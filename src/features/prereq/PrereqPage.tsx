@@ -217,11 +217,11 @@ export function PrereqPage() {
             <div>
               <p className="font-bold mb-1">约分（找公因数，同时除掉）：</p>
               <div className="bg-gray-50 rounded-lg p-3 grid grid-cols-5 gap-2 text-center">
-                <p><Math tex="\frac{4}{6} = \frac{2}{3}" /><br /><span className="text-gray-400 text-xs">÷2</span></p>
-                <p><Math tex="\frac{6}{10} = \frac{3}{5}" /><br /><span className="text-gray-400 text-xs">÷2</span></p>
-                <p><Math tex="\frac{12}{15} = \frac{4}{5}" /><br /><span className="text-gray-400 text-xs">÷3</span></p>
-                <p><Math tex="\frac{8}{12} = \frac{2}{3}" /><br /><span className="text-gray-400 text-xs">÷4</span></p>
-                <p><Math tex="\frac{15}{25} = \frac{3}{5}" /><br /><span className="text-gray-400 text-xs">÷5</span></p>
+                <p><Math tex="\frac{4}{6} = \frac{2}{3}" /><br /><span className="text-gray-600 text-xs">÷2</span></p>
+                <p><Math tex="\frac{6}{10} = \frac{3}{5}" /><br /><span className="text-gray-600 text-xs">÷2</span></p>
+                <p><Math tex="\frac{12}{15} = \frac{4}{5}" /><br /><span className="text-gray-600 text-xs">÷3</span></p>
+                <p><Math tex="\frac{8}{12} = \frac{2}{3}" /><br /><span className="text-gray-600 text-xs">÷4</span></p>
+                <p><Math tex="\frac{15}{25} = \frac{3}{5}" /><br /><span className="text-gray-600 text-xs">÷5</span></p>
               </div>
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
@@ -330,19 +330,19 @@ export function PrereqPage() {
               <div className="bg-gray-50 rounded-lg p-3 grid grid-cols-4 gap-2 text-center">
                 <div className="bg-white rounded p-2 border border-gray-200">
                   <Math tex="i^1 = i" />
-                  <br /><span className="text-gray-400 text-xs">余1</span>
+                  <br /><span className="text-gray-600 text-xs">余1</span>
                 </div>
                 <div className="bg-white rounded p-2 border border-gray-200">
                   <Math tex="i^2 = -1" />
-                  <br /><span className="text-gray-400 text-xs">余2</span>
+                  <br /><span className="text-gray-600 text-xs">余2</span>
                 </div>
                 <div className="bg-white rounded p-2 border border-gray-200">
                   <Math tex="i^3 = -i" />
-                  <br /><span className="text-gray-400 text-xs">余3</span>
+                  <br /><span className="text-gray-600 text-xs">余3</span>
                 </div>
                 <div className="bg-white rounded p-2 border border-gray-200">
                   <Math tex="i^4 = 1" />
-                  <br /><span className="text-gray-400 text-xs">余0</span>
+                  <br /><span className="text-gray-600 text-xs">余0</span>
                 </div>
               </div>
               <p className="text-gray-500 mt-2">然后又回到 <Math tex="i^5 = i" />，<Math tex="i^6 = -1" />……永远重复这4个结果。</p>
