@@ -106,8 +106,8 @@ export function ComplexPage() {
 
             <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. i² = ? → <strong>-1</strong></p>
-              <p className="text-gray-700">2. x² = -1 在实数范围内有解吗？ → <strong>没有</strong>，因为实数的平方 ≥ 0</p>
+              <p className="text-gray-700">1. <Math tex="i^2" /> = ____　答案：<strong>-1</strong></p>
+              <p className="text-gray-700">2. x² = -1 在实数范围内有解吗？　答案：<strong>没有</strong>，因为实数的平方 ≥ 0</p>
             </div>
             <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
@@ -186,8 +186,8 @@ export function ComplexPage() {
 
             <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. <Math tex="z = 5 - 4i" /> 的实部和虚部？ → 实部 <strong>5</strong>，虚部 <strong>-4</strong></p>
-              <p className="text-gray-700">2. <Math tex="z = 2i" /> 是什么数？ → <strong>纯虚数</strong>（实部=0，虚部≠0）</p>
+              <p className="text-gray-700">1. <Math tex="z = 5 - 4i" /> 的实部和虚部？　答案：实部 <strong>5</strong>，虚部 <strong>-4</strong></p>
+              <p className="text-gray-700">2. <Math tex="z = 2i" /> 是什么数？　答案：<strong>纯虚数</strong>（实部=0，虚部≠0）</p>
             </div>
           </section>
 
@@ -216,8 +216,8 @@ export function ComplexPage() {
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. 已知 <Math tex="(3x-6) + (2y+4)i = 0" />，求 x, y → x = <strong>2</strong>，y = <strong>-2</strong></p>
-              <p className="text-gray-700">2. 已知 <Math tex="a+bi = 2-3i" />，求 a, b → a = <strong>2</strong>，b = <strong>-3</strong></p>
+              <p className="text-gray-700">1. 已知 <Math tex="(3x-6) + (2y+4)i = 0" />，求 x, y　答案：x = <strong>2</strong>，y = <strong>-2</strong></p>
+              <p className="text-gray-700">2. 已知 <Math tex="a+bi = 2-3i" />，求 a, b　答案：a = <strong>2</strong>，b = <strong>-3</strong></p>
             </div>
             <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
@@ -444,17 +444,17 @@ export function ComplexPage() {
                 <div className="space-y-1 text-blue-700">
                   <p><Math tex="|z|^2 = z \cdot \bar{z} = a^2 + b^2" /></p>
                   <p><Math tex="|z_1 \cdot z_2| = |z_1| \cdot |z_2|" /></p>
-                  <p><Math tex="|z_1 / z_2| = |z_1| / |z_2|" /></p>
+                  <p><Math tex="\left|\dfrac{z_1}{z_2}\right| = \dfrac{|z_1|}{|z_2|}" /></p>
                 </div>
               </div>
             </Collapsible>
 
             <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. <Math tex="(3+2i)+(1-5i)" /> = ? → <strong><Math tex="4-3i" /></strong></p>
-              <p className="text-gray-700">2. <Math tex="(1+i)/(1-i)" /> = ? → <strong><Math tex="i" /></strong></p>
-              <p className="text-gray-700">3. <Math tex="|3+4i|" /> = ? → <strong>5</strong></p>
-              <p className="text-gray-700">4. <Math tex="i^{67}" /> = ? → 67÷4余3 → <strong><Math tex="-i" /></strong></p>
+              <p className="text-gray-700">1. <Math tex="(3+2i)+(1-5i)" /> = ____　答案：<strong><Math tex="4-3i" /></strong></p>
+              <p className="text-gray-700">2. <Math tex="\dfrac{1+i}{1-i}" /> = ____　答案：<strong><Math tex="i" /></strong></p>
+              <p className="text-gray-700">3. <Math tex="|3+4i|" /> = ____　答案：<strong>5</strong></p>
+              <p className="text-gray-700">4. <Math tex="i^{67}" /> = ____　答案：67÷4余3 → <strong><Math tex="-i" /></strong></p>
             </div>
             <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
@@ -497,8 +497,8 @@ export function ComplexPage() {
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. <Math tex="z = -2+3i" /> 在第几象限？ → 点 (-2, 3)，<strong>第二象限</strong></p>
-              <p className="text-gray-700">2. <Math tex="z = 4-i" /> 在第几象限？ → 点 (4, -1)，<strong>第四象限</strong></p>
+              <p className="text-gray-700">1. <Math tex="z = -2+3i" /> 在第几象限？　答案：点 (-2, 3)，<strong>第二象限</strong></p>
+              <p className="text-gray-700">2. <Math tex="z = 4-i" /> 在第几象限？　答案：点 (4, -1)，<strong>第四象限</strong></p>
             </div>
             <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
               <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
