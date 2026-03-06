@@ -11,9 +11,19 @@ export function isTauri(): boolean {
   return typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
 }
 
-/** 是否运行在普通浏览器（非 Tauri） */
+/** 是否运行在 Capacitor 移动端 */
+export function isCapacitor(): boolean {
+  return typeof window !== 'undefined' && 'Capacitor' in window && (window as any).Capacitor?.isNativePlatform?.();
+}
+
+/** 是否运行在原生环境（Tauri 或 Capacitor） */
+export function isNative(): boolean {
+  return isTauri() || isCapacitor();
+}
+
+/** 是否运行在普通浏览器（非 Tauri、非 Capacitor） */
 export function isBrowser(): boolean {
-  return typeof window !== 'undefined' && !isTauri();
+  return typeof window !== 'undefined' && !isTauri() && !isCapacitor();
 }
 
 /** 是否为开发环境 */
@@ -27,10 +37,12 @@ export function isProd(): boolean {
 }
 
 /** 当前运行平台描述 */
-export type Platform = 'tauri' | 'browser';
+export type Platform = 'tauri' | 'capacitor' | 'browser';
 
 export function getPlatform(): Platform {
-  return isTauri() ? 'tauri' : 'browser';
+  if (isTauri()) return 'tauri';
+  if (isCapacitor()) return 'capacitor';
+  return 'browser';
 }
 
 // ==================== CORS 代理配置 ====================
@@ -61,7 +73,7 @@ export function buildCorsProxyRequestUrl(targetUrl: string): string {
  * 检查是否需要 CORS 代理（仅 Web 端跨域时需要）
  */
 export function needsCORSProxy(url: string): boolean {
-  if (isTauri()) return false;
+  if (isNative()) return false;
 
   try {
     const urlObj = new URL(url);

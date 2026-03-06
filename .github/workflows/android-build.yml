@@ -27,33 +27,22 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Android NDK
-        run: sdkmanager "ndk;29.0.14206865"
-
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
-
-      - name: Rust cache
-        uses: swatinem/rust-cache@v2
-        with:
-          workspaces: src-tauri -> target
-
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Init Tauri Android
-        run: npx tauri android init
+      - name: Build web assets
+        run: npm run build
 
-      - name: Build Android APK
-        run: npx tauri android build --apk
-        env:
-          NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/29.0.14206865
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build debug APK
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: StudyGoGoGo-android
-          path: src-tauri/gen/android/app/build/outputs/apk/**/*.apk
+          path: android/app/build/outputs/apk/debug/*.apk
           retention-days: 30
