@@ -70,7 +70,85 @@ function getMimeType(encoding: string): string {
   }
 }
 
-/** 调用火山引擎 TTS API 合成语音 */
+const MAX_CHUNK_LENGTH = 250;
+
+/** 将长文本按句子边界拆分为不超过 MAX_CHUNK_LENGTH 的段 */
+function splitTextIntoChunks(text: string): string[] {
+  if (text.length <= MAX_CHUNK_LENGTH) return [text];
+
+  const sentences = text.split(/(?<=[。！？；\n])/g).filter((s) => s.trim());
+  const chunks: string[] = [];
+  let current = '';
+
+  for (const sentence of sentences) {
+    if (sentence.length > MAX_CHUNK_LENGTH) {
+      if (current) { chunks.push(current); current = ''; }
+      const parts = sentence.split(/(?<=[，、：])/g).filter((s) => s.trim());
+      for (const part of parts) {
+        if ((current + part).length > MAX_CHUNK_LENGTH && current) {
+          chunks.push(current); current = '';
+        }
+        current += part;
+      }
+      if (current) { chunks.push(current); current = ''; }
+    } else if ((current + sentence).length > MAX_CHUNK_LENGTH) {
+      if (current) chunks.push(current);
+      current = sentence;
+    } else {
+      current += sentence;
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks.length > 0 ? chunks : [text];
+}
+
+/** 合成单段文本 */
+async function synthesizeChunk(text: string, config: TTSConfig): Promise<TTSSynthesisResult> {
+  const requestBody = buildRequestBody(text, config);
+
+  const response = await adaptiveFetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer;${config.accessToken}`,
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  if (!response.ok) {
+    return { success: false, error: `TTS 请求失败: HTTP ${response.status}` };
+  }
+
+  const result = await response.json();
+
+  if (result.code !== 3000) {
+    return { success: false, error: `TTS 错误: ${result.message || '未知错误'} (code: ${result.code})` };
+  }
+
+  if (!result.data) {
+    return { success: false, error: '未收到音频数据' };
+  }
+
+  return {
+    success: true,
+    audioData: base64ToArrayBuffer(result.data),
+    mimeType: getMimeType(config.encoding),
+  };
+}
+
+/** 拼接多段音频 ArrayBuffer */
+function concatAudioBuffers(buffers: ArrayBuffer[]): ArrayBuffer {
+  const totalLength = buffers.reduce((sum, buf) => sum + buf.byteLength, 0);
+  const result = new Uint8Array(totalLength);
+  let offset = 0;
+  for (const buf of buffers) {
+    result.set(new Uint8Array(buf), offset);
+    offset += buf.byteLength;
+  }
+  return result.buffer;
+}
+
+/** 调用火山引擎 TTS API 合成语音（自动分段） */
 export async function synthesize(text: string, config: TTSConfig): Promise<TTSSynthesisResult> {
   if (!config.appId || !config.accessToken) {
     return { success: false, error: 'App ID 或 Access Token 未设置' };
@@ -81,41 +159,29 @@ export async function synthesize(text: string, config: TTSConfig): Promise<TTSSy
   }
 
   try {
-    const requestBody = buildRequestBody(text, config);
+    const chunks = splitTextIntoChunks(text);
 
-    const response = await adaptiveFetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer;${config.accessToken}`,
-      },
-      body: JSON.stringify(requestBody),
-    });
-
-    if (!response.ok) {
-      return {
-        success: false,
-        error: `TTS 请求失败: HTTP ${response.status}`,
-      };
+    if (chunks.length === 1) {
+      return synthesizeChunk(chunks[0], config);
     }
 
-    const result = await response.json();
+    console.log(`[TTS] 长文本分 ${chunks.length} 段合成`);
+    const audioBuffers: ArrayBuffer[] = [];
+    let mimeType = getMimeType(config.encoding);
 
-    if (result.code !== 3000) {
-      return {
-        success: false,
-        error: `TTS 错误: ${result.message || '未知错误'} (code: ${result.code})`,
-      };
-    }
-
-    if (!result.data) {
-      return { success: false, error: '未收到音频数据' };
+    for (const chunk of chunks) {
+      const result = await synthesizeChunk(chunk, config);
+      if (!result.success || !result.audioData) {
+        return result;
+      }
+      audioBuffers.push(result.audioData);
+      mimeType = result.mimeType || mimeType;
     }
 
     return {
       success: true,
-      audioData: base64ToArrayBuffer(result.data),
-      mimeType: getMimeType(config.encoding),
+      audioData: concatAudioBuffers(audioBuffers),
+      mimeType,
     };
   } catch (error) {
     return {
