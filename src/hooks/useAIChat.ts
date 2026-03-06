@@ -10,6 +10,7 @@ import type { ChatMessage } from '@/lib/ai';
 
 export interface UIMessage extends ChatMessage {
   id: string;
+  reasoning?: string;
   streaming?: boolean;
   error?: string;
 }
@@ -58,9 +59,21 @@ export function useAIChat(options: UseAIChatOptions = {}): UseAIChatReturn {
 
     setError(null);
 
-    // 解析供应商和模型：优先使用外部指定的，否则自动选第一个
+    // 解析供应商和模型：优先使用外部指定的 → 持久化选择 → 自动选第一个
     let resolvedProviderId = explicitProviderId;
     let resolvedModelId = explicitModelId;
+
+    // 如果没有外部指定，尝试从 settings 读取主聊天页面的 selectedModel
+    if (!resolvedProviderId) {
+      const savedModel = await storage.settings.getValue('selectedModel');
+      if (savedModel) {
+        try {
+          const parsed = JSON.parse(savedModel);
+          resolvedProviderId = parsed.providerId;
+          resolvedModelId = parsed.modelId;
+        } catch { /* ignore */ }
+      }
+    }
 
     if (!resolvedProviderId) {
       const enabled = await providerRegistry.getEnabled();
@@ -124,6 +137,15 @@ export function useAIChat(options: UseAIChatOptions = {}): UseAIChatReturn {
         stream: true,
         abortSignal: controller.signal,
         callbacks: {
+          onReasoning: (delta) => {
+            setMessages((prev) =>
+              prev.map((m) =>
+                m.id === assistantMsg.id
+                  ? { ...m, reasoning: (m.reasoning || '') + delta }
+                  : m,
+              ),
+            );
+          },
           onText: (delta) => {
             setMessages((prev) =>
               prev.map((m) =>
@@ -133,11 +155,11 @@ export function useAIChat(options: UseAIChatOptions = {}): UseAIChatReturn {
               ),
             );
           },
-          onFinish: async (fullText) => {
+          onFinish: async (fullText, fullReasoning) => {
             setMessages((prev) =>
               prev.map((m) =>
                 m.id === assistantMsg.id
-                  ? { ...m, streaming: false }
+                  ? { ...m, streaming: false, reasoning: fullReasoning || m.reasoning }
                   : m,
               ),
             );

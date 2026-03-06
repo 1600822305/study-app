@@ -4,7 +4,7 @@
 // ============================================================
 
 import { streamText, generateText } from 'ai';
-import { createOpenAI } from '@ai-sdk/openai';
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 import { adaptiveFetch } from '@/lib/env';
 import { providerRegistry } from './provider-registry';
 import type { ChatOptions, ChatResponse, AIProvider } from './types';
@@ -22,7 +22,10 @@ function createSDKProvider(provider: AIProvider) {
   switch (provider.type) {
     case 'openai':
     default:
-      return createOpenAI({
+      // 参考 CS：用 @ai-sdk/openai-compatible 替代 @ai-sdk/openai
+      // 原生支持 delta.reasoning_content 字段，无需 hack
+      return createOpenAICompatible({
+        name: provider.id,
         apiKey: provider.apiKey,
         baseURL: normalizeBaseURL(provider.apiHost),
         fetch: adaptiveFetch as typeof globalThis.fetch,
@@ -57,7 +60,7 @@ export async function streamChat(options: ChatOptions): Promise<ChatResponse> {
   if (!provider.apiKey) throw new Error(`供应商 "${provider.name}" 未配置 API Key`);
 
   const sdkProvider = createSDKProvider(provider);
-  const model = sdkProvider.chat(modelId); // 强制使用 /v1/chat/completions
+  const model = sdkProvider.chatModel(modelId);
 
   // 构建消息
   const apiMessages = buildMessages(messages, systemPrompt);
@@ -74,13 +77,20 @@ export async function streamChat(options: ChatOptions): Promise<ChatResponse> {
       abortSignal,
     });
 
-    for await (const part of result.textStream) {
-      fullText += part;
-      callbacks?.onText?.(part);
+    // 参考 CS：用 fullStream 同时捕获 reasoning 和 text-delta
+    for await (const part of result.fullStream) {
+      if (part.type === 'reasoning-delta') {
+        const delta = part.text;
+        fullReasoning += delta;
+        callbacks?.onReasoning?.(delta);
+      } else if (part.type === 'text-delta') {
+        fullText += part.text;
+        callbacks?.onText?.(part.text);
+      }
     }
 
     const usage = await result.usage;
-    callbacks?.onFinish?.(fullText);
+    callbacks?.onFinish?.(fullText, fullReasoning || undefined);
 
     return {
       content: fullText,
@@ -94,8 +104,8 @@ export async function streamChat(options: ChatOptions): Promise<ChatResponse> {
   } catch (error: unknown) {
     const err = error instanceof Error ? error : new Error(String(error));
     if (err.name === 'AbortError') {
-      callbacks?.onFinish?.(fullText);
-      return { content: fullText };
+      callbacks?.onFinish?.(fullText, fullReasoning || undefined);
+      return { content: fullText, reasoning: fullReasoning || undefined };
     }
     callbacks?.onError?.(err);
     throw err;
@@ -114,7 +124,7 @@ export async function chat(options: Omit<ChatOptions, 'stream' | 'callbacks'>): 
   if (!provider.apiKey) throw new Error(`供应商 "${provider.name}" 未配置 API Key`);
 
   const sdkProvider = createSDKProvider(provider);
-  const model = sdkProvider.chat(modelId); // 强制使用 /v1/chat/completions
+  const model = sdkProvider.chatModel(modelId);
 
   const apiMessages = buildMessages(messages, systemPrompt);
 

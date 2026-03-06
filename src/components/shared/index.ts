@@ -4,4 +4,4 @@ export { QuizQuestion } from './QuizQuestion';
 export { Collapsible } from './Collapsible';
 export { ProgressTracker } from './ProgressTracker';
 export { SpeakButton } from './SpeakButton';
-export { AIChatPanel } from './AIChatPanel';
+// AIChatPanel 已废弃，使用 ChatPanel (features/chat/ChatPanel.tsx)

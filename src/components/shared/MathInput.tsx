@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Delete, ChevronUp, ChevronDown } from 'lucide-react';
+import { Delete } from 'lucide-react';
 import type { MathfieldElement } from 'mathlive';
 import 'mathlive';
 
@@ -56,6 +56,20 @@ const KEYS: KeyDef[][] = [
     { label: 'π', action: { type: 'insert', latex: '\\pi ' }, variant: 'accent' },
     { label: '=', action: { type: 'insert', latex: '=' }, variant: 'operator' },
   ],
+  [
+    { label: 'x', action: { type: 'insert', latex: 'x' }, variant: 'accent' },
+    { label: 'y', action: { type: 'insert', latex: 'y' }, variant: 'accent' },
+    { label: 'z', action: { type: 'insert', latex: 'z' }, variant: 'accent' },
+    { label: 'a', action: { type: 'insert', latex: 'a' }, variant: 'accent' },
+    { label: 'b', action: { type: 'insert', latex: 'b' }, variant: 'accent' },
+  ],
+  [
+    { label: 'm', action: { type: 'insert', latex: 'm' }, variant: 'accent' },
+    { label: 'n', action: { type: 'insert', latex: 'n' }, variant: 'accent' },
+    { label: 'z̄', action: { type: 'insert', latex: '\\overline{z}' }, variant: 'accent' },
+    { label: '|·|', action: { type: 'insert', latex: '|#0|' }, variant: 'accent' },
+    { label: ',', action: { type: 'insert', latex: ',' }, variant: 'operator' },
+  ],
 ];
 
 export function MathInput({
@@ -66,6 +80,7 @@ export function MathInput({
 }: MathInputProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const mfRef = useRef<MathfieldElement | null>(null);
 
   const syncValue = useCallback(() => {
@@ -105,6 +120,11 @@ export function MathInput({
     mf.addEventListener('focus', () => {
       mf.style.borderColor = '#93b48b';
       mf.style.boxShadow = '0 0 0 3px rgba(147, 180, 139, 0.15)';
+      setOpen(true);
+      // Auto-scroll: ensure keyboard is visible without over-scrolling
+      setTimeout(() => {
+        wrapperRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
     });
     mf.addEventListener('blur', () => {
       mf.style.borderColor = '#e0ddd4';
@@ -127,6 +147,18 @@ export function MathInput({
       mfRef.current.value = value;
     }
   }, [value]);
+
+  // Click outside to close keyboard
+  useEffect(() => {
+    if (!open) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [open]);
 
   const handleKey = (key: KeyDef) => {
     const mf = mfRef.current;
@@ -172,19 +204,9 @@ export function MathInput({
   };
 
   return (
-    <div className={className}>
+    <div ref={wrapperRef} className={className}>
       {/* MathLive editing field */}
       <div ref={containerRef} />
-
-      {/* Toggle keyboard */}
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-center gap-1 mt-1 py-1.5 text-xs text-gray-500 hover:text-blue-600 cursor-pointer transition-colors"
-      >
-        {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-        {open ? '收起键盘' : '展开数学键盘'}
-      </button>
 
       {/* Custom keyboard panel */}
       {open && (

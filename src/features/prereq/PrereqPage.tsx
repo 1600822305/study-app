@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
 
-import { Math, MathInput, Collapsible, SpeakButton, AIChatPanel } from '@/components/shared';
+import { Math, MathInput, Collapsible, SpeakButton } from '@/components/shared';
 import { prereqNarrations } from './data/narrations';
 
 interface SelfTestItem {
@@ -281,8 +281,6 @@ export function PrereqPage() {
           </p>
         </div>
       </section>
-
-      <AIChatPanel moduleId="prereq" />
     </div>
   );
 }

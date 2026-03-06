@@ -7,7 +7,7 @@ import { storageLogger } from '../logger';
 // Abstract Base Repository
 // ============================================================
 
-export abstract class BaseRepository<T> {
+export abstract class BaseRepository<T, K = number> {
   protected abstract readonly tableName: string;
   protected abstract getTable(): Table<T>;
 
@@ -30,20 +30,20 @@ export abstract class BaseRepository<T> {
     }
   }
 
-  async getById(id: number): Promise<T | undefined> {
+  async getById(id: K): Promise<T | undefined> {
     try {
       this.log('getById', String(id));
-      return await this.getTable().get(id);
+      return await this.getTable().get(id as any);
     } catch (e) {
       this.handleError('getById', e);
     }
   }
 
-  async add(record: T): Promise<number> {
+  async add(record: T): Promise<K> {
     try {
       this.log('add');
       const id = await this.getTable().add(record);
-      return id as number;
+      return id as K;
     } catch (e) {
       this.handleError('add', e);
     }
@@ -58,20 +58,20 @@ export abstract class BaseRepository<T> {
     }
   }
 
-  async update(id: number, changes: Partial<T>): Promise<void> {
+  async update(id: K, changes: Partial<T>): Promise<void> {
     try {
       this.log('update', String(id));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await this.getTable().update(id, changes as any);
+      await this.getTable().update(id as any, changes as any);
     } catch (e) {
       this.handleError('update', e);
     }
   }
 
-  async deleteById(id: number): Promise<void> {
+  async deleteById(id: K): Promise<void> {
     try {
       this.log('delete', String(id));
-      await this.getTable().delete(id);
+      await this.getTable().delete(id as any);
     } catch (e) {
       this.handleError('delete', e);
     }

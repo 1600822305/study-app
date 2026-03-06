@@ -30,7 +30,7 @@ export function HomePage() {
             </div>
             <div>
               <h3 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
-                1.0 前置知识回顾
+                1.0 复数前置知识
               </h3>
               <p className="text-xs text-gray-400">30分钟 · 初中基础</p>
             </div>
@@ -56,31 +56,41 @@ export function HomePage() {
           <p className="text-sm text-gray-500">从零理解复数，高考最简单的5分，开局建立信心</p>
         </Link>
 
-        <div className="p-6 bg-gray-50 rounded-2xl border border-dashed border-gray-300 opacity-60">
+        <Link
+          to="/math/sets"
+          className="group block p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
+        >
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center">
-              <Zap size={20} className="text-gray-400" />
+            <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center">
+              <Zap size={20} className="text-emerald-600" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-400">1.2 集合</h3>
-              <p className="text-xs text-gray-400">即将开放</p>
+              <h3 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
+                1.2 集合
+              </h3>
+              <p className="text-xs text-gray-400">2-3小时 · 必拿5分</p>
             </div>
           </div>
-          <p className="text-sm text-gray-400">集合的表示与运算，再拿5分</p>
-        </div>
+          <p className="text-sm text-gray-500">集合的表示与运算，数轴法一招通杀</p>
+        </Link>
 
-        <div className="p-6 bg-gray-50 rounded-2xl border border-dashed border-gray-300 opacity-60">
+        <Link
+          to="/math/logic"
+          className="group block p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
+        >
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center">
-              <Zap size={20} className="text-gray-400" />
+            <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+              <Zap size={20} className="text-purple-600" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-400">1.3 常用逻辑用语</h3>
-              <p className="text-xs text-gray-400">即将开放</p>
+              <h3 className="font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
+                1.3 常用逻辑用语
+              </h3>
+              <p className="text-xs text-gray-400">2-3小时 · 常考5分</p>
             </div>
           </div>
-          <p className="text-sm text-gray-400">浅学即可，1小时搞定</p>
-        </div>
+          <p className="text-sm text-gray-500">充分必要条件 + 命题否定，集合法判断最靠谱</p>
+        </Link>
       </div>
 
       <div className="mt-8 p-5 bg-blue-50 border border-blue-200 rounded-2xl">

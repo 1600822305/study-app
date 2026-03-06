@@ -3,14 +3,21 @@
 // 可嵌入任何学习页面，上下文绑定当前模块
 // ============================================================
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Send, Square, Trash2, Settings, Loader2, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAIChat } from '@/hooks/useAIChat';
 import type { UIMessage } from '@/hooks/useAIChat';
 import { MessageBlockRenderer } from '@/components/shared/message-blocks';
+import { ThinkingBlock } from '@/components/shared/ThinkingBlock';
 import { providerRegistry } from '@/lib/ai';
+import { storage } from '@/lib/storage';
 import type { AIProvider } from '@/lib/ai';
+
+const MIN_W = 320;
+const MIN_H = 360;
+const DEFAULT_W = 384;
+const DEFAULT_H = 512;
 
 interface AIChatPanelProps {
   moduleId?: string;
@@ -26,14 +33,27 @@ export function AIChatPanel({ moduleId }: AIChatPanelProps) {
   const [selectedModelId, setSelectedModelId] = useState<string>('');
   const [selectorOpen, setSelectorOpen] = useState(false);
 
-  // 加载已启用的供应商列表
+  // 加载已启用的供应商列表 + 同步主聊天的模型选择
   useEffect(() => {
     (async () => {
       await providerRegistry.initFromPresets();
       const enabled = await providerRegistry.getEnabled();
       const configured = enabled.filter((p) => p.apiKey && p.models.length > 0);
       setProviders(configured);
-      // 默认选第一个
+
+      // 优先从 settings 读取主聊天页面持久化的 selectedModel
+      const savedModel = await storage.settings.getValue('selectedModel');
+      if (savedModel) {
+        try {
+          const parsed = JSON.parse(savedModel);
+          if (parsed.providerId && parsed.modelId) {
+            setSelectedProviderId(parsed.providerId);
+            setSelectedModelId(parsed.modelId);
+            return;
+          }
+        } catch { /* ignore */ }
+      }
+      // fallback：默认选第一个
       if (configured.length > 0 && !selectedProviderId) {
         setSelectedProviderId(configured[0].id);
         setSelectedModelId(configured[0].models[0]?.id || '');
@@ -53,6 +73,59 @@ export function AIChatPanel({ moduleId }: AIChatPanelProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const selectorRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  // 位置 & 尺寸状态
+  const [pos, setPos] = useState({ x: 0, y: 0 }); // 相对于默认右下角的偏移
+  const [size, setSize] = useState({ w: DEFAULT_W, h: DEFAULT_H });
+  const dragRef = useRef<{ startX: number; startY: number; origRight: number; origBottom: number } | null>(null);
+  const resizeRef = useRef<{ startX: number; startY: number; origW: number; origH: number } | null>(null);
+
+  // 拖拽移动（header 触发）
+  const onDragStart = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    dragRef.current = { startX: e.clientX, startY: e.clientY, origRight: pos.x, origBottom: pos.y };
+
+    const onMove = (ev: MouseEvent) => {
+      if (!dragRef.current) return;
+      const dx = ev.clientX - dragRef.current.startX;
+      const dy = ev.clientY - dragRef.current.startY;
+      // right 定位：鼠标右移 → right 减小
+      setPos({ x: dragRef.current.origRight - dx, y: dragRef.current.origBottom - dy });
+    };
+    const onUp = () => {
+      dragRef.current = null;
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [pos]);
+
+  // 拖拽缩放（左上角 handle 触发）
+  // 用 right+bottom 定位，只改 width/height，右下角自然不动
+  const onResizeStart = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    resizeRef.current = { startX: e.clientX, startY: e.clientY, origW: size.w, origH: size.h };
+
+    const onMove = (ev: MouseEvent) => {
+      if (!resizeRef.current) return;
+      const dx = resizeRef.current.startX - ev.clientX; // 向左拉 → 变宽
+      const dy = resizeRef.current.startY - ev.clientY; // 向上拉 → 变高
+      setSize({
+        w: Math.max(MIN_W, resizeRef.current.origW + dx),
+        h: Math.max(MIN_H, resizeRef.current.origH + dy),
+      });
+    };
+    const onUp = () => {
+      resizeRef.current = null;
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [size]);
 
   // 关闭选择器：点击外部
   useEffect(() => {
@@ -111,9 +184,29 @@ export function AIChatPanel({ moduleId }: AIChatPanelProps) {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 w-96 h-[32rem] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white shrink-0">
+    <div
+      ref={panelRef}
+      className="fixed bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col z-50 overflow-hidden"
+      style={{
+        right: 24 + pos.x,
+        bottom: 24 + pos.y,
+        width: size.w,
+        height: size.h,
+      }}
+    >
+      {/* Resize handle — 左上角 */}
+      <div
+        onMouseDown={onResizeStart}
+        className="absolute top-0 left-0 w-4 h-4 cursor-nw-resize z-10"
+        title="拖拽调整大小"
+      >
+        <div className="absolute top-1 left-1 w-2 h-2 border-t-2 border-l-2 border-gray-300 rounded-tl" />
+      </div>
+      {/* Header — 拖拽移动 */}
+      <div
+        onMouseDown={onDragStart}
+        className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white shrink-0 cursor-move select-none"
+      >
         <div className="flex items-center gap-2">
           <MessageCircle size={18} />
           <span className="font-medium text-sm">AI 数学助手</span>
@@ -295,12 +388,19 @@ function MessageBubble({ message }: { message: UIMessage }) {
               : 'bg-gray-100 text-gray-800 rounded-bl-md'
         }`}
       >
+        {/* 推理过程 */}
+        {!isUser && message.reasoning && (
+          <ThinkingBlock
+            content={message.reasoning}
+            isStreaming={!!message.streaming && !message.content}
+          />
+        )}
         {isUser ? (
           <div className="whitespace-pre-wrap break-words">{message.content}</div>
         ) : (
           <MessageBlockRenderer content={message.content} isStreaming={message.streaming} />
         )}
-        {message.streaming && (
+        {message.streaming && !message.content && !message.reasoning && (
           <span className="inline-block w-1.5 h-4 bg-gray-400 rounded-sm ml-0.5 animate-pulse" />
         )}
       </div>

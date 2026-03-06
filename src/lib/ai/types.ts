@@ -57,7 +57,7 @@ export interface StreamCallbacks {
   /** 推理过程增量（DeepSeek-R1 等） */
   onReasoning?: (delta: string) => void;
   /** 流式结束 */
-  onFinish?: (fullText: string) => void;
+  onFinish?: (fullText: string, fullReasoning?: string) => void;
   /** 发生错误 */
   onError?: (error: Error) => void;
 }

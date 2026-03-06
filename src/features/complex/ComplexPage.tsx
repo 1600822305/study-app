@@ -1,6 +1,6 @@
 import { Flame, Lightbulb, AlertTriangle } from 'lucide-react';
 
-import { Math, QuizQuestion, Collapsible, ProgressTracker, SpeakButton, AIChatPanel } from '@/components/shared';
+import { Math, QuizQuestion, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
 import { useProgress, useQuiz } from '@/hooks';
 import { complexQuizQuestions } from './data/quiz';
@@ -390,8 +390,6 @@ export function ComplexPage() {
           </div>
         </div>
       </div>
-
-      <AIChatPanel moduleId="complex" />
     </div>
   );
 }

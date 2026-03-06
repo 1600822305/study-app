@@ -3807,8 +3807,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-fs"
 version = "2.4.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ed390cc669f937afeb8b28032ce837bac8ea023d975a2e207375ec05afaf1804"
+source = "git+https://github.com/1600822305/plugins-workspace?branch=v2#886e084102edeb13a468b9ddd4e5ddd6b8ec8714"
 dependencies = [
  "anyhow",
  "dunce",
@@ -3829,8 +3828,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-http"
 version = "2.5.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d8f069451c4e87e7e2636b7f065a4c52866c4ce5e60e2d53fa1038edb6d184dc"
+source = "git+https://github.com/1600822305/plugins-workspace?branch=v2#886e084102edeb13a468b9ddd4e5ddd6b8ec8714"
 dependencies = [
  "bytes",
  "cookie_store 0.21.1",

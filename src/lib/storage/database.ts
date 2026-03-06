@@ -8,6 +8,9 @@ import type {
   StudySession,
   SettingRecord,
   AIChatMessage,
+  AssistantRecord,
+  TopicRecord,
+  ChatMessageRecord,
   OperationLog,
 } from './types';
 
@@ -22,6 +25,9 @@ class StudyDatabase extends Dexie {
   studySessions!: Table<StudySession>;
   settings!: Table<SettingRecord>;
   aiChatMessages!: Table<AIChatMessage>;
+  assistants!: Table<AssistantRecord>;
+  topics!: Table<TopicRecord>;
+  chatMessages!: Table<ChatMessageRecord>;
   operationLogs!: Table<OperationLog>;
 
   constructor() {
@@ -38,8 +44,19 @@ class StudyDatabase extends Dexie {
       operationLogs: '++id, table, operation, timestamp',
     });
 
-    // ----- Future migrations go here -----
-    // this.version(2).stores({ ... }).upgrade(tx => { ... });
+    // ----- Version 2: 助手 + 话题 + 聊天消息 -----
+    this.version(2).stores({
+      progress: '++id, module, [module+itemId], updatedAt',
+      quizAttempts: '++id, module, questionId, [module+questionId], attemptedAt',
+      uiState: 'key, updatedAt',
+      studySessions: '++id, module, startedAt',
+      settings: 'key, updatedAt',
+      aiChatMessages: '++id, sessionId, module, role, createdAt',
+      assistants: 'id, isSystem, updatedAt',
+      topics: 'id, assistantId, updatedAt, lastMessageAt',
+      chatMessages: 'id, topicId, assistantId, createdAt',
+      operationLogs: '++id, table, operation, timestamp',
+    });
   }
 }
 

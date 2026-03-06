@@ -27,6 +27,9 @@ import { UIStateRepository } from './repositories/ui-state';
 import { SessionRepository } from './repositories/session';
 import { SettingsRepository } from './repositories/settings';
 import { AIChatRepository } from './repositories/ai-chat';
+import { AssistantRepository } from './repositories/assistant';
+import { TopicRepository } from './repositories/topic';
+import { ChatMessageRepository } from './repositories/chat-message';
 
 export { getDatabase, resetDatabase } from './database';
 export { storageLogger } from './logger';
@@ -38,6 +41,9 @@ export type {
   StudySession,
   SettingRecord,
   AIChatMessage,
+  AssistantRecord,
+  TopicRecord,
+  ChatMessageRecord,
   PaginationOptions,
   PaginatedResult,
   DateRange,
@@ -51,4 +57,7 @@ export const storage = {
   session: new SessionRepository(),
   settings: new SettingsRepository(),
   aiChat: new AIChatRepository(),
+  assistants: new AssistantRepository(),
+  topics: new TopicRepository(),
+  chatMessages: new ChatMessageRepository(),
 } as const;

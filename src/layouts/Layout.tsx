@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, ChevronLeft, ChevronRight, Home, Calculator, Menu, Settings } from 'lucide-react';
+import { BookOpen, ChevronLeft, ChevronRight, Home, Calculator, Menu, Settings, MessageCircle } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
+import { ChatPanel } from '@/features/chat/ChatPanel';
 
 interface NavChild {
   path: string;
@@ -23,12 +24,15 @@ const navItems: NavItem[] = [
     label: '高考数学',
     icon: <Calculator size={18} />,
     children: [
-      { path: '/math/prereq', label: '1.0 前置知识回顾' },
+      { path: '/math/prereq', label: '1.0 复数前置知识' },
       { path: '/math/complex', label: '1.1 复数' },
+      { path: '/math/sets-prereq', label: '1.1.5 集合前置知识' },
       { path: '/math/sets', label: '1.2 集合' },
+      { path: '/math/logic-prereq', label: '1.2.5 逻辑前置知识' },
       { path: '/math/logic', label: '1.3 逻辑用语' },
     ],
   },
+  { path: '/chat', label: 'AI 对话', icon: <MessageCircle size={18} /> },
   { path: '/settings', label: '设置', icon: <Settings size={18} /> },
 ];
 
@@ -141,10 +145,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <span className="font-bold text-gray-800">{APP_NAME}</span>
         </header>
 
-        <main className="flex-1 overflow-y-auto">
-          <div className="px-6 md:px-12 py-6 md:py-10">{children}</div>
+        <main className="flex-1 overflow-hidden">
+          {location.pathname.startsWith('/chat') ? (
+            <div className="h-full">{children}</div>
+          ) : (
+            <div className="h-full overflow-y-auto px-6 md:px-12 py-6 md:py-10">{children}</div>
+          )}
         </main>
       </div>
+
+      {/* 浮动聊天面板（非 /chat 页面显示） */}
+      <ChatPanel />
     </div>
   );
 }
