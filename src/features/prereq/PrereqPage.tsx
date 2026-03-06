@@ -194,7 +194,7 @@ export function PrereqPage() {
                 <p><strong>同分母</strong>：切法一样，直接数块数</p>
                 <Math tex="\frac{2}{5} + \frac{1}{5} = \frac{3}{5}" display />
                 <p><strong>异分母</strong>：先通分（把蛋糕切成一样大的块）</p>
-                <div className="bg-white rounded p-2 text-gray-600 space-y-1">
+                <div className="bg-white rounded p-2 text-gray-600 space-y-1 text-center">
                   <p><Math tex="\frac{1}{2}" /> 是蛋糕切<strong>2块</strong>取1块，<Math tex="\frac{1}{3}" /> 是切<strong>3块</strong>取1块——块大小不同，没法直接加</p>
                   <p>通分：找公倍数 <Math tex="6" />（2和3都能整除6）</p>
                   <p><Math tex="\frac{1}{2} = \frac{3}{6}" />（切6块取3块），<Math tex="\frac{1}{3} = \frac{2}{6}" />（切6块取2块）</p>
