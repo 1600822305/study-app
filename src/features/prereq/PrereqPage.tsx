@@ -38,8 +38,20 @@ export function PrereqPage() {
   };
 
   const checkAnswer = (idx: number, answer: string) => {
-    const correct = selfTestItems[idx].answer;
-    return answer.replace(/\s/g, '') === correct.replace(/\s/g, '');
+    const item = selfTestItems[idx];
+    const normalize = (s: string) =>
+      s
+        .replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, '$1/$2')
+        .replace(/\\cdot/g, '×')
+        .replace(/\\times/g, '×')
+        .replace(/\^2/g, '²')
+        .replace(/\^{2}/g, '²')
+        .replace(/\s/g, '');
+    const userNorm = normalize(answer);
+    return (
+      userNorm === normalize(item.answer) ||
+      (item.answerLatex && userNorm === normalize(item.answerLatex))
+    );
   };
 
   return (
