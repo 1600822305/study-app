@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+html, body, #root {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+}
+
+/* KaTeX 公式字号加大 */
+.katex {
+  font-size: 1.25em !important;
+}
+
+/* Hide MathLive's built-in virtual keyboard toggle */
+math-field::part(virtual-keyboard-toggle) {
+  display: none !important;
+}
+.ML__keyboard {
+  display: none !important;
+}
