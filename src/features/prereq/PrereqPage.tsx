@@ -216,9 +216,10 @@ export function PrereqPage() {
             </div>
             <div>
               <p className="font-bold mb-1">约分（找公因数，同时除掉）：</p>
-              <div className="bg-gray-50 rounded-lg p-3 grid grid-cols-2 gap-4 text-center">
-                <p><Math tex="\frac{6}{10} = \frac{3}{5}" />（同除以2）</p>
-                <p><Math tex="\frac{12}{15} = \frac{4}{5}" />（同除以3）</p>
+              <div className="bg-gray-50 rounded-lg p-3 grid grid-cols-3 gap-2 text-center">
+                <p><Math tex="\frac{6}{10} = \frac{3}{5}" /><br /><span className="text-gray-400 text-xs">同除以2</span></p>
+                <p><Math tex="\frac{12}{15} = \frac{4}{5}" /><br /><span className="text-gray-400 text-xs">同除以3</span></p>
+                <p><Math tex="\frac{8}{12} = \frac{2}{3}" /><br /><span className="text-gray-400 text-xs">同除以4</span></p>
               </div>
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
