@@ -4,12 +4,14 @@
 
 type AudioEventHandler = () => void;
 type AudioErrorHandler = (error: Error) => void;
+type AudioProgressHandler = (currentTime: number, duration: number) => void;
 
 export class AudioPlayer {
   private audio: HTMLAudioElement | null = null;
   private objectUrl: string | null = null;
   private onEndCallback: AudioEventHandler | null = null;
   private onErrorCallback: AudioErrorHandler | null = null;
+  private onProgressCallback: AudioProgressHandler | null = null;
 
   /** 播放音频数据 */
   play(audioData: ArrayBuffer, mimeType: string): void {
@@ -22,6 +24,12 @@ export class AudioPlayer {
     this.audio.onended = () => {
       this.cleanup();
       this.onEndCallback?.();
+    };
+
+    this.audio.ontimeupdate = () => {
+      if (this.audio && this.audio.duration) {
+        this.onProgressCallback?.(this.audio.currentTime, this.audio.duration);
+      }
     };
 
     this.audio.onerror = () => {
@@ -68,6 +76,10 @@ export class AudioPlayer {
 
   onError(handler: AudioErrorHandler): void {
     this.onErrorCallback = handler;
+  }
+
+  onProgress(handler: AudioProgressHandler): void {
+    this.onProgressCallback = handler;
   }
 
   private cleanup(): void {

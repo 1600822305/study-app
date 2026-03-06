@@ -26,9 +26,11 @@ export interface TTSPlaybackState {
   isPlaying: boolean;
   isPaused: boolean;
   error: string | null;
+  sentences: string[];
+  currentSentenceIndex: number;
 }
 
-export type TTSEventType = 'start' | 'end' | 'error' | 'pause' | 'resume';
+export type TTSEventType = 'start' | 'end' | 'error' | 'pause' | 'resume' | 'subtitle';
 
 export interface TTSEvent {
   type: TTSEventType;

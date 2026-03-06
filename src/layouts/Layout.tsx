@@ -8,6 +8,7 @@ import { isMobile } from '@/lib/env';
 import { SolidBridge } from '@/shared/bridges';
 import SwipeDrawer from '@/solid/components/SwipeDrawer.solid';
 import { ChatPanel } from '@/features/chat/ChatPanel';
+import { SubtitlePanel } from '@/components/shared';
 
 interface NavChild {
   path: string;
@@ -197,6 +198,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
       {/* 浮动聊天面板（非 /chat 页面显示） */}
       <ChatPanel />
+
+      {/* TTS 字幕面板 */}
+      <SubtitlePanel />
     </div>
   );
 }
