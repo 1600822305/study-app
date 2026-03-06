@@ -75,7 +75,7 @@ export function TTSSettingsPage() {
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/settings')}
           className="p-2 rounded-lg hover:bg-gray-100 cursor-pointer transition-colors"
         >
           <ArrowLeft size={20} />

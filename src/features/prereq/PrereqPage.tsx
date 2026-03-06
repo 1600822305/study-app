@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
 
-import { Math, MathInput, Collapsible } from '@/components/shared';
+import { Math, MathInput, Collapsible, SpeakButton, AIChatPanel } from '@/components/shared';
+import { prereqNarrations } from './data/narrations';
 
 interface SelfTestItem {
   question: string;
@@ -48,7 +49,10 @@ export function PrereqPage() {
           <span>📚</span>
           <span>前置准备</span>
         </div>
-        <h1 className="text-3xl font-black text-gray-900 mb-2">1.0 前置知识回顾</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-3xl font-black text-gray-900 mb-2">1.0 前置知识回顾</h1>
+          <SpeakButton text={prereqNarrations.intro} />
+        </div>
         <p className="text-gray-500">学复数之前，先确保这些初中数学没问题</p>
         <div className="flex flex-wrap gap-3 mt-3">
           <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
@@ -61,17 +65,17 @@ export function PrereqPage() {
       </div>
 
       <section className="mb-6">
-        <Collapsible title="一、数的分类" defaultOpen storageKey="prereq:num-class">
-          <div className="bg-gray-50 rounded-lg p-4 text-sm font-mono space-y-1 mb-3">
-            <p>自然数（0,1,2,3...）</p>
-            <p className="pl-4">↓ 加入负数</p>
-            <p>整数（...-2,-1,0,1,2...）</p>
-            <p className="pl-4">↓ 加入分数</p>
-            <p>有理数（能写成 p/q 的数）</p>
-            <p className="pl-4">↓ 加入无理数（如 √2, π）</p>
+        <Collapsible title="一、数的分类" defaultOpen storageKey="prereq:num-class" headerExtra={<SpeakButton text={prereqNarrations.numClass} />}>
+          <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-1 mb-3">
+            <p>自然数（<Math tex="0, 1, 2, 3 \ldots" />）</p>
+            <p className="pl-4 text-gray-400">↓ 加入负数</p>
+            <p>整数（<Math tex="\ldots -2, -1, 0, 1, 2 \ldots" />）</p>
+            <p className="pl-4 text-gray-400">↓ 加入分数</p>
+            <p>有理数（能写成 <Math tex="\dfrac{p}{q}" /> 的数）</p>
+            <p className="pl-4 text-gray-400">↓ 加入无理数（如 <Math tex="\sqrt{2}" />，<Math tex="\pi" />）</p>
             <p>实数（数轴上所有的数）</p>
-            <p className="pl-4">↓ 加入虚数单位 i</p>
-            <p className="font-bold text-blue-600">复数（a + bi）← 你即将学的</p>
+            <p className="pl-4 text-gray-400">↓ 加入虚数单位 <Math tex="i" /></p>
+            <p className="font-bold text-blue-600">复数（<Math tex="a + bi" />）← 你即将学的</p>
           </div>
           <p className="text-sm text-gray-600">
             每次扩展都是因为<strong>原来的数不够用了</strong>
@@ -81,10 +85,10 @@ export function PrereqPage() {
       </section>
 
       <section className="mb-6">
-        <Collapsible title="二、平方与平方根" defaultOpen storageKey="prereq:square">
+        <Collapsible title="二、平方与平方根" defaultOpen storageKey="prereq:square" headerExtra={<SpeakButton text={prereqNarrations.square} />}>
           <p className="text-sm text-gray-700 mb-3">
-            <strong>关键性质：任何实数的平方 ≥ 0</strong>
-            ，所以实数范围内不存在平方等于负数的数 → 需要发明 i
+            <strong>关键性质：任何实数的平方 <Math tex="\geq 0" /></strong>
+            ，所以实数范围内不存在平方等于负数的数 → 需要发明 <Math tex="i" />
           </p>
           <div className="bg-gray-50 rounded-lg p-4 mb-3">
             <p className="text-sm mb-2 font-bold">常用平方数（背熟提速）：</p>
@@ -105,7 +109,7 @@ export function PrereqPage() {
       </section>
 
       <section className="mb-6">
-        <Collapsible title="三、分数运算" defaultOpen storageKey="prereq:fraction">
+        <Collapsible title="三、分数运算" defaultOpen storageKey="prereq:fraction" headerExtra={<SpeakButton text={prereqNarrations.fraction} />}>
           <div className="space-y-3 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-1">加减（先通分）：</p>
@@ -130,7 +134,7 @@ export function PrereqPage() {
       </section>
 
       <section className="mb-6">
-        <Collapsible title="四、多项式展开（复数乘法的核心）" defaultOpen storageKey="prereq:polynomial">
+        <Collapsible title="四、多项式展开（复数乘法的核心）" defaultOpen storageKey="prereq:polynomial" headerExtra={<SpeakButton text={prereqNarrations.polynomial} />}>
           <div className="space-y-4 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-1">分配律：</p>
@@ -158,7 +162,7 @@ export function PrereqPage() {
       </section>
 
       <section className="mb-6">
-        <Collapsible title="五、负数运算" defaultOpen storageKey="prereq:negative">
+        <Collapsible title="五、负数运算" defaultOpen storageKey="prereq:negative" headerExtra={<SpeakButton text={prereqNarrations.negative} />}>
           <div className="space-y-2 text-sm text-gray-700">
             <p>
               <strong>同号得正，异号得负：</strong>
@@ -186,20 +190,20 @@ export function PrereqPage() {
       </section>
 
       <section className="mb-6">
-        <Collapsible title="六、除以4求余数" defaultOpen storageKey="prereq:remainder">
-          <p className="text-sm text-gray-700 mb-2">判断 i 的幂次时需要：</p>
+        <Collapsible title="六、除以4求余数" defaultOpen storageKey="prereq:remainder" headerExtra={<SpeakButton text={prereqNarrations.remainder} />}>
+          <p className="text-sm text-gray-700 mb-2">判断 <Math tex="i" /> 的幂次时需要：</p>
           <div className="bg-gray-50 rounded-lg p-3 text-sm space-y-1">
             <p>
-              17 ÷ 4 = 4 余 <strong>1</strong> → <Math tex="i^{17} = i" />
+              <Math tex="17 \div 4 = 4" /> 余 <strong>1</strong> → <Math tex="i^{17} = i" />
             </p>
             <p>
-              22 ÷ 4 = 5 余 <strong>2</strong> → <Math tex="i^{22} = -1" />
+              <Math tex="22 \div 4 = 5" /> 余 <strong>2</strong> → <Math tex="i^{22} = -1" />
             </p>
             <p>
-              100 ÷ 4 = 25 余 <strong>0</strong> → <Math tex="i^{100} = 1" />
+              <Math tex="100 \div 4 = 25" /> 余 <strong>0</strong> → <Math tex="i^{100} = 1" />
             </p>
             <p>
-              2025 ÷ 4 = 506 余 <strong>1</strong> → <Math tex="i^{2025} = i" />
+              <Math tex="2025 \div 4 = 506" /> 余 <strong>1</strong> → <Math tex="i^{2025} = i" />
             </p>
           </div>
         </Collapsible>
@@ -277,6 +281,8 @@ export function PrereqPage() {
           </p>
         </div>
       </section>
+
+      <AIChatPanel moduleId="prereq" />
     </div>
   );
 }

@@ -12,6 +12,8 @@ interface CollapsibleProps {
   variant?: CollapsibleVariant;
   /** If provided, open/close state is persisted to IndexedDB */
   storageKey?: string;
+  /** Extra element rendered after the title (e.g. SpeakButton) */
+  headerExtra?: React.ReactNode;
 }
 
 export function Collapsible({
@@ -20,6 +22,7 @@ export function Collapsible({
   defaultOpen = false,
   variant = 'default',
   storageKey,
+  headerExtra,
 }: CollapsibleProps) {
   const [localOpen, setLocalOpen] = useState(defaultOpen);
   const [persistedOpen, setPersistedOpen] = useUIState(
@@ -44,13 +47,20 @@ export function Collapsible({
 
   return (
     <div className={`rounded-xl border ${styles[variant]} mb-3 overflow-hidden`}>
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center gap-2 px-4 py-3 text-left font-medium cursor-pointer hover:opacity-80 transition-opacity"
-      >
-        {open ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-        <span className={titleStyles[variant]}>{title}</span>
-      </button>
+      <div className="flex items-center px-4 py-3">
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex-1 flex items-center gap-2 text-left font-medium cursor-pointer hover:opacity-80 transition-opacity"
+        >
+          {open ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
+          <span className={titleStyles[variant]}>{title}</span>
+        </button>
+        {headerExtra && (
+          <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
+            {headerExtra}
+          </div>
+        )}
+      </div>
       {open && (
         <div className="px-4 pb-4 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-3">
           {children}

@@ -1,6 +1,7 @@
 import { Flame, Lightbulb, AlertTriangle } from 'lucide-react';
 
-import { Math, QuizQuestion, Collapsible, ProgressTracker } from '@/components/shared';
+import { Math, QuizQuestion, Collapsible, ProgressTracker, SpeakButton, AIChatPanel } from '@/components/shared';
+import { complexNarrations } from './data/narrations';
 import { useProgress, useQuiz } from '@/hooks';
 import { complexQuizQuestions } from './data/quiz';
 import { complexProgressItems } from './data/progress';
@@ -22,7 +23,10 @@ export function ComplexPage() {
           <Flame size={16} />
           <span>第一阶段 · 数学语言</span>
         </div>
-        <h1 className="text-3xl font-black text-gray-900 mb-2">1.1 复数</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-3xl font-black text-gray-900 mb-2">1.1 复数</h1>
+          <SpeakButton text={complexNarrations.intro} />
+        </div>
         <p className="text-gray-500">从零到满分 · 2小时搞定高考必拿5分</p>
         <div className="flex flex-wrap gap-3 mt-3">
           <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
@@ -47,6 +51,7 @@ export function ComplexPage() {
                 1
               </span>
               为什么要发明复数？
+              <SpeakButton text={complexNarrations.whyComplex} />
             </h2>
 
             <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
@@ -79,7 +84,7 @@ export function ComplexPage() {
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
                 <p className="text-blue-800 text-sm">
                   就像人类发明了"0"来表示"没有"，发明了"负数"来表示"欠债"，
-                  现在发明一个新数 <strong>i</strong> 来表示"平方等于-1的数"。
+                  现在发明一个新数 <Math tex="i" /> 来表示“平方等于 <Math tex="-1" /> 的数”。
                 </p>
               </div>
 
@@ -100,6 +105,7 @@ export function ComplexPage() {
                 2
               </span>
               什么是复数？
+              <SpeakButton text={complexNarrations.whatIsComplex} />
             </h2>
 
             <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
@@ -107,13 +113,13 @@ export function ComplexPage() {
                 <Math tex="z = a + bi" display />
                 <div className="flex justify-center gap-8 mt-3 text-sm text-gray-600">
                   <span>
-                    <strong>a</strong> = 实部
+                    <Math tex="a" /> = 实部
                   </span>
                   <span>
-                    <strong>b</strong> = 虚部（系数！）
+                    <Math tex="b" /> = 虚部（系数！）
                   </span>
                   <span>
-                    <strong>i</strong> = 虚数单位
+                    <Math tex="i" /> = 虚数单位
                   </span>
                 </div>
               </div>
@@ -122,9 +128,9 @@ export function ComplexPage() {
                 <table className="w-full text-sm border-collapse">
                   <thead>
                     <tr className="bg-gray-50">
-                      <th className="border border-gray-200 px-3 py-2 text-left">复数 z</th>
-                      <th className="border border-gray-200 px-3 py-2 text-center">实部 a</th>
-                      <th className="border border-gray-200 px-3 py-2 text-center">虚部 b</th>
+                      <th className="border border-gray-200 px-3 py-2 text-left">复数 <Math tex="z" /></th>
+                      <th className="border border-gray-200 px-3 py-2 text-center">实部 <Math tex="a" /></th>
+                      <th className="border border-gray-200 px-3 py-2 text-center">虚部 <Math tex="b" /></th>
                       <th className="border border-gray-200 px-3 py-2 text-left">类型</th>
                     </tr>
                   </thead>
@@ -139,8 +145,8 @@ export function ComplexPage() {
                         <td className="border border-gray-200 px-3 py-2">
                           <Math tex={z} />
                         </td>
-                        <td className="border border-gray-200 px-3 py-2 text-center">{a}</td>
-                        <td className="border border-gray-200 px-3 py-2 text-center">{b}</td>
+                        <td className="border border-gray-200 px-3 py-2 text-center"><Math tex={a} /></td>
+                        <td className="border border-gray-200 px-3 py-2 text-center"><Math tex={b} /></td>
                         <td className="border border-gray-200 px-3 py-2">{type}</td>
                       </tr>
                     ))}
@@ -154,8 +160,8 @@ export function ComplexPage() {
               <div>
                 <p className="font-bold text-red-700 text-sm">高考陷阱</p>
                 <p className="text-red-700 text-sm mt-1">
-                  虚部是系数 <strong>b</strong>，不是 bi！ 例：
-                  <Math tex="z = 3 + 5i" /> 的虚部是 <strong>5</strong>，不是 5i。每年都有人栽。
+                  虚部是系数 <Math tex="b" />，不是 <Math tex="bi" />！ 例：
+                  <Math tex="z = 3 + 5i" /> 的虚部是 <Math tex="5" />，不是 <Math tex="5i" />。每年都有人栽。
                 </p>
               </div>
             </div>
@@ -168,6 +174,7 @@ export function ComplexPage() {
                 3
               </span>
               四则运算
+              <SpeakButton text={complexNarrations.operationIntro} />
             </h2>
 
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4 flex items-start gap-3">
@@ -175,13 +182,13 @@ export function ComplexPage() {
               <div>
                 <p className="font-bold text-amber-800 text-sm">核心思想（第一性原理）</p>
                 <p className="text-amber-700 text-sm mt-1">
-                  把 i 当成一个字母（像 x 一样），按多项式运算规则来算，遇到 i² 就替换成 -1。
+                  把 <Math tex="i" /> 当成一个字母（像 <Math tex="x" /> 一样），按多项式运算规则来算，遇到 <Math tex="i^2" /> 就替换成 <Math tex="-1" />。
                   <strong>就这一条，你就会算所有复数运算了。</strong>
                 </p>
               </div>
             </div>
 
-            <Collapsible title="加法和减法" defaultOpen storageKey="complex:add-sub">
+            <Collapsible title="加法和减法" defaultOpen storageKey="complex:add-sub" headerExtra={<SpeakButton text={complexNarrations.addSub} />}>
               <p className="mb-3">实部加实部，虚部加虚部：</p>
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math tex="(a + bi) + (c + di) = (a+c) + (b+d)i" display />
@@ -196,8 +203,8 @@ export function ComplexPage() {
               </div>
             </Collapsible>
 
-            <Collapsible title="乘法" defaultOpen storageKey="complex:mul">
-              <p className="mb-3">展开括号，遇到 i² 换成 -1：</p>
+            <Collapsible title="乘法" defaultOpen storageKey="complex:mul" headerExtra={<SpeakButton text={complexNarrations.multiply} />}>
+              <p className="mb-3">展开括号，遇到 <Math tex="i^2" /> 换成 <Math tex="-1" />：</p>
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math
                   tex="(2+3i)(1+i) = 2 + 2i + 3i + 3i^2 = 2 + 5i - 3 = -1 + 5i"
@@ -213,7 +220,7 @@ export function ComplexPage() {
               </div>
             </Collapsible>
 
-            <Collapsible title="i 的幂次规律（必背）" defaultOpen storageKey="complex:i-powers">
+            <Collapsible title="i 的幂次规律（必背）" defaultOpen storageKey="complex:i-powers" headerExtra={<SpeakButton text={complexNarrations.iPowers} />}>
               <div className="overflow-x-auto">
                 <table className="text-sm border-collapse mb-3">
                   <tbody>
@@ -239,18 +246,18 @@ export function ComplexPage() {
                 <strong>每4个一循环！</strong>快速求法：指数除以4看余数
               </p>
               <p className="text-sm text-gray-600">
-                例：<Math tex="i^{2025}" />，2025 ÷ 4 = 506 余 <strong>1</strong>，所以{' '}
+                例：<Math tex="i^{2025}" />，<Math tex="2025 \div 4 = 506" /> 余 <strong>1</strong>，所以{' '}
                 <Math tex="i^{2025} = i" />
               </p>
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
                 <p className="text-blue-800 text-sm">
-                  <strong>连续4个i的幂相加 = 0：</strong>
+                  <strong>连续4个 <Math tex="i" /> 的幂相加 <Math tex="= 0" />：</strong>
                   <Math tex="i^n + i^{n+1} + i^{n+2} + i^{n+3} = 0" />
                 </p>
               </div>
             </Collapsible>
 
-            <Collapsible title="共轭复数" defaultOpen storageKey="complex:conjugate">
+            <Collapsible title="共轭复数" defaultOpen storageKey="complex:conjugate" headerExtra={<SpeakButton text={complexNarrations.conjugate} />}>
               <p className="mb-3">实部相同，虚部相反：</p>
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math tex="z = a + bi \quad \Rightarrow \quad \bar{z} = a - bi" display />
@@ -264,7 +271,7 @@ export function ComplexPage() {
               </div>
             </Collapsible>
 
-            <Collapsible title="除法（最重要的运算技巧）" defaultOpen storageKey="complex:division">
+            <Collapsible title="除法（最重要的运算技巧）" defaultOpen storageKey="complex:division" headerExtra={<SpeakButton text={complexNarrations.division} />}>
               <p className="mb-3 font-bold text-gray-800">
                 核心方法：分母实数化——上下同乘分母的共轭复数
               </p>
@@ -282,12 +289,12 @@ export function ComplexPage() {
                 <ol className="list-decimal list-inside space-y-1 text-gray-700">
                   <li>写出分母的共轭复数</li>
                   <li>分子分母同时乘以这个共轭复数</li>
-                  <li>展开计算，整理成 a + bi 的形式</li>
+                  <li>展开计算，整理成 <Math tex="a + bi" /> 的形式</li>
                 </ol>
               </div>
             </Collapsible>
 
-            <Collapsible title="复数的模（大小）" defaultOpen storageKey="complex:modulus">
+            <Collapsible title="复数的模（大小）" defaultOpen storageKey="complex:modulus" headerExtra={<SpeakButton text={complexNarrations.modulus} />}>
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math tex="|z| = |a + bi| = \sqrt{a^2 + b^2}" display />
               </div>
@@ -328,13 +335,14 @@ export function ComplexPage() {
                 5
               </span>
               知识总结卡片
+              <SpeakButton text={complexNarrations.summary} />
             </h2>
             <div className="bg-slate-900 text-white rounded-2xl p-6 space-y-3 text-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-slate-400 text-xs mb-1">定义</p>
                   <p>
-                    <Math tex="z = a + bi" /> （a实部，b虚部）
+                    <Math tex="z = a + bi" /> （<Math tex="a" /> 实部，<Math tex="b" /> 虚部）
                   </p>
                 </div>
                 <div>
@@ -354,7 +362,7 @@ export function ComplexPage() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">i的周期</p>
+                  <p className="text-slate-400 text-xs mb-1"><Math tex="i" /> 的周期</p>
                   <p>
                     <Math tex="i \to -1 \to -i \to 1 \to i \to \cdots" />
                   </p>
@@ -368,7 +376,7 @@ export function ComplexPage() {
               </div>
               <div className="border-t border-slate-700 pt-3 mt-3">
                 <p className="text-amber-400 font-bold text-xs">
-                  ⚠ 虚部是 b，不是 bi ← 高考最大陷阱！
+                  ⚠ 虚部是 <Math tex="b" />，不是 <Math tex="bi" /> ← 高考最大陷阱！
                 </p>
               </div>
             </div>
@@ -382,6 +390,8 @@ export function ComplexPage() {
           </div>
         </div>
       </div>
+
+      <AIChatPanel moduleId="complex" />
     </div>
   );
 }

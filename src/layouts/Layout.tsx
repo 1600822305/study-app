@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, ChevronLeft, ChevronRight, Home, Calculator, Menu, Volume2 } from 'lucide-react';
+import { BookOpen, ChevronLeft, ChevronRight, Home, Calculator, Menu, Settings } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 
@@ -29,7 +29,7 @@ const navItems: NavItem[] = [
       { path: '/math/logic', label: '1.3 逻辑用语' },
     ],
   },
-  { path: '/settings/tts', label: '语音设置', icon: <Volume2 size={18} /> },
+  { path: '/settings', label: '设置', icon: <Settings size={18} /> },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -44,7 +44,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
     );
   };
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) =>
+    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   const sidebar = (
     <div
