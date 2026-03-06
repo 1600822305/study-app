@@ -44,7 +44,8 @@ export function ComplexPage() {
           <p>三、复数的相等 → 实部=实部，虚部=虚部</p>
           <p>四、四则运算 → 加减乘除，把i当字母</p>
           <p>五、复平面 → 几何意义，判断象限</p>
-          <p>六、高考真题实战 → 真题模拟</p>
+          <p>⚡ 考场技巧 → 速算秒杀5招</p>
+          <p>七、高考真题实战 → 真题模拟</p>
         </div>
       </div>
 
@@ -507,11 +508,106 @@ export function ComplexPage() {
             </div>
           </section>
 
-          {/* Part 6: Quiz */}
+          {/* Part 6: Tips & Tricks */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-orange-500 text-white flex items-center justify-center text-sm font-bold">
+                ⚡
+              </span>
+              考场技巧（速算秒杀）
+              <SpeakButton text={complexNarrations.tricks} />
+            </h2>
+
+            <Collapsible title="技巧1：凑因子法（除法秒杀）" defaultOpen storageKey="complex:trick-factor">
+              <p className="text-sm text-gray-700 mb-3">
+                拿到除法题，先观察<strong>分子是不是分母的简单倍数</strong>。如果是，直接约掉，秒出答案。
+              </p>
+              <div className="bg-gray-50 rounded-lg p-3 mb-3 text-sm">
+                <p className="font-bold mb-1">例：（2025·全国一卷）求 <Math tex="\dfrac{2+i}{1-2i}" /> 的虚部</p>
+                <p className="text-gray-500 mb-2">观察：分子能不能写成 分母 × 某个简单因子？</p>
+                <div className="space-y-1 text-gray-700">
+                  <p>试试乘 <Math tex="i" />：<Math tex="i \times (1-2i) = i - 2i^2 = i + 2 = 2 + i" /> ✓ 凑上了！</p>
+                  <p>所以 <Math tex="\dfrac{2+i}{1-2i} = \dfrac{i(1-2i)}{1-2i} = i" />，虚部 = <strong>1</strong></p>
+                </div>
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
+                <p className="text-amber-800">⏱ 常规三步走要30秒，凑因子法只要5秒。但不是每题都能凑，凑不出就老实乘共轭。</p>
+              </div>
+            </Collapsible>
+
+            <Collapsible title="技巧2：模的速算（不用化简）" defaultOpen storageKey="complex:trick-modulus">
+              <p className="text-sm text-gray-700 mb-3">
+                求 <Math tex="\left|\dfrac{z_1}{z_2}\right|" /> 时，<strong>不需要先做除法再求模</strong>，直接用性质：
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                <Math tex="\left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}" display />
+              </div>
+              <div className="bg-gray-50 rounded-lg p-3 mb-3 text-sm">
+                <p className="font-bold mb-1">例：求 <Math tex="\left|\dfrac{2+i}{1+i}\right|" /></p>
+                <div className="space-y-1 text-gray-700">
+                  <p><Math tex="|2+i| = \sqrt{4+1} = \sqrt{5}" /></p>
+                  <p><Math tex="|1+i| = \sqrt{1+1} = \sqrt{2}" /></p>
+                  <p>所以 <Math tex="\left|\dfrac{2+i}{1+i}\right| = \dfrac{\sqrt{5}}{\sqrt{2}} = \dfrac{\sqrt{10}}{2}" /></p>
+                </div>
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
+                <p className="text-amber-800">⏱ 比先化简除法再求模快得多！只要题目问的是<strong>模</strong>，就用这招。</p>
+              </div>
+            </Collapsible>
+
+            <Collapsible title="技巧3：共轭的妙用" defaultOpen storageKey="complex:trick-conjugate">
+              <p className="text-sm text-gray-700 mb-3">共轭有3个速算公式，高考经常直接考：</p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-3 space-y-2 text-sm">
+                <p>① <Math tex="z + \bar{z} = 2a" />（实部的两倍）</p>
+                <p>② <Math tex="z - \bar{z} = 2bi" />（虚部的两倍 × i）</p>
+                <p>③ <Math tex="z \cdot \bar{z} = a^2 + b^2 = |z|^2" /></p>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-3 text-sm">
+                <p className="font-bold mb-1">例：已知 <Math tex="z = 1+i" />，求 <Math tex="z + \bar{z}" /></p>
+                <p className="text-gray-700">直接用公式①：<Math tex="z + \bar{z} = 2 \times 1 = 2" />，不用算 <Math tex="\bar{z}" /></p>
+              </div>
+            </Collapsible>
+
+            <Collapsible title="技巧4：(1+i) 家族速查" defaultOpen storageKey="complex:trick-1i">
+              <p className="text-sm text-gray-700 mb-3">这几个结论高考反复考，直接记住省时间：</p>
+              <div className="bg-gray-50 rounded-lg p-4 text-sm">
+                <div className="grid grid-cols-2 gap-2">
+                  <p><Math tex="(1+i)^2 = 2i" /></p>
+                  <p><Math tex="(1-i)^2 = -2i" /></p>
+                  <p><Math tex="(1+i)(1-i) = 2" /></p>
+                  <p><Math tex="\dfrac{1+i}{1-i} = i" /></p>
+                  <p><Math tex="\dfrac{1-i}{1+i} = -i" /></p>
+                  <p><Math tex="|1+i| = |1-i| = \sqrt{2}" /></p>
+                </div>
+              </div>
+            </Collapsible>
+
+            <Collapsible title="技巧5：纯虚数条件速列" defaultOpen storageKey="complex:trick-pure-imaginary">
+              <p className="text-sm text-gray-700 mb-3">
+                题目说"z 是纯虚数"，立刻列两个条件：
+              </p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                <Math tex="\text{实部} = 0 \quad \text{且} \quad \text{虚部} \neq 0" display />
+              </div>
+              <div className="bg-gray-50 rounded-lg p-3 text-sm">
+                <p className="font-bold mb-1">例：<Math tex="z = (m^2-1) + (m+1)i" /> 是纯虚数，求 m</p>
+                <div className="space-y-1 text-gray-700">
+                  <p>实部 = 0：<Math tex="m^2 - 1 = 0 \Rightarrow m = \pm 1" /></p>
+                  <p>虚部 ≠ 0：<Math tex="m + 1 \neq 0 \Rightarrow m \neq -1" /></p>
+                  <p>所以 <Math tex="m = 1" />（排除 m = -1）</p>
+                </div>
+              </div>
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm mt-3">
+                <p className="text-amber-800">⚠️ 很多人只列了实部=0，忘了检查虚部≠0，白送分！</p>
+              </div>
+            </Collapsible>
+          </section>
+
+          {/* Part 7: Quiz */}
           <section className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
-                6
+                7
               </span>
               高考真题实战
             </h2>
