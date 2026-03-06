@@ -4,10 +4,10 @@ import { BookOpen, Calculator, Zap, Target, Clock } from 'lucide-react';
 export function HomePage() {
   return (
     <div>
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-black text-gray-900 mb-3">StudyGoGoGo</h1>
-        <p className="text-lg text-gray-500">AI驱动 · 第一性原理 · 零基础逆袭高考</p>
-        <div className="flex items-center justify-center gap-6 mt-5 text-sm text-gray-400">
+      <div className="text-center mb-6 md:mb-10">
+        <h1 className="text-2xl md:text-4xl font-black text-gray-900 mb-2 md:mb-3">StudyGoGoGo</h1>
+        <p className="text-sm md:text-lg text-gray-500">AI驱动 · 第一性原理 · 零基础逆袭高考</p>
+        <div className="flex items-center justify-center gap-4 md:gap-6 mt-3 md:mt-5 text-xs md:text-sm text-gray-400">
           <span className="flex items-center gap-1">
             <Clock size={14} />
             距高考约93天
@@ -19,10 +19,10 @@ export function HomePage() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-3 md:gap-4 md:grid-cols-2">
         <Link
           to="/math/prereq"
-          className="group block p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
+          className="group block p-4 md:p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
@@ -40,7 +40,7 @@ export function HomePage() {
 
         <Link
           to="/math/complex"
-          className="group block p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
+          className="group block p-4 md:p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
@@ -58,7 +58,7 @@ export function HomePage() {
 
         <Link
           to="/math/sets"
-          className="group block p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
+          className="group block p-4 md:p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center">
@@ -76,7 +76,7 @@ export function HomePage() {
 
         <Link
           to="/math/logic"
-          className="group block p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
+          className="group block p-4 md:p-6 bg-white rounded-2xl border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200"
         >
           <div className="flex items-center gap-3 mb-3">
             <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
@@ -93,7 +93,7 @@ export function HomePage() {
         </Link>
       </div>
 
-      <div className="mt-8 p-5 bg-blue-50 border border-blue-200 rounded-2xl">
+      <div className="mt-6 md:mt-8 p-4 md:p-5 bg-blue-50 border border-blue-200 rounded-2xl">
         <h3 className="font-bold text-blue-800 mb-2">📌 学习路线</h3>
         <p className="text-sm text-blue-700 leading-relaxed">
           复数→集合→逻辑→不等式→二次函数→函数→向量→三角→数列→几何→解析几何→概率→导数

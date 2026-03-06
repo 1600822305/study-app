@@ -4,7 +4,7 @@
 // 参考 AetherLink universalFetch 架构
 // ============================================================
 
-// ==================== 平台检测 ====================
+// ==================== 运行时检测 ====================
 
 /** 是否运行在 Tauri 桌面端 */
 export function isTauri(): boolean {
@@ -26,6 +26,43 @@ export function isBrowser(): boolean {
   return typeof window !== 'undefined' && !isTauri() && !isCapacitor();
 }
 
+// ==================== 操作系统检测 ====================
+
+/** 获取 Capacitor 平台名（'android' | 'ios' | 'web'） */
+function getCapacitorPlatform(): string {
+  if (typeof window !== 'undefined' && 'Capacitor' in window) {
+    return (window as any).Capacitor?.getPlatform?.() ?? 'web';
+  }
+  return 'web';
+}
+
+/** 是否为 Android（Capacitor 或浏览器 UA） */
+export function isAndroid(): boolean {
+  if (isCapacitor()) return getCapacitorPlatform() === 'android';
+  return typeof navigator !== 'undefined' && /android/i.test(navigator.userAgent);
+}
+
+/** 是否为 iOS（Capacitor 或浏览器 UA） */
+export function isIOS(): boolean {
+  if (isCapacitor()) return getCapacitorPlatform() === 'ios';
+  return typeof navigator !== 'undefined' && /iPad|iPhone|iPod/i.test(navigator.userAgent);
+}
+
+/** 是否为移动设备（Capacitor 原生 或 移动端浏览器） */
+export function isMobile(): boolean {
+  if (isCapacitor()) return true;
+  if (typeof navigator === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || (typeof window !== 'undefined' && window.innerWidth < 768);
+}
+
+/** 是否为桌面设备 */
+export function isDesktop(): boolean {
+  return !isMobile();
+}
+
+// ==================== 环境检测 ====================
+
 /** 是否为开发环境 */
 export function isDev(): boolean {
   return import.meta.env.DEV;
@@ -36,14 +73,42 @@ export function isProd(): boolean {
   return import.meta.env.PROD;
 }
 
-/** 当前运行平台描述 */
-export type Platform = 'tauri' | 'capacitor' | 'browser';
+// ==================== 平台标识 ====================
 
-export function getPlatform(): Platform {
+/** 运行时平台 */
+export type Runtime = 'tauri' | 'capacitor' | 'browser';
+
+/** 操作系统 */
+export type OS = 'android' | 'ios' | 'windows' | 'macos' | 'linux' | 'unknown';
+
+/** 设备类型 */
+export type DeviceType = 'mobile' | 'desktop';
+
+export function getRuntime(): Runtime {
   if (isTauri()) return 'tauri';
   if (isCapacitor()) return 'capacitor';
   return 'browser';
 }
+
+export function getOS(): OS {
+  if (isAndroid()) return 'android';
+  if (isIOS()) return 'ios';
+  if (typeof navigator === 'undefined') return 'unknown';
+  const ua = navigator.userAgent;
+  if (/Windows/i.test(ua)) return 'windows';
+  if (/Mac OS/i.test(ua)) return 'macos';
+  if (/Linux/i.test(ua)) return 'linux';
+  return 'unknown';
+}
+
+export function getDeviceType(): DeviceType {
+  return isMobile() ? 'mobile' : 'desktop';
+}
+
+/** @deprecated 使用 getRuntime() 代替 */
+export type Platform = Runtime;
+/** @deprecated 使用 getRuntime() 代替 */
+export const getPlatform = getRuntime;
 
 // ==================== CORS 代理配置 ====================
 // Web 端通过本地 CORS 代理服务器转发跨域请求

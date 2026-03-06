@@ -32,6 +32,7 @@
     "@types/katex": "^0.16.8",
     "@types/react-syntax-highlighter": "^15.5.13",
     "ai": "^6.0.116",
+    "capacitor-edge-to-edge": "^2.1.1",
     "dexie": "^4.3.0",
     "katex": "^0.16.35",
     "lucide-react": "^0.577.0",
@@ -43,7 +44,9 @@
     "react-syntax-highlighter": "^16.1.1",
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0"
+    "remark-math": "^6.0.0",
+    "solid-js": "^1.9.11",
+    "vite-plugin-solid": "^2.11.10"
   },
   "devDependencies": {
     "@capacitor/cli": "^8.2.0",

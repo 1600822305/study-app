@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { BookOpen, ChevronLeft, ChevronRight, Home, Calculator, Menu, Settings, MessageCircle } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
+import { isMobile } from '@/lib/env';
+import { SolidBridge } from '@/shared/bridges';
+import SwipeDrawer from '@/solid/components/SwipeDrawer.solid';
 import { ChatPanel } from '@/features/chat/ChatPanel';
 
 interface NavChild {
@@ -41,6 +45,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>(['/math']);
+  const [mainDrawerPortal, setMainDrawerPortal] = useState<HTMLElement | null>(null);
+
+  const mobile = isMobile();
+  const isChatRoute = location.pathname.startsWith('/chat');
+
+  // 监听 SolidJS 创建的主抽屉容器
+  useEffect(() => {
+    if (!mobile) return;
+    const find = () => {
+      const el = document.getElementById('solid-main-drawer');
+      if (el !== mainDrawerPortal) setMainDrawerPortal(el);
+    };
+    find();
+    const obs = new MutationObserver(find);
+    obs.observe(document.body, { childList: true, subtree: true });
+    return () => obs.disconnect();
+  }, [mobile, mainDrawerPortal]);
+
+  const handleMainDrawerChange = useCallback((open: boolean) => {
+    setMobileOpen(open);
+  }, []);
 
   const toggleSection = (path: string) => {
     setExpandedSections((prev) =>
@@ -67,7 +92,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <>
                 <button
                   onClick={() => toggleSection(item.path)}
-                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors cursor-pointer"
+                  className="w-full flex items-center gap-3 px-4 py-3 md:py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors cursor-pointer"
                 >
                   {item.icon}
                   {!collapsed && (
@@ -87,7 +112,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                         key={child.path}
                         to={child.path}
                         onClick={() => setMobileOpen(false)}
-                        className={`block pl-6 pr-4 py-2 text-sm transition-colors ${
+                        className={`block pl-6 pr-4 py-3 md:py-2 text-sm transition-colors ${
                           isActive(child.path)
                             ? 'text-blue-400 bg-slate-800 font-medium'
                             : 'text-slate-400 hover:text-white hover:bg-slate-800'
@@ -103,7 +128,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link
                 to={item.path}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
+                className={`flex items-center gap-3 px-4 py-3 md:py-2.5 text-sm transition-colors ${
                   isActive(item.path)
                     ? 'text-blue-400 bg-slate-800 font-medium'
                     : 'text-slate-300 hover:bg-slate-800 hover:text-white'
@@ -130,26 +155,42 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex h-screen bg-[#f5f5ec] overflow-hidden">
       <aside className="hidden md:block shrink-0">{sidebar}</aside>
 
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
-          <div className="relative w-64 h-full">{sidebar}</div>
-        </div>
+      {/* ====== 移动端：SolidJS 手势主抽屉 ====== */}
+      {mobile && (
+        <>
+          <SolidBridge
+            component={SwipeDrawer as any}
+            props={{
+              open: mobileOpen,
+              onOpenChange: handleMainDrawerChange,
+              width: 288,
+              enableSwipeGesture: !isChatRoute,
+              portalId: 'solid-main-drawer',
+              bgColor: '#0f172a',
+            }}
+            style={{ display: 'contents' }}
+            debugName="MainSwipeDrawer"
+          />
+          {mainDrawerPortal && createPortal(
+            <div className="h-full">{sidebar}</div>,
+            mainDrawerPortal,
+          )}
+        </>
       )}
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="md:hidden flex items-center gap-3 px-4 py-3 bg-white border-b border-gray-200">
-          <button onClick={() => setMobileOpen(true)} className="cursor-pointer">
+        <header className="md:hidden flex items-center gap-3 px-4 py-3 bg-white border-b border-gray-200 shrink-0" style={{ paddingTop: 'calc(0.75rem + var(--sat, 0px))' }}>
+          <button onClick={() => setMobileOpen(true)} className="cursor-pointer p-1">
             <Menu size={22} />
           </button>
-          <span className="font-bold text-gray-800">{APP_NAME}</span>
+          <span className="font-bold text-gray-800 flex-1">{APP_NAME}</span>
         </header>
 
         <main className="flex-1 overflow-hidden">
           {location.pathname.startsWith('/chat') ? (
             <div className="h-full">{children}</div>
           ) : (
-            <div className="h-full overflow-y-auto px-6 md:px-12 py-6 md:py-10">{children}</div>
+            <div className="h-full overflow-y-auto px-4 md:px-12 py-4 md:py-10" style={{ paddingBottom: 'calc(2rem + var(--sab, 0px))' }}>{children}</div>
           )}
         </main>
       </div>
