@@ -1,58 +1,8 @@
-import { useState } from 'react';
-import { CheckCircle, XCircle } from 'lucide-react';
-
-import { Math, MathInput, Collapsible, SpeakButton } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel } from '@/components/shared';
 import { prereqNarrations } from './data/narrations';
-
-interface SelfTestItem {
-  question: string;
-  questionLatex?: string;
-  answer: string;
-  answerLatex?: string;
-}
-
-const selfTestItems: SelfTestItem[] = [
-  { question: '(-3)² = ?', questionLatex: '(-3)^2', answer: '9' },
-  { question: '√(9 + 16) = ?', questionLatex: '\\sqrt{9+16}', answer: '5', answerLatex: '\\sqrt{25} = 5' },
-  { question: '(2+3)(4-1) = ?', answer: '15' },
-  { question: '(a+b)(a-b) = ?', answer: 'a² - b²', answerLatex: 'a^2 - b^2' },
-  { question: '(1+x)² = ?', questionLatex: '(1+x)^2', answer: '1 + 2x + x²', answerLatex: '1 + 2x + x^2' },
-  { question: '5 - (-3) = ?', answer: '8' },
-  { question: '(-2) × (-5) = ?', answer: '10' },
-  { question: '3/4 + 1/6 = ?', questionLatex: '\\frac{3}{4} + \\frac{1}{6}', answer: '11/12', answerLatex: '\\frac{11}{12}' },
-  { question: '67 ÷ 4 的余数 = ?', answer: '3' },
-  { question: '(-1) × (-1) = ?', answer: '1' },
-];
+import { prereqSelfTest } from './data/selftest';
 
 export function PrereqPage() {
-  const [revealed, setRevealed] = useState<Set<number>>(new Set());
-  const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
-
-  const toggleReveal = (idx: number) => {
-    setRevealed((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx);
-      else next.add(idx);
-      return next;
-    });
-  };
-
-  const checkAnswer = (idx: number, answer: string) => {
-    const item = selfTestItems[idx];
-    const normalize = (s: string) =>
-      s
-        .replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g, '$1/$2')
-        .replace(/\\cdot/g, '×')
-        .replace(/\\times/g, '×')
-        .replace(/\^2/g, '²')
-        .replace(/\^{2}/g, '²')
-        .replace(/\s/g, '');
-    const userNorm = normalize(answer);
-    return (
-      userNorm === normalize(item.answer) ||
-      (item.answerLatex && userNorm === normalize(item.answerLatex))
-    );
-  };
 
   return (
     <div>
@@ -383,74 +333,12 @@ export function PrereqPage() {
       {/* Self test */}
       <section className="mb-8">
         <h2 className="text-xl font-bold text-gray-900 mb-4">自测清单</h2>
-        <p className="text-sm text-gray-500 mb-4">
-          做完10题，确认初中基础没问题。点击题目查看答案。
-        </p>
-
-        <div className="space-y-3">
-          {selfTestItems.map((item, idx) => (
-            <div key={idx} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <div className="flex items-center gap-3 px-4 py-3">
-                <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-500 shrink-0">
-                  {idx + 1}
-                </span>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-800">
-                    {item.questionLatex ? <Math tex={item.questionLatex} /> : item.question}
-                    <span className="text-gray-400"> = ?</span>
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => toggleReveal(idx)}
-                  className="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap shrink-0"
-                >
-                  {revealed.has(idx) ? '收起' : '查看答案'}
-                </button>
-              </div>
-
-              <div className="px-4 pb-3">
-                <MathInput
-                  value={userAnswers[idx] || ''}
-                  onChange={(latex) =>
-                    setUserAnswers((prev) => ({ ...prev, [idx]: latex }))
-                  }
-                  placeholder="点击输入答案..."
-                  className="w-full"
-                />
-              </div>
-
-              {revealed.has(idx) && (
-                <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 flex items-center gap-3">
-                  {userAnswers[idx] &&
-                    (checkAnswer(idx, userAnswers[idx]) ? (
-                      <CheckCircle size={18} className="text-green-500 shrink-0" />
-                    ) : (
-                      <XCircle size={18} className="text-red-500 shrink-0" />
-                    ))}
-                  <span className="text-sm text-gray-700">
-                    答案：
-                    <strong>
-                      {item.answerLatex ? <Math tex={item.answerLatex} /> : item.answer}
-                    </strong>
-                  </span>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
-          <p>
-            <strong>全对</strong> → 直接学 1.1 复数，没有障碍
-          </p>
-          <p>
-            <strong>错了1-2题</strong> → 把错的部分再看一遍
-          </p>
-          <p>
-            <strong>错了3题以上</strong> → 上面的知识点从头认真看一遍
-          </p>
-        </div>
+        <QuizPanel
+          module="prereq"
+          questions={prereqSelfTest}
+          title="前置知识自测"
+          description="10道选择题，确认初中基础没问题。"
+        />
       </section>
     </div>
   );
