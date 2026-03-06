@@ -66,20 +66,46 @@ export function PrereqPage() {
 
       <section className="mb-6">
         <Collapsible title="一、数的分类" defaultOpen storageKey="prereq:num-class" headerExtra={<SpeakButton text={prereqNarrations.numClass} />}>
-          <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-1 mb-3">
-            <p>自然数（<Math tex="0, 1, 2, 3 \ldots" />）</p>
-            <p className="pl-4 text-gray-400">↓ 加入负数</p>
-            <p>整数（<Math tex="\ldots -2, -1, 0, 1, 2 \ldots" />）</p>
-            <p className="pl-4 text-gray-400">↓ 加入分数</p>
-            <p>有理数（能写成 <Math tex="\dfrac{p}{q}" /> 的数）</p>
-            <p className="pl-4 text-gray-400">↓ 加入无理数（如 <Math tex="\sqrt{2}" />，<Math tex="\pi" />）</p>
-            <p>实数（数轴上所有的数）</p>
-            <p className="pl-4 text-gray-400">↓ 加入虚数单位 <Math tex="i" /></p>
-            <p className="font-bold text-blue-600">复数（<Math tex="a + bi" />）← 你即将学的</p>
+          <p className="text-sm text-gray-600 mb-4">
+            数学里的"数"，就像一个<strong>不断升级的工具箱</strong>。每当旧工具解决不了新问题，就往里加新工具。
+          </p>
+          <div className="space-y-4 text-sm text-gray-700">
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="font-bold mb-1">第1层：自然数</p>
+              <p className="text-gray-500 mb-1"><Math tex="0, 1, 2, 3, 4, 5, \ldots" /></p>
+              <p>最早学的<strong>数东西用的数</strong>。3个苹果、5支笔、0分。</p>
+              <p className="text-red-600 mt-1">问题：<Math tex="3 - 5 = ?" /> 自然数里没有答案，不够减。</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="font-bold mb-1">第2层：整数</p>
+              <p className="text-gray-500 mb-1"><Math tex="\ldots -3, -2, -1, 0, 1, 2, 3, \ldots" /></p>
+              <p>加入了<strong>负数</strong>。零下5度（-5℃）、欠了10块钱（-10元）。</p>
+              <p>现在 <Math tex="3 - 5 = -2" />，能算了。</p>
+              <p className="text-red-600 mt-1">问题：<Math tex="1 \div 3 = ?" /> 整数里没有答案，结果不是整数。</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="font-bold mb-1">第3层：有理数</p>
+              <p className="text-gray-500 mb-1"><Math tex="\frac{1}{2},\; -\frac{3}{4},\; 0.75,\; 0.333\ldots" /></p>
+              <p>加入了<strong>分数</strong>（小数也是分数的另一种写法）。能写成 <Math tex="\frac{p}{q}" /> 的数都叫有理数。</p>
+              <p className="text-red-600 mt-1">问题：<Math tex="\sqrt{2} = ?" /> 无限不循环小数，写不成分数。</p>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="font-bold mb-1">第4层：实数</p>
+              <p>有理数 + <strong>无理数</strong>（如 <Math tex="\sqrt{2}" />、<Math tex="\pi" />）= 实数。</p>
+              <p>简单理解：<strong>数轴上能标出来的所有点</strong>都是实数。</p>
+              <p className="text-red-600 mt-1">问题：<Math tex="x^2 = -1" />，<Math tex="x = ?" /> 任何实数的平方都 <Math tex="\geq 0" />，解不了。</p>
+            </div>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <p className="font-bold text-blue-700 mb-1">第5层：复数 ← 你即将学的</p>
+              <p>发明<strong>虚数单位 <Math tex="i" /></strong>，规定 <Math tex="i^2 = -1" />。</p>
+              <p>实数和虚数组合写成 <Math tex="a + bi" /> 的形式，就叫<strong>复数</strong>。</p>
+            </div>
           </div>
-          <p className="text-sm text-gray-600">
-            每次扩展都是因为<strong>原来的数不够用了</strong>
-            。复数不是奇怪的东西，它只是数的自然延伸。
+          <div className="mt-4 bg-gray-50 rounded-lg p-3 text-sm text-center">
+            <Math tex="\text{自然数} \to \text{整数} \to \text{有理数} \to \text{实数} \to \text{复数}" />
+          </div>
+          <p className="text-sm text-gray-600 mt-2">
+            每次扩展都是因为<strong>原来的数不够用了</strong>。复数不是奇怪的东西，它只是数的<strong>第5次自然升级</strong>。
           </p>
         </Collapsible>
       </section>
