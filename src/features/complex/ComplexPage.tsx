@@ -41,6 +41,19 @@ export function ComplexPage() {
         </div>
       </div>
 
+      {/* Knowledge Map */}
+      <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
+        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
+        <div className="grid grid-cols-2 gap-1">
+          <p>一、为什么要发明复数 → i²=-1 的由来</p>
+          <p>二、什么是复数 → 标准形式 a+bi</p>
+          <p>三、复数的相等 → 实部=实部，虚部=虚部</p>
+          <p>四、四则运算 → 加减乘除，把i当字母</p>
+          <p>五、复平面 → 几何意义，判断象限</p>
+          <p>六、高考真题实战 → 真题模拟</p>
+        </div>
+      </div>
+
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Main content */}
         <div className="flex-1 min-w-0">
@@ -95,6 +108,17 @@ export function ComplexPage() {
                   就这一条，整个复数体系都从这里长出来。
                 </p>
               </div>
+            </div>
+
+            <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. i² = ? → <strong>-1</strong></p>
+              <p className="text-gray-700">2. x² = -1 在实数范围内有解吗？ → <strong>没有</strong>，因为实数的平方 ≥ 0</p>
+            </div>
+            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
+              <p className="text-gray-700">• <strong>i² = -1</strong>，不是 i = -1（i 本身不等于 -1）</p>
+              <p className="text-gray-700">• i 不在数轴上，不能和实数比大小</p>
             </div>
           </section>
 
@@ -165,13 +189,54 @@ export function ComplexPage() {
                 </p>
               </div>
             </div>
+
+            <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. <Math tex="z = 5 - 4i" /> 的实部和虚部？ → 实部 <strong>5</strong>，虚部 <strong>-4</strong></p>
+              <p className="text-gray-700">2. <Math tex="z = 2i" /> 是什么数？ → <strong>纯虚数</strong>（实部=0，虚部≠0）</p>
+            </div>
           </section>
 
-          {/* Part 3: Operations */}
+          {/* Part 3: Equality */}
           <section className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 3
+              </span>
+              复数的相等
+              <SpeakButton text={complexNarrations.equality} />
+            </h2>
+
+            <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
+              <p className="text-gray-700 mb-3">两个复数相等的条件：</p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                <Math tex="a + bi = c + di \iff a = c \;\text{且}\; b = d" display />
+              </div>
+              <p className="text-gray-700 mb-3"><strong>实部等于实部，虚部等于虚部。</strong></p>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <p className="text-sm text-gray-600 mb-2">例：已知 <Math tex="(2x-1) + (y+3)i = 0" />，求 x, y。</p>
+                <p className="text-sm text-gray-700">实部：<Math tex="2x - 1 = 0 \Rightarrow x = \tfrac{1}{2}" /></p>
+                <p className="text-sm text-gray-700">虚部：<Math tex="y + 3 = 0 \Rightarrow y = -3" /></p>
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. 已知 <Math tex="(3x-6) + (2y+4)i = 0" />，求 x, y → x = <strong>2</strong>，y = <strong>-2</strong></p>
+              <p className="text-gray-700">2. 已知 <Math tex="a+bi = 2-3i" />，求 a, b → a = <strong>2</strong>，b = <strong>-3</strong></p>
+            </div>
+            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
+              <p className="text-gray-700">• <strong>虚数不能比大小！</strong> 3+2i 和 1+5i 谁大？没有意义，只有实数才能比大小</p>
+              <p className="text-gray-700">• 复数等于0 ⇔ <strong>实部和虚部都等于0</strong></p>
+            </div>
+          </section>
+
+          {/* Part 4: Operations */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
+                4
               </span>
               四则运算
               <SpeakButton text={complexNarrations.operationIntro} />
@@ -307,13 +372,70 @@ export function ComplexPage() {
                 </p>
               </div>
             </Collapsible>
+
+            <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. <Math tex="(3+2i)+(1-5i)" /> = ? → <strong><Math tex="4-3i" /></strong></p>
+              <p className="text-gray-700">2. <Math tex="(1+i)/(1-i)" /> = ? → <strong><Math tex="i" /></strong></p>
+              <p className="text-gray-700">3. <Math tex="|3+4i|" /> = ? → <strong>5</strong></p>
+              <p className="text-gray-700">4. <Math tex="i^{67}" /> = ? → 67÷4余3 → <strong><Math tex="-i" /></strong></p>
+            </div>
+            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
+              <p className="text-gray-700">• 遇到 <Math tex="i^2" /> <strong>必须立刻换成 -1</strong></p>
+              <p className="text-gray-700">• 除法三步走：写共轭 → 上下同乘 → 整理成 <Math tex="a+bi" /></p>
+              <p className="text-gray-700">• i 的幂次：<strong>除以4看余数</strong>，余1→i，余2→-1，余3→-i，余0→1</p>
+            </div>
           </section>
 
-          {/* Part 4: Quiz */}
+          {/* Part 5: Complex Plane */}
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
+                5
+              </span>
+              复平面（几何意义）
+              <SpeakButton text={complexNarrations.complexPlane} />
+            </h2>
+
+            <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
+              <p className="text-gray-700 mb-3">
+                每个复数 <Math tex="z = a + bi" /> 对应复平面上的一个点 <Math tex="(a, b)" />：
+              </p>
+              <div className="text-sm space-y-1 mb-4">
+                <p className="text-gray-700">• <strong>x轴 = 实轴</strong>：上面的点都是实数</p>
+                <p className="text-gray-700">• <strong>y轴 = 虚轴</strong>：上面的点（除原点）都是纯虚数</p>
+                <p className="text-gray-700">• <Math tex="|z|" /> = 点到原点的距离</p>
+              </div>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm">
+                <p className="text-blue-800 font-bold mb-1">判断象限方法：</p>
+                <p className="text-blue-700 mb-1">先化简成 <Math tex="a + bi" />，然后看 <Math tex="(a, b)" /> 在哪个象限：</p>
+                <div className="grid grid-cols-2 gap-1 text-blue-700">
+                  <p><Math tex="a>0,b>0" /> → 第一象限</p>
+                  <p><Math tex="a<0,b>0" /> → 第二象限</p>
+                  <p><Math tex="a<0,b<0" /> → 第三象限</p>
+                  <p><Math tex="a>0,b<0" /> → 第四象限</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. <Math tex="z = -2+3i" /> 在第几象限？ → 点 (-2, 3)，<strong>第二象限</strong></p>
+              <p className="text-gray-700">2. <Math tex="z = 4-i" /> 在第几象限？ → 点 (4, -1)，<strong>第四象限</strong></p>
+            </div>
+            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
+              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
+              <p className="text-gray-700">• 实部是 x 坐标，虚部是 y 坐标，<strong>别搞反</strong></p>
+              <p className="text-gray-700">• 点在坐标轴上<strong>不属于任何象限</strong></p>
+            </div>
+          </section>
+
+          {/* Part 6: Quiz */}
           <section className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
-                4
+                6
               </span>
               高考真题实战
               {quizScore.total > 0 && (
@@ -328,13 +450,13 @@ export function ComplexPage() {
             ))}
           </section>
 
-          {/* Part 5: Summary */}
+          {/* Part 7: Formula Sheet */}
           <section className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-purple-500 text-white flex items-center justify-center text-sm font-bold">
-                5
+                📌
               </span>
-              知识总结卡片
+              公式速查表
               <SpeakButton text={complexNarrations.summary} />
             </h2>
             <div className="bg-slate-900 text-white rounded-2xl p-6 space-y-3 text-sm">
