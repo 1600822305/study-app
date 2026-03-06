@@ -416,7 +416,55 @@ function ComplexPage() {
 - **数据可以从 API / JSON / 本地文件灵活切换**
 - **支持后续接入 AI 动态出题**
 
-## 十一、教学文档规范
+## 十一、TTS 语音朗读与字幕
+
+### 架构
+
+```
+src/lib/tts/
+├── types.ts          # TTSConfig, TTSPlaybackState, TTSEvent, TTSEventType(含 subtitle)
+├── engine.ts         # 火山引擎 TTS API 调用 + 长文本自动分段合成
+├── audio-player.ts   # HTMLAudioElement 封装，含 onProgress 回调
+├── tts-service.ts    # 单例服务：状态管理、句子分割、字幕进度跟踪
+└── index.ts          # 统一导出 ttsService + voiceOptions + types
+
+src/hooks/useTTS.ts                      # React Hook：订阅播放状态（含 sentences, currentSentenceIndex）
+src/components/shared/SpeakButton.tsx    # 朗读按钮（传入 text 即可）
+src/components/shared/SubtitlePanel.tsx  # 底部单行字幕条（全局挂载在 Layout）
+src/features/xxx/data/narrations.ts      # 各模块的朗读文案
+```
+
+### 朗读文案编写规则（narrations.ts）
+
+1. **紧贴原文结构**：听到的顺序、标题、关键词、例子必须与屏幕上的文档内容一一对应
+2. **口语化转换**：LaTeX 公式转自然语言（`\sqrt{9}` → "根号9"），但保留原文结构标记
+3. **不自由发挥**：不添加文档中没有的比喻、故事或解释，避免听读不同步导致走神
+4. **包含文档中的标记**：学习目标（"学完你能"）、易错点、即时练习提示都要覆盖
+5. **长度注意**：火山引擎 API 单次限制约 300 字，engine.ts 会自动按句号分段合成，无需手动控制
+
+### 长文本分段合成（engine.ts）
+
+- `splitTextIntoChunks()`：按 `。！？；` 分句，每段 ≤ 250 字
+- 超长句子进一步按 `，、：` 拆分
+- 多段依次调用 API → `concatAudioBuffers()` 拼接 → 播放
+- 短文本（≤250字）走原路径，零额外开销
+
+### 字幕面板（SubtitlePanel）
+
+- **样式**：底部居中半透明黑色胶囊条（`bg-black/75 rounded-full`）
+- **内容**：只显示当前句（单行 truncate），像视频字幕
+- **控件**：左侧 ⏸/▶ + 右侧计数器 `3/12` + ✕ 关闭
+- **进度**：底部 2px 蓝色进度条
+- **字幕跟踪**：`tts-service.ts` 按字符比例估算时间边界，通过 `audio.ontimeupdate` 更新 `currentSentenceIndex`
+- **全局挂载**：Layout.tsx 中渲染，TTS 播放时自动显示
+
+### 同步规则
+
+```
+改 MD 文档 → 同步改 App 组件 → 同步改 narrations（紧贴新内容） → tsc → git push
+```
+
+## 十二、教学文档规范
 
 教学 `.md` 文件的编写规范独立维护在：
 
