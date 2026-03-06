@@ -211,21 +211,18 @@ export function PrereqPage() {
             <div>
               <p className="font-bold mb-1">除法（乘以倒数）：</p>
               <div className="bg-gray-50 rounded-lg p-3">
-                <Math
-                  tex="\frac{2}{3} \div \frac{4}{5} = \frac{2}{3} \times \frac{5}{4} = \frac{10}{12} = \frac{5}{6}"
-                  display
-                />
+                <Math tex="\frac{2}{3} \div \frac{4}{5} = \frac{2}{3} \times \frac{5}{4} = \frac{10}{12} = \frac{5}{6}" display />
               </div>
             </div>
             <div>
               <p className="font-bold mb-1">约分（找公因数，同时除掉）：</p>
-              <div className="bg-gray-50 rounded-lg p-3 space-y-1">
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 text-center">
                 <p><Math tex="\frac{6}{10} = \frac{3}{5}" />（同除以2）</p>
                 <p><Math tex="\frac{12}{15} = \frac{4}{5}" />（同除以3）</p>
               </div>
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
-              <strong>复数中的例子：</strong>
+              <p><strong>复数中的例子：</strong></p>
               <Math tex="\frac{4-2i}{2} = \frac{4}{2} - \frac{2}{2}i = 2 - i" display />
             </div>
           </div>
