@@ -216,10 +216,12 @@ export function PrereqPage() {
             </div>
             <div>
               <p className="font-bold mb-1">约分（找公因数，同时除掉）：</p>
-              <div className="bg-gray-50 rounded-lg p-3 grid grid-cols-3 gap-2 text-center">
-                <p><Math tex="\frac{6}{10} = \frac{3}{5}" /><br /><span className="text-gray-400 text-xs">同除以2</span></p>
-                <p><Math tex="\frac{12}{15} = \frac{4}{5}" /><br /><span className="text-gray-400 text-xs">同除以3</span></p>
-                <p><Math tex="\frac{8}{12} = \frac{2}{3}" /><br /><span className="text-gray-400 text-xs">同除以4</span></p>
+              <div className="bg-gray-50 rounded-lg p-3 grid grid-cols-5 gap-2 text-center">
+                <p><Math tex="\frac{4}{6} = \frac{2}{3}" /><br /><span className="text-gray-400 text-xs">÷2</span></p>
+                <p><Math tex="\frac{6}{10} = \frac{3}{5}" /><br /><span className="text-gray-400 text-xs">÷2</span></p>
+                <p><Math tex="\frac{12}{15} = \frac{4}{5}" /><br /><span className="text-gray-400 text-xs">÷3</span></p>
+                <p><Math tex="\frac{8}{12} = \frac{2}{3}" /><br /><span className="text-gray-400 text-xs">÷4</span></p>
+                <p><Math tex="\frac{15}{25} = \frac{3}{5}" /><br /><span className="text-gray-400 text-xs">÷5</span></p>
               </div>
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
@@ -322,27 +324,45 @@ export function PrereqPage() {
 
       <section className="mb-6">
         <Collapsible title="七、除以4求余数" defaultOpen storageKey="prereq:remainder" headerExtra={<SpeakButton text={prereqNarrations.remainder} />}>
-          <p className="text-sm text-gray-700 mb-2">判断 <Math tex="i" /> 的幂次时需要：</p>
-          <div className="bg-gray-50 rounded-lg p-3 text-sm space-y-1 mb-3">
-            <p>
-              <Math tex="17 \div 4 = 4" /> 余 <strong>1</strong> → <Math tex="i^{17} = i" />
-            </p>
-            <p>
-              <Math tex="22 \div 4 = 5" /> 余 <strong>2</strong> → <Math tex="i^{22} = -1" />
-            </p>
-            <p>
-              <Math tex="100 \div 4 = 25" /> 余 <strong>0</strong> → <Math tex="i^{100} = 1" />
-            </p>
-            <p>
-              <Math tex="2025 \div 4 = 506" /> 余 <strong>1</strong> → <Math tex="i^{2025} = i" />
-            </p>
-          </div>
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm text-blue-800">
-            <p className="font-bold mb-1">快速判断余数的技巧：看最后两位</p>
-            <p className="text-gray-600 mb-1">最后两位 ÷ 4 的余数 = 整个数 ÷ 4 的余数</p>
-            <div className="space-y-1">
-              <p>2025 → 最后两位 25 ÷ 4 = 6 余 <strong>1</strong> → 余 1</p>
-              <p>2024 → 最后两位 24 ÷ 4 = 6 余 <strong>0</strong> → 余 0</p>
+          <div className="space-y-3 text-sm text-gray-700">
+            <div>
+              <p className="font-bold mb-1">先看一个规律：<Math tex="i" /> 的幂次每4个一循环</p>
+              <div className="bg-gray-50 rounded-lg p-3 grid grid-cols-4 gap-2 text-center">
+                <div className="bg-white rounded p-2 border border-gray-200">
+                  <Math tex="i^1 = i" />
+                  <br /><span className="text-gray-400 text-xs">余1</span>
+                </div>
+                <div className="bg-white rounded p-2 border border-gray-200">
+                  <Math tex="i^2 = -1" />
+                  <br /><span className="text-gray-400 text-xs">余2</span>
+                </div>
+                <div className="bg-white rounded p-2 border border-gray-200">
+                  <Math tex="i^3 = -i" />
+                  <br /><span className="text-gray-400 text-xs">余3</span>
+                </div>
+                <div className="bg-white rounded p-2 border border-gray-200">
+                  <Math tex="i^4 = 1" />
+                  <br /><span className="text-gray-400 text-xs">余0</span>
+                </div>
+              </div>
+              <p className="text-gray-500 mt-2">然后又回到 <Math tex="i^5 = i" />，<Math tex="i^6 = -1" />……永远重复这4个结果。</p>
+            </div>
+            <div>
+              <p className="font-bold mb-1">所以：用指数 ÷ 4，看余数就知道答案</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-2 text-center">
+                <p><Math tex="i^{17}" />：17 ÷ 4 = 4 余 <strong>1</strong>，查上表余1 → <Math tex="i^{17} = i" /></p>
+                <p><Math tex="i^{22}" />：22 ÷ 4 = 5 余 <strong>2</strong>，查上表余2 → <Math tex="i^{22} = -1" /></p>
+                <p><Math tex="i^{100}" />：100 ÷ 4 = 25 余 <strong>0</strong>，查上表余0 → <Math tex="i^{100} = 1" /></p>
+                <p><Math tex="i^{2025}" />：2025 ÷ 4 = 506 余 <strong>1</strong>，查上表余1 → <Math tex="i^{2025} = i" /></p>
+              </div>
+            </div>
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
+              <p className="font-bold mb-1">大数快速求余数：只看最后两位</p>
+              <p className="text-gray-600 mb-1">最后两位 ÷ 4 的余数 = 整个数 ÷ 4 的余数</p>
+              <div className="space-y-1 text-center">
+                <p>2025 → 最后两位 25 ÷ 4 = 6 余 <strong>1</strong></p>
+                <p>2024 → 最后两位 24 ÷ 4 = 6 余 <strong>0</strong></p>
+              </div>
             </div>
           </div>
         </Collapsible>
