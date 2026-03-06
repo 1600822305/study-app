@@ -141,9 +141,18 @@ export function PrereqPage() {
               </div>
               <p className="mt-2 text-gray-500">注意：<Math tex="\sqrt{\phantom{x}}" /> 号默认取正值（算术平方根）</p>
             </div>
+            <div>
+              <p className="font-bold mb-1">绝对值符号 <Math tex="|\;\;|" />：</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1">
+                <p>初中里表示<strong>绝对值</strong>（一个数到0的距离，取正）：</p>
+                <p className="pl-4"><Math tex="|5| = 5" />，<Math tex="|-3| = 3" />，<Math tex="|0| = 0" /></p>
+                <p className="text-gray-500 mt-1">简单说：<strong>去掉符号只看大小</strong></p>
+              </div>
+            </div>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
-              <strong>复数中会用到：</strong>计算复数的模（大小）时要用平方根
+              <p><strong>复数中会用到：</strong>这个符号叫<strong>模</strong>，含义类似——表示复数的"大小"。</p>
               <Math tex="|3 + 4i| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5" display />
+              <p className="text-sm text-gray-600 mt-1">你现在不需要理解为什么这么算，只要知道 <Math tex="|\;\;|" /> 在复数里表示大小，计算时需要平方和开方。</p>
             </div>
           </div>
         </Collapsible>
