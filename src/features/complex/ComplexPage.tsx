@@ -248,30 +248,53 @@ export function ComplexPage() {
             </div>
 
             <Collapsible title="加法和减法" defaultOpen storageKey="complex:add-sub" headerExtra={<SpeakButton text={complexNarrations.addSub} />}>
-              <p className="mb-3">实部加实部，虚部加虚部：</p>
-              <div className="bg-gray-50 rounded-lg p-4 mb-3">
+              <p className="text-sm text-gray-700 mb-3"><strong>规则：实部加实部，虚部加虚部</strong></p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-3 space-y-1">
                 <Math tex="(a + bi) + (c + di) = (a+c) + (b+d)i" display />
+                <Math tex="(a + bi) - (c + di) = (a-c) + (b-d)i" display />
               </div>
-              <div className="space-y-2 text-sm">
-                <p>
-                  <strong>例：</strong> <Math tex="(3+2i) + (1+4i) = 4 + 6i" />
-                </p>
-                <p>
-                  <strong>例：</strong> <Math tex="(5+3i) - (2-i) = 3 + 4i" />
-                </p>
+              <div className="space-y-3 text-sm">
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例1：</p>
+                  <Math tex="(3+2i) + (1+4i) = (3{+}1) + (2{+}4)i = 4 + 6i" display />
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例2：</p>
+                  <Math tex="(5+3i) - (2-i) = (5{-}2) + (3{-}({-}1))i = 3 + 4i" display />
+                </div>
               </div>
+              <p className="text-sm text-gray-500 mt-3">跟合并同类项一模一样，没什么新东西。</p>
             </Collapsible>
 
             <Collapsible title="乘法" defaultOpen storageKey="complex:mul" headerExtra={<SpeakButton text={complexNarrations.multiply} />}>
-              <p className="mb-3">展开括号，遇到 <Math tex="i^2" /> 换成 <Math tex="-1" />：</p>
-              <div className="bg-gray-50 rounded-lg p-4 mb-3">
-                <Math
-                  tex="(2+3i)(1+i) = 2 + 2i + 3i + 3i^2 = 2 + 5i - 3 = -1 + 5i"
-                  display
-                />
+              <p className="text-sm text-gray-700 mb-3"><strong>规则：展开括号（像多项式乘法），遇到 <Math tex="i^2" /> 换成 <Math tex="-1" /></strong></p>
+              <p className="text-sm text-gray-500 mb-3">不用背公式！直接展开就行。</p>
+              <div className="space-y-3 text-sm">
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例1：<Math tex="(2+3i)(1+i)" /></p>
+                  <div className="space-y-1 text-gray-700">
+                    <p><Math tex="= 2 \cdot 1 + 2 \cdot i + 3i \cdot 1 + 3i \cdot i" /></p>
+                    <p><Math tex="= 2 + 2i + 3i + 3i^2" /></p>
+                    <p><Math tex="= 2 + 5i + 3(-1) = -1 + 5i" /></p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例2：<Math tex="(1+i)^2" /></p>
+                  <div className="space-y-1 text-gray-700">
+                    <p><Math tex="= 1 + i + i + i^2" /></p>
+                    <p><Math tex="= 1 + 2i + (-1) = 2i" /></p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例3：<Math tex="(1-i)^2" /></p>
+                  <div className="space-y-1 text-gray-700">
+                    <p><Math tex="= 1 - i - i + i^2" /></p>
+                    <p><Math tex="= 1 - 2i + (-1) = -2i" /></p>
+                  </div>
+                </div>
               </div>
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
-                <p className="text-blue-800 text-sm font-bold mb-1">必记结论：</p>
+                <p className="text-blue-800 text-sm font-bold mb-1">🔑 必记结论（高考常用）：</p>
                 <div className="flex gap-6">
                   <Math tex="(1+i)^2 = 2i" />
                   <Math tex="(1-i)^2 = -2i" />
@@ -304,47 +327,75 @@ export function ComplexPage() {
               <p className="text-sm text-gray-700 mb-2">
                 <strong>每4个一循环！</strong>快速求法：指数除以4看余数
               </p>
-              <p className="text-sm text-gray-600">
-                例：<Math tex="i^{2025}" />，<Math tex="2025 \div 4 = 506" /> 余 <strong>1</strong>，所以{' '}
-                <Math tex="i^{2025} = i" />
-              </p>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
-                <p className="text-blue-800 text-sm">
-                  <strong>连续4个 <Math tex="i" /> 的幂相加 <Math tex="= 0" />：</strong>
-                  <Math tex="i^n + i^{n+1} + i^{n+2} + i^{n+3} = 0" />
+              <div className="text-sm text-gray-600 space-y-1">
+                <p>
+                  例1：<Math tex="i^{17}" />，17 ÷ 4 余 <strong>1</strong> → <Math tex="i^{17} = i" />
+                </p>
+                <p>
+                  例2：<Math tex="i^{22}" />，22 ÷ 4 余 <strong>2</strong> → <Math tex="i^{22} = -1" />
+                </p>
+                <p>
+                  例3：<Math tex="i^{67}" />，67 ÷ 4 余 <strong>3</strong> → <Math tex="i^{67} = -i" />
+                </p>
+                <p>
+                  例4：<Math tex="i^{100}" />，100 ÷ 4 余 <strong>0</strong> → <Math tex="i^{100} = 1" />
+                </p>
+              </div>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3 text-sm text-blue-800">
+                <p className="font-bold mb-1">连续4个 <Math tex="i" /> 的幂相加 <Math tex="= 0" /></p>
+                <p className="mb-1">为什么？因为4个一组刚好凑成：</p>
+                <Math tex="i + (-1) + (-i) + 1 = 0" display />
+                <p className="text-blue-600 mt-1">
+                  所以 <Math tex="i^n + i^{n+1} + i^{n+2} + i^{n+3} = 0" />，不管 n 是几都成立。
                 </p>
               </div>
             </Collapsible>
 
             <Collapsible title="共轭复数" defaultOpen storageKey="complex:conjugate" headerExtra={<SpeakButton text={complexNarrations.conjugate} />}>
-              <p className="mb-3">实部相同，虚部相反：</p>
+              <p className="text-sm text-gray-700 mb-3"><strong>定义：实部相同，虚部相反</strong>的两个复数互为共轭复数。</p>
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math tex="z = a + bi \quad \Rightarrow \quad \bar{z} = a - bi" display />
               </div>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                <p className="text-blue-800 text-sm">
-                  <strong>关键性质：</strong>
-                  <Math tex="z \cdot \bar{z} = (a+bi)(a-bi) = a^2 + b^2" />
-                  （总是非负实数！）
+              <div className="space-y-1 text-sm text-gray-700 mb-4">
+                <p>例：<Math tex="3+2i" /> 的共轭是 <Math tex="3-2i" /></p>
+                <p>例：<Math tex="1-5i" /> 的共轭是 <Math tex="1+5i" /></p>
+                <p>例：<Math tex="4" />（实数）的共轭是 <Math tex="4" />（本身）</p>
+              </div>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
+                <p className="text-blue-800 text-sm font-bold mb-1">🔑 关键性质：</p>
+                <Math tex="z \cdot \bar{z} = (a+bi)(a-bi) = a^2 + b^2" display />
+                <p className="text-blue-700 text-sm mt-2 mb-1">为什么？用平方差公式展开：</p>
+                <Math tex="(a+bi)(a-bi) = a^2 - (bi)^2 = a^2 - b^2 i^2 = a^2 - b^2(-1) = a^2 + b^2" display />
+                <p className="text-blue-800 text-sm mt-2">
+                  结果一定是<strong>非负实数</strong>！这就是除法要"乘共轭"的原因——<strong>分母变成实数</strong>。
                 </p>
               </div>
             </Collapsible>
 
             <Collapsible title="除法（最重要的运算技巧）" defaultOpen storageKey="complex:division" headerExtra={<SpeakButton text={complexNarrations.division} />}>
-              <p className="mb-3 font-bold text-gray-800">
-                核心方法：分母实数化——上下同乘分母的共轭复数
-              </p>
+              <p className="text-sm text-gray-700 mb-3"><strong>核心方法：分母实数化——上下同乘分母的共轭复数</strong></p>
               <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                <p className="text-sm text-gray-600 mb-2">
-                  例：计算 <Math tex="\dfrac{1+i}{1-i}" />
-                </p>
-                <Math
-                  tex="\frac{1+i}{1-i} = \frac{(1+i)(1+i)}{(1-i)(1+i)} = \frac{(1+i)^2}{1^2+1^2} = \frac{2i}{2} = i"
-                  display
-                />
+                <Math tex="\frac{a+bi}{c+di} = \frac{(a+bi)(c-di)}{(c+di)(c-di)} = \frac{(a+bi)(c-di)}{c^2+d^2}" display />
+                <p className="text-sm text-gray-500 mt-2 text-center">分母变成 <Math tex="c^2+d^2" />（实数！）</p>
               </div>
-              <div className="bg-slate-100 rounded-lg p-4 text-sm">
-                <p className="font-bold mb-2">除法三步走：</p>
+              <div className="space-y-3 text-sm">
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例1：计算 <Math tex="\dfrac{1+i}{1-i}" /></p>
+                  <div className="space-y-1 text-gray-700">
+                    <p>分母共轭：<Math tex="1+i" /></p>
+                    <p><Math tex="= \dfrac{(1+i)(1+i)}{(1-i)(1+i)} = \dfrac{(1+i)^2}{1^2+1^2} = \dfrac{2i}{2} = i" /></p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例2：计算 <Math tex="\dfrac{3+i}{1+i}" /></p>
+                  <div className="space-y-1 text-gray-700">
+                    <p>分母共轭：<Math tex="1-i" /></p>
+                    <p><Math tex="= \dfrac{(3+i)(1-i)}{(1+i)(1-i)} = \dfrac{3-3i+i-i^2}{1+1} = \dfrac{4-2i}{2} = 2-i" /></p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-slate-100 rounded-lg p-4 text-sm mt-3">
+                <p className="font-bold mb-2">除法三步走（步骤固定，死记硬背都行）：</p>
                 <ol className="list-decimal list-inside space-y-1 text-gray-700">
                   <li>写出分母的共轭复数</li>
                   <li>分子分母同时乘以这个共轭复数</li>
@@ -353,17 +404,48 @@ export function ComplexPage() {
               </div>
             </Collapsible>
 
-            <Collapsible title="复数的模（大小）" defaultOpen storageKey="complex:modulus" headerExtra={<SpeakButton text={complexNarrations.modulus} />}>
+            <Collapsible title="复数的模（大小/长度）" defaultOpen storageKey="complex:modulus" headerExtra={<SpeakButton text={complexNarrations.modulus} />}>
+              <p className="text-sm text-gray-700 mb-3"><strong>定义：复数 z = a + bi 的模，表示复数的"大小"</strong></p>
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math tex="|z| = |a + bi| = \sqrt{a^2 + b^2}" display />
               </div>
-              <div className="space-y-1 text-sm text-gray-700">
-                <p>
-                  例：<Math tex="|3+4i| = \sqrt{9+16} = \sqrt{25} = 5" />
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-sm">
+                <p className="font-bold text-amber-800 mb-2">为什么是这个公式？</p>
+                <p className="text-gray-700 mb-2">
+                  复数 <Math tex="z = a + bi" /> 在复平面上对应点 <Math tex="(a, b)" />。
+                  模就是这个点到原点的<strong>距离</strong>，用勾股定理：
                 </p>
-                <p>
-                  例：<Math tex="|1-i| = \sqrt{1+1} = \sqrt{2}" />
+                <Math tex="|z| = \sqrt{a^2 + b^2}" display />
+                <p className="text-gray-700 mt-2 mb-1">
+                  还可以用共轭来推：
                 </p>
+                <Math tex="z \cdot \bar{z} = (a+bi)(a-bi) = a^2 + b^2" display />
+                <p className="text-gray-700 mt-1">
+                  所以 <Math tex="|z|^2 = z \cdot \bar{z}" />，两边开方就得到 <Math tex="|z| = \sqrt{a^2 + b^2}" />。
+                </p>
+              </div>
+              <div className="space-y-3 text-sm">
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例1：</p>
+                  <Math tex="|3+4i| = \sqrt{9+16} = \sqrt{25} = 5" display />
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例2：</p>
+                  <Math tex="|1-i| = \sqrt{1+1} = \sqrt{2}" display />
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold mb-1">例3（实数）：</p>
+                  <Math tex="|5| = \sqrt{25+0} = 5" display />
+                  <p className="text-gray-500 mt-1">实数的模就是绝对值。</p>
+                </div>
+              </div>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3 text-sm">
+                <p className="text-blue-800 font-bold mb-1">🔑 模的性质：</p>
+                <div className="space-y-1 text-blue-700">
+                  <p><Math tex="|z|^2 = z \cdot \bar{z} = a^2 + b^2" /></p>
+                  <p><Math tex="|z_1 \cdot z_2| = |z_1| \cdot |z_2|" /></p>
+                  <p><Math tex="|z_1 / z_2| = |z_1| / |z_2|" /></p>
+                </div>
               </div>
             </Collapsible>
 
