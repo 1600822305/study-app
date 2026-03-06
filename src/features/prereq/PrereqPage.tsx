@@ -173,9 +173,8 @@ export function PrereqPage() {
               <p className="font-bold mb-1">高频组合（勾股数）：</p>
               <div className="space-y-1">
                 <p><Math tex="3^2+4^2 = 9+16 = 25 = 5^2" /> → <Math tex="\sqrt{25}=5" /></p>
-                <p><Math tex="5^2+12^2 = 25+144 = 169 = 13^2" /> → <Math tex="\sqrt{169}=13" /></p>
-                <p><Math tex="1^2+1^2 = 2" /> → <Math tex="\sqrt{2} \approx 1.414" /></p>
-                <p><Math tex="1^2+2^2 = 5" /> → <Math tex="\sqrt{5} \approx 2.236" /></p>
+                <p><Math tex="1^2+1^2 = 1+1 = 2" /> → <Math tex="\sqrt{2} \approx 1.414" /></p>
+                <p><Math tex="1^2+2^2 = 1+4 = 5" /> → <Math tex="\sqrt{5} \approx 2.236" /></p>
               </div>
             </div>
           </div>
