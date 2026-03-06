@@ -204,14 +204,18 @@ export function PrereqPage() {
             </div>
             <div>
               <p className="font-bold mb-1">乘法（分子乘分子，分母乘分母）：</p>
-              <Math tex="\frac{2}{3} \times \frac{4}{5} = \frac{8}{15}" display />
+              <div className="bg-gray-50 rounded-lg p-3">
+                <Math tex="\frac{2}{3} \times \frac{4}{5} = \frac{8}{15}" display />
+              </div>
             </div>
             <div>
               <p className="font-bold mb-1">除法（乘以倒数）：</p>
-              <Math
-                tex="\frac{2}{3} \div \frac{4}{5} = \frac{2}{3} \times \frac{5}{4} = \frac{10}{12} = \frac{5}{6}"
-                display
-              />
+              <div className="bg-gray-50 rounded-lg p-3">
+                <Math
+                  tex="\frac{2}{3} \div \frac{4}{5} = \frac{2}{3} \times \frac{5}{4} = \frac{10}{12} = \frac{5}{6}"
+                  display
+                />
+              </div>
             </div>
             <div>
               <p className="font-bold mb-1">约分（找公因数，同时除掉）：</p>
