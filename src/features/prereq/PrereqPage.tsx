@@ -186,6 +186,7 @@ export function PrereqPage() {
       <section className="mb-6">
         <Collapsible title="四、分数运算" defaultOpen storageKey="prereq:fraction" headerExtra={<SpeakButton text={prereqNarrations.fraction} />}>
           <div className="space-y-3 text-sm text-gray-700">
+            <p className="text-gray-500">生活理解：一个蛋糕切成4块，你吃了1块，就吃了 <Math tex="\frac{1}{4}" />。分数就是<strong>"整体的一部分"</strong>——分母是切成几块，分子是取几块。</p>
             <div>
               <p className="font-bold mb-1">加减：</p>
               <div className="bg-gray-50 rounded-lg p-3 space-y-2">
