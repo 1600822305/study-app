@@ -1,19 +1,13 @@
 import { Flame, Lightbulb, AlertTriangle } from 'lucide-react';
 
-import { Math, QuizQuestion, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
-import { useProgress, useQuiz } from '@/hooks';
+import { useProgress } from '@/hooks';
 import { complexQuizQuestions } from './data/quiz';
 import { complexProgressItems } from './data/progress';
 
 export function ComplexPage() {
   const { items, toggle } = useProgress('complex', complexProgressItems);
-  const { stats: quizScore, recordAnswer } = useQuiz('complex');
-
-  const handleQuizAnswer = (id: string, correct: boolean) => {
-    const q = complexQuizQuestions.find((q) => q.id === id);
-    if (q) recordAnswer(id, correct ? q.correctAnswer : '', q.correctAnswer, correct);
-  };
 
   return (
     <div>
@@ -438,16 +432,14 @@ export function ComplexPage() {
                 6
               </span>
               高考真题实战
-              {quizScore.total > 0 && (
-                <span className="ml-auto text-sm font-normal text-gray-500">
-                  {quizScore.correct}/{quizScore.total} 正确
-                </span>
-              )}
             </h2>
 
-            {complexQuizQuestions.map((q) => (
-              <QuizQuestion key={q.id} {...q} onAnswer={handleQuizAnswer} />
-            ))}
+            <QuizPanel
+              module="complex"
+              questions={complexQuizQuestions}
+              title="复数真题"
+              description="16道高考真题，覆盖全部复数考法。"
+            />
           </section>
 
           {/* Part 7: Formula Sheet */}
