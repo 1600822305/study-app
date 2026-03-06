@@ -120,6 +120,7 @@ export function PrereqPage() {
           <div className="space-y-4 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-1">平方：</p>
+              <p className="text-gray-500 mb-2">生活理解：一块正方形瓷砖，边长3厘米，面积就是 3×3 = 9 平方厘米。“平方”就是<strong>一个数乘以自己</strong>。</p>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono">
                 <p><Math tex="3^2 = 3 \times 3 = 9" /></p>
                 <p><Math tex="(-3)^2 = (-3) \times (-3) = 9" /></p>
@@ -132,10 +133,11 @@ export function PrereqPage() {
               ，所以实数范围内不存在平方等于负数的数 → 需要发明 <Math tex="i" />（<Math tex="i^2 = -1" />）
             </p>
             <div>
-              <p className="font-bold mb-1">平方根（反过来：已知平方结果，求原来的数）：</p>
+              <p className="font-bold mb-1">平方根：</p>
+              <p className="text-gray-500 mb-2">生活理解：瓷砖面积是9平方厘米，边长是多少？答：3厘米。这就是平方根——<strong>已知面积，反过来求边长</strong>。</p>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono">
-                <p><Math tex="\sqrt{9} = 3" />（因为 <Math tex="3^2 = 9" />）</p>
-                <p><Math tex="\sqrt{25} = 5" />（因为 <Math tex="5^2 = 25" />）</p>
+                <p><Math tex="\sqrt{9} = 3" />（面积9 → 边长3）</p>
+                <p><Math tex="\sqrt{25} = 5" />（面积25 → 边长5）</p>
                 <p><Math tex="\sqrt{2} \approx 1.414" />（无理数，记个大概）</p>
                 <p><Math tex="\sqrt{0} = 0" /></p>
               </div>
@@ -170,11 +172,11 @@ export function PrereqPage() {
               ))}
             </div>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
-              <p className="font-bold mb-1">高频组合（勾股数）：</p>
+              <p className="font-bold mb-1">高频组合（计算复数模时会反复遇到）：</p>
               <div className="space-y-1">
-                <p><Math tex="3^2+4^2 = 9+16 = 25 = 5^2" /> → <Math tex="\sqrt{25}=5" /></p>
-                <p><Math tex="1^2+1^2 = 1+1 = 2" /> → <Math tex="\sqrt{2} \approx 1.414" /></p>
-                <p><Math tex="1^2+2^2 = 1+4 = 5" /> → <Math tex="\sqrt{5} \approx 2.236" /></p>
+                <p><Math tex="3^2+4^2 = 9+16 = 25" />，所以 <Math tex="\sqrt{25}=5" /></p>
+                <p><Math tex="1^2+1^2 = 1+1 = 2" />，所以 <Math tex="\sqrt{2} \approx 1.414" /></p>
+                <p><Math tex="1^2+2^2 = 1+4 = 5" />，所以 <Math tex="\sqrt{5} \approx 2.236" /></p>
               </div>
             </div>
           </div>
