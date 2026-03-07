@@ -354,210 +354,195 @@ export function SetsPage() {
           <section className="mb-6">
             <Collapsible title="五、集合间的关系" defaultOpen storageKey="sets:relations" headerExtra={<SpeakButton text={setsNarrations.subsets} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：判断子集和真子集关系，计算子集个数，记住空集铁律。</p>
-              <div className="space-y-3 text-sm text-gray-700">
-                <Collapsible title="子集 ⊆ 和真子集 ⊊" storageKey="sets:subset">
-                  <div className="space-y-3 text-sm text-gray-700">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">定义</p>
-                      <p className="text-blue-700 mb-1"><strong>子集 ⊆</strong>：A 中的每个元素都在 B 中 → <Math tex="A \subseteq B" /></p>
-                      <p className="text-blue-700"><strong>真子集 ⊊</strong>：A 是 B 的子集，但 A ≠ B → <Math tex="A \subsetneq B" /></p>
-                      <div className="bg-white rounded-lg p-3 border border-blue-100 mt-2 text-xs text-gray-600">
-                        <p className="font-bold mb-1">生活类比：</p>
-                        <p>你班上的男同学 ⊆ 你班上的所有同学</p>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="bg-green-50 rounded-xl p-4 border border-green-200">
-                        <p className="font-bold text-green-700 text-sm mb-2">✓ 真子集：A = &#123;1, 2&#125;，B = &#123;1, 2, 3&#125;</p>
-                        <div className="flex justify-center my-3">
-                          <div className="relative w-40 h-40 rounded-full border-2 border-blue-400 bg-blue-50/50 flex items-start justify-center pt-3">
-                            <span className="text-blue-600 font-bold text-sm">B</span>
-                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full border-2 border-amber-400 bg-amber-50 flex flex-col items-center justify-center">
-                              <span className="text-amber-600 font-bold text-xs">A</span>
-                              <span className="text-gray-700 text-xs">1, 2</span>
-                            </div>
-                            <span className="absolute top-12 right-4 text-red-500 font-bold text-xs">3</span>
-                            <span className="absolute top-16 right-1 text-red-400 text-[10px]">多出来的</span>
-                          </div>
-                        </div>
-                        <p className="text-green-700 text-xs text-center">A 全在 B 里，B 还多一个 3 → <strong>A ⊆ B ✓　A ⊊ B ✓</strong></p>
-                      </div>
+              <div className="space-y-4 text-sm text-gray-700">
 
-                      <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-                        <p className="font-bold text-amber-700 text-sm mb-2">⚠ 子集但不是真子集：A = &#123;1, 2, 3&#125;，B = &#123;1, 2, 3&#125;</p>
-                        <div className="flex justify-center my-3">
-                          <div className="relative w-32 h-32 rounded-full border-2 border-blue-400 bg-blue-50/30 flex flex-col items-center justify-center" style={{boxShadow: 'inset 0 0 0 2px rgba(234,179,8,0.5)'}}>
-                            <div className="flex gap-2 items-center">
-                              <span className="text-blue-600 font-bold text-sm">B</span>
-                              <span className="text-gray-400">=</span>
-                              <span className="text-amber-600 font-bold text-sm">A</span>
-                            </div>
-                            <span className="text-gray-700 text-xs mt-1">1, 2, 3</span>
-                            <span className="text-gray-400 text-[10px] mt-0.5">完全重合</span>
-                          </div>
-                        </div>
-                        <p className="text-amber-700 text-xs text-center">元素完全一样，没有「多出来的」→ <strong>A ⊆ B ✓　A ⊊ B ✗</strong></p>
-                      </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p>前面学了「<strong>元素 ∈ 集合</strong>」— 判断一个东西在不在袋子里。</p>
+                  <p className="mt-1">现在要学的是：<strong>两个袋子之间</strong>是什么关系？</p>
+                  <p className="mt-2 text-gray-500 text-xs">就三种可能：一样大 / 一个装在另一个里面 / 没关系。往下一个一个看 ↓</p>
+                </div>
 
-                      <div className="bg-red-50 rounded-xl p-4 border border-red-200">
-                        <p className="font-bold text-red-600 text-sm mb-2">✗ 不是子集：A = &#123;1, 4&#125;，B = &#123;1, 2, 3&#125;</p>
-                        <div className="flex justify-center my-3">
-                          <div className="relative w-56 h-32">
-                            <div className="absolute left-0 top-0 w-32 h-32 rounded-full border-2 border-blue-400 bg-blue-50/30 flex flex-col items-center justify-center pl-0">
-                              <span className="text-blue-600 font-bold text-sm -mt-2 -ml-6">B</span>
-                              <span className="text-gray-700 text-xs -ml-6">2, 3</span>
-                            </div>
-                            <div className="absolute right-0 top-2 w-28 h-28 rounded-full border-2 border-amber-400 bg-amber-50/40 flex flex-col items-center justify-center pr-0">
-                              <span className="text-amber-600 font-bold text-sm -mt-2 ml-4">A</span>
-                              <span className="text-red-500 font-bold text-xs ml-4">4</span>
-                              <span className="text-red-400 text-[10px] ml-4">跑出去了！</span>
-                            </div>
-                            <div className="absolute left-[88px] top-1/2 -translate-y-1/2 text-gray-700 text-xs font-medium">1</div>
-                          </div>
-                        </div>
-                        <p className="text-red-600 text-xs text-center">4 不在 B 里 →  <strong>A ⊆ B ✗　A ⊊ B ✗</strong></p>
-                      </div>
-                    </div>
-
-                    <div className="bg-[#F5E6D3] rounded-xl p-4 text-sm space-y-1">
-                      <p className="font-bold text-[#7A5C3E]">一句话总结：</p>
-                      <p className="text-[#7A5C3E]"><strong>子集 ⊆</strong> = A 的元素<strong>全在</strong> B 里面（允许一模一样）</p>
-                      <p className="text-[#7A5C3E]"><strong>真子集 ⊊</strong> = A 的元素全在 B 里面，<strong>而且 B 还「多出来」一些元素</strong></p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-lg p-3 space-y-1">
-                      <p><Math tex="\{1, 2\} \subseteq \{1, 2, 3\}" /> ✓（1 和 2 都在右边）</p>
-                      <p><Math tex="\{1, 2, 3\} \subseteq \{1, 2, 3\}" /> ✓（<strong>完全相等也算子集</strong>）</p>
-                      <p><Math tex="\{1, 2, 3\} \subsetneq \{1, 2, 3\}" /> ✗（相等不是真子集）</p>
-                      <p><Math tex="\{1, 4\} \subseteq \{1, 2, 3\}" /> ✗（4 不在右边）</p>
-                    </div>
+                {/* ───── ① 集合相等 ───── */}
+                <div className="border-l-4 border-blue-400 pl-4 space-y-2">
+                  <p className="font-bold text-blue-700 text-base">① 集合相等：两个袋子里东西一模一样</p>
+                  <p>不管顺序怎么排、写法是什么，只要<strong>元素完全相同</strong>就相等：</p>
+                  <div className="bg-white rounded-lg border p-3 space-y-1">
+                    <p><Math tex="\{1, 2, 3\} = \{3, 1, 2\}" /> ✓　顺序不影响</p>
+                    <p><Math tex="\{1, 1, 2\} = \{1, 2\}" /> ✓　重复的自动去掉</p>
+                    <p><Math tex="\{x \mid x^2=1\} = \{-1, 1\}" /> ✓　描述法和列举法可以相等</p>
                   </div>
-                </Collapsible>
+                  <p className="text-gray-500 text-xs">就这么简单，打开两个袋子看看，东西一样就相等。</p>
+                </div>
 
-                <Collapsible title="集合相等 =" storageKey="sets:equal">
-                  <div className="space-y-3 text-sm text-gray-700">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">定义</p>
-                      <p className="text-blue-700"><Math tex="A = B \;\Leftrightarrow\; A \subseteq B \text{ 且 } B \subseteq A" /></p>
-                      <p className="text-blue-600 text-xs mt-1">两个集合的元素<strong>完全一样</strong>（顺序、形式无所谓）</p>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-3 space-y-1">
-                      <p><Math tex="\{1, 2, 3\} = \{3, 1, 2\}" /> ✓（顺序不影响）</p>
-                      <p><Math tex="\{1, 1, 2\} = \{1, 2\}" /> ✓（重复元素自动去掉）</p>
-                      <p><Math tex="\{x \mid x^2=1\} = \{-1, 1\}" /> ✓（描述法和列举法可以相等）</p>
-                    </div>
-                  </div>
-                </Collapsible>
+                {/* ───── ② 子集 ───── */}
+                <div className="border-l-4 border-green-400 pl-4 space-y-2">
+                  <p className="font-bold text-green-700 text-base">② 子集 ⊆：小袋子装在大袋子里</p>
+                  <p>如果 A 的<strong>每一个</strong>元素都能在 B 里找到 → A 是 B 的子集，写作 <Math tex="A \subseteq B" /></p>
 
-                <Collapsible title="空集 ∅（非常重要！）" storageKey="sets:empty">
-                  <div className="space-y-3 text-sm text-gray-700">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">空集 = 没有任何元素的集合 = 空袋子</p>
-                      <p className="text-blue-700"><Math tex="\varnothing = \{\}" /> ← 里面什么都没有</p>
-                    </div>
-                    <div className="bg-[#F5E6D3] rounded-xl p-5 text-center">
-                      <p className="text-sm text-[#9A7B5B] mb-2">空集两条铁律（高考必考！）</p>
-                      <p className="mb-2"><Math tex="\varnothing \subseteq A" />　（对<strong>任意</strong>集合 A 都成立）</p>
-                      <p><Math tex="\varnothing \subsetneq A" />　（只要 A 不是空集）</p>
-                    </div>
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                      <div className="flex items-start gap-2">
-                        <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                        <div className="text-amber-700 text-sm space-y-1">
-                          <p className="font-bold">⚠️ 高考经典陷阱</p>
-                          <p>题目说"A ⊆ B"，很多人忘了 <strong>A 可能是空集</strong>！</p>
-                          <p>比如 A = &#123;x | x²+ax+1=0&#125; ⊆ B，需要考虑方程无解时 A = ∅。</p>
-                          <p><strong>做子集题，第一步永远是：别忘了空集！</strong></p>
-                        </div>
+                  <div className="bg-white rounded-lg border p-3">
+                    <p className="font-bold text-sm mb-2">怎么判断？逐个检查 A 的元素：</p>
+                    <div className="space-y-2">
+                      <div className="bg-green-50 rounded-lg p-2">
+                        <p className="text-green-700 font-bold text-xs mb-1">A = &#123;1, 2&#125;，B = &#123;1, 2, 3&#125;</p>
+                        <p className="text-xs">1 在 B 里？<strong className="text-green-600">✓</strong>　2 在 B 里？<strong className="text-green-600">✓</strong>　→ 全在！<strong className="text-green-600">A ⊆ B ✓</strong></p>
+                      </div>
+                      <div className="bg-red-50 rounded-lg p-2">
+                        <p className="text-red-600 font-bold text-xs mb-1">A = &#123;1, 4&#125;，B = &#123;1, 2, 3&#125;</p>
+                        <p className="text-xs">1 在 B 里？<strong className="text-green-600">✓</strong>　4 在 B 里？<strong className="text-red-500">✗</strong>　→ 有一个不在！<strong className="text-red-500">A ⊆ B ✗</strong></p>
                       </div>
                     </div>
                   </div>
-                </Collapsible>
 
-                <Collapsible title="子集个数公式（背就行）" storageKey="sets:subset-count">
-                  <div className="space-y-3 text-sm text-gray-700">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">集合有 n 个元素：</p>
-                      <div className="grid grid-cols-[auto_auto_auto] gap-x-2 gap-y-1 text-blue-700 w-fit">
-                        <span className="text-right">子集个数</span><span>=</span><span><Math tex="2^n" /></span>
-                        <span className="text-right">真子集个数</span><span>=</span><span><Math tex="2^n - 1" />（去掉自身）</span>
-                        <span className="text-right">非空子集个数</span><span>=</span><span><Math tex="2^n - 1" />（去掉 ∅）</span>
-                        <span className="text-right">非空真子集个数</span><span>=</span><span><Math tex="2^n - 2" />（去掉自身和 ∅）</span>
-                      </div>
-                    </div>
-                    <div className="bg-[#F5E6D3] rounded-xl p-4">
-                      <p className="font-bold text-[#7A5C3E] mb-1">为什么真子集和非空子集个数一样？</p>
-                      <p className="text-[#7A5C3E]">真子集 = 全部子集 - <strong>自身</strong>（去掉一头）</p>
-                      <p className="text-[#7A5C3E]">非空子集 = 全部子集 - <strong>空集</strong>（去掉另一头）</p>
-                      <p className="text-[#7A5C3E]">两个各减 1，所以结果一样！</p>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <p className="font-bold text-gray-800 mb-2">例：A = &#123;a, b, c&#125;，3个元素</p>
-                      <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 w-fit">
-                        <span className="text-right">子集</span><span>=</span><span>2³ = <strong>8</strong> 个</span><span className="text-gray-700">∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</span>
-                        <span className="text-right">真子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-700">（去掉&#123;a,b,c&#125;本身）</span>
-                        <span className="text-right">非空子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-700">（去掉∅）</span>
-                        <span className="text-right">非空真子集</span><span>=</span><span>8 - 2 = <strong>6</strong></span><span className="text-gray-700">（去掉∅和&#123;a,b,c&#125;）</span>
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <p className="text-amber-800 font-bold text-xs">⚠ 关键点：自己是自己的子集！</p>
+                    <p className="text-amber-700 text-xs mt-1"><Math tex="\{1,2,3\} \subseteq \{1,2,3\}" /> ✓ — 每个元素当然都在自己里面</p>
+                  </div>
+
+                  <p className="text-gray-500 text-xs">生活类比：你班的男同学 ⊆ 你班的所有同学（男同学全在班里）</p>
+                </div>
+
+                {/* ───── ③ 真子集 ───── */}
+                <div className="border-l-4 border-purple-400 pl-4 space-y-2">
+                  <p className="font-bold text-purple-700 text-base">③ 真子集 ⊊：子集 + 不相等</p>
+                  <p>在②的基础上再加一个条件：A 全在 B 里面，<strong>而且 B 还多出来一些元素</strong>。</p>
+
+                  <div className="bg-white rounded-lg border p-3 space-y-1">
+                    <p><Math tex="\{1, 2\} \subsetneq \{1, 2, 3\}" /> ✓　A 全在 B 里，B 多了个 3</p>
+                    <p><Math tex="\{1, 2, 3\} \subsetneq \{1, 2, 3\}" /> ✗　完全一样，没有「多出来的」→ 不是真子集</p>
+                  </div>
+
+                  <div className="bg-[#F5E6D3] rounded-xl p-3">
+                    <p className="font-bold text-[#7A5C3E] text-xs">一句话区分：</p>
+                    <p className="text-[#7A5C3E] text-xs"><strong>子集 ⊆</strong>：全在里面就行（<strong>允许</strong>一模一样）</p>
+                    <p className="text-[#7A5C3E] text-xs"><strong>真子集 ⊊</strong>：全在里面，而且<strong>不能</strong>一模一样（B 必须比 A 大）</p>
+                  </div>
+                </div>
+
+                {/* ───── ④ 空集 ───── */}
+                <div className="border-l-4 border-red-400 pl-4 space-y-2">
+                  <p className="font-bold text-red-700 text-base">④ 空集 ∅：空袋子的特殊规矩</p>
+                  <p><Math tex="\varnothing" /> 就是一个<strong>什么都没有</strong>的集合，空袋子。</p>
+
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-center">
+                    <p className="font-bold text-blue-800 mb-2">空集铁律（必须背！高考必考）</p>
+                    <p className="text-blue-700"><Math tex="\varnothing \subseteq A" />　空集是<strong>任何</strong>集合的子集</p>
+                    <p className="text-blue-700 mt-1"><Math tex="\varnothing \subsetneq A" />　只要 A 不是空集，空集就是 A 的真子集</p>
+                  </div>
+
+                  <div className="bg-white rounded-lg border p-3 text-xs space-y-1">
+                    <p className="font-bold">为什么空集是任何集合的子集？</p>
+                    <p>子集的定义是「A 的<strong>每个</strong>元素都在 B 里」。</p>
+                    <p>空集<strong>没有元素</strong>，所以这个条件自动满足（没有元素能违反条件）。</p>
+                    <p className="text-gray-500">就好像说"这个空教室里的<strong>每个人</strong>都会飞" — 没人在里面，所以这句话不算错。</p>
+                  </div>
+
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <div className="flex items-start gap-2">
+                      <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                      <div className="text-amber-700 text-xs space-y-1">
+                        <p className="font-bold">⚠ 高考经典陷阱</p>
+                        <p>题目说 A ⊆ B，很多人忘了 <strong>A 可能是 ∅</strong>！</p>
+                        <p>比如 A = &#123;x | x²+1=0&#125;，这个方程无实数解 → A = ∅</p>
+                        <p><strong>做子集题，第一步永远是：别忘了空集！</strong></p>
                       </div>
                     </div>
                   </div>
-                </Collapsible>
 
-                <Collapsible title="A⊆B 求参数范围（高考经典题型！）" storageKey="sets:subset-param">
-                  <div className="space-y-3 text-sm text-gray-700">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">解题思路</p>
-                      <p className="text-blue-700">A ⊆ B 意味着 <strong>A 完全在 B 里面</strong>。画数轴，看 A 的端点是否被 B「罩住」。</p>
-                    </div>
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-xs space-y-1">
+                    <p className="font-bold text-red-700">⚠ ∅ 和 &#123;0&#125; 不一样！</p>
+                    <p className="text-red-600">∅ 里面<strong>什么都没有</strong>（0 个元素）</p>
+                    <p className="text-red-600">&#123;0&#125; 里面<strong>有一个元素 0</strong>（1 个元素）</p>
+                  </div>
+                </div>
 
-                    <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                      <p className="font-bold text-gray-800">例：<Math tex="A = \{x \mid -2 < x < 4\},\; B = \{x \mid x < a\},\; A \subseteq B" />，求 a 的范围</p>
-                      <div className="pl-3 border-l-2 border-blue-300 space-y-2">
-                        <div>
-                          <p><span className="text-blue-600 font-bold">第①步</span>：画数轴看两个集合的位置</p>
-                          <div className="bg-white rounded-lg p-3 border">
-                            <svg viewBox="0 0 360 80" className="w-full">
-                              <line x1="20" y1="25" x2="340" y2="25" stroke="#d1d5db" strokeWidth="1" />
-                              <line x1="20" y1="50" x2="340" y2="50" stroke="#d1d5db" strokeWidth="1" />
-                              <line x1="80" y1="19" x2="80" y2="56" stroke="#6b7280" strokeWidth="1" />
-                              <line x1="240" y1="19" x2="240" y2="31" stroke="#6b7280" strokeWidth="1" />
-                              <line x1="280" y1="44" x2="280" y2="56" stroke="#6b7280" strokeWidth="1" />
-                              <text x="80" y="72" fontSize="10" fill="#374151" textAnchor="middle">-2</text>
-                              <text x="240" y="72" fontSize="10" fill="#374151" textAnchor="middle">4</text>
-                              <text x="280" y="72" fontSize="10" fill="#374151" textAnchor="middle">a</text>
-                              <line x1="80" y1="25" x2="240" y2="25" stroke="#2563eb" strokeWidth="3" />
-                              <circle cx="80" cy="25" r="3" fill="white" stroke="#2563eb" strokeWidth="1.5" />
-                              <circle cx="240" cy="25" r="3" fill="white" stroke="#2563eb" strokeWidth="1.5" />
-                              <text x="160" y="18" fontSize="10" fill="#2563eb" fontWeight="bold" textAnchor="middle">A: (-2, 4)</text>
-                              <line x1="20" y1="50" x2="280" y2="50" stroke="#16a34a" strokeWidth="3" />
-                              <circle cx="280" cy="50" r="3" fill="white" stroke="#16a34a" strokeWidth="1.5" />
-                              <text x="40" y="44" fontSize="9" fill="#16a34a" fontWeight="bold">← -∞</text>
-                              <text x="300" y="44" fontSize="10" fill="#16a34a" fontWeight="bold">B</text>
-                            </svg>
-                          </div>
-                        </div>
-                        <div>
-                          <p><span className="text-blue-600 font-bold">第②步</span>：A 的右端点是 4（不含），B 要把它「罩住」→ <Math tex="a \geq 4" /></p>
-                          <p className="text-xs text-gray-700 mt-1">a = 3 时 B = (-∞,3)，A 里的 3.5 没被包住 ✗</p>
-                          <p className="text-xs text-gray-700">a = 4 时 B = (-∞,4)，A = (-2,4) 全在 B 里 ✓</p>
-                        </div>
-                      </div>
-                    </div>
+                {/* ───── ⑤ 子集个数 ───── */}
+                <div className="border-l-4 border-amber-400 pl-4 space-y-2">
+                  <p className="font-bold text-amber-700 text-base">⑤ 子集个数公式</p>
+                  <p>一个有 <strong>n 个元素</strong>的集合，它的子集个数有规律：</p>
 
-                    <div className="bg-[#F5E6D3] rounded-xl p-4">
-                      <p className="font-bold text-[#7A5C3E] mb-1">做 A⊆B 参数题的口诀</p>
-                      <p className="text-[#7A5C3E]"><strong>画数轴 → 看端点 → A 的边必须在 B 的边「里面」</strong></p>
-                      <p className="text-[#9A7B5B] text-xs mt-1">别忘了考虑 A = ∅ 的情况！</p>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <div className="grid grid-cols-[auto_auto_auto] gap-x-2 gap-y-1 text-blue-700 text-xs w-fit">
+                      <span className="text-right font-bold">子集</span><span>=</span><span><Math tex="2^n" /> 个</span>
+                      <span className="text-right font-bold">真子集</span><span>=</span><span><Math tex="2^n - 1" /> 个（去掉自身）</span>
+                      <span className="text-right font-bold">非空子集</span><span>=</span><span><Math tex="2^n - 1" /> 个（去掉 ∅）</span>
+                      <span className="text-right font-bold">非空真子集</span><span>=</span><span><Math tex="2^n - 2" /> 个（去掉自身和 ∅）</span>
                     </div>
                   </div>
-                </Collapsible>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-                  <p className="text-gray-700">1. 集合 &#123;1, 2&#125; 的子集有几个？→ 答案：<strong>2² = 4 个</strong></p>
-                  <p className="text-gray-700">2. ∅ 和 &#123;0&#125; 是同一个集合吗？→ 答案：<strong>不是</strong>（∅没有元素，&#123;0&#125;有一个元素0）</p>
-                  <p className="text-gray-700">3. &#123;1,2&#125; ⊆ &#123;1,2,3&#125; 对吗？&#123;1,2,3&#125; ⊆ &#123;1,2,3&#125; 呢？→ 答案：<strong>都对</strong>（自身也是子集）</p>
-                  <p className="text-gray-700">4. A = &#123;x | x {'<'} a&#125;，B = &#123;x | x {'<'} 3&#125;，若 B ⊆ A，则 a 的范围？→ 答案：<strong>a ≥ 3</strong></p>
+                  <div className="bg-white rounded-lg border p-3 text-xs">
+                    <p className="font-bold mb-1">例：A = &#123;a, b, c&#125;（3 个元素）</p>
+                    <p>全部子集 = 2³ = <strong>8</strong> 个：∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</p>
+                    <p className="mt-1">真子集 = 8 - 1 = <strong>7</strong> 个（去掉 &#123;a,b,c&#125; 自己）</p>
+                    <p>非空子集 = 8 - 1 = <strong>7</strong> 个（去掉 ∅）</p>
+                    <p>非空真子集 = 8 - 2 = <strong>6</strong> 个（两头都去掉）</p>
+                  </div>
+
+                  <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs">
+                    <p className="font-bold text-[#7A5C3E]">为什么「真子集」和「非空子集」个数一样（都是 2ⁿ-1）？</p>
+                    <p className="text-[#7A5C3E] mt-1">真子集 = 全部 - <strong>自身</strong>（去掉最大的那个）</p>
+                    <p className="text-[#7A5C3E]">非空子集 = 全部 - <strong>∅</strong>（去掉最小的那个）</p>
+                    <p className="text-[#7A5C3E]">各减 1，当然一样多！</p>
+                  </div>
+                </div>
+
+                {/* ───── ⑥ A⊆B 参数题 ───── */}
+                <div className="border-l-4 border-indigo-400 pl-4 space-y-2">
+                  <p className="font-bold text-indigo-700 text-base">⑥ A⊆B 求参数范围（高考经典题型）</p>
+                  <p>学会了子集的概念，现在看怎么用它来<strong>做题</strong>。</p>
+
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs">
+                    <p className="font-bold text-blue-800">核心思路：A ⊆ B 就是 A 完全在 B 里面。画数轴，看端点！</p>
+                  </div>
+
+                  <div className="bg-white rounded-lg border p-3 text-xs space-y-2">
+                    <p className="font-bold">例：<Math tex="A = \{x \mid -2 < x < 4\}" />，<Math tex="B = \{x \mid x < a\}" />，若 A ⊆ B，求 a</p>
+                    <div className="pl-3 border-l-2 border-blue-300 space-y-2">
+                      <div>
+                        <p className="text-blue-600 font-bold">第①步：画数轴</p>
+                        <div className="bg-gray-50 rounded-lg p-2 border mt-1">
+                          <svg viewBox="0 0 360 80" className="w-full">
+                            <line x1="20" y1="25" x2="340" y2="25" stroke="#d1d5db" strokeWidth="1" />
+                            <line x1="20" y1="50" x2="340" y2="50" stroke="#d1d5db" strokeWidth="1" />
+                            <line x1="80" y1="19" x2="80" y2="56" stroke="#6b7280" strokeWidth="1" />
+                            <line x1="240" y1="19" x2="240" y2="31" stroke="#6b7280" strokeWidth="1" />
+                            <line x1="280" y1="44" x2="280" y2="56" stroke="#6b7280" strokeWidth="1" />
+                            <text x="80" y="72" fontSize="10" fill="#374151" textAnchor="middle">-2</text>
+                            <text x="240" y="72" fontSize="10" fill="#374151" textAnchor="middle">4</text>
+                            <text x="280" y="72" fontSize="10" fill="#374151" textAnchor="middle">a</text>
+                            <line x1="80" y1="25" x2="240" y2="25" stroke="#2563eb" strokeWidth="3" />
+                            <circle cx="80" cy="25" r="3" fill="white" stroke="#2563eb" strokeWidth="1.5" />
+                            <circle cx="240" cy="25" r="3" fill="white" stroke="#2563eb" strokeWidth="1.5" />
+                            <text x="160" y="18" fontSize="10" fill="#2563eb" fontWeight="bold" textAnchor="middle">A: (-2, 4)</text>
+                            <line x1="20" y1="50" x2="280" y2="50" stroke="#16a34a" strokeWidth="3" />
+                            <circle cx="280" cy="50" r="3" fill="white" stroke="#16a34a" strokeWidth="1.5" />
+                            <text x="40" y="44" fontSize="9" fill="#16a34a" fontWeight="bold">← -∞</text>
+                            <text x="300" y="44" fontSize="10" fill="#16a34a" fontWeight="bold">B</text>
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-blue-600 font-bold">第②步：B 要把 A「罩住」→ a 必须 ≥ 4</p>
+                        <p className="text-gray-600 mt-1">a = 3 → B = (-∞,3)，A 里的 3.5 没被罩住 ✗</p>
+                        <p className="text-gray-600">a = 4 → B = (-∞,4)，A = (-2,4) 全在 B 里 ✓</p>
+                        <p className="text-gray-800 mt-1">答案：<strong><Math tex="a \geq 4" /></strong></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs">
+                    <p className="font-bold text-[#7A5C3E]">口诀：画数轴 → 看端点 → A 的边必须在 B 的边里面</p>
+                    <p className="text-[#9A7B5B] mt-1">别忘了考虑 A = ∅ 的情况！</p>
+                  </div>
+                </div>
+
+                {/* ───── 即时练习 ───── */}
+                <div className="bg-green-50 border border-green-200 rounded-lg p-3 space-y-1">
+                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习（学完上面再做）</p>
+                  <p className="text-gray-700">1. &#123;1,2&#125; ⊆ &#123;1,2,3&#125; 对吗？&#123;1,2,3&#125; ⊆ &#123;1,2,3&#125; 呢？→ <strong>都对</strong>（自己也是自己的子集）</p>
+                  <p className="text-gray-700">2. &#123;1,2,3&#125; ⊊ &#123;1,2,3&#125; 对吗？→ <strong>不对</strong>（相等不算真子集）</p>
+                  <p className="text-gray-700">3. ∅ 和 &#123;0&#125; 一样吗？→ <strong>不一样</strong>（∅ 是 0 个元素，&#123;0&#125; 有 1 个元素）</p>
+                  <p className="text-gray-700">4. &#123;1, 2&#125; 的子集有几个？→ <strong>2² = 4 个</strong>（∅, &#123;1&#125;, &#123;2&#125;, &#123;1,2&#125;）</p>
+                  <p className="text-gray-700">5. A = &#123;x | x {'<'} a&#125;，B = &#123;x | x {'<'} 3&#125;，若 B ⊆ A，则 a 的范围？→ <strong>a ≥ 3</strong></p>
                 </div>
               </div>
             </Collapsible>
