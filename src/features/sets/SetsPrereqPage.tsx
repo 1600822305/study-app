@@ -149,8 +149,8 @@ export function SetsPrereqPage() {
                 </div>
                 <div className="bg-slate-800 rounded-lg p-3">
                   <p className="text-xs text-slate-400 mb-1">完全平方公式</p>
-                  <Math tex="(a+b)^2 = a^2 + 2ab + b^2" />
-                  <Math tex="(a-b)^2 = a^2 - 2ab + b^2" />
+                  <p><Math tex="(a+b)^2 = a^2 + 2ab + b^2" /></p>
+                  <p><Math tex="(a-b)^2 = a^2 - 2ab + b^2" /></p>
                   <p className="text-xs text-slate-500 mt-1">中间项 = 2倍乘积，末项 = 那个数的平方</p>
                 </div>
               </div>
