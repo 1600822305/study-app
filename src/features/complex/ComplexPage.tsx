@@ -330,6 +330,37 @@ export function ComplexPage() {
                   <Math tex="(1-i)^2 = -2i" />
                 </div>
               </div>
+
+              <div className="mt-4 border-t border-gray-200 pt-4">
+                <p className="text-sm font-bold text-gray-900 mb-2">高次幂怎么算？——拆成"已知结论"反复用</p>
+                <p className="text-sm text-gray-500 mb-3">思路：先算平方，再用平方结论往上叠。</p>
+                <div className="space-y-3 text-sm">
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold mb-1">例4：求 <Math tex="(1-i)^4" /></p>
+                    <div className="space-y-1 text-gray-700">
+                      <p>第一步：先用已知结论 <Math tex="(1-i)^2 = -2i" /></p>
+                      <p>第二步：<Math tex="(1-i)^4 = \left[(1-i)^2\right]^2 = (-2i)^2" /></p>
+                      <p>第三步：<Math tex="(-2i)^2 = 4i^2 = 4 \times (-1) = -4" /></p>
+                      <p className="font-bold text-blue-700">答案：<Math tex="(1-i)^4 = -4" /></p>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold mb-1">例5：求 <Math tex="(1+i)^4" /></p>
+                    <div className="space-y-1 text-gray-700">
+                      <p><Math tex="(1+i)^4 = \left[(1+i)^2\right]^2 = (2i)^2 = 4i^2 = -4" /></p>
+                    </div>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold mb-1">例6：求 <Math tex="(1+i)^8" /></p>
+                    <div className="space-y-1 text-gray-700">
+                      <p><Math tex="(1+i)^8 = \left[(1+i)^4\right]^2 = (-4)^2 = 16" /></p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-3 text-sm">
+                  <p className="text-amber-800">💡 <strong>套路：</strong>高次幂 → 先拆成平方的幂 → 用已知结论代入 → 化简。遇到 <Math tex="i^2" /> 就换成 <Math tex="-1" />，万变不离其宗。</p>
+                </div>
+              </div>
             </Collapsible>
 
             <Collapsible title="i 的幂次规律（必背）" defaultOpen storageKey="complex:i-powers" headerExtra={<SpeakButton text={complexNarrations.iPowers} />}>
