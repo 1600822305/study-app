@@ -227,6 +227,40 @@ export function SetsPrereqPage() {
               <div className="bg-gray-50 rounded-lg p-4">
                 <p className="text-xs text-gray-500 mb-2">认准 a、b、c 之后，直接套：</p>
                 <Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" display />
+
+                <Collapsible title="这个公式怎么来的？（配方法推导，看懂就不用死背）" storageKey="sets-prereq:formula-derivation">
+                  <div className="space-y-2 text-sm text-gray-700">
+                    <p className="text-xs text-gray-500">从 <Math tex="ax^2 + bx + c = 0" /> 出发，一步步变形：</p>
+                    <div className="pl-3 border-l-2 border-purple-300 space-y-2">
+                      <div>
+                        <p className="text-xs text-purple-600 font-bold">第一步：两边除以 a，让 x² 系数变 1</p>
+                        <p><Math tex="x^2 + \frac{b}{a}x + \frac{c}{a} = 0" /></p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-purple-600 font-bold">第二步：常数项挪到右边</p>
+                        <p><Math tex="x^2 + \frac{b}{a}x = -\frac{c}{a}" /></p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-purple-600 font-bold">第三步：配方！两边加上 <Math tex="\left(\frac{b}{2a}\right)^2" />，凑成完全平方</p>
+                        <p><Math tex="x^2 + \frac{b}{a}x + \frac{b^2}{4a^2} = -\frac{c}{a} + \frac{b^2}{4a^2}" /></p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-purple-600 font-bold">第四步：左边就是完全平方，右边通分</p>
+                        <p><Math tex="\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}" /></p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-purple-600 font-bold">第五步：两边开根号</p>
+                        <p><Math tex="x + \frac{b}{2a} = \pm\frac{\sqrt{b^2 - 4ac}}{2a}" /></p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-purple-600 font-bold">第六步：移项，搞定！</p>
+                        <p><Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" /></p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2 bg-purple-50 p-2 rounded">所以求根公式本质上就是<strong>配方法</strong>的通用版。理解了"配方→开根→移项"这三步，公式就记住了。</p>
+                  </div>
+                </Collapsible>
+
                 <div className="mt-3 text-sm space-y-1 bg-white rounded-lg p-3 border border-gray-100">
                   <p className="font-bold text-gray-800 text-xs">根号里面的 <Math tex="\Delta = b^2 - 4ac" /> 叫"判别式"，决定有几个解：</p>
                   <p className="pl-4"><Math tex="\Delta > 0" /> → 两个不同的解（最常见）</p>
