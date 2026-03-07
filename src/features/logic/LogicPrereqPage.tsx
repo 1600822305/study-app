@@ -144,132 +144,78 @@ export function LogicPrereqPage() {
             </div>
 
             <div>
-              <p className="font-bold mb-2">绝对值不等式速查</p>
+              <p className="font-bold mb-2">绝对值不等式</p>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
-                <p className="font-bold text-blue-800 mb-1">先搞清楚：|x| 是什么？</p>
-                <p className="text-blue-700"><Math tex="|x|" /> 就是 x <strong>到 0 的距离</strong>，永远是正数或零。</p>
-                <p className="text-blue-700 mt-1">比如 <Math tex="|3| = 3" />，<Math tex="|-3| = 3" />（不管正负，距离都是 3）</p>
-                <p className="text-blue-700 mt-2">所以 <Math tex="|x| < 3" /> 的意思就是：x 到 0 的距离<strong>不超过 3</strong> → x 在 -3 到 3 之间</p>
-                <p className="text-blue-700"><Math tex="|x| > 3" /> 的意思就是：x 到 0 的距离<strong>超过 3</strong> → x 在 -3 左边或 3 右边</p>
+              {/* 核心思路 */}
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-3">
+                <p className="font-bold text-blue-800 mb-2">核心思路：去掉绝对值 → 变成你会解的普通不等式</p>
+                <p className="text-blue-700 text-sm">绝对值不等式看起来吓人，其实只要<strong>去掉绝对值符号</strong>，就变成你已经学过的普通不等式了。</p>
+                <p className="text-blue-700 text-sm mt-1">去绝对值只有两条规则，记住就行：</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                <p><Math tex="|x| < a \;\Rightarrow\; -a < x < a" />（距离不超过 a → 夹在中间）</p>
-                <p><Math tex="|x| > a \;\Rightarrow\; x < -a \text{ 或 } x > a" />（距离超过 a → 在两边）</p>
-              </div>
-              <p className="mt-2 text-gray-600">口诀：<strong>小于取中间，大于取两边</strong>（和二次不等式一样！）</p>
-
-              {/* |x-b|<a 拆开讲 */}
-              <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 mt-3">
-                <p className="font-bold text-purple-800 mb-2">进阶：中心不在 0 怎么办？</p>
-                <p className="text-purple-700 mb-3">上面的 |x| {'<'} a 中心是 0。如果中心换成别的数 b，就变成 <Math tex="|x - b| < a" /></p>
+              {/* 规则1: 小于 */}
+              <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                <p className="font-bold text-gray-800 mb-2">规则① |东西| {'<'} a → 去绝对值，<strong className="text-green-600">夹在中间</strong></p>
+                <div className="bg-white rounded-lg p-3 mb-2">
+                  <p className="text-center text-sm"><Math tex="|东西| < a" /> → <Math tex="-a < 东西 < a" /></p>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">就是把"东西"<strong>夹在 -a 和 a 之间</strong>，绝对值就没了！</p>
 
                 <div className="bg-white rounded-lg p-3 space-y-3">
-                  <p className="text-sm"><strong>意思是：</strong>x 到 <strong>b</strong> 的距离不超过 <strong>a</strong></p>
-                  <p className="text-sm"><strong>怎么算：</strong>从 b 往左走 a 步，往右走 a 步</p>
-
-                  {/* 示意图 */}
-                  <div className="bg-gray-50 rounded-lg px-4 py-3">
-                    <div className="relative h-7 mx-2">
-                      <div className="absolute top-1/2 left-[10%] right-[10%] h-[2px] bg-gray-400" />
-                      {/* 左端点 b-a */}
-                      <div className="absolute top-1/2 flex flex-col items-center" style={{ left: '20%', transform: 'translateX(-50%)' }}>
-                        <div className="w-[1.5px] h-3 bg-red-500 -translate-y-1/2" />
-                        <span className="text-xs font-bold text-red-600 mt-1.5">b-a</span>
-                      </div>
-                      {/* 中心 b */}
-                      <div className="absolute top-1/2 flex flex-col items-center" style={{ left: '50%', transform: 'translateX(-50%)' }}>
-                        <div className="w-[1.5px] h-3 bg-purple-500 -translate-y-1/2" />
-                        <span className="text-xs font-bold text-purple-600 mt-1.5">b</span>
-                      </div>
-                      {/* 右端点 b+a */}
-                      <div className="absolute top-1/2 flex flex-col items-center" style={{ left: '80%', transform: 'translateX(-50%)' }}>
-                        <div className="w-[1.5px] h-3 bg-red-500 -translate-y-1/2" />
-                        <span className="text-xs font-bold text-red-600 mt-1.5">b+a</span>
-                      </div>
-                    </div>
-                    {/* 距离标注 */}
-                    <div className="relative h-6 mx-2">
-                      <div className="absolute top-0 border-b-[2px] border-l-[2px] border-r-[2px] border-green-500 rounded-b-md" style={{ left: '20%', right: '20%', height: '80%' }} />
-                    </div>
-                    <div className="flex justify-between px-[18%] text-xs text-gray-500">
-                      <span>← a →</span>
-                      <span>← a →</span>
-                    </div>
+                  <div>
+                    <p className="text-sm font-bold text-gray-700">例1：<Math tex="|x| < 3" /></p>
+                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="-3 < x < 3" />　（完事了！）</p>
                   </div>
-
-                  <p className="text-sm"><strong>结果：</strong><Math tex="b - a < x < b + a" /></p>
-                  <p className="text-gray-500 text-xs">就三个字：<strong>中心 ± 半径</strong></p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="font-bold text-gray-800 mb-3">例：解 <Math tex="|x - 1| < 3" /></p>
-              <div className="space-y-2 text-sm">
-                <p><strong>第1步：</strong>看出来这是什么？</p>
-                <p className="pl-4 text-gray-600">|x - <strong>1</strong>| {'<'} <strong>3</strong> → x 到 <strong>1</strong> 的距离不超过 <strong>3</strong></p>
-                <p><strong>第2步：</strong>套公式 |x - b| {'<'} a → b - a {'<'} x {'<'} b + a</p>
-                <p className="pl-4 text-gray-600">这里 b = 1，a = 3，所以：1 - 3 {'<'} x {'<'} 1 + 3</p>
-                <p><strong>第3步：</strong>算出来</p>
-                <p className="pl-4"><Math tex="-2 < x < 4" /></p>
-              </div>
-
-              {/* 数轴图解 */}
-              <div className="bg-white rounded-lg px-5 pt-2 pb-3 mt-3">
-                <div className="relative h-7 mx-4">
-                  <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gray-400" />
-                  {[-3, -2, -1, 0, 1, 2, 3, 4, 5].map((n) => (
-                    <div key={n} className="absolute top-1/2 flex flex-col items-center" style={{ left: `${(n + 3) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>
-                      <div className="w-[1.5px] h-2.5 bg-gray-500 -translate-y-1/2" />
-                      <span className={`text-xs mt-1.5 ${n === 1 ? 'font-bold text-purple-600' : n === -2 || n === 4 ? 'font-bold text-red-600' : 'text-gray-500'}`}>{n}</span>
-                    </div>
-                  ))}
-                </div>
-                {/* 距离标注 */}
-                <div className="relative h-8 mx-4">
-                  <div className="absolute top-0 border-b-[3px] border-l-[3px] border-r-[3px] border-green-500 rounded-b-lg" style={{ left: `${(-2 + 3) * (100 / 8)}%`, right: `${100 - (4 + 3) * (100 / 8)}%`, height: '100%' }} />
-                  <span className="absolute bottom-0 text-xs font-bold text-green-600" style={{ left: `${(1 + 3) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>解集：(-2, 4)</span>
-                </div>
-                <div className="flex justify-center gap-4 mt-1 text-xs text-gray-500">
-                  <span>← 距离3 →<strong className="text-purple-600 mx-1">中心1</strong>← 距离3 →</span>
+                  <div className="border-t border-gray-200 pt-2">
+                    <p className="text-sm font-bold text-gray-700">例2：<Math tex="|x - 1| < 3" /></p>
+                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="-3 < x - 1 < 3" /></p>
+                    <p className="text-sm text-gray-600 pl-2">三边同时 +1 → <Math tex="-2 < x < 4" />　✓</p>
+                  </div>
+                  <div className="border-t border-gray-200 pt-2">
+                    <p className="text-sm font-bold text-gray-700">例3：<Math tex="|x + 2| < 3" /></p>
+                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="-3 < x + 2 < 3" /></p>
+                    <p className="text-sm text-gray-600 pl-2">三边同时 -2 → <Math tex="-5 < x < 1" />　✓</p>
+                  </div>
                 </div>
               </div>
 
-              <p className="text-gray-500 text-xs mt-2">验证：x=0 → |0-1|=1{'<'}3 ✓　　x=5 → |5-1|=4{'>'}3 ✗（不在解集里）</p>
+              {/* 规则2: 大于 */}
+              <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                <p className="font-bold text-gray-800 mb-2">规则② |东西| {'>'} a → 去绝对值，<strong className="text-red-600">拆成两边</strong></p>
+                <div className="bg-white rounded-lg p-3 mb-2">
+                  <p className="text-center text-sm"><Math tex="|东西| > a" /> → <Math tex="东西 < -a" /> <strong>或</strong> <Math tex="东西 > a" /></p>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">就是"东西"要么<strong>小于 -a</strong>，要么<strong>大于 a</strong>，绝对值就没了！</p>
 
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <p className="font-bold text-gray-800 mb-3">变式：遇到 <Math tex="|x + 2| < 3" /> 怎么办？</p>
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
-                  <p className="text-amber-800 text-sm"><strong>关键技巧：</strong>把 <Math tex="x + 2" /> 看成 <Math tex="x - (-2)" />，这样中心就是 <strong>-2</strong></p>
-                  <p className="text-amber-700 text-xs mt-1">因为 |x - b| 里的 b 是中心点，x+2 = x-(-2)，所以中心是 -2</p>
+                <div className="bg-white rounded-lg p-3 space-y-3">
+                  <div>
+                    <p className="text-sm font-bold text-gray-700">例1：<Math tex="|x| > 3" /></p>
+                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="x < -3" /> 或 <Math tex="x > 3" /></p>
+                  </div>
+                  <div className="border-t border-gray-200 pt-2">
+                    <p className="text-sm font-bold text-gray-700">例2：<Math tex="|x - 3| \geq 2" /></p>
+                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="x - 3 \leq -2" /> 或 <Math tex="x - 3 \geq 2" /></p>
+                    <p className="text-sm text-gray-600 pl-2">各自 +3 → <Math tex="x \leq 1" /> 或 <Math tex="x \geq 5" />　✓</p>
+                  </div>
                 </div>
-                <div className="space-y-2 text-sm">
-                  <p><strong>第1步：</strong>转化 → <Math tex="|x + 2| = |x - (-2)|" />，中心 b = -2，半径 a = 3</p>
-                  <p><strong>第2步：</strong>套公式 → -2 - 3 {'<'} x {'<'} -2 + 3</p>
-                  <p><strong>第3步：</strong>算出来 → <Math tex="-5 < x < 1" /></p>
-                </div>
+              </div>
 
-                {/* 数轴图解 */}
-                <div className="bg-white rounded-lg px-5 pt-2 pb-3 mt-3">
-                  <div className="relative h-7 mx-4">
-                    <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gray-400" />
-                    {[-6, -5, -4, -3, -2, -1, 0, 1, 2].map((n) => (
-                      <div key={n} className="absolute top-1/2 flex flex-col items-center" style={{ left: `${(n + 6) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>
-                        <div className="w-[1.5px] h-2.5 bg-gray-500 -translate-y-1/2" />
-                        <span className={`text-xs mt-1.5 ${n === -2 ? 'font-bold text-purple-600' : n === -5 || n === 1 ? 'font-bold text-red-600' : 'text-gray-500'}`}>{n}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="relative h-8 mx-4">
-                    <div className="absolute top-0 border-b-[3px] border-l-[3px] border-r-[3px] border-green-500 rounded-b-lg" style={{ left: `${(-5 + 6) * (100 / 8)}%`, right: `${100 - (1 + 6) * (100 / 8)}%`, height: '100%' }} />
-                    <span className="absolute bottom-0 text-xs font-bold text-green-600" style={{ left: `${(-2 + 6) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>解集：(-5, 1)</span>
-                  </div>
-                  <div className="flex justify-center gap-4 mt-1 text-xs text-gray-500">
-                    <span>← 距离3 →<strong className="text-purple-600 mx-1">中心-2</strong>← 距离3 →</span>
-                  </div>
+              {/* 口诀 */}
+              <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-3">
+                <p className="font-bold text-orange-800 mb-1">就两句话：</p>
+                <p className="text-orange-700 font-bold"><strong>{'<'} → 去绝对值，夹中间</strong>：-a {'<'} 东西 {'<'} a</p>
+                <p className="text-orange-700 font-bold"><strong>{'>'} → 去绝对值，拆两边</strong>：东西 {'<'} -a 或 东西 {'>'} a</p>
+                <p className="text-orange-600 text-xs mt-2">口诀：<strong>小于夹中间，大于拆两边</strong></p>
+              </div>
+
+              {/* 做题步骤 */}
+              <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4">
+                <p className="font-bold text-green-800 mb-2">做题就两步：</p>
+                <div className="space-y-1.5 text-sm text-green-700">
+                  <p><strong>① 去绝对值：</strong>看是 {'<'} 还是 {'>'}，用对应规则去掉 | |</p>
+                  <p><strong>② 解普通不等式：</strong>移项、化简，得出答案</p>
                 </div>
+                <p className="text-green-600 text-xs mt-2 font-bold">绝对值不等式 = 去绝对值 + 解普通不等式，没了！</p>
               </div>
             </div>
 
