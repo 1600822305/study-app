@@ -379,17 +379,19 @@ export function SetsPage() {
                         </svg>
                       </div>
                       <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="A \subsetneq B" />（真子集）</p>
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="B \subsetneq A" />（反过来）</p>
                         <svg viewBox="0 0 180 130" className="w-full">
                           <rect x="4" y="4" width="172" height="122" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
-                          <circle cx="90" cy="60" r="40" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" strokeWidth="1.5" />
-                          <circle cx="90" cy="70" r="20" fill="rgba(234,179,8,0.2)" stroke="#eab308" strokeWidth="1.5" />
-                          <text x="90" y="40" fontSize="13" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
-                          <text x="90" y="75" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="140" y="45" fontSize="9" fill="#ef4444" fontWeight="bold">B 比 A 多</text>
-                          <text x="90" y="118" fontSize="10" fill="#6b7280" textAnchor="middle">A 在 B 里面，且 A ≠ B</text>
+                          <circle cx="90" cy="60" r="40" fill="rgba(234,179,8,0.12)" stroke="#eab308" strokeWidth="1.5" />
+                          <circle cx="90" cy="70" r="20" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" strokeWidth="1.5" />
+                          <text x="90" y="40" fontSize="13" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="90" y="75" fontSize="11" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
+                          <text x="90" y="118" fontSize="10" fill="#6b7280" textAnchor="middle">B 在 A 里面，A 比 B 大</text>
                         </svg>
                       </div>
+                    </div>
+                    <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs">
+                      <p className="text-[#7A5C3E]"><strong>谁是小圆谁就是子集！</strong>小圆在大圆里面 → 小的 ⊆ 大的。</p>
                     </div>
 
                     <div className="bg-gray-50 rounded-lg p-3 space-y-1">
