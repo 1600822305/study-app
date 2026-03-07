@@ -1,4 +1,7 @@
+import { useMemo } from 'react';
 import { Flame, AlertTriangle } from 'lucide-react';
+import { VennDiagram } from '@upsetjs/react';
+import { extractSets, generateCombinations } from '@upsetjs/model';
 
 import { Math, Collapsible, ProgressTracker, SpeakButton, QuizPanel } from '@/components/shared';
 import { setsNarrations } from './data/narrations';
@@ -6,8 +9,21 @@ import { useProgress } from '@/hooks';
 import { setsQuizQuestions } from './data/quiz';
 import { setsProgressItems } from './data/progress';
 
+// Venn diagram data for A∩B demo
+const vennElems = [
+  { name: '1', sets: ['A'] },
+  { name: '2', sets: ['A'] },
+  { name: '3', sets: ['A', 'B'] },
+  { name: '4', sets: ['A', 'B'] },
+  { name: '5', sets: ['B'] },
+  { name: '6', sets: ['B'] },
+];
+
 export function SetsPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sets', setsProgressItems);
+
+  const vennSets = useMemo(() => extractSets(vennElems), []);
+  const vennCombinations = useMemo(() => generateCombinations(vennSets), [vennSets]);
 
   return (
     <div>
@@ -181,39 +197,15 @@ export function SetsPage() {
                 <Collapsible title="方法三：Venn 图（韦恩图）—— 画个圈" storageKey="sets:rep-venn">
                   <div className="space-y-4 text-sm text-gray-700">
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                      <p className="text-blue-700">用封闭曲线（通常是圆或椭圆）表示集合，直观展示集合间的关系。</p>
+                      <p className="text-blue-700">用封闭曲线（通常是圆或椭圆）表示集合，直观展示集合间的关系。<strong>悬停</strong>可高亮各区域。</p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {/* A ⊆ U */}
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <p className="text-center font-bold text-gray-700 text-xs mb-2">A ⊆ U（子集）</p>
-                        <svg viewBox="0 0 200 140" className="w-full max-w-[200px] mx-auto">
-                          <rect x="5" y="5" width="190" height="130" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
-                          <text x="175" y="22" fontSize="12" fill="#3b82f6" fontWeight="bold">U</text>
-                          <circle cx="90" cy="75" r="35" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5" />
-                          <text x="90" y="80" fontSize="14" fill="#1d4ed8" fontWeight="bold" textAnchor="middle">A</text>
-                        </svg>
-                      </div>
-
-                      {/* A ∩ B */}
-                      <div className="bg-gray-50 rounded-lg p-3">
-                        <p className="text-center font-bold text-gray-700 text-xs mb-2">A ∩ B（交集）</p>
-                        <svg viewBox="0 0 200 140" className="w-full max-w-[200px] mx-auto">
-                          <rect x="5" y="5" width="190" height="130" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
-                          <text x="175" y="22" fontSize="12" fill="#3b82f6" fontWeight="bold">U</text>
-                          <circle cx="75" cy="75" r="38" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5" fillOpacity="0.5" />
-                          <circle cx="120" cy="75" r="38" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" fillOpacity="0.5" />
-                          {/* intersection highlight */}
-                          <clipPath id="clipA">
-                            <circle cx="75" cy="75" r="38" />
-                          </clipPath>
-                          <circle cx="120" cy="75" r="38" fill="#bbf7d0" fillOpacity="0.7" clipPath="url(#clipA)" />
-                          <text x="58" y="80" fontSize="13" fill="#1d4ed8" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="137" y="80" fontSize="13" fill="#b45309" fontWeight="bold" textAnchor="middle">B</text>
-                          <text x="97" y="110" fontSize="10" fill="#15803d" fontWeight="bold" textAnchor="middle">A∩B</text>
-                        </svg>
-                      </div>
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <p className="text-center font-bold text-gray-700 text-xs mb-2">A ∩ B 交互式韦恩图（悬停试试）</p>
+                      {useMemo(() => {
+                        const VD = VennDiagram as React.ComponentType<{ sets: typeof vennSets; combinations: typeof vennCombinations; width: number; height: number }>;
+                        return <VD sets={vennSets} combinations={vennCombinations} width={360} height={240} />;
+                      }, [vennSets, vennCombinations])}
                     </div>
 
                     <p className="text-xs text-gray-500">Venn 图在做交集、并集、补集运算时特别直观，后面集合运算会大量使用。</p>

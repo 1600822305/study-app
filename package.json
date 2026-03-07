@@ -31,6 +31,7 @@
     "@tauri-apps/plugin-http": "^2.5.7",
     "@types/katex": "^0.16.8",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@upsetjs/react": "^1.11.0",
     "ai": "^6.0.116",
     "capacitor-edge-to-edge": "^2.1.1",
     "dexie": "^4.3.0",
