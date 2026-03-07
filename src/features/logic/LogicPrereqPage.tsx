@@ -216,6 +216,7 @@ export function LogicPrereqPage() {
                     <p className="text-sm text-gray-600 pl-2">两边都有 <Math tex="x^2" />，消掉 → <Math tex="-18x + 81 < -2x + 1" /></p>
                     <p className="text-sm text-gray-600 pl-2">移项：-18x + 2x {'<'} 1 - 81 → <Math tex="-16x < -80" /></p>
                     <p className="text-sm text-gray-600 pl-2">两边÷(-16)，<strong>变号</strong> → <Math tex="x > 5" />　✓</p>
+                    <p className="text-sm text-gray-400 pl-2 text-xs">（为什么变号？因为除以负数时大小关系会反过来，比如 6 {'>'} 2 但 -6 {'<'} -2）</p>
                   </div>
                   <div className="border-t border-gray-200 pt-2">
                     <p className="text-sm font-bold text-gray-700">例2：<Math tex="|2x + 1| \geq |x - 3|" /></p>
