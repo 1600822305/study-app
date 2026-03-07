@@ -674,9 +674,9 @@ export function SetsPage() {
                       <p className="text-purple-600 text-sm">口诀：<strong>补穿入，交并换</strong>（补号穿进括号，∩ 和 ∪ 互换）</p>
                     </div>
 
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <p className="font-bold text-gray-800 mb-1">实战演练：U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
-                      <p className="text-xs text-gray-500"><Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125;</p>
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="font-bold text-gray-800 mb-2 text-base">实战演练：U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
+                      <p className="text-sm text-gray-600"><Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125;</p>
                     </div>
 
                     <div className="overflow-x-auto">
