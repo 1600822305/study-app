@@ -379,8 +379,42 @@ export function SetsPrereqPage() {
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-3 border border-blue-100">
-                  <p className="font-bold text-gray-800 text-xs mb-1">抛物线和 x 轴的交点 = 方程 <Math tex="ax^2+bx+c=0" /> 的根</p>
-                  <p className="text-gray-600 text-xs">有两个交点 → 两个根；一个交点 → 重根；没有交点 → 无实数根</p>
+                  <p className="font-bold text-gray-800 text-xs mb-2">抛物线和 x 轴的交点 = 方程 <Math tex="ax^2+bx+c=0" /> 的根</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="text-center">
+                      <div className="bg-gray-50 rounded overflow-hidden">
+                        <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={100}>
+                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
+                          <Plot.OfX y={(x: number) => x * x - 1} color="#6366f1" />
+                          <Point x={-1} y={0} color="#ef4444" />
+                          <Point x={1} y={0} color="#ef4444" />
+                        </Mafs>
+                      </div>
+                      <p className="text-xs font-bold text-green-600 mt-1">Δ {'>'} 0</p>
+                      <p className="text-xs text-gray-500">两个交点 → 两个根</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="bg-gray-50 rounded overflow-hidden">
+                        <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={100}>
+                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
+                          <Plot.OfX y={(x: number) => x * x} color="#6366f1" />
+                          <Point x={0} y={0} color="#f59e0b" />
+                        </Mafs>
+                      </div>
+                      <p className="text-xs font-bold text-amber-500 mt-1">Δ = 0</p>
+                      <p className="text-xs text-gray-500">一个交点 → 重根</p>
+                    </div>
+                    <div className="text-center">
+                      <div className="bg-gray-50 rounded overflow-hidden">
+                        <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={100}>
+                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
+                          <Plot.OfX y={(x: number) => x * x + 1} color="#6366f1" />
+                        </Mafs>
+                      </div>
+                      <p className="text-xs font-bold text-red-500 mt-1">Δ {'<'} 0</p>
+                      <p className="text-xs text-gray-500">没交点 → 无实数根</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <p className="text-xs text-blue-600 mt-2 font-bold">下面的口诀假设 a {'>'} 0（开口朝上）。如果 a {'<'} 0，先两边乘 -1 变成 a {'>'} 0 再用口诀。</p>
