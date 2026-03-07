@@ -212,6 +212,7 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     explanation: 'A⊆B 意味着 A 的所有元素都在 B 里。A 的右端点是 4（不含），B 要把 4 也"罩住"，所以 a ≥ 4。',
     explanationLatex:
       'A=(-2,4),\\; B=(-\\infty,a) \\quad A \\subseteq B \\Leftrightarrow a \\geq 4',
+    explanationDiagram: 'subset-number-line',
   },
   {
     id: 'sq15',

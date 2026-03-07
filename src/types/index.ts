@@ -35,6 +35,7 @@ export interface QuizQuestionData {
   correctAnswer: string;
   explanation: string;
   explanationLatex?: string;
+  explanationDiagram?: string;
 }
 
 /** 学习进度条目 */
