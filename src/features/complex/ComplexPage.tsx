@@ -174,6 +174,34 @@ export function ComplexPage() {
               </div>
             </div>
 
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
+              <p className="font-bold text-blue-800 mb-3">📂 复数的分类</p>
+              <div className="bg-white rounded-lg p-4 text-sm text-center font-mono">
+                <p className="mb-1">复数 <Math tex="z = a + bi" /></p>
+                <p className="text-gray-400 mb-1">┌─────────┴─────────┐</p>
+                <div className="flex justify-center gap-12 mb-1">
+                  <span><Math tex="b = 0" /></span>
+                  <span><Math tex="b \neq 0" /></span>
+                </div>
+                <div className="flex justify-center gap-16 mb-1">
+                  <span className="text-green-700 font-bold">实数</span>
+                  <span className="text-purple-700 font-bold">虚数</span>
+                </div>
+                <p className="text-gray-400 mb-1 ml-24">┌─────┴─────┐</p>
+                <div className="flex justify-center gap-4 ml-24">
+                  <div className="text-center">
+                    <p><Math tex="a \neq 0" /></p>
+                    <p className="text-blue-700 font-bold">一般虚数</p>
+                  </div>
+                  <div className="text-center">
+                    <p><Math tex="a = 0" /></p>
+                    <p className="text-red-600 font-bold">纯虚数</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-blue-700 text-xs mt-2">💡 实数也是复数（虚部为0的复数）；0 既是实数也是复数，但<strong>不是</strong>纯虚数。</p>
+            </div>
+
             <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
               <AlertTriangle size={20} className="text-red-500 shrink-0 mt-0.5" />
               <div>
@@ -479,6 +507,21 @@ export function ComplexPage() {
               <p className="text-gray-700 mb-3">
                 每个复数 <Math tex="z = a + bi" /> 对应复平面上的一个点 <Math tex="(a, b)" />：
               </p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-4 overflow-x-auto">
+                <pre className="text-xs leading-relaxed text-gray-700 text-center whitespace-pre font-mono">{
+`         虚轴 (y)
+          ↑
+     2i  ·|· · · ·(3,2) ← z = 3+2i
+          |      ↗
+      i  ·|· · /· ·
+          |  /
+  --------+--------→ 实轴 (x)
+          |
+     -i  ·|· · · ·
+          |
+    -2i  ·|· · · ·(-2,-2) ← z = -2-2i`
+                }</pre>
+              </div>
               <div className="text-sm space-y-1 mb-4">
                 <p className="text-gray-700">• <strong>x轴 = 实轴</strong>：上面的点都是实数</p>
                 <p className="text-gray-700">• <strong>y轴 = 虚轴</strong>：上面的点（除原点）都是纯虚数</p>
