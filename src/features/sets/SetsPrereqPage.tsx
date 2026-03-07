@@ -311,59 +311,77 @@ export function SetsPrereqPage() {
 
       {/* Self test */}
       <section className="mb-8">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">自测清单</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-bold">
+            5
+          </span>
+          自测清单
+        </h2>
         <p className="text-sm text-gray-500 mb-4">
-          做完5题，确认基础没问题。点击题目查看答案。
+          先在输入框写答案，再点"查看答案"对照。做完5题确认基础没问题。
         </p>
 
-        <div className="space-y-3">
-          {selfTestItems.map((item, idx) => (
-            <div key={idx} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <div className="flex items-center gap-3 px-4 py-3">
-                <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-500 shrink-0">
-                  {idx + 1}
-                </span>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-800">
-                    {item.questionLatex ? <Math tex={item.questionLatex} /> : item.question}
-                  </p>
-                </div>
-                <button
-                  onClick={() => toggleReveal(idx)}
-                  className="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap shrink-0"
-                >
-                  {revealed.has(idx) ? '收起' : '查看答案'}
-                </button>
-              </div>
+        <div className="space-y-4">
+          {selfTestItems.map((item, idx) => {
+            const isRevealed = revealed.has(idx);
+            const hasInput = !!userAnswers[idx];
+            const isMatch = hasInput && userAnswers[idx].replace(/\s/g, '') === item.answer.replace(/\s/g, '');
 
-              <div className="px-4 pb-3">
-                <MathInput
-                  value={userAnswers[idx] || ''}
-                  onChange={(latex) => setUserAnswers((prev) => ({ ...prev, [idx]: latex }))}
-                  placeholder="点击输入答案..."
-                  className="w-full"
-                />
-              </div>
-
-              {revealed.has(idx) && (
-                <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 flex items-center gap-3">
-                  {userAnswers[idx] && (
-                    userAnswers[idx].replace(/\s/g, '') === item.answer.replace(/\s/g, '') ? (
-                      <CheckCircle size={18} className="text-green-500 shrink-0" />
-                    ) : (
-                      <XCircle size={18} className="text-red-500 shrink-0" />
-                    )
-                  )}
-                  <span className="text-sm text-gray-700">
-                    答案：
-                    <strong>
-                      {item.answerLatex ? <Math tex={item.answerLatex} /> : item.answer}
-                    </strong>
+            return (
+              <div key={idx} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                {/* Question header */}
+                <div className="flex items-start gap-3 px-5 py-4">
+                  <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
+                    isRevealed && hasInput
+                      ? isMatch ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                      : 'bg-blue-100 text-blue-700'
+                  }`}>
+                    {isRevealed && hasInput
+                      ? isMatch ? <CheckCircle size={18} /> : <XCircle size={18} />
+                      : idx + 1
+                    }
                   </span>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-800">
+                      {item.questionLatex ? <Math tex={item.questionLatex} /> : item.question}
+                    </p>
+                  </div>
                 </div>
-              )}
-            </div>
-          ))}
+
+                {/* Input area */}
+                <div className="px-5 pb-3">
+                  <MathInput
+                    value={userAnswers[idx] || ''}
+                    onChange={(latex) => setUserAnswers((prev) => ({ ...prev, [idx]: latex }))}
+                    placeholder="点击输入你的答案..."
+                    className="w-full"
+                  />
+                </div>
+
+                {/* Answer toggle */}
+                <div className="px-5 pb-4">
+                  <button
+                    onClick={() => toggleReveal(idx)}
+                    className={`text-sm font-medium cursor-pointer transition-colors ${
+                      isRevealed ? 'text-gray-400 hover:text-gray-600' : 'text-blue-500 hover:text-blue-700'
+                    }`}
+                  >
+                    {isRevealed ? '收起答案 ▲' : '查看答案 ▼'}
+                  </button>
+                </div>
+
+                {/* Answer reveal */}
+                {isRevealed && (
+                  <div className={`px-5 py-4 border-t ${isMatch ? 'bg-green-50 border-green-100' : 'bg-amber-50 border-amber-100'}`}>
+                    <p className="text-sm text-gray-700">
+                      <strong>答案：</strong>
+                      {item.answerLatex ? <Math tex={item.answerLatex} /> : <strong>{item.answer}</strong>}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
