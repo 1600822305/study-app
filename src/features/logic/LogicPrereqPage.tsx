@@ -64,33 +64,29 @@ export function LogicPrereqPage() {
               <p className="font-bold mb-3">用数轴比较区间大小</p>
               <p className="mb-3">A = (2, 5)，B = (1, 6)，谁包含谁？</p>
 
-              {/* 数轴图解 */}
-              <div className="bg-white rounded-lg p-4 space-y-4">
-                {/* 数轴刻度 */}
-                <div className="relative h-6">
-                  <div className="absolute top-1/2 left-[10%] right-[10%] h-[2px] bg-gray-300" />
+              {/* 数轴图解 - 盖子样式 */}
+              <div className="bg-white rounded-lg px-5 pt-2 pb-4">
+                {/* B 盖子（上方大弧） */}
+                <div className="relative h-10 mx-6">
+                  <div className="absolute bottom-0 border-t-[3px] border-l-[3px] border-r-[3px] border-blue-500 rounded-t-lg" style={{ left: `${1 * (100 / 7)}%`, right: `${100 - 6 * (100 / 7)}%`, height: '100%' }} />
+                  <span className="absolute top-0 text-sm font-bold text-blue-600" style={{ left: `${3.5 * (100 / 7)}%`, transform: 'translateX(-50%)' }}>B = (1, 6)</span>
+                </div>
+
+                {/* 数轴 */}
+                <div className="relative h-8 mx-6 my-1">
+                  <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gray-400" />
                   {[0, 1, 2, 3, 4, 5, 6, 7].map((n) => (
-                    <div key={n} className="absolute top-1/2 -translate-y-1/2 flex flex-col items-center" style={{ left: `${10 + n * (80 / 7)}%` }}>
-                      <div className="w-[1px] h-2 bg-gray-400" />
-                      <span className="text-[10px] text-gray-500 mt-1">{n}</span>
+                    <div key={n} className="absolute top-1/2 flex flex-col items-center" style={{ left: `${n * (100 / 7)}%`, transform: 'translateX(-50%)' }}>
+                      <div className="w-[1.5px] h-3 bg-gray-500 -translate-y-1/2" />
+                      <span className="text-sm font-medium text-gray-600 mt-2">{n}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* B 区间 (1, 6) - 蓝色，在下面 */}
-                <div className="relative h-7">
-                  <div className="absolute top-1/2 -translate-y-1/2 h-3 bg-blue-100 border-y border-blue-300 rounded-sm" style={{ left: `${10 + 1 * (80 / 7)}%`, right: `${100 - 10 - 6 * (80 / 7)}%` }} />
-                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-blue-500 bg-white" style={{ left: `${10 + 1 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
-                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-blue-500 bg-white" style={{ left: `${10 + 6 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
-                  <span className="absolute -left-1 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600">B</span>
-                </div>
-
-                {/* A 区间 (2, 5) - 红色，在上面 */}
-                <div className="relative h-7">
-                  <div className="absolute top-1/2 -translate-y-1/2 h-3 bg-red-100 border-y border-red-300 rounded-sm" style={{ left: `${10 + 2 * (80 / 7)}%`, right: `${100 - 10 - 5 * (80 / 7)}%` }} />
-                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-red-500 bg-white" style={{ left: `${10 + 2 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
-                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-red-500 bg-white" style={{ left: `${10 + 5 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
-                  <span className="absolute -left-1 top-1/2 -translate-y-1/2 text-xs font-bold text-red-600">A</span>
+                {/* A 盖子（下方小弧，翻转） */}
+                <div className="relative h-10 mx-6">
+                  <div className="absolute top-0 border-b-[3px] border-l-[3px] border-r-[3px] border-red-500 rounded-b-lg" style={{ left: `${2 * (100 / 7)}%`, right: `${100 - 5 * (100 / 7)}%`, height: '100%' }} />
+                  <span className="absolute bottom-0 text-sm font-bold text-red-600" style={{ left: `${3.5 * (100 / 7)}%`, transform: 'translateX(-50%)' }}>A = (2, 5)</span>
                 </div>
               </div>
 
