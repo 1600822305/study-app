@@ -1099,19 +1099,19 @@ export function SetsPage() {
             <Collapsible title="七、解题核心技巧" defaultOpen storageKey="sets:techniques" headerExtra={<SpeakButton text={setsNarrations.techniques} />}>
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="font-bold text-blue-800 mb-2">技巧一：数轴法（最常用）</p>
+                  <p className="font-bold text-blue-800 mb-2">技巧一：数轴法（最常用）<span className="ml-2 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
                   <p className="text-blue-700">遇到不等式集合 → 画数轴 → 看重叠（交集）/ 合起来（并集）/ 剩下的（补集）</p>
                 </div>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="font-bold text-blue-800 mb-2">技巧二：方程型先解方程</p>
+                  <p className="font-bold text-blue-800 mb-2">技巧二：方程型先解方程 <span className="ml-1 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
                   <p className="text-blue-700"><Math tex="\{x \mid x^2 - 3x + 2 = 0\}" /> → 先解出 x=1, x=2 → <Math tex="\{1, 2\}" /></p>
                 </div>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="font-bold text-blue-800 mb-2">技巧三：子集问题别忘空集</p>
+                  <p className="font-bold text-blue-800 mb-2">技巧三：子集问题别忘空集 <span className="ml-1 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
                   <p className="text-blue-700">"若 A ⊆ B" → 分两种：A = ∅ 和 A ≠ ∅</p>
                 </div>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <p className="font-bold text-blue-800 mb-2">技巧四：含参数问题的等价转换</p>
+                  <p className="font-bold text-blue-800 mb-2">技巧四：含参数问题的等价转换 <span className="ml-1 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
                   <div className="text-blue-700 space-y-1">
                     <p>"<Math tex="A \cap B = \varnothing" />" → A 和 B 在数轴上完全分开</p>
                     <p>"<Math tex="A \cap B = A" />" → 等价于 <Math tex="A \subseteq B" /></p>
@@ -1119,7 +1119,7 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                <Collapsible title="技巧五：集合相等 A=B → 元素一一对应（高考填空高频）" storageKey="sets:technique-equal">
+                <Collapsible title="技巧五：集合相等 A=B → 元素一一对应（拓展提高）" storageKey="sets:technique-equal">
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                       <p className="font-bold text-blue-800">核心思路</p>
@@ -1157,7 +1157,7 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
-                <Collapsible title="进阶挑战：含参集合 + 分类讨论（99%的人会错！）" storageKey="sets:technique-advanced">
+                <Collapsible title="进阶挑战：含参集合 + 分类讨论（拓展 · 高考选择题不考这么难）" storageKey="sets:technique-advanced">
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="bg-red-50 border border-red-200 rounded-lg p-3">
                       <p className="font-bold text-red-800">为什么难？</p>
