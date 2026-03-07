@@ -53,11 +53,11 @@ export function LogicPrereqPage() {
           <div className="space-y-3 text-sm text-gray-700">
             <p>充分必要条件的判断，本质就是<strong>比较两个集合的大小</strong>。</p>
 
-            <div className="bg-gray-50 rounded-lg p-4 space-y-1">
+            <div className="bg-gray-50 rounded-lg p-4 space-y-2">
               <p className="font-bold mb-2">子集回顾</p>
-              <p><Math tex="A \subseteq B" /> → A 里的每个元素都在 B 里</p>
-              <p><Math tex="A \subset B" /> → A 是 B 的真子集（A 被 B 包含，且 A ≠ B）</p>
-              <p><Math tex="A = B" /> → 两个集合完全相同</p>
+              <p>如果 A 里的每个元素<strong>都能在 B 里找到</strong>，就说 A 是 B 的子集，写作 <Math tex="A \subseteq B" /></p>
+              <p>如果 A 是 B 的子集，而且 A 和 B <strong>不完全一样</strong>（B 比 A 多东西），就叫真子集，写作 <Math tex="A \subset B" /></p>
+              <p>如果两个集合的元素<strong>完全相同</strong>，就是相等，写作 <Math tex="A = B" /></p>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4">
