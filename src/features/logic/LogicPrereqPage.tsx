@@ -145,16 +145,25 @@ export function LogicPrereqPage() {
 
             <div>
               <p className="font-bold mb-2">绝对值不等式速查</p>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
+                <p className="font-bold text-blue-800 mb-1">先搞清楚：|x| 是什么？</p>
+                <p className="text-blue-700"><Math tex="|x|" /> 就是 x <strong>到 0 的距离</strong>，永远是正数或零。</p>
+                <p className="text-blue-700 mt-1">比如 <Math tex="|3| = 3" />，<Math tex="|-3| = 3" />（不管正负，距离都是 3）</p>
+                <p className="text-blue-700 mt-2">所以 <Math tex="|x| < 3" /> 的意思就是：x 到 0 的距离<strong>不超过 3</strong> → x 在 -3 到 3 之间</p>
+                <p className="text-blue-700"><Math tex="|x| > 3" /> 的意思就是：x 到 0 的距离<strong>超过 3</strong> → x 在 -3 左边或 3 右边</p>
+              </div>
+
               <div className="bg-gray-50 rounded-lg p-4 space-y-1">
-                <p><Math tex="|x| < a \;\Rightarrow\; -a < x < a" /></p>
-                <p><Math tex="|x| > a \;\Rightarrow\; x < -a \text{ 或 } x > a" /></p>
-                <p><Math tex="|x - b| < a \;\Rightarrow\; b - a < x < b + a" /></p>
+                <p><Math tex="|x| < a \;\Rightarrow\; -a < x < a" />（距离不超过 a → 夹在中间）</p>
+                <p><Math tex="|x| > a \;\Rightarrow\; x < -a \text{ 或 } x > a" />（距离超过 a → 在两边）</p>
+                <p className="mt-2 pt-2 border-t border-gray-200"><Math tex="|x - b| < a" /> 就是 x 到 <strong>b</strong> 的距离不超过 a → <Math tex="b - a < x < b + a" /></p>
               </div>
               <p className="mt-2 text-gray-600">口诀：<strong>小于取中间，大于取两边</strong>（和二次不等式一样！）</p>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-3">
-              <p className="font-bold text-gray-800 mb-1">例：<Math tex="|x - 1| < 3" /></p>
+              <p className="font-bold text-gray-800 mb-1">例：<Math tex="|x - 1| < 3" />（x 到 1 的距离不超过 3）</p>
               <p><Math tex="1 - 3 < x < 1 + 3 \;\Rightarrow\; -2 < x < 4" /></p>
             </div>
 
