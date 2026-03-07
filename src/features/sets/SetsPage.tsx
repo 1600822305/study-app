@@ -38,6 +38,37 @@ export function SetsPage() {
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Main content */}
         <div className="flex-1 min-w-0">
+          {/* 符号速查 */}
+          <section className="mb-6">
+            <Collapsible title="📖 符号速查卡（看不懂符号先看这里）" storageKey="sets:symbols" defaultOpen={false}>
+              <div className="space-y-3 text-sm text-gray-700">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="font-bold text-blue-800 mb-3">集合里会用到的所有符号，一次搞定：</p>
+                  <div className="grid grid-cols-[auto_auto_1fr] gap-x-4 gap-y-2">
+                    <Math tex="\in" /><span className="font-bold">属于</span><span className="text-gray-600">元素在集合里：<Math tex="3 \in \{1,2,3\}" /></span>
+                    <Math tex="\notin" /><span className="font-bold">不属于</span><span className="text-gray-600">元素不在集合里：<Math tex="4 \notin \{1,2,3\}" /></span>
+                    <Math tex="\subseteq" /><span className="font-bold">子集</span><span className="text-gray-600">A 全在 B 里面：<Math tex="\{1,2\} \subseteq \{1,2,3\}" /></span>
+                    <Math tex="\subsetneq" /><span className="font-bold">真子集</span><span className="text-gray-600">A 在 B 里面，但 A ≠ B</span>
+                    <Math tex="\cap" /><span className="font-bold">交集</span><span className="text-gray-600">两个都有的部分</span>
+                    <Math tex="\cup" /><span className="font-bold">并集</span><span className="text-gray-600">合在一起（去重）</span>
+                    <Math tex="\complement_U A" /><span className="font-bold">补集</span><span className="text-gray-600">全集 U 里去掉 A 剩下的</span>
+                    <Math tex="\varnothing" /><span className="font-bold">空集</span><span className="text-gray-600">什么都没有的集合</span>
+                    <Math tex="\mathbb{R}" /><span className="font-bold">实数集</span><span className="text-gray-600">所有实数</span>
+                    <Math tex="\mathbb{Z}" /><span className="font-bold">整数集</span><span className="text-gray-600">…-2, -1, 0, 1, 2…</span>
+                    <Math tex="\mathbb{N}" /><span className="font-bold">自然数集</span><span className="text-gray-600">0, 1, 2, 3…</span>
+                    <Math tex="\mathbb{N}^*" /><span className="font-bold">正整数集</span><span className="text-gray-600">1, 2, 3…（不含 0）</span>
+                    <Math tex="\mathbb{Q}" /><span className="font-bold">有理数集</span><span className="text-gray-600">整数和分数</span>
+                    <Math tex="\{x \mid \ldots\}" /><span className="font-bold">描述法</span><span className="text-gray-600">竖线读作"满足"：满足…条件的 x</span>
+                  </div>
+                </div>
+                <div className="bg-[#F5E6D3] rounded-xl p-4">
+                  <p className="font-bold text-[#7A5C3E] mb-1">不用死记！</p>
+                  <p className="text-[#7A5C3E]">后面每个章节用到新符号时都会<strong>重新解释</strong>。这张表随时可以回来翻。</p>
+                </div>
+              </div>
+            </Collapsible>
+          </section>
+
           {/* Section 1: 集合是什么 */}
           <section className="mb-6">
             <Collapsible title="一、集合是什么？" defaultOpen storageKey="sets:what-is-set" headerExtra={<SpeakButton text={setsNarrations.whatIsSet} />}>
