@@ -112,7 +112,9 @@ export function SetsPrereqPage() {
         </div>
       </div>
 
-      <ProgressTracker items={progressItems} onToggle={toggleProgress} />
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Main content */}
+        <div className="flex-1 min-w-0">
 
       {/* Section 1: Solving Quadratic Equations */}
       <section className="mb-6">
@@ -381,6 +383,15 @@ export function SetsPrereqPage() {
         </h2>
         <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="8道选择题，检验解方程、解不等式、区间表示是否过关" />
       </section>
+        </div>
+
+        {/* Sidebar: Progress */}
+        <div className="lg:w-72 shrink-0">
+          <div className="lg:sticky lg:top-6">
+            <ProgressTracker items={progressItems} onToggle={toggleProgress} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
