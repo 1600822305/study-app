@@ -209,7 +209,7 @@ export const setsQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'a > -2', isLatex: true },
     ],
     correctAnswer: 'a \\geq 4',
-    explanation: 'A⊆B 意味着 A 的所有元素都在 B 里。A 的右端点是 4（不含），B 要把 4 也"罩住"，所以 a ≥ 4。',
+    explanation: 'A⊆B = A 要完全在 B 里面。A 最大到 4（不含），B = (-∞, a) 要把 A 全包住，a 至少取 4。比如 a=3 时 B 太小包不住，a=4 或 a=100 都行。',
     explanationLatex:
       'A=(-2,4),\\; B=(-\\infty,a) \\quad A \\subseteq B \\Leftrightarrow a \\geq 4',
     explanationDiagram: 'subset-number-line',
