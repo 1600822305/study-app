@@ -197,4 +197,50 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     explanationLatex:
       'A=[-1,3],\\; B=[a,+\\infty) \\quad A \\cap B \\neq \\varnothing \\Leftrightarrow a \\leq 3',
   },
+  {
+    id: 'sq14',
+    question: '',
+    questionLatex:
+      'A = \\{x \\mid -2 < x < 4\\},\\; B = \\{x \\mid x < a\\},\\; A \\subseteq B,\\; \\text{则 a 的范围是}',
+    options: [
+      { label: 'A', value: 'a \\geq 4', isLatex: true },
+      { label: 'B', value: 'a > 4', isLatex: true },
+      { label: 'C', value: 'a \\geq -2', isLatex: true },
+      { label: 'D', value: 'a > -2', isLatex: true },
+    ],
+    correctAnswer: 'a \\geq 4',
+    explanation: 'A⊆B 意味着 A 的所有元素都在 B 里。A 的右端点是 4（不含），B 要把 4 也"罩住"，所以 a ≥ 4。',
+    explanationLatex:
+      'A=(-2,4),\\; B=(-\\infty,a) \\quad A \\subseteq B \\Leftrightarrow a \\geq 4',
+  },
+  {
+    id: 'sq15',
+    question: '',
+    questionLatex:
+      'U = \\mathbb{R},\\; A = \\{x \\mid x \\leq 1\\},\\; B = \\{x \\mid x > -2\\},\\; \\complement_U(A \\cup B) =',
+    options: [
+      { label: 'A', value: '\\varnothing', isLatex: true },
+      { label: 'B', value: '\\{x \\mid x > 1\\}', isLatex: true },
+      { label: 'C', value: '\\{x \\mid -2 < x \\leq 1\\}', isLatex: true },
+      { label: 'D', value: '\\{x \\mid x \\leq -2\\}', isLatex: true },
+    ],
+    correctAnswer: '\\varnothing',
+    explanation: 'A∪B = (-∞,1] ∪ (-2,+∞) = ℝ（全覆盖了），所以补集 = ∅。',
+    explanationLatex:
+      'A \\cup B = (-\\infty,1] \\cup (-2,+\\infty) = \\mathbb{R} \\quad \\complement_U(A \\cup B) = \\varnothing',
+  },
+  {
+    id: 'sq16',
+    question: '某班 50 人，参加数学兴趣小组 30 人，参加物理兴趣小组 25 人，两个都参加的有 15 人，则两个都没参加的人数为',
+    options: [
+      { label: 'A', value: '5' },
+      { label: 'B', value: '10' },
+      { label: 'C', value: '15' },
+      { label: 'D', value: '20' },
+    ],
+    correctAnswer: '10',
+    explanation: '容斥原理：|A∪B| = |A| + |B| - |A∩B| = 30 + 25 - 15 = 40，都没参加 = 50 - 40 = 10。',
+    explanationLatex:
+      '|A \\cup B| = 30 + 25 - 15 = 40 \\quad \\text{都没参加} = 50 - 40 = 10',
+  },
 ];
