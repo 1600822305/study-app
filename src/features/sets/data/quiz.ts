@@ -36,7 +36,7 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     id: 'sq3',
     question: '（2022·新高考Ⅰ卷）已知 U = R，',
     questionLatex:
-      'A = \\{x \\mid x^2 - x - 2 \\geq 0\\},\\; \\complement_U A =',
+      'U = \\mathbb{R},\\; A = \\{x \\mid x^2 - x - 2 \\geq 0\\},\\; \\complement_U A =',
     options: [
       { label: 'A', value: '\\{x \\mid -1 < x < 2\\}', isLatex: true },
       { label: 'B', value: '\\{x \\mid -1 \\leq x \\leq 2\\}', isLatex: true },
@@ -50,9 +50,9 @@ export const setsQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'sq4',
-    question: '（2021·新高考Ⅰ卷）已知 U = R，A = {x | x < 2}，B = {x | 0 ≤ x ≤ 3}，则',
+    question: '（2021·新高考Ⅰ卷）',
     questionLatex:
-      'A \\cap (\\complement_U B) =',
+      'U = \\mathbb{R},\\; A = \\{x \\mid x < 2\\},\\; B = \\{x \\mid 0 \\leq x \\leq 3\\},\\; A \\cap (\\complement_U B) =',
     options: [
       { label: 'A', value: '\\{x \\mid x < 0\\}', isLatex: true },
       { label: 'B', value: '\\{x \\mid x < 2\\}', isLatex: true },
@@ -82,8 +82,8 @@ export const setsQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'sq6',
-    question: '已知 U = {1, 2, 3, 4, 5}，A = {1, 3, 5}，B = {2, 4}，则',
-    questionLatex: '(\\complement_U A) \\cup B =',
+    question: '',
+    questionLatex: 'U = \\{1,2,3,4,5\\},\\; A = \\{1,3,5\\},\\; B = \\{2,4\\},\\; (\\complement_U A) \\cup B =',
     options: [
       { label: 'A', value: '\\{2, 4\\}', isLatex: true },
       { label: 'B', value: '\\{1, 3, 5\\}', isLatex: true },
