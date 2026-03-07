@@ -661,55 +661,64 @@ export function SetsPage() {
                       </div>
                     </div>
 
-                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 space-y-4">
+                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 space-y-3">
                       <p className="font-bold text-purple-800">🧠 德摩根定律（混合运算的捷径）</p>
-
-                      <div className="bg-white rounded-lg p-3 border border-purple-200">
-                        <p className="text-xs text-purple-500 font-bold mb-2">生活类比秒懂：</p>
-                        <div className="space-y-2 text-sm text-purple-700">
-                          <p>「<strong>不</strong>(既会游泳<strong>且</strong>会骑车)的人」= 「<strong>不</strong>会游泳 <strong>或</strong> <strong>不</strong>会骑车的人」</p>
-                          <p className="text-xs text-purple-400 pl-4">→ 不是两样都会 = 至少有一样不会</p>
-                          <p>「<strong>不</strong>(会游泳<strong>或</strong>会骑车)的人」= 「<strong>不</strong>会游泳 <strong>且</strong> <strong>不</strong>会骑车的人」</p>
-                          <p className="text-xs text-purple-400 pl-4">→ 两样都不会 = 一样都不会</p>
-                        </div>
+                      <div className="space-y-2 text-sm text-purple-700">
+                        <p>「<strong>不</strong>(既会游泳<strong>且</strong>会骑车)的人」= 「<strong>不</strong>会游泳 <strong>或</strong> <strong>不</strong>会骑车的人」</p>
+                        <p>「<strong>不</strong>(会游泳<strong>或</strong>会骑车)的人」= 「<strong>不</strong>会游泳 <strong>且</strong> <strong>不</strong>会骑车的人」</p>
                       </div>
-
                       <div className="space-y-2 text-purple-700">
-                        <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /></p>
-                        <p className="text-xs text-purple-500 pl-4">补「交」= 补的「并」（∩ 变 ∪）</p>
-                        <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /></p>
-                        <p className="text-xs text-purple-500 pl-4">补「并」= 补的「交」（∪ 变 ∩）</p>
+                        <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /> <span className="text-xs text-purple-500">∩ 变 ∪</span></p>
+                        <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /> <span className="text-xs text-purple-500">∪ 变 ∩</span></p>
                       </div>
+                      <p className="text-purple-600 text-sm">口诀：<strong>补穿入，交并换</strong>（补号穿进括号，∩ 和 ∪ 互换）</p>
+                    </div>
 
-                      <div className="bg-purple-100 rounded-lg p-3 text-center">
-                        <p className="font-bold text-purple-800 text-sm">三字口诀：<strong className="text-lg">补穿入，交并换</strong></p>
-                        <p className="text-xs text-purple-600 mt-1">补号像炸弹💣穿进括号，把 ∩ 和 ∪ 炸反了</p>
-                      </div>
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <p className="font-bold text-gray-800 mb-1">实战演练：U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
+                      <p className="text-xs text-gray-500"><Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125;</p>
+                    </div>
 
-                      <div className="space-y-3">
-                        <p className="font-bold text-purple-800">实战演练：U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
-                        <p className="text-xs text-purple-500">先算好：<Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125;</p>
-                      </div>
-
-                      <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-2">
-                        <p className="font-bold text-green-800">① <Math tex="\complement_U(A \cup B)" />　→　补「并」变补的「交」</p>
-                        <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
-                          <span className="text-green-600 font-bold">常规：</span>
-                          <span>A ∪ B = &#123;1,2,3,4&#125; → 补集 = <strong>&#123;5, 6&#125;</strong></span>
-                          <span className="text-green-600 font-bold">捷径：</span>
-                          <span>&#123;4,5,6&#125; <Math tex="\cap" /> &#123;1,5,6&#125; = <strong>&#123;5, 6&#125;</strong> ✓</span>
-                        </div>
-                      </div>
-
-                      <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 space-y-2">
-                        <p className="font-bold text-orange-800">② <Math tex="\complement_U(A \cap B)" />　→　补「交」变补的「并」</p>
-                        <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
-                          <span className="text-orange-600 font-bold">常规：</span>
-                          <span>A ∩ B = &#123;2,3&#125; → 补集 = <strong>&#123;1, 4, 5, 6&#125;</strong></span>
-                          <span className="text-orange-600 font-bold">捷径：</span>
-                          <span>&#123;4,5,6&#125; <Math tex="\cup" /> &#123;1,5,6&#125; = <strong>&#123;1, 4, 5, 6&#125;</strong> ✓</span>
-                        </div>
-                      </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm border-collapse">
+                        <thead>
+                          <tr>
+                            <th className="border border-gray-200 bg-gray-100 px-3 py-2 text-center w-1/4">题目</th>
+                            <th className="border border-gray-200 bg-blue-50 px-3 py-2 text-center text-blue-700 w-[37.5%]">常规做法</th>
+                            <th className="border border-gray-200 bg-purple-50 px-3 py-2 text-center text-purple-700 w-[37.5%]">德摩根捷径</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border border-gray-200 px-3 py-3 text-center align-top">
+                              <p className="font-bold"><Math tex="\complement_U(A \cup B)" /></p>
+                              <p className="text-xs text-gray-400 mt-1">补「并」→「交」</p>
+                            </td>
+                            <td className="border border-gray-200 px-3 py-3 bg-blue-50/50 align-top">
+                              <p>A ∪ B = &#123;1,2,3,4&#125;</p>
+                              <p className="mt-1">补集 = <strong>&#123;5, 6&#125;</strong></p>
+                            </td>
+                            <td className="border border-gray-200 px-3 py-3 bg-purple-50/50 align-top">
+                              <p>&#123;4,5,6&#125; ∩ &#123;1,5,6&#125;</p>
+                              <p className="mt-1">= <strong>&#123;5, 6&#125;</strong> ✓</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-200 px-3 py-3 text-center align-top">
+                              <p className="font-bold"><Math tex="\complement_U(A \cap B)" /></p>
+                              <p className="text-xs text-gray-400 mt-1">补「交」→「并」</p>
+                            </td>
+                            <td className="border border-gray-200 px-3 py-3 bg-blue-50/50 align-top">
+                              <p>A ∩ B = &#123;2,3&#125;</p>
+                              <p className="mt-1">补集 = <strong>&#123;1,4,5,6&#125;</strong></p>
+                            </td>
+                            <td className="border border-gray-200 px-3 py-3 bg-purple-50/50 align-top">
+                              <p>&#123;4,5,6&#125; ∪ &#123;1,5,6&#125;</p>
+                              <p className="mt-1">= <strong>&#123;1,4,5,6&#125;</strong> ✓</p>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </Collapsible>
