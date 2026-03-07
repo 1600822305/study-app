@@ -40,7 +40,7 @@ export function SetsPrereqPage() {
           <p>二、解一元二次不等式（大于取两边，小于取中间）</p>
           <p>三、数轴的使用（○ 和 ●）</p>
           <p>四、区间表示法（开闭区间 + ∞）</p>
-          <p>五、选择题自测（13题）</p>
+          <p>五、选择题自测（16题）</p>
         </div>
       </div>
 
@@ -619,7 +619,7 @@ export function SetsPrereqPage() {
           </span>
           选择题自测
         </h2>
-        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="13道选择题，检验解方程、解不等式、区间表示、数轴是否过关" />
+        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="16道选择题，覆盖解方程、解不等式、区间表示、数轴全部知识点" />
       </section>
         </div>
 
