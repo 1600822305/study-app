@@ -284,6 +284,21 @@ export function SetsPage() {
                   </table>
                 </div>
 
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                  <p className="font-bold text-purple-800 mb-2">🧠 记忆口诀：「N 自然，Z 整数，Q 商（分数），R 实数」</p>
+                  <div className="space-y-1 text-sm text-purple-700">
+                    <p><strong>N</strong> = <strong>N</strong>atural → 自然数（含 0）。N 加星号 <Math tex="\mathbb{N}^*" /> 去掉 0</p>
+                    <p><strong>Z</strong> = 德语 <strong>Z</strong>ahlen（数）→ 整数。记法：<strong>Z = 整(Zhěng)</strong> 的拼音首字母</p>
+                    <p><strong>Q</strong> = <strong>Q</strong>uotient（商）→ 有理数 = 能写成分数的数</p>
+                    <p><strong>R</strong> = <strong>R</strong>eal → 实数 = 数轴上所有的点</p>
+                  </div>
+                  <div className="mt-3 bg-purple-100 rounded-lg p-3">
+                    <p className="font-bold text-purple-800 text-xs mb-1">包含关系（从小到大，一层套一层）：</p>
+                    <p className="text-center text-purple-700 font-mono"><Math tex="\mathbb{N}^* \subset \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}" /></p>
+                    <p className="text-xs text-purple-600 text-center mt-1">口诀：<strong>正→自→整→有→实</strong>，每一层都包含前面所有的</p>
+                  </div>
+                </div>
+
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
                   <div className="flex items-start gap-2">
                     <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
