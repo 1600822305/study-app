@@ -180,11 +180,10 @@ export function QuizPanel({ module, questions, title = '自测', description }: 
                 return (
                   <div key={wa.questionId} className="bg-red-50 border border-red-200 rounded-lg p-3">
                     <p className="text-sm font-medium text-gray-800 mb-1">
-                      {q.question}
-                      {q.questionLatex && (
-                        <span className="ml-1">
-                          <MathTex tex={q.questionLatex} />
-                        </span>
+                      {q.questionLatex ? (
+                        <MathTex tex={q.questionLatex} />
+                      ) : (
+                        q.question
                       )}
                     </p>
                     <p className="text-xs text-red-600">
@@ -258,11 +257,10 @@ export function QuizPanel({ module, questions, title = '自测', description }: 
         )}
 
         <p className="text-gray-800 font-medium mb-4">
-          {current.question}
-          {current.questionLatex && (
-            <span className="ml-2">
-              <MathTex tex={current.questionLatex} />
-            </span>
+          {current.questionLatex ? (
+            <MathTex tex={current.questionLatex} />
+          ) : (
+            current.question
           )}
         </p>
 
