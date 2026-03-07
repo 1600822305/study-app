@@ -1156,6 +1156,53 @@ export function SetsPage() {
                     </div>
                   </div>
                 </Collapsible>
+
+                <Collapsible title="进阶挑战：含参集合 + 分类讨论（99%的人会错！）" storageKey="sets:technique-advanced">
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                      <p className="font-bold text-red-800">为什么难？</p>
+                      <p className="text-red-700">方程的解的<strong>个数不确定</strong> → 集合的元素个数不确定 → 必须<strong>分类讨论</strong></p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                      <p className="font-bold text-gray-800">例：集合 <Math tex="M = \{x \mid (x-a)(x^2 - ax + a - 1) = 0\}" />，各元素之和为 3，求 a</p>
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-3 text-sm">
+                        <div>
+                          <p className="text-blue-600 font-bold">第①步：因式分解，找出所有根</p>
+                          <p className="text-gray-700 mt-1"><Math tex="x^2 - ax + a - 1 = (x-1)(x-a+1)" /></p>
+                          <p className="text-gray-700">所以方程变为 <Math tex="(x-a)(x-1)(x-a+1) = 0" /></p>
+                          <p className="text-gray-700">三个根：<Math tex="x = a,\; x = 1,\; x = a-1" /></p>
+                        </div>
+                        <div>
+                          <p className="text-blue-600 font-bold">第②步：分类讨论（根据根是否重复）</p>
+
+                          <div className="bg-white rounded-lg p-3 border mt-1 space-y-3">
+                            <div>
+                              <p className="font-bold text-purple-700">情况一：三个根互不相同（a ≠ 1 且 a ≠ 2）</p>
+                              <p className="text-gray-700">M = &#123;a, 1, a-1&#125;，元素和 = a + 1 + (a-1) = 2a = 3</p>
+                              <p className="text-gray-700">→ <strong>a = 3/2</strong>　验证：M = &#123;3/2, 1, 1/2&#125;，全不重复 ✓</p>
+                            </div>
+                            <div>
+                              <p className="font-bold text-purple-700">情况二：a = 1（则 a 和 1 重合）</p>
+                              <p className="text-gray-700">M = &#123;1, 0&#125;，元素和 = 1 ✗</p>
+                            </div>
+                            <div>
+                              <p className="font-bold text-purple-700">情况三：a = 2（则 1 和 a-1=1 重合）</p>
+                              <p className="text-gray-700">M = &#123;2, 1&#125;，元素和 = 3 ✓ → <strong>a = 2</strong></p>
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-gray-800 font-bold">答案：<Math tex="a = \dfrac{3}{2}" /> 或 <Math tex="a = 2" /></p>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#F5E6D3] rounded-xl p-3 text-sm space-y-1">
+                      <p className="font-bold text-[#7A5C3E]">为什么 99% 的人错？</p>
+                      <p className="text-[#9A7B5B]">大多数人只算出 a = 3/2 就结束了，<strong>忘了讨论根重合的情况</strong>！</p>
+                      <p className="text-[#9A7B5B]">→ <strong>含参集合必须分类讨论：先假设所有根不同解出来，再逐一检查根重合的可能！</strong></p>
+                    </div>
+                  </div>
+                </Collapsible>
               </div>
             </Collapsible>
           </section>
@@ -1217,7 +1264,7 @@ export function SetsPage() {
               </span>
               高考真题实战
             </h2>
-            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="21道选择题，覆盖高考集合全部题型" />
+            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="22道选择题，覆盖高考集合全部题型" />
           </section>
 
           {/* Section 9: 知识总结卡片 */}

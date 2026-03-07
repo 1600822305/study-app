@@ -322,4 +322,20 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     explanationLatex:
       'b=0,\\; a^2=1 \\Rightarrow a=1\\;(a=-1\\text{ 时 }A\\text{ 有重复}) \\quad 1^{2025}+0^{2025}=1',
   },
+  {
+    id: 'sq22',
+    question: '已知集合',
+    questionLatex:
+      'M = \\{x \\mid (x-a)(x^2 - ax + a - 1) = 0\\},\\; \\text{各元素之和为 3，则 a 的所有可能值为}',
+    options: [
+      { label: 'A', value: '\\dfrac{3}{2}', isLatex: true },
+      { label: 'B', value: '2', isLatex: false },
+      { label: 'C', value: '\\dfrac{3}{2} \\text{ 或 } 2', isLatex: true },
+      { label: 'D', value: '1 \\text{ 或 } \\dfrac{3}{2}', isLatex: true },
+    ],
+    correctAnswer: '\\dfrac{3}{2} \\text{ 或 } 2',
+    explanation: '先因式分解：x²-ax+a-1 = (x-1)(x-a+1)，三个根为 a, 1, a-1。当三根不同时 2a=3 → a=3/2；当 a=2 时 1 和 a-1 重合，M={2,1}，和=3 也满足。',
+    explanationLatex:
+      '(x-a)(x-1)(x-a+1)=0 \\quad \\text{根不同: } 2a=3 \\Rightarrow a=\\tfrac{3}{2} \\quad a=2\\text{ 时 }M=\\{2,1\\},\\text{和}=3\\;\\checkmark',
+  },
 ];
