@@ -530,6 +530,7 @@ export function SetsPrereqPage() {
                 <div className="rounded-lg overflow-hidden border border-gray-200">
                   <Mafs viewBox={{ x: [-4, 6], y: [-0.8, 0.8], padding: 0 }} preserveAspectRatio={false} height={70}>
                     <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={false} />
+                    <MafsText x={0} y={-0.45} size={12}>0</MafsText>
                     <Line.Segment point1={[2, 0]} point2={[6, 0]} color="#3b82f6" weight={4} />
                     <Point x={2} y={0} color="white" />
                     <MafsText x={2} y={0.5} size={12}>○ 不含</MafsText>
@@ -541,6 +542,7 @@ export function SetsPrereqPage() {
                 <div className="rounded-lg overflow-hidden border border-gray-200">
                   <Mafs viewBox={{ x: [-4, 6], y: [-0.8, 0.8], padding: 0 }} preserveAspectRatio={false} height={70}>
                     <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={false} />
+                    <MafsText x={0} y={-0.45} size={12}>0</MafsText>
                     <Line.Segment point1={[-1, 0]} point2={[3, 0]} color="#ef4444" weight={4} />
                     <Point x={-1} y={0} color="white" />
                     <Point x={3} y={0} color="#ef4444" />
