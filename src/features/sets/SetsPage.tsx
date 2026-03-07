@@ -608,11 +608,11 @@ export function SetsPage() {
                               {/* A: x ≤ 1 */}
                               <line x1="20" y1="20" x2="220" y2="20" stroke="#3b82f6" strokeWidth="3" />
                               <circle cx="220" cy="20" r="3" fill="#3b82f6" />
-                              <text x="22" y="14" fontSize="9" fill="#3b82f6" fontWeight="bold">← A: x ≤ 1</text>
-                              {/* ∁B: x ≤ -1 */}
+                              <text x="22" y="14" fontSize="9" fill="#3b82f6" fontWeight="bold">← A : x ≤ 1</text>
+                              {/* 补B: x ≤ -1 */}
                               <line x1="20" y1="45" x2="120" y2="45" stroke="#ef4444" strokeWidth="3" />
                               <circle cx="120" cy="45" r="3" fill="#ef4444" />
-                              <text x="22" y="39" fontSize="9" fill="#ef4444" fontWeight="bold">← ∁B: x ≤ -1</text>
+                              <text x="22" y="39" fontSize="9" fill="#ef4444" fontWeight="bold">← 补B : x ≤ -1</text>
                             </svg>
                           </div>
                           <p className="pl-4">重叠部分 = <Math tex="\{x \mid x \leq -1\}" /></p>
