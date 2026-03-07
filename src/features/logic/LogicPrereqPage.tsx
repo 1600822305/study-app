@@ -191,59 +191,80 @@ export function LogicPrereqPage() {
       {/* Section 3: Basic Reasoning */}
       <section className="mb-6">
         <Collapsible title="三、基本推理能力" defaultOpen storageKey="logic-prereq:reasoning" headerExtra={<SpeakButton text={logicPrereqNarrations.reasoning} />}>
-          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：判断"p 能不能推出 q"，用举反例法或集合包含法。</p>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：3秒判断"A 能不能推出 B"。</p>
           <div className="space-y-4 text-sm text-gray-700">
+
+            {/* Step 1: 生活直觉 */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="font-bold text-blue-800 mb-2">先用生活例子理解</p>
+              <p className="text-blue-700 mb-2">"推出"就是<strong>"如果 A 成立，B 是不是一定成立？"</strong></p>
+              <div className="bg-white rounded-lg p-3 space-y-2">
+                <p>🐱 "它是猫" → "它是动物"　<strong className="text-green-600">✓ 能推出</strong>（猫一定是动物）</p>
+                <p>🐾 "它是动物" → "它是猫"　<strong className="text-red-600">✗ 推不出</strong>（狗也是动物啊）</p>
+              </div>
+              <p className="mt-3 text-blue-700">看到了吗？<strong>反过来就不成立了</strong>。这就是"推出"的核心——<strong>有方向的</strong>。</p>
+            </div>
+
+            {/* Step 2: 一句话口诀 */}
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
+              <p className="font-bold text-orange-800 text-base mb-1">判断口诀（背这一句就够了）</p>
+              <p className="text-orange-700 text-base font-bold">小范围 → 大范围：<span className="text-green-600">能推出 ✓</span></p>
+              <p className="text-orange-700 text-base font-bold">大范围 → 小范围：<span className="text-red-600">推不出 ✗</span></p>
+              <p className="text-orange-600 text-xs mt-2">（"猫"是小范围，"动物"是大范围，猫→动物 ✓，动物→猫 ✗）</p>
+            </div>
+
+            {/* Step 3: 用到数学上 */}
             <div>
-              <p className="font-bold mb-2">"推出"是什么意思？</p>
-              <div className="bg-gray-50 rounded-lg p-4 space-y-1">
-                <p><Math tex="p \Rightarrow q" /> 读作"p 推出 q"或"若 p 则 q"</p>
-                <p className="text-gray-500">意思是：只要 p 成立，q 一定成立</p>
+              <p className="font-bold mb-2">用到数学上</p>
+              <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div>
+                  <p className="font-bold text-gray-800 mb-1">例1：数字版</p>
+                  <p>"x = 2" → "x 是偶数"？</p>
+                  <p className="text-gray-500 text-xs">x=2 是小范围（只有一个数），偶数是大范围（2,4,6,8...好多个）</p>
+                  <p>小→大，<strong className="text-green-600">能推出 ✓</strong></p>
+                </div>
+                <div className="border-t border-gray-200 pt-3">
+                  <p className="font-bold text-gray-800 mb-1">例2：不等式版</p>
+                  <p>"x {'>'} 3" → "x {'>'} 1"？</p>
+                  <p className="text-gray-500 text-xs">x{'>'}3 的范围更小（3右边），x{'>'}1 的范围更大（1右边）</p>
+                  <p>小→大，<strong className="text-green-600">能推出 ✓</strong>（大于3的数当然大于1）</p>
+                </div>
+                <div className="border-t border-gray-200 pt-3">
+                  <p className="font-bold text-gray-800 mb-1">反过来呢？</p>
+                  <p>"x {'>'} 1" → "x {'>'} 3"？</p>
+                  <p>大→小，<strong className="text-red-600">推不出 ✗</strong>（x=2 大于1但不大于3）</p>
+                </div>
               </div>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="font-bold text-gray-800 mb-2">例</p>
-              <div className="space-y-1">
-                <p>"x = 2" → "x 是偶数" ✓（能推出）</p>
-                <p>"x 是偶数" → "x = 2" ✗（x=4 也是偶数，推不出）</p>
-              </div>
-            </div>
-
+            {/* Step 4: 怎么快速判断 */}
             <div>
-              <p className="font-bold mb-2">判断能否推出的方法</p>
+              <p className="font-bold mb-2">遇到题怎么判断？两个绝招</p>
               <div className="space-y-2">
                 <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800">方法1：举反例</p>
-                  <p className="text-gray-600">找到 p 成立但 q 不成立的例子 → 推不出</p>
+                  <p className="font-bold text-gray-800">绝招1：想范围大小</p>
+                  <p className="text-gray-600">谁的范围小？小的能推出大的，大的推不出小的</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800">方法2：集合包含</p>
-                  <p className="text-gray-600">p 的范围（集合A）<Math tex="\subseteq" /> q 的范围（集合B）→ 能推出</p>
+                  <p className="font-bold text-gray-800">绝招2：找反例（推不出时用）</p>
+                  <p className="text-gray-600">能找到<strong>一个</strong> A 成立但 B 不成立的例子 → 推不出</p>
+                  <p className="text-gray-500 text-xs mt-1">（比如"动物→猫"推不出，因为"狗"就是反例：狗是动物但不是猫）</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <p className="text-blue-800 text-sm">
-                <strong>核心：</strong>p 的范围 ⊆ q 的范围 → p 能推出 q（<strong>小推大能推，大推小推不出</strong>）
-              </p>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-4">
-              <p className="font-bold text-gray-800 mb-2">综合例</p>
-              <p>p: "x {'>'} 3"，q: "x {'>'} 1"</p>
-              <p className="text-gray-500 text-xs mt-1">p 的集合 = (3, +∞)，q 的集合 = (1, +∞)，p ⊂ q</p>
-              <div className="mt-2 space-y-1">
-                <p>p → q？x {'>'} 3 当然 x {'>'} 1 ✓（小范围满足大范围）</p>
-                <p>q → p？x {'>'} 1 不一定 x {'>'} 3（如 x = 2）✗</p>
-              </div>
+            {/* Step 5: 数学符号（最后才引入） */}
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="font-bold text-gray-800 mb-1">最后认识一下符号</p>
+              <p>"A 推出 B" 写成 <Math tex="A \Rightarrow B" />，读作"若 A 则 B"</p>
+              <p className="text-gray-500 text-xs mt-1">就这么简单，箭头方向就是推出方向</p>
             </div>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. p: "x = 1"，q: "x² = 1"，p→q？q→p？　答案：<strong>p→q ✓，q→p ✗</strong></p>
-              <p className="text-gray-700">2. p: "x {'>'} 5"，q: "x {'>'} 3"，p→q？　答案：<strong>✓</strong></p>
-              <p className="text-gray-700">3. p: "x² = 4"，q: "x = 2"，p→q？　答案：<strong>✗</strong>（x=-2也满足p）</p>
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习（想想范围大小就行）</p>
+              <p className="text-gray-700">1. "它是正方形" → "它是矩形"，能推出吗？　答案：<strong>✓</strong>（正方形范围更小）</p>
+              <p className="text-gray-700">2. p: "x = 1"，q: "x² = 1"，p→q？　答案：<strong>✓</strong>　q→p？　答案：<strong>✗</strong>（x=-1也满足q）</p>
+              <p className="text-gray-700">3. p: "x {'>'} 5"，q: "x {'>'} 3"，p→q？　答案：<strong>✓</strong>（小范围→大范围）</p>
             </div>
 
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
@@ -251,8 +272,8 @@ export function LogicPrereqPage() {
                 <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
                 <div className="text-amber-700 text-sm space-y-1">
                   <p className="font-bold">⚠️ 易错点</p>
-                  <p><strong>方向别搞反</strong>：p→q 问的是"p 成立时 q 是否一定成立"</p>
-                  <p>举反例只需要<strong>一个</strong>就够了，不需要列出所有反例</p>
+                  <p><strong>方向别搞反</strong>：问"A→B"就是问"A 成立时 B 是否一定成立"，不是反过来</p>
+                  <p>找反例只需要<strong>一个</strong>就够了（狗是动物但不是猫 → 一个反例搞定）</p>
                 </div>
               </div>
             </div>
