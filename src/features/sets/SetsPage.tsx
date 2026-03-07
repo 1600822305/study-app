@@ -366,6 +366,32 @@ export function SetsPage() {
                         <p>你班上的男同学 ⊆ 你班上的所有同学</p>
                       </div>
                     </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-gray-50 rounded-xl p-4">
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="A \subseteq B" />（子集）</p>
+                        <svg viewBox="0 0 180 120" className="w-full">
+                          <rect x="4" y="4" width="172" height="112" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
+                          <circle cx="90" cy="55" r="42" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" strokeWidth="1.5" />
+                          <circle cx="90" cy="62" r="22" fill="rgba(234,179,8,0.2)" stroke="#eab308" strokeWidth="1.5" />
+                          <text x="90" y="50" fontSize="13" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
+                          <text x="90" y="70" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="90" y="110" fontSize="10" fill="#6b7280" textAnchor="middle">A 完全在 B 里面</text>
+                        </svg>
+                      </div>
+                      <div className="bg-gray-50 rounded-xl p-4">
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="A \subsetneq B" />（真子集）</p>
+                        <svg viewBox="0 0 180 120" className="w-full">
+                          <rect x="4" y="4" width="172" height="112" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
+                          <circle cx="90" cy="55" r="42" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" strokeWidth="1.5" />
+                          <circle cx="90" cy="62" r="22" fill="rgba(234,179,8,0.2)" stroke="#eab308" strokeWidth="1.5" />
+                          <text x="90" y="50" fontSize="13" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
+                          <text x="90" y="70" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="135" y="45" fontSize="9" fill="#ef4444" fontWeight="bold">B 比 A 多</text>
+                          <text x="90" y="110" fontSize="10" fill="#6b7280" textAnchor="middle">A 在 B 里面，且 A ≠ B</text>
+                        </svg>
+                      </div>
+                    </div>
+
                     <div className="bg-gray-50 rounded-lg p-3 space-y-1">
                       <p><Math tex="\{1, 2\} \subseteq \{1, 2, 3\}" /> ✓（1 和 2 都在右边）</p>
                       <p><Math tex="\{1, 2, 3\} \subseteq \{1, 2, 3\}" /> ✓（<strong>完全相等也算子集</strong>）</p>
