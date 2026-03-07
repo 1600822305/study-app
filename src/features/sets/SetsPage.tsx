@@ -226,13 +226,13 @@ export function SetsPage() {
 
                       {/* ∁ᵤA 补集 */}
                       <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-center font-bold text-gray-700 text-sm mb-2">∁ᵤA（补集）</p>
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2">补集（U 中去掉 A）</p>
                         <svg viewBox="0 0 180 130" className="w-full">
                           <rect x="4" y="4" width="172" height="122" rx="8" fill="#fde68a" stroke="#f59e0b" strokeWidth="1.5" />
                           <text x="160" y="20" fontSize="14" fill="#b45309" fontWeight="bold">U</text>
                           <circle cx="80" cy="70" r="36" fill="#ffffff" stroke="#3b82f6" strokeWidth="1.5" />
                           <text x="80" y="76" fontSize="18" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="152" y="115" fontSize="12" fill="#b45309" fontWeight="bold" textAnchor="middle">∁ᵤA</text>
+                          <text x="150" y="115" fontSize="14" fill="#b45309" fontWeight="bold" textAnchor="middle">补集</text>
                         </svg>
                       </div>
                     </div>
