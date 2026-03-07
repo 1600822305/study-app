@@ -216,23 +216,72 @@ export function LogicPrereqPage() {
             {/* Step 3: 用到数学上 */}
             <div>
               <p className="font-bold mb-2">用到数学上</p>
-              <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+              <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+
+                {/* 例1：集合圈图 */}
                 <div>
                   <p className="font-bold text-gray-800 mb-1">例1：数字版</p>
-                  <p>"x = 2" → "x 是偶数"？</p>
-                  <p className="text-gray-500 text-xs">x=2 是小范围（只有一个数），偶数是大范围（2,4,6,8...好多个）</p>
-                  <p>小→大，<strong className="text-green-600">能推出 ✓</strong></p>
+                  <p className="mb-2">"x = 2" → "x 是偶数"？</p>
+                  <div className="bg-white rounded-lg p-4 flex items-center justify-center">
+                    <div className="relative">
+                      {/* 大圈：偶数 */}
+                      <div className="w-48 h-28 rounded-full border-[3px] border-blue-400 bg-blue-50 flex items-end justify-center pb-1">
+                        <span className="text-xs text-blue-500">偶数：2, 4, 6, 8, 10...</span>
+                      </div>
+                      {/* 小圈：x=2 */}
+                      <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full border-[3px] border-red-400 bg-red-50 flex items-center justify-center">
+                        <span className="text-sm font-bold text-red-600">x=2</span>
+                      </div>
+                    </div>
+                    <div className="ml-4 text-sm space-y-1">
+                      <p><span className="text-red-600 font-bold">小圈</span>在<span className="text-blue-600 font-bold">大圈</span>里面</p>
+                      <p>小→大，<strong className="text-green-600">能推出 ✓</strong></p>
+                    </div>
+                  </div>
                 </div>
+
+                {/* 例2：数轴盖子 */}
                 <div className="border-t border-gray-200 pt-3">
                   <p className="font-bold text-gray-800 mb-1">例2：不等式版</p>
-                  <p>"x {'>'} 3" → "x {'>'} 1"？</p>
-                  <p className="text-gray-500 text-xs">x{'>'}3 的范围更小（3右边），x{'>'}1 的范围更大（1右边）</p>
-                  <p>小→大，<strong className="text-green-600">能推出 ✓</strong>（大于3的数当然大于1）</p>
+                  <p className="mb-2">"x {'>'} 3" → "x {'>'} 1"？</p>
+                  <div className="bg-white rounded-lg px-5 pt-2 pb-3">
+                    {/* x>1 大盖子 */}
+                    <div className="relative h-8 mx-6">
+                      <div className="absolute bottom-0 border-t-[3px] border-l-[3px] border-blue-500 rounded-tl-lg" style={{ left: `${1 * (100 / 6)}%`, right: 0, height: '100%' }} />
+                      <span className="absolute top-0 text-xs font-bold text-blue-600" style={{ left: `${3.5 * (100 / 6)}%`, transform: 'translateX(-50%)' }}>x {'>'} 1（大范围）</span>
+                    </div>
+                    {/* 数轴 */}
+                    <div className="relative h-7 mx-6 my-1">
+                      <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gray-400" />
+                      {[0, 1, 2, 3, 4, 5, 6].map((n) => (
+                        <div key={n} className="absolute top-1/2 flex flex-col items-center" style={{ left: `${n * (100 / 6)}%`, transform: 'translateX(-50%)' }}>
+                          <div className="w-[1.5px] h-2.5 bg-gray-500 -translate-y-1/2" />
+                          <span className="text-xs text-gray-600 mt-1.5">{n}</span>
+                        </div>
+                      ))}
+                      <div className="absolute top-1/2 -translate-y-1/2 right-0 text-gray-400 text-xs">→</div>
+                    </div>
+                    {/* x>3 小盖子 */}
+                    <div className="relative h-8 mx-6">
+                      <div className="absolute top-0 border-b-[3px] border-l-[3px] border-red-500 rounded-bl-lg" style={{ left: `${3 * (100 / 6)}%`, right: 0, height: '100%' }} />
+                      <span className="absolute bottom-0 text-xs font-bold text-red-600" style={{ left: `${4.5 * (100 / 6)}%`, transform: 'translateX(-50%)' }}>x {'>'} 3（小范围）</span>
+                    </div>
+                  </div>
+                  <p className="mt-1 text-center"><span className="text-red-600 font-bold">小</span>在<span className="text-blue-600 font-bold">大</span>里面 → <strong className="text-green-600">能推出 ✓</strong></p>
                 </div>
+
+                {/* 反过来 */}
                 <div className="border-t border-gray-200 pt-3">
                   <p className="font-bold text-gray-800 mb-1">反过来呢？</p>
                   <p>"x {'>'} 1" → "x {'>'} 3"？</p>
-                  <p>大→小，<strong className="text-red-600">推不出 ✗</strong>（x=2 大于1但不大于3）</p>
+                  <div className="bg-white rounded-lg p-3 mt-2 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-orange-100 border-2 border-orange-400 flex items-center justify-center text-sm font-bold text-orange-600 shrink-0">2</div>
+                    <div className="text-sm">
+                      <p>x=2 满足 x{'>'}1 ✓　但不满足 x{'>'}3 ✗</p>
+                      <p className="text-gray-500 text-xs">找到反例了！</p>
+                    </div>
+                  </div>
+                  <p className="mt-2">大→小，<strong className="text-red-600">推不出 ✗</strong></p>
                 </div>
               </div>
             </div>
