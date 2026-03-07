@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { CheckCircle, XCircle, Lightbulb, AlertTriangle } from 'lucide-react';
-import { Mafs, Coordinates, Point, Line, Text as MafsText } from 'mafs';
+import { Mafs, Coordinates, Point, Line, Plot, Text as MafsText } from 'mafs';
 
 import { Math, MathInput, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
@@ -369,6 +369,33 @@ export function SetsPrereqPage() {
               <div className="mt-3 text-sm text-gray-600 space-y-1 text-left">
                 <p><Math tex="ax^2+bx+c > 0 \;\Rightarrow\; x < x_1 \text{ 或 } x > x_2" /></p>
                 <p><Math tex="ax^2+bx+c < 0 \;\Rightarrow\; x_1 < x < x_2" /></p>
+              </div>
+            </div>
+
+            {/* 抛物线图解 */}
+            <div>
+              <p className="font-bold mb-2">图解：为什么口诀是对的？</p>
+              <p className="text-xs text-gray-500 mb-3">
+                <Math tex="y = x^2 - 3x - 4 = (x+1)(x-4)" /> 的图像（a {'>'} 0，开口朝上）：
+              </p>
+              <div className="bg-gray-50 rounded-xl p-2 overflow-hidden">
+                <Mafs viewBox={{ x: [-3, 6], y: [-6, 4] }} height={220}>
+                  <Coordinates.Cartesian />
+                  <Plot.OfX y={(x: number) => x * x - 3 * x - 4} color="#6366f1" />
+                  <Point x={-1} y={0} color="#ef4444" />
+                  <Point x={4} y={0} color="#ef4444" />
+                  <MafsText x={-1} y={0.8} size={12}>x₁=-1</MafsText>
+                  <MafsText x={4} y={0.8} size={12}>x₂=4</MafsText>
+                  <MafsText x={-2.2} y={2} size={12} color="#16a34a">y{'>'} 0</MafsText>
+                  <MafsText x={1.5} y={-3} size={12} color="#ef4444">y{'<'} 0</MafsText>
+                  <MafsText x={5.2} y={2} size={12} color="#16a34a">y{'>'} 0</MafsText>
+                </Mafs>
+              </div>
+              <div className="mt-3 text-sm space-y-1 text-gray-600">
+                <p>🔴 两个根 <Math tex="x_1 = -1, x_2 = 4" /> 是抛物线和 x 轴的交点</p>
+                <p>🟢 <strong>两边</strong>（x {'<'} -1 和 x {'>'} 4）：抛物线在 x 轴<strong>上面</strong> → y {'>'} 0</p>
+                <p>🔴 <strong>中间</strong>（-1 {'<'} x {'<'} 4）：抛物线在 x 轴<strong>下面</strong> → y {'<'} 0</p>
+                <p className="text-xs text-gray-400 mt-1">所以"大于取两边"就是取 y {'>'} 0 的部分，"小于取中间"就是取 y {'<'} 0 的部分。</p>
               </div>
             </div>
 
