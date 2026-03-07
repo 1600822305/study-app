@@ -1,7 +1,4 @@
-import { useMemo } from 'react';
 import { Flame, AlertTriangle } from 'lucide-react';
-import { VennDiagram } from '@upsetjs/react';
-import { extractSets, generateCombinations } from '@upsetjs/model';
 
 import { Math, Collapsible, ProgressTracker, SpeakButton, QuizPanel } from '@/components/shared';
 import { setsNarrations } from './data/narrations';
@@ -9,21 +6,8 @@ import { useProgress } from '@/hooks';
 import { setsQuizQuestions } from './data/quiz';
 import { setsProgressItems } from './data/progress';
 
-// Venn diagram data for A∩B demo
-const vennElems = [
-  { name: '1', sets: ['A'] },
-  { name: '2', sets: ['A'] },
-  { name: '3', sets: ['A', 'B'] },
-  { name: '4', sets: ['A', 'B'] },
-  { name: '5', sets: ['B'] },
-  { name: '6', sets: ['B'] },
-];
-
 export function SetsPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sets', setsProgressItems);
-
-  const vennSets = useMemo(() => extractSets(vennElems), []);
-  const vennCombinations = useMemo(() => generateCombinations(vennSets), [vennSets]);
 
   return (
     <div>
@@ -200,65 +184,57 @@ export function SetsPage() {
                       <p className="text-blue-700">用封闭曲线（通常是圆或椭圆）表示集合，直观展示集合间的关系。</p>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 gap-4">
                       {/* A ⊆ U 子集 */}
-                      <div className="bg-gray-50 rounded-lg p-2">
-                        <p className="text-center font-bold text-gray-700 text-[10px] mb-1">A ⊆ U 子集</p>
-                        <svg viewBox="0 0 120 90" className="w-full">
-                          <rect x="3" y="3" width="114" height="84" rx="6" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
-                          <text x="105" y="15" fontSize="9" fill="#3b82f6" fontWeight="bold">U</text>
-                          <circle cx="55" cy="50" r="25" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1" />
-                          <text x="55" y="54" fontSize="11" fill="#1d4ed8" fontWeight="bold" textAnchor="middle">A</text>
+                      <div className="bg-gray-50 rounded-xl p-4">
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2">A ⊆ U（子集）</p>
+                        <svg viewBox="0 0 180 130" className="w-full">
+                          <rect x="4" y="4" width="172" height="122" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
+                          <text x="160" y="20" fontSize="14" fill="#3b82f6" fontWeight="bold">U</text>
+                          <circle cx="80" cy="72" r="38" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5" />
+                          <text x="80" y="78" fontSize="18" fill="#1d4ed8" fontWeight="bold" textAnchor="middle">A</text>
                         </svg>
                       </div>
 
                       {/* A ∩ B 交集 */}
-                      <div className="bg-gray-50 rounded-lg p-2">
-                        <p className="text-center font-bold text-gray-700 text-[10px] mb-1">A ∩ B 交集</p>
-                        <svg viewBox="0 0 120 90" className="w-full">
-                          <rect x="3" y="3" width="114" height="84" rx="6" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
-                          <text x="105" y="15" fontSize="9" fill="#3b82f6" fontWeight="bold">U</text>
-                          <circle cx="42" cy="48" r="24" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1" fillOpacity="0.5" />
-                          <circle cx="72" cy="48" r="24" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1" fillOpacity="0.5" />
-                          <clipPath id="vClipA"><circle cx="42" cy="48" r="24" /></clipPath>
-                          <circle cx="72" cy="48" r="24" fill="#bbf7d0" fillOpacity="0.7" clipPath="url(#vClipA)" />
-                          <text x="32" y="52" fontSize="9" fill="#1d4ed8" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="82" y="52" fontSize="9" fill="#b45309" fontWeight="bold" textAnchor="middle">B</text>
+                      <div className="bg-gray-50 rounded-xl p-4">
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2">A ∩ B（交集）</p>
+                        <svg viewBox="0 0 180 130" className="w-full">
+                          <rect x="4" y="4" width="172" height="122" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
+                          <text x="160" y="20" fontSize="14" fill="#3b82f6" fontWeight="bold">U</text>
+                          <circle cx="65" cy="70" r="36" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5" fillOpacity="0.5" />
+                          <circle cx="110" cy="70" r="36" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" fillOpacity="0.5" />
+                          <clipPath id="vClipA"><circle cx="65" cy="70" r="36" /></clipPath>
+                          <circle cx="110" cy="70" r="36" fill="#bbf7d0" fillOpacity="0.7" clipPath="url(#vClipA)" />
+                          <text x="48" y="76" fontSize="16" fill="#1d4ed8" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="127" y="76" fontSize="16" fill="#b45309" fontWeight="bold" textAnchor="middle">B</text>
                         </svg>
                       </div>
 
                       {/* A ∪ B 并集 */}
-                      <div className="bg-gray-50 rounded-lg p-2">
-                        <p className="text-center font-bold text-gray-700 text-[10px] mb-1">A ∪ B 并集</p>
-                        <svg viewBox="0 0 120 90" className="w-full">
-                          <rect x="3" y="3" width="114" height="84" rx="6" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
-                          <text x="105" y="15" fontSize="9" fill="#3b82f6" fontWeight="bold">U</text>
-                          <circle cx="42" cy="48" r="24" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1" fillOpacity="0.6" />
-                          <circle cx="72" cy="48" r="24" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1" fillOpacity="0.6" />
-                          <text x="32" y="52" fontSize="9" fill="#15803d" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="82" y="52" fontSize="9" fill="#15803d" fontWeight="bold" textAnchor="middle">B</text>
+                      <div className="bg-gray-50 rounded-xl p-4">
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2">A ∪ B（并集）</p>
+                        <svg viewBox="0 0 180 130" className="w-full">
+                          <rect x="4" y="4" width="172" height="122" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
+                          <text x="160" y="20" fontSize="14" fill="#3b82f6" fontWeight="bold">U</text>
+                          <circle cx="65" cy="70" r="36" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1.5" fillOpacity="0.6" />
+                          <circle cx="110" cy="70" r="36" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1.5" fillOpacity="0.6" />
+                          <text x="48" y="76" fontSize="16" fill="#15803d" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="127" y="76" fontSize="16" fill="#15803d" fontWeight="bold" textAnchor="middle">B</text>
                         </svg>
                       </div>
 
                       {/* ∁ᵤA 补集 */}
-                      <div className="bg-gray-50 rounded-lg p-2">
-                        <p className="text-center font-bold text-gray-700 text-[10px] mb-1">∁ᵤA 补集</p>
-                        <svg viewBox="0 0 120 90" className="w-full">
-                          <rect x="3" y="3" width="114" height="84" rx="6" fill="#fde68a" stroke="#f59e0b" strokeWidth="1" />
-                          <text x="105" y="15" fontSize="9" fill="#b45309" fontWeight="bold">U</text>
-                          <circle cx="55" cy="48" r="24" fill="#ffffff" stroke="#3b82f6" strokeWidth="1" />
-                          <text x="55" y="52" fontSize="11" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="100" y="78" fontSize="8" fill="#b45309" fontWeight="bold" textAnchor="middle">∁ᵤA</text>
+                      <div className="bg-gray-50 rounded-xl p-4">
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2">∁ᵤA（补集）</p>
+                        <svg viewBox="0 0 180 130" className="w-full">
+                          <rect x="4" y="4" width="172" height="122" rx="8" fill="#fde68a" stroke="#f59e0b" strokeWidth="1.5" />
+                          <text x="160" y="20" fontSize="14" fill="#b45309" fontWeight="bold">U</text>
+                          <circle cx="80" cy="70" r="36" fill="#ffffff" stroke="#3b82f6" strokeWidth="1.5" />
+                          <text x="80" y="76" fontSize="18" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="152" y="115" fontSize="12" fill="#b45309" fontWeight="bold" textAnchor="middle">∁ᵤA</text>
                         </svg>
                       </div>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-lg p-3">
-                      <p className="text-center font-bold text-gray-700 text-xs mb-2">交互式韦恩图（悬停高亮各区域）</p>
-                      {useMemo(() => {
-                        const VD = VennDiagram as React.ComponentType<{ sets: typeof vennSets; combinations: typeof vennCombinations; width: number; height: number }>;
-                        return <VD sets={vennSets} combinations={vennCombinations} width={360} height={240} />;
-                      }, [vennSets, vennCombinations])}
                     </div>
 
                     <p className="text-xs text-gray-500">Venn 图在做交集、并集、补集运算时特别直观，后面集合运算会大量使用。</p>
