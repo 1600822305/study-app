@@ -670,11 +670,20 @@ export function SetsPrereqPage() {
         <Collapsible title="📌 公式速查表" storageKey="sets-prereq:cheatsheet">
           <div className="space-y-4 text-sm text-gray-700">
             <div>
+              <p className="font-bold text-gray-800 mb-2">直接开平方法</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
+                <p><Math tex="x^2 = k \;\Rightarrow\; x = \pm\sqrt{k}" /></p>
+                <p><Math tex="(x+a)^2 = k \;\Rightarrow\; x+a = \pm\sqrt{k}" /> → 移项</p>
+                <p>没有一次项 bx 的时候直接用，最快</p>
+              </div>
+            </div>
+            <div>
               <p className="font-bold text-gray-800 mb-2">因式分解</p>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
                 <p>平方差：<Math tex="x^2 - a^2 = (x+a)(x-a)" /></p>
                 <p>完全平方：<Math tex="x^2 + 2ax + a^2 = (x+a)^2" /></p>
                 <p>提公因式：<Math tex="x^2 - 3x = x(x-3)" /></p>
+                <p>一般：找两数，乘=常数项，加=一次项系数</p>
               </div>
             </div>
             <div>
@@ -682,6 +691,14 @@ export function SetsPrereqPage() {
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
                 <p><Math tex="x = \dfrac{-b \pm \sqrt{b^2-4ac}}{2a}" /></p>
                 <p><Math tex="\Delta = b^2-4ac" />：{'>'} 0 两根，= 0 重根，{'<'} 0 无实根</p>
+                <p>b 偶数时：令 <Math tex="b'=\frac{b}{2}" />，<Math tex="x = \frac{-b' \pm \sqrt{b'^2-ac}}{a}" /></p>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold text-gray-800 mb-2">配方法</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
+                <p>常数项移右边 → 两边加 <Math tex="\left(\frac{b}{2}\right)^2" /> → 左边变 <Math tex="\left(x+\frac{b}{2}\right)^2" /> → 开平方</p>
+                <p>口诀：<strong>一次项系数 ÷ 2，再平方</strong></p>
               </div>
             </div>
             <div>
@@ -698,6 +715,7 @@ export function SetsPrereqPage() {
                 <p>○ 空心 → 不含（{'<'} 或 {'>'}）→ 小括号 ( )</p>
                 <p>● 实心 → 包含（≤ 或 ≥）→ 中括号 [ ]</p>
                 <p>∞ → 永远用小括号</p>
+                <p>∪ → 并集（"或"的意思）</p>
                 <p>补集：○ ↔ ● 互换</p>
               </div>
             </div>
