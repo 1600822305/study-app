@@ -139,19 +139,19 @@ export function SetsPrereqPage() {
             </div>
 
             {/* 必背公式 */}
-            <div className="bg-slate-900 text-white rounded-xl p-5">
-              <p className="text-sm text-slate-400 mb-3">必背！因式分解要用到的两个公式</p>
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-5">
+              <p className="text-sm text-orange-700 font-bold mb-3">必背！因式分解要用到的两个公式</p>
               <div className="space-y-3">
-                <div className="bg-slate-800 rounded-lg p-3">
-                  <p className="text-xs text-slate-400 mb-1">平方差公式</p>
+                <div className="bg-white border border-orange-100 rounded-lg p-3">
+                  <p className="text-xs text-orange-600 mb-1">平方差公式</p>
                   <Math tex="a^2 - b^2 = (a+b)(a-b)" />
-                  <p className="text-xs text-slate-500 mt-1">看到"一个平方 减 另一个平方"就能用</p>
+                  <p className="text-xs text-gray-500 mt-1">看到"一个平方 减 另一个平方"就能用</p>
                 </div>
-                <div className="bg-slate-800 rounded-lg p-3">
-                  <p className="text-xs text-slate-400 mb-1">完全平方公式</p>
+                <div className="bg-white border border-orange-100 rounded-lg p-3">
+                  <p className="text-xs text-orange-600 mb-1">完全平方公式</p>
                   <p><Math tex="(a+b)^2 = a^2 + 2ab + b^2" /></p>
                   <p><Math tex="(a-b)^2 = a^2 - 2ab + b^2" /></p>
-                  <p className="text-xs text-slate-500 mt-1">中间项 = 2倍乘积，末项 = 那个数的平方</p>
+                  <p className="text-xs text-gray-500 mt-1">中间项 = 2倍乘积，末项 = 那个数的平方</p>
                 </div>
               </div>
             </div>
@@ -321,10 +321,10 @@ export function SetsPrereqPage() {
             </div>
 
             {/* 总结 */}
-            <div className="bg-slate-900 text-white rounded-xl p-4 text-center">
-              <p className="text-sm text-slate-400 mb-1">选哪个方法？</p>
-              <p className="text-base font-bold">先试因式分解 → 搞不定再用公式法</p>
-              <p className="text-xs text-slate-400 mt-1">高考90%的方程都能因式分解，公式法是保底的</p>
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 text-center">
+              <p className="text-sm text-orange-600 mb-1">选哪个方法？</p>
+              <p className="text-base font-bold text-gray-800">先试因式分解 → 搞不定再用公式法</p>
+              <p className="text-xs text-gray-500 mt-1">高考90%的方程都能因式分解，公式法是保底的</p>
             </div>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
@@ -363,10 +363,10 @@ export function SetsPrereqPage() {
               </div>
             </div>
 
-            <div className="bg-slate-900 text-white rounded-xl p-5 text-center">
-              <p className="text-sm text-slate-400 mb-2">口诀（必记！）</p>
-              <p className="text-lg font-bold">大于取两边，小于取中间</p>
-              <div className="mt-3 text-sm text-slate-300 space-y-1 text-left">
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-5 text-center">
+              <p className="text-sm text-orange-600 mb-2">口诀（必记！）</p>
+              <p className="text-lg font-bold text-gray-800">大于取两边，小于取中间</p>
+              <div className="mt-3 text-sm text-gray-600 space-y-1 text-left">
                 <p><Math tex="ax^2+bx+c > 0 \;\Rightarrow\; x < x_1 \text{ 或 } x > x_2" /></p>
                 <p><Math tex="ax^2+bx+c < 0 \;\Rightarrow\; x_1 < x < x_2" /></p>
               </div>
