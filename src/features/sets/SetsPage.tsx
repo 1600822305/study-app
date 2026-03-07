@@ -661,56 +661,57 @@ export function SetsPage() {
                       </div>
                     </div>
 
-                    <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 space-y-3 text-sm">
-                      <p className="text-gray-800"><strong>📎 拓展了解：德摩根定律</strong>（新教材已移除，高考不直接考，了解即可）</p>
-                      <div className="space-y-1 text-gray-700">
-                        <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /> — 并的补 = 补的交</p>
-                        <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /> — 交的补 = 补的并</p>
-                        <p>记法：<strong>补号穿进括号，∩ 和 ∪ 互换</strong></p>
-                      </div>
-                    </div>
+                    <Collapsible title="📎 拓展了解：德摩根定律（高考不直接考）" storageKey="sets:demorgan" defaultOpen={false}>
+                      <div className="space-y-3 text-sm">
+                        <div className="space-y-1 text-gray-700">
+                          <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /> — 并的补 = 补的交</p>
+                          <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /> — 交的补 = 补的并</p>
+                          <p>记法：<strong>补号穿进括号，∩ 和 ∪ 互换</strong></p>
+                        </div>
 
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-3">
-                      <p className="font-bold text-green-800">验证公式1：并的补 = 补的交</p>
-                      <p className="text-sm"><strong>题目：</strong>U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;，求 <Math tex="\complement_U(A \cup B)" /></p>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-white rounded-lg p-3 border space-y-1 text-sm">
-                          <p className="font-bold text-blue-700">常规：先并再补</p>
-                          <p>A ∪ B = &#123;1,2,3,4&#125;</p>
-                          <p>U 中去掉 &#123;1,2,3,4&#125;</p>
-                          <p>= <strong className="text-blue-700">&#123;5, 6&#125;</strong></p>
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-3">
+                          <p className="font-bold text-green-800">验证公式1：并的补 = 补的交</p>
+                          <p><strong>题目：</strong>U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;，求 <Math tex="\complement_U(A \cup B)" /></p>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-white rounded-lg p-3 border space-y-1">
+                              <p className="font-bold text-blue-700">常规：先并再补</p>
+                              <p>A ∪ B = &#123;1,2,3,4&#125;</p>
+                              <p>U 中去掉 &#123;1,2,3,4&#125;</p>
+                              <p>= <strong className="text-blue-700">&#123;5, 6&#125;</strong></p>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border space-y-1">
+                              <p className="font-bold text-purple-700">德摩根捷径</p>
+                              <p>补A = &#123;4,5,6&#125;</p>
+                              <p>补B = &#123;1,5,6&#125;</p>
+                              <p>补A ∩ 补B = <strong className="text-purple-700">&#123;5, 6&#125;</strong> ✓</p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="bg-white rounded-lg p-3 border space-y-1 text-sm">
-                          <p className="font-bold text-purple-700">德摩根捷径</p>
-                          <p>补A = &#123;4,5,6&#125;</p>
-                          <p>补B = &#123;1,5,6&#125;</p>
-                          <p>补A ∩ 补B = <strong className="text-purple-700">&#123;5, 6&#125;</strong> ✓</p>
+
+                        <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 space-y-3">
+                          <p className="font-bold text-orange-800">验证公式2：交的补 = 补的并</p>
+                          <p><strong>题目：</strong>U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;，求 <Math tex="\complement_U(A \cap B)" /></p>
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-white rounded-lg p-3 border space-y-1">
+                              <p className="font-bold text-blue-700">常规：先交再补</p>
+                              <p>A ∩ B = &#123;2,3&#125;</p>
+                              <p>U 中去掉 &#123;2,3&#125;</p>
+                              <p>= <strong className="text-blue-700">&#123;1,4,5,6&#125;</strong></p>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border space-y-1">
+                              <p className="font-bold text-purple-700">德摩根捷径</p>
+                              <p>补A = &#123;4,5,6&#125;</p>
+                              <p>补B = &#123;1,5,6&#125;</p>
+                              <p>补A ∪ 补B = <strong className="text-purple-700">&#123;1,4,5,6&#125;</strong> ✓</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                          <p className="text-blue-700">💡 高考做题<strong>直接用常规方法</strong>（先算括号内，再取补集）就够了，步骤清晰不容易错。</p>
                         </div>
                       </div>
-                    </div>
-
-                    <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 space-y-3">
-                      <p className="font-bold text-orange-800">验证公式2：交的补 = 补的并</p>
-                      <p className="text-sm"><strong>题目：</strong>U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;，求 <Math tex="\complement_U(A \cap B)" /></p>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-white rounded-lg p-3 border space-y-1 text-sm">
-                          <p className="font-bold text-blue-700">常规：先交再补</p>
-                          <p>A ∩ B = &#123;2,3&#125;</p>
-                          <p>U 中去掉 &#123;2,3&#125;</p>
-                          <p>= <strong className="text-blue-700">&#123;1,4,5,6&#125;</strong></p>
-                        </div>
-                        <div className="bg-white rounded-lg p-3 border space-y-1 text-sm">
-                          <p className="font-bold text-purple-700">德摩根捷径</p>
-                          <p>补A = &#123;4,5,6&#125;</p>
-                          <p>补B = &#123;1,5,6&#125;</p>
-                          <p>补A ∪ 补B = <strong className="text-purple-700">&#123;1,4,5,6&#125;</strong> ✓</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-sm">
-                      <p className="text-blue-700">💡 高考做题<strong>直接用常规方法</strong>（先算括号内，再取补集）就够了，步骤清晰不容易错。</p>
-                    </div>
+                    </Collapsible>
                   </div>
                 </Collapsible>
 
