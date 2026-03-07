@@ -1,90 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
-import { CheckCircle, XCircle, Lightbulb, AlertTriangle } from 'lucide-react';
+import { Lightbulb, AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Line, Plot, Text as MafsText } from 'mafs';
 
-import { Math, MathInput, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
 import { useProgress } from '@/hooks';
-import { storage } from '@/lib/storage';
 
-interface SelfTestItem {
-  question: string;
-  questionLatex?: string;
-  answer: string;
-  answerLatex?: string;
-}
-
-const selfTestItems: SelfTestItem[] = [
-  {
-    question: '解方程：x² - x - 6 = 0',
-    questionLatex: 'x^2 - x - 6 = 0',
-    answer: 'x=3或x=-2',
-    answerLatex: 'x = 3 \\text{ 或 } x = -2',
-  },
-  {
-    question: '解不等式：x² - 5x + 6 < 0',
-    questionLatex: 'x^2 - 5x + 6 < 0',
-    answer: '2<x<3',
-    answerLatex: '2 < x < 3',
-  },
-  {
-    question: '解不等式：x² - 4 ≥ 0',
-    questionLatex: 'x^2 - 4 \\geq 0',
-    answer: 'x≤-2或x≥2',
-    answerLatex: 'x \\leq -2 \\text{ 或 } x \\geq 2',
-  },
-  {
-    question: '用区间表示：{x | -3 < x ≤ 5}',
-    questionLatex: '\\{x \\mid -3 < x \\leq 5\\}',
-    answer: '(-3,5]',
-    answerLatex: '(-3, 5]',
-  },
-  {
-    question: '在数轴上 {x | 1 ≤ x < 4}，1 用什么圆？4 用什么圆？',
-    answer: '1实心4空心',
-  },
-];
 
 export function SetsPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sets-prereq', setsPrereqProgressItems);
-  const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
-  const [submitted, setSubmitted] = useState(false);
-  const restoredRef = useRef(false);
-
-  // Restore self-test state from IndexedDB
-  useEffect(() => {
-    Promise.all([
-      storage.ui.getJSON<Record<number, string>>('sets-prereq:selftest-answers', {}),
-      storage.ui.getJSON<boolean>('sets-prereq:selftest-submitted', false),
-    ]).then(([savedAnswers, savedSubmitted]) => {
-      if (savedAnswers && Object.keys(savedAnswers).length > 0) {
-        setUserAnswers(savedAnswers);
-      }
-      if (savedSubmitted) setSubmitted(true);
-      restoredRef.current = true;
-    });
-  }, []);
-
-  // Persist self-test state
-  useEffect(() => {
-    if (!restoredRef.current) return;
-    storage.ui.setJSON('sets-prereq:selftest-answers', userAnswers);
-  }, [userAnswers]);
-
-  useEffect(() => {
-    if (!restoredRef.current) return;
-    storage.ui.setJSON('sets-prereq:selftest-submitted', submitted);
-  }, [submitted]);
-
-  const handleSubmitTest = () => setSubmitted(true);
-  const handleResetTest = () => {
-    setUserAnswers({});
-    setSubmitted(false);
-    storage.ui.remove('sets-prereq:selftest-answers');
-    storage.ui.remove('sets-prereq:selftest-submitted');
-  };
 
   return (
     <div>
@@ -115,8 +40,7 @@ export function SetsPrereqPage() {
           <p>二、解一元二次不等式（大于取两边，小于取中间）</p>
           <p>三、数轴的使用（○ 和 ●）</p>
           <p>四、区间表示法（开闭区间 + ∞）</p>
-          <p>五、自测清单（填空验证）</p>
-          <p>六、选择题自测（8题）</p>
+          <p>五、选择题自测（13题）</p>
         </div>
       </div>
 
@@ -647,104 +571,6 @@ export function SetsPrereqPage() {
         </Collapsible>
       </section>
 
-      {/* Self test */}
-      <section className="mb-8">
-        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-          <span className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-sm font-bold">
-            5
-          </span>
-          自测清单
-        </h2>
-
-        {/* Score summary (shown after submit) */}
-        {submitted && (
-          <div className="mb-4 p-4 rounded-xl border flex items-center justify-between bg-white border-gray-200">
-            <div className="flex items-center gap-3">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold ${
-                selfTestItems.filter((item, i) => userAnswers[i]?.replace(/\s/g, '') === item.answer.replace(/\s/g, '')).length === selfTestItems.length
-                  ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
-              }`}>
-                {selfTestItems.filter((item, i) => userAnswers[i]?.replace(/\s/g, '') === item.answer.replace(/\s/g, '')).length}/{selfTestItems.length}
-              </div>
-              <div>
-                <p className="font-bold text-gray-800">
-                  {selfTestItems.filter((item, i) => userAnswers[i]?.replace(/\s/g, '') === item.answer.replace(/\s/g, '')).length === selfTestItems.length
-                    ? '全对！基础扎实，直接学集合 🎉'
-                    : '看看哪些错了，对应板块再复习一下'}
-                </p>
-                <p className="text-sm text-gray-500">答案已显示在每题下方</p>
-              </div>
-            </div>
-            <button onClick={handleResetTest} className="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap">
-              重新测试
-            </button>
-          </div>
-        )}
-
-        {/* All questions in one paper */}
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm divide-y divide-gray-100">
-          {selfTestItems.map((item, idx) => {
-            const hasInput = !!userAnswers[idx];
-            const isCorrect = hasInput && userAnswers[idx].replace(/\s/g, '') === item.answer.replace(/\s/g, '');
-
-            return (
-              <div key={idx} className="px-5 py-4">
-                {/* Question */}
-                <div className="flex items-start gap-3 mb-3">
-                  <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                    submitted
-                      ? isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    {submitted
-                      ? isCorrect ? <CheckCircle size={14} /> : <XCircle size={14} />
-                      : idx + 1
-                    }
-                  </span>
-                  <p className="text-sm font-medium text-gray-800 pt-0.5">
-                    {item.questionLatex ? <Math tex={item.questionLatex} /> : item.question}
-                  </p>
-                </div>
-
-                {/* Input */}
-                <div className="ml-10">
-                  <MathInput
-                    value={userAnswers[idx] || ''}
-                    onChange={(latex) => setUserAnswers((prev) => ({ ...prev, [idx]: latex }))}
-                    placeholder="输入答案..."
-                    className="w-full"
-                  />
-                </div>
-
-                {/* Answer (shown after submit) */}
-                {submitted && (
-                  <div className={`ml-10 mt-2 px-3 py-2 rounded-lg text-sm ${isCorrect ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
-                    <strong>答案：</strong>
-                    {item.answerLatex ? <Math tex={item.answerLatex} /> : item.answer}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Submit / result */}
-        {!submitted ? (
-          <button
-            onClick={handleSubmitTest}
-            className="mt-4 w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl transition-colors cursor-pointer"
-          >
-            提交检查
-          </button>
-        ) : (
-          <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
-            <p><strong>全对</strong> → 直接学 1.2 集合，没有障碍</p>
-            <p><strong>错了1-2题</strong> → 把错的部分再看一遍</p>
-            <p><strong>错了3题以上</strong> → 上面的知识点从头认真看一遍</p>
-          </div>
-        )}
-      </section>
-
       {/* Formula Cheat Sheet */}
       <section className="mb-8">
         <Collapsible title="📌 公式速查表" storageKey="sets-prereq:cheatsheet">
@@ -785,15 +611,15 @@ export function SetsPrereqPage() {
         </Collapsible>
       </section>
 
-      {/* Section 6: Quiz */}
+      {/* Section 5: Quiz */}
       <section className="mb-8">
         <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
           <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
-            6
+            5
           </span>
           选择题自测
         </h2>
-        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="8道选择题，检验解方程、解不等式、区间表示是否过关" />
+        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="13道选择题，检验解方程、解不等式、区间表示、数轴是否过关" />
       </section>
         </div>
 
