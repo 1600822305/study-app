@@ -195,6 +195,39 @@ export function LogicPrereqPage() {
               </div>
 
               <p className="text-gray-500 text-xs mt-2">验证：x=0 → |0-1|=1{'<'}3 ✓　　x=5 → |5-1|=4{'>'}3 ✗（不在解集里）</p>
+
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="font-bold text-gray-800 mb-3">变式：遇到 <Math tex="|x + 2| < 3" /> 怎么办？</p>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-3">
+                  <p className="text-amber-800 text-sm"><strong>关键技巧：</strong>把 <Math tex="x + 2" /> 看成 <Math tex="x - (-2)" />，这样中心就是 <strong>-2</strong></p>
+                  <p className="text-amber-700 text-xs mt-1">因为 |x - b| 里的 b 是中心点，x+2 = x-(-2)，所以中心是 -2</p>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <p><strong>第1步：</strong>转化 → <Math tex="|x + 2| = |x - (-2)|" />，中心 b = -2，半径 a = 3</p>
+                  <p><strong>第2步：</strong>套公式 → -2 - 3 {'<'} x {'<'} -2 + 3</p>
+                  <p><strong>第3步：</strong>算出来 → <Math tex="-5 < x < 1" /></p>
+                </div>
+
+                {/* 数轴图解 */}
+                <div className="bg-white rounded-lg px-5 pt-2 pb-3 mt-3">
+                  <div className="relative h-7 mx-4">
+                    <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gray-400" />
+                    {[-6, -5, -4, -3, -2, -1, 0, 1, 2].map((n) => (
+                      <div key={n} className="absolute top-1/2 flex flex-col items-center" style={{ left: `${(n + 6) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>
+                        <div className="w-[1.5px] h-2.5 bg-gray-500 -translate-y-1/2" />
+                        <span className={`text-xs mt-1.5 ${n === -2 ? 'font-bold text-purple-600' : n === -5 || n === 1 ? 'font-bold text-red-600' : 'text-gray-500'}`}>{n}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="relative h-8 mx-4">
+                    <div className="absolute top-0 border-b-[3px] border-l-[3px] border-r-[3px] border-green-500 rounded-b-lg" style={{ left: `${(-5 + 6) * (100 / 8)}%`, right: `${100 - (1 + 6) * (100 / 8)}%`, height: '100%' }} />
+                    <span className="absolute bottom-0 text-xs font-bold text-green-600" style={{ left: `${(-2 + 6) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>解集：(-5, 1)</span>
+                  </div>
+                  <div className="flex justify-center gap-4 mt-1 text-xs text-gray-500">
+                    <span>← 距离3 →<strong className="text-purple-600 mx-1">中心-2</strong>← 距离3 →</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
