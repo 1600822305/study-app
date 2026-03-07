@@ -49,33 +49,41 @@ const selfTestItems: SelfTestItem[] = [
 
 export function SetsPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sets-prereq', setsPrereqProgressItems);
-  const [revealed, setRevealed] = useState<Set<number>>(new Set());
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
+  const [submitted, setSubmitted] = useState(false);
   const restoredRef = useRef(false);
 
-  // Restore self-test answers from IndexedDB
+  // Restore self-test state from IndexedDB
   useEffect(() => {
-    storage.ui.getJSON<Record<number, string>>('sets-prereq:selftest-answers', {}).then((saved) => {
-      if (saved && Object.keys(saved).length > 0) {
-        setUserAnswers(saved);
+    Promise.all([
+      storage.ui.getJSON<Record<number, string>>('sets-prereq:selftest-answers', {}),
+      storage.ui.getJSON<boolean>('sets-prereq:selftest-submitted', false),
+    ]).then(([savedAnswers, savedSubmitted]) => {
+      if (savedAnswers && Object.keys(savedAnswers).length > 0) {
+        setUserAnswers(savedAnswers);
       }
+      if (savedSubmitted) setSubmitted(true);
       restoredRef.current = true;
     });
   }, []);
 
-  // Persist self-test answers
+  // Persist self-test state
   useEffect(() => {
     if (!restoredRef.current) return;
     storage.ui.setJSON('sets-prereq:selftest-answers', userAnswers);
   }, [userAnswers]);
 
-  const toggleReveal = (idx: number) => {
-    setRevealed((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx);
-      else next.add(idx);
-      return next;
-    });
+  useEffect(() => {
+    if (!restoredRef.current) return;
+    storage.ui.setJSON('sets-prereq:selftest-submitted', submitted);
+  }, [submitted]);
+
+  const handleSubmitTest = () => setSubmitted(true);
+  const handleResetTest = () => {
+    setUserAnswers({});
+    setSubmitted(false);
+    storage.ui.remove('sets-prereq:selftest-answers');
+    storage.ui.remove('sets-prereq:selftest-submitted');
   };
 
   return (
@@ -317,66 +325,72 @@ export function SetsPrereqPage() {
           </span>
           自测清单
         </h2>
-        <p className="text-sm text-gray-500 mb-4">
-          先在输入框写答案，再点"查看答案"对照。做完5题确认基础没问题。
-        </p>
 
-        <div className="space-y-4">
+        {/* Score summary (shown after submit) */}
+        {submitted && (
+          <div className="mb-4 p-4 rounded-xl border flex items-center justify-between bg-white border-gray-200">
+            <div className="flex items-center gap-3">
+              <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold ${
+                selfTestItems.filter((item, i) => userAnswers[i]?.replace(/\s/g, '') === item.answer.replace(/\s/g, '')).length === selfTestItems.length
+                  ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+              }`}>
+                {selfTestItems.filter((item, i) => userAnswers[i]?.replace(/\s/g, '') === item.answer.replace(/\s/g, '')).length}/{selfTestItems.length}
+              </div>
+              <div>
+                <p className="font-bold text-gray-800">
+                  {selfTestItems.filter((item, i) => userAnswers[i]?.replace(/\s/g, '') === item.answer.replace(/\s/g, '')).length === selfTestItems.length
+                    ? '全对！基础扎实，直接学集合 🎉'
+                    : '看看哪些错了，对应板块再复习一下'}
+                </p>
+                <p className="text-sm text-gray-500">答案已显示在每题下方</p>
+              </div>
+            </div>
+            <button onClick={handleResetTest} className="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap">
+              重新测试
+            </button>
+          </div>
+        )}
+
+        {/* All questions in one paper */}
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm divide-y divide-gray-100">
           {selfTestItems.map((item, idx) => {
-            const isRevealed = revealed.has(idx);
             const hasInput = !!userAnswers[idx];
-            const isMatch = hasInput && userAnswers[idx].replace(/\s/g, '') === item.answer.replace(/\s/g, '');
+            const isCorrect = hasInput && userAnswers[idx].replace(/\s/g, '') === item.answer.replace(/\s/g, '');
 
             return (
-              <div key={idx} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-                {/* Question header */}
-                <div className="flex items-start gap-3 px-5 py-4">
-                  <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
-                    isRevealed && hasInput
-                      ? isMatch ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      : 'bg-blue-100 text-blue-700'
+              <div key={idx} className="px-5 py-4">
+                {/* Question */}
+                <div className="flex items-start gap-3 mb-3">
+                  <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
+                    submitted
+                      ? isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                      : 'bg-gray-100 text-gray-500'
                   }`}>
-                    {isRevealed && hasInput
-                      ? isMatch ? <CheckCircle size={18} /> : <XCircle size={18} />
+                    {submitted
+                      ? isCorrect ? <CheckCircle size={14} /> : <XCircle size={14} />
                       : idx + 1
                     }
                   </span>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-800">
-                      {item.questionLatex ? <Math tex={item.questionLatex} /> : item.question}
-                    </p>
-                  </div>
+                  <p className="text-sm font-medium text-gray-800 pt-0.5">
+                    {item.questionLatex ? <Math tex={item.questionLatex} /> : item.question}
+                  </p>
                 </div>
 
-                {/* Input area */}
-                <div className="px-5 pb-3">
+                {/* Input */}
+                <div className="ml-10">
                   <MathInput
                     value={userAnswers[idx] || ''}
                     onChange={(latex) => setUserAnswers((prev) => ({ ...prev, [idx]: latex }))}
-                    placeholder="点击输入你的答案..."
+                    placeholder="输入答案..."
                     className="w-full"
                   />
                 </div>
 
-                {/* Answer toggle */}
-                <div className="px-5 pb-4">
-                  <button
-                    onClick={() => toggleReveal(idx)}
-                    className={`text-sm font-medium cursor-pointer transition-colors ${
-                      isRevealed ? 'text-gray-400 hover:text-gray-600' : 'text-blue-500 hover:text-blue-700'
-                    }`}
-                  >
-                    {isRevealed ? '收起答案 ▲' : '查看答案 ▼'}
-                  </button>
-                </div>
-
-                {/* Answer reveal */}
-                {isRevealed && (
-                  <div className={`px-5 py-4 border-t ${isMatch ? 'bg-green-50 border-green-100' : 'bg-amber-50 border-amber-100'}`}>
-                    <p className="text-sm text-gray-700">
-                      <strong>答案：</strong>
-                      {item.answerLatex ? <Math tex={item.answerLatex} /> : <strong>{item.answer}</strong>}
-                    </p>
+                {/* Answer (shown after submit) */}
+                {submitted && (
+                  <div className={`ml-10 mt-2 px-3 py-2 rounded-lg text-sm ${isCorrect ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                    <strong>答案：</strong>
+                    {item.answerLatex ? <Math tex={item.answerLatex} /> : item.answer}
                   </div>
                 )}
               </div>
@@ -384,11 +398,21 @@ export function SetsPrereqPage() {
           })}
         </div>
 
-        <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
-          <p><strong>全对</strong> → 直接学 1.2 集合，没有障碍</p>
-          <p><strong>错了1-2题</strong> → 把错的部分再看一遍</p>
-          <p><strong>错了3题以上</strong> → 上面的知识点从头认真看一遍</p>
-        </div>
+        {/* Submit / result */}
+        {!submitted ? (
+          <button
+            onClick={handleSubmitTest}
+            className="mt-4 w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-xl transition-colors cursor-pointer"
+          >
+            提交检查
+          </button>
+        ) : (
+          <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
+            <p><strong>全对</strong> → 直接学 1.2 集合，没有障碍</p>
+            <p><strong>错了1-2题</strong> → 把错的部分再看一遍</p>
+            <p><strong>错了3题以上</strong> → 上面的知识点从头认真看一遍</p>
+          </div>
+        )}
       </section>
 
       {/* Section 6: Quiz */}
