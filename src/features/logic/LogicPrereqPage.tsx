@@ -154,12 +154,55 @@ export function LogicPrereqPage() {
                 <p className="text-blue-700"><Math tex="|x| > 3" /> 的意思就是：x 到 0 的距离<strong>超过 3</strong> → x 在 -3 左边或 3 右边</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4 space-y-1">
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                 <p><Math tex="|x| < a \;\Rightarrow\; -a < x < a" />（距离不超过 a → 夹在中间）</p>
                 <p><Math tex="|x| > a \;\Rightarrow\; x < -a \text{ 或 } x > a" />（距离超过 a → 在两边）</p>
-                <p className="mt-2 pt-2 border-t border-gray-200"><Math tex="|x - b| < a" /> 就是 x 到 <strong>b</strong> 的距离不超过 a → <Math tex="b - a < x < b + a" /></p>
               </div>
               <p className="mt-2 text-gray-600">口诀：<strong>小于取中间，大于取两边</strong>（和二次不等式一样！）</p>
+
+              {/* |x-b|<a 拆开讲 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 mt-3">
+                <p className="font-bold text-purple-800 mb-2">进阶：中心不在 0 怎么办？</p>
+                <p className="text-purple-700 mb-3">上面的 |x| {'<'} a 中心是 0。如果中心换成别的数 b，就变成 <Math tex="|x - b| < a" /></p>
+
+                <div className="bg-white rounded-lg p-3 space-y-3">
+                  <p className="text-sm"><strong>意思是：</strong>x 到 <strong>b</strong> 的距离不超过 <strong>a</strong></p>
+                  <p className="text-sm"><strong>怎么算：</strong>从 b 往左走 a 步，往右走 a 步</p>
+
+                  {/* 示意图 */}
+                  <div className="bg-gray-50 rounded-lg px-4 py-3">
+                    <div className="relative h-7 mx-2">
+                      <div className="absolute top-1/2 left-[10%] right-[10%] h-[2px] bg-gray-400" />
+                      {/* 左端点 b-a */}
+                      <div className="absolute top-1/2 flex flex-col items-center" style={{ left: '20%', transform: 'translateX(-50%)' }}>
+                        <div className="w-[1.5px] h-3 bg-red-500 -translate-y-1/2" />
+                        <span className="text-xs font-bold text-red-600 mt-1.5">b-a</span>
+                      </div>
+                      {/* 中心 b */}
+                      <div className="absolute top-1/2 flex flex-col items-center" style={{ left: '50%', transform: 'translateX(-50%)' }}>
+                        <div className="w-[1.5px] h-3 bg-purple-500 -translate-y-1/2" />
+                        <span className="text-xs font-bold text-purple-600 mt-1.5">b</span>
+                      </div>
+                      {/* 右端点 b+a */}
+                      <div className="absolute top-1/2 flex flex-col items-center" style={{ left: '80%', transform: 'translateX(-50%)' }}>
+                        <div className="w-[1.5px] h-3 bg-red-500 -translate-y-1/2" />
+                        <span className="text-xs font-bold text-red-600 mt-1.5">b+a</span>
+                      </div>
+                    </div>
+                    {/* 距离标注 */}
+                    <div className="relative h-6 mx-2">
+                      <div className="absolute top-0 border-b-[2px] border-l-[2px] border-r-[2px] border-green-500 rounded-b-md" style={{ left: '20%', right: '20%', height: '80%' }} />
+                    </div>
+                    <div className="flex justify-between px-[18%] text-xs text-gray-500">
+                      <span>← a →</span>
+                      <span>← a →</span>
+                    </div>
+                  </div>
+
+                  <p className="text-sm"><strong>结果：</strong><Math tex="b - a < x < b + a" /></p>
+                  <p className="text-gray-500 text-xs">就三个字：<strong>中心 ± 半径</strong></p>
+                </div>
+              </div>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4">
