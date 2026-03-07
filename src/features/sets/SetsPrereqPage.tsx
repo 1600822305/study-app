@@ -379,16 +379,16 @@ export function SetsPrereqPage() {
                 <Math tex="y = x^2 - 3x - 4 = (x+1)(x-4)" /> 的图像（a {'>'} 0，开口朝上）：
               </p>
               <div className="bg-gray-50 rounded-xl p-2 overflow-hidden">
-                <Mafs viewBox={{ x: [-3, 6], y: [-6, 4] }} height={220}>
-                  <Coordinates.Cartesian />
+                <Mafs viewBox={{ x: [-3, 6], y: [-6, 4], padding: 0 }} preserveAspectRatio={false} height={260}>
+                  <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 1 }} />
                   <Plot.OfX y={(x: number) => x * x - 3 * x - 4} color="#6366f1" />
                   <Point x={-1} y={0} color="#ef4444" />
                   <Point x={4} y={0} color="#ef4444" />
-                  <MafsText x={-1} y={0.8} size={12}>x₁=-1</MafsText>
-                  <MafsText x={4} y={0.8} size={12}>x₂=4</MafsText>
-                  <MafsText x={-2.2} y={2} size={12} color="#16a34a">y{'>'} 0</MafsText>
-                  <MafsText x={1.5} y={-3} size={12} color="#ef4444">y{'<'} 0</MafsText>
-                  <MafsText x={5.2} y={2} size={12} color="#16a34a">y{'>'} 0</MafsText>
+                  <MafsText x={-1} y={1} size={14}>x₁=-1</MafsText>
+                  <MafsText x={4} y={1} size={14}>x₂=4</MafsText>
+                  <MafsText x={-2.2} y={3} size={16} color="#16a34a">y{'>'} 0</MafsText>
+                  <MafsText x={1.5} y={-4} size={16} color="#ef4444">y{'<'} 0</MafsText>
+                  <MafsText x={5.3} y={3} size={16} color="#16a34a">y{'>'} 0</MafsText>
                 </Mafs>
               </div>
               <div className="mt-3 text-sm space-y-1 text-gray-600">
