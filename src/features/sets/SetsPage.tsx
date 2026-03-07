@@ -510,18 +510,65 @@ export function SetsPage() {
                       <p className="font-bold text-gray-800">例（列举法）：</p>
                       <p>U = &#123;1,2,3,4,5&#125;，A = &#123;1,3,5&#125; → <Math tex="\complement_U A = \{2, 4\}" /></p>
                     </div>
-                    <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                      <p className="font-bold text-gray-800">例（数轴法）：</p>
-                      <p><Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid 1 \leq x < 5\}" /></p>
-                      <p><Math tex="\complement_U A = \{x \mid x < 1 \text{ 或 } x \geq 5\}" /></p>
-                    </div>
-                    <div className="bg-slate-900 text-white rounded-xl p-5 text-center">
-                      <p className="text-sm text-slate-400 mb-2">补集端点规律（必记！）</p>
-                      <div className="space-y-1">
-                        <p>原来 {'<'} 的 → 补集变成 ≥</p>
-                        <p>原来 ≤ 的 → 补集变成 {'>'}</p>
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                      <p className="font-bold text-gray-800">例（数轴法 · 图解）：</p>
+                      <p><Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid 1 \leq x < 5\}" />，求 <Math tex="\complement_U A" /></p>
+
+                      <div className="bg-white rounded-lg p-3 border">
+                        <p className="text-xs text-gray-500 mb-2 font-bold">第①步：画出 A 的范围</p>
+                        <svg viewBox="0 0 340 50" className="w-full">
+                          <line x1="20" y1="30" x2="320" y2="30" stroke="#d1d5db" strokeWidth="1.5" />
+                          {/* ticks */}
+                          <line x1="100" y1="24" x2="100" y2="36" stroke="#6b7280" strokeWidth="1.5" />
+                          <text x="100" y="46" fontSize="11" fill="#374151" textAnchor="middle">1</text>
+                          <line x1="240" y1="24" x2="240" y2="36" stroke="#6b7280" strokeWidth="1.5" />
+                          <text x="240" y="46" fontSize="11" fill="#374151" textAnchor="middle">5</text>
+                          {/* A range */}
+                          <line x1="100" y1="30" x2="240" y2="30" stroke="#3b82f6" strokeWidth="4" />
+                          <circle cx="100" cy="30" r="4" fill="#3b82f6" />
+                          <circle cx="240" cy="30" r="4" fill="white" stroke="#3b82f6" strokeWidth="2" />
+                          <text x="170" y="20" fontSize="11" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A：[1, 5)</text>
+                          {/* endpoint labels */}
+                          <text x="100" y="14" fontSize="9" fill="#3b82f6" textAnchor="middle">实心=含1</text>
+                          <text x="240" y="14" fontSize="9" fill="#f59e0b" textAnchor="middle">空心=不含5</text>
+                        </svg>
                       </div>
-                      <p className="text-amber-400 font-bold text-sm mt-3">口诀：开变闭，闭变开</p>
+
+                      <div className="bg-white rounded-lg p-3 border">
+                        <p className="text-xs text-gray-500 mb-2 font-bold">第②步：补集 = 数轴上剩下的部分，端点反转！</p>
+                        <svg viewBox="0 0 340 50" className="w-full">
+                          <line x1="20" y1="30" x2="320" y2="30" stroke="#d1d5db" strokeWidth="1.5" />
+                          <line x1="100" y1="24" x2="100" y2="36" stroke="#6b7280" strokeWidth="1.5" />
+                          <text x="100" y="46" fontSize="11" fill="#374151" textAnchor="middle">1</text>
+                          <line x1="240" y1="24" x2="240" y2="36" stroke="#6b7280" strokeWidth="1.5" />
+                          <text x="240" y="46" fontSize="11" fill="#374151" textAnchor="middle">5</text>
+                          {/* complement left */}
+                          <line x1="20" y1="30" x2="100" y2="30" stroke="#ef4444" strokeWidth="4" />
+                          <circle cx="100" cy="30" r="4" fill="white" stroke="#ef4444" strokeWidth="2" />
+                          <text x="20" y="20" fontSize="10" fill="#ef4444" fontWeight="bold">←</text>
+                          {/* complement right */}
+                          <line x1="240" y1="30" x2="320" y2="30" stroke="#ef4444" strokeWidth="4" />
+                          <circle cx="240" cy="30" r="4" fill="#ef4444" />
+                          <text x="318" y="20" fontSize="10" fill="#ef4444" fontWeight="bold">→</text>
+                          {/* labels */}
+                          <text x="60" y="18" fontSize="10" fill="#ef4444" fontWeight="bold" textAnchor="middle">x {'<'} 1</text>
+                          <text x="280" y="18" fontSize="10" fill="#ef4444" fontWeight="bold" textAnchor="middle">x ≥ 5</text>
+                          <text x="100" y="14" fontSize="9" fill="#ef4444" textAnchor="middle">空心=不含1</text>
+                          <text x="240" y="14" fontSize="9" fill="#ef4444" textAnchor="middle">实心=含5</text>
+                        </svg>
+                      </div>
+
+                      <p className="text-sm">结果：<Math tex="\complement_U A = \{x \mid x < 1 \text{ 或 } x \geq 5\}" /></p>
+                    </div>
+
+                    <div className="bg-[#F5E6D3] rounded-xl p-5">
+                      <p className="font-bold text-[#7A5C3E] mb-3 text-center">补集端点规律（必记！）</p>
+                      <div className="grid grid-cols-[auto_auto_auto_auto] gap-x-3 gap-y-2 w-fit mx-auto text-sm">
+                        <span className="font-bold text-[#7A5C3E]">A 的端点</span><span></span><span className="font-bold text-[#7A5C3E]">补集端点</span><span className="font-bold text-[#7A5C3E]">图上看</span>
+                        <span>{'<'}（不含）</span><span>→</span><span>≥（含）</span><span className="text-gray-500">空心 → 实心</span>
+                        <span>≤（含）</span><span>→</span><span>{'>'}（不含）</span><span className="text-gray-500">实心 → 空心</span>
+                      </div>
+                      <p className="text-[#9A7B5B] font-bold text-center mt-3">口诀：<strong className="text-[#7A5C3E]">开变闭，闭变开</strong>（空心变实心，实心变空心）</p>
                     </div>
                   </div>
                 </Collapsible>
