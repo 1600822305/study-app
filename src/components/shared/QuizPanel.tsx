@@ -3,6 +3,7 @@ import { ChevronRight, RotateCcw, Trophy, Clock, Target, CheckCircle, XCircle } 
 
 import { Math as MathTex } from './Math';
 import { useQuiz } from '@/hooks/useQuiz';
+import { storage } from '@/lib/storage';
 
 import type { QuizQuestionData } from '@/types';
 
@@ -19,6 +20,16 @@ interface AnswerRecord {
   correct: boolean;
 }
 
+interface QuizSession {
+  currentIdx: number;
+  answers: AnswerRecord[];
+  selected: string | null;
+  answered: boolean;
+  finished: boolean;
+  startTime: number;
+  elapsed: number;
+}
+
 export function QuizPanel({ module, questions, title = '自测', description }: QuizPanelProps) {
   const { recordAnswer } = useQuiz(module);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -29,6 +40,32 @@ export function QuizPanel({ module, questions, title = '自测', description }: 
   const [startTime, setStartTime] = useState(() => Date.now());
   const [elapsed, setElapsed] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval>>(undefined);
+  const restoredRef = useRef(false);
+
+  const sessionKey = `quiz:${module}:session`;
+
+  // Restore session from IndexedDB on mount
+  useEffect(() => {
+    storage.ui.getJSON<QuizSession | null>(sessionKey, null).then((saved) => {
+      if (saved && saved.answers.length > 0) {
+        setCurrentIdx(saved.currentIdx);
+        setAnswers(saved.answers);
+        setSelected(saved.selected);
+        setAnswered(saved.answered);
+        setFinished(saved.finished);
+        setStartTime(saved.finished ? saved.startTime : Date.now() - saved.elapsed * 1000);
+        setElapsed(saved.elapsed);
+      }
+      restoredRef.current = true;
+    });
+  }, [sessionKey]);
+
+  // Persist session to IndexedDB on state changes
+  useEffect(() => {
+    if (!restoredRef.current) return;
+    const session: QuizSession = { currentIdx, answers, selected, answered, finished, startTime, elapsed };
+    storage.ui.setJSON(sessionKey, session);
+  }, [currentIdx, answers, selected, answered, finished, elapsed, sessionKey, startTime]);
 
   const current = questions[currentIdx];
   const total = questions.length;
@@ -88,6 +125,8 @@ export function QuizPanel({ module, questions, title = '自测', description }: 
     setAnswered(false);
     setFinished(false);
     setStartTime(Date.now());
+    setElapsed(0);
+    storage.ui.remove(sessionKey);
   };
 
   const isCorrect = selected === current?.correctAnswer;
