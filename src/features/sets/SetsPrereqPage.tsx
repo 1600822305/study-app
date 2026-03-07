@@ -234,11 +234,50 @@ export function SetsPrereqPage() {
               </div>
             </Collapsible>
 
+            {/* 方法三：配方法 */}
+            <Collapsible title="方法三：配方法（公式法的本质）" storageKey="sets-prereq:eq-complete-square">
+              <div className="space-y-4 text-sm text-gray-700">
+                <p className="text-gray-500 text-xs">核心思路：把 <Math tex="ax^2 + bx + c = 0" /> 凑成 <Math tex="(x + ?)^2 = \text{某个数}" /> 的形式，然后直接开平方。</p>
+
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <p className="font-bold text-gray-800">例：<Math tex="x^2 + 6x + 5 = 0" /></p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
+                    <p><span className="text-blue-600 font-bold">第一步</span>：把常数项移到右边</p>
+                    <p className="pl-4"><Math tex="x^2 + 6x = -5" /></p>
+                    <p><span className="text-blue-600 font-bold">第二步</span>：两边加上 <Math tex="\left(\dfrac{6}{2}\right)^2 = 9" />，凑完全平方</p>
+                    <p className="pl-4"><Math tex="x^2 + 6x + 9 = -5 + 9 = 4" /></p>
+                    <p><span className="text-blue-600 font-bold">第三步</span>：左边写成平方形式</p>
+                    <p className="pl-4"><Math tex="(x + 3)^2 = 4" /></p>
+                    <p><span className="text-blue-600 font-bold">第四步</span>：直接开平方</p>
+                    <p className="pl-4"><Math tex="x + 3 = \pm 2 \;\Rightarrow\; x = -1 \text{ 或 } x = -5" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                  <p className="font-bold text-blue-800 text-xs mb-1">配方的关键操作</p>
+                  <p className="text-blue-700 text-xs">对 <Math tex="x^2 + bx" />，两边加 <Math tex="\left(\dfrac{b}{2}\right)^2" />，就变成 <Math tex="\left(x + \dfrac{b}{2}\right)^2" /></p>
+                  <p className="text-blue-600 text-xs mt-1">口诀：<strong>"一次项系数的一半的平方"</strong></p>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <p className="font-bold text-gray-800">例2：<Math tex="x^2 - 4x + 1 = 0" /></p>
+                  <div className="pl-3 border-l-2 border-green-300 space-y-1.5">
+                    <p><Math tex="x^2 - 4x = -1" /></p>
+                    <p>两边加 <Math tex="\left(\dfrac{-4}{2}\right)^2 = 4" /></p>
+                    <p><Math tex="(x - 2)^2 = 3" /></p>
+                    <p><Math tex="x = 2 \pm \sqrt{3}" /></p>
+                  </div>
+                </div>
+
+                <p className="text-xs text-gray-400">配方法就是求根公式推导过程中的那几步。掌握配方法，求根公式就不用死记了。</p>
+              </div>
+            </Collapsible>
+
             {/* 总结 */}
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 text-center">
               <p className="text-sm text-orange-600 mb-1">选哪个方法？</p>
-              <p className="text-base font-bold text-gray-800">先试因式分解 → 搞不定再用公式法</p>
-              <p className="text-xs text-gray-500 mt-1">高考90%的方程都能因式分解，公式法是保底的</p>
+              <p className="text-base font-bold text-gray-800">先试因式分解 → 搞不定再配方或套公式</p>
+              <p className="text-xs text-gray-500 mt-1">高考90%的方程都能因式分解，配方法和公式法是保底的</p>
             </div>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
