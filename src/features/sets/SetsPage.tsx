@@ -393,6 +393,7 @@ export function SetsPage() {
                       <p className="font-bold text-gray-800 mb-1">例：A = &#123;a, b, c&#125;，3个元素</p>
                       <p>子集 = 2³ = <strong>8</strong> 个：∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</p>
                       <p>真子集 = 8 - 1 = <strong>7</strong>（去掉&#123;a,b,c&#125;本身）</p>
+                      <p>非空子集 = 8 - 1 = <strong>7</strong>（去掉∅）</p>
                       <p>非空真子集 = 8 - 2 = <strong>6</strong>（去掉∅和&#123;a,b,c&#125;）</p>
                     </div>
                   </div>
