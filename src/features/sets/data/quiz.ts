@@ -97,7 +97,8 @@ export const setsQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'sq7',
-    question: '集合 A = {a, b, c} 的子集个数为',
+    question: '',
+    questionLatex: 'A = \\{a, b, c\\} \\text{ 的子集个数为}',
     options: [
       { label: 'A', value: '6' },
       { label: 'B', value: '7' },
@@ -114,10 +115,10 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     questionLatex:
       'A = \\{x \\mid x^2 - 4x + 3 \\leq 0\\},\\; B = \\{x \\mid x > 2\\},\\; A \\cap B =',
     options: [
-      { label: 'A', value: '(2, 3]', isLatex: false },
-      { label: 'B', value: '[1, 2)', isLatex: false },
-      { label: 'C', value: '[1, 3]', isLatex: false },
-      { label: 'D', value: '(2, +∞)', isLatex: false },
+      { label: 'A', value: '(2, 3]', isLatex: true },
+      { label: 'B', value: '[1, 2)', isLatex: true },
+      { label: 'C', value: '[1, 3]', isLatex: true },
+      { label: 'D', value: '(2, +\\infty)', isLatex: true },
     ],
     correctAnswer: '(2, 3]',
     explanation: '先解 A 的不等式，再与 B 取交集。',
@@ -128,19 +129,19 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     id: 'sq9',
     question: '下列关于空集的说法，正确的是',
     options: [
-      { label: 'A', value: '∅ = {0}' },
-      { label: 'B', value: '空集没有子集' },
-      { label: 'C', value: '空集是任何集合的子集' },
-      { label: 'D', value: '空集是任何集合的元素' },
+      { label: 'A', value: '\\varnothing = \\{0\\}', isLatex: true },
+      { label: 'B', value: '\\text{空集没有子集}', isLatex: true },
+      { label: 'C', value: '\\text{空集是任何集合的子集}', isLatex: true },
+      { label: 'D', value: '\\text{空集是任何集合的元素}', isLatex: true },
     ],
-    correctAnswer: '空集是任何集合的子集',
+    correctAnswer: '\\text{空集是任何集合的子集}',
     explanation: '空集 ∅ 是任何集合的子集，这是集合论的基本公理。',
   },
   {
     id: 'sq10',
-    question: '已知 U = R，',
+    question: '',
     questionLatex:
-      'A = \\{x \\mid -1 \\leq x < 3\\},\\; B = \\{x \\mid 2 < x \\leq 5\\},\\; A \\cup B =',
+      'U = \\mathbb{R},\\; A = \\{x \\mid -1 \\leq x < 3\\},\\; B = \\{x \\mid 2 < x \\leq 5\\},\\; A \\cup B =',
     options: [
       { label: 'A', value: '\\{x \\mid -1 \\leq x \\leq 5\\}', isLatex: true },
       { label: 'B', value: '\\{x \\mid 2 < x < 3\\}', isLatex: true },
@@ -156,12 +157,12 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     id: 'sq11',
     question: '下列关系正确的是',
     options: [
-      { label: 'A', value: '0 ∈ N*' },
-      { label: 'B', value: '√2 ∈ Q' },
-      { label: 'C', value: '-3 ∈ Z' },
-      { label: 'D', value: 'π ∈ Q' },
+      { label: 'A', value: '0 \\in \\mathbb{N}^*', isLatex: true },
+      { label: 'B', value: '\\sqrt{2} \\in \\mathbb{Q}', isLatex: true },
+      { label: 'C', value: '-3 \\in \\mathbb{Z}', isLatex: true },
+      { label: 'D', value: '\\pi \\in \\mathbb{Q}', isLatex: true },
     ],
-    correctAnswer: '-3 ∈ Z',
+    correctAnswer: '-3 \\in \\mathbb{Z}',
     explanation: '-3 是整数，属于整数集 Z。0 不属于正整数集 N*；√2 和 π 都是无理数，不属于有理数集 Q。',
   },
   {
