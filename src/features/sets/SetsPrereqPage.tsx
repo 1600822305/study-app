@@ -80,37 +80,37 @@ export function SetsPrereqPage() {
               </div>
             </div>
 
-            {/* 直接开平方法 */}
-            <div>
-              <p className="font-bold mb-2">方法零：直接开平方法（最简单，秒杀特定题型）</p>
-              <p className="text-gray-500 text-xs mb-2">看到 x² = 某个数 或 (x+a)² = 某个数，直接开根号，不用分解也不用套公式。</p>
-              <div className="space-y-2">
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 text-xs mb-1">形式一：x² = k</p>
-                  <p><Math tex="x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
-                  <p className="text-gray-500 text-xs">两边开根号，别忘了 ±</p>
+            {/* 方法零：直接开平方法 */}
+            <Collapsible title="方法零：直接开平方法（最简单）" storageKey="sets-prereq:eq-sqrt">
+              <div className="space-y-3 text-sm text-gray-700">
+                <p className="text-gray-500 text-xs">看到 x² = 某个数 或 (x+a)² = 某个数，直接开根号，不用分解也不用套公式。</p>
+                <div className="space-y-2">
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 text-xs mb-1">形式一：x² = k</p>
+                    <p><Math tex="x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
+                    <p className="text-gray-500 text-xs">两边开根号，别忘了 ±</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 text-xs mb-1">形式二：(x+a)² = k</p>
+                    <p><Math tex="(x-1)^2 = 4 \;\Rightarrow\; x-1 = \pm 2 \;\Rightarrow\; x = 3 \text{ 或 } x = -1" /></p>
+                    <p className="text-gray-500 text-xs">先开根号，再移项</p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 text-xs mb-1">形式三：ax² = k（先除再开）</p>
+                    <p><Math tex="2x^2 = 18 \;\Rightarrow\; x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
+                  </div>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 text-xs mb-1">形式二：(x+a)² = k</p>
-                  <p><Math tex="(x-1)^2 = 4 \;\Rightarrow\; x-1 = \pm 2 \;\Rightarrow\; x = 3 \text{ 或 } x = -1" /></p>
-                  <p className="text-gray-500 text-xs">先开根号，再移项</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 text-xs mb-1">形式三：ax² = k（先除再开）</p>
-                  <p><Math tex="2x^2 = 18 \;\Rightarrow\; x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
-                </div>
+                <p className="text-xs text-gray-400">适用范围：没有一次项（bx），或者已经是完全平方的形式。</p>
               </div>
-              <p className="text-xs text-gray-400 mt-2">适用范围：没有一次项（bx），或者已经是完全平方的形式。遇到一次项就得用下面的方法。</p>
-            </div>
+            </Collapsible>
 
-            {/* 因式分解法 */}
-            <div>
-              <p className="font-bold mb-2">方法一：因式分解法（最常用，优先试）</p>
-              <p className="text-gray-500 text-xs mb-2">核心思路：把方程拆成"两个东西相乘 = 0"的形式，那其中一个必须 = 0。</p>
-              <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-3">
-                <div>
+            {/* 方法一：因式分解法 */}
+            <Collapsible title="方法一：因式分解法（最常用，优先试）" storageKey="sets-prereq:eq-factor">
+              <div className="space-y-4 text-sm text-gray-700">
+                <p className="text-gray-500 text-xs">核心思路：把方程拆成"两个东西相乘 = 0"的形式，那其中一个必须 = 0。</p>
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <p className="font-bold text-gray-800">例：<Math tex="x^2 - 5x + 6 = 0" /></p>
-                  <div className="mt-2 pl-3 border-l-2 border-blue-300 space-y-1.5">
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
                     <p><span className="text-blue-600 font-bold">第一步</span>：找两个数，要满足：</p>
                     <p className="pl-4">乘起来 = 常数项 6</p>
                     <p className="pl-4">加起来 = 一次项系数 -5</p>
@@ -120,129 +120,119 @@ export function SetsPrereqPage() {
                     <p className="pl-4"><Math tex="x - 2 = 0 \;\Rightarrow\; x = 2" />　或　<Math tex="x - 3 = 0 \;\Rightarrow\; x = 3" /></p>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* 三种常见套路 */}
-            <div>
-              <p className="font-bold mb-2">三种常见"一眼看出"的套路</p>
-              <div className="space-y-2">
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 text-xs mb-1">套路一：平方差（没有 x 的一次项）</p>
-                  <p><Math tex="x^2 - 4 = 0" /></p>
-                  <p className="text-gray-500 text-xs">看到 x² - 一个数 = 0 → 直接拆成 (x+?)(x-?)</p>
-                  <p><Math tex="(x+2)(x-2) = 0 \;\Rightarrow\; x = 2 \text{ 或 } x = -2" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 text-xs mb-1">套路二：提公因式（没有常数项）</p>
-                  <p><Math tex="x^2 - 3x = 0" /></p>
-                  <p className="text-gray-500 text-xs">每一项都有 x → 把 x 提出来</p>
-                  <p><Math tex="x(x - 3) = 0 \;\Rightarrow\; x = 0 \text{ 或 } x = 3" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 text-xs mb-1">套路三：完全平方（两个根一样）</p>
-                  <p><Math tex="x^2 + 2x + 1 = 0" /></p>
-                  <p className="text-gray-500 text-xs mt-1">怎么看出来的？对照公式 <Math tex="(x+a)^2 = x^2 + 2ax + a^2" />：</p>
-                  <p className="text-gray-500 text-xs pl-3">这里 a = 1，所以 <Math tex="2ax = 2x" /> ✓，<Math tex="a^2 = 1" /> ✓</p>
-                  <p className="mt-1"><Math tex="(x+1)^2 = 0 \;\Rightarrow\; x = -1" />（重根：只有一个解）</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 公式法 */}
-            <div>
-              <p className="font-bold mb-2">方法二：公式法（因式分解看不出来时用）</p>
-              <p className="text-gray-500 text-xs mb-2">直接套公式，万能方法，但算起来比因式分解麻烦。用之前要先<strong>认准 a、b、c</strong>。</p>
-
-              {/* 怎么认 a b c */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-3">
-                <p className="font-bold text-blue-800 mb-2">第零步：怎么认出 a、b、c？</p>
-                <p className="text-blue-700 text-xs mb-2">把方程对齐到标准形式 <Math tex="ax^2 + bx + c = 0" />，<strong>连着前面的符号一起读</strong>：</p>
-                <div className="bg-white rounded-lg p-3 border border-blue-100 space-y-2 text-sm">
-                  <div>
-                    <p className="text-gray-800"><Math tex="x^2 + 2x - 1 = 0" /></p>
-                    <p className="text-gray-500 text-xs pl-3">a = <strong className="text-blue-600">1</strong>（x² 前面的数），b = <strong className="text-blue-600">+2</strong>（x 前面的数），c = <strong className="text-red-500">-1</strong>（常数项，<strong>符号要带上</strong>）</p>
+                <p className="font-bold text-gray-800 mt-2">三种常见"一眼看出"的套路</p>
+                <div className="space-y-2">
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 text-xs mb-1">套路一：平方差（没有 x 的一次项）</p>
+                    <p><Math tex="x^2 - 4 = 0 \;\Rightarrow\; (x+2)(x-2) = 0 \;\Rightarrow\; x = \pm 2" /></p>
                   </div>
-                  <div>
-                    <p className="text-gray-800"><Math tex="2x^2 - 3x + 5 = 0" /></p>
-                    <p className="text-gray-500 text-xs pl-3">a = <strong className="text-blue-600">2</strong>，b = <strong className="text-red-500">-3</strong>（是负的！），c = <strong className="text-blue-600">+5</strong></p>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 text-xs mb-1">套路二：提公因式（没有常数项）</p>
+                    <p><Math tex="x^2 - 3x = 0 \;\Rightarrow\; x(x - 3) = 0 \;\Rightarrow\; x = 0 \text{ 或 } x = 3" /></p>
+                  </div>
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 text-xs mb-1">套路三：完全平方（两个根一样）</p>
+                    <p><Math tex="x^2 + 2x + 1 = 0 \;\Rightarrow\; (x+1)^2 = 0 \;\Rightarrow\; x = -1" />（重根）</p>
                   </div>
                 </div>
-                <p className="text-red-600 text-xs mt-2 font-bold">最常见的错：把 c = -1 写成 c = 1，符号丢了，整道题全错！</p>
               </div>
+            </Collapsible>
 
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-xs text-gray-500 mb-2">认准 a、b、c 之后，直接套：</p>
-                <Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" display />
+            {/* 方法二：公式法 */}
+            <Collapsible title="方法二：公式法（万能保底）" storageKey="sets-prereq:eq-formula">
+              <div className="space-y-4 text-sm text-gray-700">
+                <p className="text-gray-500 text-xs">直接套公式，万能方法，但算起来比因式分解麻烦。用之前要先<strong>认准 a、b、c</strong>。</p>
 
-                <Collapsible title="这个公式怎么来的？（配方法推导，看懂就不用死背）" storageKey="sets-prereq:formula-derivation">
-                  <div className="space-y-2 text-sm text-gray-700">
-                    <p className="text-xs text-gray-500">从 <Math tex="ax^2 + bx + c = 0" /> 出发，一步步变形：</p>
-                    <div className="pl-3 border-l-2 border-purple-300 space-y-2">
-                      <div>
-                        <p className="text-xs text-purple-600 font-bold">第一步：两边除以 a，让 x² 系数变 1</p>
-                        <p><Math tex="x^2 + \frac{b}{a}x + \frac{c}{a} = 0" /></p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-purple-600 font-bold">第二步：常数项挪到右边</p>
-                        <p><Math tex="x^2 + \frac{b}{a}x = -\frac{c}{a}" /></p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-purple-600 font-bold">第三步：配方！两边加上 <Math tex="\left(\frac{b}{2a}\right)^2" />，凑成完全平方</p>
-                        <p><Math tex="x^2 + \frac{b}{a}x + \frac{b^2}{4a^2} = -\frac{c}{a} + \frac{b^2}{4a^2}" /></p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-purple-600 font-bold">第四步：左边就是完全平方，右边通分</p>
-                        <p><Math tex="\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}" /></p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-purple-600 font-bold">第五步：两边开根号</p>
-                        <p><Math tex="x + \frac{b}{2a} = \pm\frac{\sqrt{b^2 - 4ac}}{2a}" /></p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-purple-600 font-bold">第六步：移项，搞定！</p>
-                        <p><Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" /></p>
-                      </div>
+                {/* 怎么认 a b c */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="font-bold text-blue-800 mb-2">第零步：怎么认出 a、b、c？</p>
+                  <p className="text-blue-700 text-xs mb-2">把方程对齐到标准形式 <Math tex="ax^2 + bx + c = 0" />，<strong>连着前面的符号一起读</strong>：</p>
+                  <div className="bg-white rounded-lg p-3 border border-blue-100 space-y-2 text-sm">
+                    <div>
+                      <p className="text-gray-800"><Math tex="x^2 + 2x - 1 = 0" /></p>
+                      <p className="text-gray-500 text-xs pl-3">a = <strong className="text-blue-600">1</strong>（x² 前面的数），b = <strong className="text-blue-600">+2</strong>（x 前面的数），c = <strong className="text-red-500">-1</strong>（常数项，<strong>符号要带上</strong>）</p>
                     </div>
-                    <p className="text-xs text-gray-500 mt-2 bg-purple-50 p-2 rounded">所以求根公式本质上就是<strong>配方法</strong>的通用版。理解了"配方→开根→移项"这三步，公式就记住了。</p>
+                    <div>
+                      <p className="text-gray-800"><Math tex="2x^2 - 3x + 5 = 0" /></p>
+                      <p className="text-gray-500 text-xs pl-3">a = <strong className="text-blue-600">2</strong>，b = <strong className="text-red-500">-3</strong>（是负的！），c = <strong className="text-blue-600">+5</strong></p>
+                    </div>
                   </div>
-                </Collapsible>
-
-                <div className="mt-3 text-sm space-y-1 bg-white rounded-lg p-3 border border-gray-100">
-                  <p className="font-bold text-gray-800 text-xs">根号里面的 <Math tex="\Delta = b^2 - 4ac" /> 叫"判别式"，决定有几个解：</p>
-                  <p className="pl-4"><Math tex="\Delta > 0" /> → 两个不同的解（最常见）</p>
-                  <p className="pl-4"><Math tex="\Delta = 0" /> → 只有一个解（重根）</p>
-                  <p className="pl-4"><Math tex="\Delta < 0" /> → 无解（根号里是负数，开不出来）</p>
+                  <p className="text-red-600 text-xs mt-2 font-bold">最常见的错：把 c = -1 写成 c = 1，符号丢了，整道题全错！</p>
                 </div>
-              </div>
 
-              {/* 变式：b 是偶数 */}
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-3">
-                <p className="font-bold text-green-800 mb-2">变式：当 b 是偶数时（省一半计算量！）</p>
-                <p className="text-xs text-green-700 mb-2">设 <Math tex="b = 2b'" />（也就是 <Math tex="b' = \frac{b}{2}" />），公式简化为：</p>
-                <div className="bg-white rounded-lg p-3 border border-green-100">
-                  <Math tex="x = \frac{-b' \pm \sqrt{b'^2 - ac}}{a}" display />
-                </div>
-                <p className="text-xs text-green-600 mt-2">根号里也变简单了：<Math tex="\Delta' = b'^2 - ac" />（不用乘 4 了）</p>
-                <div className="bg-white rounded-lg p-3 border border-green-100 mt-2">
-                  <p className="font-bold text-gray-800 text-xs mb-1">例：<Math tex="x^2 + 2x - 1 = 0" />（b = 2 是偶数）</p>
-                  <div className="pl-3 border-l-2 border-green-300 space-y-1 text-sm text-gray-700">
-                    <p><Math tex="b' = 1" />，<Math tex="\Delta' = 1^2 - 1 \times (-1) = 2" /></p>
-                    <p><Math tex="x = \dfrac{-1 \pm \sqrt{2}}{1} = -1 \pm \sqrt{2}" /></p>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="text-xs text-gray-500 mb-2">认准 a、b、c 之后，直接套：</p>
+                  <Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" display />
+
+                  <Collapsible title="这个公式怎么来的？（配方法推导，看懂就不用死背）" storageKey="sets-prereq:formula-derivation">
+                    <div className="space-y-2 text-sm text-gray-700">
+                      <p className="text-xs text-gray-500">从 <Math tex="ax^2 + bx + c = 0" /> 出发，一步步变形：</p>
+                      <div className="pl-3 border-l-2 border-purple-300 space-y-2">
+                        <div>
+                          <p className="text-xs text-purple-600 font-bold">第一步：两边除以 a，让 x² 系数变 1</p>
+                          <p><Math tex="x^2 + \frac{b}{a}x + \frac{c}{a} = 0" /></p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-purple-600 font-bold">第二步：常数项挪到右边</p>
+                          <p><Math tex="x^2 + \frac{b}{a}x = -\frac{c}{a}" /></p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-purple-600 font-bold">第三步：配方！两边加上 <Math tex="\left(\frac{b}{2a}\right)^2" /></p>
+                          <p><Math tex="x^2 + \frac{b}{a}x + \frac{b^2}{4a^2} = -\frac{c}{a} + \frac{b^2}{4a^2}" /></p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-purple-600 font-bold">第四步：左边完全平方，右边通分</p>
+                          <p><Math tex="\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}" /></p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-purple-600 font-bold">第五步：两边开根号</p>
+                          <p><Math tex="x + \frac{b}{2a} = \pm\frac{\sqrt{b^2 - 4ac}}{2a}" /></p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-purple-600 font-bold">第六步：移项，搞定！</p>
+                          <p><Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" /></p>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-2 bg-purple-50 p-2 rounded">所以求根公式本质上就是<strong>配方法</strong>的通用版。理解了"配方→开根→移项"这三步，公式就记住了。</p>
+                    </div>
+                  </Collapsible>
+
+                  <div className="mt-3 text-sm space-y-1 bg-white rounded-lg p-3 border border-gray-100">
+                    <p className="font-bold text-gray-800 text-xs">根号里面的 <Math tex="\Delta = b^2 - 4ac" /> 叫"判别式"，决定有几个解：</p>
+                    <p className="pl-4"><Math tex="\Delta > 0" /> → 两个不同的解（最常见）</p>
+                    <p className="pl-4"><Math tex="\Delta = 0" /> → 只有一个解（重根）</p>
+                    <p className="pl-4"><Math tex="\Delta < 0" /> → 无解（根号里是负数，开不出来）</p>
                   </div>
-                  <p className="text-xs text-green-600 mt-1">比完整公式算起来简单多了吧？</p>
                 </div>
-              </div>
 
-              <div className="bg-gray-50 rounded-lg p-3 mt-3">
-                <p className="font-bold text-gray-800 mb-2">例（完整公式）：<Math tex="x^2 + 2x - 1 = 0" /></p>
-                <div className="pl-3 border-l-2 border-blue-300 space-y-1.5 text-gray-700">
-                  <p><span className="text-blue-600 font-bold">认出 a, b, c</span>：a = 1，b = 2，c = <strong className="text-red-500">-1</strong>（别丢负号！）</p>
-                  <p><span className="text-blue-600 font-bold">算判别式</span>：<Math tex="\Delta = 2^2 - 4(1)(-1) = 4 + 4 = 8 > 0" /> ✓ 有两个解</p>
-                  <p><span className="text-blue-600 font-bold">套公式</span>：<Math tex="x = \dfrac{-2 \pm \sqrt{8}}{2} = \dfrac{-2 \pm 2\sqrt{2}}{2} = -1 \pm \sqrt{2}" /></p>
+                {/* 变式：b 是偶数 */}
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <p className="font-bold text-green-800 mb-2">变式：当 b 是偶数时（省一半计算量！）</p>
+                  <p className="text-xs text-green-700 mb-2">设 <Math tex="b = 2b'" />（也就是 <Math tex="b' = \frac{b}{2}" />），公式简化为：</p>
+                  <div className="bg-white rounded-lg p-3 border border-green-100">
+                    <Math tex="x = \frac{-b' \pm \sqrt{b'^2 - ac}}{a}" display />
+                  </div>
+                  <p className="text-xs text-green-600 mt-2">根号里也变简单了：<Math tex="\Delta' = b'^2 - ac" />（不用乘 4 了）</p>
+                  <div className="bg-white rounded-lg p-3 border border-green-100 mt-2">
+                    <p className="font-bold text-gray-800 text-xs mb-1">例：<Math tex="x^2 + 2x - 1 = 0" />（b = 2 是偶数）</p>
+                    <div className="pl-3 border-l-2 border-green-300 space-y-1 text-sm text-gray-700">
+                      <p><Math tex="b' = 1" />，<Math tex="\Delta' = 1^2 - 1 \times (-1) = 2" /></p>
+                      <p><Math tex="x = \dfrac{-1 \pm \sqrt{2}}{1} = -1 \pm \sqrt{2}" /></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-2">例（完整公式）：<Math tex="x^2 + 2x - 1 = 0" /></p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5 text-gray-700">
+                    <p><span className="text-blue-600 font-bold">认出 a, b, c</span>：a = 1，b = 2，c = <strong className="text-red-500">-1</strong>（别丢负号！）</p>
+                    <p><span className="text-blue-600 font-bold">算判别式</span>：<Math tex="\Delta = 2^2 - 4(1)(-1) = 4 + 4 = 8 > 0" /> ✓ 有两个解</p>
+                    <p><span className="text-blue-600 font-bold">套公式</span>：<Math tex="x = \dfrac{-2 \pm \sqrt{8}}{2} = \dfrac{-2 \pm 2\sqrt{2}}{2} = -1 \pm \sqrt{2}" /></p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Collapsible>
 
             {/* 总结 */}
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 text-center">
