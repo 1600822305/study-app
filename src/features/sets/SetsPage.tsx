@@ -382,11 +382,11 @@ export function SetsPage() {
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                       <p className="font-bold text-blue-800 mb-2">集合有 n 个元素：</p>
-                      <div className="space-y-1">
-                        <p className="text-blue-700">子集个数 = <Math tex="2^n" /></p>
-                        <p className="text-blue-700">真子集个数 = <Math tex="2^n - 1" /></p>
-                        <p className="text-blue-700">非空子集个数 = <Math tex="2^n - 1" /></p>
-                        <p className="text-blue-700">非空真子集个数 = <Math tex="2^n - 2" /></p>
+                      <div className="grid grid-cols-[auto_auto_auto] gap-x-2 gap-y-1 text-blue-700 w-fit">
+                        <span className="text-right">子集个数</span><span>=</span><span><Math tex="2^n" /></span>
+                        <span className="text-right">真子集个数</span><span>=</span><span><Math tex="2^n - 1" /></span>
+                        <span className="text-right">非空子集个数</span><span>=</span><span><Math tex="2^n - 1" /></span>
+                        <span className="text-right">非空真子集个数</span><span>=</span><span><Math tex="2^n - 2" /></span>
                       </div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3">
