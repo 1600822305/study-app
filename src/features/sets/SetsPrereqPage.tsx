@@ -237,39 +237,69 @@ export function SetsPrereqPage() {
             {/* 方法三：配方法 */}
             <Collapsible title="方法三：配方法（公式法的本质）" storageKey="sets-prereq:eq-complete-square">
               <div className="space-y-4 text-sm text-gray-700">
-                <p className="text-gray-500 text-xs">核心思路：把 <Math tex="ax^2 + bx + c = 0" /> 凑成 <Math tex="(x + ?)^2 = \text{某个数}" /> 的形式，然后直接开平方。</p>
+                <p className="text-gray-500 text-xs">核心思路：把方程凑成 <Math tex="(x + ?)^2 = \text{某个数}" /> 的形式，然后用方法零（直接开平方）解出来。</p>
 
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                  <p className="font-bold text-gray-800">例：<Math tex="x^2 + 6x + 5 = 0" /></p>
-                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
-                    <p><span className="text-blue-600 font-bold">第一步</span>：把常数项移到右边</p>
-                    <p className="pl-4"><Math tex="x^2 + 6x = -5" /></p>
-                    <p><span className="text-blue-600 font-bold">第二步</span>：两边加上 <Math tex="\left(\dfrac{6}{2}\right)^2 = 9" />，凑完全平方</p>
-                    <p className="pl-4"><Math tex="x^2 + 6x + 9 = -5 + 9 = 4" /></p>
-                    <p><span className="text-blue-600 font-bold">第三步</span>：左边写成平方形式</p>
-                    <p className="pl-4"><Math tex="(x + 3)^2 = 4" /></p>
-                    <p><span className="text-blue-600 font-bold">第四步</span>：直接开平方</p>
-                    <p className="pl-4"><Math tex="x + 3 = \pm 2 \;\Rightarrow\; x = -1 \text{ 或 } x = -5" /></p>
+                {/* 先讲规则 */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="font-bold text-blue-800 mb-2">关键操作：怎么"凑"完全平方？</p>
+                  <p className="text-blue-700 text-xs mb-2">回忆完全平方公式：<Math tex="(x + a)^2 = x^2 + 2ax + a^2" /></p>
+                  <p className="text-blue-700 text-xs mb-2">反过来看：如果你有 <Math tex="x^2 + 2ax" />，<strong>只差一个 <Math tex="a^2" /></strong> 就能凑成 <Math tex="(x+a)^2" /></p>
+                  <div className="bg-white rounded-lg p-3 border border-blue-100 mt-2">
+                    <p className="text-gray-800 text-sm font-bold mb-1">所以操作就是：</p>
+                    <p className="text-gray-700">看 x 前面的系数 → 除以 2 → 平方 → 两边都加上这个数</p>
+                    <p className="text-blue-600 text-xs mt-2 font-bold">口诀："<strong>一次项系数 ÷ 2，再平方</strong>"</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-3 border border-blue-100 mt-2 text-xs text-gray-600">
+                    <p className="mb-1">验证：<Math tex="x^2 + 6x" />，x 前面系数是 6</p>
+                    <p>6 ÷ 2 = 3，3² = <strong>9</strong> → 加 9 → <Math tex="x^2 + 6x + 9 = (x+3)^2" /> ✓</p>
                   </div>
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                  <p className="font-bold text-blue-800 text-xs mb-1">配方的关键操作</p>
-                  <p className="text-blue-700 text-xs">对 <Math tex="x^2 + bx" />，两边加 <Math tex="\left(\dfrac{b}{2}\right)^2" />，就变成 <Math tex="\left(x + \dfrac{b}{2}\right)^2" /></p>
-                  <p className="text-blue-600 text-xs mt-1">口诀：<strong>"一次项系数的一半的平方"</strong></p>
+                {/* 例1：完整步骤 */}
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <p className="font-bold text-gray-800">例1：<Math tex="x^2 + 6x + 5 = 0" /></p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-2">
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第一步</span>：常数项移到右边</p>
+                      <p className="pl-4"><Math tex="x^2 + 6x = -5" /></p>
+                    </div>
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第二步</span>：x 前面系数是 6 → <span className="text-red-500 font-bold">6 ÷ 2 = 3，3² = 9</span> → 两边都加 9</p>
+                      <p className="pl-4"><Math tex="x^2 + 6x + 9 = -5 + 9" /></p>
+                    </div>
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第三步</span>：左边变成完全平方，右边算出来</p>
+                      <p className="pl-4"><Math tex="(x + 3)^2 = 4" /></p>
+                    </div>
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第四步</span>：直接开平方（回到方法零）</p>
+                      <p className="pl-4"><Math tex="x + 3 = \pm 2" /></p>
+                      <p className="pl-4"><Math tex="x = -3 + 2 = -1 \quad \text{或} \quad x = -3 - 2 = -5" /></p>
+                    </div>
+                  </div>
                 </div>
 
+                {/* 例2 */}
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <p className="font-bold text-gray-800">例2：<Math tex="x^2 - 4x + 1 = 0" /></p>
-                  <div className="pl-3 border-l-2 border-green-300 space-y-1.5">
-                    <p><Math tex="x^2 - 4x = -1" /></p>
-                    <p>两边加 <Math tex="\left(\dfrac{-4}{2}\right)^2 = 4" /></p>
-                    <p><Math tex="(x - 2)^2 = 3" /></p>
-                    <p><Math tex="x = 2 \pm \sqrt{3}" /></p>
+                  <div className="pl-3 border-l-2 border-green-300 space-y-2">
+                    <div>
+                      <p>常数项移右边：<Math tex="x^2 - 4x = -1" /></p>
+                    </div>
+                    <div>
+                      <p>x 前面系数是 -4 → <span className="text-red-500 font-bold">-4 ÷ 2 = -2，(-2)² = 4</span> → 两边都加 4</p>
+                      <p className="pl-4"><Math tex="x^2 - 4x + 4 = -1 + 4" /></p>
+                    </div>
+                    <div>
+                      <p><Math tex="(x - 2)^2 = 3" /></p>
+                    </div>
+                    <div>
+                      <p><Math tex="x = 2 \pm \sqrt{3}" /></p>
+                    </div>
                   </div>
                 </div>
 
-                <p className="text-xs text-gray-400">配方法就是求根公式推导过程中的那几步。掌握配方法，求根公式就不用死记了。</p>
+                <p className="text-xs text-gray-400">配方法就是求根公式推导中的那几步。掌握了配方法，求根公式就不用死记了——你随时可以自己推出来。</p>
               </div>
             </Collapsible>
 
