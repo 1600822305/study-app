@@ -268,8 +268,27 @@ export function SetsPrereqPage() {
                   <p className="pl-4"><Math tex="\Delta < 0" /> → 无解（根号里是负数，开不出来）</p>
                 </div>
               </div>
+
+              {/* 变式：b 是偶数 */}
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-3">
+                <p className="font-bold text-green-800 mb-2">变式：当 b 是偶数时（省一半计算量！）</p>
+                <p className="text-xs text-green-700 mb-2">设 <Math tex="b = 2b'" />（也就是 <Math tex="b' = \frac{b}{2}" />），公式简化为：</p>
+                <div className="bg-white rounded-lg p-3 border border-green-100">
+                  <Math tex="x = \frac{-b' \pm \sqrt{b'^2 - ac}}{a}" display />
+                </div>
+                <p className="text-xs text-green-600 mt-2">根号里也变简单了：<Math tex="\Delta' = b'^2 - ac" />（不用乘 4 了）</p>
+                <div className="bg-white rounded-lg p-3 border border-green-100 mt-2">
+                  <p className="font-bold text-gray-800 text-xs mb-1">例：<Math tex="x^2 + 2x - 1 = 0" />（b = 2 是偶数）</p>
+                  <div className="pl-3 border-l-2 border-green-300 space-y-1 text-sm text-gray-700">
+                    <p><Math tex="b' = 1" />，<Math tex="\Delta' = 1^2 - 1 \times (-1) = 2" /></p>
+                    <p><Math tex="x = \dfrac{-1 \pm \sqrt{2}}{1} = -1 \pm \sqrt{2}" /></p>
+                  </div>
+                  <p className="text-xs text-green-600 mt-1">比完整公式算起来简单多了吧？</p>
+                </div>
+              </div>
+
               <div className="bg-gray-50 rounded-lg p-3 mt-3">
-                <p className="font-bold text-gray-800 mb-2">例：<Math tex="x^2 + 2x - 1 = 0" /></p>
+                <p className="font-bold text-gray-800 mb-2">例（完整公式）：<Math tex="x^2 + 2x - 1 = 0" /></p>
                 <div className="pl-3 border-l-2 border-blue-300 space-y-1.5 text-gray-700">
                   <p><span className="text-blue-600 font-bold">认出 a, b, c</span>：a = 1，b = 2，c = <strong className="text-red-500">-1</strong>（别丢负号！）</p>
                   <p><span className="text-blue-600 font-bold">算判别式</span>：<Math tex="\Delta = 2^2 - 4(1)(-1) = 4 + 4 = 8 > 0" /> ✓ 有两个解</p>
