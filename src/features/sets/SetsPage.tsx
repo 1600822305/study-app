@@ -359,8 +359,8 @@ export function SetsPage() {
                       <p className="font-bold text-blue-800 mb-2">空集 = 没有任何元素的集合 = 空袋子</p>
                       <p className="text-blue-700"><Math tex="\varnothing = \{\}" /> ← 里面什么都没有</p>
                     </div>
-                    <div className="bg-slate-900 text-white rounded-xl p-5 text-center">
-                      <p className="text-sm text-slate-400 mb-2">空集两条铁律（高考必考！）</p>
+                    <div className="bg-[#F5E6D3] rounded-xl p-5 text-center">
+                      <p className="text-sm text-[#9A7B5B] mb-2">空集两条铁律（高考必考！）</p>
                       <p className="mb-2"><Math tex="\varnothing \subseteq A" />　（对<strong>任意</strong>集合 A 都成立）</p>
                       <p><Math tex="\varnothing \subsetneq A" />　（只要 A 不是空集）</p>
                     </div>
