@@ -205,9 +205,27 @@ export function SetsPrereqPage() {
             {/* 公式法 */}
             <div>
               <p className="font-bold mb-2">方法二：公式法（因式分解看不出来时用）</p>
-              <p className="text-gray-500 text-xs mb-2">直接套公式，万能方法，但算起来比因式分解麻烦。</p>
+              <p className="text-gray-500 text-xs mb-2">直接套公式，万能方法，但算起来比因式分解麻烦。用之前要先<strong>认准 a、b、c</strong>。</p>
+
+              {/* 怎么认 a b c */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-3">
+                <p className="font-bold text-blue-800 mb-2">第零步：怎么认出 a、b、c？</p>
+                <p className="text-blue-700 text-xs mb-2">把方程对齐到标准形式 <Math tex="ax^2 + bx + c = 0" />，<strong>连着前面的符号一起读</strong>：</p>
+                <div className="bg-white rounded-lg p-3 border border-blue-100 space-y-2 text-sm">
+                  <div>
+                    <p className="text-gray-800"><Math tex="x^2 + 2x - 1 = 0" /></p>
+                    <p className="text-gray-500 text-xs pl-3">a = <strong className="text-blue-600">1</strong>（x² 前面的数），b = <strong className="text-blue-600">+2</strong>（x 前面的数），c = <strong className="text-red-500">-1</strong>（常数项，<strong>符号要带上</strong>）</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-800"><Math tex="2x^2 - 3x + 5 = 0" /></p>
+                    <p className="text-gray-500 text-xs pl-3">a = <strong className="text-blue-600">2</strong>，b = <strong className="text-red-500">-3</strong>（是负的！），c = <strong className="text-blue-600">+5</strong></p>
+                  </div>
+                </div>
+                <p className="text-red-600 text-xs mt-2 font-bold">最常见的错：把 c = -1 写成 c = 1，符号丢了，整道题全错！</p>
+              </div>
+
               <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-xs text-gray-500 mb-2">对于 <Math tex="ax^2 + bx + c = 0" />，直接套：</p>
+                <p className="text-xs text-gray-500 mb-2">认准 a、b、c 之后，直接套：</p>
                 <Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" display />
                 <div className="mt-3 text-sm space-y-1 bg-white rounded-lg p-3 border border-gray-100">
                   <p className="font-bold text-gray-800 text-xs">根号里面的 <Math tex="\Delta = b^2 - 4ac" /> 叫"判别式"，决定有几个解：</p>
@@ -219,7 +237,7 @@ export function SetsPrereqPage() {
               <div className="bg-gray-50 rounded-lg p-3 mt-3">
                 <p className="font-bold text-gray-800 mb-2">例：<Math tex="x^2 + 2x - 1 = 0" /></p>
                 <div className="pl-3 border-l-2 border-blue-300 space-y-1.5 text-gray-700">
-                  <p><span className="text-blue-600 font-bold">认出 a, b, c</span>：a = 1，b = 2，c = -1</p>
+                  <p><span className="text-blue-600 font-bold">认出 a, b, c</span>：a = 1，b = 2，c = <strong className="text-red-500">-1</strong>（别丢负号！）</p>
                   <p><span className="text-blue-600 font-bold">算判别式</span>：<Math tex="\Delta = 2^2 - 4(1)(-1) = 4 + 4 = 8 > 0" /> ✓ 有两个解</p>
                   <p><span className="text-blue-600 font-bold">套公式</span>：<Math tex="x = \dfrac{-2 \pm \sqrt{8}}{2} = \dfrac{-2 \pm 2\sqrt{2}}{2} = -1 \pm \sqrt{2}" /></p>
                 </div>
