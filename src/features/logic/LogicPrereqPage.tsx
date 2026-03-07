@@ -1,52 +1,13 @@
-import { useState } from 'react';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 
-import { Math, MathInput, Collapsible, SpeakButton } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
 import { logicPrereqNarrations } from './data/prereq-narrations';
-
-interface SelfTestItem {
-  question: string;
-  questionLatex?: string;
-  answer: string;
-  answerLatex?: string;
-}
-
-const selfTestItems: SelfTestItem[] = [
-  {
-    question: 'A = (1, 4)，B = (0, 5)，A 和 B 谁包含谁？',
-    answer: 'A⊂B',
-    answerLatex: 'A \\subset B',
-  },
-  {
-    question: '解不等式：x² - 5x + 4 ≤ 0',
-    questionLatex: 'x^2 - 5x + 4 \\leq 0',
-    answer: '1≤x≤4',
-    answerLatex: '1 \\leq x \\leq 4',
-  },
-  {
-    question: '解不等式：|x + 2| < 3',
-    questionLatex: '|x + 2| < 3',
-    answer: '-5<x<1',
-    answerLatex: '-5 < x < 1',
-  },
-  {
-    question: 'p: x = 1，q: x² = 1，p 能推出 q 吗？q 能推出 p 吗？',
-    answer: 'p→q能,q→p不能',
-  },
-];
+import { logicPrereqProgressItems } from './data/prereq-progress';
+import { logicPrereqQuizQuestions } from './data/prereq-quiz';
+import { useProgress } from '@/hooks';
 
 export function LogicPrereqPage() {
-  const [revealed, setRevealed] = useState<Set<number>>(new Set());
-  const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
-
-  const toggleReveal = (idx: number) => {
-    setRevealed((prev) => {
-      const next = new Set(prev);
-      if (next.has(idx)) next.delete(idx);
-      else next.add(idx);
-      return next;
-    });
-  };
+  const { items: progressItems, toggle: toggleProgress } = useProgress('logic-prereq', logicPrereqProgressItems);
 
   return (
     <div>
@@ -70,9 +31,25 @@ export function LogicPrereqPage() {
         </div>
       </div>
 
+      <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
+        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
+        <div className="text-sm text-gray-600 space-y-1">
+          <p>一、集合的子集关系 ──── 判断"谁包含谁"，充分必要条件的基础</p>
+          <p>二、解不等式 ──── 把条件转成集合，比较范围大小</p>
+          <p>三、基本推理能力 ──── 判断"p 能不能推出 q"</p>
+          <p>四、公式速查表 ──── 一页纸总结</p>
+          <p>五、选择题自测（8题）</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Main content */}
+        <div className="flex-1 min-w-0">
+
       {/* Section 1: Subset Relations */}
       <section className="mb-6">
         <Collapsible title="一、集合的子集关系" defaultOpen storageKey="logic-prereq:subset" headerExtra={<SpeakButton text={logicPrereqNarrations.subset} />}>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用数轴快速判断两个区间的包含关系，说出"A⊂B"还是"B⊂A"。</p>
           <div className="space-y-3 text-sm text-gray-700">
             <p>充分必要条件的判断，本质就是<strong>比较两个集合的大小</strong>。</p>
 
@@ -99,6 +76,24 @@ export function LogicPrereqPage() {
                 现在先记住怎么判断谁包含谁。
               </p>
             </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. A = &#123;1,2&#125;，B = &#123;1,2,3&#125;，关系？　答案：<strong>A ⊂ B</strong></p>
+              <p className="text-gray-700">2. A = (-1, 3)，B = (-2, 5)，谁包含谁？　答案：<strong>A ⊂ B</strong></p>
+              <p className="text-gray-700">3. A = [1, 4]，B = [1, 4]，关系？　答案：<strong>A = B</strong></p>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-amber-700 text-sm space-y-1">
+                  <p className="font-bold">⚠️ 易错点</p>
+                  <p><strong>⊂ 和 ⊆ 的区别</strong>：⊂ 是真子集（不能相等），⊆ 是子集（可以相等）</p>
+                  <p>比较区间时<strong>画数轴</strong>最靠谱，不要只看端点数字大小</p>
+                </div>
+              </div>
+            </div>
           </div>
         </Collapsible>
       </section>
@@ -106,6 +101,7 @@ export function LogicPrereqPage() {
       {/* Section 2: Solving Inequalities */}
       <section className="mb-6">
         <Collapsible title="二、解不等式" defaultOpen storageKey="logic-prereq:inequality" headerExtra={<SpeakButton text={logicPrereqNarrations.inequalityReview} />}>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：快速解一元二次不等式和绝对值不等式，写成集合或区间。</p>
           <div className="space-y-4 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-2">一元二次不等式速查</p>
@@ -113,6 +109,7 @@ export function LogicPrereqPage() {
                 <p><Math tex="ax^2+bx+c > 0 \;\Rightarrow\; x < x_1 \text{ 或 } x > x_2" />（取两边）</p>
                 <p><Math tex="ax^2+bx+c < 0 \;\Rightarrow\; x_1 < x < x_2" />（取中间）</p>
               </div>
+              <p className="mt-2 text-gray-600">口诀：<strong>大于取两边，小于取中间</strong></p>
             </div>
 
             <div>
@@ -130,11 +127,30 @@ export function LogicPrereqPage() {
                 <p><Math tex="|x| > a \;\Rightarrow\; x < -a \text{ 或 } x > a" /></p>
                 <p><Math tex="|x - b| < a \;\Rightarrow\; b - a < x < b + a" /></p>
               </div>
+              <p className="mt-2 text-gray-600">口诀：<strong>小于取中间，大于取两边</strong>（和二次不等式一样！）</p>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="font-bold text-gray-800 mb-1">例：<Math tex="|x - 1| < 3" /></p>
               <p><Math tex="1 - 3 < x < 1 + 3 \;\Rightarrow\; -2 < x < 4" /></p>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. 解 <Math tex="x^2 - 5x + 6 < 0" /> → 答案：<strong>2 {'<'} x {'<'} 3</strong></p>
+              <p className="text-gray-700">2. 解 <Math tex="x^2 - 1 \geq 0" /> → 答案：<strong>x ≤ -1 或 x ≥ 1</strong></p>
+              <p className="text-gray-700">3. 解 <Math tex="|x + 2| < 3" /> → 答案：<strong>-5 {'<'} x {'<'} 1</strong></p>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-amber-700 text-sm space-y-1">
+                  <p className="font-bold">⚠️ 易错点</p>
+                  <p><strong>开闭区间别搞混</strong>：{'<'} 用开区间 ()，≤ 用闭区间 []</p>
+                  <p>绝对值不等式 |x-b| {'<'} a，<strong>中心是 b 不是 0</strong>，别算错</p>
+                </div>
+              </div>
             </div>
           </div>
         </Collapsible>
@@ -143,6 +159,7 @@ export function LogicPrereqPage() {
       {/* Section 3: Basic Reasoning */}
       <section className="mb-6">
         <Collapsible title="三、基本推理能力" defaultOpen storageKey="logic-prereq:reasoning" headerExtra={<SpeakButton text={logicPrereqNarrations.reasoning} />}>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：判断"p 能不能推出 q"，用举反例法或集合包含法。</p>
           <div className="space-y-4 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-2">"推出"是什么意思？</p>
@@ -174,81 +191,101 @@ export function LogicPrereqPage() {
               </div>
             </div>
 
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <p className="text-blue-800 text-sm">
+                <strong>核心：</strong>p 的范围 ⊆ q 的范围 → p 能推出 q（<strong>小推大能推，大推小推不出</strong>）
+              </p>
+            </div>
+
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="font-bold text-gray-800 mb-2">综合例</p>
               <p>p: "x {'>'} 3"，q: "x {'>'} 1"</p>
+              <p className="text-gray-500 text-xs mt-1">p 的集合 = (3, +∞)，q 的集合 = (1, +∞)，p ⊂ q</p>
               <div className="mt-2 space-y-1">
-                <p>p → q？x {'>'} 3 当然 x {'>'} 1 ✓（能推出）</p>
-                <p>q → p？x {'>'} 1 不一定 x {'>'} 3（如 x = 2）✗（推不出）</p>
+                <p>p → q？x {'>'} 3 当然 x {'>'} 1 ✓（小范围满足大范围）</p>
+                <p>q → p？x {'>'} 1 不一定 x {'>'} 3（如 x = 2）✗</p>
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. p: "x = 1"，q: "x² = 1"，p→q？q→p？　答案：<strong>p→q ✓，q→p ✗</strong></p>
+              <p className="text-gray-700">2. p: "x {'>'} 5"，q: "x {'>'} 3"，p→q？　答案：<strong>✓</strong></p>
+              <p className="text-gray-700">3. p: "x² = 4"，q: "x = 2"，p→q？　答案：<strong>✗</strong>（x=-2也满足p）</p>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-amber-700 text-sm space-y-1">
+                  <p className="font-bold">⚠️ 易错点</p>
+                  <p><strong>方向别搞反</strong>：p→q 问的是"p 成立时 q 是否一定成立"</p>
+                  <p>举反例只需要<strong>一个</strong>就够了，不需要列出所有反例</p>
+                </div>
               </div>
             </div>
           </div>
         </Collapsible>
       </section>
 
-      {/* Self test */}
-      <section className="mb-8">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">自测清单</h2>
-        <p className="text-sm text-gray-500 mb-4">
-          做完4题，确认基础没问题。点击题目查看答案。
-        </p>
-
-        <div className="space-y-3">
-          {selfTestItems.map((item, idx) => (
-            <div key={idx} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <div className="flex items-center gap-3 px-4 py-3">
-                <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold text-gray-500 shrink-0">
-                  {idx + 1}
-                </span>
-                <div className="flex-1">
-                  <p className="text-sm text-gray-800">
-                    {item.questionLatex ? <Math tex={item.questionLatex} /> : item.question}
-                  </p>
-                </div>
-                <button
-                  onClick={() => toggleReveal(idx)}
-                  className="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap shrink-0"
-                >
-                  {revealed.has(idx) ? '收起' : '查看答案'}
-                </button>
+      {/* Section 4: 公式速查表 */}
+      <section className="mb-6">
+        <Collapsible title="📌 公式速查表" storageKey="logic-prereq:cheatsheet">
+          <div className="space-y-4 text-sm text-gray-700">
+            <div>
+              <p className="font-bold text-gray-800 mb-2">子集关系</p>
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <p><Math tex="A \subseteq B" />：A 的每个元素都在 B 里（含相等）</p>
+                <p><Math tex="A \subset B" />：A 在 B 里面且 A ≠ B（真子集）</p>
+                <p>判断方法：画数轴，看谁包含谁</p>
               </div>
-
-              <div className="px-4 pb-3">
-                <MathInput
-                  value={userAnswers[idx] || ''}
-                  onChange={(latex) => setUserAnswers((prev) => ({ ...prev, [idx]: latex }))}
-                  placeholder="点击输入答案..."
-                  className="w-full"
-                />
-              </div>
-
-              {revealed.has(idx) && (
-                <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 flex items-center gap-3">
-                  {userAnswers[idx] && (
-                    userAnswers[idx].replace(/\s/g, '') === item.answer.replace(/\s/g, '') ? (
-                      <CheckCircle size={18} className="text-green-500 shrink-0" />
-                    ) : (
-                      <XCircle size={18} className="text-red-500 shrink-0" />
-                    )
-                  )}
-                  <span className="text-sm text-gray-700">
-                    答案：
-                    <strong>
-                      {item.answerLatex ? <Math tex={item.answerLatex} /> : item.answer}
-                    </strong>
-                  </span>
-                </div>
-              )}
             </div>
-          ))}
+            <div>
+              <p className="font-bold text-gray-800 mb-2">一元二次不等式（a {'>'} 0）</p>
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <p>{'>'} 0 → 取两边：<Math tex="x < x_1 \text{ 或 } x > x_2" /></p>
+                <p>{'<'} 0 → 取中间：<Math tex="x_1 < x < x_2" /></p>
+                <p className="text-gray-500 text-xs">口诀：<strong className="text-gray-700">大于取两边，小于取中间</strong></p>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold text-gray-800 mb-2">绝对值不等式</p>
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <p><Math tex="|x| < a \;\Rightarrow\; -a < x < a" /></p>
+                <p><Math tex="|x| > a \;\Rightarrow\; x < -a \text{ 或 } x > a" /></p>
+                <p><Math tex="|x - b| < a \;\Rightarrow\; b - a < x < b + a" /></p>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold text-gray-800 mb-2">推出关系</p>
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <p><Math tex="p \Rightarrow q" /> ⟺ p 的集合 <Math tex="\subseteq" /> q 的集合</p>
+                <p>小范围推大范围 ✓　大范围推小范围 ✗</p>
+              </div>
+            </div>
+          </div>
+        </Collapsible>
+      </section>
+
+      {/* Section 5: Quiz */}
+      <section className="mb-8">
+        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
+            5
+          </span>
+          选择题自测
+        </h2>
+        <QuizPanel module="logic-prereq" questions={logicPrereqQuizQuestions} title="前置知识自测" description="8道选择题，覆盖子集关系、解不等式、推出判断全部知识点" />
+      </section>
         </div>
 
-        <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-xl text-sm text-green-800">
-          <p><strong>全对</strong> → 直接学 1.3 常用逻辑用语，没有障碍</p>
-          <p><strong>错了1题</strong> → 把错的部分再看一遍</p>
-          <p><strong>错了2题以上</strong> → 上面的知识点从头认真看一遍</p>
+        {/* Sidebar: Progress */}
+        <div className="lg:w-72 shrink-0">
+          <div className="lg:sticky lg:top-6">
+            <ProgressTracker items={progressItems} onToggle={toggleProgress} />
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
