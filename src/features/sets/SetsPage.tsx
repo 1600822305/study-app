@@ -423,9 +423,22 @@ export function SetsPage() {
                 <Collapsible title="交集 ∩ —— 取公共部分" storageKey="sets:intersection" headerExtra={<SpeakButton text={setsNarrations.intersection} />}>
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">定义</p>
-                      <Math tex="A \cap B = \{x \mid x \in A \text{ 且 } x \in B\}" display />
-                      <p className="text-blue-600 text-xs mt-2">口诀：交集 = <strong>两个都要有</strong></p>
+                      <div className="flex items-center gap-4 flex-wrap">
+                        <div className="flex-1 min-w-[200px]">
+                          <p className="font-bold text-blue-800 mb-2">定义</p>
+                          <Math tex="A \cap B = \{x \mid x \in A \text{ 且 } x \in B\}" display />
+                          <p className="text-blue-600 text-xs mt-2">口诀：交集 = <strong>两个都要有</strong></p>
+                        </div>
+                        <svg viewBox="0 0 160 110" className="w-28 shrink-0">
+                          <rect x="3" y="3" width="154" height="104" rx="6" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
+                          <circle cx="58" cy="55" r="32" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.2" fillOpacity="0.4" />
+                          <circle cx="98" cy="55" r="32" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.2" fillOpacity="0.4" />
+                          <clipPath id="opClipA"><circle cx="58" cy="55" r="32" /></clipPath>
+                          <circle cx="98" cy="55" r="32" fill="#bbf7d0" fillOpacity="0.8" clipPath="url(#opClipA)" />
+                          <text x="42" y="59" fontSize="12" fill="#1d4ed8" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="114" y="59" fontSize="12" fill="#b45309" fontWeight="bold" textAnchor="middle">B</text>
+                        </svg>
+                      </div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                       <p className="font-bold text-gray-800">例1（列举法）：</p>
@@ -448,9 +461,20 @@ export function SetsPage() {
                 <Collapsible title="并集 ∪ —— 取所有的" storageKey="sets:union" headerExtra={<SpeakButton text={setsNarrations.union} />}>
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">定义</p>
-                      <Math tex="A \cup B = \{x \mid x \in A \text{ 或 } x \in B\}" display />
-                      <p className="text-blue-600 text-xs mt-2">口诀：并集 = <strong>只要有一个就行</strong>（去重）</p>
+                      <div className="flex items-center gap-4 flex-wrap">
+                        <div className="flex-1 min-w-[200px]">
+                          <p className="font-bold text-blue-800 mb-2">定义</p>
+                          <Math tex="A \cup B = \{x \mid x \in A \text{ 或 } x \in B\}" display />
+                          <p className="text-blue-600 text-xs mt-2">口诀：并集 = <strong>只要有一个就行</strong>（去重）</p>
+                        </div>
+                        <svg viewBox="0 0 160 110" className="w-28 shrink-0">
+                          <rect x="3" y="3" width="154" height="104" rx="6" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
+                          <circle cx="58" cy="55" r="32" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1.2" fillOpacity="0.6" />
+                          <circle cx="98" cy="55" r="32" fill="#bbf7d0" stroke="#16a34a" strokeWidth="1.2" fillOpacity="0.6" />
+                          <text x="42" y="59" fontSize="12" fill="#15803d" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="114" y="59" fontSize="12" fill="#15803d" fontWeight="bold" textAnchor="middle">B</text>
+                        </svg>
+                      </div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                       <p className="font-bold text-gray-800">例（列举法）：</p>
@@ -467,9 +491,20 @@ export function SetsPage() {
                 <Collapsible title="补集 ∁ᵤA —— 取剩下的" storageKey="sets:complement" headerExtra={<SpeakButton text={setsNarrations.complement} />}>
                   <div className="space-y-3 text-sm text-gray-700">
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <p className="font-bold text-blue-800 mb-2">定义</p>
-                      <Math tex="\complement_U A = \{x \mid x \in U \text{ 且 } x \notin A\}" display />
-                      <p className="text-blue-600 text-xs mt-2">口诀：补集 = <strong>U 里去掉 A 剩下的</strong>（必须有全集 U！）</p>
+                      <div className="flex items-center gap-4 flex-wrap">
+                        <div className="flex-1 min-w-[200px]">
+                          <p className="font-bold text-blue-800 mb-2">定义</p>
+                          <Math tex="\complement_U A = \{x \mid x \in U \text{ 且 } x \notin A\}" display />
+                          <p className="text-blue-600 text-xs mt-2">口诀：补集 = <strong>U 里去掉 A 剩下的</strong>（必须有全集 U！）</p>
+                        </div>
+                        <svg viewBox="0 0 160 110" className="w-28 shrink-0">
+                          <rect x="3" y="3" width="154" height="104" rx="6" fill="#fde68a" stroke="#f59e0b" strokeWidth="1.2" />
+                          <text x="145" y="18" fontSize="11" fill="#b45309" fontWeight="bold">U</text>
+                          <circle cx="72" cy="55" r="30" fill="#ffffff" stroke="#3b82f6" strokeWidth="1.2" />
+                          <text x="72" y="59" fontSize="12" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="135" y="98" fontSize="10" fill="#b45309" fontWeight="bold" textAnchor="middle">补集</text>
+                        </svg>
+                      </div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                       <p className="font-bold text-gray-800">例（列举法）：</p>
