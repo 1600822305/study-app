@@ -1,4 +1,5 @@
 import { Flame, Lightbulb, AlertTriangle } from 'lucide-react';
+import { Mafs, Coordinates, Point, Vector, Text as MafsText } from 'mafs';
 
 import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
@@ -507,20 +508,35 @@ export function ComplexPage() {
               <p className="text-gray-700 mb-3">
                 每个复数 <Math tex="z = a + bi" /> 对应复平面上的一个点 <Math tex="(a, b)" />：
               </p>
-              <div className="bg-gray-50 rounded-lg p-4 mb-4 overflow-x-auto">
-                <pre className="text-xs leading-relaxed text-gray-700 text-center whitespace-pre font-mono">{
-`         虚轴 (y)
-          ↑
-     2i  ·|· · · ·(3,2) ← z = 3+2i
-          |      ↗
-      i  ·|· · /· ·
-          |  /
-  --------+--------→ 实轴 (x)
-          |
-     -i  ·|· · · ·
-          |
-    -2i  ·|· · · ·(-2,-2) ← z = -2-2i`
-                }</pre>
+              <div className="mb-4 rounded-lg overflow-hidden border border-gray-200">
+                <Mafs viewBox={{ x: [-4, 4], y: [-3, 3] }} preserveAspectRatio={false} height={300}>
+                  <Coordinates.Cartesian
+                    xAxis={{ labels: (x) => x === 0 ? '' : `${x}` }}
+                    yAxis={{ labels: (y) => y === 0 ? '' : `${y}i` }}
+                  />
+                  {/* 原点到 z₁ 的向量 */}
+                  <Vector tail={[0, 0]} tip={[3, 2]} color="#3b82f6" />
+                  <Point x={3} y={2} color="#3b82f6" />
+                  <MafsText x={3.2} y={2.4} size={14} color="#3b82f6">z₁ = 3+2i</MafsText>
+                  {/* 原点到 z₂ 的向量 */}
+                  <Vector tail={[0, 0]} tip={[-2, -2]} color="#ef4444" />
+                  <Point x={-2} y={-2} color="#ef4444" />
+                  <MafsText x={-3.5} y={-2.4} size={14} color="#ef4444">z₂ = -2-2i</MafsText>
+                  {/* 纯虚数 2i */}
+                  <Point x={0} y={2} color="#8b5cf6" />
+                  <MafsText x={0.4} y={2.4} size={12} color="#8b5cf6">2i（纯虚数）</MafsText>
+                  {/* 实数 -1 */}
+                  <Point x={-1} y={0} color="#16a34a" />
+                  <MafsText x={-1} y={-0.5} size={12} color="#16a34a">-1（实数）</MafsText>
+                  {/* 象限标注 */}
+                  <MafsText x={2} y={1} size={13} color="#9ca3af">第一象限</MafsText>
+                  <MafsText x={-2.5} y={1} size={13} color="#9ca3af">第二象限</MafsText>
+                  <MafsText x={-2.5} y={-1} size={13} color="#9ca3af">第三象限</MafsText>
+                  <MafsText x={2} y={-1} size={13} color="#9ca3af">第四象限</MafsText>
+                  {/* 轴标签 */}
+                  <MafsText x={3.7} y={-0.3} size={13} color="#374151">实轴</MafsText>
+                  <MafsText x={0.4} y={2.8} size={13} color="#374151">虚轴</MafsText>
+                </Mafs>
               </div>
               <div className="text-sm space-y-1 mb-4">
                 <p className="text-gray-700">• <strong>x轴 = 实轴</strong>：上面的点都是实数</p>
