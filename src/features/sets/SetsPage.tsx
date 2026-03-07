@@ -686,24 +686,28 @@ export function SetsPage() {
                         <p className="text-xs text-purple-600 mt-1">补号像炸弹💣穿进括号，把 ∩ 和 ∪ 炸反了</p>
                       </div>
 
-                      <div className="bg-white rounded-lg p-4 border border-purple-200 space-y-3">
-                        <p className="font-bold text-purple-800">实战演练（同一组数据，两条定律都验证）：</p>
-                        <p className="text-sm">U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
+                      <div className="space-y-3">
+                        <p className="font-bold text-purple-800">实战演练：U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
+                        <p className="text-xs text-purple-500">先算好：<Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125;</p>
+                      </div>
 
-                        <div className="bg-purple-50 rounded-lg p-3 space-y-2">
-                          <p className="text-sm font-bold">① 求 <Math tex="\complement_U(A \cup B)" />（补「并」→ 补的「交」）</p>
-                          <div className="pl-3 border-l-2 border-purple-300 space-y-1 text-sm">
-                            <p><span className="text-purple-600 font-bold">常规：</span>A ∪ B = &#123;1,2,3,4&#125; → 补集 = &#123;5, 6&#125;</p>
-                            <p><span className="text-purple-600 font-bold">捷径：</span><Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125; → 取交 = &#123;5, 6&#125; ✓</p>
-                          </div>
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4 space-y-2">
+                        <p className="font-bold text-green-800">① <Math tex="\complement_U(A \cup B)" />　→　补「并」变补的「交」</p>
+                        <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+                          <span className="text-green-600 font-bold">常规：</span>
+                          <span>A ∪ B = &#123;1,2,3,4&#125; → 补集 = <strong>&#123;5, 6&#125;</strong></span>
+                          <span className="text-green-600 font-bold">捷径：</span>
+                          <span>&#123;4,5,6&#125; <Math tex="\cap" /> &#123;1,5,6&#125; = <strong>&#123;5, 6&#125;</strong> ✓</span>
                         </div>
+                      </div>
 
-                        <div className="bg-purple-50 rounded-lg p-3 space-y-2">
-                          <p className="text-sm font-bold">② 求 <Math tex="\complement_U(A \cap B)" />（补「交」→ 补的「并」）</p>
-                          <div className="pl-3 border-l-2 border-purple-300 space-y-1 text-sm">
-                            <p><span className="text-purple-600 font-bold">常规：</span>A ∩ B = &#123;2,3&#125; → 补集 = &#123;1, 4, 5, 6&#125;</p>
-                            <p><span className="text-purple-600 font-bold">捷径：</span><Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125; → 取并 = &#123;1, 4, 5, 6&#125; ✓</p>
-                          </div>
+                      <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 space-y-2">
+                        <p className="font-bold text-orange-800">② <Math tex="\complement_U(A \cap B)" />　→　补「交」变补的「并」</p>
+                        <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+                          <span className="text-orange-600 font-bold">常规：</span>
+                          <span>A ∩ B = &#123;2,3&#125; → 补集 = <strong>&#123;1, 4, 5, 6&#125;</strong></span>
+                          <span className="text-orange-600 font-bold">捷径：</span>
+                          <span>&#123;4,5,6&#125; <Math tex="\cup" /> &#123;1,5,6&#125; = <strong>&#123;1, 4, 5, 6&#125;</strong> ✓</span>
                         </div>
                       </div>
                     </div>
