@@ -82,58 +82,93 @@ export function SetsPrereqPage() {
 
             {/* 方法零：直接开平方法 */}
             <Collapsible title="方法零：直接开平方法（最简单）" storageKey="sets-prereq:eq-sqrt">
-              <div className="space-y-3 text-sm text-gray-700">
-                <p className="text-gray-500 text-xs">看到 x² = 某个数 或 (x+a)² = 某个数，直接开根号，不用分解也不用套公式。</p>
-                <div className="space-y-2">
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <p className="font-bold text-gray-800 text-xs mb-1">形式一：x² = k</p>
-                    <p><Math tex="x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
-                    <p className="text-gray-500 text-xs">两边开根号，别忘了 ±</p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <p className="font-bold text-gray-800 text-xs mb-1">形式二：(x+a)² = k</p>
-                    <p><Math tex="(x-1)^2 = 4 \;\Rightarrow\; x-1 = \pm 2 \;\Rightarrow\; x = 3 \text{ 或 } x = -1" /></p>
-                    <p className="text-gray-500 text-xs">先开根号，再移项</p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <p className="font-bold text-gray-800 text-xs mb-1">形式三：ax² = k（先除再开）</p>
-                    <p><Math tex="2x^2 = 18 \;\Rightarrow\; x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
+              <div className="space-y-4 text-sm text-gray-700">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="font-bold text-blue-800 mb-2">什么时候能用？</p>
+                  <p className="text-blue-700 text-xs mb-2">方程里<strong>没有一次项 bx</strong>，只剩下 x² 和常数，或者已经是 (x+a)² = k 的形式。</p>
+                  <div className="bg-white rounded-lg p-3 border border-blue-100">
+                    <p className="text-gray-800 text-sm font-bold mb-1">操作：</p>
+                    <p className="text-gray-700">两边直接开根号，<span className="text-red-500 font-bold">别忘了 ±</span>（正负两个根）</p>
                   </div>
                 </div>
-                <p className="text-xs text-gray-400">适用范围：没有一次项（bx），或者已经是完全平方的形式。</p>
+
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <p className="font-bold text-gray-800">例1：<Math tex="x^2 = 9" /></p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
+                    <p>两边开根号 → <Math tex="x = \pm\sqrt{9} = \pm 3" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <p className="font-bold text-gray-800">例2：<Math tex="(x-1)^2 = 4" /></p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
+                    <p><span className="text-blue-600 font-bold">第一步</span>：开根号 → <Math tex="x - 1 = \pm 2" /></p>
+                    <p><span className="text-blue-600 font-bold">第二步</span>：移项 → <Math tex="x = 1 + 2 = 3" /> 或 <Math tex="x = 1 - 2 = -1" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <p className="font-bold text-gray-800">例3：<Math tex="2x^2 = 18" /></p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
+                    <p><span className="text-blue-600 font-bold">第一步</span>：先除以 2 → <Math tex="x^2 = 9" /></p>
+                    <p><span className="text-blue-600 font-bold">第二步</span>：开根号 → <Math tex="x = \pm 3" /></p>
+                  </div>
+                </div>
               </div>
             </Collapsible>
 
             {/* 方法一：因式分解法 */}
             <Collapsible title="方法一：因式分解法（最常用，优先试）" storageKey="sets-prereq:eq-factor">
               <div className="space-y-4 text-sm text-gray-700">
-                <p className="text-gray-500 text-xs">核心思路：把方程拆成"两个东西相乘 = 0"的形式，那其中一个必须 = 0。</p>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                  <p className="font-bold text-gray-800">例：<Math tex="x^2 - 5x + 6 = 0" /></p>
-                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
-                    <p><span className="text-blue-600 font-bold">第一步</span>：找两个数，要满足：</p>
-                    <p className="pl-4">乘起来 = 常数项 6</p>
-                    <p className="pl-4">加起来 = 一次项系数 -5</p>
-                    <p><span className="text-blue-600 font-bold">第二步</span>：试一试 → <strong>-2 × -3 = 6 ✓，-2 + -3 = -5 ✓</strong></p>
-                    <p><span className="text-blue-600 font-bold">第三步</span>：写成乘积：<Math tex="(x-2)(x-3) = 0" /></p>
-                    <p><span className="text-blue-600 font-bold">第四步</span>：两个括号，哪个 = 0 都行：</p>
-                    <p className="pl-4"><Math tex="x - 2 = 0 \;\Rightarrow\; x = 2" />　或　<Math tex="x - 3 = 0 \;\Rightarrow\; x = 3" /></p>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="font-bold text-blue-800 mb-2">核心思路</p>
+                  <p className="text-blue-700 text-xs mb-2">如果 A × B = 0，那 A = 0 或 B = 0。所以把方程拆成<strong>"两个东西相乘 = 0"</strong>就解决了。</p>
+                  <div className="bg-white rounded-lg p-3 border border-blue-100">
+                    <p className="text-gray-800 text-sm font-bold mb-1">操作：</p>
+                    <p className="text-gray-700">找两个数 p、q，使得 <span className="text-red-500 font-bold">p × q = 常数项</span> 且 <span className="text-red-500 font-bold">p + q = 一次项系数</span></p>
+                    <p className="text-gray-700 mt-1">然后写成 <Math tex="(x + p)(x + q) = 0" /></p>
                   </div>
                 </div>
 
-                <p className="font-bold text-gray-800 mt-2">三种常见"一眼看出"的套路</p>
-                <div className="space-y-2">
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <p className="font-bold text-gray-800 text-xs mb-1">套路一：平方差（没有 x 的一次项）</p>
-                    <p><Math tex="x^2 - 4 = 0 \;\Rightarrow\; (x+2)(x-2) = 0 \;\Rightarrow\; x = \pm 2" /></p>
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                  <p className="font-bold text-gray-800">例：<Math tex="x^2 - 5x + 6 = 0" /></p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-2">
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第一步</span>：找两个数，要满足：</p>
+                      <p className="pl-4">乘起来 = 常数项 <strong>6</strong></p>
+                      <p className="pl-4">加起来 = 一次项系数 <strong>-5</strong></p>
+                    </div>
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第二步</span>：试一试 → <span className="text-red-500 font-bold">-2 × -3 = 6 ✓，-2 + -3 = -5 ✓</span></p>
+                    </div>
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第三步</span>：写成乘积 → <Math tex="(x-2)(x-3) = 0" /></p>
+                    </div>
+                    <div>
+                      <p><span className="text-blue-600 font-bold">第四步</span>：哪个括号 = 0 都行：</p>
+                      <p className="pl-4"><Math tex="x = 2 \text{ 或 } x = 3" /></p>
+                    </div>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <p className="font-bold text-gray-800 text-xs mb-1">套路二：提公因式（没有常数项）</p>
-                    <p><Math tex="x^2 - 3x = 0 \;\Rightarrow\; x(x - 3) = 0 \;\Rightarrow\; x = 0 \text{ 或 } x = 3" /></p>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <p className="font-bold text-gray-800 text-xs mb-1">套路三：完全平方（两个根一样）</p>
-                    <p><Math tex="x^2 + 2x + 1 = 0 \;\Rightarrow\; (x+1)^2 = 0 \;\Rightarrow\; x = -1" />（重根）</p>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <p className="font-bold text-blue-800 mb-2">三种"一眼看出"的特殊套路</p>
+                  <div className="space-y-2">
+                    <div className="bg-white rounded-lg p-3 border border-blue-100">
+                      <p className="font-bold text-gray-800 text-xs mb-1">套路一：平方差（没有 x 的一次项）</p>
+                      <p className="text-xs text-gray-500 mb-1">看到 x² - 一个数 → 拆成 (x+?)(x-?)</p>
+                      <p><Math tex="x^2 - 4 = 0 \;\Rightarrow\; (x+2)(x-2) = 0 \;\Rightarrow\; x = \pm 2" /></p>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border border-blue-100">
+                      <p className="font-bold text-gray-800 text-xs mb-1">套路二：提公因式（没有常数项）</p>
+                      <p className="text-xs text-gray-500 mb-1">每项都有 x → 把 x 提出来</p>
+                      <p><Math tex="x^2 - 3x = 0 \;\Rightarrow\; x(x - 3) = 0 \;\Rightarrow\; x = 0 \text{ 或 } x = 3" /></p>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border border-blue-100">
+                      <p className="font-bold text-gray-800 text-xs mb-1">套路三：完全平方（两个根一样）</p>
+                      <p className="text-xs text-gray-500 mb-1">对照 <Math tex="(x+a)^2 = x^2+2ax+a^2" />，中间项=2倍乘积就是</p>
+                      <p><Math tex="x^2 + 2x + 1 = 0 \;\Rightarrow\; (x+1)^2 = 0 \;\Rightarrow\; x = -1" />（重根）</p>
+                    </div>
                   </div>
                 </div>
               </div>
