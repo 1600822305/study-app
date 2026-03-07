@@ -1191,37 +1191,119 @@ export function SetsPage() {
               知识总结卡片
               <SpeakButton text={setsNarrations.summary} />
             </h2>
-            <div className="bg-slate-900 text-white rounded-2xl p-6 space-y-3 text-sm">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-slate-300 text-xs mb-1">概念</p>
-                  <p>集合 = 一堆确定的东西</p>
-                </div>
-                <div>
-                  <p className="text-slate-300 text-xs mb-1">三大性质</p>
-                  <p>确定性、互异性、无序性</p>
-                </div>
-                <div>
-                  <p className="text-slate-300 text-xs mb-1">运算</p>
-                  <p><Math tex="\cap" /> 公共部分 · <Math tex="\cup" /> 全部 · <Math tex="\complement_U" /> 剩下的</p>
-                </div>
-                <div>
-                  <p className="text-slate-300 text-xs mb-1">核心方法</p>
-                  <p>画数轴！</p>
-                </div>
-                <div>
-                  <p className="text-slate-300 text-xs mb-1">补集端点</p>
-                  <p>开变闭，闭变开</p>
-                </div>
-                <div>
-                  <p className="text-slate-300 text-xs mb-1">子集个数</p>
-                  <p><Math tex="n" /> 个元素 → <Math tex="2^n" /> 个子集</p>
+            <div className="bg-slate-900 text-white rounded-2xl p-6 space-y-4 text-sm">
+              {/* 第一行：概念基础 */}
+              <div>
+                <p className="text-slate-400 text-xs font-bold mb-2 uppercase tracking-wider">概念基础</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="bg-slate-800 rounded-lg p-3">
+                    <p className="text-slate-400 text-xs mb-1">集合</p>
+                    <p>一堆<strong className="text-blue-300">确定的</strong>东西</p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3">
+                    <p className="text-slate-400 text-xs mb-1">三大性质</p>
+                    <p>确定性 · 互异性 · 无序性</p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3">
+                    <p className="text-slate-400 text-xs mb-1">表示方法</p>
+                    <p>列举法 · 描述法 · Venn图 · 区间</p>
+                  </div>
                 </div>
               </div>
-              <div className="border-t border-slate-700 pt-3 mt-3">
-                <p className="text-amber-400 font-bold text-xs">
-                  ⚠ 高考陷阱：0是自然数 · 子集别忘空集 · 互异性 · 描述法看清 x 还是 (x,y)
-                </p>
+
+              {/* 第二行：区间 + 数集 */}
+              <div>
+                <p className="text-slate-400 text-xs font-bold mb-2 uppercase tracking-wider">区间 & 数集</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p className="text-slate-400 text-xs mb-1">区间表示法</p>
+                    <p><strong className="text-blue-300">( )</strong> 不含端点 · <strong className="text-green-300">[ ]</strong> 含端点 · <strong className="text-amber-300">∞ 永远用 ( )</strong></p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p className="text-slate-400 text-xs mb-1">常见数集</p>
+                    <p><Math tex="\mathbb{N}^* \subset \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}" /></p>
+                    <p className="text-xs text-slate-400">正→自→整→有→实</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 第三行：关系 */}
+              <div>
+                <p className="text-slate-400 text-xs font-bold mb-2 uppercase tracking-wider">集合关系</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p><Math tex="A \subseteq B" /> 子集：全在里面（<strong className="text-green-300">允许</strong>相等）</p>
+                    <p><Math tex="A \subsetneq B" /> 真子集：全在里面（<strong className="text-red-300">不能</strong>相等）</p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p className="text-slate-400 text-xs mb-1">子集个数公式</p>
+                    <p>子集 <Math tex="2^n" /> · 真子集 <Math tex="2^n\!-\!1" /> · 非空 <Math tex="2^n\!-\!1" /> · 非空真 <Math tex="2^n\!-\!2" /></p>
+                  </div>
+                </div>
+                <div className="bg-slate-800 rounded-lg p-3 mt-3 space-y-1">
+                  <p className="text-slate-400 text-xs mb-1">空集铁律（必记！）</p>
+                  <p><Math tex="\varnothing \subseteq A" />（任何集合）　<Math tex="\varnothing \subsetneq A" />（A 非空时）　<strong className="text-amber-300">∅ ≠ &#123;0&#125;</strong></p>
+                </div>
+              </div>
+
+              {/* 第四行：运算 */}
+              <div>
+                <p className="text-slate-400 text-xs font-bold mb-2 uppercase tracking-wider">集合运算</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="bg-slate-800 rounded-lg p-3">
+                    <p><Math tex="A \cap B" /> 交集</p>
+                    <p className="text-xs text-slate-400">两个都有的</p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3">
+                    <p><Math tex="A \cup B" /> 并集</p>
+                    <p className="text-xs text-slate-400">合起来（去重）</p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3">
+                    <p><Math tex="\complement_U A" /> 补集</p>
+                    <p className="text-xs text-slate-400">U 去掉 A 剩的</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p className="text-slate-400 text-xs mb-1">补集端点规律</p>
+                    <p><strong className="text-green-300">开变闭，闭变开</strong>（{'<'} ↔ ≥，≤ ↔ {'>'}）</p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p className="text-slate-400 text-xs mb-1">容斥原理</p>
+                    <p><Math tex="|A \cup B| = |A| + |B| - |A \cap B|" /></p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 第五行：等价转换 + 解题 */}
+              <div>
+                <p className="text-slate-400 text-xs font-bold mb-2 uppercase tracking-wider">等价转换 & 解题</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p><Math tex="A \cap B = A \;\Leftrightarrow\; A \subseteq B" /></p>
+                    <p><Math tex="A \cup B = B \;\Leftrightarrow\; A \subseteq B" /></p>
+                    <p><Math tex="A \cap B = \varnothing \;\Leftrightarrow" /> 数轴完全分开</p>
+                  </div>
+                  <div className="bg-slate-800 rounded-lg p-3 space-y-1">
+                    <p className="text-slate-400 text-xs mb-1">核心解题方法</p>
+                    <p>① <strong className="text-blue-300">画数轴</strong>（不等式集合必画）</p>
+                    <p>② A⊆B / A∩B=∅ → <strong className="text-blue-300">看端点</strong></p>
+                    <p>③ 含参集合 → <strong className="text-blue-300">互异性</strong>两两不等</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 陷阱清单 */}
+              <div className="border-t border-slate-700 pt-3">
+                <p className="text-amber-400 font-bold text-xs mb-2">⚠ 高考陷阱清单</p>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs text-amber-300">
+                  <p>① 0 是自然数</p>
+                  <p>② 子集别忘空集</p>
+                  <p>③ 互异性不能重复</p>
+                  <p>④ 描述法看清 x 还是 (x,y)</p>
+                  <p>⑤ ∅ 和 &#123;0&#125; 不一样</p>
+                  <p>⑥ 补集必须有全集 U</p>
+                </div>
               </div>
             </div>
           </section>
