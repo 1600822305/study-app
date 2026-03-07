@@ -3,7 +3,7 @@ import type { QuizQuestionData } from '@/types';
 export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   {
     id: 'spq1',
-    question: '解方程 x² - 7x + 12 = 0，则 x =',
+    question: '解方程，则 x =',
     questionLatex: 'x^2 - 7x + 12 = 0',
     options: [
       { label: 'A', value: 'x=3 \\text{ 或 } x=4', isLatex: true },
@@ -17,7 +17,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq2',
-    question: '方程 x² + 2x - 1 = 0 的判别式 Δ =',
+    question: '求判别式 Δ =',
     questionLatex: 'x^2 + 2x - 1 = 0 \\text{ 的 } \\Delta =',
     options: [
       { label: 'A', value: '0' },
@@ -31,7 +31,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq3',
-    question: '不等式 x² - 5x + 4 < 0 的解集为',
+    question: '解集为',
     questionLatex: 'x^2 - 5x + 4 < 0',
     options: [
       { label: 'A', value: '\\{x \\mid 1 < x < 4\\}', isLatex: true },
@@ -45,7 +45,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq4',
-    question: '不等式 x² + x - 6 ≥ 0 的解集为',
+    question: '解集为',
     questionLatex: 'x^2 + x - 6 \\geq 0',
     options: [
       { label: 'A', value: '\\{x \\mid -3 \\leq x \\leq 2\\}', isLatex: true },
@@ -59,7 +59,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq5',
-    question: '用区间表示 {x | -2 < x ≤ 5}',
+    question: '用区间表示',
     questionLatex: '\\{x \\mid -2 < x \\leq 5\\}',
     options: [
       { label: 'A', value: '(-2, 5]', isLatex: false },
@@ -73,7 +73,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq6',
-    question: '{x | x ≥ 3} 用区间表示为',
+    question: '用区间表示为',
     questionLatex: '\\{x \\mid x \\geq 3\\}',
     options: [
       { label: 'A', value: '[3, +\\infty)', isLatex: true },
@@ -98,7 +98,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq8',
-    question: '解方程 2x² - 3x - 2 = 0，则 x =',
+    question: '解方程，则 x =',
     questionLatex: '2x^2 - 3x - 2 = 0',
     options: [
       { label: 'A', value: 'x=2 \\text{ 或 } x=-\\dfrac{1}{2}', isLatex: true },
@@ -112,7 +112,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq9',
-    question: '解方程 x² - x - 6 = 0，则 x =',
+    question: '解方程，则 x =',
     questionLatex: 'x^2 - x - 6 = 0',
     options: [
       { label: 'A', value: 'x=3 \\text{ 或 } x=-2', isLatex: true },
@@ -126,7 +126,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq10',
-    question: '不等式 x² - 5x + 6 < 0 的解集为',
+    question: '解集为',
     questionLatex: 'x^2 - 5x + 6 < 0',
     options: [
       { label: 'A', value: '\\{x \\mid 2 < x < 3\\}', isLatex: true },
@@ -140,7 +140,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq11',
-    question: '不等式 x² - 4 ≥ 0 的解集为',
+    question: '解集为',
     questionLatex: 'x^2 - 4 \\geq 0',
     options: [
       { label: 'A', value: '\\{x \\mid x \\leq -2 \\text{ 或 } x \\geq 2\\}', isLatex: true },
@@ -154,7 +154,7 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'spq12',
-    question: '用区间表示 {x | -3 < x ≤ 5}',
+    question: '用区间表示',
     questionLatex: '\\{x \\mid -3 < x \\leq 5\\}',
     options: [
       { label: 'A', value: '(-3, 5]', isLatex: false },
