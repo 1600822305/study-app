@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { CheckCircle, XCircle, Lightbulb } from 'lucide-react';
+import { CheckCircle, XCircle, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Line, Text as MafsText } from 'mafs';
 
 import { Math, MathInput, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
@@ -127,6 +127,7 @@ export function SetsPrereqPage() {
       {/* Section 1: Solving Quadratic Equations */}
       <section className="mb-6">
         <Collapsible title="一、解一元二次方程" defaultOpen storageKey="sets-prereq:equation" headerExtra={<SpeakButton text={setsPrereqNarrations.equation} />}>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用因式分解法和公式法解一元二次方程，快速确定集合的元素。</p>
           <div className="space-y-4 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-2">因式分解法（最常用）</p>
@@ -172,6 +173,18 @@ export function SetsPrereqPage() {
               <p className="text-gray-700">1. <Math tex="x^2 - x - 6 = 0" />，x = ____　答案：<strong><Math tex="x=3 \text{ 或 } x=-2" /></strong></p>
               <p className="text-gray-700">2. <Math tex="x^2 + 2x + 1 = 0" />，x = ____　答案：<strong><Math tex="x = -1" /></strong>（重根）</p>
             </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-amber-700 text-sm space-y-1">
+                  <p className="font-bold">⚠️ 易错点</p>
+                  <p>找两个数时注意<strong>符号</strong>：乘起来=6、加起来=-5，那就是 -2 和 -3（都是负的）</p>
+                  <p>公式法别忘了 <strong>±</strong>，两个根都要写</p>
+                  <p><Math tex="\Delta < 0" /> 意味着<strong>无实数根</strong>，集合可能是空集</p>
+                </div>
+              </div>
+            </div>
           </div>
         </Collapsible>
       </section>
@@ -179,6 +192,7 @@ export function SetsPrereqPage() {
       {/* Section 2: Quadratic Inequalities */}
       <section className="mb-6">
         <Collapsible title="二、解一元二次不等式（集合最核心的前置技能！）" defaultOpen storageKey="sets-prereq:inequality" headerExtra={<SpeakButton text={setsPrereqNarrations.inequality} />}>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用“三步走”方法独立解一元二次不等式，写出集合描述法的解集。</p>
           <div className="space-y-4 text-sm text-gray-700">
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
               <p className="font-bold text-amber-800 mb-2">核心方法：三步走</p>
@@ -234,6 +248,18 @@ export function SetsPrereqPage() {
               <p className="text-gray-700">1. <Math tex="x^2 - 5x + 6 < 0" /> 的解集 = ____　答案：<strong><Math tex="2 < x < 3" /></strong></p>
               <p className="text-gray-700">2. <Math tex="x^2 - 4 \geq 0" /> 的解集 = ____　答案：<strong><Math tex="x \leq -2 \text{ 或 } x \geq 2" /></strong></p>
             </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-amber-700 text-sm space-y-1">
+                  <p className="font-bold">⚠️ 易错点</p>
+                  <p><strong>“大于”和“小于”别搞反</strong>：大于取两边（远离根），小于取中间（夹在根之间）</p>
+                  <p><strong>含等号别漏</strong>：≥ 和 ≤ 的解集端点要用 ≤ 和 ≥</p>
+                  <p><strong>a {'<'} 0 时先两边乘 -1</strong>：不等号方向要反转！</p>
+                </div>
+              </div>
+            </div>
           </div>
         </Collapsible>
       </section>
@@ -241,6 +267,7 @@ export function SetsPrereqPage() {
       {/* Section 3: Number Line */}
       <section className="mb-6">
         <Collapsible title="三、数轴的使用" defaultOpen storageKey="sets-prereq:numberline" headerExtra={<SpeakButton text={setsPrereqNarrations.numberLine} />}>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：在数轴上正确表示不等式的解集，分清 ○ 和 ●。</p>
           <div className="space-y-3 text-sm text-gray-700">
             <p><strong>数轴</strong> = 一条画了数字的直线，左边小右边大。</p>
 
@@ -271,6 +298,24 @@ export function SetsPrereqPage() {
               <p className="text-blue-700 text-sm mt-1">○ 空心圆 = 不包含（对应 {'<'} 或 {'>'}）</p>
               <p className="text-blue-700 text-sm">● 实心圆 = 包含（对应 ≤ 或 ≥）</p>
             </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. <Math tex="x \leq -1" /> 在数轴上，-1 用什么圆？　答案：<strong>实心圆 ●（含端点）</strong></p>
+              <p className="text-gray-700">2. <Math tex="1 < x < 4" /> 的两个端点分别用？　答案：<strong>1 空心 ○，4 空心 ○</strong></p>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-amber-700 text-sm space-y-1">
+                  <p className="font-bold">⚠️ 易错点</p>
+                  <p>{'<'} 和 ≤ 的区别就在于<strong>圆的空实</strong>：{'<'} 空心、≤ 实心</p>
+                  <p>做集合运算时，<strong>画数轴是最直观的方法</strong></p>
+                  <p>补集运算时<strong>端点开闭互换</strong>：原来 ○ 变 ●，原来 ● 变 ○</p>
+                </div>
+              </div>
+            </div>
           </div>
         </Collapsible>
       </section>
@@ -278,6 +323,7 @@ export function SetsPrereqPage() {
       {/* Section 4: Interval Notation */}
       <section className="mb-6">
         <Collapsible title="四、区间表示法" defaultOpen storageKey="sets-prereq:interval" headerExtra={<SpeakButton text={setsPrereqNarrations.interval} />}>
+          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：把不等式的解集用区间表示，正确使用小括号和中括号。</p>
           <div className="space-y-3 text-sm text-gray-700">
             <p>区间是不等式的另一种写法，更简洁。</p>
             <div className="overflow-x-auto">
@@ -312,6 +358,23 @@ export function SetsPrereqPage() {
               <p>小括号 ( ) → 不包含端点（开）</p>
               <p>中括号 [ ] → 包含端点（闭）</p>
               <p>无穷 ∞ → 永远用小括号</p>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. <Math tex="\{x \mid -3 < x \leq 5\}" /> = ____　答案：<strong><Math tex="(-3, 5]" /></strong></p>
+              <p className="text-gray-700">2. <Math tex="\{x \mid x \geq 3\}" /> = ____　答案：<strong><Math tex="[3, +\infty)" /></strong></p>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+              <div className="flex items-start gap-2">
+                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-amber-700 text-sm space-y-1">
+                  <p className="font-bold">⚠️ 易错点</p>
+                  <p><strong>∞ 永远用小括号</strong>：<Math tex="[3, +\infty)" /> ✓，<Math tex="[3, +\infty]" /> ✗</p>
+                  <p>区间写法和数轴对应：<strong>小括号 = ○，中括号 = ●</strong></p>
+                </div>
+              </div>
             </div>
           </div>
         </Collapsible>
@@ -413,6 +476,46 @@ export function SetsPrereqPage() {
             <p><strong>错了3题以上</strong> → 上面的知识点从头认真看一遍</p>
           </div>
         )}
+      </section>
+
+      {/* Formula Cheat Sheet */}
+      <section className="mb-8">
+        <Collapsible title="📌 公式速查表" storageKey="sets-prereq:cheatsheet">
+          <div className="space-y-4 text-sm text-gray-700">
+            <div>
+              <p className="font-bold text-gray-800 mb-2">因式分解</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
+                <p>平方差：<Math tex="x^2 - a^2 = (x+a)(x-a)" /></p>
+                <p>完全平方：<Math tex="x^2 + 2ax + a^2 = (x+a)^2" /></p>
+                <p>提公因式：<Math tex="x^2 - 3x = x(x-3)" /></p>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold text-gray-800 mb-2">求根公式</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
+                <p><Math tex="x = \dfrac{-b \pm \sqrt{b^2-4ac}}{2a}" /></p>
+                <p><Math tex="\Delta = b^2-4ac" />：{'>'} 0 两根，= 0 重根，{'<'} 0 无实根</p>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold text-gray-800 mb-2">一元二次不等式（a {'>'} 0）</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
+                <p>{'>'} 0 → 取两边：<Math tex="x < x_1 \text{ 或 } x > x_2" /></p>
+                <p>{'<'} 0 → 取中间：<Math tex="x_1 < x < x_2" /></p>
+                <p>口诀：<strong>大于取两边，小于取中间</strong></p>
+              </div>
+            </div>
+            <div>
+              <p className="font-bold text-gray-800 mb-2">数轴 + 区间</p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono text-xs">
+                <p>○ 空心 → 不含（{'<'} 或 {'>'}）→ 小括号 ( )</p>
+                <p>● 实心 → 包含（≤ 或 ≥）→ 中括号 [ ]</p>
+                <p>∞ → 永远用小括号</p>
+                <p>补集：○ ↔ ● 互换</p>
+              </div>
+            </div>
+          </div>
+        </Collapsible>
       </section>
 
       {/* Section 6: Quiz */}
