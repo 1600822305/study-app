@@ -674,9 +674,14 @@ export function SetsPage() {
                       <p className="text-purple-600 text-sm">口诀：<strong>补穿入，交并换</strong>（补号穿进括号，∩ 和 ∪ 互换）</p>
                     </div>
 
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="font-bold text-gray-800 mb-2 text-base">实战演练：U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
-                      <p className="text-sm text-gray-600"><Math tex="\complement_U A" /> = &#123;4,5,6&#125;，<Math tex="\complement_U B" /> = &#123;1,5,6&#125;</p>
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                      <p className="font-bold text-gray-800 text-base">实战演练</p>
+                      <p className="text-sm"><strong>已知：</strong>U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
+                      <div className="bg-white rounded-lg p-3 border space-y-1 text-sm">
+                        <p className="text-gray-700 font-bold">准备工作：先把 A 和 B 的补集算出来（后面要用）</p>
+                        <p><Math tex="\complement_U A" /> = U 中去掉 A → &#123;1,2,3,4,5,6&#125; - &#123;1,2,3&#125; = <strong>&#123;4,5,6&#125;</strong></p>
+                        <p><Math tex="\complement_U B" /> = U 中去掉 B → &#123;1,2,3,4,5,6&#125; - &#123;2,3,4&#125; = <strong>&#123;1,5,6&#125;</strong></p>
+                      </div>
                     </div>
 
                     <div className="overflow-x-auto">
