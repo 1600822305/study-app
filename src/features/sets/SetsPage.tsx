@@ -56,7 +56,7 @@ export function SetsPage() {
 
                 <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                   <p className="font-bold text-gray-800">生活中的"集合"：</p>
-                  <p>你书包里的东西 = <Math tex="\{\text{课本}, \text{笔}, \text{橡皮}, \text{手机}\}" /></p>
+                  <p>你书包里的东西 = &#123;课本, 笔, 橡皮, 手机&#125;</p>
                   <p>所有偶数 = <Math tex="\{0, 2, 4, 6, 8, \ldots\}" /></p>
                   <p>比3大的数 = <Math tex="\{x \mid x > 3\}" /></p>
                 </div>
