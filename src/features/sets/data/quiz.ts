@@ -244,4 +244,66 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     explanationLatex:
       '|A \\cup B| = 30 + 25 - 15 = 40 \\quad \\text{都没参加} = 50 - 40 = 10',
   },
+  {
+    id: 'sq17',
+    question: '已知',
+    questionLatex:
+      'A = \\{x \\mid 1 \\leq x \\leq 3\\},\\; B = \\{x \\mid x > a\\},\\; A \\cap B = \\varnothing,\\; \\text{则 a 的范围是}',
+    options: [
+      { label: 'A', value: 'a \\geq 3', isLatex: true },
+      { label: 'B', value: 'a > 3', isLatex: true },
+      { label: 'C', value: 'a \\geq 1', isLatex: true },
+      { label: 'D', value: 'a < 1', isLatex: true },
+    ],
+    correctAnswer: 'a \\geq 3',
+    explanation: 'A∩B=∅ 意味着数轴上完全分开。A=[1,3]，B=(a,+∞)。B 的左端 a 必须 ≥ A 的右端 3，因为 B 不含 a，a=3 时 B=(3,+∞) 和 A=[1,3] 刚好不重叠。',
+    explanationLatex:
+      'A=[1,3],\\; B=(a,+\\infty) \\quad A \\cap B = \\varnothing \\Leftrightarrow a \\geq 3',
+  },
+  {
+    id: 'sq18',
+    question: '',
+    questionLatex:
+      '\\text{用区间表示 } \\{x \\mid -3 < x \\leq 5\\} =',
+    options: [
+      { label: 'A', value: '[-3, 5]', isLatex: false },
+      { label: 'B', value: '(-3, 5]', isLatex: false },
+      { label: 'C', value: '(-3, 5)', isLatex: false },
+      { label: 'D', value: '[-3, 5)', isLatex: false },
+    ],
+    correctAnswer: '(-3, 5]',
+    explanation: '-3 不含用小括号 (，5 含用中括号 ]。',
+    explanationLatex:
+      '-3 \\text{ 不含} \\Rightarrow ( \\quad 5 \\text{ 含} \\Rightarrow ] \\quad \\Rightarrow (-3, 5]',
+  },
+  {
+    id: 'sq19',
+    question: '',
+    questionLatex:
+      '\\text{集合 } \\{a, b, c\\} \\text{ 的非空真子集共有几个？}',
+    options: [
+      { label: 'A', value: '5' },
+      { label: 'B', value: '6' },
+      { label: 'C', value: '7' },
+      { label: 'D', value: '8' },
+    ],
+    correctAnswer: '6',
+    explanation: '3 个元素 → 子集 2³=8 个，去掉空集和自身 → 非空真子集 = 8-2 = 6 个。',
+    explanationLatex:
+      '2^3 - 2 = 8 - 2 = 6',
+  },
+  {
+    id: 'sq20',
+    question: '下列集合中，表示的是点的集合（而不是数的集合）的是',
+    options: [
+      { label: 'A', value: '\\{x \\mid x^2 - 1 = 0\\}', isLatex: true },
+      { label: 'B', value: '\\{x \\mid x > 2\\}', isLatex: true },
+      { label: 'C', value: '\\{(x,y) \\mid y = 2x + 1\\}', isLatex: true },
+      { label: 'D', value: '\\{x \\mid x \\in \\mathbb{Z}\\}', isLatex: true },
+    ],
+    correctAnswer: '\\{(x,y) \\mid y = 2x + 1\\}',
+    explanation: '竖线前面是 (x,y) 时，集合里的元素是坐标点，不是数。其他三个竖线前面都是 x，是数的集合。',
+    explanationLatex:
+      '\\{(x,y) \\mid \\ldots\\} \\text{ 是点集}，\\{x \\mid \\ldots\\} \\text{ 是数集，两者完全不同！}',
+  },
 ];

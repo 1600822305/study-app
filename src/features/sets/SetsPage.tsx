@@ -1179,7 +1179,7 @@ export function SetsPage() {
               </span>
               高考真题实战
             </h2>
-            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="13道选择题，覆盖高考集合全部题型" />
+            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="20道选择题，覆盖高考集合全部题型" />
           </section>
 
           {/* Section 9: 知识总结卡片 */}
