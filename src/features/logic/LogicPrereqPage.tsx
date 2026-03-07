@@ -162,9 +162,39 @@ export function LogicPrereqPage() {
               <p className="mt-2 text-gray-600">口诀：<strong>小于取中间，大于取两边</strong>（和二次不等式一样！）</p>
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="font-bold text-gray-800 mb-1">例：<Math tex="|x - 1| < 3" />（x 到 1 的距离不超过 3）</p>
-              <p><Math tex="1 - 3 < x < 1 + 3 \;\Rightarrow\; -2 < x < 4" /></p>
+            <div className="bg-gray-50 rounded-lg p-4">
+              <p className="font-bold text-gray-800 mb-3">例：解 <Math tex="|x - 1| < 3" /></p>
+              <div className="space-y-2 text-sm">
+                <p><strong>第1步：</strong>看出来这是什么？</p>
+                <p className="pl-4 text-gray-600">|x - <strong>1</strong>| {'<'} <strong>3</strong> → x 到 <strong>1</strong> 的距离不超过 <strong>3</strong></p>
+                <p><strong>第2步：</strong>套公式 |x - b| {'<'} a → b - a {'<'} x {'<'} b + a</p>
+                <p className="pl-4 text-gray-600">这里 b = 1，a = 3，所以：1 - 3 {'<'} x {'<'} 1 + 3</p>
+                <p><strong>第3步：</strong>算出来</p>
+                <p className="pl-4"><Math tex="-2 < x < 4" /></p>
+              </div>
+
+              {/* 数轴图解 */}
+              <div className="bg-white rounded-lg px-5 pt-2 pb-3 mt-3">
+                <div className="relative h-7 mx-4">
+                  <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gray-400" />
+                  {[-3, -2, -1, 0, 1, 2, 3, 4, 5].map((n) => (
+                    <div key={n} className="absolute top-1/2 flex flex-col items-center" style={{ left: `${(n + 3) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>
+                      <div className="w-[1.5px] h-2.5 bg-gray-500 -translate-y-1/2" />
+                      <span className={`text-xs mt-1.5 ${n === 1 ? 'font-bold text-purple-600' : n === -2 || n === 4 ? 'font-bold text-red-600' : 'text-gray-500'}`}>{n}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* 距离标注 */}
+                <div className="relative h-8 mx-4">
+                  <div className="absolute top-0 border-b-[3px] border-l-[3px] border-r-[3px] border-green-500 rounded-b-lg" style={{ left: `${(-2 + 3) * (100 / 8)}%`, right: `${100 - (4 + 3) * (100 / 8)}%`, height: '100%' }} />
+                  <span className="absolute bottom-0 text-xs font-bold text-green-600" style={{ left: `${(1 + 3) * (100 / 8)}%`, transform: 'translateX(-50%)' }}>解集：(-2, 4)</span>
+                </div>
+                <div className="flex justify-center gap-4 mt-1 text-xs text-gray-500">
+                  <span>← 距离3 →<strong className="text-purple-600 mx-1">中心1</strong>← 距离3 →</span>
+                </div>
+              </div>
+
+              <p className="text-gray-500 text-xs mt-2">验证：x=0 → |0-1|=1{'<'}3 ✓　　x=5 → |5-1|=4{'>'}3 ✗（不在解集里）</p>
             </div>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
