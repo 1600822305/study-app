@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+.git
+.github
+android
+src-tauri
+*.log
+*.local
+.vscode
+.idea
+.DS_Store

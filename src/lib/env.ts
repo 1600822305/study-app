@@ -114,7 +114,7 @@ export const getPlatform = getRuntime;
 // Web 端通过本地 CORS 代理服务器转发跨域请求
 // 启动方式：npm run cors-proxy 或 npm run dev:web
 
-const DEFAULT_CORS_PROXY_URL = 'http://localhost:8888';
+const DEFAULT_CORS_PROXY_URL = isDev() ? 'http://localhost:8888' : '';
 let _corsProxyUrl = DEFAULT_CORS_PROXY_URL;
 
 export function setCorsProxyUrl(url: string): void {
