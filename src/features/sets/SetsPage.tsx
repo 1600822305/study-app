@@ -685,6 +685,25 @@ export function SetsPage() {
                         <p className="font-bold text-purple-800 text-sm">三字口诀：<strong className="text-lg">补穿入，交并换</strong></p>
                         <p className="text-xs text-purple-600 mt-1">补号像炸弹💣穿进括号，把 ∩ 和 ∪ 炸反了</p>
                       </div>
+
+                      <div className="bg-white rounded-lg p-4 border border-purple-200 space-y-2">
+                        <p className="font-bold text-purple-800">实战演练：</p>
+                        <p className="text-sm">U = &#123;1,2,3,4,5,6&#125;，A = &#123;1,2,3&#125;，B = &#123;2,3,4&#125;</p>
+                        <p className="text-sm font-bold">求 <Math tex="\complement_U(A \cup B)" /></p>
+                        <div className="pl-3 border-l-2 border-purple-300 space-y-2 text-sm">
+                          <div>
+                            <p className="text-purple-600 font-bold">方法一（常规）：先算括号内</p>
+                            <p className="pl-4">A ∪ B = &#123;1,2,3,4&#125;</p>
+                            <p className="pl-4"><Math tex="\complement_U(A \cup B)" /> = &#123;5, 6&#125;</p>
+                          </div>
+                          <div>
+                            <p className="text-purple-600 font-bold">方法二（德摩根捷径）：补穿入，∪ 变 ∩</p>
+                            <p className="pl-4"><Math tex="\complement_U A" /> = &#123;4,5,6&#125;</p>
+                            <p className="pl-4"><Math tex="\complement_U B" /> = &#123;1,5,6&#125;</p>
+                            <p className="pl-4"><Math tex="(\complement_U A) \cap (\complement_U B)" /> = &#123;5, 6&#125; ✓ 一样！</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Collapsible>
