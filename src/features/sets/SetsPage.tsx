@@ -390,11 +390,13 @@ export function SetsPage() {
                       </div>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3">
-                      <p className="font-bold text-gray-800 mb-1">例：A = &#123;a, b, c&#125;，3个元素</p>
-                      <p>子集 = 2³ = <strong>8</strong> 个：∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</p>
-                      <p>真子集 = 8 - 1 = <strong>7</strong>（去掉&#123;a,b,c&#125;本身）</p>
-                      <p>非空子集 = 8 - 1 = <strong>7</strong>（去掉∅）</p>
-                      <p>非空真子集 = 8 - 2 = <strong>6</strong>（去掉∅和&#123;a,b,c&#125;）</p>
+                      <p className="font-bold text-gray-800 mb-2">例：A = &#123;a, b, c&#125;，3个元素</p>
+                      <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 w-fit">
+                        <span className="text-right">子集</span><span>=</span><span>2³ = <strong>8</strong> 个</span><span className="text-gray-500">∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</span>
+                        <span className="text-right">真子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-500">（去掉&#123;a,b,c&#125;本身）</span>
+                        <span className="text-right">非空子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-500">（去掉∅）</span>
+                        <span className="text-right">非空真子集</span><span>=</span><span>8 - 2 = <strong>6</strong></span><span className="text-gray-500">（去掉∅和&#123;a,b,c&#125;）</span>
+                      </div>
                     </div>
                   </div>
                 </Collapsible>
