@@ -157,10 +157,30 @@ export function SetsPage() {
                   </div>
                 </div>
 
+                <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
+                  <p className="font-bold text-gray-800">含参集合 + 互异性（高考经典题型）</p>
+                  <p className="text-gray-700">例：集合 <Math tex="A = \{a,\; a^2 + a,\; -1\}" />，求 a 的取值范围。</p>
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-2 text-xs">
+                    <div>
+                      <p className="text-blue-600 font-bold">思路：三个元素必须互不相同</p>
+                      <div className="bg-white rounded-lg p-2 border mt-1 space-y-1">
+                        <p>① <Math tex="a \neq a^2 + a" /> → <Math tex="a^2 \neq 0" /> → <strong>a ≠ 0</strong></p>
+                        <p>② <Math tex="a \neq -1" /> → <strong>a ≠ -1</strong></p>
+                        <p>③ <Math tex="a^2 + a \neq -1" /> → <Math tex="a^2 + a + 1 \neq 0" /> → 判别式 <Math tex="\Delta = 1 - 4 = -3 < 0" />，方程无实根 → <strong>自动满足</strong></p>
+                      </div>
+                    </div>
+                    <p className="text-gray-800">答案：<strong><Math tex="a \neq 0" /> 且 <Math tex="a \neq -1" /></strong>（即 a 是除 0 和 -1 以外的任意实数）</p>
+                  </div>
+                  <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs mt-2">
+                    <p className="font-bold text-[#7A5C3E]">做题套路：列出所有"两两不等"的条件 → 逐个解 → 取交集</p>
+                  </div>
+                </div>
+
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
                   <p className="text-gray-700">1. 下列能构成集合的是？A. 好看的花　B. 不超过10的自然数 → 答案：<strong>B</strong></p>
                   <p className="text-gray-700">2. &#123;1, 2, 3&#125; 和 &#123;3, 2, 1&#125; 是同一个集合吗？→ 答案：<strong>是</strong>（无序性）</p>
+                  <p className="text-gray-700">3. 集合 <Math tex="B = \{2,\; m,\; m^2 - m\}" />，m 不能取哪些值？→ 答案：<strong>m ≠ 2, m ≠ 0, m ≠ -1</strong>（分别让三对元素相等解出来，再排除）</p>
                 </div>
               </div>
             </Collapsible>
@@ -272,10 +292,102 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
+                <Collapsible title="方法四：区间表示法 —— 数轴上的一段" storageKey="sets:rep-interval">
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                      <p className="text-blue-700">当集合是<strong>数轴上连续的一段</strong>时，可以用区间来表示，比描述法更简洁。</p>
+                      <p className="text-blue-600 text-xs mt-1">后面做交集、并集、补集运算时，到处都用区间，必须学会！</p>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm border-collapse">
+                        <thead>
+                          <tr className="bg-gray-50">
+                            <th className="border border-gray-200 px-2 py-1.5 text-center">名称</th>
+                            <th className="border border-gray-200 px-2 py-1.5 text-center">符号</th>
+                            <th className="border border-gray-200 px-2 py-1.5 text-center">意思</th>
+                            <th className="border border-gray-200 px-2 py-1.5 text-center">端点</th>
+                          </tr>
+                        </thead>
+                        <tbody className="text-xs">
+                          <tr>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center">开区间</td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center"><Math tex="(a, b)" /></td>
+                            <td className="border border-gray-200 px-2 py-1.5"><Math tex="a < x < b" /></td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center text-red-600">两头都<strong>不含</strong></td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center">闭区间</td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center"><Math tex="[a, b]" /></td>
+                            <td className="border border-gray-200 px-2 py-1.5"><Math tex="a \leq x \leq b" /></td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center text-blue-600">两头都<strong>含</strong></td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center">半开半闭</td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center"><Math tex="[a, b)" /> 或 <Math tex="(a, b]" /></td>
+                            <td className="border border-gray-200 px-2 py-1.5"><Math tex="a \leq x < b" /> 或 <Math tex="a < x \leq b" /></td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center">一头含一头不含</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center">无穷区间</td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center"><Math tex="(-\infty, a)" /> 或 <Math tex="[a, +\infty)" /></td>
+                            <td className="border border-gray-200 px-2 py-1.5">x {'<'} a 或 x ≥ a</td>
+                            <td className="border border-gray-200 px-2 py-1.5 text-center text-red-600">∞ 那头<strong>永远不含</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs space-y-1">
+                      <p className="font-bold text-[#7A5C3E]">一句话记住：</p>
+                      <p className="text-[#7A5C3E]"><strong>小括号 ( ) = 不含端点</strong>（空心圆 ○）</p>
+                      <p className="text-[#7A5C3E]"><strong>中括号 [ ] = 含端点</strong>（实心圆 ●）</p>
+                      <p className="text-[#7A5C3E]"><strong>∞ 永远用小括号</strong>（无穷大不是具体的数，不能"含"）</p>
+                    </div>
+
+                    <div className="bg-white rounded-lg border p-3">
+                      <p className="font-bold text-xs mb-2">数轴上长什么样：</p>
+                      <svg viewBox="0 0 340 110" className="w-full">
+                        <line x1="20" y1="20" x2="320" y2="20" stroke="#d1d5db" strokeWidth="1" />
+                        <line x1="20" y1="50" x2="320" y2="50" stroke="#d1d5db" strokeWidth="1" />
+                        <line x1="20" y1="80" x2="320" y2="80" stroke="#d1d5db" strokeWidth="1" />
+                        <line x1="100" y1="14" x2="100" y2="86" stroke="#e5e7eb" strokeWidth="1" />
+                        <line x1="240" y1="14" x2="240" y2="56" stroke="#e5e7eb" strokeWidth="1" />
+                        <text x="100" y="104" fontSize="10" fill="#374151" textAnchor="middle">a</text>
+                        <text x="240" y="104" fontSize="10" fill="#374151" textAnchor="middle">b</text>
+                        {/* (a, b) open */}
+                        <line x1="100" y1="20" x2="240" y2="20" stroke="#3b82f6" strokeWidth="3" />
+                        <circle cx="100" cy="20" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                        <circle cx="240" cy="20" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                        <text x="170" y="14" fontSize="10" fill="#3b82f6" fontWeight="bold" textAnchor="middle">(a, b) 开区间</text>
+                        {/* [a, b] closed */}
+                        <line x1="100" y1="50" x2="240" y2="50" stroke="#16a34a" strokeWidth="3" />
+                        <circle cx="100" cy="50" r="3.5" fill="#16a34a" />
+                        <circle cx="240" cy="50" r="3.5" fill="#16a34a" />
+                        <text x="170" y="44" fontSize="10" fill="#16a34a" fontWeight="bold" textAnchor="middle">[a, b] 闭区间</text>
+                        {/* (-∞, b) */}
+                        <line x1="20" y1="80" x2="240" y2="80" stroke="#ef4444" strokeWidth="3" />
+                        <circle cx="240" cy="80" r="3.5" fill="white" stroke="#ef4444" strokeWidth="1.5" />
+                        <text x="22" y="74" fontSize="9" fill="#ef4444" fontWeight="bold">← -∞</text>
+                        <text x="170" y="74" fontSize="10" fill="#ef4444" fontWeight="bold" textAnchor="middle">(-∞, b)</text>
+                      </svg>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-3 space-y-1 text-xs">
+                      <p className="font-bold">转换练习：</p>
+                      <p><Math tex="\{x \mid 1 < x \leq 5\}" /> = <strong>(1, 5]</strong>　左不含用(，右含用]</p>
+                      <p><Math tex="\{x \mid x \geq 3\}" /> = <strong>[3, +∞)</strong>　左含用[，∞用)</p>
+                      <p><Math tex="\{x \mid x < 0\}" /> = <strong>(-∞, 0)</strong>　∞用(，右不含用)</p>
+                    </div>
+                  </div>
+                </Collapsible>
+
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
                   <p className="text-gray-700">1. 用列举法表示"不超过 5 的正整数" → 答案：<strong>&#123;1, 2, 3, 4, 5&#125;</strong></p>
                   <p className="text-gray-700">2. <Math tex="\{x \mid x^2 = 1\}" /> 用列举法 → 答案：<strong><Math tex="\{-1, 1\}" /></strong></p>
+                  <p className="text-gray-700">3. 把 <Math tex="\{x \mid -3 \leq x < 2\}" /> 写成区间 → 答案：<strong>[-3, 2)</strong></p>
+                  <p className="text-gray-700">4. 把 <Math tex="\{x \mid x > 5\}" /> 写成区间 → 答案：<strong>(5, +∞)</strong></p>
                 </div>
               </div>
             </Collapsible>
@@ -594,6 +706,56 @@ export function SetsPage() {
                         <p>重叠：&nbsp;&nbsp;&nbsp;&nbsp;(3────5)</p>
                       </div>
                       <p><Math tex="A \cap B = \{x \mid 3 < x < 5\}" /></p>
+                    </div>
+                  </div>
+                </Collapsible>
+
+                <Collapsible title="A∩B=∅ 求参数范围（高考高频题型）" storageKey="sets:intersection-empty">
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                      <p className="font-bold text-blue-800">核心思路</p>
+                      <p className="text-blue-700"><Math tex="A \cap B = \varnothing" /> 就是 A 和 B <strong>完全没有公共部分</strong>，在数轴上<strong>完全分开</strong>。</p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                      <p className="font-bold text-gray-800">例：<Math tex="A = \{x \mid 1 \leq x \leq 3\}" />，<Math tex="B = \{x \mid x > a\}" />，若 <Math tex="A \cap B = \varnothing" />，求 a</p>
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-2 text-xs">
+                        <div>
+                          <p className="text-blue-600 font-bold">第①步：画数轴</p>
+                          <div className="bg-white rounded-lg p-2 border mt-1">
+                            <svg viewBox="0 0 360 80" className="w-full">
+                              <line x1="20" y1="25" x2="340" y2="25" stroke="#d1d5db" strokeWidth="1" />
+                              <line x1="20" y1="50" x2="340" y2="50" stroke="#d1d5db" strokeWidth="1" />
+                              <line x1="100" y1="19" x2="100" y2="31" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="200" y1="19" x2="200" y2="31" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="240" y1="44" x2="240" y2="56" stroke="#6b7280" strokeWidth="1" />
+                              <text x="100" y="72" fontSize="10" fill="#374151" textAnchor="middle">1</text>
+                              <text x="200" y="72" fontSize="10" fill="#374151" textAnchor="middle">3</text>
+                              <text x="240" y="72" fontSize="10" fill="#374151" textAnchor="middle">a</text>
+                              {/* A: [1,3] */}
+                              <line x1="100" y1="25" x2="200" y2="25" stroke="#3b82f6" strokeWidth="3" />
+                              <circle cx="100" cy="25" r="3" fill="#3b82f6" />
+                              <circle cx="200" cy="25" r="3" fill="#3b82f6" />
+                              <text x="150" y="18" fontSize="10" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A: [1, 3]</text>
+                              {/* B: (a, +∞) */}
+                              <line x1="240" y1="50" x2="340" y2="50" stroke="#f59e0b" strokeWidth="3" />
+                              <circle cx="240" cy="50" r="3" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
+                              <text x="290" y="44" fontSize="10" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B: (a, +∞)</text>
+                            </svg>
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-blue-600 font-bold">第②步：要完全分开 → B 的左端 a 必须在 A 的右边</p>
+                          <p className="text-gray-600 mt-1">a = 2 → B = (2, +∞)，A 里的 2.5 和 B 重叠了 ✗</p>
+                          <p className="text-gray-600">a = 3 → B = (3, +∞)，A 最大是 3（含），B 从 3 开始（不含），刚好不重叠 ✓</p>
+                          <p className="text-gray-800 mt-1">答案：<strong><Math tex="a \geq 3" /></strong></p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs space-y-1">
+                      <p className="font-bold text-[#7A5C3E]">口诀：A∩B=∅ → 数轴上完全分开 → 看端点够不够远</p>
+                      <p className="text-[#9A7B5B]">注意开闭区间！端点一个含一个不含时，刚好"挨着"算分开。</p>
                     </div>
                   </div>
                 </Collapsible>
