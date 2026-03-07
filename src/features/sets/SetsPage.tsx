@@ -201,7 +201,7 @@ export function SetsPage() {
 
           {/* Section 4: 常见数集 */}
           <section className="mb-6">
-            <Collapsible title="四、常见的数集（背下来）" defaultOpen storageKey="sets:number-sets">
+            <Collapsible title="四、常见的数集（背下来）" defaultOpen storageKey="sets:number-sets" headerExtra={<SpeakButton text={setsNarrations.numberSets} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：记住 N, N*, Z, Q, R 各代表什么，判断元素属于哪个数集。</p>
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="overflow-x-auto">
@@ -343,7 +343,7 @@ export function SetsPage() {
 
           {/* Section 6: 集合的运算 */}
           <section className="mb-6">
-            <Collapsible title="六、集合的运算（高考核心！）" defaultOpen storageKey="sets:operations">
+            <Collapsible title="六、集合的运算（高考核心！）" defaultOpen storageKey="sets:operations" headerExtra={<SpeakButton text={setsNarrations.operations} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：熟练做交集、并集、补集运算，掌握混合运算技巧。</p>
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
@@ -484,7 +484,7 @@ export function SetsPage() {
 
           {/* Section 7: 解题核心技巧 */}
           <section className="mb-6">
-            <Collapsible title="七、解题核心技巧" defaultOpen storageKey="sets:techniques">
+            <Collapsible title="七、解题核心技巧" defaultOpen storageKey="sets:techniques" headerExtra={<SpeakButton text={setsNarrations.techniques} />}>
               <div className="space-y-3 text-sm text-gray-700">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <p className="font-bold text-blue-800 mb-2">技巧一：数轴法（最常用）</p>
