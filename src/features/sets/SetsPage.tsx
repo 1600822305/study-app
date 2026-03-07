@@ -21,7 +21,7 @@ export function SetsPage() {
           <h1 className="text-3xl font-black text-gray-900 mb-2">1.2 集合</h1>
           <SpeakButton text={setsNarrations.intro} />
         </div>
-        <p className="text-gray-500">从零到满分 · 2-3小时搞定高考必拿5分</p>
+        <p className="text-gray-700">从零到满分 · 2-3小时搞定高考必拿5分</p>
         <div className="flex flex-wrap gap-3 mt-3">
           <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
             难度 ★☆☆☆☆
@@ -237,7 +237,7 @@ export function SetsPage() {
                       </div>
                     </div>
 
-                    <p className="text-xs text-gray-500">Venn 图在做交集、并集、补集运算时特别直观，后面集合运算会大量使用。</p>
+                    <p className="text-xs text-gray-700">Venn 图在做交集、并集、补集运算时特别直观，后面集合运算会大量使用。</p>
                   </div>
                 </Collapsible>
 
@@ -277,7 +277,7 @@ export function SetsPage() {
                           <td className="border border-gray-200 px-3 py-2 text-center"><Math tex={sym} /></td>
                           <td className="border border-gray-200 px-3 py-2">{name}</td>
                           <td className="border border-gray-200 px-3 py-2 text-gray-600">{desc}</td>
-                          <td className="border border-gray-200 px-3 py-2 text-gray-500 text-xs">{ex}</td>
+                          <td className="border border-gray-200 px-3 py-2 text-gray-700 text-xs">{ex}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -392,10 +392,10 @@ export function SetsPage() {
                     <div className="bg-gray-50 rounded-lg p-3">
                       <p className="font-bold text-gray-800 mb-2">例：A = &#123;a, b, c&#125;，3个元素</p>
                       <div className="grid grid-cols-[auto_auto_auto_1fr] gap-x-2 gap-y-1 w-fit">
-                        <span className="text-right">子集</span><span>=</span><span>2³ = <strong>8</strong> 个</span><span className="text-gray-500">∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</span>
-                        <span className="text-right">真子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-500">（去掉&#123;a,b,c&#125;本身）</span>
-                        <span className="text-right">非空子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-500">（去掉∅）</span>
-                        <span className="text-right">非空真子集</span><span>=</span><span>8 - 2 = <strong>6</strong></span><span className="text-gray-500">（去掉∅和&#123;a,b,c&#125;）</span>
+                        <span className="text-right">子集</span><span>=</span><span>2³ = <strong>8</strong> 个</span><span className="text-gray-700">∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</span>
+                        <span className="text-right">真子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-700">（去掉&#123;a,b,c&#125;本身）</span>
+                        <span className="text-right">非空子集</span><span>=</span><span>8 - 1 = <strong>7</strong></span><span className="text-gray-700">（去掉∅）</span>
+                        <span className="text-right">非空真子集</span><span>=</span><span>8 - 2 = <strong>6</strong></span><span className="text-gray-700">（去掉∅和&#123;a,b,c&#125;）</span>
                       </div>
                     </div>
                   </div>
@@ -515,7 +515,7 @@ export function SetsPage() {
                       <p><Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid 1 \leq x < 5\}" />，求 <Math tex="\complement_U A" /></p>
 
                       <div className="bg-white rounded-lg p-3 border">
-                        <p className="text-xs text-gray-500 mb-2 font-bold">第①步：画出 A 的范围</p>
+                        <p className="text-xs text-gray-700 mb-2 font-bold">第①步：画出 A 的范围</p>
                         <svg viewBox="0 0 340 50" className="w-full">
                           <line x1="20" y1="30" x2="320" y2="30" stroke="#d1d5db" strokeWidth="1.5" />
                           {/* ticks */}
@@ -535,7 +535,7 @@ export function SetsPage() {
                       </div>
 
                       <div className="bg-white rounded-lg p-3 border">
-                        <p className="text-xs text-gray-500 mb-2 font-bold">第②步：补集 = 数轴上剩下的部分，端点反转！</p>
+                        <p className="text-xs text-gray-700 mb-2 font-bold">第②步：补集 = 数轴上剩下的部分，端点反转！</p>
                         <svg viewBox="0 0 340 50" className="w-full">
                           <line x1="20" y1="30" x2="320" y2="30" stroke="#d1d5db" strokeWidth="1.5" />
                           <line x1="100" y1="24" x2="100" y2="36" stroke="#6b7280" strokeWidth="1.5" />
@@ -565,8 +565,8 @@ export function SetsPage() {
                       <p className="font-bold text-[#7A5C3E] mb-3 text-center">补集端点规律（必记！）</p>
                       <div className="grid grid-cols-[auto_auto_auto_auto] gap-x-3 gap-y-2 w-fit mx-auto text-sm">
                         <span className="font-bold text-[#7A5C3E]">A 的端点</span><span></span><span className="font-bold text-[#7A5C3E]">补集端点</span><span className="font-bold text-[#7A5C3E]">图上看</span>
-                        <span>{'<'}（不含）</span><span>→</span><span>≥（含）</span><span className="text-gray-500">空心 → 实心</span>
-                        <span>≤（含）</span><span>→</span><span>{'>'}（不含）</span><span className="text-gray-500">实心 → 空心</span>
+                        <span>{'<'}（不含）</span><span>→</span><span>≥（含）</span><span className="text-gray-700">空心 → 实心</span>
+                        <span>≤（含）</span><span>→</span><span>{'>'}（不含）</span><span className="text-gray-700">实心 → 空心</span>
                       </div>
                       <p className="text-[#9A7B5B] font-bold text-center mt-3">口诀：<strong className="text-[#7A5C3E]">开变闭，闭变开</strong>（空心变实心，实心变空心）</p>
                     </div>
@@ -656,7 +656,7 @@ export function SetsPage() {
                         <div>
                           <p><span className="text-blue-600 font-bold">第②步</span>：再求补集（端点反转）</p>
                           <p className="pl-4"><Math tex="\complement_U(A \cap B) = \{x \mid x < 2 \text{ 或 } x > 4\}" /></p>
-                          <p className="pl-4 text-xs text-gray-500">[2,4] → 补集两端：2 的 ≤ 变 {'<'}，4 的 ≤ 变 {'>'}</p>
+                          <p className="pl-4 text-xs text-gray-700">[2,4] → 补集两端：2 的 ≤ 变 {'<'}，4 的 ≤ 变 {'>'}</p>
                         </div>
                       </div>
                     </div>
@@ -668,8 +668,8 @@ export function SetsPage() {
                         <p>「<strong>不</strong>(会游泳<strong>或</strong>会骑车)的人」= 「<strong>不</strong>会游泳 <strong>且</strong> <strong>不</strong>会骑车的人」</p>
                       </div>
                       <div className="space-y-2 text-purple-700">
-                        <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /> <span className="text-xs text-purple-500">∩ 变 ∪</span></p>
-                        <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /> <span className="text-xs text-purple-500">∪ 变 ∩</span></p>
+                        <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /> <span className="text-xs text-purple-700">∩ 变 ∪</span></p>
+                        <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /> <span className="text-xs text-purple-700">∪ 变 ∩</span></p>
                       </div>
                       <p className="text-purple-600 text-sm">口诀：<strong>补穿入，交并换</strong>（补号穿进括号，∩ 和 ∪ 互换）</p>
                     </div>
@@ -692,7 +692,7 @@ export function SetsPage() {
                           <tr>
                             <td className="border border-gray-200 px-3 py-3 text-center align-top">
                               <p className="font-bold"><Math tex="\complement_U(A \cup B)" /></p>
-                              <p className="text-xs text-gray-400 mt-1">补「并」→「交」</p>
+                              <p className="text-xs text-gray-600 mt-1">补「并」→「交」</p>
                             </td>
                             <td className="border border-gray-200 px-3 py-3 bg-blue-50/50 align-top">
                               <p>A ∪ B = &#123;1,2,3,4&#125;</p>
@@ -706,7 +706,7 @@ export function SetsPage() {
                           <tr>
                             <td className="border border-gray-200 px-3 py-3 text-center align-top">
                               <p className="font-bold"><Math tex="\complement_U(A \cap B)" /></p>
-                              <p className="text-xs text-gray-400 mt-1">补「交」→「并」</p>
+                              <p className="text-xs text-gray-600 mt-1">补「交」→「并」</p>
                             </td>
                             <td className="border border-gray-200 px-3 py-3 bg-blue-50/50 align-top">
                               <p>A ∩ B = &#123;2,3&#125;</p>
@@ -813,7 +813,7 @@ export function SetsPage() {
                   <p className="font-bold text-gray-800 mb-2">补集端点</p>
                   <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                     <p>{'<'} → ≥，≤ → {'>'}，{'>'} → ≤，≥ → {'<'}</p>
-                    <p className="text-xs text-gray-500">口诀：<strong className="text-gray-700">开变闭，闭变开</strong></p>
+                    <p className="text-xs text-gray-700">口诀：<strong className="text-gray-700">开变闭，闭变开</strong></p>
                   </div>
                 </div>
                 <div>
@@ -860,27 +860,27 @@ export function SetsPage() {
             <div className="bg-slate-900 text-white rounded-2xl p-6 space-y-3 text-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">概念</p>
+                  <p className="text-slate-300 text-xs mb-1">概念</p>
                   <p>集合 = 一堆确定的东西</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">三大性质</p>
+                  <p className="text-slate-300 text-xs mb-1">三大性质</p>
                   <p>确定性、互异性、无序性</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">运算</p>
+                  <p className="text-slate-300 text-xs mb-1">运算</p>
                   <p><Math tex="\cap" /> 公共部分 · <Math tex="\cup" /> 全部 · <Math tex="\complement_U" /> 剩下的</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">核心方法</p>
+                  <p className="text-slate-300 text-xs mb-1">核心方法</p>
                   <p>画数轴！</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">补集端点</p>
+                  <p className="text-slate-300 text-xs mb-1">补集端点</p>
                   <p>开变闭，闭变开</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">子集个数</p>
+                  <p className="text-slate-300 text-xs mb-1">子集个数</p>
                   <p><Math tex="n" /> 个元素 → <Math tex="2^n" /> 个子集</p>
                 </div>
               </div>
