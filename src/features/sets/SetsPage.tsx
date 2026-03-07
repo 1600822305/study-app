@@ -1118,6 +1118,44 @@ export function SetsPage() {
                     <p>"<Math tex="A \cup B = B" />" → 等价于 <Math tex="A \subseteq B" /></p>
                   </div>
                 </div>
+
+                <Collapsible title="技巧五：集合相等 A=B → 元素一一对应（高考填空高频）" storageKey="sets:technique-equal">
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                      <p className="font-bold text-blue-800">核心思路</p>
+                      <p className="text-blue-700">A = B → 两边元素<strong>完全相同</strong> → 逐个对应找参数 → 最后<strong>验证互异性</strong></p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                      <p className="font-bold text-gray-800">例：<Math tex="A = \{1,\; -a,\; \tfrac{b}{a}\}" />，<Math tex="B = \{0,\; a^2,\; b-a\}" />，若 A = B，求 <Math tex="a^{2025} + b^{2025}" /></p>
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-2 text-xs">
+                        <div>
+                          <p className="text-blue-600 font-bold">第①步：找突破口 — 0 在哪？</p>
+                          <p className="text-gray-700 mt-1">0 ∈ B 且 A = B → 0 ∈ A → A 中谁 = 0？</p>
+                          <p className="text-gray-700">1 ≠ 0　-a = 0 → a = 0 但 b/a 无意义 ✗　<strong>b/a = 0 → b = 0</strong>（a ≠ 0）</p>
+                        </div>
+                        <div>
+                          <p className="text-blue-600 font-bold">第②步：b = 0 代入</p>
+                          <p className="text-gray-700 mt-1">A = &#123;1, -a, 0&#125;　B = &#123;0, a², -a&#125;</p>
+                          <p className="text-gray-700">-a 在两边都有 ✓ → 剩下 &#123;1, 0&#125; = &#123;0, a²&#125; → <strong>a² = 1</strong></p>
+                        </div>
+                        <div>
+                          <p className="text-blue-600 font-bold">第③步：解 a² = 1 并验证互异性</p>
+                          <p className="text-gray-700 mt-1">a = 1：A = &#123;1, -1, 0&#125;，全部不重复 ✓</p>
+                          <p className="text-gray-700">a = -1：A = &#123;1, <strong className="text-red-600">1</strong>, 0&#125;，1 重复了 ✗</p>
+                        </div>
+                        <p className="text-gray-800 font-bold mt-1">答案：a = 1, b = 0 → <Math tex="1^{2025} + 0^{2025} = \boxed{1}" /></p>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs space-y-1">
+                      <p className="font-bold text-[#7A5C3E]">做题套路（三步走）：</p>
+                      <p className="text-[#9A7B5B]">① 找突破口（通常是 0 或特殊值在哪边）</p>
+                      <p className="text-[#9A7B5B]">② 代入求参数（元素一一对应）</p>
+                      <p className="text-[#9A7B5B]">③ <strong>验证互异性</strong>（多解时排除不满足的）</p>
+                    </div>
+                  </div>
+                </Collapsible>
               </div>
             </Collapsible>
           </section>
@@ -1179,7 +1217,7 @@ export function SetsPage() {
               </span>
               高考真题实战
             </h2>
-            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="20道选择题，覆盖高考集合全部题型" />
+            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="21道选择题，覆盖高考集合全部题型" />
           </section>
 
           {/* Section 9: 知识总结卡片 */}

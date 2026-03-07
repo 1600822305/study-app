@@ -306,4 +306,20 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     explanationLatex:
       '\\{(x,y) \\mid \\ldots\\} \\text{ 是点集}，\\{x \\mid \\ldots\\} \\text{ 是数集，两者完全不同！}',
   },
+  {
+    id: 'sq21',
+    question: '已知集合',
+    questionLatex:
+      'A = \\{1,\\; -a,\\; \\tfrac{b}{a}\\},\\; B = \\{0,\\; a^2,\\; b-a\\},\\; A = B,\\; \\text{则 } a^{2025} + b^{2025} =',
+    options: [
+      { label: 'A', value: '0' },
+      { label: 'B', value: '1' },
+      { label: 'C', value: '-1' },
+      { label: 'D', value: '2' },
+    ],
+    correctAnswer: '1',
+    explanation: '0∈B 且 A=B → 0∈A → b/a=0 → b=0。代入后 A={1,-a,0}，B={0,a²,-a}，对应得 a²=1。a=1 满足互异性，a=-1 导致 A 有重复元素。故 a=1, b=0，答案=1。',
+    explanationLatex:
+      'b=0,\\; a^2=1 \\Rightarrow a=1\\;(a=-1\\text{ 时 }A\\text{ 有重复}) \\quad 1^{2025}+0^{2025}=1',
+  },
 ];
