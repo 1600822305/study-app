@@ -156,6 +156,29 @@ export function SetsPrereqPage() {
               </div>
             </div>
 
+            {/* 直接开平方法 */}
+            <div>
+              <p className="font-bold mb-2">方法零：直接开平方法（最简单，秒杀特定题型）</p>
+              <p className="text-gray-500 text-xs mb-2">看到 x² = 某个数 或 (x+a)² = 某个数，直接开根号，不用分解也不用套公式。</p>
+              <div className="space-y-2">
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 text-xs mb-1">形式一：x² = k</p>
+                  <p><Math tex="x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
+                  <p className="text-gray-500 text-xs">两边开根号，别忘了 ±</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 text-xs mb-1">形式二：(x+a)² = k</p>
+                  <p><Math tex="(x-1)^2 = 4 \;\Rightarrow\; x-1 = \pm 2 \;\Rightarrow\; x = 3 \text{ 或 } x = -1" /></p>
+                  <p className="text-gray-500 text-xs">先开根号，再移项</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 text-xs mb-1">形式三：ax² = k（先除再开）</p>
+                  <p><Math tex="2x^2 = 18 \;\Rightarrow\; x^2 = 9 \;\Rightarrow\; x = \pm 3" /></p>
+                </div>
+              </div>
+              <p className="text-xs text-gray-400 mt-2">适用范围：没有一次项（bx），或者已经是完全平方的形式。遇到一次项就得用下面的方法。</p>
+            </div>
+
             {/* 因式分解法 */}
             <div>
               <p className="font-bold mb-2">方法一：因式分解法（最常用，优先试）</p>
