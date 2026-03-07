@@ -575,23 +575,101 @@ export function SetsPage() {
 
                 <Collapsible title="交并补混合运算（高考最爱考！）" storageKey="sets:mixed-ops">
                   <div className="space-y-3 text-sm text-gray-700">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                      <p className="text-blue-700"><strong>套路：</strong>先算括号里面的（通常先求补集），再算外面的。</p>
+                    <div className="bg-[#F5E6D3] rounded-xl p-4">
+                      <p className="font-bold text-[#7A5C3E] mb-2">解题模板（三步走）</p>
+                      <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm text-[#7A5C3E]">
+                        <span className="font-bold">①</span><span>看清求什么 → 找出运算顺序（先括号内，再括号外）</span>
+                        <span className="font-bold">②</span><span>遇到补集 → 端点反转（开变闭，闭变开）</span>
+                        <span className="font-bold">③</span><span>遇到交/并 → 画数轴，交取重叠，并取全部</span>
+                      </div>
                     </div>
-                    <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                      <p className="font-bold text-gray-800">例：<Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid x \leq 1\}" />，<Math tex="B = \{x \mid x > -1\}" /></p>
+
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                      <p className="font-bold text-gray-800">例1：<Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid x \leq 1\}" />，<Math tex="B = \{x \mid x > -1\}" /></p>
                       <p className="font-bold">求 <Math tex="A \cap (\complement_U B)" /></p>
-                      <div className="pl-3 border-l-2 border-blue-300 space-y-2">
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-3">
                         <div>
-                          <p><span className="text-blue-600 font-bold">第一步</span>：先求 <Math tex="\complement_U B" /></p>
-                          <p className="pl-4">B = &#123;x | x {'>'} -1&#125;，补集 = <Math tex="\{x \mid x \leq -1\}" /></p>
+                          <p><span className="text-blue-600 font-bold">第①步</span>：先求 <Math tex="\complement_U B" />（端点反转）</p>
+                          <p className="pl-4">B = &#123;x | x {'>'} -1&#125; → 补集 = <Math tex="\{x \mid x \leq -1\}" /></p>
                         </div>
                         <div>
-                          <p><span className="text-blue-600 font-bold">第二步</span>：再求 <Math tex="A \cap (\complement_U B)" /></p>
-                          <p className="pl-4">A = &#123;x | x ≤ 1&#125;，∁ᵤB = &#123;x | x ≤ -1&#125;</p>
-                          <p className="pl-4">画数轴取重叠 → <Math tex="\{x \mid x \leq -1\}" /></p>
+                          <p><span className="text-blue-600 font-bold">第②步</span>：画数轴求 <Math tex="A \cap (\complement_U B)" /></p>
+                          <div className="bg-white rounded-lg p-3 border">
+                            <svg viewBox="0 0 340 70" className="w-full">
+                              <line x1="20" y1="20" x2="320" y2="20" stroke="#d1d5db" strokeWidth="1" />
+                              <line x1="20" y1="45" x2="320" y2="45" stroke="#d1d5db" strokeWidth="1" />
+                              {/* tick at -1 */}
+                              <line x1="120" y1="14" x2="120" y2="26" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="120" y1="39" x2="120" y2="51" stroke="#6b7280" strokeWidth="1" />
+                              {/* tick at 1 */}
+                              <line x1="220" y1="14" x2="220" y2="26" stroke="#6b7280" strokeWidth="1" />
+                              <text x="120" y="64" fontSize="10" fill="#374151" textAnchor="middle">-1</text>
+                              <text x="220" y="64" fontSize="10" fill="#374151" textAnchor="middle">1</text>
+                              {/* A: x ≤ 1 */}
+                              <line x1="20" y1="20" x2="220" y2="20" stroke="#3b82f6" strokeWidth="3" />
+                              <circle cx="220" cy="20" r="3" fill="#3b82f6" />
+                              <text x="22" y="14" fontSize="9" fill="#3b82f6" fontWeight="bold">← A: x ≤ 1</text>
+                              {/* ∁B: x ≤ -1 */}
+                              <line x1="20" y1="45" x2="120" y2="45" stroke="#ef4444" strokeWidth="3" />
+                              <circle cx="120" cy="45" r="3" fill="#ef4444" />
+                              <text x="22" y="39" fontSize="9" fill="#ef4444" fontWeight="bold">← ∁B: x ≤ -1</text>
+                            </svg>
+                          </div>
+                          <p className="pl-4">重叠部分 = <Math tex="\{x \mid x \leq -1\}" /></p>
                         </div>
                       </div>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                      <p className="font-bold text-gray-800">例2：<Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid 1 < x \leq 4\}" />，<Math tex="B = \{x \mid 2 \leq x < 5\}" /></p>
+                      <p className="font-bold">求 <Math tex="\complement_U(A \cap B)" /></p>
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-3">
+                        <div>
+                          <p><span className="text-blue-600 font-bold">第①步</span>：先求括号内 <Math tex="A \cap B" /></p>
+                          <div className="bg-white rounded-lg p-3 border">
+                            <svg viewBox="0 0 340 70" className="w-full">
+                              <line x1="20" y1="20" x2="320" y2="20" stroke="#d1d5db" strokeWidth="1" />
+                              <line x1="20" y1="45" x2="320" y2="45" stroke="#d1d5db" strokeWidth="1" />
+                              {/* ticks 1,2,4,5 */}
+                              <line x1="70" y1="14" x2="70" y2="26" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="130" y1="14" x2="130" y2="51" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="250" y1="14" x2="250" y2="51" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="310" y1="39" x2="310" y2="51" stroke="#6b7280" strokeWidth="1" />
+                              <text x="70" y="64" fontSize="10" fill="#374151" textAnchor="middle">1</text>
+                              <text x="130" y="64" fontSize="10" fill="#374151" textAnchor="middle">2</text>
+                              <text x="250" y="64" fontSize="10" fill="#374151" textAnchor="middle">4</text>
+                              <text x="310" y="64" fontSize="10" fill="#374151" textAnchor="middle">5</text>
+                              {/* A: (1,4] */}
+                              <line x1="70" y1="20" x2="250" y2="20" stroke="#3b82f6" strokeWidth="3" />
+                              <circle cx="70" cy="20" r="3" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                              <circle cx="250" cy="20" r="3" fill="#3b82f6" />
+                              <text x="160" y="14" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A: (1, 4]</text>
+                              {/* B: [2,5) */}
+                              <line x1="130" y1="45" x2="310" y2="45" stroke="#f59e0b" strokeWidth="3" />
+                              <circle cx="130" cy="45" r="3" fill="#f59e0b" />
+                              <circle cx="310" cy="45" r="3" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
+                              <text x="220" y="39" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B: [2, 5)</text>
+                            </svg>
+                          </div>
+                          <p className="pl-4">重叠 = <Math tex="A \cap B = \{x \mid 2 \leq x \leq 4\} = [2, 4]" /></p>
+                        </div>
+                        <div>
+                          <p><span className="text-blue-600 font-bold">第②步</span>：再求补集（端点反转）</p>
+                          <p className="pl-4"><Math tex="\complement_U(A \cap B) = \{x \mid x < 2 \text{ 或 } x > 4\}" /></p>
+                          <p className="pl-4 text-xs text-gray-500">[2,4] → 补集两端：2 的 ≤ 变 {'<'}，4 的 ≤ 变 {'>'}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                      <p className="font-bold text-purple-800 mb-2">🧠 德摩根定律（混合运算的捷径）</p>
+                      <div className="space-y-2 text-purple-700">
+                        <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /></p>
+                        <p className="text-xs text-purple-500 pl-4">补交 = 补的并（交变并）</p>
+                        <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /></p>
+                        <p className="text-xs text-purple-500 pl-4">补并 = 补的交（并变交）</p>
+                      </div>
+                      <p className="text-xs text-purple-600 mt-2">记法：<strong>补号穿进去，交并要互换</strong></p>
                     </div>
                   </div>
                 </Collapsible>
