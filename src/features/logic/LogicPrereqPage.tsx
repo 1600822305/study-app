@@ -61,13 +61,40 @@ export function LogicPrereqPage() {
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4">
-              <p className="font-bold mb-2">用数轴比较区间大小</p>
-              <p>A = (2, 5)，B = (1, 6)</p>
-              <div className="mt-2 font-mono text-xs text-gray-500 space-y-1">
-                <p>A: &nbsp;&nbsp;&nbsp;&nbsp;(2═══5)</p>
-                <p>B: &nbsp;(1════════6)</p>
+              <p className="font-bold mb-3">用数轴比较区间大小</p>
+              <p className="mb-3">A = (2, 5)，B = (1, 6)，谁包含谁？</p>
+
+              {/* 数轴图解 */}
+              <div className="bg-white rounded-lg p-4 space-y-4">
+                {/* 数轴刻度 */}
+                <div className="relative h-6">
+                  <div className="absolute top-1/2 left-[10%] right-[10%] h-[2px] bg-gray-300" />
+                  {[0, 1, 2, 3, 4, 5, 6, 7].map((n) => (
+                    <div key={n} className="absolute top-1/2 -translate-y-1/2 flex flex-col items-center" style={{ left: `${10 + n * (80 / 7)}%` }}>
+                      <div className="w-[1px] h-2 bg-gray-400" />
+                      <span className="text-[10px] text-gray-500 mt-1">{n}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* B 区间 (1, 6) - 蓝色，在下面 */}
+                <div className="relative h-7">
+                  <div className="absolute top-1/2 -translate-y-1/2 h-3 bg-blue-100 border-y border-blue-300 rounded-sm" style={{ left: `${10 + 1 * (80 / 7)}%`, right: `${100 - 10 - 6 * (80 / 7)}%` }} />
+                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-blue-500 bg-white" style={{ left: `${10 + 1 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
+                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-blue-500 bg-white" style={{ left: `${10 + 6 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
+                  <span className="absolute -left-1 top-1/2 -translate-y-1/2 text-xs font-bold text-blue-600">B</span>
+                </div>
+
+                {/* A 区间 (2, 5) - 红色，在上面 */}
+                <div className="relative h-7">
+                  <div className="absolute top-1/2 -translate-y-1/2 h-3 bg-red-100 border-y border-red-300 rounded-sm" style={{ left: `${10 + 2 * (80 / 7)}%`, right: `${100 - 10 - 5 * (80 / 7)}%` }} />
+                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-red-500 bg-white" style={{ left: `${10 + 2 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
+                  <div className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full border-2 border-red-500 bg-white" style={{ left: `${10 + 5 * (80 / 7)}%`, transform: 'translate(-50%, -50%)' }} />
+                  <span className="absolute -left-1 top-1/2 -translate-y-1/2 text-xs font-bold text-red-600">A</span>
+                </div>
               </div>
-              <p className="mt-2">A 在 B 里面 → <Math tex="A \subset B" /></p>
+
+              <p className="mt-3 text-sm"><span className="text-red-600 font-bold">A</span> 完全被 <span className="text-blue-600 font-bold">B</span> 包住 → <Math tex="A \subset B" /></p>
             </div>
 
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
