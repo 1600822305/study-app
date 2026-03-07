@@ -373,8 +373,8 @@ export function SetsPage() {
                           <rect x="4" y="4" width="172" height="112" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
                           <circle cx="90" cy="55" r="42" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" strokeWidth="1.5" />
                           <circle cx="90" cy="62" r="22" fill="rgba(234,179,8,0.2)" stroke="#eab308" strokeWidth="1.5" />
-                          <text x="90" y="50" fontSize="13" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
-                          <text x="90" y="70" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="60" y="28" fontSize="13" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
+                          <text x="90" y="67" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
                           <text x="90" y="110" fontSize="10" fill="#6b7280" textAnchor="middle">A 完全在 B 里面</text>
                         </svg>
                       </div>
@@ -384,9 +384,9 @@ export function SetsPage() {
                           <rect x="4" y="4" width="172" height="112" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1" />
                           <circle cx="90" cy="55" r="42" fill="rgba(59,130,246,0.12)" stroke="#3b82f6" strokeWidth="1.5" />
                           <circle cx="90" cy="62" r="22" fill="rgba(234,179,8,0.2)" stroke="#eab308" strokeWidth="1.5" />
-                          <text x="90" y="50" fontSize="13" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
-                          <text x="90" y="70" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="135" y="45" fontSize="9" fill="#ef4444" fontWeight="bold">B 比 A 多</text>
+                          <text x="60" y="28" fontSize="13" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
+                          <text x="90" y="67" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
+                          <text x="135" y="38" fontSize="9" fill="#ef4444" fontWeight="bold">B 比 A 多</text>
                           <text x="90" y="110" fontSize="10" fill="#6b7280" textAnchor="middle">A 在 B 里面，且 A ≠ B</text>
                         </svg>
                       </div>
