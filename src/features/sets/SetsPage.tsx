@@ -661,15 +661,30 @@ export function SetsPage() {
                       </div>
                     </div>
 
-                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-                      <p className="font-bold text-purple-800 mb-2">🧠 德摩根定律（混合运算的捷径）</p>
+                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 space-y-4">
+                      <p className="font-bold text-purple-800">🧠 德摩根定律（混合运算的捷径）</p>
+
+                      <div className="bg-white rounded-lg p-3 border border-purple-200">
+                        <p className="text-xs text-purple-500 font-bold mb-2">生活类比秒懂：</p>
+                        <div className="space-y-2 text-sm text-purple-700">
+                          <p>「<strong>不</strong>(既会游泳<strong>且</strong>会骑车)的人」= 「<strong>不</strong>会游泳 <strong>或</strong> <strong>不</strong>会骑车的人」</p>
+                          <p className="text-xs text-purple-400 pl-4">→ 不是两样都会 = 至少有一样不会</p>
+                          <p>「<strong>不</strong>(会游泳<strong>或</strong>会骑车)的人」= 「<strong>不</strong>会游泳 <strong>且</strong> <strong>不</strong>会骑车的人」</p>
+                          <p className="text-xs text-purple-400 pl-4">→ 两样都不会 = 一样都不会</p>
+                        </div>
+                      </div>
+
                       <div className="space-y-2 text-purple-700">
                         <p><Math tex="\complement_U(A \cap B) = (\complement_U A) \cup (\complement_U B)" /></p>
-                        <p className="text-xs text-purple-500 pl-4">补交 = 补的并（交变并）</p>
+                        <p className="text-xs text-purple-500 pl-4">补「交」= 补的「并」（∩ 变 ∪）</p>
                         <p><Math tex="\complement_U(A \cup B) = (\complement_U A) \cap (\complement_U B)" /></p>
-                        <p className="text-xs text-purple-500 pl-4">补并 = 补的交（并变交）</p>
+                        <p className="text-xs text-purple-500 pl-4">补「并」= 补的「交」（∪ 变 ∩）</p>
                       </div>
-                      <p className="text-xs text-purple-600 mt-2">记法：<strong>补号穿进去，交并要互换</strong></p>
+
+                      <div className="bg-purple-100 rounded-lg p-3 text-center">
+                        <p className="font-bold text-purple-800 text-sm">三字口诀：<strong className="text-lg">补穿入，交并换</strong></p>
+                        <p className="text-xs text-purple-600 mt-1">补号像炸弹💣穿进括号，把 ∩ 和 ∪ 炸反了</p>
+                      </div>
                     </div>
                   </div>
                 </Collapsible>
