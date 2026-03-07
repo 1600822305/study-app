@@ -1128,7 +1128,7 @@ export function SetsPage() {
 
                     <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                       <p className="font-bold text-gray-800">例：<Math tex="A = \{1,\; -a,\; \tfrac{b}{a}\}" />，<Math tex="B = \{0,\; a^2,\; b-a\}" />，若 A = B，求 <Math tex="a^{2025} + b^{2025}" /></p>
-                      <div className="pl-3 border-l-2 border-blue-300 space-y-2 text-xs">
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-2 text-sm">
                         <div>
                           <p className="text-blue-600 font-bold">第①步：找突破口 — 0 在哪？</p>
                           <p className="text-gray-700 mt-1">0 ∈ B 且 A = B → 0 ∈ A → A 中谁 = 0？</p>
@@ -1148,7 +1148,7 @@ export function SetsPage() {
                       </div>
                     </div>
 
-                    <div className="bg-[#F5E6D3] rounded-xl p-3 text-xs space-y-1">
+                    <div className="bg-[#F5E6D3] rounded-xl p-3 text-sm space-y-1">
                       <p className="font-bold text-[#7A5C3E]">做题套路（三步走）：</p>
                       <p className="text-[#9A7B5B]">① 找突破口（通常是 0 或特殊值在哪边）</p>
                       <p className="text-[#9A7B5B]">② 代入求参数（元素一一对应）</p>
