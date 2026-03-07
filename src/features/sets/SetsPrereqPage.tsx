@@ -349,11 +349,43 @@ export function SetsPrereqPage() {
         </Collapsible>
       </section>
 
-      {/* Section 2: Quadratic Inequalities */}
-      <section className="mb-6">
-        <Collapsible title="二、解一元二次不等式（集合最核心的前置技能！）" defaultOpen storageKey="sets-prereq:inequality" headerExtra={<SpeakButton text={setsPrereqNarrations.inequality} />}>
-          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用“三步走”方法独立解一元二次不等式，写出集合描述法的解集。</p>
-          <div className="space-y-4 text-sm text-gray-700">
+        {/* Section 2: Quadratic Inequalities */}
+        <section className="mb-6">
+          <Collapsible title="二、解一元二次不等式（集合最核心的前置技能！）" defaultOpen storageKey="sets-prereq:inequality" headerExtra={<SpeakButton text={setsPrereqNarrations.inequality} />}>
+            <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用"三步走"方法独立解一元二次不等式，写出集合描述法的解集。</p>
+            <div className="space-y-4 text-sm text-gray-700">
+
+            {/* 二次函数前置 */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="font-bold text-blue-800 mb-2">先搞清楚：二次函数的图像长什么样？</p>
+              <p className="text-blue-700 mb-2">不等式的解法靠的是<strong>二次函数的图像</strong>，所以要先知道图像的基本规律。</p>
+              <div className="space-y-2 text-sm">
+                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                  <p className="font-bold text-gray-800 text-xs mb-1">二次函数：<Math tex="y = ax^2 + bx + c" /></p>
+                  <p className="text-gray-600">图像是一条<strong>抛物线</strong>（U 形曲线），开口方向由 a 决定：</p>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-white rounded-lg p-3 border border-blue-100 text-center">
+                    <p className="font-bold text-blue-600 text-xs mb-1">a {'>'} 0 → 开口朝上 ∪</p>
+                    <div className="text-3xl leading-none">∪</div>
+                    <p className="text-xs text-gray-500 mt-1">像碗一样，<strong>底部是最低点</strong></p>
+                    <p className="text-xs text-gray-400">两边往上走 → 两边 y {'>'} 0</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-3 border border-blue-100 text-center">
+                    <p className="font-bold text-red-500 text-xs mb-1">a {'<'} 0 → 开口朝下 ∩</p>
+                    <div className="text-3xl leading-none">∩</div>
+                    <p className="text-xs text-gray-500 mt-1">像山丘，<strong>顶部是最高点</strong></p>
+                    <p className="text-xs text-gray-400">两边往下走 → 两边 y {'<'} 0</p>
+                  </div>
+                </div>
+                <div className="bg-white rounded-lg p-3 border border-blue-100">
+                  <p className="font-bold text-gray-800 text-xs mb-1">抛物线和 x 轴的交点 = 方程 <Math tex="ax^2+bx+c=0" /> 的根</p>
+                  <p className="text-gray-600 text-xs">有两个交点 → 两个根；一个交点 → 重根；没有交点 → 无实数根</p>
+                </div>
+              </div>
+              <p className="text-xs text-blue-600 mt-2 font-bold">下面的口诀假设 a {'>'} 0（开口朝上）。如果 a {'<'} 0，先两边乘 -1 变成 a {'>'} 0 再用口诀。</p>
+            </div>
+
             <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
               <p className="font-bold text-amber-800 mb-2">核心方法：三步走</p>
               <div className="text-amber-700 space-y-1">
