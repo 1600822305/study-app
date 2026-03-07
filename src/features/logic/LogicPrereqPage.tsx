@@ -213,14 +213,18 @@ export function LogicPrereqPage() {
                     <p className="text-sm font-bold text-gray-700">例1：<Math tex="|x - 9| < |x - 1|" /></p>
                     <p className="text-sm text-gray-600 pl-2">两边平方 → <Math tex="(x-9)^2 < (x-1)^2" /></p>
                     <p className="text-sm text-gray-600 pl-2">展开 → <Math tex="x^2 - 18x + 81 < x^2 - 2x + 1" /></p>
-                    <p className="text-sm text-gray-600 pl-2">化简 → <Math tex="-16x < -80" /> → <Math tex="x > 5" />　✓</p>
+                    <p className="text-sm text-gray-600 pl-2">两边都有 <Math tex="x^2" />，消掉 → <Math tex="-18x + 81 < -2x + 1" /></p>
+                    <p className="text-sm text-gray-600 pl-2">移项：-18x + 2x {'<'} 1 - 81 → <Math tex="-16x < -80" /></p>
+                    <p className="text-sm text-gray-600 pl-2">两边÷(-16)，<strong>变号</strong> → <Math tex="x > 5" />　✓</p>
                   </div>
                   <div className="border-t border-gray-200 pt-2">
                     <p className="text-sm font-bold text-gray-700">例2：<Math tex="|2x + 1| \geq |x - 3|" /></p>
                     <p className="text-sm text-gray-600 pl-2">两边平方 → <Math tex="(2x+1)^2 \geq (x-3)^2" /></p>
                     <p className="text-sm text-gray-600 pl-2">展开 → <Math tex="4x^2 + 4x + 1 \geq x^2 - 6x + 9" /></p>
-                    <p className="text-sm text-gray-600 pl-2">化简 → <Math tex="3x^2 + 10x - 8 \geq 0" /></p>
-                    <p className="text-sm text-gray-600 pl-2">因式分解 → <Math tex="(3x - 2)(x + 4) \geq 0" /> → <Math tex="x \leq -4" /> 或 <Math tex="x \geq \tfrac{2}{3}" />　✓</p>
+                    <p className="text-sm text-gray-600 pl-2">全部移到左边 → <Math tex="4x^2 - x^2 + 4x + 6x + 1 - 9 \geq 0" /></p>
+                    <p className="text-sm text-gray-600 pl-2">合并 → <Math tex="3x^2 + 10x - 8 \geq 0" /></p>
+                    <p className="text-sm text-gray-600 pl-2">因式分解 → <Math tex="(3x - 2)(x + 4) \geq 0" /></p>
+                    <p className="text-sm text-gray-600 pl-2">大于取两边 → <Math tex="x \leq -4" /> 或 <Math tex="x \geq \tfrac{2}{3}" />　✓</p>
                   </div>
                 </div>
               </div>
