@@ -138,6 +138,24 @@ export function SetsPrereqPage() {
               <p className="text-blue-600 mt-2 text-xs">集合题里经常说"A = {'{'} x | x² - 5x + 6 = 0 {'}'}"，你需要解出 x 才能知道集合里有什么元素。</p>
             </div>
 
+            {/* 必背公式 */}
+            <div className="bg-slate-900 text-white rounded-xl p-5">
+              <p className="text-sm text-slate-400 mb-3">必背！因式分解要用到的两个公式</p>
+              <div className="space-y-3">
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-400 mb-1">平方差公式</p>
+                  <Math tex="a^2 - b^2 = (a+b)(a-b)" />
+                  <p className="text-xs text-slate-500 mt-1">看到"一个平方 减 另一个平方"就能用</p>
+                </div>
+                <div className="bg-slate-800 rounded-lg p-3">
+                  <p className="text-xs text-slate-400 mb-1">完全平方公式</p>
+                  <Math tex="(a+b)^2 = a^2 + 2ab + b^2" />
+                  <Math tex="(a-b)^2 = a^2 - 2ab + b^2" />
+                  <p className="text-xs text-slate-500 mt-1">中间项 = 2倍乘积，末项 = 那个数的平方</p>
+                </div>
+              </div>
+            </div>
+
             {/* 因式分解法 */}
             <div>
               <p className="font-bold mb-2">方法一：因式分解法（最常用，优先试）</p>
