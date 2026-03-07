@@ -333,36 +333,46 @@ export function LogicPrereqPage() {
       {/* Section 4: 公式速查表 */}
       <section className="mb-6">
         <Collapsible title="📌 公式速查表" storageKey="logic-prereq:cheatsheet">
-          <div className="space-y-4 text-sm text-gray-700">
-            <div>
-              <p className="font-bold text-gray-800 mb-2">子集关系</p>
-              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                <p><Math tex="A \subseteq B" />：A 的每个元素都在 B 里（含相等）</p>
-                <p><Math tex="A \subset B" />：A 在 B 里面且 A ≠ B（真子集）</p>
-                <p>判断方法：画数轴，看谁包含谁</p>
+          <p className="text-xs text-gray-500 mb-3">考前翻一翻，30秒回忆全部知识点</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+            {/* 卡片1：子集 */}
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+              <p className="font-bold text-blue-800 mb-2 text-sm">子集关系</p>
+              <div className="space-y-1.5 text-sm">
+                <p><Math tex="A \subseteq B" /> 子集（可以相等）</p>
+                <p><Math tex="A \subset B" /> 真子集（不能相等）</p>
+                <p className="text-blue-600 text-xs font-bold mt-2">方法：画数轴看谁包含谁</p>
               </div>
             </div>
-            <div>
-              <p className="font-bold text-gray-800 mb-2">一元二次不等式（a {'>'} 0）</p>
-              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                <p>{'>'} 0 → 取两边：<Math tex="x < x_1 \text{ 或 } x > x_2" /></p>
-                <p>{'<'} 0 → 取中间：<Math tex="x_1 < x < x_2" /></p>
-                <p className="text-gray-500 text-xs">口诀：<strong className="text-gray-700">大于取两边，小于取中间</strong></p>
+
+            {/* 卡片2：二次不等式 */}
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
+              <p className="font-bold text-orange-800 mb-2 text-sm">一元二次不等式</p>
+              <div className="space-y-1.5 text-sm">
+                <p>{'>'} 0 → <strong>取两边</strong>　{'<'} 0 → <strong>取中间</strong></p>
+                <p className="text-orange-600 text-xs font-bold mt-2">口诀：大于取两边，小于取中间</p>
               </div>
             </div>
-            <div>
-              <p className="font-bold text-gray-800 mb-2">绝对值不等式</p>
-              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                <p><Math tex="|x| < a \;\Rightarrow\; -a < x < a" /></p>
-                <p><Math tex="|x| > a \;\Rightarrow\; x < -a \text{ 或 } x > a" /></p>
-                <p><Math tex="|x - b| < a \;\Rightarrow\; b - a < x < b + a" /></p>
+
+            {/* 卡片3：绝对值 */}
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-4">
+              <p className="font-bold text-purple-800 mb-2 text-sm">绝对值不等式</p>
+              <div className="space-y-1.5 text-sm">
+                <p><Math tex="|x| < a" /> → 夹中间：<Math tex="-a < x < a" /></p>
+                <p><Math tex="|x| > a" /> → 取两边</p>
+                <p><Math tex="|x\!-\!b| < a" /> → 中心 b，半径 a</p>
+                <p className="text-purple-600 text-xs font-bold mt-2">本质：到某点的距离</p>
               </div>
             </div>
-            <div>
-              <p className="font-bold text-gray-800 mb-2">推出关系</p>
-              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
-                <p><Math tex="p \Rightarrow q" /> ⟺ p 的集合 <Math tex="\subseteq" /> q 的集合</p>
-                <p>小范围推大范围 ✓　大范围推小范围 ✗</p>
+
+            {/* 卡片4：推出 */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+              <p className="font-bold text-green-800 mb-2 text-sm">推出判断</p>
+              <div className="space-y-1.5 text-sm">
+                <p>小范围 → 大范围　<strong className="text-green-600">✓</strong></p>
+                <p>大范围 → 小范围　<strong className="text-red-600">✗</strong></p>
+                <p className="text-green-600 text-xs font-bold mt-2">绝招：想范围大小 / 找反例</p>
               </div>
             </div>
           </div>
