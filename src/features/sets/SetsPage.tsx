@@ -345,10 +345,16 @@ export function SetsPage() {
                 </Collapsible>
 
                 <Collapsible title="集合相等 =" storageKey="sets:equal">
-                  <div className="space-y-2 text-sm text-gray-700">
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <p className="font-bold text-blue-800 mb-2">定义</p>
                       <p className="text-blue-700"><Math tex="A = B \;\Leftrightarrow\; A \subseteq B \text{ 且 } B \subseteq A" /></p>
-                      <p className="text-blue-600 text-xs mt-1">两个集合的元素完全一样</p>
+                      <p className="text-blue-600 text-xs mt-1">两个集合的元素<strong>完全一样</strong>（顺序、形式无所谓）</p>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-3 space-y-1">
+                      <p><Math tex="\{1, 2, 3\} = \{3, 1, 2\}" /> ✓（顺序不影响）</p>
+                      <p><Math tex="\{1, 1, 2\} = \{1, 2\}" /> ✓（重复元素自动去掉）</p>
+                      <p><Math tex="\{x \mid x^2=1\} = \{-1, 1\}" /> ✓（描述法和列举法可以相等）</p>
                     </div>
                   </div>
                 </Collapsible>
@@ -384,10 +390,16 @@ export function SetsPage() {
                       <p className="font-bold text-blue-800 mb-2">集合有 n 个元素：</p>
                       <div className="grid grid-cols-[auto_auto_auto] gap-x-2 gap-y-1 text-blue-700 w-fit">
                         <span className="text-right">子集个数</span><span>=</span><span><Math tex="2^n" /></span>
-                        <span className="text-right">真子集个数</span><span>=</span><span><Math tex="2^n - 1" /></span>
-                        <span className="text-right">非空子集个数</span><span>=</span><span><Math tex="2^n - 1" /></span>
-                        <span className="text-right">非空真子集个数</span><span>=</span><span><Math tex="2^n - 2" /></span>
+                        <span className="text-right">真子集个数</span><span>=</span><span><Math tex="2^n - 1" />（去掉自身）</span>
+                        <span className="text-right">非空子集个数</span><span>=</span><span><Math tex="2^n - 1" />（去掉 ∅）</span>
+                        <span className="text-right">非空真子集个数</span><span>=</span><span><Math tex="2^n - 2" />（去掉自身和 ∅）</span>
                       </div>
+                    </div>
+                    <div className="bg-[#F5E6D3] rounded-xl p-4">
+                      <p className="font-bold text-[#7A5C3E] mb-1">为什么真子集和非空子集个数一样？</p>
+                      <p className="text-[#7A5C3E]">真子集 = 全部子集 - <strong>自身</strong>（去掉一头）</p>
+                      <p className="text-[#7A5C3E]">非空子集 = 全部子集 - <strong>空集</strong>（去掉另一头）</p>
+                      <p className="text-[#7A5C3E]">两个各减 1，所以结果一样！</p>
                     </div>
                     <div className="bg-gray-50 rounded-lg p-3">
                       <p className="font-bold text-gray-800 mb-2">例：A = &#123;a, b, c&#125;，3个元素</p>
@@ -401,10 +413,61 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
+                <Collapsible title="A⊆B 求参数范围（高考经典题型！）" storageKey="sets:subset-param">
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <p className="font-bold text-blue-800 mb-2">解题思路</p>
+                      <p className="text-blue-700">A ⊆ B 意味着 <strong>A 完全在 B 里面</strong>。画数轴，看 A 的端点是否被 B「罩住」。</p>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                      <p className="font-bold text-gray-800">例：<Math tex="A = \{x \mid -2 < x < 4\},\; B = \{x \mid x < a\},\; A \subseteq B" />，求 a 的范围</p>
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-2">
+                        <div>
+                          <p><span className="text-blue-600 font-bold">第①步</span>：画数轴看两个集合的位置</p>
+                          <div className="bg-white rounded-lg p-3 border">
+                            <svg viewBox="0 0 360 80" className="w-full">
+                              <line x1="20" y1="25" x2="340" y2="25" stroke="#d1d5db" strokeWidth="1" />
+                              <line x1="20" y1="50" x2="340" y2="50" stroke="#d1d5db" strokeWidth="1" />
+                              <line x1="80" y1="19" x2="80" y2="56" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="240" y1="19" x2="240" y2="31" stroke="#6b7280" strokeWidth="1" />
+                              <line x1="280" y1="44" x2="280" y2="56" stroke="#6b7280" strokeWidth="1" />
+                              <text x="80" y="72" fontSize="10" fill="#374151" textAnchor="middle">-2</text>
+                              <text x="240" y="72" fontSize="10" fill="#374151" textAnchor="middle">4</text>
+                              <text x="280" y="72" fontSize="10" fill="#374151" textAnchor="middle">a</text>
+                              <line x1="80" y1="25" x2="240" y2="25" stroke="#2563eb" strokeWidth="3" />
+                              <circle cx="80" cy="25" r="3" fill="white" stroke="#2563eb" strokeWidth="1.5" />
+                              <circle cx="240" cy="25" r="3" fill="white" stroke="#2563eb" strokeWidth="1.5" />
+                              <text x="160" y="18" fontSize="10" fill="#2563eb" fontWeight="bold" textAnchor="middle">A: (-2, 4)</text>
+                              <line x1="20" y1="50" x2="280" y2="50" stroke="#16a34a" strokeWidth="3" />
+                              <circle cx="280" cy="50" r="3" fill="white" stroke="#16a34a" strokeWidth="1.5" />
+                              <text x="40" y="44" fontSize="9" fill="#16a34a" fontWeight="bold">← -∞</text>
+                              <text x="300" y="44" fontSize="10" fill="#16a34a" fontWeight="bold">B</text>
+                            </svg>
+                          </div>
+                        </div>
+                        <div>
+                          <p><span className="text-blue-600 font-bold">第②步</span>：A 的右端点是 4（不含），B 要把它「罩住」→ <Math tex="a \geq 4" /></p>
+                          <p className="text-xs text-gray-700 mt-1">a = 3 时 B = (-∞,3)，A 里的 3.5 没被包住 ✗</p>
+                          <p className="text-xs text-gray-700">a = 4 时 B = (-∞,4)，A = (-2,4) 全在 B 里 ✓</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#F5E6D3] rounded-xl p-4">
+                      <p className="font-bold text-[#7A5C3E] mb-1">做 A⊆B 参数题的口诀</p>
+                      <p className="text-[#7A5C3E]"><strong>画数轴 → 看端点 → A 的边必须在 B 的边「里面」</strong></p>
+                      <p className="text-[#9A7B5B] text-xs mt-1">别忘了考虑 A = ∅ 的情况！</p>
+                    </div>
+                  </div>
+                </Collapsible>
+
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
                   <p className="text-gray-700">1. 集合 &#123;1, 2&#125; 的子集有几个？→ 答案：<strong>2² = 4 个</strong></p>
                   <p className="text-gray-700">2. ∅ 和 &#123;0&#125; 是同一个集合吗？→ 答案：<strong>不是</strong>（∅没有元素，&#123;0&#125;有一个元素0）</p>
+                  <p className="text-gray-700">3. &#123;1,2&#125; ⊆ &#123;1,2,3&#125; 对吗？&#123;1,2,3&#125; ⊆ &#123;1,2,3&#125; 呢？→ 答案：<strong>都对</strong>（自身也是子集）</p>
+                  <p className="text-gray-700">4. A = &#123;x | x {'<'} a&#125;，B = &#123;x | x {'<'} 3&#125;，若 B ⊆ A，则 a 的范围？→ 答案：<strong>a ≥ 3</strong></p>
                 </div>
               </div>
             </Collapsible>
