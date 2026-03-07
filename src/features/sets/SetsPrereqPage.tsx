@@ -524,19 +524,31 @@ export function SetsPrereqPage() {
           <div className="space-y-3 text-sm text-gray-700">
             <p><strong>数轴</strong> = 一条画了数字的直线，左边小右边大。</p>
 
-            <div className="rounded-lg overflow-hidden border border-gray-200">
-              <Mafs viewBox={{ x: [-5, 5], y: [-1.5, 1.5] }} preserveAspectRatio={false} height={120}>
-                <Coordinates.Cartesian xAxis={{ labels: (x) => `${x}` }} yAxis={false} />
-                {/* x > 2: 空心圆 + 射线向右 */}
-                <Line.Segment point1={[2, 0.8]} point2={[5, 0.8]} color="#3b82f6" weight={3} />
-                <Point x={2} y={0.8} color="white" />
-                <MafsText x={-1} y={0.8} size={11} color="#3b82f6">x {'>'} 2（○ 不含）</MafsText>
-                {/* -1 < x ≤ 3: 空心-1 实心3 */}
-                <Line.Segment point1={[-1, -0.5]} point2={[3, -0.5]} color="#ef4444" weight={3} />
-                <Point x={-1} y={-0.5} color="white" />
-                <Point x={3} y={-0.5} color="#ef4444" />
-                <MafsText x={1} y={-1} size={11} color="#ef4444">-1 {'<'} x ≤ 3（○…●）</MafsText>
-              </Mafs>
+            <div className="space-y-3">
+              <div>
+                <p className="text-xs text-gray-500 mb-1">例1：<Math tex="x > 2" />（不含 2，向右延伸）</p>
+                <div className="rounded-lg overflow-hidden border border-gray-200">
+                  <Mafs viewBox={{ x: [-4, 6], y: [-0.8, 0.8], padding: 0 }} preserveAspectRatio={false} height={70}>
+                    <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={false} />
+                    <Line.Segment point1={[2, 0]} point2={[6, 0]} color="#3b82f6" weight={4} />
+                    <Point x={2} y={0} color="white" />
+                    <MafsText x={2} y={0.5} size={12}>○ 不含</MafsText>
+                  </Mafs>
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 mb-1">例2：<Math tex="-1 < x \leq 3" />（-1 不含，3 含）</p>
+                <div className="rounded-lg overflow-hidden border border-gray-200">
+                  <Mafs viewBox={{ x: [-4, 6], y: [-0.8, 0.8], padding: 0 }} preserveAspectRatio={false} height={70}>
+                    <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={false} />
+                    <Line.Segment point1={[-1, 0]} point2={[3, 0]} color="#ef4444" weight={4} />
+                    <Point x={-1} y={0} color="white" />
+                    <Point x={3} y={0} color="#ef4444" />
+                    <MafsText x={-1} y={0.5} size={12}>○</MafsText>
+                    <MafsText x={3} y={0.5} size={12}>●</MafsText>
+                  </Mafs>
+                </div>
+              </div>
             </div>
 
             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
