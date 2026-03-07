@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { ChevronRight, RotateCcw, Trophy, Clock, Target, CheckCircle, XCircle } from 'lucide-react';
 
 import { Math as MathTex } from './Math';
+import { QuizDiagrams } from './QuizDiagrams';
 import { useQuiz } from '@/hooks/useQuiz';
 import { storage } from '@/lib/storage';
 
@@ -326,6 +327,7 @@ export function QuizPanel({ module, questions, title = '自测', description }: 
                     <MathTex tex={current.explanationLatex} display />
                   </span>
                 )}
+                <QuizDiagrams name={current.explanationDiagram} />
               </p>
             )}
           </div>
