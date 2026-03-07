@@ -730,6 +730,46 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
+                <Collapsible title="集合计数——容斥原理（韦恩图应用）" storageKey="sets:inclusion-exclusion">
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                      <p className="font-bold text-blue-800">核心公式</p>
+                      <Math tex="|A \cup B| = |A| + |B| - |A \cap B|" display />
+                      <p className="text-blue-700 text-xs">口诀：<strong>加了两个再减掉重复的</strong>（因为重叠部分被加了两次）</p>
+                    </div>
+
+                    <div className="flex justify-center">
+                      <svg viewBox="0 0 280 160" className="w-full max-w-xs">
+                        <rect x="3" y="3" width="274" height="154" rx="8" fill="#f9fafb" stroke="#d1d5db" strokeWidth="1" />
+                        <circle cx="105" cy="80" r="50" fill="rgba(59,130,246,0.15)" stroke="#3b82f6" strokeWidth="1.5" />
+                        <circle cx="175" cy="80" r="50" fill="rgba(234,179,8,0.15)" stroke="#eab308" strokeWidth="1.5" />
+                        <text x="80" y="78" fontSize="13" fontWeight="bold" fill="#2563eb" textAnchor="middle">只A</text>
+                        <text x="140" y="72" fontSize="12" fontWeight="bold" fill="#7c3aed" textAnchor="middle">A∩B</text>
+                        <text x="140" y="88" fontSize="10" fill="#7c3aed" textAnchor="middle">(重叠)</text>
+                        <text x="200" y="78" fontSize="13" fontWeight="bold" fill="#ca8a04" textAnchor="middle">只B</text>
+                        <text x="70" y="40" fontSize="12" fill="#3b82f6">A</text>
+                        <text x="200" y="40" fontSize="12" fill="#ca8a04">B</text>
+                        <text x="140" y="148" fontSize="11" fill="#6b7280" textAnchor="middle">两个都没参加 = 总数 - |A∪B|</text>
+                      </svg>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                      <p className="font-bold text-gray-800">例题：某班 50 人，数学兴趣组 30 人，物理兴趣组 25 人，两个都参加 15 人</p>
+                      <div className="pl-3 border-l-2 border-blue-300 space-y-1">
+                        <p><span className="text-blue-600 font-bold">第①步</span>：求参加了至少一个的人数</p>
+                        <p className="pl-4"><Math tex="|A \cup B| = 30 + 25 - 15 = 40" /></p>
+                        <p><span className="text-blue-600 font-bold">第②步</span>：总数减去参加了的</p>
+                        <p className="pl-4">两个都没参加 = 50 - 40 = <strong className="text-green-700">10 人</strong></p>
+                      </div>
+                    </div>
+
+                    <div className="bg-[#F5E6D3] rounded-xl p-4">
+                      <p className="font-bold text-[#7A5C3E] mb-1">记忆技巧</p>
+                      <p className="text-[#7A5C3E]">想象两个圆重叠——直接加会<strong>多算一次重叠区</strong>，所以要<strong>减掉一次</strong>。</p>
+                    </div>
+                  </div>
+                </Collapsible>
+
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
                   <p className="text-gray-700">1. A = &#123;1,3,5,7&#125;，B = &#123;3,5,8&#125;，A ∩ B = ____　答案：<strong>&#123;3, 5&#125;</strong></p>
