@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { CheckCircle, XCircle, Lightbulb } from 'lucide-react';
+import { Mafs, Coordinates, Point, Line, Text as MafsText } from 'mafs';
 
-import { Math, MathInput, Collapsible, SpeakButton } from '@/components/shared';
+import { Math, MathInput, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
+import { setsPrereqProgressItems } from './data/prereq-progress';
+import { setsPrereqQuizQuestions } from './data/prereq-quiz';
+import { useProgress } from '@/hooks';
+import { storage } from '@/lib/storage';
 
 interface SelfTestItem {
   question: string;
@@ -43,8 +48,26 @@ const selfTestItems: SelfTestItem[] = [
 ];
 
 export function SetsPrereqPage() {
+  const { items: progressItems, toggle: toggleProgress } = useProgress('sets-prereq', setsPrereqProgressItems);
   const [revealed, setRevealed] = useState<Set<number>>(new Set());
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
+  const restoredRef = useRef(false);
+
+  // Restore self-test answers from IndexedDB
+  useEffect(() => {
+    storage.ui.getJSON<Record<number, string>>('sets-prereq:selftest-answers', {}).then((saved) => {
+      if (saved && Object.keys(saved).length > 0) {
+        setUserAnswers(saved);
+      }
+      restoredRef.current = true;
+    });
+  }, []);
+
+  // Persist self-test answers
+  useEffect(() => {
+    if (!restoredRef.current) return;
+    storage.ui.setJSON('sets-prereq:selftest-answers', userAnswers);
+  }, [userAnswers]);
 
   const toggleReveal = (idx: number) => {
     setRevealed((prev) => {
@@ -76,6 +99,20 @@ export function SetsPrereqPage() {
           </span>
         </div>
       </div>
+
+      <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
+        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
+        <div className="text-sm text-gray-600 space-y-1">
+          <p>一、解一元二次方程（因式分解 + 公式法）</p>
+          <p>二、解一元二次不等式（大于取两边，小于取中间）</p>
+          <p>三、数轴的使用（○ 和 ●）</p>
+          <p>四、区间表示法（开闭区间 + ∞）</p>
+          <p>五、自测清单（填空验证）</p>
+          <p>六、选择题自测（8题）</p>
+        </div>
+      </div>
+
+      <ProgressTracker items={progressItems} onToggle={toggleProgress} />
 
       {/* Section 1: Solving Quadratic Equations */}
       <section className="mb-6">
@@ -110,6 +147,20 @@ export function SetsPrereqPage() {
                   <p className="pl-4"><Math tex="\Delta < 0" /> → 没有实数根（无解）</p>
                 </div>
               </div>
+              <div className="bg-gray-50 rounded-lg p-3 mt-3">
+                <p className="font-bold text-gray-800 mb-1">例：<Math tex="x^2 + 2x - 1 = 0" /></p>
+                <div className="space-y-1 text-gray-700">
+                  <p><Math tex="a=1,\; b=2,\; c=-1" /></p>
+                  <p><Math tex="\Delta = 4 - 4(1)(-1) = 8 > 0" /></p>
+                  <p><Math tex="x = \dfrac{-2 \pm \sqrt{8}}{2} = \dfrac{-2 \pm 2\sqrt{2}}{2} = -1 \pm \sqrt{2}" /></p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. <Math tex="x^2 - x - 6 = 0" />，x = ____　答案：<strong><Math tex="x=3 \text{ 或 } x=-2" /></strong></p>
+              <p className="text-gray-700">2. <Math tex="x^2 + 2x + 1 = 0" />，x = ____　答案：<strong><Math tex="x = -1" /></strong>（重根）</p>
             </div>
           </div>
         </Collapsible>
@@ -150,7 +201,28 @@ export function SetsPrereqPage() {
                   <p>解方程：<Math tex="(x-3)(x+1) = 0 \;\Rightarrow\; x = -1, 3" /></p>
                   <p>"大于取两边"（含等号） → <Math tex="x \leq -1 \text{ 或 } x \geq 3" /></p>
                 </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">例3：<Math tex="x^2 - 4x + 3 \leq 0" /></p>
+                  <p>解方程：<Math tex="(x-1)(x-3) = 0 \;\Rightarrow\; x = 1, 3" /></p>
+                  <p>"小于取中间"（含等号） → <Math tex="1 \leq x \leq 3" /></p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">例4：<Math tex="x^2 + 2x > 0" /></p>
+                  <p>解方程：<Math tex="x(x+2) = 0 \;\Rightarrow\; x = -2, 0" /></p>
+                  <p>"大于取两边" → <Math tex="x < -2 \text{ 或 } x > 0" /></p>
+                </div>
               </div>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">
+              <Lightbulb size={16} className="text-amber-600 shrink-0 mt-0.5" />
+              <p className="text-amber-700 text-sm"><strong>为什么？</strong>二次函数 <Math tex="y = ax^2+bx+c" />（a{'>'} 0）的图像是开口朝上的抛物线。两个根之间在 x 轴下面（{'<'} 0），两边在 x 轴上面（{'>'} 0）。</p>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
+              <p className="text-gray-700">1. <Math tex="x^2 - 5x + 6 < 0" /> 的解集 = ____　答案：<strong><Math tex="2 < x < 3" /></strong></p>
+              <p className="text-gray-700">2. <Math tex="x^2 - 4 \geq 0" /> 的解集 = ____　答案：<strong><Math tex="x \leq -2 \text{ 或 } x \geq 2" /></strong></p>
             </div>
           </div>
         </Collapsible>
@@ -161,6 +233,21 @@ export function SetsPrereqPage() {
         <Collapsible title="三、数轴的使用" defaultOpen storageKey="sets-prereq:numberline" headerExtra={<SpeakButton text={setsPrereqNarrations.numberLine} />}>
           <div className="space-y-3 text-sm text-gray-700">
             <p><strong>数轴</strong> = 一条画了数字的直线，左边小右边大。</p>
+
+            <div className="rounded-lg overflow-hidden border border-gray-200">
+              <Mafs viewBox={{ x: [-5, 5], y: [-1.5, 1.5] }} preserveAspectRatio={false} height={120}>
+                <Coordinates.Cartesian xAxis={{ labels: (x) => `${x}` }} yAxis={false} />
+                {/* x > 2: 空心圆 + 射线向右 */}
+                <Line.Segment point1={[2, 0.8]} point2={[5, 0.8]} color="#3b82f6" weight={3} />
+                <Point x={2} y={0.8} color="white" />
+                <MafsText x={-1} y={0.8} size={11} color="#3b82f6">x {'>'} 2（○ 不含）</MafsText>
+                {/* -1 < x ≤ 3: 空心-1 实心3 */}
+                <Line.Segment point1={[-1, -0.5]} point2={[3, -0.5]} color="#ef4444" weight={3} />
+                <Point x={-1} y={-0.5} color="white" />
+                <Point x={3} y={-0.5} color="#ef4444" />
+                <MafsText x={1} y={-1} size={11} color="#ef4444">-1 {'<'} x ≤ 3（○…●）</MafsText>
+              </Mafs>
+            </div>
 
             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
               <p className="font-bold mb-2">在数轴上表示不等式</p>
@@ -282,6 +369,17 @@ export function SetsPrereqPage() {
           <p><strong>错了1-2题</strong> → 把错的部分再看一遍</p>
           <p><strong>错了3题以上</strong> → 上面的知识点从头认真看一遍</p>
         </div>
+      </section>
+
+      {/* Section 6: Quiz */}
+      <section className="mb-8">
+        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
+            6
+          </span>
+          选择题自测
+        </h2>
+        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="8道选择题，检验解方程、解不等式、区间表示是否过关" />
       </section>
     </div>
   );
