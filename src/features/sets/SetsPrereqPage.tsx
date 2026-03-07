@@ -177,8 +177,9 @@ export function SetsPrereqPage() {
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="font-bold text-gray-800 text-xs mb-1">套路三：完全平方（两个根一样）</p>
                   <p><Math tex="x^2 + 2x + 1 = 0" /></p>
-                  <p className="text-gray-500 text-xs">1² = 1，2×1×x = 2x → 刚好是 (x+1)²</p>
-                  <p><Math tex="(x+1)^2 = 0 \;\Rightarrow\; x = -1" />（重根：只有一个解）</p>
+                  <p className="text-gray-500 text-xs mt-1">怎么看出来的？对照公式 <Math tex="(x+a)^2 = x^2 + 2ax + a^2" />：</p>
+                  <p className="text-gray-500 text-xs pl-3">这里 a = 1，所以 <Math tex="2ax = 2x" /> ✓，<Math tex="a^2 = 1" /> ✓</p>
+                  <p className="mt-1"><Math tex="(x+1)^2 = 0 \;\Rightarrow\; x = -1" />（重根：只有一个解）</p>
                 </div>
               </div>
             </div>
