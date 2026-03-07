@@ -369,44 +369,53 @@ export function SetsPage() {
                     <div className="space-y-3">
                       <div className="bg-green-50 rounded-xl p-4 border border-green-200">
                         <p className="font-bold text-green-700 text-sm mb-2">✓ 真子集：A = &#123;1, 2&#125;，B = &#123;1, 2, 3&#125;</p>
-                        <svg viewBox="0 0 260 110" className="w-full max-w-sm mx-auto">
-                          <circle cx="130" cy="52" r="48" fill="rgba(59,130,246,0.08)" stroke="#3b82f6" strokeWidth="1.5" />
-                          <circle cx="115" cy="58" r="24" fill="rgba(234,179,8,0.15)" stroke="#eab308" strokeWidth="1.5" />
-                          <text x="130" y="20" fontSize="12" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
-                          <text x="100" y="52" fontSize="11" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="108" y="66" fontSize="11" fill="#374151" textAnchor="middle">1, 2</text>
-                          <text x="163" y="58" fontSize="11" fill="#ef4444" fontWeight="bold" textAnchor="middle">3</text>
-                          <text x="163" y="70" fontSize="8" fill="#ef4444" textAnchor="middle">B 多出来的</text>
-                        </svg>
-                        <p className="text-green-700 text-xs text-center">A 的元素全在 B 里，B 还多一个 3 → <strong>A ⊆ B ✓　A ⊊ B ✓</strong></p>
+                        <div className="flex justify-center my-3">
+                          <div className="relative w-40 h-40 rounded-full border-2 border-blue-400 bg-blue-50/50 flex items-start justify-center pt-3">
+                            <span className="text-blue-600 font-bold text-sm">B</span>
+                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full border-2 border-amber-400 bg-amber-50 flex flex-col items-center justify-center">
+                              <span className="text-amber-600 font-bold text-xs">A</span>
+                              <span className="text-gray-700 text-xs">1, 2</span>
+                            </div>
+                            <span className="absolute top-12 right-4 text-red-500 font-bold text-xs">3</span>
+                            <span className="absolute top-16 right-1 text-red-400 text-[10px]">多出来的</span>
+                          </div>
+                        </div>
+                        <p className="text-green-700 text-xs text-center">A 全在 B 里，B 还多一个 3 → <strong>A ⊆ B ✓　A ⊊ B ✓</strong></p>
                       </div>
 
                       <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
                         <p className="font-bold text-amber-700 text-sm mb-2">⚠ 子集但不是真子集：A = &#123;1, 2, 3&#125;，B = &#123;1, 2, 3&#125;</p>
-                        <svg viewBox="0 0 260 110" className="w-full max-w-sm mx-auto">
-                          <circle cx="130" cy="52" r="40" fill="rgba(59,130,246,0.08)" stroke="#3b82f6" strokeWidth="1.5" />
-                          <circle cx="130" cy="52" r="40" fill="none" stroke="#eab308" strokeWidth="1.5" strokeDasharray="5 3" />
-                          <text x="130" y="20" fontSize="11" fill="#6b7280" textAnchor="middle">A 和 B 完全重合</text>
-                          <text x="108" y="50" fontSize="12" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
-                          <text x="152" y="50" fontSize="12" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="130" y="62" fontSize="11" fill="#374151" textAnchor="middle">1, 2, 3</text>
-                        </svg>
+                        <div className="flex justify-center my-3">
+                          <div className="relative w-32 h-32 rounded-full border-2 border-blue-400 bg-blue-50/30 flex flex-col items-center justify-center" style={{boxShadow: 'inset 0 0 0 2px rgba(234,179,8,0.5)'}}>
+                            <div className="flex gap-2 items-center">
+                              <span className="text-blue-600 font-bold text-sm">B</span>
+                              <span className="text-gray-400">=</span>
+                              <span className="text-amber-600 font-bold text-sm">A</span>
+                            </div>
+                            <span className="text-gray-700 text-xs mt-1">1, 2, 3</span>
+                            <span className="text-gray-400 text-[10px] mt-0.5">完全重合</span>
+                          </div>
+                        </div>
                         <p className="text-amber-700 text-xs text-center">元素完全一样，没有「多出来的」→ <strong>A ⊆ B ✓　A ⊊ B ✗</strong></p>
                       </div>
 
                       <div className="bg-red-50 rounded-xl p-4 border border-red-200">
                         <p className="font-bold text-red-600 text-sm mb-2">✗ 不是子集：A = &#123;1, 4&#125;，B = &#123;1, 2, 3&#125;</p>
-                        <svg viewBox="0 0 260 110" className="w-full max-w-sm mx-auto">
-                          <circle cx="100" cy="52" r="38" fill="rgba(59,130,246,0.08)" stroke="#3b82f6" strokeWidth="1.5" />
-                          <circle cx="175" cy="52" r="30" fill="rgba(234,179,8,0.12)" stroke="#eab308" strokeWidth="1.5" />
-                          <text x="80" y="30" fontSize="12" fill="#2563eb" fontWeight="bold" textAnchor="middle">B</text>
-                          <text x="190" y="38" fontSize="12" fill="#ca8a04" fontWeight="bold" textAnchor="middle">A</text>
-                          <text x="85" y="55" fontSize="11" fill="#374151" textAnchor="middle">2, 3</text>
-                          <text x="125" y="55" fontSize="11" fill="#374151" textAnchor="middle">1</text>
-                          <text x="185" y="58" fontSize="11" fill="#ef4444" fontWeight="bold" textAnchor="middle">4</text>
-                          <text x="185" y="70" fontSize="8" fill="#ef4444" textAnchor="middle">跑出去了！</text>
-                        </svg>
-                        <p className="text-red-600 text-xs text-center">4 不在 B 里，「跑出去了」→ <strong>A ⊆ B ✗　A ⊊ B ✗</strong></p>
+                        <div className="flex justify-center my-3">
+                          <div className="relative w-56 h-32">
+                            <div className="absolute left-0 top-0 w-32 h-32 rounded-full border-2 border-blue-400 bg-blue-50/30 flex flex-col items-center justify-center pl-0">
+                              <span className="text-blue-600 font-bold text-sm -mt-2 -ml-6">B</span>
+                              <span className="text-gray-700 text-xs -ml-6">2, 3</span>
+                            </div>
+                            <div className="absolute right-0 top-2 w-28 h-28 rounded-full border-2 border-amber-400 bg-amber-50/40 flex flex-col items-center justify-center pr-0">
+                              <span className="text-amber-600 font-bold text-sm -mt-2 ml-4">A</span>
+                              <span className="text-red-500 font-bold text-xs ml-4">4</span>
+                              <span className="text-red-400 text-[10px] ml-4">跑出去了！</span>
+                            </div>
+                            <div className="absolute left-[88px] top-1/2 -translate-y-1/2 text-gray-700 text-xs font-medium">1</div>
+                          </div>
+                        </div>
+                        <p className="text-red-600 text-xs text-center">4 不在 B 里 →  <strong>A ⊆ B ✗　A ⊊ B ✗</strong></p>
                       </div>
                     </div>
 
