@@ -187,7 +187,7 @@ export function SetsPage() {
                     <div className="grid grid-cols-2 gap-4">
                       {/* A ⊆ U 子集 */}
                       <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-center font-bold text-gray-700 text-sm mb-2">A ⊆ U（子集）</p>
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="A \subseteq U" />（子集）</p>
                         <svg viewBox="0 0 180 130" className="w-full">
                           <rect x="4" y="4" width="172" height="122" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
                           <text x="160" y="20" fontSize="14" fill="#3b82f6" fontWeight="bold">U</text>
@@ -198,7 +198,7 @@ export function SetsPage() {
 
                       {/* A ∩ B 交集 */}
                       <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-center font-bold text-gray-700 text-sm mb-2">A ∩ B（交集）</p>
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="A \cap B" />（交集）</p>
                         <svg viewBox="0 0 180 130" className="w-full">
                           <rect x="4" y="4" width="172" height="122" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
                           <text x="160" y="20" fontSize="14" fill="#3b82f6" fontWeight="bold">U</text>
@@ -213,7 +213,7 @@ export function SetsPage() {
 
                       {/* A ∪ B 并集 */}
                       <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-center font-bold text-gray-700 text-sm mb-2">A ∪ B（并集）</p>
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="A \cup B" />（并集）</p>
                         <svg viewBox="0 0 180 130" className="w-full">
                           <rect x="4" y="4" width="172" height="122" rx="8" fill="#f0f9ff" stroke="#93c5fd" strokeWidth="1.5" />
                           <text x="160" y="20" fontSize="14" fill="#3b82f6" fontWeight="bold">U</text>
@@ -226,7 +226,7 @@ export function SetsPage() {
 
                       {/* ∁ᵤA 补集 */}
                       <div className="bg-gray-50 rounded-xl p-4">
-                        <p className="text-center font-bold text-gray-700 text-sm mb-2">补集（U 中去掉 A）</p>
+                        <p className="text-center font-bold text-gray-700 text-sm mb-2"><Math tex="\complement_U A" />（补集）</p>
                         <svg viewBox="0 0 180 130" className="w-full">
                           <rect x="4" y="4" width="172" height="122" rx="8" fill="#fde68a" stroke="#f59e0b" strokeWidth="1.5" />
                           <text x="160" y="20" fontSize="14" fill="#b45309" fontWeight="bold">U</text>
