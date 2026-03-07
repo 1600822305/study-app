@@ -200,12 +200,38 @@ export function LogicPrereqPage() {
                 </div>
               </div>
 
+              {/* 规则3: 两边都是绝对值 */}
+              <div className="bg-gray-50 rounded-lg p-4 mb-3">
+                <p className="font-bold text-gray-800 mb-2">规则③ 两边都是绝对值 → <strong className="text-purple-600">两边平方</strong>，绝对值全没</p>
+                <div className="bg-white rounded-lg p-3 mb-2">
+                  <p className="text-center text-sm"><Math tex="|A| < |B|" /> → <Math tex="A^2 < B^2" />（两边平方，绝对值消失）</p>
+                </div>
+                <p className="text-sm text-gray-600 mb-2">因为 <Math tex="|A|^2 = A^2" />，平方之后绝对值自动没了，变成普通不等式！</p>
+
+                <div className="bg-white rounded-lg p-3 space-y-3">
+                  <div>
+                    <p className="text-sm font-bold text-gray-700">例1：<Math tex="|x - 9| < |x - 1|" /></p>
+                    <p className="text-sm text-gray-600 pl-2">两边平方 → <Math tex="(x-9)^2 < (x-1)^2" /></p>
+                    <p className="text-sm text-gray-600 pl-2">展开 → <Math tex="x^2 - 18x + 81 < x^2 - 2x + 1" /></p>
+                    <p className="text-sm text-gray-600 pl-2">化简 → <Math tex="-16x < -80" /> → <Math tex="x > 5" />　✓</p>
+                  </div>
+                  <div className="border-t border-gray-200 pt-2">
+                    <p className="text-sm font-bold text-gray-700">例2：<Math tex="|2x + 1| \geq |x - 3|" /></p>
+                    <p className="text-sm text-gray-600 pl-2">两边平方 → <Math tex="(2x+1)^2 \geq (x-3)^2" /></p>
+                    <p className="text-sm text-gray-600 pl-2">展开 → <Math tex="4x^2 + 4x + 1 \geq x^2 - 6x + 9" /></p>
+                    <p className="text-sm text-gray-600 pl-2">化简 → <Math tex="3x^2 + 10x - 8 \geq 0" /></p>
+                    <p className="text-sm text-gray-600 pl-2">因式分解 → <Math tex="(3x - 2)(x + 4) \geq 0" /> → <Math tex="x \leq -4" /> 或 <Math tex="x \geq \tfrac{2}{3}" />　✓</p>
+                  </div>
+                </div>
+              </div>
+
               {/* 口诀 */}
               <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-3">
-                <p className="font-bold text-orange-800 mb-1">就两句话：</p>
-                <p className="text-orange-700 font-bold"><strong>{'<'} → 去绝对值，夹中间</strong>：-a {'<'} 东西 {'<'} a</p>
-                <p className="text-orange-700 font-bold"><strong>{'>'} → 去绝对值，拆两边</strong>：东西 {'<'} -a 或 东西 {'>'} a</p>
-                <p className="text-orange-600 text-xs mt-2">口诀：<strong>小于夹中间，大于拆两边</strong></p>
+                <p className="font-bold text-orange-800 mb-1">三条规则汇总：</p>
+                <p className="text-orange-700"><strong>{'<'} → 夹中间</strong>：-a {'<'} 东西 {'<'} a</p>
+                <p className="text-orange-700"><strong>{'>'} → 拆两边</strong>：东西 {'<'} -a 或 东西 {'>'} a</p>
+                <p className="text-orange-700"><strong>两边都有 | | → 平方</strong>：变成普通多项式不等式</p>
+                <p className="text-orange-600 text-xs mt-2">口诀：<strong>小于夹中间，大于拆两边，都有就平方</strong></p>
               </div>
 
               {/* 做题步骤 */}
