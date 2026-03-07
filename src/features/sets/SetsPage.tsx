@@ -542,7 +542,9 @@ export function SetsPage() {
                   <p className="text-gray-700">2. &#123;1,2,3&#125; ⊊ &#123;1,2,3&#125; 对吗？→ <strong>不对</strong>（相等不算真子集）</p>
                   <p className="text-gray-700">3. ∅ 和 &#123;0&#125; 一样吗？→ <strong>不一样</strong>（∅ 是 0 个元素，&#123;0&#125; 有 1 个元素）</p>
                   <p className="text-gray-700">4. &#123;1, 2&#125; 的子集有几个？→ <strong>2² = 4 个</strong>（∅, &#123;1&#125;, &#123;2&#125;, &#123;1,2&#125;）</p>
-                  <p className="text-gray-700">5. A = &#123;x | x {'<'} a&#125;，B = &#123;x | x {'<'} 3&#125;，若 B ⊆ A，则 a 的范围？→ <strong>a ≥ 3</strong></p>
+                  <p className="text-gray-700">5. &#123;1, 2&#125; 的非空子集有几个？→ <strong>2² - 1 = 3 个</strong>（&#123;1&#125;, &#123;2&#125;, &#123;1,2&#125;）</p>
+                  <p className="text-gray-700">6. &#123;1, 2&#125; 的非空真子集有几个？→ <strong>2² - 2 = 2 个</strong>（&#123;1&#125;, &#123;2&#125;）</p>
+                  <p className="text-gray-700">7. A = &#123;x | x {'<'} a&#125;，B = &#123;x | x {'<'} 3&#125;，若 B ⊆ A，则 a 的范围？→ <strong>a ≥ 3</strong></p>
                 </div>
               </div>
             </Collapsible>
