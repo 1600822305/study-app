@@ -22,6 +22,19 @@ export function LogicPage() {
         ]}
       />
 
+      {/* 知识地图 */}
+      <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
+        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
+        <div className="grid grid-cols-2 gap-1">
+          <p>一、命题 → 能判断真假的陈述句</p>
+          <p>二、四种命题 → 逆、否、逆否</p>
+          <p>三、充分必要条件 → 集合法判断</p>
+          <p>四、量词与否定 → ∀ ↔ ∃ 互换</p>
+          <p>五、逻辑联结词 → 且、或、非</p>
+          <p>六、高考真题实战 → 真题模拟</p>
+        </div>
+      </div>
+
       {/* 速通路线图 */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-6">
         <p className="font-black text-blue-900 text-lg mb-1">速通路线图：这节课就 5 个知识点</p>

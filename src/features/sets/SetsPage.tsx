@@ -22,6 +22,20 @@ export function SetsPage() {
         ]}
       />
 
+      {/* 知识地图 */}
+      <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
+        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
+        <div className="grid grid-cols-2 gap-1">
+          <p>一、什么是集合 → 三大性质</p>
+          <p>二、元素与集合 → ∈ 和 ∉</p>
+          <p>三、集合的表示 → 列举法、描述法、区间</p>
+          <p>四、常见数集 → ℕ, ℤ, ℚ, ℝ</p>
+          <p>五、子集与真子集 → ⊆ 和 ⊂</p>
+          <p>六、集合的运算 → 交集、并集、补集</p>
+          <p>七、高考真题实战 → 真题模拟</p>
+        </div>
+      </div>
+
       {/* 速通路线图 */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-6">
         <p className="font-black text-blue-900 text-lg mb-1">速通路线图：集合就 6 个知识点</p>
