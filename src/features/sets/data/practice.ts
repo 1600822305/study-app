@@ -156,7 +156,7 @@ export const setsPractice0: QuizQuestionData[] = [
     id: 'stp0-1',
     type: 'choice',
     question: '',
-    questionLatex: 'A = \\{2, 4, 6, 8\\}\\text{，}8 \\text{ ____ } A',
+    questionLatex: 'A = \\{2, 4, 6, 8\\}\\text{，}8 \\;\\rule{2em}{0.4pt}\\; A',
     options: [
       { label: 'A', value: '∈' },
       { label: 'B', value: '∉' },
@@ -168,7 +168,7 @@ export const setsPractice0: QuizQuestionData[] = [
     id: 'stp0-2',
     type: 'choice',
     question: '',
-    questionLatex: 'B = \\{x \\mid x > 5\\}\\text{，}3 \\text{ ____ } B',
+    questionLatex: 'B = \\{x \\mid x > 5\\}\\text{，}3 \\;\\rule{2em}{0.4pt}\\; B',
     options: [
       { label: 'A', value: '∈' },
       { label: 'B', value: '∉' },
@@ -223,7 +223,7 @@ export const setsPractice3: QuizQuestionData[] = [
     id: 'stp3-1',
     type: 'choice',
     question: '',
-    questionLatex: '-3 \\text{ ____ } \\mathbb{Z}',
+    questionLatex: '-3 \\;\\rule{2em}{0.4pt}\\; \\mathbb{Z}',
     options: [
       { label: 'A', value: '∈' },
       { label: 'B', value: '∉' },
@@ -235,7 +235,7 @@ export const setsPractice3: QuizQuestionData[] = [
     id: 'stp3-2',
     type: 'choice',
     question: '',
-    questionLatex: '\\sqrt{2} \\text{ ____ } \\mathbb{Q}',
+    questionLatex: '\\sqrt{2} \\;\\rule{2em}{0.4pt}\\; \\mathbb{Q}',
     options: [
       { label: 'A', value: '∈' },
       { label: 'B', value: '∉' },
@@ -247,7 +247,7 @@ export const setsPractice3: QuizQuestionData[] = [
     id: 'stp3-3',
     type: 'choice',
     question: '',
-    questionLatex: '\\pi \\text{ ____ } \\mathbb{R}',
+    questionLatex: '\\pi \\;\\rule{2em}{0.4pt}\\; \\mathbb{R}',
     options: [
       { label: 'A', value: '∈' },
       { label: 'B', value: '∉' },
