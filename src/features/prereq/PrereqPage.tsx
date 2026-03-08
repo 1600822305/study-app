@@ -258,6 +258,7 @@ export function PrereqPage() {
             <div>
               <p className="font-bold mb-1">完全平方公式：</p>
               <Math tex="(a+b)^2 = a^2 + 2ab + b^2" display />
+              <Math tex="(a-b)^2 = a^2 - 2ab + b^2" display />
               <div className="bg-gray-50 rounded-lg p-3 mt-1">
                 <p className="font-bold">例：</p>
                 <Math tex="(1+i)^2 = 1^2 + 2(1)(i) + i^2 = 1 + 2i + (-1) = 2i" display />
@@ -398,6 +399,15 @@ export function PrereqPage() {
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((n) => (
                   <span key={n}>{n}²={n * n}</span>
                 ))}
+              </div>
+            </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="font-bold mb-1">高频组合</p>
+              <div className="grid grid-cols-2 gap-1 text-xs">
+                <p>3²+4²=25 → √25=5</p>
+                <p>5²+12²=169 → √169=13</p>
+                <p>1²+1²=2 → √2≈1.414</p>
+                <p>1²+2²=5 → √5≈2.236</p>
               </div>
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
