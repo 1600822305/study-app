@@ -206,7 +206,9 @@ export function LogicPrereqPage() {
                 <div className="bg-white rounded-lg p-3 mb-2">
                   <p className="text-center text-sm"><Math tex="|A| < |B|" /> → <Math tex="A^2 < B^2" />（两边平方，绝对值消失）</p>
                 </div>
-                <p className="text-sm text-gray-600 mb-2">因为 <Math tex="|A|^2 = A^2" />，平方之后绝对值自动没了，变成普通不等式！</p>
+                <p className="text-sm text-gray-600 mb-1">因为 <Math tex="|A|^2 = A^2" />，平方之后绝对值自动没了，变成普通不等式！</p>
+                <p className="text-sm text-gray-600 mb-2">其实规则①②也能用平方法，只要<strong>两边都 ≥ 0</strong> 就行（绝对值和正数都 ≥ 0，所以放心平方）</p>
+                <p className="text-sm text-amber-700 mb-2">⚠️ <strong>不能平方的情况：</strong>一边是普通表达式（可能为负），比如 |x| {'>'} 2x-1，右边可能是负数，不能直接平方</p>
 
                 <div className="bg-white rounded-lg p-3 space-y-3">
                   <div>
