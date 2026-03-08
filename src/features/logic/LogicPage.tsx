@@ -35,6 +35,38 @@ export function LogicPage() {
         </div>
       </div>
 
+      {/* 速通路线图 */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-6">
+        <p className="font-black text-blue-900 text-lg mb-1">速通路线图：这节课就 5 个知识点</p>
+        <p className="text-blue-700 text-sm mb-4">每个知识点只需要记 1-2 个规则，不需要逻辑思维，照着做就能拿分！</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">① 命题</p>
+            <p className="text-gray-500 mt-1">规则：能判断真假的陈述句 = 命题</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">② 四种命题</p>
+            <p className="text-gray-500 mt-1">规则：逆否命题和原命题同真同假</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">③ 充分必要条件</p>
+            <p className="text-gray-500 mt-1">规则：解不等式 → 画集合 → 比大小</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">④ 量词否定</p>
+            <p className="text-gray-500 mt-1">规则：∀ ↔ ∃ 互换 + 条件取反</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">⑤ 逻辑联结词</p>
+            <p className="text-gray-500 mt-1">规则：且=全真才真，或=一真就真</p>
+          </div>
+          <div className="bg-yellow-50 rounded-xl p-3 border border-yellow-200">
+            <p className="font-bold text-yellow-800">核心秘密</p>
+            <p className="text-yellow-700 mt-1">这节课不考逻辑思维，考的是背规则！</p>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Main content */}
         <div className="flex-1 min-w-0">
@@ -213,6 +245,43 @@ export function LogicPage() {
               </div>
             </Collapsible>
 
+            <Collapsible title="做题菜谱（照着做就行！）" defaultOpen storageKey="logic:recipe">
+              <div className="bg-gradient-to-b from-emerald-50 to-green-50 border-2 border-emerald-300 rounded-xl p-5">
+                <p className="font-black text-emerald-800 mb-3">遇到充分必要条件的题，永远三步走：</p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <span className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0">1</span>
+                    <div className="text-sm">
+                      <p className="font-bold text-gray-800">解出范围</p>
+                      <p className="text-gray-600">把 p 和 q 各自解成不等式或具体值，得到集合 A 和 B</p>
+                      <p className="text-gray-500 mt-1">例：p: x² {'<'} 4 → A = (-2, 2)，q: x {'>'} 0 → B = (0, +∞)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0">2</span>
+                    <div className="text-sm">
+                      <p className="font-bold text-gray-800">比大小</p>
+                      <p className="text-gray-600">看 A 和 B 谁包含谁（画数轴最直观）</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0">3</span>
+                    <div className="text-sm">
+                      <p className="font-bold text-gray-800">套公式</p>
+                      <p className="text-gray-600">A ⊂ B → 充分不必要 | B ⊂ A → 必要不充分 | A = B → 充要 | 互不包含 → 既不充分也不必要</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 bg-white rounded-lg p-3 text-sm">
+                  <p className="font-bold text-gray-800 mb-1">完整示范：</p>
+                  <p className="text-gray-600">p: x {'>'} 2，q: x {'>'} 1</p>
+                  <p className="text-gray-600">① A = (2, +∞)，B = (1, +∞)</p>
+                  <p className="text-gray-600">② A 在 B 里面 → A ⊂ B（A 更小）</p>
+                  <p className="text-gray-600">③ A 小 → <strong>p 充分不必要</strong>。完毕，就这么简单！</p>
+                </div>
+              </div>
+            </Collapsible>
+
             <Collapsible title="武器一：直接推理法" storageKey="logic:direct-method">
               <div className="space-y-3">
                 <div className="bg-white border border-gray-200 rounded-lg p-4 text-sm">
@@ -310,10 +379,27 @@ export function LogicPage() {
 
             <Collapsible title="否定规则（高考爱考！）" defaultOpen storageKey="logic:negation">
               <div className="bg-slate-900 text-white rounded-xl p-5 text-center mb-3">
-                <p className="text-sm text-slate-400 mb-2">否定规则</p>
+                <p className="text-sm text-slate-400 mb-2">做题就两步：换量词 + 查表取反</p>
                 <div className="space-y-2">
-                  <p><Math tex="\forall" /> 变 <Math tex="\exists" />，同时条件取反</p>
-                  <p><Math tex="\exists" /> 变 <Math tex="\forall" />，同时条件取反</p>
+                  <p><strong>第一步：</strong><Math tex="\forall" /> 变 <Math tex="\exists" />，<Math tex="\exists" /> 变 <Math tex="\forall" /></p>
+                  <p><strong>第二步：</strong>对照下表，把条件取反</p>
+                </div>
+              </div>
+
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-3">
+                <p className="font-bold text-amber-800 text-sm mb-2">条件取反对照表（背住这个就够了）</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm text-center">
+                  {[
+                    ['>', '≤'], ['<', '≥'], ['≥', '<'],
+                    ['≤', '>'], ['=', '≠'], ['≠', '='],
+                    ['是', '不是'], ['都是', '不都是'], ['大于', '不大于'],
+                  ].map(([orig, neg], idx) => (
+                    <div key={idx} className="bg-white rounded-lg px-3 py-1.5 border border-amber-100">
+                      <span className="text-gray-800">{orig}</span>
+                      <span className="text-amber-600 mx-1">→</span>
+                      <span className="font-bold text-amber-800">{neg}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
