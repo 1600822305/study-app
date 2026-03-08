@@ -166,23 +166,23 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
   // ── 打印模式：静态展示全部题目 ──
   if (isPrinting) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-3 my-3">
-        <p className="font-bold text-gray-800 mb-1">{title}</p>
-        {description && <p className="text-xs text-gray-400 mb-2">{description}</p>}
+      <div className="bg-white rounded-xl border border-gray-200 p-2 my-2">
+        <p className="font-bold text-gray-800 text-sm mb-1">{title}</p>
+        {description && <p className="text-xs text-gray-400 mb-1">{description}</p>}
         <div className="space-y-1.5">
           {questions.map((q, idx) => (
-            <div key={q.id} className="bg-gray-50 rounded-lg border border-gray-200 px-3 py-2" style={{ breakInside: 'avoid' }}>
-              <p className="text-gray-800 font-medium mb-0.5">
-                <span className="text-blue-600 mr-2">{idx + 1}.</span>
+            <div key={q.id} className="bg-gray-50 rounded border border-gray-200 px-2.5 py-1.5" style={{ breakInside: 'avoid' }}>
+              <p className="text-gray-900 font-bold text-sm leading-5">
+                <span className="text-blue-700 mr-1 font-extrabold">{idx + 1}.</span>
                 {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}
               </p>
 
               {/* 选择题选项 */}
               {q.type !== 'blank' && q.options && (
-                <div className="space-y-0.5 ml-4">
+                <div className="flex flex-wrap gap-x-4 gap-y-0 ml-4 text-sm">
                   {q.options.map((opt) => (
-                    <div key={opt.value} className="flex items-center gap-1.5 text-gray-700">
-                      <span className="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0" style={{ fontSize: '10px' }}>
+                    <div key={opt.value} className="flex items-center gap-1 text-gray-800 font-medium">
+                      <span className="w-3.5 h-3.5 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-500 shrink-0" style={{ fontSize: '9px' }}>
                         {opt.label}
                       </span>
                       <span>{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>

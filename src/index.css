@@ -41,13 +41,13 @@ math-field::part(virtual-keyboard-toggle) {
 /* ============================================================
    专业 PDF 导出 — @media print
    A4 = 210mm × 297mm
-   页边距: 上 8mm · 左右 5mm · 下 8mm
-   → 可打印区域: 200mm × 281mm
+   页边距: 上 5mm · 左右 5mm · 下 5mm
+   → 可打印区域: 200mm × 287mm
    ============================================================ */
 
 @page {
   size: A4 portrait;
-  margin: 8mm 5mm 8mm 5mm;
+  margin: 5mm;
 }
 
 @media print {
@@ -442,9 +442,9 @@ html.print-preview-mode #root {
   overflow: visible !important;
   height: auto !important;
 
-  /* 第一页的白色背景 + padding（模拟 @page margin: 8mm 5mm） */
+  /* 第一页的白色背景 + padding（模拟 @page margin: 5mm） */
   background: white !important;
-  padding: 8mm 5mm 0 5mm !important;
+  padding: 5mm 5mm 0 5mm !important;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 
   /* 打印排版 */
@@ -492,7 +492,7 @@ html.print-preview-mode #root {
 
 /* 新页面顶部（模拟页顶 margin） */
 .preview-page-start {
-  height: 8mm;
+  height: 5mm;
   background: white;
 }
 

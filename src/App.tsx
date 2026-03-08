@@ -10,6 +10,7 @@ import { PrereqPage } from '@/features/prereq';
 import { ComplexPage } from '@/features/complex';
 import { SetsPage, SetsPrereqPage } from '@/features/sets';
 import { LogicPage, LogicPrereqPage } from '@/features/logic';
+import { InequalityPrereqPage, InequalityPage } from '@/features/inequality';
 import { SettingsPage } from '@/features/settings/SettingsPage';
 import { TTSSettingsPage } from '@/features/settings/TTSSettingsPage';
 import { AISettingsPage } from '@/features/settings/AISettingsPage';
@@ -34,6 +35,8 @@ function App() {
           <Route path="/math/sets" element={<SetsPage />} />
           <Route path="/math/logic-prereq" element={<LogicPrereqPage />} />
           <Route path="/math/logic" element={<LogicPage />} />
+          <Route path="/math/inequality-prereq" element={<InequalityPrereqPage />} />
+          <Route path="/math/inequality" element={<InequalityPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/tts" element={<TTSSettingsPage />} />
           <Route path="/settings/ai" element={<AISettingsPage />} />

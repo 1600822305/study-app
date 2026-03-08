@@ -27,6 +27,17 @@ const tocData = [
       { label: '1.3', title: '逻辑用语', path: '/math/logic' },
     ],
   },
+  {
+    label: '第二阶段',
+    title: '计算工具',
+    path: null,
+    items: [
+      { label: '2.0', title: '不等式前置知识', path: '/math/inequality-prereq' },
+      { label: '2.1', title: '不等式', path: '/math/inequality' },
+      { label: '2.2', title: '二次函数前置知识', path: '/math/quadratic-prereq' },
+      { label: '2.3', title: '二次函数', path: '/math/quadratic' },
+    ],
+  },
 ];
 
 export function TableOfContentsPage() {

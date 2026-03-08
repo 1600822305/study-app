@@ -52,6 +52,15 @@ const navItems: NavItem[] = [
           { path: '/math/logic', label: '1.3 逻辑用语' },
         ],
       },
+      {
+        groupLabel: '第二阶段：计算工具',
+        items: [
+          { path: '/math/inequality-prereq', label: '2.0 不等式前置知识' },
+          { path: '/math/inequality', label: '2.1 不等式' },
+          { path: '/math/quadratic-prereq', label: '2.2 二次函数前置知识' },
+          { path: '/math/quadratic', label: '2.3 二次函数' },
+        ],
+      },
     ],
   },
   { path: '/chat', label: 'AI 对话', icon: <MessageCircle size={18} /> },
