@@ -18,15 +18,15 @@ export const logicQuizQuestions: QuizQuestionData[] = [
   },
   {
     id: 'lq2',
-    question: '（2022·新高考Ⅰ卷）p: a > 0 且 b > 0，q: a + b > 0，则 p 是 q 的',
+    question: '"若 x > 0，则 x² > 0"的否命题是？',
     options: [
-      { label: 'A', value: '充分不必要条件' },
-      { label: 'B', value: '必要不充分条件' },
-      { label: 'C', value: '充要条件' },
-      { label: 'D', value: '既不充分也不必要条件' },
+      { label: 'A', value: '若 x ≤ 0，则 x² ≤ 0' },
+      { label: 'B', value: '若 x² > 0，则 x > 0' },
+      { label: 'C', value: '若 x² ≤ 0，则 x ≤ 0' },
+      { label: 'D', value: '∃x > 0，x² ≤ 0' },
     ],
-    correctAnswer: '充分不必要条件',
-    explanation: 'a>0且b>0 → a+b>0 ✓；a+b>0 不一定 a>0且b>0（如a=3,b=-1）✗',
+    correctAnswer: '若 x ≤ 0，则 x² ≤ 0',
+    explanation: '否命题 = 条件和结论都取反。"若非p则非q"：x>0 变 x≤0，x²>0 变 x²≤0。注意 D 选项是"否定"不是"否命题"，这是高考常考陷阱！',
   },
   {
     id: 'lq3',
@@ -39,7 +39,7 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '既不充分也不必要条件' },
     ],
     correctAnswer: '必要不充分条件',
-    explanation: '集合法比大小。',
+    explanation: 'p: |x|<2 解得 A=(-2,2)。q: x²-x-2<0 因式分解 (x-2)(x+1)<0 解得 B=(-1,2)。B⊂A，B 更小所以 q 充分、p 必要。',
     explanationLatex:
       'A=(-2,2),\\; B: (x-2)(x+1)<0 \\Rightarrow (-1,2) \\quad B \\subset A \\Rightarrow \\text{p 是 q 的必要不充分条件}',
   },
@@ -54,7 +54,7 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\exists x_0 \\in \\mathbb{R},\\; x_0^2 + 1 < 0', isLatex: true },
     ],
     correctAnswer: '\\exists x_0 \\in \\mathbb{R},\\; x_0^2 + 1 \\leq 0',
-    explanation: '全称命题的否定：∀ 变 ∃，条件取反（> 变 ≤）。',
+    explanation: '两步：① ∀ 变 ∃ ② > 变 ≤。B选项错在只取了<没取≤，D选项错在>没取反。原命题为真，其否定为假命题。',
   },
   {
     id: 'lq5',
@@ -67,22 +67,19 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\exists x_0 \\in \\mathbb{R},\\; x_0^2 - x_0 - 1 < 0', isLatex: true },
     ],
     correctAnswer: '\\forall x \\in \\mathbb{R},\\; x^2 - x - 1 \\leq 0',
-    explanation: '特称命题的否定：∃ 变 ∀，条件取反（> 变 ≤）。',
+    explanation: '两步：① ∃ 变 ∀ ② > 变 ≤。和 lq4 相反方向，注意 A 选项只换了量词没取反条件。',
   },
   {
     id: 'lq6',
-    question: 'p: x² - 3x + 2 = 0，q: x = 1 或 x = 2，则 p 是 q 的',
-    questionLatex: 'p: x^2 - 3x + 2 = 0,\; q: x = 1 \\text{ 或 } x = 2,\; \\text{则 p 是 q 的}',
+    question: '"x = 1 或 x = 2" 的否定是？',
     options: [
-      { label: 'A', value: '充分不必要条件' },
-      { label: 'B', value: '必要不充分条件' },
-      { label: 'C', value: '充要条件' },
-      { label: 'D', value: '既不充分也不必要条件' },
+      { label: 'A', value: 'x ≠ 1 或 x ≠ 2' },
+      { label: 'B', value: 'x ≠ 1 且 x ≠ 2' },
+      { label: 'C', value: 'x = 1 且 x = 2' },
+      { label: 'D', value: 'x ≠ 1 或 x = 2' },
     ],
-    correctAnswer: '充要条件',
-    explanation: 'x²-3x+2=0 解为 x=1 或 x=2，与 q 完全相同，互推成立。',
-    explanationLatex:
-      'x^2-3x+2=0 \\Rightarrow (x-1)(x-2)=0 \\Rightarrow x=1 \\text{ 或 } x=2 \\quad A=B \\Rightarrow \\text{充要条件}',
+    correctAnswer: 'x ≠ 1 且 x ≠ 2',
+    explanation: '否定"或"变"且"，条件取反：= 变 ≠。A 选项是最常见的错误——"或"没变成"且"。',
   },
   {
     id: 'lq7',
@@ -94,7 +91,7 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '若 x≠1，则 x²=1' },
     ],
     correctAnswer: '若 x=1，则 x²=1',
-    explanation: 'B 是原命题为真。A 的逆命题不一定成立（x 也可能=-1）。',
+    explanation: 'B：x=1 代入 x²=1 ✓，真命题。A：x²=1 时 x=±1，不一定x=1，假命题。C：x²≠1但x=1？矛盾，假。D：x≠1但x²=1？x=-1就行，不一定。',
   },
   {
     id: 'lq8',
@@ -107,7 +104,7 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'x < 0 \\text{ 且 } x > 3', isLatex: true },
     ],
     correctAnswer: 'x \\leq 0 \\text{ 或 } x \\geq 3',
-    explanation: '否定时：且变或，> 变 ≤，< 变 ≥。',
+    explanation: '且变或，> 变 ≤，< 变 ≥。A 选项错在没把"且"变"或"，D 选项错在用了严格不等号。',
   },
   {
     id: 'lq9',
@@ -120,7 +117,7 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'a < 5', isLatex: true },
     ],
     correctAnswer: 'a < 1',
-    explanation: 'p充分→A⊆B，A=[1,5]，B=(a,+∞)，A的最小值1必须>a，即a<1。',
+    explanation: 'p 充分 → A⊆B。A=[1,5]，B=(a,+∞)。要让 [1,5] 全部落在 (a,+∞) 里，A 的最小值 1 必须 > a，所以 a < 1。注意 B 选项 a≤1 时 a=1 会导致 x=1 不在 B 中。',
     explanationLatex:
       'A=[1,5] \\subseteq B=(a,+\\infty) \\Rightarrow 1 > a \\Rightarrow a < 1',
   },
@@ -134,7 +131,7 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '若 x ≠ 1，则 x² = 1' },
     ],
     correctAnswer: '若 x ≠ 1，则 x² ≠ 1',
-    explanation: '逆否命题：条件和结论互换并取反。原命题"若p则q"的逆否命题是"若非q则非p"。',
+    explanation: '逆否命题 = "若非q则非p"。原命题"若 x²=1 则 x=1"→ 逆否"若 x≠1 则 x²≠1"。B 选项是"逆命题的否"，C 是逆命题，都不对。',
   },
   {
     id: 'lq11',
@@ -146,7 +143,7 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '明天会下雨吗？' },
     ],
     correctAnswer: '4 是偶数',
-    explanation: '"4是偶数"能明确判断真假（真命题），是命题。其余：x>3 真假不确定、"请关门"是祈使句、"明天会下雨吗？"是疑问句，都不是命题。',
+    explanation: 'C "4是偶数"能明确判断真假（真命题）。A "x>3" 含未知数 x，真假不确定，不是命题。B 是祈使句，D 是疑问句，都不能判断真假。',
   },
   {
     id: 'lq12',
@@ -158,6 +155,6 @@ export const logicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'p 且 q 为真，p 或 q 为假' },
     ],
     correctAnswer: 'p 且 q 为假，p 或 q 为真',
-    explanation: '且：全真才真，一假就假 → p且q=假。或：一真就真 → p或q=真。',
+    explanation: 'p真q假：且 = 全真才真，q假所以 p且q=假。或 = 一真就真，p真所以 p或q=真。A、D 说"且为真"错，B 说"或为假"错。',
   },
 ];

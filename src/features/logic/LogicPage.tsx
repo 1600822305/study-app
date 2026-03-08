@@ -1,12 +1,13 @@
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { logicNarrations } from './data/narrations';
 import { logicPractice1, logicPractice2, logicPractice3, logicPractice4, logicPractice5 } from './data/practice';
-import { useProgress } from '@/hooks';
+import { useProgress, usePrintMode } from '@/hooks';
 import { logicQuizQuestions } from './data/quiz';
 import { logicProgressItems } from './data/progress';
 
 export function LogicPage() {
   const { items, toggle } = useProgress('logic', logicProgressItems);
+  const { isPrinting, printOptions } = usePrintMode();
 
   return (
     <div>
@@ -25,11 +26,11 @@ export function LogicPage() {
       <div className="flex justify-end mb-4 print:hidden">
         <ExportButton title="1.3 常用逻辑用语" />
       </div>
-
+ 
       {/* 知识地图 */}
-      <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
-        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
-        <div className="grid grid-cols-2 gap-1">
+      <div className="bg-gray-50 rounded-xl p-5 mb-6 text-base text-gray-600">
+        <p className="font-bold text-gray-800 mb-3 text-lg">📋 知识地图</p>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2 leading-7">
           <button onClick={() => document.getElementById('logic-prop')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、命题 → 能判断真假的陈述句</button>
           <button onClick={() => document.getElementById('logic-four')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、四种命题 → 逆、否、逆否</button>
           <button onClick={() => document.getElementById('logic-cond')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、充分必要条件 → 集合法判断</button>
@@ -40,42 +41,42 @@ export function LogicPage() {
       </div>
 
       {/* 速通路线图 */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-6">
-        <p className="font-black text-blue-900 text-lg mb-1">速通路线图：这节课就 5 个知识点</p>
-        <p className="text-blue-700 text-sm mb-4">每个知识点只需要记 1-2 个规则，不需要逻辑思维，照着做就能拿分！</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">① 命题</p>
-            <p className="text-gray-500 mt-1">规则：能判断真假的陈述句 = 命题</p>
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-5">
+        <p className="font-black text-blue-900 text-xl mb-1">速通路线图：这节课就 5 个知识点</p>
+        <p className="text-blue-700 text-base mb-3">每个知识点只需要记 1-2 个规则，不需要逻辑思维，照着做就能拿分！</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-base">
+          <div className="bg-white rounded-xl p-4 border border-blue-100 min-h-[80px]">
+            <p className="font-bold text-gray-800 text-base">① 命题</p>
+            <p className="text-gray-500 mt-2 leading-7">规则：能判断真假的陈述句 = 命题</p>
           </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">② 四种命题</p>
-            <p className="text-gray-500 mt-1">规则：逆否命题和原命题同真同假</p>
+          <div className="bg-white rounded-xl p-4 border border-blue-100 min-h-[80px]">
+            <p className="font-bold text-gray-800 text-base">② 四种命题</p>
+            <p className="text-gray-500 mt-2 leading-7">规则：逆否命题和原命题同真同假</p>
           </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">③ 充分必要条件</p>
-            <p className="text-gray-500 mt-1">规则：谁小谁充分，谁大谁必要</p>
+          <div className="bg-white rounded-xl p-4 border border-blue-100 min-h-[80px]">
+            <p className="font-bold text-gray-800 text-base">③ 充分必要条件</p>
+            <p className="text-gray-500 mt-2 leading-7">规则：谁小谁充分，谁大谁必要</p>
           </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">④ 量词否定</p>
-            <p className="text-gray-500 mt-1">规则：∀ ↔ ∃ 互换 + 条件取反</p>
+          <div className="bg-white rounded-xl p-4 border border-blue-100 min-h-[80px]">
+            <p className="font-bold text-gray-800 text-base">④ 量词否定</p>
+            <p className="text-gray-500 mt-2 leading-7">规则：∀ ↔ ∃ 互换 + 条件取反</p>
           </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">⑤ 逻辑联结词</p>
-            <p className="text-gray-500 mt-1">规则：且=全真才真，或=一真就真</p>
+          <div className="bg-white rounded-xl p-4 border border-blue-100 min-h-[80px]">
+            <p className="font-bold text-gray-800 text-base">⑤ 逻辑联结词</p>
+            <p className="text-gray-500 mt-2 leading-7">规则：且=全真才真，或=一真就真</p>
           </div>
-          <div className="bg-yellow-50 rounded-xl p-3 border border-yellow-200">
-            <p className="font-bold text-yellow-800">核心秘密</p>
-            <p className="text-yellow-700 mt-1">这节课不考逻辑思维，考的是背规则！</p>
+          <div className="bg-yellow-50 rounded-xl p-4 border border-yellow-200 min-h-[80px]">
+            <p className="font-bold text-yellow-800 text-base">核心秘密</p>
+            <p className="text-yellow-700 mt-2 leading-7">这节课不考逻辑思维，考的是背规则！</p>
           </div>
         </div>
       </div>
 
       {/* 必背清单 */}
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
-        <p className="font-bold text-gray-800 mb-3">📝 必背清单：只背这 7 条，高考就够了</p>
-        <p className="text-xs text-gray-500 mb-3">不用理解为什么，死记硬背就行，考试直接套。</p>
-        <div className="space-y-2 text-sm text-gray-700">
+        <p className="font-bold text-gray-800 mb-2 text-lg">📝 必背清单：只背这 7 条，高考就够了</p>
+        <p className="text-base text-gray-500 mb-3">不用理解为什么，死记硬背就行，考试直接套。</p>
+        <div className="space-y-2 text-base text-gray-700 leading-7">
           <p>1. <strong>命题 = 能判断真假的陈述句</strong> — 疑问句、祈使句、感叹句都不是。含未知数的开放语句也不是。</p>
           <p>2. <strong>逆否命题与原命题同真同假</strong> — 原命题难证？直接证逆否命题，效果一样。</p>
           <p>3. <strong>谁小谁充分，谁大谁必要</strong> — 集合 A ⊂ B → A 小 → p 是 q 的充分条件。这一条能解 90% 的充要条件题。</p>
@@ -87,6 +88,8 @@ export function LogicPage() {
       </div>
 
       <LessonLayout progressItems={items} onToggle={toggle}>
+          <PageBreak label="命题是什么" />
+
           {/* Part 1: Propositions */}
           <section id="logic-prop" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -124,6 +127,11 @@ export function LogicPage() {
               </div>
 
               <PracticeCard questions={logicPractice1} />
+
+              <CalloutCard variant="warning" title="易错提醒">
+                <p>"x + 1 = 0" 含未知数 x，真假不确定 → <strong>不是命题</strong></p>
+                <p className="mt-1">"1 + 1 = 3" 虽然是错的，但能判断真假 → <strong>是命题（假命题）</strong></p>
+              </CalloutCard>
             </div>
           </section>
 
@@ -184,6 +192,11 @@ export function LogicPage() {
             </CalloutCard>
 
             <PracticeCard questions={logicPractice2} />
+
+            <CalloutCard variant="warning" title="易错提醒">
+              <p><strong>否命题 ≠ 否定原命题！</strong>否命题是条件和结论都取反，不是说原命题"不对"。</p>
+              <p className="mt-1"><strong>逆否命题才和原命题等价</strong>，逆命题和否命题不一定和原命题同真假。</p>
+            </CalloutCard>
           </section>
 
           <PageBreak label="充分必要条件" />
@@ -339,6 +352,10 @@ export function LogicPage() {
                   </div>
                 </div>
               </div>
+
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-3 text-base text-amber-800">
+                <p><strong>快速判断技巧：</strong>画数轴，看谁的范围更小。小的那个就是充分条件，大的那个就是必要条件。记住口诀就行！</p>
+              </div>
             </Collapsible>
 
             <Collapsible title="拆题实战：遇到题先判断用哪种方法" defaultOpen storageKey="logic:decompose">
@@ -432,27 +449,27 @@ export function LogicPage() {
             </h2>
 
             <Collapsible title="两种量词" defaultOpen storageKey="logic:quantifiers">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-                <div className="bg-gray-50 rounded-lg p-4 text-sm">
-                  <p className="font-bold mb-1">全称量词 <Math tex="\forall" /></p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="font-bold mb-2 text-base">全称量词 <Math tex="\forall" /></p>
                   <p className="text-gray-600">"对所有的" "对任意的"</p>
                   <p className="mt-2"><Math tex="\forall x \in \mathbb{R},\; x^2 \geq 0" /></p>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-4 text-sm">
-                  <p className="font-bold mb-1">存在量词 <Math tex="\exists" /></p>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <p className="font-bold mb-2 text-base">存在量词 <Math tex="\exists" /></p>
                   <p className="text-gray-600">"存在一个" "至少有一个"</p>
                   <p className="mt-2"><Math tex="\exists x \in \mathbb{R},\; x^2 - 1 = 0" /></p>
                 </div>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4 mb-3 text-sm space-y-2">
-                <p className="font-bold text-gray-800 mb-1">全称命题与特称命题</p>
+              <div className="bg-gray-50 rounded-lg p-4 mb-4 space-y-2">
+                <p className="font-bold text-gray-800 mb-2 text-base">全称命题与特称命题</p>
                 <p>全称命题：<Math tex="\forall x \in M,\; p(x)" /> → “对所有 x 都满足 p”</p>
                 <p>特称命题：<Math tex="\exists x \in M,\; p(x)" /> → “存在某个 x 满足 p”</p>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-1.5">
-                <p className="font-bold text-gray-800 mb-1">例</p>
+              <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+                <p className="font-bold text-gray-800 mb-2 text-base">例</p>
                 <p><Math tex="\forall x \in \mathbb{R},\; x^2 \geq 0" /> → 真命题 ✓（所有实数的平方都≥0）</p>
                 <p><Math tex="\exists x \in \mathbb{R},\; x^2 < 0" /> → 假命题 ✗（不存在实数的平方小于0）</p>
                 <p><Math tex="\exists x \in \mathbb{R},\; x^2 - 1 = 0" /> → 真命题 ✓（x=1就行）</p>
@@ -460,8 +477,8 @@ export function LogicPage() {
             </Collapsible>
 
             <Collapsible title="否定规则（高考爱考！）" defaultOpen storageKey="logic:negation">
-              <div className="bg-slate-900 text-white rounded-xl p-5 text-center mb-3">
-                <p className="text-sm text-slate-400 mb-2">做题就两步：换量词 + 查表取反</p>
+              <div className="bg-slate-900 text-white rounded-xl p-5 text-center mb-4">
+                <p className="text-slate-400 mb-2">做题就两步：换量词 + 查表取反</p>
                 <div className="space-y-2">
                   <p><strong>第一步：</strong><Math tex="\forall" /> 变 <Math tex="\exists" />，<Math tex="\exists" /> 变 <Math tex="\forall" /></p>
                   <p><strong>第二步：</strong>对照下表，把条件取反</p>
@@ -469,7 +486,7 @@ export function LogicPage() {
               </div>
 
               <CalloutCard variant="warning" title="条件取反对照表（背住这个就够了）" icon={null} className="mb-3">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm text-center">
+                <div className="grid grid-cols-3 gap-2 text-sm text-center">
                   {[
                     ['>', '≤'], ['<', '≥'], ['≥', '<'],
                     ['≤', '>'], ['=', '≠'], ['≠', '='],
@@ -537,7 +554,7 @@ export function LogicPage() {
             </h2>
 
             <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
-              <div className="space-y-4 text-sm">
+              <div className="space-y-4">
                 <div>
                   <p className="font-bold text-gray-800">p 且 q（<Math tex="p \wedge q" />）</p>
                   <p className="text-gray-600">两个同时成立才为真。口诀：全真才真，一假就假。</p>
@@ -586,8 +603,8 @@ export function LogicPage() {
             </Collapsible>
 
             <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4 mt-4">
-              <p className="font-bold text-gray-800 text-sm mb-2">例：p: 2 {'>'} 1（真），q: 3 是偶数（假）</p>
-              <div className="text-sm text-gray-600 space-y-1">
+              <p className="font-bold text-gray-800 mb-2">例：p: 2 {'>'} 1（真），q: 3 是偶数（假）</p>
+              <div className="text-gray-600 space-y-1">
                 <p>p 且 q = <strong>假</strong>（q 不成立）</p>
                 <p>p 或 q = <strong>真</strong>（p 成立就够了）</p>
                 <p>非 p = <strong>假</strong></p>
@@ -595,21 +612,69 @@ export function LogicPage() {
             </div>
 
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <p className="text-blue-800 text-sm font-bold mb-1">否定时的变换规则：</p>
-              <div className="text-blue-700 text-sm space-y-1">
+              <p className="text-blue-800 font-bold mb-1">否定时的变换规则：</p>
+              <div className="text-blue-700 space-y-1">
                 <p>"p 且 q" 的否定 = "非p <strong>或</strong> 非q"（且变或）</p>
                 <p>"p 或 q" 的否定 = "非p <strong>且</strong> 非q"（或变且）</p>
               </div>
-              <div className="mt-3 text-sm text-gray-700 space-y-1">
+              <div className="mt-3 text-gray-700 space-y-1">
                 <p><strong>例：</strong>"x {'>'} 0 且 x {'<'} 5" 的否定 = "x ≤ 0 <strong>或</strong> x ≥ 5"</p>
                 <p><strong>例：</strong>"x = 1 或 x = 2" 的否定 = "x ≠ 1 <strong>且</strong> x ≠ 2"</p>
               </div>
             </div>
 
+            <div className="bg-slate-900 text-white rounded-xl p-5 text-center mb-4">
+              <p className="text-amber-400 font-bold mb-3 text-lg">三秒记住逻辑联结词</p>
+              <div className="space-y-2 text-base">
+                <p><strong>且</strong> = 严格老师：全部满足才通过（全真才真）</p>
+                <p><strong>或</strong> = 宽松老师：有一个满足就通过（一真就真）</p>
+                <p><strong>非</strong> = 唱反调：真变假，假变真</p>
+              </div>
+              <p className="text-slate-400 mt-3">否定时：且变或，或变且，条件取反</p>
+            </div>
+
+            <PageBreak label="逻辑联结词 — 即时练习" />
             <PracticeCard questions={logicPractice5} />
+
+            {/* Part 7: Summary - fills blank after practice */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 mt-4">
+              <p className="text-emerald-800 font-bold text-xl mb-5 text-center">全章知识总结卡片</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-xl p-4 border border-green-100">
+                  <p className="text-emerald-700 font-bold mb-2 text-base">命题</p>
+                  <p className="text-gray-700 leading-7">能判断真假的陈述句 = 命题</p>
+                  <p className="text-gray-500 mt-2 leading-7">疑问句、祈使句、含未知数 → 不是命题</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 border border-green-100">
+                  <p className="text-emerald-700 font-bold mb-2 text-base">四种命题</p>
+                  <p className="text-gray-700 leading-7">原命题 ↔ 逆否命题：<strong>同真同假</strong></p>
+                  <p className="text-gray-500 mt-2 leading-7">逆命题 ↔ 否命题：同真同假</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 border border-green-100">
+                  <p className="text-emerald-700 font-bold mb-2 text-base">充要条件</p>
+                  <p className="text-gray-700 leading-7"><strong>谁小谁充分，谁大谁必要</strong></p>
+                  <p className="text-gray-500 mt-2 leading-7">A⊂B → 充分 · B⊂A → 必要 · A=B → 充要</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 border border-green-100">
+                  <p className="text-emerald-700 font-bold mb-2 text-base">量词否定</p>
+                  <p className="text-gray-700 leading-7"><Math tex="\forall \leftrightarrow \exists" /> 互换 + 条件取反</p>
+                  <p className="text-gray-500 mt-2 leading-7">&gt; 变 ≤，= 变 ≠，是 变 不是</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 border border-green-100">
+                  <p className="text-emerald-700 font-bold mb-2 text-base">逻辑联结词</p>
+                  <p className="text-gray-700 leading-7">且 = 全真才真 · 或 = 一真就真</p>
+                  <p className="text-gray-500 mt-2 leading-7">否定时：且变或，或变且</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 border border-red-100">
+                  <p className="text-red-600 font-bold mb-2 text-base">高考陷阱</p>
+                  <p className="text-gray-700 leading-7">否定 ≠ 否命题（完全不同！）</p>
+                  <p className="text-gray-500 mt-2 leading-7">充要别搞反方向，拿不准用集合法</p>
+                </div>
+              </div>
+            </div>
           </section>
 
-          <PageBreak label="真题实战" />
+          <PageBreak label="高考真题实战" />
 
           {/* Part 6: Quiz */}
           <section id="logic-quiz" className="mb-8 scroll-mt-4">
@@ -622,50 +687,55 @@ export function LogicPage() {
             <QuizPanel module="logic" questions={logicQuizQuestions} title="逻辑用语真题实战" description="12道选择题，覆盖命题判断、四种命题、充分必要条件、量词否定、逻辑联结词全部考点" />
           </section>
 
-          {/* Part 7: Summary */}
-          <section className="mb-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-purple-500 text-white flex items-center justify-center text-sm font-bold">
-                7
-              </span>
-              知识总结卡片
-              <SpeakButton text={logicNarrations.summary} />
-            </h2>
-            <div className="bg-slate-900 text-white rounded-2xl p-6 space-y-3 text-sm">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">四种命题</p>
-                  <p>原 ↔ 逆否（同真同假）</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">充要条件</p>
-                  <p>集合法：谁小谁充分，谁大谁必要</p>
-                  <p className="text-xs text-slate-400 mt-1">A⊂B → 充分不必要 · B⊂A → 必要不充分 · A=B → 充要</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">量词否定</p>
-                  <p><Math tex="\forall \leftrightarrow \exists" />，条件取反</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">联结词</p>
-                  <p>且：全真才真 · 或：一真就真</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">否定变换</p>
-                  <p>且变或，或变且</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">易混概念</p>
-                  <p>否定 ≠ 否命题</p>
+      {isPrinting && printOptions.showAnswers && (
+        <>
+          <PageBreak label="答案与解析" />
+          <section className="mb-8 print-answers">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+
+            {[
+              { label: '一、命题判断 — 即时练习', questions: logicPractice1 },
+              { label: '二、四种命题 — 即时练习', questions: logicPractice2 },
+              { label: '三、充分必要条件 — 即时练习', questions: logicPractice3 },
+              { label: '四、量词与否定 — 即时练习', questions: logicPractice4 },
+              { label: '五、逻辑联结词 — 即时练习', questions: logicPractice5 },
+              { label: '高考真题实战', questions: logicQuizQuestions },
+            ].map((section) => (
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="space-y-3 text-gray-700">
+                  {section.questions.map((q, idx) => {
+                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
+                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
+                    const answerTex = isSimpleFractionAnswer
+                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
+                      : q.correctAnswer;
+                    return (
+                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
+                        <div className="min-w-0">
+                          <p className="font-bold text-gray-900">
+                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
+                          </p>
+                          {q.explanationLatex && (
+                            <div className="text-gray-700 mt-1">
+                              <Math tex={q.explanationLatex} />
+                            </div>
+                          )}
+                          {q.explanation && (
+                            <p className="text-gray-700 mt-1">{q.explanation}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-              <div className="border-t border-slate-700 pt-3 mt-3">
-                <p className="text-amber-400 font-bold text-xs">
-                  ⚠ 高考陷阱：充分必要别搞反方向 · "否定"≠"否命题" · 集合法最靠谱
-                </p>
-              </div>
-            </div>
+            ))}
           </section>
+        </>
+      )}
+
       </LessonLayout>
     </div>
   );

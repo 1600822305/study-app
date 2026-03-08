@@ -29,9 +29,17 @@ const PrintContext = createContext<PrintContextValue>({
 });
 
 export function PrintProvider({ children }: { children: React.ReactNode }) {
-  const [isPrinting, setIsPrinting] = useState(false);
-  const [isPreview, setIsPreview] = useState(false);
-  const [printOptions, setPrintOptions] = useState<PrintOptions>({});
+  // Support URL query params: ?print=true&showAnswers=true&preview=true
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlPrint = urlParams.get('print') === 'true';
+  const urlShowAnswers = urlParams.get('showAnswers') === 'true';
+  const urlPreview = urlParams.get('preview') === 'true';
+
+  const [isPrinting, setIsPrinting] = useState(urlPrint);
+  const [isPreview, setIsPreview] = useState(urlPrint && urlPreview);
+  const [printOptions, setPrintOptions] = useState<PrintOptions>(
+    urlPrint ? { showAnswers: urlShowAnswers } : {},
+  );
 
   const startPrint = useCallback((options: PrintOptions = {}) => {
     // 如果正在预览，先退出预览再打印

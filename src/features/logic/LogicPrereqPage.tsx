@@ -3,10 +3,11 @@ import { logicPrereqNarrations } from './data/prereq-narrations';
 import { logicPrereqPractice1, logicPrereqPractice2, logicPrereqPractice3 } from './data/practice';
 import { logicPrereqProgressItems } from './data/prereq-progress';
 import { logicPrereqQuizQuestions } from './data/prereq-quiz';
-import { useProgress } from '@/hooks';
+import { useProgress, usePrintMode } from '@/hooks';
 
 export function LogicPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('logic-prereq', logicPrereqProgressItems);
+  const { isPrinting, printOptions } = usePrintMode();
 
   return (
     <div>
@@ -93,6 +94,34 @@ export function LogicPrereqPage() {
               </p>
             </div>
 
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
+              <p className="font-bold text-orange-800 mb-3">📌 子集判断口诀速查</p>
+              <div className="space-y-2 text-gray-700">
+                <div className="flex items-start gap-2">
+                  <span className="text-orange-500 font-bold shrink-0">①</span>
+                  <p><strong>有限集</strong>：逐个检查 A 的元素是否都在 B 中 → 都在就是 <Math tex="A \subseteq B" /></p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-orange-500 font-bold shrink-0">②</span>
+                  <p><strong>区间</strong>：画数轴，看谁被谁"罩住" → 被罩住的是子集</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-orange-500 font-bold shrink-0">③</span>
+                  <p><strong>空集</strong>：<Math tex="\varnothing" /> 是任何集合的子集（<Math tex="\varnothing \subseteq A" /> 恒成立）</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-orange-500 font-bold shrink-0">④</span>
+                  <p><strong>⊆ vs ⊂</strong>：<Math tex="A \subseteq B" /> 允许相等，<Math tex="A \subset B" /> 必须不等（真子集）</p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-orange-500 font-bold shrink-0">⑤</span>
+                  <p><strong>范围大小</strong>：范围小 ⊂ 范围大（小的是子集，大的是超集）</p>
+                </div>
+              </div>
+            </div>
+
+            <PageBreak />
+
             <PracticeCard questions={logicPrereqPractice1} />
 
             <CalloutCard variant="warning" title="易错点">
@@ -102,8 +131,6 @@ export function LogicPrereqPage() {
           </div>
         </Collapsible>
       </section>
-
-      <PageBreak label="第2页 · 解不等式" />
 
       {/* Section 2: Solving Inequalities */}
       <section id="lp-inequality" className="mb-6 scroll-mt-4">
@@ -130,111 +157,180 @@ export function LogicPrereqPage() {
             <div>
               <p className="font-bold mb-2">绝对值不等式</p>
 
-              {/* 核心思路 */}
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-3">
-                <p className="font-bold text-blue-800 mb-2">核心思路：去掉绝对值 → 变成你会解的普通不等式</p>
-                <p className="text-blue-700 text-sm">绝对值不等式看起来吓人，其实只要<strong>去掉绝对值符号</strong>，就变成你已经学过的普通不等式了。</p>
-                <p className="text-blue-700 text-sm mt-1">去绝对值只有两条规则，记住就行：</p>
-              </div>
-
-              {/* 规则1: 小于 */}
-              <div className="bg-gray-50 rounded-lg p-4 mb-3">
-                <p className="font-bold text-gray-800 mb-2">规则① |东西| {'<'} a → 去绝对值，<strong className="text-green-600">夹在中间</strong></p>
-                <div className="bg-white rounded-lg p-3 mb-2">
-                  <p className="text-center text-sm"><Math tex="|东西| < a" /> → <Math tex="-a < 东西 < a" /></p>
-                </div>
-                <p className="text-sm text-gray-600 mb-2">就是把"东西"<strong>夹在 -a 和 a 之间</strong>，绝对值就没了！</p>
-
-                <div className="bg-white rounded-lg p-3 space-y-3">
-                  <div>
-                    <p className="text-sm font-bold text-gray-700">例1：<Math tex="|x| < 3" /></p>
-                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="-3 < x < 3" />　（完事了！）</p>
+              {/* 核心方法：去绝对值 */}
+              <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-4 mb-3">
+                <p className="text-lg font-bold text-blue-800 mb-2">核心思路：去掉绝对值 → 变成普通不等式</p>
+                <p className="text-blue-700 mb-3">绝对值不等式看起来吓人，其实只要<strong>去掉 | |</strong>，就变成你已经会解的普通不等式了。去绝对值只有<strong>两句话</strong>：</p>
+                <div className="space-y-3">
+                  <div className="bg-white rounded-lg p-4 border-l-4 border-green-500">
+                    <p className="font-bold text-green-700 mb-1"><Math tex="|东西| < a" /> → 去掉 | |，<strong className="text-green-600">夹在中间</strong></p>
+                    <div className="bg-green-50 rounded-lg p-2 mt-2 text-center">
+                      <Math tex="-a < 东西 < a" />
+                    </div>
+                    <p className="text-gray-600 mt-2">就是把"东西"<strong>夹在 -a 和 a 之间</strong>，绝对值就没了</p>
                   </div>
-                  <div className="border-t border-gray-200 pt-2">
-                    <p className="text-sm font-bold text-gray-700">例2：<Math tex="|x - 1| < 3" /></p>
-                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="-3 < x - 1 < 3" /></p>
-                    <p className="text-sm text-gray-600 pl-2">三边同时 +1 → <Math tex="-2 < x < 4" />　✓</p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-2">
-                    <p className="text-sm font-bold text-gray-700">例3：<Math tex="|x + 2| < 3" /></p>
-                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="-3 < x + 2 < 3" /></p>
-                    <p className="text-sm text-gray-600 pl-2">三边同时 -2 → <Math tex="-5 < x < 1" />　✓</p>
+                  <div className="bg-white rounded-lg p-4 border-l-4 border-red-500">
+                    <p className="font-bold text-red-600 mb-1"><Math tex="|东西| > a" /> → 去掉 | |，<strong className="text-red-600">拆成两边</strong></p>
+                    <div className="bg-red-50 rounded-lg p-2 mt-2 text-center">
+                      <Math tex="东西 < -a" /> <strong className="mx-2">或</strong> <Math tex="东西 > a" />
+                    </div>
+                    <p className="text-gray-600 mt-2">要么<strong>小于 -a</strong>，要么<strong>大于 a</strong>，绝对值就没了</p>
                   </div>
                 </div>
               </div>
 
-              {/* 规则2: 大于 */}
-              <div className="bg-gray-50 rounded-lg p-4 mb-3">
-                <p className="font-bold text-gray-800 mb-2">规则② |东西| {'>'} a → 去绝对值，<strong className="text-red-600">拆成两边</strong></p>
-                <div className="bg-white rounded-lg p-3 mb-2">
-                  <p className="text-center text-sm"><Math tex="|东西| > a" /> → <Math tex="东西 < -a" /> <strong>或</strong> <Math tex="东西 > a" /></p>
-                </div>
-                <p className="text-sm text-gray-600 mb-2">就是"东西"要么<strong>小于 -a</strong>，要么<strong>大于 a</strong>，绝对值就没了！</p>
-
-                <div className="bg-white rounded-lg p-3 space-y-3">
-                  <div>
-                    <p className="text-sm font-bold text-gray-700">例1：<Math tex="|x| > 3" /></p>
-                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="x < -3" /> 或 <Math tex="x > 3" /></p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-2">
-                    <p className="text-sm font-bold text-gray-700">例2：<Math tex="|x - 3| \geq 2" /></p>
-                    <p className="text-sm text-gray-600 pl-2">去绝对值 → <Math tex="x - 3 \leq -2" /> 或 <Math tex="x - 3 \geq 2" /></p>
-                    <p className="text-sm text-gray-600 pl-2">各自 +3 → <Math tex="x \leq 1" /> 或 <Math tex="x \geq 5" />　✓</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* 规则3: 两边都是绝对值 */}
-              <div className="bg-gray-50 rounded-lg p-4 mb-3">
-                <p className="font-bold text-gray-800 mb-2">规则③ 两边都是绝对值 → <strong className="text-purple-600">两边平方</strong>，绝对值全没</p>
-                <div className="bg-white rounded-lg p-3 mb-2">
-                  <p className="text-center text-sm"><Math tex="|A| < |B|" /> → <Math tex="A^2 < B^2" />（两边平方，绝对值消失）</p>
-                </div>
-                <p className="text-sm text-gray-600 mb-1">因为 <Math tex="|A|^2 = A^2" />，平方之后绝对值自动没了，变成普通不等式！</p>
-                <p className="text-sm text-gray-600 mb-2">其实规则①②也能用平方法，只要<strong>两边都 ≥ 0</strong> 就行（绝对值和正数都 ≥ 0，所以放心平方）</p>
-                <p className="text-sm text-amber-700 mb-2">⚠️ <strong>不能平方的情况：</strong>一边是普通表达式（可能为负），比如 |x| {'>'} 2x-1，右边可能是负数，不能直接平方</p>
-
-                <div className="bg-white rounded-lg p-3 space-y-3">
-                  <div>
-                    <p className="text-sm font-bold text-gray-700">例1：<Math tex="|x - 9| < |x - 1|" /></p>
-                    <p className="text-sm text-gray-600 pl-2">两边平方 → <Math tex="(x-9)^2 < (x-1)^2" /></p>
-                    <p className="text-sm text-gray-600 pl-2">展开 → <Math tex="x^2 - 18x + 81 < x^2 - 2x + 1" /></p>
-                    <p className="text-sm text-gray-600 pl-2">两边都有 <Math tex="x^2" />，消掉 → <Math tex="-18x + 81 < -2x + 1" /></p>
-                    <p className="text-sm text-gray-600 pl-2">移项：-18x + 2x {'<'} 1 - 81 → <Math tex="-16x < -80" /></p>
-                    <p className="text-sm text-gray-600 pl-2">先去负号：两边×(-1)，符号反向 → <Math tex="16x > 80" /></p>
-                    <p className="text-sm text-gray-600 pl-2">两边÷16 → <Math tex="x > 5" />　✓</p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-2">
-                    <p className="text-sm font-bold text-gray-700">例2：<Math tex="|2x + 1| \geq |x - 3|" /></p>
-                    <p className="text-sm text-gray-600 pl-2">两边平方 → <Math tex="(2x+1)^2 \geq (x-3)^2" /></p>
-                    <p className="text-sm text-gray-600 pl-2">展开 → <Math tex="4x^2 + 4x + 1 \geq x^2 - 6x + 9" /></p>
-                    <p className="text-sm text-gray-600 pl-2">全部移到左边 → <Math tex="4x^2 - x^2 + 4x + 6x + 1 - 9 \geq 0" /></p>
-                    <p className="text-sm text-gray-600 pl-2">合并 → <Math tex="3x^2 + 10x - 8 \geq 0" /></p>
-                    <p className="text-sm text-gray-600 pl-2">因式分解 → <Math tex="(3x - 2)(x + 4) \geq 0" /></p>
-                    <p className="text-sm text-gray-600 pl-2">大于取两边 → <Math tex="x \leq -4" /> 或 <Math tex="x \geq \tfrac{2}{3}" />　✓</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* 口诀 */}
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-3">
-                <p className="font-bold text-orange-800 mb-1">三条规则汇总：</p>
-                <p className="text-orange-700"><strong>{'<'} → 夹中间</strong>：-a {'<'} 东西 {'<'} a</p>
-                <p className="text-orange-700"><strong>{'>'} → 拆两边</strong>：东西 {'<'} -a 或 东西 {'>'} a</p>
-                <p className="text-orange-700"><strong>两边都有 | | → 平方</strong>：变成普通多项式不等式</p>
-                <p className="text-orange-600 text-xs mt-2">口诀：<strong>小于夹中间，大于拆两边，都有就平方</strong></p>
-              </div>
-
-              {/* 做题步骤 */}
-              <div className="bg-green-50 border-2 border-green-300 rounded-xl p-4">
-                <p className="font-bold text-green-800 mb-2">做题就两步：</p>
-                <div className="space-y-1.5 text-sm text-green-700">
-                  <p><strong>① 去绝对值：</strong>看是 {'<'} 还是 {'>'}，用对应规则去掉 | |</p>
+              {/* 做题两步 */}
+              <div className="bg-orange-50 border-2 border-orange-300 rounded-xl p-3 mb-3">
+                <p className="font-bold text-orange-800 mb-2">做题就两步：</p>
+                <div className="space-y-1.5 text-orange-700">
+                  <p><strong>① 去绝对值：</strong>看是 {'<'} 还是 {'>'}，用上面的规则去掉 | |</p>
                   <p><strong>② 解普通不等式：</strong>移项、化简，得出答案</p>
                 </div>
-                <p className="text-green-600 text-xs mt-2 font-bold">绝对值不等式 = 去绝对值 + 解普通不等式，没了！</p>
+                <p className="text-orange-600 text-xs mt-2 font-bold">绝对值不等式 = 去绝对值 + 解普通不等式，没了！</p>
               </div>
+
+              {/* 口诀速查 */}
+              <div className="bg-gray-50 rounded-xl p-3 mb-3">
+                <p className="font-bold text-gray-800 mb-2">口诀速查</p>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-white rounded-lg p-3 text-center">
+                    <p className="font-bold text-green-700">{'<'} → 夹中间</p>
+                    <p className="text-gray-500 text-sm mt-1"><Math tex="-a < 东西 < a" /></p>
+                  </div>
+                  <div className="bg-white rounded-lg p-3 text-center">
+                    <p className="font-bold text-red-600">{'>'} → 拆两边</p>
+                    <p className="text-gray-500 text-sm mt-1">东西{'<'}-a 或 东西{'>'}a</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 快速示范 */}
+              <div className="bg-gray-50 rounded-xl p-3 mb-2">
+                <p className="font-bold text-gray-800 mb-2">快速示范</p>
+                <div className="space-y-2">
+                  <div className="bg-white rounded-lg p-3">
+                    <p className="font-bold text-gray-700 mb-1"><Math tex="|x - 1| < 3" /></p>
+                    <div className="pl-3 border-l-2 border-green-400 space-y-1">
+                      <p className="text-gray-600">{'<'} → 夹中间 → <Math tex="-3 < x - 1 < 3" /></p>
+                      <p className="text-gray-600">三边同时 +1 → <Math tex="-2 < x < 4" /> ✓</p>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg p-3">
+                    <p className="font-bold text-gray-700 mb-1"><Math tex="|x + 2| > 5" /></p>
+                    <div className="pl-3 border-l-2 border-red-400 space-y-1">
+                      <p className="text-gray-600">{'>'} → 拆两边 → <Math tex="x + 2 < -5" /> 或 <Math tex="x + 2 > 5" /></p>
+                      <p className="text-gray-600">各自 -2 → <Math tex="x < -7" /> 或 <Math tex="x > 3" /> ✓</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 深层理解（距离法）- 折叠 */}
+              <div className="bg-purple-50 border border-purple-200 rounded-xl p-3 mb-2">
+                <p className="font-bold text-purple-800 mb-1">💡 想知道"为什么"？（选看）</p>
+                <p className="text-purple-700 text-sm mb-2">|x - a| 的本质是 x 到 a 在数轴上的<strong>距离</strong>。</p>
+                <div className="text-purple-600 text-sm space-y-1">
+                  <p>• |x-3| {'<'} 2 = "x 到 3 的距离小于 2" → x 在 3 附近 → <Math tex="1 < x < 5" /></p>
+                  <p>• |x| {'>'} 3 = "x 到 0 的距离大于 3" → x 离 0 很远 → <Math tex="x < -3" /> 或 <Math tex="x > 3" /></p>
+                </div>
+                <p className="text-purple-500 text-xs mt-2">理解了距离，"夹中间"和"拆两边"就不用背了——近就在中间，远就在两边，画数轴一看便知。</p>
+              </div>
+
+              <p className="text-lg font-bold text-gray-800 mb-0">实战演练（按题型分类，覆盖所有变形）</p>
+
+              <PageBreak />
+
+              {/* 实战演练 - 按题型分类 */}
+              <div className="space-y-3 mb-3">
+                <p className="text-green-700 font-bold">类型一：{'<'} / ≤ → 夹中间</p>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">① <Math tex="|x| < 5" /><span className="text-gray-400 text-sm ml-2">最基础</span></p>
+                  <div className="pl-3 border-l-2 border-green-400">
+                    <p>夹中间 → <Math tex="-5 < x < 5" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">② <Math tex="|x - 2| \leq 3" /><span className="text-gray-400 text-sm ml-2">| | 里是 x-a</span></p>
+                  <div className="pl-3 border-l-2 border-green-400 space-y-1">
+                    <p>夹中间 → <Math tex="-3 \leq x - 2 \leq 3" /></p>
+                    <p>三边 +2 → <Math tex="-1 \leq x \leq 5" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">③ <Math tex="|x + 4| < 1" /><span className="text-gray-400 text-sm ml-2">| | 里是 x+a</span></p>
+                  <div className="pl-3 border-l-2 border-green-400 space-y-1">
+                    <p>夹中间 → <Math tex="-1 < x + 4 < 1" /></p>
+                    <p>三边 -4 → <Math tex="-5 < x < -3" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">④ <Math tex="|2x - 6| < 4" /><span className="text-gray-400 text-sm ml-2">| | 里有系数</span></p>
+                  <div className="pl-3 border-l-2 border-green-400 space-y-1">
+                    <p>夹中间 → <Math tex="-4 < 2x - 6 < 4" /></p>
+                    <p>三边 +6 → <Math tex="2 < 2x < 10" /> → 三边 ÷2 → <Math tex="1 < x < 5" /></p>
+                  </div>
+                </div>
+
+                <p className="text-red-600 font-bold mt-1">类型二：{'>'} / ≥ → 拆两边</p>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">⑤ <Math tex="|x| > 2" /><span className="text-gray-400 text-sm ml-2">最基础</span></p>
+                  <div className="pl-3 border-l-2 border-red-400">
+                    <p>拆两边 → <Math tex="x < -2" /> 或 <Math tex="x > 2" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">⑥ <Math tex="|x - 5| \geq 3" /><span className="text-gray-400 text-sm ml-2">| | 里是 x-a</span></p>
+                  <div className="pl-3 border-l-2 border-red-400 space-y-1">
+                    <p>拆两边 → <Math tex="x - 5 \leq -3" /> 或 <Math tex="x - 5 \geq 3" /></p>
+                    <p>各自 +5 → <Math tex="x \leq 2" /> 或 <Math tex="x \geq 8" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">⑦ <Math tex="|x + 1| > 4" /><span className="text-gray-400 text-sm ml-2">| | 里是 x+a</span></p>
+                  <div className="pl-3 border-l-2 border-red-400 space-y-1">
+                    <p>拆两边 → <Math tex="x + 1 < -4" /> 或 <Math tex="x + 1 > 4" /></p>
+                    <p>各自 -1 → <Math tex="x < -5" /> 或 <Math tex="x > 3" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">⑧ <Math tex="|3x + 9| > 6" /><span className="text-gray-400 text-sm ml-2">| | 里有系数</span></p>
+                  <div className="pl-3 border-l-2 border-red-400 space-y-1">
+                    <p>拆两边 → <Math tex="3x + 9 < -6" /> 或 <Math tex="3x + 9 > 6" /></p>
+                    <p>各自 -9 → <Math tex="3x < -15" /> 或 <Math tex="3x > -3" /></p>
+                    <p>各自 ÷3 → <Math tex="x < -5" /> 或 <Math tex="x > -1" /></p>
+                  </div>
+                </div>
+
+                <p className="text-orange-600 font-bold mt-1">类型三：先变形，再去绝对值</p>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">⑨ <Math tex="|x - 1| + 2 \leq 5" /><span className="text-gray-400 text-sm ml-2">移项</span></p>
+                  <div className="pl-3 border-l-2 border-orange-400 space-y-1">
+                    <p>先移项 → <Math tex="|x - 1| \leq 3" /></p>
+                    <p>夹中间 → <Math tex="-3 \leq x - 1 \leq 3" /> → 三边 +1 → <Math tex="-2 \leq x \leq 4" /></p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">⑩ <Math tex="2|x + 3| - 1 < 7" /><span className="text-gray-400 text-sm ml-2">系数在外+移项</span></p>
+                  <div className="pl-3 border-l-2 border-orange-400 space-y-1">
+                    <p>先移项 → <Math tex="2|x + 3| < 8" /> → 两边 ÷2 → <Math tex="|x + 3| < 4" /></p>
+                    <p>夹中间 → <Math tex="-4 < x + 3 < 4" /> → 三边 -3 → <Math tex="-7 < x < 1" /></p>
+                  </div>
+                </div>
+              </div>
+
             </div>
+
+            <PageBreak />
 
             <PracticeCard questions={logicPrereqPractice2} />
 
@@ -346,6 +442,8 @@ export function LogicPrereqPage() {
               </div>
             </div>
 
+            <PageBreak />
+
             {/* Step 4: 怎么快速判断 */}
             <div>
               <p className="font-bold mb-2">遇到题怎么判断？两个绝招</p>
@@ -369,12 +467,12 @@ export function LogicPrereqPage() {
               <p className="text-gray-500 text-xs mt-1">就这么简单，箭头方向就是推出方向</p>
             </div>
 
-            <PracticeCard questions={logicPrereqPractice3} title="✏️ 即时练习（想想范围大小就行）" />
-
             <CalloutCard variant="warning" title="易错点">
-              <p><strong>方向别搞反</strong>：问“A→B”就是问“A 成立时 B 是否一定成立”，不是反过来</p>
+              <p><strong>方向别搞反</strong>：问"A→B"就是问"A 成立时 B 是否一定成立"，不是反过来</p>
               <p>找反例只需要<strong>一个</strong>就够了（狗是动物但不是猫 → 一个反例搞定）</p>
             </CalloutCard>
+
+            <PracticeCard questions={logicPrereqPractice3} title="✏️ 即时练习（想想范围大小就行）" />
           </div>
         </Collapsible>
       </section>
@@ -385,7 +483,7 @@ export function LogicPrereqPage() {
       <section id="lp-cheatsheet" className="mb-6 scroll-mt-4">
         <Collapsible title="📌 公式速查表" storageKey="logic-prereq:cheatsheet">
           <p className="text-xs text-gray-500 mb-3">考前翻一翻，30秒回忆全部知识点</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3">
 
             {/* 卡片1：子集 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
@@ -393,6 +491,7 @@ export function LogicPrereqPage() {
               <div className="space-y-1.5 text-sm">
                 <p><Math tex="A \subseteq B" /> 子集（可以相等）</p>
                 <p><Math tex="A \subset B" /> 真子集（不能相等）</p>
+                <p><Math tex="\varnothing \subset A" /> 空集是任何非空集合的真子集</p>
                 <p className="text-blue-600 text-xs font-bold mt-2">方法：画数轴看谁包含谁</p>
               </div>
             </div>
@@ -401,7 +500,9 @@ export function LogicPrereqPage() {
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
               <p className="font-bold text-orange-800 mb-2 text-sm">一元二次不等式</p>
               <div className="space-y-1.5 text-sm">
-                <p>{'>'} 0 → <strong>取两边</strong>　{'<'} 0 → <strong>取中间</strong></p>
+                <p>{'>'} 0 → <strong>取两边</strong>（远离两根）</p>
+                <p>{'<'} 0 → <strong>取中间</strong>（两根之间）</p>
+                <p>先因式分解找根，再定区间</p>
                 <p className="text-orange-600 text-xs font-bold mt-2">口诀：大于取两边，小于取中间</p>
               </div>
             </div>
@@ -411,8 +512,9 @@ export function LogicPrereqPage() {
               <p className="font-bold text-purple-800 mb-2 text-sm">绝对值不等式</p>
               <div className="space-y-1.5 text-sm">
                 <p><Math tex="|x| < a" /> → 夹中间：<Math tex="-a < x < a" /></p>
-                <p><Math tex="|x| > a" /> → 取两边</p>
+                <p><Math tex="|x| > a" /> → 拆两边：<Math tex="x<-a" /> 或 <Math tex="x>a" /></p>
                 <p><Math tex="|x\!-\!b| < a" /> → 中心 b，半径 a</p>
+                <p>做题两步：去绝对值 → 解普通不等式</p>
                 <p className="text-purple-600 text-xs font-bold mt-2">本质：到某点的距离</p>
               </div>
             </div>
@@ -422,10 +524,25 @@ export function LogicPrereqPage() {
               <p className="font-bold text-green-800 mb-2 text-sm">推出判断</p>
               <div className="space-y-1.5 text-sm">
                 <p><Math tex="p \Rightarrow q \;\Leftrightarrow\;" /> p的集合 <Math tex="\subseteq" /> q的集合</p>
-                <p>小范围 → 大范围　<strong className="text-green-600">✓</strong></p>
-                <p>大范围 → 小范围　<strong className="text-red-600">✗</strong></p>
+                <p>小范围 → 大范围　<strong className="text-green-600">✓ 能推出</strong></p>
+                <p>大范围 → 小范围　<strong className="text-red-600">✗ 推不出</strong></p>
                 <p className="text-green-600 text-xs font-bold mt-2">绝招：想范围大小 / 找反例</p>
               </div>
+            </div>
+          </div>
+
+          {/* 易混淆对比 */}
+          <div className="mt-3 bg-red-50 border border-red-200 rounded-xl p-4">
+            <p className="font-bold text-red-800 mb-2 text-sm">易混淆对比速查</p>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
+              <p>{'<'} 用<strong>开区间</strong> ( )</p>
+              <p>≤ 用<strong>闭区间</strong> [ ]</p>
+              <p><Math tex="x^2\!>\!0" /> 取两边（远离根）</p>
+              <p><Math tex="|x|\!>\!a" /> 拆两边（远离中心）</p>
+              <p><Math tex="x^2\!<\!0" /> 取中间（两根之间）</p>
+              <p><Math tex="|x|\!<\!a" /> 夹中间（靠近中心）</p>
+              <p>p→q：看 p 是否<strong>更小</strong></p>
+              <p>A⊂B：A 在 B <strong>里面</strong></p>
             </div>
           </div>
         </Collapsible>
@@ -443,6 +560,91 @@ export function LogicPrereqPage() {
         </h2>
         <QuizPanel module="logic-prereq" questions={logicPrereqQuizQuestions} title="前置知识自测" description="8道选择题，覆盖子集关系、解不等式、推出判断全部知识点" />
       </section>
+
+      {isPrinting && printOptions.showAnswers && (
+        <>
+          <PageBreak label="答案与解析" />
+          <section className="mb-8 print-answers">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+
+            {[
+              { label: '一、集合包含关系 — 即时练习', questions: logicPrereqPractice1 },
+              { label: '二、解不等式 — 即时练习', questions: logicPrereqPractice2 },
+            ].map((section) => (
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
+                  {section.questions.map((q, idx) => {
+                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
+                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
+                    const answerTex = isSimpleFractionAnswer
+                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
+                      : q.correctAnswer;
+                    return (
+                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
+                        <div className="min-w-0">
+                          <p className="font-bold text-gray-900">
+                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
+                          </p>
+                          {q.explanationLatex && (
+                            <div className="text-gray-700 mt-1">
+                              <Math tex={q.explanationLatex} />
+                            </div>
+                          )}
+                          {q.explanation && (
+                            <p className="text-gray-700 mt-1">{q.explanation}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </section>
+
+          <PageBreak />
+
+          <section className="mb-8 print-answers">
+            {[
+              { label: '三、基本推理 — 即时练习', questions: logicPrereqPractice3 },
+              { label: '选择题自测', questions: logicPrereqQuizQuestions },
+            ].map((section) => (
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
+                  {section.questions.map((q, idx) => {
+                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
+                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
+                    const answerTex = isSimpleFractionAnswer
+                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
+                      : q.correctAnswer;
+                    return (
+                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
+                        <div className="min-w-0">
+                          <p className="font-bold text-gray-900">
+                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
+                          </p>
+                          {q.explanationLatex && (
+                            <div className="text-gray-700 mt-1">
+                              <Math tex={q.explanationLatex} />
+                            </div>
+                          )}
+                          {q.explanation && (
+                            <p className="text-gray-700 mt-1">{q.explanation}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </section>
+        </>
+      )}
 
       </LessonLayout>
     </div>
