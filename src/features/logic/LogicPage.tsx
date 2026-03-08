@@ -67,63 +67,6 @@ export function LogicPage() {
         </div>
       </div>
 
-      {/* 必背清单 */}
-      <div className="bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-2xl p-5 mb-6">
-        <p className="font-black text-red-800 text-lg mb-1">必背清单：只背这 7 条，高考就够了</p>
-        <p className="text-red-600 text-sm mb-4">不用理解为什么，死记硬背就行，考试直接套</p>
-        <div className="space-y-2 text-sm">
-          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">1</span>
-            <div>
-              <p className="font-bold text-gray-800">命题 = 能判断真假的陈述句</p>
-              <p className="text-gray-500">疑问句、祈使句、感叹句都不是。含未知数的开放语句也不是。</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">2</span>
-            <div>
-              <p className="font-bold text-gray-800">逆否命题与原命题同真同假</p>
-              <p className="text-gray-500">原命题难证？直接证逆否命题，效果一样。</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">3</span>
-            <div>
-              <p className="font-bold text-gray-800">谁小谁充分，谁大谁必要</p>
-              <p className="text-gray-500">集合 A ⊂ B → A 小 → p 是 q 的充分条件。这一条能解 90% 的充要条件题。</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">4</span>
-            <div>
-              <p className="font-bold text-gray-800">充要条件做题三步：解范围 → 比大小 → 套公式</p>
-              <p className="text-gray-500">不要想"谁推出谁"，直接解不等式画数轴比较。</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">5</span>
-            <div>
-              <p className="font-bold text-gray-800">量词否定：∀ ↔ ∃ 互换，条件取反</p>
-              <p className="text-gray-500">"所有"变"存在"，"存在"变"所有"，然后 {'>'} 变 ≤，{'<'} 变 ≥，= 变 ≠。</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">6</span>
-            <div>
-              <p className="font-bold text-gray-800">且（∧）：全真才真，有假就假</p>
-              <p className="text-gray-500">像严格老师：所有条件都满足才算通过。</p>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">7</span>
-            <div>
-              <p className="font-bold text-gray-800">或（∨）：有真就真，全假才假</p>
-              <p className="text-gray-500">像宽松老师：有一个条件满足就算通过。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <LessonLayout progressItems={items} onToggle={toggle}>
           {/* Part 1: Propositions */}
           <section id="logic-prop" className="mb-8 scroll-mt-4">
@@ -368,89 +311,69 @@ export function LogicPage() {
             </Collapsible>
 
             <Collapsible title="拆题实战：遇到题先判断用哪种方法" defaultOpen storageKey="logic:decompose">
-              <div className="bg-gradient-to-b from-violet-50 to-purple-50 border-2 border-violet-300 rounded-xl p-6 mb-6">
-                <p className="font-black text-violet-800 text-lg mb-4">第零步：先看题目长啥样</p>
-                <div className="space-y-4">
-                  <div className="bg-white rounded-xl p-5 border border-violet-200">
-                    <p className="font-bold text-violet-800 text-lg mb-2">类型 A：只有一个变量 x</p>
-                    <p className="text-gray-600 mb-2">p 和 q 都是关于 x 的不等式或等式</p>
-                    <p className="text-violet-600 font-bold text-lg">→ 用集合法</p>
+              <div className="bg-violet-50 border border-violet-200 rounded-lg p-4 mb-4">
+                <p className="font-bold text-violet-800 mb-3">第零步：先看题目长啥样</p>
+                <div className="space-y-3 text-sm">
+                  <div className="bg-white rounded-lg p-3 border border-violet-100">
+                    <p className="font-bold text-violet-800 mb-1">类型 A：只有一个变量 x</p>
+                    <p className="text-gray-600">p 和 q 都是关于 x 的不等式或等式 → <strong className="text-violet-600">用集合法</strong></p>
                   </div>
-                  <div className="bg-white rounded-xl p-5 border border-violet-200">
-                    <p className="font-bold text-violet-800 text-lg mb-2">类型 B：有两个变量 a、b 或者文字题</p>
-                    <p className="text-gray-600 mb-2">没法解出一个范围来比大小</p>
-                    <p className="text-violet-600 font-bold text-lg">→ 用推理法</p>
+                  <div className="bg-white rounded-lg p-3 border border-violet-100">
+                    <p className="font-bold text-violet-800 mb-1">类型 B：有两个变量 a、b 或者文字题</p>
+                    <p className="text-gray-600">没法解出一个范围来比大小 → <strong className="text-violet-600">用推理法</strong></p>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="bg-white border-2 border-blue-200 rounded-xl p-6">
-                  <p className="font-bold text-blue-800 text-lg mb-4">实战 1（集合法）</p>
-                  <p className="text-gray-700 text-lg mb-4">题目：p: x² {'<'} 4，q: x {'<'} 2</p>
+              <div className="space-y-4 text-sm">
+                <div className="bg-white border border-blue-200 rounded-lg p-4">
+                  <p className="font-bold text-blue-800 mb-2">实战 1（集合法）</p>
+                  <p className="text-gray-700 mb-3">题目：p: x² {'<'} 4，q: x {'<'} 2</p>
 
-                  <div className="space-y-4">
-                    <div className="bg-blue-50 rounded-xl p-4">
-                      <p className="font-bold text-blue-800 text-lg mb-2">第 1 步：解范围</p>
-                      <p className="text-gray-700">p: x² {'<'} 4</p>
-                      <p className="text-gray-700">解出来：-2 {'<'} x {'<'} 2</p>
-                      <p className="text-gray-700 font-bold">所以 A = (-2, 2)</p>
-                      <p className="text-gray-700 mt-3">q: x {'<'} 2</p>
-                      <p className="text-gray-700 font-bold">所以 B = (-∞, 2)</p>
+                  <div className="space-y-2">
+                    <div className="bg-blue-50 rounded-lg p-3">
+                      <p className="font-bold text-blue-800 mb-1">第 1 步：解范围</p>
+                      <p className="text-gray-700">p: x² {'<'} 4 → -2 {'<'} x {'<'} 2，所以 <strong>A = (-2, 2)</strong></p>
+                      <p className="text-gray-700">q: x {'<'} 2，所以 <strong>B = (-∞, 2)</strong></p>
                     </div>
-
-                    <div className="bg-blue-50 rounded-xl p-4">
-                      <p className="font-bold text-blue-800 text-lg mb-2">第 2 步：比大小</p>
-                      <p className="text-gray-700">A = (-2, 2)，B = (-∞, 2)</p>
-                      <p className="text-gray-700 font-bold mt-2">A 在 B 里面，A 更小</p>
+                    <div className="bg-blue-50 rounded-lg p-3">
+                      <p className="font-bold text-blue-800 mb-1">第 2 步：比大小</p>
+                      <p className="text-gray-700">A = (-2, 2)，B = (-∞, 2) → <strong>A 在 B 里面，A 更小</strong></p>
                     </div>
-
-                    <div className="bg-blue-50 rounded-xl p-4">
-                      <p className="font-bold text-blue-800 text-lg mb-2">第 3 步：套公式</p>
-                      <p className="text-gray-700">A 小 → 谁小谁充分</p>
-                      <p className="text-blue-800 font-black text-lg mt-2">答案：p 是 q 的充分不必要条件 ✅</p>
+                    <div className="bg-blue-50 rounded-lg p-3">
+                      <p className="font-bold text-blue-800 mb-1">第 3 步：套公式</p>
+                      <p className="text-gray-700">A 小 → 谁小谁充分 → <strong className="text-blue-800">p 是 q 的充分不必要条件 ✅</strong></p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white border-2 border-orange-200 rounded-xl p-6">
-                  <p className="font-bold text-orange-800 text-lg mb-2">实战 2（推理法）</p>
-                  <p className="text-orange-600 mb-4">2022 新高考 I 卷真题</p>
-                  <p className="text-gray-700 text-lg mb-4">p: a {'>'} 0 且 b {'>'} 0，q: a + b {'>'} 0</p>
-                  <p className="text-gray-500 mb-4">两个变量 → 没法解范围 → 用推理法</p>
+                <div className="bg-white border border-orange-200 rounded-lg p-4">
+                  <p className="font-bold text-orange-800 mb-1">实战 2（推理法）</p>
+                  <p className="text-orange-600 text-xs mb-2">2022 新高考 I 卷真题</p>
+                  <p className="text-gray-700 mb-3">p: a {'>'} 0 且 b {'>'} 0，q: a + b {'>'} 0（两个变量 → 用推理法）</p>
 
-                  <div className="space-y-4">
-                    <div className="bg-orange-50 rounded-xl p-4">
-                      <p className="font-bold text-orange-800 text-lg mb-2">第 1 步：正推 p → q</p>
-                      <p className="text-gray-700">假设 a {'>'} 0 且 b {'>'} 0</p>
-                      <p className="text-gray-700">两个正数加一起，肯定大于 0</p>
-                      <p className="text-orange-800 font-bold mt-2">所以 q 成立 ✓ 推得出</p>
+                  <div className="space-y-2">
+                    <div className="bg-orange-50 rounded-lg p-3">
+                      <p className="font-bold text-orange-800 mb-1">第 1 步：正推 p → q</p>
+                      <p className="text-gray-700">a {'>'} 0 且 b {'>'} 0 → a+b 肯定 {'>'} 0 → <strong className="text-green-700">q 成立 ✓</strong></p>
                     </div>
-
-                    <div className="bg-orange-50 rounded-xl p-4">
-                      <p className="font-bold text-orange-800 text-lg mb-2">第 2 步：反推 q → p</p>
-                      <p className="text-gray-700">假设 a + b {'>'} 0，能推出 a {'>'} 0 且 b {'>'} 0 吗？</p>
-                      <p className="text-gray-700 mt-2">找反例：a = 3，b = -1</p>
-                      <p className="text-gray-700">a + b = 2 {'>'} 0 ✓ 但 b = -1 {'<'} 0</p>
-                      <p className="text-orange-800 font-bold mt-2">所以 p 不一定成立 ✗ 推不出</p>
+                    <div className="bg-orange-50 rounded-lg p-3">
+                      <p className="font-bold text-orange-800 mb-1">第 2 步：反推 q → p</p>
+                      <p className="text-gray-700">反例：a=3, b=-1，a+b=2{'>'}0 ✓ 但 b{'<'}0 → <strong className="text-red-600">p 不一定成立 ✗</strong></p>
                     </div>
-
-                    <div className="bg-orange-50 rounded-xl p-4">
-                      <p className="font-bold text-orange-800 text-lg mb-2">第 3 步：查表</p>
-                      <p className="text-gray-700">p→q ✓，q→p ✗</p>
-                      <p className="text-orange-800 font-black text-lg mt-2">答案：充分不必要条件，选 A ✅</p>
+                    <div className="bg-orange-50 rounded-lg p-3">
+                      <p className="font-bold text-orange-800 mb-1">第 3 步：查表</p>
+                      <p className="text-gray-700">p→q ✓，q→p ✗ → <strong className="text-orange-800">充分不必要条件，选 A ✅</strong></p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 bg-slate-900 text-white rounded-xl p-6 text-center">
-                <p className="text-amber-400 font-bold text-lg mb-3">推理法万能模板</p>
-                <p className="text-lg">不知道用啥方法？就用这三步：</p>
-                <div className="space-y-2 mt-3 text-lg">
+              <div className="mt-4 bg-slate-900 text-white rounded-lg p-4 text-center text-sm">
+                <p className="text-amber-400 font-bold mb-2">推理法万能模板</p>
+                <div className="space-y-1">
                   <p>1. 假设 p 成立，看 q 是否一定成立</p>
-                  <p>2. 假设 q 成立，看 p 是否一定成立</p>
-                  <p className="text-gray-400">（推不出的时候，举一个反例就行）</p>
+                  <p>2. 假设 q 成立，看 p 是否一定成立<span className="text-gray-400">（推不出就举反例）</span></p>
                   <p>3. 查四种情况表，得出答案</p>
                 </div>
               </div>
