@@ -75,7 +75,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
   };
 
   const isActive = (path: string) =>
-    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+    path === '/'
+      ? location.pathname === '/'
+      : location.pathname === path || location.pathname.startsWith(path + '/');
 
   const sidebar = (
     <div
