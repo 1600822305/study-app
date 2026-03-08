@@ -1,4 +1,4 @@
 export { PageHeader } from './PageHeader';
 export { PracticeCard } from './PracticeCard';
-export { WarningCard } from './WarningCard';
+export { CalloutCard } from './CalloutCard';
 export { LessonLayout } from './LessonLayout';

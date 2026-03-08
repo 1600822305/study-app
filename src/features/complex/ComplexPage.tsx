@@ -1,7 +1,7 @@
-import { Lightbulb, AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Vector, Text as MafsText } from 'mafs';
 
-import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
 import { useProgress } from '@/hooks';
 import { complexQuizQuestions } from './data/quiz';
@@ -97,11 +97,10 @@ export function ComplexPage() {
               <p className="text-gray-700">1. <Math tex="i^2" /> = ____　答案：<strong>-1</strong></p>
               <p className="text-gray-700">2. x² = -1 在实数范围内有解吗？　答案：<strong>没有</strong>，因为实数的平方 ≥ 0</p>
             </div>
-            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-              <p className="text-gray-700">• <strong>i² = -1</strong>，不是 i = -1（i 本身不等于 -1）</p>
-              <p className="text-gray-700">• i 不在数轴上，不能和实数比大小</p>
-            </div>
+            <CalloutCard variant="warning" title="易错点" className="mt-3">
+              <p>• <strong>i² = -1</strong>，不是 i = -1（i 本身不等于 -1）</p>
+              <p>• i 不在数轴上，不能和实数比大小</p>
+            </CalloutCard>
           </section>
 
           {/* Part 2: What */}
@@ -235,11 +234,10 @@ export function ComplexPage() {
               <p className="text-gray-700">1. 已知 <Math tex="(3x-6) + (2y+4)i = 0" />，求 x, y　答案：x = <strong>2</strong>，y = <strong>-2</strong></p>
               <p className="text-gray-700">2. 已知 <Math tex="a+bi = 2-3i" />，求 a, b　答案：a = <strong>2</strong>，b = <strong>-3</strong></p>
             </div>
-            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-              <p className="text-gray-700">• <strong>虚数不能比大小！</strong> 3+2i 和 1+5i 谁大？没有意义，只有实数才能比大小</p>
-              <p className="text-gray-700">• 复数等于0 ⇔ <strong>实部和虚部都等于0</strong></p>
-            </div>
+            <CalloutCard variant="warning" title="易错点" className="mt-3">
+              <p>• <strong>虚数不能比大小！</strong> 3+2i 和 1+5i 谁大？没有意义，只有实数才能比大小</p>
+              <p>• 复数等于0 ⇔ <strong>实部和虚部都等于0</strong></p>
+            </CalloutCard>
           </section>
 
           {/* Part 4: Operations */}
@@ -252,16 +250,12 @@ export function ComplexPage() {
               <SpeakButton text={complexNarrations.operationIntro} />
             </h2>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4 flex items-start gap-3">
-              <Lightbulb size={20} className="text-amber-600 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-bold text-amber-800 text-sm">核心思想（第一性原理）</p>
-                <p className="text-amber-700 text-sm mt-1">
-                  把 <Math tex="i" /> 当成一个字母（像 <Math tex="x" /> 一样），按多项式运算规则来算，遇到 <Math tex="i^2" /> 就替换成 <Math tex="-1" />。
-                  <strong>就这一条，你就会算所有复数运算了。</strong>
-                </p>
-              </div>
-            </div>
+            <CalloutCard variant="tip" title="核心思想（第一性原理）" className="mb-4">
+              <p>
+                把 <Math tex="i" /> 当成一个字母（像 <Math tex="x" /> 一样），按多项式运算规则来算，遇到 <Math tex="i^2" /> 就替换成 <Math tex="-1" />。
+                <strong>就这一条，你就会算所有复数运算了。</strong>
+              </p>
+            </CalloutCard>
 
             <Collapsible title="加法和减法" defaultOpen storageKey="complex:add-sub" headerExtra={<SpeakButton text={complexNarrations.addSub} />}>
               <p className="text-sm text-gray-700 mb-3"><strong>规则：实部加实部，虚部加虚部</strong></p>
@@ -343,9 +337,9 @@ export function ComplexPage() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-3 text-sm">
-                  <p className="text-amber-800">💡 <strong>套路：</strong>高次幂 → 先拆成平方的幂 → 用已知结论代入 → 化简。遇到 <Math tex="i^2" /> 就换成 <Math tex="-1" />，万变不离其宗。</p>
-                </div>
+                <CalloutCard variant="tip" icon={null} className="mt-3">
+                  <p>💡 <strong>套路：</strong>高次幂 → 先拆成平方的幂 → 用已知结论代入 → 化简。遇到 <Math tex="i^2" /> 就换成 <Math tex="-1" />，万变不离其宗。</p>
+                </CalloutCard>
               </div>
             </Collapsible>
 
@@ -456,21 +450,20 @@ export function ComplexPage() {
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math tex="|z| = |a + bi| = \sqrt{a^2 + b^2}" display />
               </div>
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-sm">
-                <p className="font-bold text-amber-800 mb-2">为什么是这个公式？</p>
-                <p className="text-gray-700 mb-2">
+              <CalloutCard variant="tip" title="为什么是这个公式？" className="mb-4">
+                <p className="mb-2">
                   复数 <Math tex="z = a + bi" /> 在复平面上对应点 <Math tex="(a, b)" />。
                   模就是这个点到原点的<strong>距离</strong>，用勾股定理：
                 </p>
                 <Math tex="|z| = \sqrt{a^2 + b^2}" display />
-                <p className="text-gray-700 mt-2 mb-1">
+                <p className="mt-2 mb-1">
                   还可以用共轭来推：
                 </p>
                 <Math tex="z \cdot \bar{z} = (a+bi)(a-bi) = a^2 + b^2" display />
-                <p className="text-gray-700 mt-1">
+                <p className="mt-1">
                   所以 <Math tex="|z|^2 = z \cdot \bar{z}" />，两边开方就得到 <Math tex="|z| = \sqrt{a^2 + b^2}" />。
                 </p>
-              </div>
+              </CalloutCard>
               <div className="space-y-3 text-sm">
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="font-bold mb-1">例1：</p>
@@ -503,12 +496,11 @@ export function ComplexPage() {
               <p className="text-gray-700">3. <Math tex="|3+4i|" /> = ____　答案：<strong>5</strong></p>
               <p className="text-gray-700">4. <Math tex="i^{67}" /> = ____　答案：67÷4余3 → <strong><Math tex="-i" /></strong></p>
             </div>
-            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-              <p className="text-gray-700">• 遇到 <Math tex="i^2" /> <strong>必须立刻换成 -1</strong></p>
-              <p className="text-gray-700">• 除法三步走：写共轭 → 上下同乘 → 整理成 <Math tex="a+bi" /></p>
-              <p className="text-gray-700">• i 的幂次：<strong>除以4看余数</strong>，余1→i，余2→-1，余3→-i，余0→1</p>
-            </div>
+            <CalloutCard variant="warning" title="易错点" className="mt-3">
+              <p>• 遇到 <Math tex="i^2" /> <strong>必须立刻换成 -1</strong></p>
+              <p>• 除法三步走：写共轭 → 上下同乘 → 整理成 <Math tex="a+bi" /></p>
+              <p>• i 的幂次：<strong>除以4看余数</strong>，余1→i，余2→-1，余3→-i，余0→1</p>
+            </CalloutCard>
           </section>
 
           {/* Part 5: Complex Plane */}
@@ -577,11 +569,10 @@ export function ComplexPage() {
               <p className="text-gray-700">1. <Math tex="z = -2+3i" /> 在第几象限？　答案：点 (-2, 3)，<strong>第二象限</strong></p>
               <p className="text-gray-700">2. <Math tex="z = 4-i" /> 在第几象限？　答案：点 (4, -1)，<strong>第四象限</strong></p>
             </div>
-            <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-              <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-              <p className="text-gray-700">• 实部是 x 坐标，虚部是 y 坐标，<strong>别搞反</strong></p>
-              <p className="text-gray-700">• 点在坐标轴上<strong>不属于任何象限</strong></p>
-            </div>
+            <CalloutCard variant="warning" title="易错点" className="mt-3">
+              <p>• 实部是 x 坐标，虚部是 y 坐标，<strong>别搞反</strong></p>
+              <p>• 点在坐标轴上<strong>不属于任何象限</strong></p>
+            </CalloutCard>
           </section>
 
           {/* Part 6: Tips & Tricks */}
@@ -606,9 +597,9 @@ export function ComplexPage() {
                   <p>所以 <Math tex="\dfrac{2+i}{1-2i} = \dfrac{i(1-2i)}{1-2i} = i" />，虚部 = <strong>1</strong></p>
                 </div>
               </div>
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-                <p className="text-amber-800">⏱ 常规三步走要30秒，凑因子法只要5秒。但不是每题都能凑，凑不出就老实乘共轭。</p>
-              </div>
+              <CalloutCard variant="tip" icon={null}>
+                <p>⏱ 常规三步走要30秒，凑因子法只要5秒。但不是每题都能凑，凑不出就老实乘共轭。</p>
+              </CalloutCard>
             </Collapsible>
 
             <Collapsible title="技巧2：模的速算（不用化简）" defaultOpen storageKey="complex:trick-modulus">
@@ -626,9 +617,9 @@ export function ComplexPage() {
                   <p>所以 <Math tex="\left|\dfrac{2+i}{1+i}\right| = \dfrac{\sqrt{5}}{\sqrt{2}} = \dfrac{\sqrt{10}}{2}" /></p>
                 </div>
               </div>
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-                <p className="text-amber-800">⏱ 比先化简除法再求模快得多！只要题目问的是<strong>模</strong>，就用这招。</p>
-              </div>
+              <CalloutCard variant="tip" icon={null}>
+                <p>⏱ 比先化简除法再求模快得多！只要题目问的是<strong>模</strong>，就用这招。</p>
+              </CalloutCard>
             </Collapsible>
 
             <Collapsible title="技巧3：共轭的妙用" defaultOpen storageKey="complex:trick-conjugate">
@@ -673,9 +664,9 @@ export function ComplexPage() {
                   <p>所以 <Math tex="m = 1" />（排除 m = -1）</p>
                 </div>
               </div>
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm mt-3">
-                <p className="text-amber-800">⚠️ 很多人只列了实部=0，忘了检查虚部≠0，白送分！</p>
-              </div>
+              <CalloutCard variant="warning" icon={null} className="mt-3">
+                <p>⚠️ 很多人只列了实部=0，忘了检查虚部≠0，白送分！</p>
+              </CalloutCard>
             </Collapsible>
           </section>
 

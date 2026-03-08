@@ -1,6 +1,4 @@
-import { AlertTriangle } from 'lucide-react';
-
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
 import { setsNarrations } from './data/narrations';
 import { useProgress } from '@/hooks';
 import { setsQuizQuestions } from './data/quiz';
@@ -133,15 +131,9 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <div className="flex items-start gap-2">
-                    <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                    <div className="text-amber-700 text-sm space-y-1">
-                      <p className="font-bold">⚠️ 高考陷阱</p>
-                      <p>题目说"集合 A = &#123;a, b, c&#125;"，则 a、b、c <strong>一定互不相等</strong>。互异性经常藏着出题陷阱。</p>
-                    </div>
-                  </div>
-                </div>
+                <CalloutCard variant="warning" title="高考陷阱">
+                  <p>题目说“集合 A = &#123;a, b, c&#125;”，则 a、b、c <strong>一定互不相等</strong>。互异性经常藏着出题陷阱。</p>
+                </CalloutCard>
 
                 <div className="bg-gray-50 rounded-lg p-4 space-y-2 text-sm">
                   <p className="font-bold text-gray-800">含参集合 + 互异性（高考经典题型）</p>
@@ -201,17 +193,11 @@ export function SetsPage() {
                       <p><Math tex="\{x \mid x^2 - 4 = 0\}" /> → 其实就是 <Math tex="\{-2, 2\}" /></p>
                       <p><Math tex="\{(x,y) \mid y = 2x\}" /> → 直线 y=2x 上的所有<strong>点</strong></p>
                     </div>
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                      <div className="flex items-start gap-2">
-                        <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                        <div className="text-amber-700 text-sm">
-                          <p className="font-bold">⚠️ 重要区分</p>
-                          <p><Math tex="\{x \mid x^2 - 4 = 0\}" /> 是<strong>数的集合</strong> = <Math tex="\{-2, 2\}" /></p>
-                          <p><Math tex="\{(x,y) \mid y = x^2\}" /> 是<strong>点的集合</strong>（坐标点）</p>
-                          <p>看清竖线前面是 x 还是 (x,y)！</p>
-                        </div>
-                      </div>
-                    </div>
+                    <CalloutCard variant="warning" title="重要区分">
+                      <p><Math tex="\{x \mid x^2 - 4 = 0\}" /> 是<strong>数的集合</strong> = <Math tex="\{-2, 2\}" /></p>
+                      <p><Math tex="\{(x,y) \mid y = x^2\}" /> 是<strong>点的集合</strong>（坐标点）</p>
+                      <p>看清竖线前面是 x 还是 (x,y)！</p>
+                    </CalloutCard>
                   </div>
                 </Collapsible>
 
@@ -428,15 +414,9 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <div className="flex items-start gap-2">
-                    <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                    <div className="text-amber-700 text-sm">
-                      <p className="font-bold">⚠️ 高考知识点</p>
-                      <p><strong>0 是自然数！</strong> <Math tex="0 \in \mathbb{N}" /> ✓，<Math tex="0 \notin \mathbb{N}^*" /> ✓</p>
-                    </div>
-                  </div>
-                </div>
+                <CalloutCard variant="warning" title="高考知识点">
+                  <p><strong>0 是自然数！</strong> <Math tex="0 \in \mathbb{N}" /> ✓，<Math tex="0 \notin \mathbb{N}^*" /> ✓</p>
+                </CalloutCard>
 
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
@@ -491,10 +471,9 @@ export function SetsPage() {
                     </div>
                   </div>
 
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                    <p className="text-amber-800 font-bold text-xs">⚠ 关键点：自己是自己的子集！</p>
-                    <p className="text-amber-700 text-xs mt-1"><Math tex="\{1,2,3\} \subseteq \{1,2,3\}" /> ✓ — 每个元素当然都在自己里面</p>
-                  </div>
+                  <CalloutCard variant="warning" title="关键点：自己是自己的子集！" icon={null}>
+                    <p><Math tex="\{1,2,3\} \subseteq \{1,2,3\}" /> ✓ — 每个元素当然都在自己里面</p>
+                  </CalloutCard>
 
                   <p className="text-gray-500 text-xs">生活类比：你班的男同学 ⊆ 你班的所有同学（男同学全在班里）</p>
                 </div>
@@ -534,23 +513,16 @@ export function SetsPage() {
                     <p className="text-gray-500">就好像说"这个空教室里的<strong>每个人</strong>都会飞" — 没人在里面，所以这句话不算错。</p>
                   </div>
 
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                    <div className="flex items-start gap-2">
-                      <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                      <div className="text-amber-700 text-xs space-y-1">
-                        <p className="font-bold">⚠ 高考经典陷阱</p>
-                        <p>题目说 A ⊆ B，很多人忘了 <strong>A 可能是 ∅</strong>！</p>
-                        <p>比如 A = &#123;x | x²+1=0&#125;，这个方程无实数解 → A = ∅</p>
-                        <p><strong>做子集题，第一步永远是：别忘了空集！</strong></p>
-                      </div>
-                    </div>
-                  </div>
+                  <CalloutCard variant="warning" title="高考经典陷阱">
+                    <p>题目说 A ⊆ B，很多人忘了 <strong>A 可能是 ∅</strong>！</p>
+                    <p>比如 A = &#123;x | x²+1=0&#125;，这个方程无实数解 → A = ∅</p>
+                    <p><strong>做子集题，第一步永远是：别忘了空集！</strong></p>
+                  </CalloutCard>
 
-                  <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-xs space-y-1">
-                    <p className="font-bold text-red-700">⚠ ∅ 和 &#123;0&#125; 不一样！</p>
-                    <p className="text-red-600">∅ 里面<strong>什么都没有</strong>（0 个元素）</p>
-                    <p className="text-red-600">&#123;0&#125; 里面<strong>有一个元素 0</strong>（1 个元素）</p>
-                  </div>
+                  <CalloutCard variant="danger" title="∅ 和 &#123;0&#125; 不一样！" icon={null}>
+                    <p>∅ 里面<strong>什么都没有</strong>（0 个元素）</p>
+                    <p>&#123;0&#125; 里面<strong>有一个元素 0</strong>（1 个元素）</p>
+                  </CalloutCard>
                 </div>
 
                 {/* ───── ⑤ 子集个数 ───── */}
@@ -1065,17 +1037,11 @@ export function SetsPage() {
                   <p className="text-gray-700">3. A = &#123;x | -1 ≤ x {'<'} 3&#125;，B = &#123;x | 2 {'<'} x ≤ 5&#125;，A ∩ B = ____　答案：<strong>(2, 3)</strong></p>
                 </div>
 
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                  <div className="flex items-start gap-2">
-                    <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                    <div className="text-amber-700 text-sm space-y-1">
-                      <p className="font-bold">⚠️ 易错点</p>
-                      <p>补集<strong>必须说明全集 U</strong>，没有全集就没有补集</p>
-                      <p>端点开闭要看清：<Math tex="[1,3) \cap (2,5] = (2,3)" /> 注意中间是开区间</p>
-                      <p>混合运算<strong>先算括号内</strong>，通常先求补集</p>
-                    </div>
-                  </div>
-                </div>
+                <CalloutCard variant="warning" title="易错点">
+                  <p>补集<strong>必须说明全集 U</strong>，没有全集就没有补集</p>
+                  <p>端点开闭要看清：<Math tex="[1,3) \cap (2,5] = (2,3)" /> 注意中间是开区间</p>
+                  <p>混合运算<strong>先算括号内</strong>，通常先求补集</p>
+                </CalloutCard>
               </div>
             </Collapsible>
           </section>

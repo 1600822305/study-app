@@ -1,4 +1,4 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, CalloutCard } from '@/components/shared';
 import { prereqNarrations } from './data/narrations';
 import { prereqSelfTest } from './data/selftest';
 
@@ -87,12 +87,11 @@ export function PrereqPage() {
             <p className="text-gray-700">2. -3 是什么数？→ <strong>整数（也是有理数、实数）</strong></p>
             <p className="text-gray-700">3. 2 + 3i 是什么数？→ <strong>复数</strong></p>
           </div>
-          <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-            <p className="text-gray-700">• <strong>0 是自然数</strong>，也是整数、有理数、实数</p>
-            <p className="text-gray-700">• 无限不循环小数（如 √2、π）是<strong>无理数</strong>，不是有理数</p>
-            <p className="text-gray-700">• 每层都<strong>包含</strong>上一层：复数 ⊃ 实数 ⊃ 有理数 ⊃ 整数 ⊃ 自然数</p>
-          </div>
+          <CalloutCard variant="warning" title="易错点" className="mt-3">
+            <p>• <strong>0 是自然数</strong>，也是整数、有理数、实数</p>
+            <p>• 无限不循环小数（如 √2、π）是<strong>无理数</strong>，不是有理数</p>
+            <p>• 每层都<strong>包含</strong>上一层：复数 ⊃ 实数 ⊃ 有理数 ⊃ 整数 ⊃ 自然数</p>
+          </CalloutCard>
         </Collapsible>
       </section>
 
@@ -145,12 +144,11 @@ export function PrereqPage() {
             <p className="text-gray-700">2. <Math tex="\sqrt{16+9}" /> = ? → <Math tex="\sqrt{25} = " /><strong>5</strong></p>
             <p className="text-gray-700">3. <Math tex="|-7|" /> = ? → <strong>7</strong></p>
           </div>
-          <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-            <p className="text-gray-700">• <strong><Math tex="(-3)^2 = 9" /></strong>，不是 -9！括号很重要：<Math tex="-3^2 = -(3^2) = -9" /></p>
-            <p className="text-gray-700">• <strong><Math tex="\sqrt{\phantom{x}}" /> 号默认取正值</strong>：<Math tex="\sqrt{9} = 3" />，不是 ±3</p>
-            <p className="text-gray-700">• | | 在初中是绝对值，在复数里是模，计算方法不同但含义类似</p>
-          </div>
+          <CalloutCard variant="warning" title="易错点" className="mt-3">
+            <p>• <strong><Math tex="(-3)^2 = 9" /></strong>，不是 -9！括号很重要：<Math tex="-3^2 = -(3^2) = -9" /></p>
+            <p>• <strong><Math tex="\sqrt{\phantom{x}}" /> 号默认取正值</strong>：<Math tex="\sqrt{9} = 3" />，不是 ±3</p>
+            <p>• | | 在初中是绝对值，在复数里是模，计算方法不同但含义类似</p>
+          </CalloutCard>
         </Collapsible>
       </section>
 
@@ -237,12 +235,11 @@ export function PrereqPage() {
             <p className="text-gray-700">2. <Math tex="\frac{3}{5} \times \frac{2}{7}" /> = ? → <strong><Math tex="\frac{6}{35}" /></strong></p>
             <p className="text-gray-700">3. <Math tex="\frac{18}{24}" /> 约分 = ? → <strong><Math tex="\frac{3}{4}" /></strong>（同除以6）</p>
           </div>
-          <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-            <p className="text-gray-700">• 异分母<strong>不能直接加分子</strong>：<Math tex="\frac{1}{2} + \frac{1}{3} \neq \frac{2}{5}" />，必须先通分</p>
-            <p className="text-gray-700">• 除以分数 = 乘以<strong>倒数</strong>，别忘了翻转</p>
-            <p className="text-gray-700">• 约分要找<strong>最大公因数</strong>，一次除到底</p>
-          </div>
+          <CalloutCard variant="warning" title="易错点" className="mt-3">
+            <p>• 异分母<strong>不能直接加分子</strong>：<Math tex="\frac{1}{2} + \frac{1}{3} \neq \frac{2}{5}" />，必须先通分</p>
+            <p>• 除以分数 = 乘以<strong>倒数</strong>，别忘了翻转</p>
+            <p>• 约分要找<strong>最大公因数</strong>，一次除到底</p>
+          </CalloutCard>
         </Collapsible>
       </section>
 
@@ -281,18 +278,17 @@ export function PrereqPage() {
                 <Math tex="(1+i)^2 = 1^2 + 2(1)(i) + i^2 = 1 + 2i + (-1) = 2i" display />
               </div>
             </div>
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-              <p className="font-bold text-red-700 mb-1">平方差公式（复数除法的核心！）：</p>
+            <CalloutCard variant="danger" title="平方差公式（复数除法的核心！）">
               <Math tex="(a+b)(a-b) = a^2 - b^2" display />
-              <div className="mt-2 space-y-1 text-red-700">
+              <div className="mt-2 space-y-1">
                 <p><Math tex="(1+i)(1-i) = 1^2 - i^2 = 1-(-1) = 2" /></p>
                 <p><Math tex="(2+3i)(2-3i) = 4 - 9i^2 = 4+9 = 13" /></p>
                 <p><Math tex="(a+bi)(a-bi) = a^2 - b^2 i^2 = a^2 + b^2" /> → 总是正实数！</p>
               </div>
-              <p className="text-red-700 mt-2">
-                这就是为什么除法要“乘以共轭复数”——<strong>用平方差公式把分母变成实数</strong>。
+              <p className="mt-2">
+                这就是为什么除法要"乘以共轭复数"——<strong>用平方差公式把分母变成实数</strong>。
               </p>
-            </div>
+            </CalloutCard>
           </div>
           <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
             <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
@@ -300,12 +296,11 @@ export function PrereqPage() {
             <p className="text-gray-700">2. <Math tex="(1+i)^2" /> = ? → <Math tex="1+2i+i^2 = 1+2i-1 = " /><strong><Math tex="2i" /></strong></p>
             <p className="text-gray-700">3. <Math tex="(3+2i)(3-2i)" /> = ? → <Math tex="9-4i^2 = 9+4 = " /><strong>13</strong></p>
           </div>
-          <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-            <p className="text-gray-700">• 两个括号相乘<strong>不能只乘第一项</strong>：<Math tex="(a+b)(c+d) \neq ac+bd" /></p>
-            <p className="text-gray-700">• 遇到 <Math tex="i^2" /> 一定要<strong>立刻替换成 -1</strong>，别漏了</p>
-            <p className="text-gray-700">• 平方差公式的结果<strong>没有虚部</strong>，一定是正实数</p>
-          </div>
+          <CalloutCard variant="warning" title="易错点" className="mt-3">
+            <p>• 两个括号相乘<strong>不能只乘第一项</strong>：<Math tex="(a+b)(c+d) \neq ac+bd" /></p>
+            <p>• 遇到 <Math tex="i^2" /> 一定要<strong>立刻替换成 -1</strong>，别漏了</p>
+            <p>• 平方差公式的结果<strong>没有虚部</strong>，一定是正实数</p>
+          </CalloutCard>
         </Collapsible>
       </section>
 
@@ -343,9 +338,9 @@ export function PrereqPage() {
                 <p><Math tex="2 - i^2 = 2 - (-1) = 2 + 1 = 3" /></p>
               </div>
             </div>
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-amber-800">
-              <strong>最容易犯的错：</strong>忘记 <Math tex="i^2 = -1" /> 带入时的符号变化。
-            </div>
+            <CalloutCard variant="warning" title="最容易犯的错" icon={null}>
+              <p>忘记 <Math tex="i^2 = -1" /> 带入时的符号变化。</p>
+            </CalloutCard>
           </div>
           <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
             <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
@@ -353,12 +348,11 @@ export function PrereqPage() {
             <p className="text-gray-700">2. <Math tex="(-4) \times (-3)" /> = ? → <strong>12</strong>（同号得正）</p>
             <p className="text-gray-700">3. <Math tex="2 - i^2" /> = ? → <Math tex="2 - (-1) = " /><strong>3</strong></p>
           </div>
-          <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
-            <p className="text-gray-700">• <strong>减去负数 = 加正数</strong>：5 - (-3) = 8，不是 2</p>
-            <p className="text-gray-700">• <strong>负 × 负 = 正</strong>：(-1)×(-1) = 1</p>
-            <p className="text-gray-700">• <Math tex="i^2" /> 带入时<strong>先写括号</strong>：<Math tex="2-i^2 = 2-(-1) = 3" />，别写成 2-1=1</p>
-          </div>
+          <CalloutCard variant="warning" title="易错点" className="mt-3">
+            <p>• <strong>减去负数 = 加正数</strong>：5 - (-3) = 8，不是 2</p>
+            <p>• <strong>负 × 负 = 正</strong>：(-1)×(-1) = 1</p>
+            <p>• <Math tex="i^2" /> 带入时<strong>先写括号</strong>：<Math tex="2-i^2 = 2-(-1) = 3" />，别写成 2-1=1</p>
+          </CalloutCard>
         </Collapsible>
       </section>
 

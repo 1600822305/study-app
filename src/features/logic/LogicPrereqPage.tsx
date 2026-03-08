@@ -1,6 +1,4 @@
-import { AlertTriangle } from 'lucide-react';
-
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
 import { logicPrereqNarrations } from './data/prereq-narrations';
 import { logicPrereqProgressItems } from './data/prereq-progress';
 import { logicPrereqQuizQuestions } from './data/prereq-quiz';
@@ -97,16 +95,10 @@ export function LogicPrereqPage() {
               <p className="text-gray-700">3. A = [1, 4]，B = [1, 4]，关系？　答案：<strong>A = B</strong></p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <div className="flex items-start gap-2">
-                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-amber-700 text-sm space-y-1">
-                  <p className="font-bold">⚠️ 易错点</p>
-                  <p><strong>⊂ 和 ⊆ 的区别</strong>：⊂ 是真子集（不能相等），⊆ 是子集（可以相等）</p>
-                  <p>比较区间时<strong>画数轴</strong>最靠谱，不要只看端点数字大小</p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p><strong>⊂ 和 ⊆ 的区别</strong>：⊂ 是真子集（不能相等），⊆ 是子集（可以相等）</p>
+              <p>比较区间时<strong>画数轴</strong>最靠谱，不要只看端点数字大小</p>
+            </CalloutCard>
           </div>
         </Collapsible>
       </section>
@@ -249,16 +241,10 @@ export function LogicPrereqPage() {
               <p className="text-gray-700">3. 解 <Math tex="|x + 2| < 3" /> → 答案：<strong>-5 {'<'} x {'<'} 1</strong></p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <div className="flex items-start gap-2">
-                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-amber-700 text-sm space-y-1">
-                  <p className="font-bold">⚠️ 易错点</p>
-                  <p><strong>开闭区间别搞混</strong>：{'<'} 用开区间 ()，≤ 用闭区间 []</p>
-                  <p>绝对值不等式 |x-b| {'<'} a，<strong>中心是 b 不是 0</strong>，别算错</p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p><strong>开闭区间别搞混</strong>：{'<'} 用开区间 ()，≤ 用闭区间 []</p>
+              <p>绝对值不等式 |x-b| {'<'} a，<strong>中心是 b 不是 0</strong>，别算错</p>
+            </CalloutCard>
           </div>
         </Collapsible>
       </section>
@@ -391,16 +377,10 @@ export function LogicPrereqPage() {
               <p className="text-gray-700">3. p: "x {'>'} 5"，q: "x {'>'} 3"，p→q？　答案：<strong>✓</strong>（小范围→大范围）</p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <div className="flex items-start gap-2">
-                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-amber-700 text-sm space-y-1">
-                  <p className="font-bold">⚠️ 易错点</p>
-                  <p><strong>方向别搞反</strong>：问"A→B"就是问"A 成立时 B 是否一定成立"，不是反过来</p>
-                  <p>找反例只需要<strong>一个</strong>就够了（狗是动物但不是猫 → 一个反例搞定）</p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p><strong>方向别搞反</strong>：问“A→B”就是问“A 成立时 B 是否一定成立”，不是反过来</p>
+              <p>找反例只需要<strong>一个</strong>就够了（狗是动物但不是猫 → 一个反例搞定）</p>
+            </CalloutCard>
           </div>
         </Collapsible>
       </section>

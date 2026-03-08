@@ -1,7 +1,6 @@
-import { Lightbulb, AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Line, Plot, Text as MafsText } from 'mafs';
 
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
@@ -342,17 +341,11 @@ export function SetsPrereqPage() {
               <p className="text-gray-700">3. <Math tex="x^2 - 9 = 0" />，x = ____　答案：<strong><Math tex="x = \pm 3" /></strong>（平方差）</p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <div className="flex items-start gap-2">
-                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-amber-700 text-sm space-y-1">
-                  <p className="font-bold">⚠️ 易错点</p>
-                  <p>找两个数时注意<strong>符号</strong>：乘起来=6、加起来=-5，那就是 -2 和 -3（都是负的）</p>
-                  <p>公式法别忘了 <strong>±</strong>，两个根都要写</p>
-                  <p><Math tex="\Delta < 0" /> 意味着<strong>无实数根</strong>，集合可能是空集</p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p>找两个数时注意<strong>符号</strong>：乘起来=6、加起来=-5，那就是 -2 和 -3（都是负的）</p>
+              <p>公式法别忘了 <strong>±</strong>，两个根都要写</p>
+              <p><Math tex="\Delta < 0" /> 意味着<strong>无实数根</strong>，集合可能是空集</p>
+            </CalloutCard>
           </div>
         </Collapsible>
       </section>
@@ -428,14 +421,11 @@ export function SetsPrereqPage() {
               <p className="text-xs text-blue-600 mt-2 font-bold">下面的口诀假设 a {'>'} 0（开口朝上）。如果 a {'<'} 0，先两边乘 -1 变成 a {'>'} 0 再用口诀。</p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-              <p className="font-bold text-amber-800 mb-2">核心方法：三步走</p>
-              <div className="text-amber-700 space-y-1">
-                <p>1. 化成标准形式 <Math tex="ax^2 + bx + c > 0" /></p>
-                <p>2. 解对应方程，找到两个根 <Math tex="x_1 < x_2" /></p>
-                <p>3. 用口诀写答案</p>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="核心方法：三步走" icon={null}>
+              <p>1. 化成标准形式 <Math tex="ax^2 + bx + c > 0" /></p>
+              <p>2. 解对应方程，找到两个根 <Math tex="x_1 < x_2" /></p>
+              <p>3. 用口诀写答案</p>
+            </CalloutCard>
 
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-5 text-center">
               <p className="text-sm text-orange-600 mb-2">口诀（必记！）</p>
@@ -499,10 +489,9 @@ export function SetsPrereqPage() {
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">
-              <Lightbulb size={16} className="text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-amber-700 text-sm"><strong>为什么？</strong>二次函数 <Math tex="y = ax^2+bx+c" />（a{'>'} 0）的图像是开口朝上的抛物线。两个根之间在 x 轴下面（{'<'} 0），两边在 x 轴上面（{'>'} 0）。</p>
-            </div>
+            <CalloutCard variant="tip">
+              <p><strong>为什么？</strong>二次函数 <Math tex="y = ax^2+bx+c" />（a{'>'} 0）的图像是开口朝上的抛物线。两个根之间在 x 轴下面（{'<'} 0），两边在 x 轴上面（{'>'} 0）。</p>
+            </CalloutCard>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
               <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
@@ -510,17 +499,11 @@ export function SetsPrereqPage() {
               <p className="text-gray-700">2. <Math tex="x^2 - 4 \geq 0" /> 的解集 = ____　答案：<strong><Math tex="x \leq -2 \text{ 或 } x \geq 2" /></strong></p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <div className="flex items-start gap-2">
-                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-amber-700 text-sm space-y-1">
-                  <p className="font-bold">⚠️ 易错点</p>
-                  <p><strong>“大于”和“小于”别搞反</strong>：大于取两边（远离根），小于取中间（夹在根之间）</p>
-                  <p><strong>含等号别漏</strong>：≥ 和 ≤ 的解集端点要用 ≤ 和 ≥</p>
-                  <p><strong>a {'<'} 0 时先两边乘 -1</strong>：不等号方向要反转！</p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p><strong>“大于”和“小于”别搞反</strong>：大于取两边（远离根），小于取中间（夹在根之间）</p>
+              <p><strong>含等号别漏</strong>：≥ 和 ≤ 的解集端点要用 ≤ 和 ≥</p>
+              <p><strong>a {'<'} 0 时先两边乘 -1</strong>：不等号方向要反转！</p>
+            </CalloutCard>
           </div>
         </Collapsible>
       </section>
@@ -580,17 +563,11 @@ export function SetsPrereqPage() {
               <p className="text-gray-700">2. <Math tex="1 < x < 4" /> 的两个端点分别用？　答案：<strong>1 空心 ○，4 空心 ○</strong></p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <div className="flex items-start gap-2">
-                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-amber-700 text-sm space-y-1">
-                  <p className="font-bold">⚠️ 易错点</p>
-                  <p>{'<'} 和 ≤ 的区别就在于<strong>圆的空实</strong>：{'<'} 空心、≤ 实心</p>
-                  <p>做集合运算时，<strong>画数轴是最直观的方法</strong></p>
-                  <p>补集运算时<strong>端点开闭互换</strong>：原来 ○ 变 ●，原来 ● 变 ○</p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p>{'<'} 和 ≤ 的区别就在于<strong>圆的空实</strong>：{'<'} 空心、≤ 实心</p>
+              <p>做集合运算时，<strong>画数轴是最直观的方法</strong></p>
+              <p>补集运算时<strong>端点开闭互换</strong>：原来 ○ 变 ●，原来 ● 变 ○</p>
+            </CalloutCard>
           </div>
         </Collapsible>
       </section>
@@ -641,16 +618,10 @@ export function SetsPrereqPage() {
               <p className="text-gray-700">2. <Math tex="\{x \mid x \geq 3\}" /> = ____　答案：<strong><Math tex="[3, +\infty)" /></strong></p>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <div className="flex items-start gap-2">
-                <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-amber-700 text-sm space-y-1">
-                  <p className="font-bold">⚠️ 易错点</p>
-                  <p><strong>∞ 永远用小括号</strong>：<Math tex="[3, +\infty)" /> ✓，<Math tex="[3, +\infty]" /> ✗</p>
-                  <p>区间写法和数轴对应：<strong>小括号 = ○，中括号 = ●</strong></p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p><strong>∞ 永远用小括号</strong>：<Math tex="[3, +\infty)" /> ✓，<Math tex="[3, +\infty]" /> ✗</p>
+              <p>区间写法和数轴对应：<strong>小括号 = ○，中括号 = ●</strong></p>
+            </CalloutCard>
           </div>
         </Collapsible>
       </section>

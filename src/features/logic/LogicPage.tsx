@@ -1,6 +1,4 @@
-import { Lightbulb, AlertTriangle } from 'lucide-react';
-
-import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
 import { logicNarrations } from './data/narrations';
 import { useProgress } from '@/hooks';
 import { logicQuizQuestions } from './data/quiz';
@@ -209,12 +207,11 @@ export function LogicPage() {
               </div>
             </div>
 
-            <div className="bg-slate-900 text-white rounded-xl p-5 text-center mb-4">
-              <p className="text-sm text-slate-400 mb-2">核心规律（必记！）</p>
+            <CalloutCard variant="tip" title="核心规律（必记！）" className="mb-4">
               <p className="text-lg font-bold">原命题 ↔ 逆否命题：同真同假</p>
               <p className="text-sm text-slate-400 mt-2">逆命题 ↔ 否命题：同真同假</p>
               <p className="text-xs text-slate-500 mt-3">高考用法：直接证明原命题很难时 → 可以去证明逆否命题（等价的）</p>
-            </div>
+            </CalloutCard>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-4">
               <p className="font-bold text-green-800 text-sm mb-2">✏️ 即时练习</p>
@@ -246,17 +243,13 @@ export function LogicPage() {
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4 flex items-start gap-3">
-              <Lightbulb size={20} className="text-amber-600 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-bold text-amber-800 text-sm">数学定义</p>
-                <p className="text-amber-700 text-sm mt-1">
-                  若 <Math tex="p \Rightarrow q" />（p 能推出 q），则 p 是 q 的<strong>充分</strong>条件，q 是 p 的<strong>必要</strong>条件。
-                </p>
-                <p className="text-amber-700 text-sm mt-1">充分 = "有它就够了"（p 成立，q 一定成立）</p>
-                <p className="text-amber-700 text-sm">必要 = "没它不行"（q 不成立，p 一定不成立）</p>
-              </div>
-            </div>
+            <CalloutCard variant="tip" title="数学定义" className="mb-4">
+              <p>
+                若 <Math tex="p \Rightarrow q" />（p 能推出 q），则 p 是 q 的<strong>充分</strong>条件，q 是 p 的<strong>必要</strong>条件。
+              </p>
+              <p>充分 = “有它就够了”（p 成立，q 一定成立）</p>
+              <p>必要 = “没它不行”（q 不成立，p 一定不成立）</p>
+            </CalloutCard>
 
             <Collapsible title="四种情况一张表" defaultOpen storageKey="logic:four-cases">
               <div className="overflow-x-auto">
@@ -472,16 +465,10 @@ export function LogicPage() {
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 flex items-start gap-3">
-              <AlertTriangle size={20} className="text-amber-500 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-bold text-amber-700 text-sm">⚠️ 易错点</p>
-                <div className="text-amber-700 text-sm mt-1 space-y-1">
-                  <p>1. <strong>方向别搞反</strong>：p→q 说的是 p 充分，不是 q 充分</p>
-                  <p>2. <strong>拿不准就用集合法</strong>：先求出集合 A 和 B，比大小最靠谱</p>
-                </div>
-              </div>
-            </div>
+            <CalloutCard variant="warning" title="易错点">
+              <p>1. <strong>方向别搞反</strong>：p→q 说的是 p 充分，不是 q 充分</p>
+              <p>2. <strong>拿不准就用集合法</strong>：先求出集合 A 和 B，比大小最靠谱</p>
+            </CalloutCard>
           </section>
 
           {/* Part 4: Quantifiers */}
@@ -518,8 +505,7 @@ export function LogicPage() {
                 </div>
               </div>
 
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-3">
-                <p className="font-bold text-amber-800 text-sm mb-2">条件取反对照表（背住这个就够了）</p>
+              <CalloutCard variant="warning" title="条件取反对照表（背住这个就够了）" icon={null} className="mb-3">
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm text-center">
                   {[
                     ['>', '≤'], ['<', '≥'], ['≥', '<'],
@@ -533,7 +519,7 @@ export function LogicPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </CalloutCard>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-sm border-collapse">
@@ -565,17 +551,11 @@ export function LogicPage() {
                 </table>
               </div>
 
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3 mt-3">
-                <AlertTriangle size={20} className="text-red-500 shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-bold text-red-700 text-sm">⚠️ 易错点：否定 ≠ 否命题！</p>
-                  <div className="text-red-700 text-sm mt-1 space-y-1">
-                    <p><strong>"否定"</strong>是对整个命题说"不对"（∀ ↔ ∃ 互换 + 条件取反）</p>
-                    <p><strong>"否命题"</strong>是把条件和结论都取反（若非p则非q）</p>
-                    <p>两者是<strong>完全不同</strong>的概念！</p>
-                  </div>
-                </div>
-              </div>
+              <CalloutCard variant="danger" title="易错点：否定 ≠ 否命题！" className="mt-3">
+                <p><strong>"否定"</strong>是对整个命题说"不对"（∀ ↔ ∃ 互换 + 条件取反）</p>
+                <p><strong>"否命题"</strong>是把条件和结论都取反（若非p则非q）</p>
+                <p>两者是<strong>完全不同</strong>的概念！</p>
+              </CalloutCard>
             </Collapsible>
 
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
