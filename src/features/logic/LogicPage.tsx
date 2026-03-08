@@ -67,6 +67,63 @@ export function LogicPage() {
         </div>
       </div>
 
+      {/* 必背清单 */}
+      <div className="bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-2xl p-5 mb-6">
+        <p className="font-black text-red-800 text-lg mb-1">必背清单：只背这 7 条，高考就够了</p>
+        <p className="text-red-600 text-sm mb-4">不用理解为什么，死记硬背就行，考试直接套</p>
+        <div className="space-y-2 text-sm">
+          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
+            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">1</span>
+            <div>
+              <p className="font-bold text-gray-800">命题 = 能判断真假的陈述句</p>
+              <p className="text-gray-500">疑问句、祈使句、感叹句都不是。含未知数的开放语句也不是。</p>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
+            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">2</span>
+            <div>
+              <p className="font-bold text-gray-800">逆否命题与原命题同真同假</p>
+              <p className="text-gray-500">原命题难证？直接证逆否命题，效果一样。</p>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
+            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">3</span>
+            <div>
+              <p className="font-bold text-gray-800">谁小谁充分，谁大谁必要</p>
+              <p className="text-gray-500">集合 A ⊂ B → A 小 → p 是 q 的充分条件。这一条能解 90% 的充要条件题。</p>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
+            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">4</span>
+            <div>
+              <p className="font-bold text-gray-800">充要条件做题三步：解范围 → 比大小 → 套公式</p>
+              <p className="text-gray-500">不要想"谁推出谁"，直接解不等式画数轴比较。</p>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
+            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">5</span>
+            <div>
+              <p className="font-bold text-gray-800">量词否定：∀ ↔ ∃ 互换，条件取反</p>
+              <p className="text-gray-500">"所有"变"存在"，"存在"变"所有"，然后 {'>'} 变 ≤，{'<'} 变 ≥，= 变 ≠。</p>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
+            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">6</span>
+            <div>
+              <p className="font-bold text-gray-800">且（∧）：全真才真，有假就假</p>
+              <p className="text-gray-500">像严格老师：所有条件都满足才算通过。</p>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-red-100 flex items-start gap-3">
+            <span className="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">7</span>
+            <div>
+              <p className="font-bold text-gray-800">或（∨）：有真就真，全假才假</p>
+              <p className="text-gray-500">像宽松老师：有一个条件满足就算通过。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Main content */}
         <div className="flex-1 min-w-0">
