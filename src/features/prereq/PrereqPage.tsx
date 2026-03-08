@@ -595,7 +595,7 @@ export function PrereqPage() {
       {isPrinting && printOptions.showAnswers && (
         <>
           <PageBreak label="答案与解析" />
-          <section className="mb-8">
+          <section className="mb-8 print-answers">
             <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
 
             {[
@@ -609,21 +609,33 @@ export function PrereqPage() {
               { label: '自测清单', questions: prereqSelfTest },
             ].map((section) => (
               <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-1 text-sm border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-gray-700">
-                  {section.questions.map((q, idx) => (
-                    <div key={q.id} className="flex gap-1 items-baseline">
-                      <span className="text-blue-600 font-medium shrink-0">{idx + 1}.</span>
-                      <span>
-                        <span className="font-medium">{q.correctAnswer}</span>
-                        {q.explanationLatex ? (
-                          <span className="text-gray-500 ml-1">— <Math tex={q.explanationLatex} /></span>
-                        ) : q.explanation ? (
-                          <span className="text-gray-500 ml-1">— {q.explanation}</span>
-                        ) : null}
-                      </span>
-                    </div>
-                  ))}
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
+                  {section.questions.map((q, idx) => {
+                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
+                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
+                    const answerTex = isSimpleFractionAnswer
+                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
+                      : q.correctAnswer;
+                    return (
+                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
+                        <div className="min-w-0">
+                          <p className="font-bold text-gray-900">
+                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
+                          </p>
+                          {q.explanationLatex && (
+                            <div className="text-gray-700 mt-1">
+                              <Math tex={q.explanationLatex} />
+                            </div>
+                          )}
+                          {q.explanation && (
+                            <p className="text-gray-700 mt-1">{q.explanation}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}

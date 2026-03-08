@@ -1,15 +1,15 @@
 import { AlertTriangle } from 'lucide-react';
-import { Mafs, Coordinates, Point, Vector, Text as MafsText } from 'mafs';
 
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
 import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/practice';
-import { useProgress } from '@/hooks';
+import { useProgress, usePrintMode } from '@/hooks';
 import { complexQuizQuestions } from './data/quiz';
 import { complexProgressItems } from './data/progress';
 
 export function ComplexPage() {
   const { items, toggle } = useProgress('complex', complexProgressItems);
+  const { isPrinting, printOptions } = usePrintMode();
 
   return (
     <div>
@@ -86,9 +86,9 @@ export function ComplexPage() {
               <SpeakButton text={complexNarrations.whyComplex} />
             </h2>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
-              <p className="text-gray-700 mb-4">你学过解方程：</p>
-              <div className="bg-gray-50 rounded-lg p-4 font-mono text-sm space-y-2 mb-4">
+            <div className="bg-white rounded-xl border border-gray-200 p-4 mb-3">
+              <p className="text-gray-700 mb-3">你学过解方程：</p>
+              <div className="bg-gray-50 rounded-lg p-4 font-mono text-sm space-y-2 mb-3">
                 <div className="flex items-center gap-3">
                   <Math tex="x + 3 = 5" />
                   <span className="text-gray-400">→</span>
@@ -109,21 +109,21 @@ export function ComplexPage() {
                 </div>
               </div>
 
-              <p className="text-gray-700 mb-3">
+              <p className="text-gray-700 mb-2">
                 数学家说：既然没有，那就<strong>造一个</strong>。
               </p>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-3">
                 <p className="text-blue-800 text-sm">
                   就像人类发明了"0"来表示"没有"，发明了"负数"来表示"欠债"，
                   现在发明一个新数 <Math tex="i" /> 来表示“平方等于 <Math tex="-1" /> 的数”。
                 </p>
               </div>
 
-              <div className="bg-slate-900 text-white rounded-xl p-5 text-center">
+              <div className="bg-slate-900 text-white rounded-xl p-4 text-center break-inside-avoid" style={{ breakInside: 'avoid' }}>
                 <p className="text-sm text-slate-400 mb-2">核心定义（整个复数的根基）</p>
                 <Math tex="i^2 = -1" display className="text-2xl" />
-                <p className="text-sm text-slate-400 mt-3">
+                <p className="text-sm text-slate-400 mt-2">
                   就这一条，整个复数体系都从这里长出来。
                 </p>
               </div>
@@ -136,11 +136,9 @@ export function ComplexPage() {
             </CalloutCard>
           </section>
 
-          <PageBreak label="复数的定义" />
-
           {/* Part 2: What */}
-          <section id="complex-what" className="mb-8 scroll-mt-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <section id="complex-what" className="mb-4 scroll-mt-4">
+            <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 2
               </span>
@@ -148,10 +146,10 @@ export function ComplexPage() {
               <SpeakButton text={complexNarrations.whatIsComplex} />
             </h2>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
-              <div className="bg-gray-50 rounded-lg p-4 text-center mb-4">
+            <div className="bg-white rounded-xl border border-gray-200 p-3 mb-3">
+              <div className="bg-gray-50 rounded-lg p-3 text-center mb-3">
                 <Math tex="z = a + bi" display />
-                <div className="flex justify-center gap-8 mt-3 text-sm text-gray-600">
+                <div className="flex justify-center gap-8 mt-2 text-sm text-gray-600">
                   <span>
                     <Math tex="a" /> = 实部
                   </span>
@@ -168,10 +166,10 @@ export function ComplexPage() {
                 <table className="w-full text-sm border-collapse">
                   <thead>
                     <tr className="bg-gray-50">
-                      <th className="border border-gray-200 px-3 py-2 text-left">复数 <Math tex="z" /></th>
-                      <th className="border border-gray-200 px-3 py-2 text-center">实部 <Math tex="a" /></th>
-                      <th className="border border-gray-200 px-3 py-2 text-center">虚部 <Math tex="b" /></th>
-                      <th className="border border-gray-200 px-3 py-2 text-left">类型</th>
+                      <th className="border border-gray-200 px-2 py-1 text-left">复数 <Math tex="z" /></th>
+                      <th className="border border-gray-200 px-2 py-1 text-center">实部 <Math tex="a" /></th>
+                      <th className="border border-gray-200 px-2 py-1 text-center">虚部 <Math tex="b" /></th>
+                      <th className="border border-gray-200 px-2 py-1 text-left">类型</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -183,12 +181,12 @@ export function ComplexPage() {
                       ['0', '0', '0', '实数（也是复数）'],
                     ].map(([z, a, b, type], idx) => (
                       <tr key={idx} className="hover:bg-blue-50">
-                        <td className="border border-gray-200 px-3 py-2">
+                        <td className="border border-gray-200 px-2 py-1">
                           <Math tex={z} />
                         </td>
-                        <td className="border border-gray-200 px-3 py-2 text-center"><Math tex={a} /></td>
-                        <td className="border border-gray-200 px-3 py-2 text-center"><Math tex={b} /></td>
-                        <td className="border border-gray-200 px-3 py-2">{type}</td>
+                        <td className="border border-gray-200 px-2 py-1 text-center"><Math tex={a} /></td>
+                        <td className="border border-gray-200 px-2 py-1 text-center"><Math tex={b} /></td>
+                        <td className="border border-gray-200 px-2 py-1">{type}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -196,9 +194,9 @@ export function ComplexPage() {
               </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
-              <p className="font-bold text-blue-800 mb-3">📂 复数的分类</p>
-              <div className="bg-white rounded-lg p-4 text-sm text-center font-mono">
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-3 mb-3">
+              <p className="font-bold text-blue-800 mb-2">📂 复数的分类</p>
+              <div className="bg-white rounded-lg p-3 text-sm text-center font-mono">
                 <p className="mb-1">复数 <Math tex="z = a + bi" /></p>
                 <p className="text-gray-400 mb-1">┌─────────┴─────────┐</p>
                 <div className="flex justify-center gap-12 mb-1">
@@ -224,7 +222,7 @@ export function ComplexPage() {
               <p className="text-blue-700 text-xs mt-2">💡 实数也是复数（虚部为0的复数）；0 既是实数也是复数，但<strong>不是</strong>纯虚数。</p>
             </div>
 
-            <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-3 flex items-start gap-2">
               <AlertTriangle size={20} className="text-red-500 shrink-0 mt-0.5" />
               <div>
                 <p className="font-bold text-red-700 text-sm">高考陷阱</p>
@@ -238,11 +236,9 @@ export function ComplexPage() {
             <PracticeCard questions={complexPractice2} />
           </section>
 
-          <PageBreak label="复数相等" />
-
           {/* Part 3: Equality */}
-          <section id="complex-equality" className="mb-8 scroll-mt-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <section id="complex-equality" className="mb-4 scroll-mt-4">
+            <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 3
               </span>
@@ -250,13 +246,13 @@ export function ComplexPage() {
               <SpeakButton text={complexNarrations.equality} />
             </h2>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
-              <p className="text-gray-700 mb-3">两个复数相等的条件：</p>
-              <div className="bg-gray-50 rounded-lg p-4 mb-4">
+            <div className="bg-white rounded-xl border border-gray-200 p-4 mb-3">
+              <p className="text-gray-700 mb-2">两个复数相等的条件：</p>
+              <div className="bg-gray-50 rounded-lg p-3 mb-3">
                 <Math tex="a + bi = c + di \iff a = c \;\text{且}\; b = d" display />
               </div>
-              <p className="text-gray-700 mb-3"><strong>实部等于实部，虚部等于虚部。</strong></p>
-              <div className="bg-gray-50 rounded-lg p-4">
+              <p className="text-gray-700 mb-2"><strong>实部等于实部，虚部等于虚部。</strong></p>
+              <div className="bg-gray-50 rounded-lg p-3">
                 <p className="text-sm text-gray-600 mb-2">例：已知 <Math tex="(2x-1) + (y+3)i = 0" />，求 x, y。</p>
                 <p className="text-sm text-gray-700">实部：<Math tex="2x - 1 = 0 \Rightarrow x = \tfrac{1}{2}" /></p>
                 <p className="text-sm text-gray-700">虚部：<Math tex="y + 3 = 0 \Rightarrow y = -3" /></p>
@@ -264,7 +260,7 @@ export function ComplexPage() {
             </div>
 
             <PracticeCard questions={complexPractice3} />
-            <CalloutCard variant="warning" title="易错点" className="mt-3">
+            <CalloutCard variant="warning" title="易错点" className="mt-2">
               <p>• <strong>虚数不能比大小！</strong> 3+2i 和 1+5i 谁大？没有意义，只有实数才能比大小</p>
               <p>• 复数等于0 ⇔ <strong>实部和虚部都等于0</strong></p>
             </CalloutCard>
@@ -335,6 +331,8 @@ export function ComplexPage() {
                   </div>
                 </div>
               </div>
+              <PageBreak label="必记结论 + 高次幂" />
+
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
                 <p className="text-blue-800 text-sm font-bold mb-1">🔑 必记结论（高考常用）：</p>
                 <div className="flex gap-6">
@@ -423,6 +421,8 @@ export function ComplexPage() {
                 </p>
               </div>
             </Collapsible>
+
+            <PageBreak label="共轭复数" />
 
             <Collapsible title="共轭复数" defaultOpen storageKey="complex:conjugate" headerExtra={<SpeakButton text={complexNarrations.conjugate} />}>
               <p className="text-sm text-gray-700 mb-3"><strong>定义：实部相同，虚部相反</strong>的两个复数互为共轭复数。</p>
@@ -521,6 +521,8 @@ export function ComplexPage() {
               </div>
             </Collapsible>
 
+            <PageBreak label="四则运算练习" />
+
             <PracticeCard questions={complexPractice4} />
             <CalloutCard variant="warning" title="易错点" className="mt-3">
               <p>• 遇到 <Math tex="i^2" /> <strong>必须立刻换成 -1</strong></p>
@@ -543,41 +545,52 @@ export function ComplexPage() {
               <SpeakButton text={complexNarrations.complexPlane} />
             </h2>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-5 mb-4">
-              <p className="text-gray-700 mb-3">
+            <div className="bg-white rounded-xl border border-gray-200 p-4 mb-3">
+              <p className="text-gray-700 mb-2">
                 每个复数 <Math tex="z = a + bi" /> 对应复平面上的一个点 <Math tex="(a, b)" />：
               </p>
-              <div className="mb-4 rounded-lg overflow-hidden border border-gray-200">
-                <Mafs viewBox={{ x: [-4, 4], y: [-3, 3] }} preserveAspectRatio={false} height={300}>
-                  <Coordinates.Cartesian
-                    xAxis={{ labels: (x) => x === 0 ? '' : `${x}` }}
-                    yAxis={{ labels: (y) => y === 0 ? '' : `${y}i` }}
-                  />
-                  {/* 原点到 z₁ 的向量 */}
-                  <Vector tail={[0, 0]} tip={[3, 2]} color="#3b82f6" />
-                  <Point x={3} y={2} color="#3b82f6" />
-                  <MafsText x={3.2} y={2.4} size={14} color="#3b82f6">z₁ = 3+2i</MafsText>
-                  {/* 原点到 z₂ 的向量 */}
-                  <Vector tail={[0, 0]} tip={[-2, -2]} color="#ef4444" />
-                  <Point x={-2} y={-2} color="#ef4444" />
-                  <MafsText x={-3.5} y={-2.4} size={14} color="#ef4444">z₂ = -2-2i</MafsText>
-                  {/* 纯虚数 2i */}
-                  <Point x={0} y={2} color="#8b5cf6" />
-                  <MafsText x={0.4} y={2.4} size={12} color="#8b5cf6">2i（纯虚数）</MafsText>
-                  {/* 实数 -1 */}
-                  <Point x={-1} y={0} color="#16a34a" />
-                  <MafsText x={-1} y={-0.5} size={12} color="#16a34a">-1（实数）</MafsText>
-                  {/* 象限标注 */}
-                  <MafsText x={2} y={1} size={13} color="#9ca3af">第一象限</MafsText>
-                  <MafsText x={-2.5} y={1} size={13} color="#9ca3af">第二象限</MafsText>
-                  <MafsText x={-2.5} y={-1} size={13} color="#9ca3af">第三象限</MafsText>
-                  <MafsText x={2} y={-1} size={13} color="#9ca3af">第四象限</MafsText>
-                  {/* 轴标签 */}
-                  <MafsText x={3.7} y={-0.3} size={13} color="#374151">实轴</MafsText>
-                  <MafsText x={0.4} y={2.8} size={13} color="#374151">虚轴</MafsText>
-                </Mafs>
+              {/* 纯 HTML+CSS 复平面 */}
+              <div className="mb-3 rounded-lg border border-gray-200 bg-white relative" style={{ height: 220 }}>
+                {/* 网格容器 */}
+                <div className="absolute inset-0" style={{ display: 'grid', gridTemplateColumns: 'repeat(8, 1fr)', gridTemplateRows: 'repeat(6, 1fr)' }}>
+                  {Array.from({ length: 48 }).map((_, i) => (
+                    <div key={i} style={{ border: '1px solid #f0f0f0' }} />
+                  ))}
+                </div>
+                {/* x轴 */}
+                <div className="absolute left-0 right-0" style={{ top: '50%', height: 2, backgroundColor: '#374151' }} />
+                {/* y轴 */}
+                <div className="absolute top-0 bottom-0" style={{ left: '50%', width: 2, backgroundColor: '#374151' }} />
+                {/* x轴刻度标签 */}
+                {[-3, -2, -1, 1, 2, 3].map(n => (
+                  <span key={`x${n}`} className="absolute text-xs text-gray-500" style={{ left: `${50 + n * 12.5}%`, top: '52%', transform: 'translateX(-50%)' }}>{n}</span>
+                ))}
+                {/* y轴刻度标签 */}
+                {[-2, -1, 1, 2].map(n => (
+                  <span key={`y${n}`} className="absolute text-xs text-gray-500" style={{ top: `${50 - n * 16.67}%`, left: '52%', transform: 'translateY(-50%)' }}>{n}i</span>
+                ))}
+                {/* 轴标签 */}
+                <span className="absolute text-xs font-bold text-gray-600" style={{ right: 8, top: '52%' }}>实轴</span>
+                <span className="absolute text-xs font-bold text-gray-600" style={{ left: '52%', top: 4 }}>虚轴</span>
+                {/* z₁ = 3+2i 点 */}
+                <div className="absolute w-3 h-3 rounded-full bg-blue-500" style={{ left: `${50 + 3 * 12.5}%`, top: `${50 - 2 * 16.67}%`, transform: 'translate(-50%, -50%)' }} />
+                <span className="absolute text-xs font-bold text-blue-600" style={{ left: `${50 + 3 * 12.5 + 2}%`, top: `${50 - 2 * 16.67 - 5}%` }}>z₁ = 3+2i</span>
+                {/* z₂ = -2-2i 点 */}
+                <div className="absolute w-3 h-3 rounded-full bg-red-500" style={{ left: `${50 + (-2) * 12.5}%`, top: `${50 - (-2) * 16.67}%`, transform: 'translate(-50%, -50%)' }} />
+                <span className="absolute text-xs font-bold text-red-500" style={{ left: `${50 + (-2) * 12.5 - 14}%`, top: `${50 - (-2) * 16.67 + 2}%` }}>z₂ = -2-2i</span>
+                {/* 2i 纯虚数 */}
+                <div className="absolute w-2.5 h-2.5 rounded-full bg-purple-500" style={{ left: '50%', top: `${50 - 2 * 16.67}%`, transform: 'translate(-50%, -50%)' }} />
+                <span className="absolute text-xs text-purple-600" style={{ left: '53%', top: `${50 - 2 * 16.67 - 5}%` }}>2i（纯虚数）</span>
+                {/* -1 实数 */}
+                <div className="absolute w-2.5 h-2.5 rounded-full bg-green-600" style={{ left: `${50 + (-1) * 12.5}%`, top: '50%', transform: 'translate(-50%, -50%)' }} />
+                <span className="absolute text-xs text-green-700" style={{ left: `${50 + (-1) * 12.5 - 6}%`, top: '55%' }}>-1（实数）</span>
+                {/* 象限标注 */}
+                <span className="absolute text-xs text-gray-400" style={{ left: '68%', top: '25%' }}>第一象限</span>
+                <span className="absolute text-xs text-gray-400" style={{ left: '18%', top: '25%' }}>第二象限</span>
+                <span className="absolute text-xs text-gray-400" style={{ left: '18%', top: '70%' }}>第三象限</span>
+                <span className="absolute text-xs text-gray-400" style={{ left: '68%', top: '70%' }}>第四象限</span>
               </div>
-              <div className="text-sm space-y-1 mb-4">
+              <div className="text-sm space-y-1 mb-2">
                 <p className="text-gray-700">• <strong>x轴 = 实轴</strong>：上面的点都是实数</p>
                 <p className="text-gray-700">• <strong>y轴 = 虚轴</strong>：上面的点（除原点）都是纯虚数</p>
                 <p className="text-gray-700">• <Math tex="|z|" /> = 点到原点的距离</p>
@@ -595,7 +608,7 @@ export function ComplexPage() {
             </div>
 
             <PracticeCard questions={complexPractice5} />
-            <CalloutCard variant="warning" title="易错点" className="mt-3">
+            <CalloutCard variant="warning" title="易错点" className="mt-2">
               <p>• 实部是 x 坐标，虚部是 y 坐标，<strong>别搞反</strong></p>
               <p>• 点在坐标轴上<strong>不属于任何象限</strong></p>
             </CalloutCard>
@@ -637,9 +650,9 @@ export function ComplexPage() {
               <div className="bg-gray-50 rounded-lg p-4 mb-3">
                 <Math tex="\left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}" display />
               </div>
-              <div className="bg-gray-50 rounded-lg p-3 mb-3 text-sm">
+              <div className="bg-gray-50 rounded-lg p-3 mb-2 text-sm">
                 <p className="font-bold mb-1">例：求 <Math tex="\left|\dfrac{2+i}{1+i}\right|" /></p>
-                <div className="space-y-1 text-gray-700">
+                <div className="space-y-0.5 text-gray-700">
                   <p><Math tex="|2+i| = \sqrt{4+1} = \sqrt{5}" /></p>
                   <p><Math tex="|1+i| = \sqrt{1+1} = \sqrt{2}" /></p>
                   <p>所以 <Math tex="\left|\dfrac{2+i}{1+i}\right| = \dfrac{\sqrt{5}}{\sqrt{2}} = \dfrac{\sqrt{10}}{2}" /></p>
@@ -651,8 +664,8 @@ export function ComplexPage() {
             </Collapsible>
 
             <Collapsible title="技巧3：共轭的妙用" defaultOpen storageKey="complex:trick-conjugate">
-              <p className="text-sm text-gray-700 mb-3">共轭有3个速算公式，高考经常直接考：</p>
-              <div className="bg-gray-50 rounded-lg p-4 mb-3 space-y-2 text-sm">
+              <p className="text-sm text-gray-700 mb-2">共轭有3个速算公式，高考经常直接考：</p>
+              <div className="bg-gray-50 rounded-lg p-3 mb-2 space-y-1 text-sm">
                 <p>① <Math tex="z + \bar{z} = 2a" />（实部的两倍）</p>
                 <p>② <Math tex="z - \bar{z} = 2bi" />（虚部的两倍 × i）</p>
                 <p>③ <Math tex="z \cdot \bar{z} = a^2 + b^2 = |z|^2" /></p>
@@ -777,6 +790,54 @@ export function ComplexPage() {
             </div>
           </section>
 
+      {isPrinting && printOptions.showAnswers && (
+        <>
+          <PageBreak label="答案与解析" />
+          <section className="mb-8 print-answers">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+
+            {[
+              { label: '一、虚数单位 i — 即时练习', questions: complexPractice1 },
+              { label: '二、复数的概念 — 即时练习', questions: complexPractice2 },
+              { label: '三、复数的相等 — 即时练习', questions: complexPractice3 },
+              { label: '四、四则运算 — 即时练习', questions: complexPractice4 },
+              { label: '五、复平面 — 即时练习', questions: complexPractice5 },
+              { label: '高考真题实战', questions: complexQuizQuestions },
+            ].map((section) => (
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="space-y-3 text-gray-700">
+                  {section.questions.map((q, idx) => {
+                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
+                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
+                    const answerTex = isSimpleFractionAnswer
+                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
+                      : q.correctAnswer;
+                    return (
+                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
+                        <div className="min-w-0">
+                          <p className="font-bold text-gray-900">
+                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
+                          </p>
+                          {q.explanationLatex && (
+                            <div className="text-gray-700 mt-1">
+                              <Math tex={q.explanationLatex} />
+                            </div>
+                          )}
+                          {q.explanation && (
+                            <p className="text-gray-700 mt-1">{q.explanation}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </section>
+        </>
+      )}
       </LessonLayout>
     </div>
   );

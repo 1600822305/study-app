@@ -165,6 +165,12 @@ math-field::part(virtual-keyboard-toggle) {
     max-width: 100% !important;
   }
 
+  /* Mafs 图表：打印时强制白底黑字（默认是黑底白字） */
+  .MafsView {
+    --mafs-bg: white !important;
+    --mafs-fg: black !important;
+  }
+
   /* ═══════════════════════════════════════
      4. 排版 — A4 纸质阅读优化
      ═══════════════════════════════════════ */
@@ -214,11 +220,8 @@ math-field::part(virtual-keyboard-toggle) {
      5. 分页控制 — 智能策略
      ═══════════════════════════════════════ */
 
-  /* 小型卡片：避免跨页（练习题单题、易错点、CalloutCard） */
-  .break-inside-avoid,
-  .bg-amber-50,
-  .bg-yellow-50,
-  [class*="CalloutCard"] {
+  /* 小型卡片：显式标记避免跨页 */
+  .break-inside-avoid {
     break-inside: avoid !important;
   }
 
@@ -372,6 +375,15 @@ math-field::part(virtual-keyboard-toggle) {
   .screen-hidden {
     display: none;
   }
+
+  /* 预览专用的分页元素在真实打印中隐藏 */
+  .preview-page-break,
+  .preview-page-end,
+  .preview-page-gap,
+  .preview-page-start,
+  .page-break-label {
+    display: none !important;
+  }
 }
 
 /* 非打印时隐藏打印专用元素 */
@@ -422,18 +434,18 @@ html.print-preview-mode body {
 }
 
 html.print-preview-mode #root {
-  /* A4 纸张模拟 */
+  /* A4 宽度容器（不是单页白纸，而是多页的载体） */
   position: relative !important;
   width: 210mm !important;
-  min-height: 297mm;
   max-width: 210mm !important;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-  padding: 18mm 15mm 22mm 15mm !important;
   margin: 0 !important;
   overflow: visible !important;
   height: auto !important;
 
+  /* 第一页的白色背景 + padding（模拟 @page margin: 8mm 5mm） */
   background: white !important;
+  padding: 8mm 5mm 0 5mm !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 
   /* 打印排版 */
   font-size: 11pt !important;
@@ -453,26 +465,35 @@ html.print-preview-mode #root {
   border: none;
 }
 
-/* 预览模式：可视化分页标记 */
-.page-break-marker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 24px -15mm;
-  padding: 0 15mm;
-  user-select: none;
+/* 预览模式：模拟真实分页 */
+.preview-page-break {
+  /* 撑满整个 A4 宽度（包括 padding 区域） */
+  margin-left: -5mm;
+  margin-right: -5mm;
 }
 
-.page-break-line {
-  flex: 1;
-  height: 2px;
-  background: repeating-linear-gradient(
-    to right,
-    #ef4444 0,
-    #ef4444 8px,
-    transparent 8px,
-    transparent 14px
-  );
+/* 当前页底部留白（模拟页底 margin） */
+.preview-page-end {
+  height: 8mm;
+  background: white;
+}
+
+/* 灰色间隔区（页与页之间的视觉分割） */
+.preview-page-gap {
+  background: #6b7280;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 6px 12px rgba(0, 0, 0, 0.2),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 新页面顶部（模拟页顶 margin） */
+.preview-page-start {
+  height: 8mm;
+  background: white;
 }
 
 .page-break-label {

@@ -10,7 +10,7 @@ interface PageBreakProps {
  *
  * - 屏幕正常浏览：完全不可见
  * - 打印模式：在此处强制分页（break-before: page）
- * - 预览模式：显示红色虚线分页标记，方便排版调整
+ * - 预览模式：模拟真实分页 — 结束当前页面，灰色间隔，开始新页面
  */
 export function PageBreak({ label }: PageBreakProps) {
   const { isPreview, isPrinting } = usePrintMode();
@@ -18,13 +18,18 @@ export function PageBreak({ label }: PageBreakProps) {
   // 正常屏幕模式：不渲染
   if (!isPrinting && !isPreview) return null;
 
-  // 预览模式：显示可视化分页标记
+  // 预览模式：模拟真实页面分割
   if (isPreview) {
     return (
-      <div className="page-break-marker">
-        <div className="page-break-line" />
-        <span className="page-break-label">{label || '分页'}</span>
-        <div className="page-break-line" />
+      <div className="preview-page-break">
+        {/* 当前页底部留白 */}
+        <div className="preview-page-end" />
+        {/* 灰色间隔区 + 分页标签 */}
+        <div className="preview-page-gap">
+          <span className="page-break-label">{label || '分页'}</span>
+        </div>
+        {/* 新页面顶部 */}
+        <div className="preview-page-start" />
       </div>
     );
   }

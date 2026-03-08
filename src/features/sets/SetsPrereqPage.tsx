@@ -5,11 +5,12 @@ import { setsPrereqNarrations } from './data/prereq-narrations';
 import { setsPrereqPractice1, setsPrereqPractice2, setsPrereqPractice3, setsPrereqPractice4 } from './data/practice';
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
-import { useProgress } from '@/hooks';
+import { useProgress, usePrintMode } from '@/hooks';
 
 
 export function SetsPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sets-prereq', setsPrereqProgressItems);
+  const { isPrinting, printOptions } = usePrintMode();
 
   return (
     <div>
@@ -236,6 +237,7 @@ export function SetsPrereqPage() {
                 </div>
 
                 {/* 变式：b 是偶数 */}
+                <PageBreak />
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                   <p className="font-bold text-green-800 mb-2">变式：当 b 是偶数时（省一半计算量！）</p>
                   <p className="text-xs text-green-700 mb-2">设 <Math tex="b = 2b'" />（也就是 <Math tex="b' = \frac{b}{2}" />），公式简化为：</p>
@@ -265,11 +267,11 @@ export function SetsPrereqPage() {
 
             {/* 方法三：配方法 */}
             <Collapsible title="方法三：配方法（公式法的本质）" storageKey="sets-prereq:eq-complete-square">
-              <div className="space-y-4 text-sm text-gray-700">
+              <div className="space-y-3 text-sm text-gray-700">
                 <p className="text-gray-500 text-xs">核心思路：把方程凑成 <Math tex="(x + ?)^2 = \text{某个数}" /> 的形式，然后用方法零（直接开平方）解出来。</p>
 
                 {/* 先讲规则 */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                   <p className="font-bold text-blue-800 mb-2">关键操作：怎么"凑"完全平方？</p>
                   <p className="text-blue-700 text-xs mb-2">回忆完全平方公式：<Math tex="(x + a)^2 = x^2 + 2ax + a^2" /></p>
                   <p className="text-blue-700 text-xs mb-2">反过来看：如果你有 <Math tex="x^2 + 2ax" />，<strong>只差一个 <Math tex="a^2" /></strong> 就能凑成 <Math tex="(x+a)^2" /></p>
@@ -285,9 +287,9 @@ export function SetsPrereqPage() {
                 </div>
 
                 {/* 例1：完整步骤 */}
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gray-50 rounded-lg p-3 space-y-2">
                   <p className="font-bold text-gray-800">例1：<Math tex="x^2 + 6x + 5 = 0" /></p>
-                  <div className="pl-3 border-l-2 border-blue-300 space-y-2">
+                  <div className="pl-3 border-l-2 border-blue-300 space-y-1.5">
                     <div>
                       <p><span className="text-blue-600 font-bold">第一步</span>：常数项移到右边</p>
                       <p className="pl-4"><Math tex="x^2 + 6x = -5" /></p>
@@ -429,6 +431,7 @@ export function SetsPrereqPage() {
               <p>3. 用口诀写答案</p>
             </CalloutCard>
 
+            <PageBreak />
             <div className="bg-orange-50 border border-orange-200 rounded-xl p-5 text-center">
               <p className="text-sm text-orange-600 mb-2">口诀（必记！）</p>
               <p className="text-lg font-bold text-gray-800">大于取两边，小于取中间</p>
@@ -440,26 +443,50 @@ export function SetsPrereqPage() {
               </div>
             </div>
 
-            {/* 抛物线图解 */}
+            {/* 抛物线图解 — 纯 HTML+CSS */}
             <div>
               <p className="font-bold mb-2">图解：为什么口诀是对的？</p>
               <p className="text-xs text-gray-500 mb-3">
                 <Math tex="y = x^2 - 3x - 4 = (x+1)(x-4)" /> 的图像（a {'>'} 0，开口朝上）：
               </p>
-              <div className="bg-gray-50 rounded-xl p-2 overflow-hidden">
-                <Mafs viewBox={{ x: [-3, 6], y: [-6, 4], padding: 0 }} preserveAspectRatio={false} height={260}>
-                  <Coordinates.Cartesian xAxis={{ lines: 1 }} yAxis={{ lines: 1 }} />
-                  <Plot.OfX y={(x: number) => x * x - 3 * x - 4} color="#6366f1" />
-                  <Point x={-1} y={0} color="#ef4444" />
-                  <Point x={4} y={0} color="#ef4444" />
-                  <MafsText x={-1} y={1} size={14}>x₁=-1</MafsText>
-                  <MafsText x={4} y={1} size={14}>x₂=4</MafsText>
-                  <MafsText x={-2.2} y={3} size={16} color="#16a34a">y{'>'} 0</MafsText>
-                  <MafsText x={1.5} y={-4} size={16} color="#ef4444">y{'<'} 0</MafsText>
-                  <MafsText x={5.3} y={3} size={16} color="#16a34a">y{'>'} 0</MafsText>
-                </Mafs>
+              <div className="bg-gray-50 rounded-xl p-3 overflow-hidden relative" style={{ height: 180 }}>
+                {/* x 轴 */}
+                <div className="absolute left-[8%] right-[8%] top-[55%] h-[2px] bg-gray-800" />
+                {/* x 轴箭头 */}
+                <div className="absolute right-[7%] top-[55%] -translate-y-1/2 text-gray-800 text-xs font-bold">→ x</div>
+                {/* y 轴 */}
+                <div className="absolute left-[35%] top-[8%] bottom-[8%] w-[2px] bg-gray-800" />
+                {/* y 轴箭头 */}
+                <div className="absolute left-[35%] top-[5%] -translate-x-1/2 text-gray-800 text-xs font-bold">y ↑</div>
+                {/* 抛物线 — 用 SVG path */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 220" preserveAspectRatio="none">
+                  <path
+                    d="M 30,30 Q 70,80 108,120 Q 140,155 170,175 Q 200,190 220,175 Q 250,155 280,120 Q 310,80 350,10"
+                    fill="none"
+                    stroke="#6366f1"
+                    strokeWidth="2.5"
+                  />
+                </svg>
+                {/* 根 x₁=-1 */}
+                <div className="absolute left-[22%] top-[55%] -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-3 h-3 rounded-full bg-red-500 border-2 border-white" />
+                </div>
+                <div className="absolute left-[22%] top-[45%] -translate-x-1/2 text-xs font-bold text-gray-700">x₁=-1</div>
+                {/* 根 x₂=4 */}
+                <div className="absolute left-[72%] top-[55%] -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-3 h-3 rounded-full bg-red-500 border-2 border-white" />
+                </div>
+                <div className="absolute left-[72%] top-[45%] -translate-x-1/2 text-xs font-bold text-gray-700">x₂=4</div>
+                {/* y > 0 标注（左） */}
+                <div className="absolute left-[10%] top-[25%] text-green-600 font-bold text-sm">y{'>'} 0</div>
+                {/* y < 0 标注（中间） */}
+                <div className="absolute left-[43%] top-[75%] text-red-500 font-bold text-sm">y{'<'} 0</div>
+                {/* y > 0 标注（右） */}
+                <div className="absolute left-[80%] top-[25%] text-green-600 font-bold text-sm">y{'>'} 0</div>
+                {/* 原点 O */}
+                <div className="absolute left-[35%] top-[55%] translate-x-1 translate-y-1 text-xs text-gray-500">O</div>
               </div>
-              <div className="mt-3 text-sm space-y-1 text-gray-600">
+              <div className="mt-2 text-sm space-y-0.5 text-gray-600">
                 <p>🔴 两个根 <Math tex="x_1 = -1, x_2 = 4" /> 是抛物线和 x 轴的交点</p>
                 <p>🟢 <strong>两边</strong>（x {'<'} -1 和 x {'>'} 4）：抛物线在 x 轴<strong>上面</strong> → y {'>'} 0</p>
                 <p>🔴 <strong>中间</strong>（-1 {'<'} x {'<'} 4）：抛物线在 x 轴<strong>下面</strong> → y {'<'} 0</p>
@@ -468,25 +495,25 @@ export function SetsPrereqPage() {
             </div>
 
             <div>
-              <p className="font-bold mb-2">例题演练</p>
-              <div className="space-y-3">
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 mb-1">例1：<Math tex="x^2 - 3x - 4 < 0" /></p>
+              <p className="font-bold mb-1">例题演练</p>
+              <div className="space-y-2">
+                <div className="bg-gray-50 rounded-lg p-2">
+                  <p className="font-bold text-gray-800 mb-0.5">例1：<Math tex="x^2 - 3x - 4 < 0" /></p>
                   <p>解方程：<Math tex="(x-4)(x+1) = 0 \;\Rightarrow\; x = -1, 4" /></p>
                   <p>"小于取中间" → <Math tex="-1 < x < 4" /></p>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 mb-1">例2：<Math tex="x^2 - 2x - 3 \geq 0" /></p>
+                <div className="bg-gray-50 rounded-lg p-2">
+                  <p className="font-bold text-gray-800 mb-0.5">例2：<Math tex="x^2 - 2x - 3 \geq 0" /></p>
                   <p>解方程：<Math tex="(x-3)(x+1) = 0 \;\Rightarrow\; x = -1, 3" /></p>
                   <p>"大于取两边"（含等号） → <Math tex="x \leq -1 \text{ 或 } x \geq 3" /></p>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 mb-1">例3：<Math tex="x^2 - 4x + 3 \leq 0" /></p>
+                <div className="bg-gray-50 rounded-lg p-2">
+                  <p className="font-bold text-gray-800 mb-0.5">例3：<Math tex="x^2 - 4x + 3 \leq 0" /></p>
                   <p>解方程：<Math tex="(x-1)(x-3) = 0 \;\Rightarrow\; x = 1, 3" /></p>
                   <p>"小于取中间"（含等号） → <Math tex="1 \leq x \leq 3" /></p>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 mb-1">例4：<Math tex="x^2 + 2x > 0" /></p>
+                <div className="bg-gray-50 rounded-lg p-2">
+                  <p className="font-bold text-gray-800 mb-0.5">例4：<Math tex="x^2 + 2x > 0" /></p>
                   <p>解方程：<Math tex="x(x+2) = 0 \;\Rightarrow\; x = -2, 0" /></p>
                   <p>"大于取两边" → <Math tex="x < -2 \text{ 或 } x > 0" /></p>
                 </div>
@@ -496,6 +523,7 @@ export function SetsPrereqPage() {
             <CalloutCard variant="tip">
               <p><strong>为什么？</strong>二次函数 <Math tex="y = ax^2+bx+c" />（a{'>'} 0）的图像是开口朝上的抛物线。两个根之间在 x 轴下面（{'<'} 0），两边在 x 轴上面（{'>'} 0）。</p>
             </CalloutCard>
+            <PageBreak />
 
             <PracticeCard questions={setsPrereqPractice2} />
 
@@ -699,6 +727,54 @@ export function SetsPrereqPage() {
         </h2>
         <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="16道选择题，覆盖解方程、解不等式、区间表示、数轴全部知识点" />
       </section>
+
+      {isPrinting && printOptions.showAnswers && (
+        <>
+          <PageBreak label="答案与解析" />
+          <section className="mb-8 print-answers">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+
+            {[
+              { label: '一、解方程 — 即时练习', questions: setsPrereqPractice1 },
+              { label: '二、解不等式 — 即时练习', questions: setsPrereqPractice2 },
+              { label: '三、数轴 — 即时练习', questions: setsPrereqPractice3 },
+              { label: '四、区间表示法 — 即时练习', questions: setsPrereqPractice4 },
+              { label: '选择题自测', questions: setsPrereqQuizQuestions },
+            ].map((section) => (
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
+                  {section.questions.map((q, idx) => {
+                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
+                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
+                    const answerTex = isSimpleFractionAnswer
+                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
+                      : q.correctAnswer;
+                    return (
+                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
+                        <div className="min-w-0">
+                          <p className="font-bold text-gray-900">
+                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
+                          </p>
+                          {q.explanationLatex && (
+                            <div className="text-gray-700 mt-1">
+                              <Math tex={q.explanationLatex} />
+                            </div>
+                          )}
+                          {q.explanation && (
+                            <p className="text-gray-700 mt-1">{q.explanation}</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </section>
+        </>
+      )}
 
       </LessonLayout>
     </div>
