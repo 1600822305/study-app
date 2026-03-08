@@ -26,8 +26,8 @@ export function SetsPage() {
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <button onClick={() => document.getElementById('sets-what')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、什么是集合 → 三大性质</button>
-          <button onClick={() => document.getElementById('sets-props')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、元素与集合 → ∈ 和 ∉</button>
+          <button onClick={() => document.getElementById('sets-what')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合是什么 → 定义 + ∈ 和 ∉</button>
+          <button onClick={() => document.getElementById('sets-props')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、三大性质 → 确定性·互异性·无序性</button>
           <button onClick={() => document.getElementById('sets-repr')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、集合的表示 → 列举法、描述法、区间</button>
           <button onClick={() => document.getElementById('sets-numsets')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、常见数集 → ℕ, ℤ, ℚ, ℝ</button>
           <button onClick={() => document.getElementById('sets-subset')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、子集与真子集 → ⊆ 和 ⊂</button>
@@ -1078,6 +1078,7 @@ export function SetsPage() {
                   <p className="font-bold text-blue-800 mb-2">技巧四：含参数问题的等价转换 <span className="ml-1 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
                   <div className="text-blue-700 space-y-1">
                     <p>"<Math tex="A \cap B = \varnothing" />" → A 和 B 在数轴上完全分开</p>
+                    <p>"<Math tex="A \subseteq B" />" → A 的范围在 B 的范围里面（A 可以是空集）</p>
                     <p>"<Math tex="A \cap B = A" />" → 等价于 <Math tex="A \subseteq B" /></p>
                     <p>"<Math tex="A \cup B = B" />" → 等价于 <Math tex="A \subseteq B" /></p>
                   </div>
@@ -1214,6 +1215,8 @@ export function SetsPage() {
                     <p>② 子集问题别忘空集</p>
                     <p>③ 互异性：集合元素不能重复</p>
                     <p>④ 描述法看清 x 还是 (x,y)</p>
+                    <p>⑤ ∅ 和 &#123;0&#125; 不一样（∅ 是 0 个元素，&#123;0&#125; 有 1 个元素）</p>
+                    <p>⑥ 补集必须有全集 U</p>
                   </div>
                 </div>
               </div>
