@@ -1,9 +1,12 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, CalloutCard, PracticeCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, CalloutCard, PracticeCard, LessonLayout } from '@/components/shared';
 import { prereqNarrations } from './data/narrations';
 import { prereqSelfTest } from './data/selftest';
 import { prereqPractice1, prereqPractice2, prereqPractice3, prereqPractice4, prereqPractice5, prereqPractice6, prereqPractice7 } from './data/practice';
+import { prereqProgressItems } from './data/progress';
+import { useProgress } from '@/hooks';
 
 export function PrereqPage() {
+  const { items: progressItems, toggle: toggleProgress } = useProgress('prereq', prereqProgressItems);
 
   return (
     <div>
@@ -33,6 +36,7 @@ export function PrereqPage() {
         </div>
       </div>
 
+      <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
       <section className="mb-6">
         <Collapsible title="一、数的分类" defaultOpen storageKey="prereq:num-class" headerExtra={<SpeakButton text={prereqNarrations.numClass} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：说出自然数→整数→有理数→实数→复数的扩展关系，理解为什么需要复数。</p>
@@ -433,6 +437,7 @@ export function PrereqPage() {
           description="10道选择题，确认初中基础没问题。"
         />
       </section>
+      </LessonLayout>
     </div>
   );
 }
