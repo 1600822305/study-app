@@ -389,6 +389,82 @@ export function LogicPage() {
               </div>
             </Collapsible>
 
+            <Collapsible title="拆题实战：遇到题先判断用哪种方法" defaultOpen storageKey="logic:decompose">
+              <div className="bg-gradient-to-b from-violet-50 to-purple-50 border-2 border-violet-300 rounded-xl p-5 mb-4">
+                <p className="font-black text-violet-800 mb-3">第零步：先判断题目类型，再选方法</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                  <div className="bg-white rounded-xl p-3 border border-violet-200">
+                    <p className="font-bold text-violet-800">类型 A：能解出范围的</p>
+                    <p className="text-gray-500 mt-1">p 和 q 都是关于同一个变量 x 的不等式或等式</p>
+                    <p className="text-violet-600 font-bold mt-1">→ 用集合法（解范围→比大小→套公式）</p>
+                    <p className="text-gray-400 text-xs mt-1">例：p: x {'>'} 2，q: x {'>'} 1</p>
+                  </div>
+                  <div className="bg-white rounded-xl p-3 border border-violet-200">
+                    <p className="font-bold text-violet-800">类型 B：有多个变量 / 不好解范围的</p>
+                    <p className="text-gray-500 mt-1">p 和 q 涉及 a、b 多个变量，或者是文字描述</p>
+                    <p className="text-violet-600 font-bold mt-1">→ 用推理法（正推一次 + 反推一次）</p>
+                    <p className="text-gray-400 text-xs mt-1">例：p: a {'>'} 0 且 b {'>'} 0，q: a+b {'>'} 0</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="bg-white border-2 border-blue-200 rounded-xl p-4">
+                  <p className="font-bold text-blue-800 text-sm mb-1">实战 1（集合法）：p: x² {'<'} 4，q: x {'<'} 2</p>
+                  <p className="text-xs text-blue-500 mb-3">判断：单变量不等式 → 用集合法</p>
+                  <div className="text-sm text-gray-700 space-y-1.5">
+                    <div className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">1</span>
+                      <p><strong>解范围：</strong>p: x² {'<'} 4 → -2 {'<'} x {'<'} 2 → A = (-2, 2)。q: x {'<'} 2 → B = (-∞, 2)</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">2</span>
+                      <p><strong>比大小：</strong>A = (-2, 2) 在 B = (-∞, 2) 里面 → A ⊂ B，A 更小</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">3</span>
+                      <p><strong>套公式：</strong>A 小 → <strong>p 是 q 的充分不必要条件</strong> ✅</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white border-2 border-orange-200 rounded-xl p-4">
+                  <p className="font-bold text-orange-800 text-sm mb-1">实战 2（推理法）：2022 新高考 I 卷真题</p>
+                  <p className="text-sm text-gray-700 mb-1">p: a {'>'} 0 且 b {'>'} 0，q: a + b {'>'} 0，则 p 是 q 的？</p>
+                  <p className="text-xs text-orange-500 mb-3">判断：两个变量 a、b → 不好解范围 → 用推理法</p>
+                  <div className="text-sm text-gray-700 space-y-1.5">
+                    <div className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">1</span>
+                      <div>
+                        <p><strong>正推 p→q：</strong>假设 p 成立（a {'>'} 0 且 b {'>'} 0）</p>
+                        <p className="text-gray-500">两个正数相加，a + b 一定 {'>'} 0 → q 成立 ✓</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">2</span>
+                      <div>
+                        <p><strong>反推 q→p：</strong>假设 q 成立（a + b {'>'} 0），p 一定成立吗？</p>
+                        <p className="text-gray-500">举反例：a = 3, b = -1 → a + b = 2 {'>'} 0 ✓，但 b {'<'} 0 → p 不成立 ✗</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold shrink-0 text-xs">3</span>
+                      <div>
+                        <p><strong>查表：</strong>p→q ✓，q→p ✗ → <strong>充分不必要条件，选 A</strong> ✅</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 bg-slate-900 text-white rounded-xl p-4 text-center text-sm">
+                <p className="text-amber-400 font-bold mb-1">推理法万能模板（不知道用啥就用这个）</p>
+                <p>第一步：假设 p 成立，看 q 是否一定成立（正推）</p>
+                <p>第二步：假设 q 成立，看 p 是否一定成立（反推，找反例最快）</p>
+                <p>第三步：查四种情况表，得出答案</p>
+              </div>
+            </Collapsible>
+
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4 mb-4">
               <p className="font-bold text-green-800 text-sm mb-2">✏️ 即时练习</p>
               <div className="text-sm text-gray-700 space-y-1">
