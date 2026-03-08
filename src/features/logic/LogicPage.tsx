@@ -1,4 +1,4 @@
-import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { logicNarrations } from './data/narrations';
 import { logicPractice1, logicPractice2, logicPractice3, logicPractice4, logicPractice5 } from './data/practice';
 import { useProgress } from '@/hooks';
@@ -21,6 +21,10 @@ export function LogicPage() {
           { label: '约2-3小时', color: 'purple' },
         ]}
       />
+
+      <div className="flex justify-end mb-4 print:hidden">
+        <ExportButton title="1.3 常用逻辑用语" />
+      </div>
 
       {/* 知识地图 */}
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
@@ -123,6 +127,8 @@ export function LogicPage() {
             </div>
           </section>
 
+          <PageBreak label="四种命题" />
+
           {/* Part 2: Four Types of Propositions */}
           <section id="logic-four" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -179,6 +185,8 @@ export function LogicPage() {
 
             <PracticeCard questions={logicPractice2} />
           </section>
+
+          <PageBreak label="充分必要条件" />
 
           {/* Part 3: Sufficient & Necessary Conditions */}
           <section id="logic-cond" className="mb-8 scroll-mt-4">
@@ -411,6 +419,8 @@ export function LogicPage() {
             </CalloutCard>
           </section>
 
+          <PageBreak label="量词与否定" />
+
           {/* Part 4: Quantifiers */}
           <section id="logic-quant" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -514,6 +524,8 @@ export function LogicPage() {
             <PracticeCard questions={logicPractice4} />
           </section>
 
+          <PageBreak label="逻辑联结词" />
+
           {/* Part 5: Logical Connectives */}
           <section id="logic-conn" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -596,6 +608,8 @@ export function LogicPage() {
 
             <PracticeCard questions={logicPractice5} />
           </section>
+
+          <PageBreak label="真题实战" />
 
           {/* Part 6: Quiz */}
           <section id="logic-quiz" className="mb-8 scroll-mt-4">

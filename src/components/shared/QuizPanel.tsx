@@ -4,6 +4,7 @@ import { ChevronRight, RotateCcw, Trophy, Clock, Target, CheckCircle, XCircle, S
 import { Math as MathTex } from './Math';
 import { QuizDiagrams } from './QuizDiagrams';
 import { useQuiz } from '@/hooks/useQuiz';
+import { usePrintMode } from '@/hooks/usePrintMode';
 import { storage } from '@/lib/storage';
 
 import type { QuizQuestionData } from '@/types';
@@ -59,7 +60,9 @@ interface QuizSession {
 // ── Component ──
 
 export function QuizPanel({ module, questions, title = '自测', description, shuffle = true }: QuizPanelProps) {
+  const { isPrinting } = usePrintMode();
   const { recordAnswer } = useQuiz(module);
+
   const [order, setOrder] = useState<string[]>(() =>
     shuffle ? shuffleArray(questions.map((q) => q.id)) : questions.map((q) => q.id),
   );
@@ -159,6 +162,49 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
     setAnswers((prev) => [...prev, record]);
     recordAnswer(current.id, trimmed, current.correctAnswer, isCorrect);
   }, [answered, current, blankInput, recordAnswer]);
+
+  // ── 打印模式：静态展示全部题目 ──
+  if (isPrinting) {
+    return (
+      <div className="bg-white rounded-xl border border-gray-200 p-4 my-4">
+        <p className="font-bold text-gray-800 mb-3">{title}</p>
+        {description && <p className="text-xs text-gray-400 mb-3">{description}</p>}
+        <div className="space-y-3">
+          {questions.map((q, idx) => (
+            <div key={q.id} className="bg-gray-50 rounded-lg border border-gray-200 p-3" style={{ breakInside: 'avoid' }}>
+              <p className="text-gray-800 font-medium mb-1">
+                <span className="text-blue-600 mr-2">{idx + 1}.</span>
+                {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}
+              </p>
+
+              {/* 选择题选项 */}
+              {q.type !== 'blank' && q.options && (
+                <div className="space-y-1 ml-4">
+                  {q.options.map((opt) => (
+                    <div key={opt.value} className="flex items-center gap-2 text-gray-700">
+                      <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
+                        {opt.label}
+                      </span>
+                      <span>{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* 填空题：留出答题线 */}
+              {q.type === 'blank' && (
+                <div className="ml-4 mt-1">
+                  <span className="text-gray-400">答：</span>
+                  <span className="inline-block w-40 border-b-2 border-gray-300 ml-1">&nbsp;</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+      </div>
+    );
+  }
 
   const handleNext = () => {
     if (currentIdx < total - 1) {

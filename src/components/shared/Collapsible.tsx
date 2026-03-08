@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 import { useUIState } from '@/hooks/useUIState';
+import { usePrintMode } from '@/hooks/usePrintMode';
 
 import type { CollapsibleVariant } from '@/types';
 
@@ -30,7 +31,9 @@ export function Collapsible({
     defaultOpen,
   );
 
-  const open = storageKey ? persistedOpen : localOpen;
+  const { isPrinting } = usePrintMode();
+
+  const open = isPrinting ? true : (storageKey ? persistedOpen : localOpen);
   const setOpen = storageKey ? setPersistedOpen : setLocalOpen;
 
   const styles = {

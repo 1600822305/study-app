@@ -2,7 +2,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Layout } from '@/layouts/Layout';
 import { ChatProvider } from '@/features/chat/ChatContext';
+import { PrintProvider } from '@/hooks/usePrintMode';
 import { HomePage } from '@/features/home';
+import { ExamOverviewPage } from '@/features/overview';
+import { CoverPage, TableOfContentsPage } from '@/features/book';
 import { PrereqPage } from '@/features/prereq';
 import { ComplexPage } from '@/features/complex';
 import { SetsPage, SetsPrereqPage } from '@/features/sets';
@@ -17,10 +20,14 @@ import { ChatPage } from '@/features/chat/ChatPage';
 function App() {
   return (
     <BrowserRouter>
+      <PrintProvider>
       <ChatProvider>
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/math/cover" element={<CoverPage />} />
+          <Route path="/math/toc" element={<TableOfContentsPage />} />
+          <Route path="/math/overview" element={<ExamOverviewPage />} />
           <Route path="/math/prereq" element={<PrereqPage />} />
           <Route path="/math/complex" element={<ComplexPage />} />
           <Route path="/math/sets-prereq" element={<SetsPrereqPage />} />
@@ -36,6 +43,7 @@ function App() {
         </Routes>
       </Layout>
       </ChatProvider>
+      </PrintProvider>
     </BrowserRouter>
   );
 }

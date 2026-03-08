@@ -1,6 +1,6 @@
 import { Mafs, Coordinates, Point, Line, Plot, Text as MafsText } from 'mafs';
 
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
 import { setsPrereqPractice1, setsPrereqPractice2, setsPrereqPractice3, setsPrereqPractice4 } from './data/practice';
 import { setsPrereqProgressItems } from './data/prereq-progress';
@@ -24,6 +24,10 @@ export function SetsPrereqPage() {
           { label: '初中+高一基础', color: 'green' },
         ]}
       />
+
+      <div className="flex justify-end mb-4 print:hidden">
+        <ExportButton title="1.1.5 集合前置知识" />
+      </div>
 
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
@@ -346,6 +350,8 @@ export function SetsPrereqPage() {
         </Collapsible>
       </section>
 
+      <PageBreak label="解不等式" />
+
         {/* Section 2: Quadratic Inequalities */}
         <section id="sp-inequality" className="mb-6 scroll-mt-4">
           <Collapsible title="二、解一元二次不等式（集合最核心的前置技能！）" defaultOpen storageKey="sets-prereq:inequality" headerExtra={<SpeakButton text={setsPrereqNarrations.inequality} />}>
@@ -502,6 +508,8 @@ export function SetsPrereqPage() {
         </Collapsible>
       </section>
 
+      <PageBreak label="数轴" />
+
       {/* Section 3: Number Line */}
       <section id="sp-numberline" className="mb-6 scroll-mt-4">
         <Collapsible title="三、数轴的使用" defaultOpen storageKey="sets-prereq:numberline" headerExtra={<SpeakButton text={setsPrereqNarrations.numberLine} />}>
@@ -562,6 +570,8 @@ export function SetsPrereqPage() {
         </Collapsible>
       </section>
 
+      <PageBreak label="区间表示法" />
+
       {/* Section 4: Interval Notation */}
       <section id="sp-interval" className="mb-6 scroll-mt-4">
         <Collapsible title="四、区间表示法" defaultOpen storageKey="sets-prereq:interval" headerExtra={<SpeakButton text={setsPrereqNarrations.interval} />}>
@@ -616,6 +626,8 @@ export function SetsPrereqPage() {
           </div>
         </Collapsible>
       </section>
+
+      <PageBreak label="公式速查表" />
 
       {/* Formula Cheat Sheet */}
       <section className="mb-8">
@@ -674,6 +686,8 @@ export function SetsPrereqPage() {
           </div>
         </Collapsible>
       </section>
+
+      <PageBreak label="选择题自测" />
 
       {/* Section 5: Quiz */}
       <section id="sp-quiz" className="mb-8 scroll-mt-4">

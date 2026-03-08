@@ -38,6 +38,9 @@ const navItems: NavItem[] = [
     label: '高考数学',
     icon: <Calculator size={18} />,
     children: [
+      { path: '/math/cover', label: '📕 封面' },
+      { path: '/math/toc', label: '📑 目录' },
+      { path: '/math/overview', label: '📊 高考分析报告' },
       {
         groupLabel: '第一阶段：数学语言',
         items: [

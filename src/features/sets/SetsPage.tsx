@@ -1,4 +1,4 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { setsNarrations } from './data/narrations';
 import { setsPractice0, setsPractice1, setsPractice2, setsPractice3, setsPractice4, setsPractice5 } from './data/practice';
 import { useProgress } from '@/hooks';
@@ -21,6 +21,10 @@ export function SetsPage() {
           { label: '约2-3小时', color: 'purple' },
         ]}
       />
+
+      <div className="flex justify-end mb-4 print:hidden">
+        <ExportButton title="1.2 集合" />
+      </div>
 
       {/* 知识地图 */}
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
@@ -139,6 +143,8 @@ export function SetsPage() {
             </Collapsible>
           </section>
 
+          <PageBreak label="三大性质" />
+
           {/* Section 2: 三大性质 */}
           <section id="sets-props" className="mb-6 scroll-mt-4">
             <Collapsible title="二、集合的三大性质（必须记住！）" defaultOpen storageKey="sets:properties" headerExtra={<SpeakButton text={setsNarrations.threeProperties} />}>
@@ -201,6 +207,8 @@ export function SetsPage() {
               </div>
             </Collapsible>
           </section>
+
+          <PageBreak label="表示方法" />
 
           {/* Section 3: 表示方法 */}
           <section id="sets-repr" className="mb-6 scroll-mt-4">
@@ -397,6 +405,8 @@ export function SetsPage() {
             </Collapsible>
           </section>
 
+          <PageBreak label="常见数集" />
+
           {/* Section 4: 常见数集 */}
           <section id="sets-numsets" className="mb-6 scroll-mt-4">
             <Collapsible title="四、常见的数集（背下来）" defaultOpen storageKey="sets:number-sets" headerExtra={<SpeakButton text={setsNarrations.numberSets} />}>
@@ -454,6 +464,8 @@ export function SetsPage() {
               </div>
             </Collapsible>
           </section>
+
+          <PageBreak label="集合间的关系" />
 
           {/* Section 5: 集合间的关系 */}
           <section id="sets-subset" className="mb-6 scroll-mt-4">
@@ -636,6 +648,8 @@ export function SetsPage() {
               </div>
             </Collapsible>
           </section>
+
+          <PageBreak label="集合运算" />
 
           {/* Section 6: 集合的运算 */}
           <section id="sets-ops" className="mb-6 scroll-mt-4">

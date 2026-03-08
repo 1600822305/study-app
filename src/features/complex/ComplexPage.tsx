@@ -1,7 +1,7 @@
 import { AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Vector, Text as MafsText } from 'mafs';
 
-import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
 import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/practice';
 import { useProgress } from '@/hooks';
@@ -24,6 +24,10 @@ export function ComplexPage() {
           { label: '约2小时', color: 'purple' },
         ]}
       />
+
+      <div className="flex justify-end mb-4 print:hidden">
+        <ExportButton title="1.1 复数" />
+      </div>
 
       {/* Knowledge Map */}
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
@@ -132,6 +136,8 @@ export function ComplexPage() {
             </CalloutCard>
           </section>
 
+          <PageBreak label="复数的定义" />
+
           {/* Part 2: What */}
           <section id="complex-what" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -232,6 +238,8 @@ export function ComplexPage() {
             <PracticeCard questions={complexPractice2} />
           </section>
 
+          <PageBreak label="复数相等" />
+
           {/* Part 3: Equality */}
           <section id="complex-equality" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -261,6 +269,8 @@ export function ComplexPage() {
               <p>• 复数等于0 ⇔ <strong>实部和虚部都等于0</strong></p>
             </CalloutCard>
           </section>
+
+          <PageBreak label="复数运算" />
 
           {/* Part 4: Operations */}
           <section id="complex-ops" className="mb-8 scroll-mt-4">
@@ -521,6 +531,8 @@ export function ComplexPage() {
             </CalloutCard>
           </section>
 
+          <PageBreak label="复平面" />
+
           {/* Part 5: Complex Plane */}
           <section id="complex-plane" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -588,6 +600,8 @@ export function ComplexPage() {
               <p>• 点在坐标轴上<strong>不属于任何象限</strong></p>
             </CalloutCard>
           </section>
+
+          <PageBreak label="技巧速查" />
 
           {/* Part 6: Tips & Tricks */}
           <section id="complex-tips" className="mb-8 scroll-mt-4">

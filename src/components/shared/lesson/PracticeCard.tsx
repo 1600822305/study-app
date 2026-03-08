@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { ChevronRight, RotateCcw, CheckCircle, XCircle, Send } from 'lucide-react';
 
 import { Math as MathTex } from '../Math';
+import { usePrintMode } from '@/hooks/usePrintMode';
 
 import type { QuizQuestionData } from '@/types';
 
@@ -24,6 +25,7 @@ interface PracticeCardProps {
 // ── Component ──
 
 export function PracticeCard({ title = '✏️ 即时练习', questions }: PracticeCardProps) {
+  const { isPrinting } = usePrintMode();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [blankInput, setBlankInput] = useState('');
@@ -59,6 +61,48 @@ export function PracticeCard({ title = '✏️ 即时练习', questions }: Pract
     setAnswered(true);
     setResults((prev) => [...prev, checkBlankAnswer(trimmed, current)]);
   }, [answered, current, blankInput]);
+
+  // ── 打印模式：静态展示所有题目 ──
+  if (isPrinting) {
+    return (
+      <div className="print-practice bg-green-50 border border-green-200 rounded-xl p-3 my-3">
+        <p className="font-bold text-green-800 mb-2">{title}</p>
+        <div className="space-y-3">
+          {questions.map((q, idx) => (
+            <div key={idx} className="bg-white rounded-lg border border-green-100 p-3" style={{ breakInside: 'avoid' }}>
+              <p className="text-gray-800 font-medium mb-1">
+                <span className="text-green-600 mr-2">{idx + 1}.</span>
+                {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}
+              </p>
+
+              {/* 选择题选项 */}
+              {q.type !== 'blank' && q.options && (
+                <div className="space-y-1 ml-4">
+                  {q.options.map((opt) => (
+                    <div key={opt.value} className="flex items-center gap-2 text-gray-700">
+                      <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
+                        {opt.label}
+                      </span>
+                      <span>{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* 填空题：留出答题线 */}
+              {q.type === 'blank' && (
+                <div className="ml-4 mt-1">
+                  <span className="text-gray-400">答：</span>
+                  <span className="inline-block w-40 border-b-2 border-gray-300 ml-1">&nbsp;</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+      </div>
+    );
+  }
 
   const handleNext = () => {
     if (currentIdx < total - 1) {

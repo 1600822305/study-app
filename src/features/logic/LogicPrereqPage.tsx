@@ -1,4 +1,4 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { logicPrereqNarrations } from './data/prereq-narrations';
 import { logicPrereqPractice1, logicPrereqPractice2, logicPrereqPractice3 } from './data/practice';
 import { logicPrereqProgressItems } from './data/prereq-progress';
@@ -21,6 +21,10 @@ export function LogicPrereqPage() {
           { label: '集合基础', color: 'green' },
         ]}
       />
+
+      <div className="flex justify-end mb-4 print:hidden">
+        <ExportButton title="1.2.5 逻辑用语前置知识" />
+      </div>
 
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
@@ -98,6 +102,8 @@ export function LogicPrereqPage() {
           </div>
         </Collapsible>
       </section>
+
+      <PageBreak label="第2页 · 解不等式" />
 
       {/* Section 2: Solving Inequalities */}
       <section id="lp-inequality" className="mb-6 scroll-mt-4">
@@ -240,6 +246,8 @@ export function LogicPrereqPage() {
         </Collapsible>
       </section>
 
+      <PageBreak label="第3页 · 基本推理" />
+
       {/* Section 3: Basic Reasoning */}
       <section id="lp-reasoning" className="mb-6 scroll-mt-4">
         <Collapsible title="三、基本推理能力" defaultOpen storageKey="logic-prereq:reasoning" headerExtra={<SpeakButton text={logicPrereqNarrations.reasoning} />}>
@@ -371,6 +379,8 @@ export function LogicPrereqPage() {
         </Collapsible>
       </section>
 
+      <PageBreak label="公式速查表" />
+
       {/* Section 4: 公式速查表 */}
       <section id="lp-cheatsheet" className="mb-6 scroll-mt-4">
         <Collapsible title="📌 公式速查表" storageKey="logic-prereq:cheatsheet">
@@ -420,6 +430,8 @@ export function LogicPrereqPage() {
           </div>
         </Collapsible>
       </section>
+
+      <PageBreak label="选择题自测" />
 
       {/* Section 5: Quiz */}
       <section id="lp-quiz" className="mb-8 scroll-mt-4">

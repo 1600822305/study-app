@@ -1,12 +1,14 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, CalloutCard, PracticeCard, LessonLayout } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, CalloutCard, PracticeCard, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
 import { prereqNarrations } from './data/narrations';
 import { prereqSelfTest } from './data/selftest';
 import { prereqPractice1, prereqPractice2, prereqPractice3, prereqPractice4, prereqPractice5, prereqPractice6, prereqPractice7 } from './data/practice';
 import { prereqProgressItems } from './data/progress';
 import { useProgress } from '@/hooks';
+import { usePrintMode } from '@/hooks/usePrintMode';
 
 export function PrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('prereq', prereqProgressItems);
+  const { isPrinting, printOptions } = usePrintMode();
 
   return (
     <div>
@@ -22,9 +24,13 @@ export function PrereqPage() {
         ]}
       />
 
+      <div className="flex justify-end mb-4 print:hidden">
+        <ExportButton title="1.0 前置知识回顾" />
+      </div>
+
       {/* Knowledge Map */}
-      <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
-        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
+      <div className="bg-gray-50 rounded-xl p-3 mb-3 text-sm text-gray-600 print:p-2 print:mb-2">
+        <p className="font-bold text-gray-800 mb-1">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
           <button onClick={() => document.getElementById('prereq-numclass')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、数的分类 → 复数在数系中的位置</button>
           <button onClick={() => document.getElementById('prereq-square')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、平方与平方根 → 计算复数模的基础</button>
@@ -39,61 +45,80 @@ export function PrereqPage() {
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
       <section id="prereq-numclass" className="mb-6 scroll-mt-4">
         <Collapsible title="一、数的分类" defaultOpen storageKey="prereq:num-class" headerExtra={<SpeakButton text={prereqNarrations.numClass} />}>
-          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：说出自然数→整数→有理数→实数→复数的扩展关系，理解为什么需要复数。</p>
-          <p className="text-sm text-gray-600 mb-4">
-            数学里的"数"，就像一个<strong>不断升级的工具箱</strong>。每当旧工具解决不了新问题，就往里加新工具。
-          </p>
-          <div className="space-y-4 text-sm text-gray-700">
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="font-bold mb-1">第1层：自然数</p>
-              <p className="text-gray-500 mb-1"><Math tex="0, 1, 2, 3, 4, 5, \ldots" /></p>
-              <p>最早学的<strong>数东西用的数</strong>。3个苹果、5支笔、0分。</p>
-              <p className="text-green-700 mt-1 font-medium">总结：自然数 = 0和正整数，用来数数和计数。</p>
-              <p className="text-red-600 mt-1">问题：<Math tex="3 - 5 = ?" /> 自然数里没有答案，不够减。</p>
+          <p className="text-blue-600 mb-3">🎯 学完你能：说出 5 种数的名字和包含关系，理解为什么需要复数。</p>
+
+          {/* 一览表 */}
+          <div className="mb-4">
+            <p className="font-bold text-gray-800 text-lg mb-2">先看全局：5 种数一览表</p>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="border border-gray-200 px-3 py-2 text-center w-16">层级</th>
+                    <th className="border border-gray-200 px-3 py-2 text-left">名称</th>
+                    <th className="border border-gray-200 px-3 py-2 text-left">举例</th>
+                    <th className="border border-gray-200 px-3 py-2 text-left">一句话解释</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="border border-gray-200 px-3 py-2 text-center">1</td><td className="border border-gray-200 px-3 py-2">自然数</td><td className="border border-gray-200 px-3 py-2 text-gray-500">0, 1, 2, 3 …</td><td className="border border-gray-200 px-3 py-2">数东西用的数</td></tr>
+                  <tr className="bg-gray-50"><td className="border border-gray-200 px-3 py-2 text-center">2</td><td className="border border-gray-200 px-3 py-2">整数</td><td className="border border-gray-200 px-3 py-2 text-gray-500">…-2, -1, 0, 1, 2…</td><td className="border border-gray-200 px-3 py-2">自然数 + 负数</td></tr>
+                  <tr><td className="border border-gray-200 px-3 py-2 text-center">3</td><td className="border border-gray-200 px-3 py-2">有理数</td><td className="border border-gray-200 px-3 py-2 text-gray-500">½, -¾, 0.75</td><td className="border border-gray-200 px-3 py-2">能写成分数的数</td></tr>
+                  <tr className="bg-gray-50"><td className="border border-gray-200 px-3 py-2 text-center">4</td><td className="border border-gray-200 px-3 py-2">实数</td><td className="border border-gray-200 px-3 py-2 text-gray-500">√2, π, 所有小数</td><td className="border border-gray-200 px-3 py-2">数轴上所有的点</td></tr>
+                  <tr className="bg-blue-50"><td className="border border-gray-200 px-3 py-2 text-center font-bold">5</td><td className="border border-gray-200 px-3 py-2 font-bold text-blue-700">复数</td><td className="border border-gray-200 px-3 py-2 text-gray-500">3+2i, -i</td><td className="border border-gray-200 px-3 py-2">实数 + 虚数（你要学的）</td></tr>
+                </tbody>
+              </table>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="font-bold mb-1">第2层：整数</p>
-              <p className="text-gray-500 mb-1"><Math tex="\ldots -3, -2, -1, 0, 1, 2, 3, \ldots" /></p>
-              <p>加入了<strong>负数</strong>。零下5度（-5℃）、欠了10块钱（-10元）。</p>
-              <p>现在 <Math tex="3 - 5 = -2" />，能算了。</p>
-              <p className="text-green-700 mt-1 font-medium">总结：整数 = 没有小数点的数，包括正整数、0、负整数。</p>
-              <p className="text-red-600 mt-1">问题：<Math tex="1 \div 3 = ?" /> 整数里没有答案，结果不是整数。</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="font-bold mb-1">第3层：有理数</p>
-              <p className="text-gray-500 mb-1"><Math tex="\frac{1}{2},\; -\frac{3}{4},\; 0.75,\; 0.333\ldots" /></p>
-              <p>加入了<strong>分数</strong>（小数也是分数的另一种写法）。能写成 <Math tex="\frac{p}{q}" /> 的数都叫有理数。</p>
-              <p className="text-green-700 mt-1 font-medium">总结：有理数 = 能写成分数的数，包括整数、有限小数、循环小数。</p>
-              <p className="text-red-600 mt-1">问题：<Math tex="\sqrt{2} = ?" /> 无限不循环小数，写不成分数。</p>
-            </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="font-bold mb-1">第4层：实数</p>
-              <p>有理数 + <strong>无理数</strong>（如 <Math tex="\sqrt{2}" />、<Math tex="\pi" />）= 实数。</p>
-              <p>简单理解：<strong>数轴上能标出来的所有点</strong>都是实数。</p>
-              <p className="text-green-700 mt-1 font-medium">总结：实数 = 数轴上所有的点 = 有理数 + 无理数。</p>
-              <p className="text-red-600 mt-1">问题：<Math tex="x^2 = -1" />，<Math tex="x = ?" /> 任何实数的平方都 <Math tex="\geq 0" />，解不了。</p>
-            </div>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <p className="font-bold text-blue-700 mb-1">第5层：复数 ← 你即将学的</p>
-              <p>发明<strong>虚数单位 <Math tex="i" /></strong>，规定 <Math tex="i^2 = -1" />。</p>
-              <p>实数和虚数组合写成 <Math tex="a + bi" /> 的形式，就叫<strong>复数</strong>。</p>
-              <p className="text-green-700 mt-1 font-medium">总结：复数 = <Math tex="a + bi" />，a 是实部，b 是虚部，<Math tex="i^2 = -1" />。</p>
+            <p className="text-gray-500 mt-2">每一层都<strong>包含</strong>上一层。复数最大，自然数最小。</p>
+          </div>
+
+          {/* 升级故事 */}
+          <div className="mb-4">
+            <p className="font-bold text-gray-800 text-lg mb-2">为什么要一层层升级？</p>
+            <p className="text-gray-700 mb-2">每次升级，都是因为<strong>旧的数解决不了新问题</strong>：</p>
+
+            <div className="space-y-2">
+              <div className="border-l-4 border-gray-300 pl-4">
+                <p className="font-bold text-gray-800">第1次升级：自然数 → 整数</p>
+                <p className="text-gray-600"><Math tex="3 - 5 = ?" /> 自然数算不了 → 加入<strong>负数</strong>，变成整数</p>
+              </div>
+              <div className="border-l-4 border-emerald-300 pl-4">
+                <p className="font-bold text-gray-800">第2次升级：整数 → 有理数</p>
+                <p className="text-gray-600"><Math tex="1 \div 3 = ?" /> 整数算不了 → 加入<strong>分数</strong>，变成有理数</p>
+              </div>
+              <div className="border-l-4 border-amber-300 pl-4">
+                <p className="font-bold text-gray-800">第3次升级：有理数 → 实数</p>
+                <p className="text-gray-600"><Math tex="\sqrt{2} = ?" /> 写不成分数 → 加入<strong>无理数</strong>，变成实数</p>
+              </div>
+              <div className="border-l-4 border-blue-500 pl-4 bg-blue-50 rounded-r-lg py-3 pr-3" style={{ breakInside: 'avoid' }}>
+                <p className="font-bold text-blue-700">第4次升级：实数 → 复数</p>
+                <p className="text-gray-600 mb-1"><Math tex="x^2 = -1" /> 实数的平方都 ≥ 0，解不了</p>
+                <p className="text-gray-600 mb-1">→ 发明<strong>虚数单位 <Math tex="i" /></strong>，规定 <Math tex="i^2 = -1" /></p>
+                <p className="text-gray-600">→ 实数和虚数组合写成 <Math tex="a + bi" />，就是<strong>复数</strong></p>
+              </div>
             </div>
           </div>
-          <div className="mt-4 bg-gray-50 rounded-lg p-3 text-sm text-center">
-            <Math tex="\text{自然数} \to \text{整数} \to \text{有理数} \to \text{实数} \to \text{复数}" />
+
+          {/* 进化链 */}
+          <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-4 text-center mb-4">
+            <p className="font-bold text-gray-700 mb-1">记住这条线</p>
+            <p className="text-lg font-bold">
+              自然数 → 整数 → 有理数 → 实数 → <span className="text-blue-600">复数</span>
+            </p>
+            <p className="text-gray-500 mt-2">遇到新问题，就升级工具箱。复数是数的<strong>第5次自然升级</strong>。</p>
           </div>
-          <p className="text-sm text-gray-600 mt-2">
-            每次扩展都是因为<strong>原来的数不够用了</strong>。复数不是奇怪的东西，它只是数的<strong>第5次自然升级</strong>。
-          </p>
+
           <PracticeCard questions={prereqPractice1} />
-          <CalloutCard variant="warning" title="易错点" className="mt-3">
+
+          <CalloutCard variant="warning" title="易错点" className="mt-4">
             <p>• <strong>0 是自然数</strong>，也是整数、有理数、实数</p>
             <p>• 无限不循环小数（如 √2、π）是<strong>无理数</strong>，不是有理数</p>
             <p>• 每层都<strong>包含</strong>上一层：复数 ⊃ 实数 ⊃ 有理数 ⊃ 整数 ⊃ 自然数</p>
           </CalloutCard>
         </Collapsible>
       </section>
+
+      <PageBreak label="平方与平方根" />
 
       <section id="prereq-square" className="mb-6 scroll-mt-4">
         <Collapsible title="二、平方与平方根" defaultOpen storageKey="prereq:square" headerExtra={<SpeakButton text={prereqNarrations.square} />}>
@@ -109,10 +134,44 @@ export function PrereqPage() {
                 <p><Math tex="0.1^2 = 0.01" /></p>
               </div>
             </div>
-            <p>
-              <strong>关键性质：任何实数的平方 <Math tex="\geq 0" /></strong>
-              ，所以实数范围内不存在平方等于负数的数 → 需要发明 <Math tex="i" />（<Math tex="i^2 = -1" />）
-            </p>
+            <div>
+              <p className="font-bold mb-2">关键性质：任何实数的平方 <Math tex="\geq 0" /></p>
+              <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono">
+                <p>正数² = 正数</p>
+                <p>负数² = 正数</p>
+                <p>0² = 0</p>
+              </div>
+              <p className="mt-2 text-gray-600">所以实数范围内<strong>不存在平方等于负数的数</strong> → 需要发明 <Math tex="i" />（<Math tex="i^2 = -1" />）</p>
+            </div>
+
+            <div>
+              <p className="font-bold mb-2 text-red-600">⚠️ 括号陷阱（高频易错）</p>
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse text-center">
+                  <thead>
+                    <tr className="bg-gray-100">
+                      <th className="border border-gray-200 px-3 py-2">写法</th>
+                      <th className="border border-gray-200 px-3 py-2">含义</th>
+                      <th className="border border-gray-200 px-3 py-2">结果</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-green-50">
+                      <td className="border border-gray-200 px-3 py-2"><Math tex="(-3)^2" /></td>
+                      <td className="border border-gray-200 px-3 py-2">先取负3，再平方</td>
+                      <td className="border border-gray-200 px-3 py-2 font-bold text-green-700"><Math tex="(-3) \times (-3) = 9" /></td>
+                    </tr>
+                    <tr className="bg-red-50">
+                      <td className="border border-gray-200 px-3 py-2"><Math tex="-3^2" /></td>
+                      <td className="border border-gray-200 px-3 py-2">先算 <Math tex="3^2" />，再取负</td>
+                      <td className="border border-gray-200 px-3 py-2 font-bold text-red-700"><Math tex="-(3 \times 3) = -9" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-2 text-gray-700"><strong>口诀：有括号，整体平方；没括号，先算幂再加负号。</strong></p>
+            </div>
+
             <div>
               <p className="font-bold mb-1">平方根：</p>
               <p className="text-gray-500 mb-2">生活理解：瓷砖面积是9平方厘米，边长是多少？答：3厘米。这就是平方根——<strong>已知面积，反过来求边长</strong>。</p>
@@ -138,6 +197,7 @@ export function PrereqPage() {
               <p className="text-sm text-gray-600 mt-1">你现在不需要理解为什么这么算，只要知道 <Math tex="|\;\;|" /> 在复数里表示大小，计算时需要平方和开方。</p>
             </div>
           </div>
+          <PageBreak label="即时练习" />
           <PracticeCard questions={prereqPractice2} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• <strong><Math tex="(-3)^2 = 9" /></strong>，不是 -9！括号很重要：<Math tex="-3^2 = -(3^2) = -9" /></p>
@@ -147,10 +207,12 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
+      <PageBreak label="常用平方数" />
+
       <section id="prereq-sqtable" className="mb-6 scroll-mt-4">
         <Collapsible title="三、常用平方数" defaultOpen storageKey="prereq:square-table" headerExtra={<SpeakButton text={prereqNarrations.squareTable} />}>
-          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：脱口而出 1²~13² 的值，快速心算复数模。</p>
-          <div className="space-y-3 text-sm text-gray-700">
+          <p className="text-xs text-blue-600 mb-2">🎯 学完你能：脱口而出 1²~13² 的值，快速心算复数模。</p>
+          <div className="space-y-2 text-sm text-gray-700">
             <p className="font-bold">背熟，计算提速：</p>
             <div className="grid grid-cols-4 gap-2 text-sm text-center">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((n) => (
@@ -159,9 +221,9 @@ export function PrereqPage() {
                 </div>
               ))}
             </div>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-blue-800">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 text-blue-800">
               <p className="font-bold mb-1">高频组合（计算复数模时会反复遇到）：</p>
-              <div className="space-y-1">
+              <div className="space-y-0">
                 <p><Math tex="3^2+4^2 = 9+16 = 25" />，即 <Math tex="\sqrt{25}=5" /></p>
                 <p><Math tex="5^2+12^2 = 25+144 = 169" />，即 <Math tex="\sqrt{169}=13" /></p>
                 <p><Math tex="1^2+1^2 = 1+1 = 2" />，即 <Math tex="\sqrt{2} \approx 1.414" /></p>
@@ -172,6 +234,8 @@ export function PrereqPage() {
           <PracticeCard questions={prereqPractice3} />
         </Collapsible>
       </section>
+
+      <PageBreak label="分数运算" />
 
       <section id="prereq-fraction" className="mb-6 scroll-mt-4">
         <Collapsible title="四、分数运算" defaultOpen storageKey="prereq:fraction" headerExtra={<SpeakButton text={prereqNarrations.fraction} />}>
@@ -219,6 +283,27 @@ export function PrereqPage() {
               <Math tex="\frac{4-2i}{2} = \frac{4}{2} - \frac{2}{2}i = 2 - i" display />
             </div>
           </div>
+          <div className="mt-4 mb-2">
+            <p className="font-bold text-gray-800 mb-2">运算口诀速查</p>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="border border-gray-200 px-3 py-2 text-left w-16">运算</th>
+                    <th className="border border-gray-200 px-3 py-2 text-left">口诀</th>
+                    <th className="border border-gray-200 px-3 py-2 text-left">例子</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="border border-gray-200 px-3 py-2">加减</td><td className="border border-gray-200 px-3 py-2">先通分，再加减分子</td><td className="border border-gray-200 px-3 py-2"><Math tex="\frac{1}{2}+\frac{1}{3}=\frac{5}{6}" /></td></tr>
+                  <tr className="bg-gray-50"><td className="border border-gray-200 px-3 py-2">乘法</td><td className="border border-gray-200 px-3 py-2">分子×分子，分母×分母</td><td className="border border-gray-200 px-3 py-2"><Math tex="\frac{2}{3}\times\frac{4}{5}=\frac{8}{15}" /></td></tr>
+                  <tr><td className="border border-gray-200 px-3 py-2">除法</td><td className="border border-gray-200 px-3 py-2">翻转后面，变乘法</td><td className="border border-gray-200 px-3 py-2"><Math tex="\frac{2}{3}\div\frac{4}{5}=\frac{2}{3}\times\frac{5}{4}" /></td></tr>
+                  <tr className="bg-gray-50"><td className="border border-gray-200 px-3 py-2">约分</td><td className="border border-gray-200 px-3 py-2">找最大公因数，同时除</td><td className="border border-gray-200 px-3 py-2"><Math tex="\frac{18}{24}=\frac{3}{4}" />（÷6）</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <PageBreak label="即时练习" />
           <PracticeCard questions={prereqPractice4} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• 异分母<strong>不能直接加分子</strong>：<Math tex="\frac{1}{2} + \frac{1}{3} \neq \frac{2}{5}" />，必须先通分</p>
@@ -227,6 +312,8 @@ export function PrereqPage() {
           </CalloutCard>
         </Collapsible>
       </section>
+
+      <PageBreak label="多项式展开" />
 
       <section id="prereq-poly" className="mb-6 scroll-mt-4">
         <Collapsible title="五、多项式展开（复数乘法的核心）" defaultOpen storageKey="prereq:polynomial" headerExtra={<SpeakButton text={prereqNarrations.polynomial} />}>
@@ -276,22 +363,56 @@ export function PrereqPage() {
               </p>
             </CalloutCard>
           </div>
+          <div className="mt-4 mb-2">
+            <p className="font-bold text-gray-800 mb-2">展开公式速查表</p>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="border border-gray-200 px-3 py-2 text-left w-28">公式</th>
+                    <th className="border border-gray-200 px-3 py-2 text-left">展开结果</th>
+                    <th className="border border-gray-200 px-3 py-2 text-left">复数例子</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td className="border border-gray-200 px-3 py-2">分配律</td><td className="border border-gray-200 px-3 py-2"><Math tex="a(b+c)=ab+ac" /></td><td className="border border-gray-200 px-3 py-2"><Math tex="2(1+i)=2+2i" /></td></tr>
+                  <tr className="bg-gray-50"><td className="border border-gray-200 px-3 py-2">FOIL</td><td className="border border-gray-200 px-3 py-2"><Math tex="(a+b)(c+d)" /></td><td className="border border-gray-200 px-3 py-2"><Math tex="(2+i)(3-i)=7+i" /></td></tr>
+                  <tr><td className="border border-gray-200 px-3 py-2">完全平方</td><td className="border border-gray-200 px-3 py-2"><Math tex="(a+b)^2=a^2+2ab+b^2" /></td><td className="border border-gray-200 px-3 py-2"><Math tex="(1+i)^2=2i" /></td></tr>
+                  <tr className="bg-gray-50"><td className="border border-gray-200 px-3 py-2">平方差</td><td className="border border-gray-200 px-3 py-2"><Math tex="(a+b)(a-b)=a^2-b^2" /></td><td className="border border-gray-200 px-3 py-2"><Math tex="(1+i)(1-i)=2" /></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <PageBreak label="即时练习" />
           <PracticeCard questions={prereqPractice5} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• 两个括号相乘<strong>不能只乘第一项</strong>：<Math tex="(a+b)(c+d) \neq ac+bd" /></p>
             <p>• 遇到 <Math tex="i^2" /> 一定要<strong>立刻替换成 -1</strong>，别漏了</p>
             <p>• 平方差公式的结果<strong>没有虚部</strong>，一定是正实数</p>
           </CalloutCard>
+          <div className="mt-4 bg-purple-50 border border-purple-200 rounded-lg p-3">
+            <p className="font-bold text-purple-800 mb-2">💡 i 的幂次规律（展开时经常用到）</p>
+            <div className="grid grid-cols-4 gap-2 text-center text-sm mb-2">
+              <div className="bg-white rounded px-2 py-1 border border-purple-200"><Math tex="i^1 = i" /></div>
+              <div className="bg-white rounded px-2 py-1 border border-purple-200"><Math tex="i^2 = -1" /></div>
+              <div className="bg-white rounded px-2 py-1 border border-purple-200"><Math tex="i^3 = -i" /></div>
+              <div className="bg-white rounded px-2 py-1 border border-purple-200"><Math tex="i^4 = 1" /></div>
+            </div>
+            <p className="text-purple-700"><strong>每4次一循环</strong>：<Math tex="i \to -1 \to -i \to 1 \to i \to \cdots" /></p>
+            <p className="text-gray-600 mt-1">技巧：看指数除以4的余数。余1得 <Math tex="i" />，余2得 <Math tex="-1" />，余3得 <Math tex="-i" />，余0得 <Math tex="1" /></p>
+          </div>
         </Collapsible>
       </section>
 
+      <PageBreak label="负数运算" />
+
       <section id="prereq-negative" className="mb-6 scroll-mt-4">
         <Collapsible title="六、负数运算" defaultOpen storageKey="prereq:negative" headerExtra={<SpeakButton text={prereqNarrations.negative} />}>
-          <p className="text-xs text-blue-600 mb-3">🎯 学完你能：熟练处理负数加减乘除，不在 i²=-1 的符号变化上犯错。</p>
-          <div className="space-y-3 text-sm text-gray-700">
+          <p className="text-xs text-blue-600 mb-2">🎯 学完你能：熟练处理负数加减乘除，不在 i²=-1 的符号变化上犯错。</p>
+          <div className="space-y-2 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-1">负数的加减：</p>
-              <div className="bg-gray-50 rounded-lg p-3 space-y-1">
+              <div className="bg-gray-50 rounded-lg p-2 space-y-0">
                 <p>正 + 负：看谁绝对值大</p>
                 <p className="pl-4"><Math tex="5 + (-3) = 2" /></p>
                 <p className="pl-4"><Math tex="3 + (-7) = -4" /></p>
@@ -303,7 +424,7 @@ export function PrereqPage() {
             </div>
             <div>
               <p className="font-bold mb-1">负数的乘除：</p>
-              <div className="bg-gray-50 rounded-lg p-3 font-mono">
+              <div className="bg-gray-50 rounded-lg p-2 font-mono">
                 <p>正 × 正 = 正　　正 × 负 = 负</p>
                 <p>负 × 正 = 负　　负 × 负 = 正</p>
               </div>
@@ -324,13 +445,15 @@ export function PrereqPage() {
             </CalloutCard>
           </div>
           <PracticeCard questions={prereqPractice6} />
-          <CalloutCard variant="warning" title="易错点" className="mt-3">
+          <CalloutCard variant="warning" title="易错点" className="mt-2">
             <p>• <strong>减去负数 = 加正数</strong>：5 - (-3) = 8，不是 2</p>
             <p>• <strong>负 × 负 = 正</strong>：(-1)×(-1) = 1</p>
             <p>• <Math tex="i^2" /> 带入时<strong>先写括号</strong>：<Math tex="2-i^2 = 2-(-1) = 3" />，别写成 2-1=1</p>
           </CalloutCard>
         </Collapsible>
       </section>
+
+      <PageBreak label="除以4求余数" />
 
       <section id="prereq-remainder" className="mb-6 scroll-mt-4">
         <Collapsible title="七、除以4求余数" defaultOpen storageKey="prereq:remainder" headerExtra={<SpeakButton text={prereqNarrations.remainder} />}>
@@ -385,6 +508,8 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
+      <PageBreak label="公式速查表" />
+
       {/* Formula Cheat Sheet */}
       <section className="mb-6">
         <Collapsible title="📌 公式速查表" storageKey="prereq:cheatsheet">
@@ -433,9 +558,27 @@ export function PrereqPage() {
               <p className="font-bold mb-1">i 的幂次循环</p>
               <p>余1→<Math tex="i" />　余2→<Math tex="-1" />　余3→<Math tex="-i" />　余0→<Math tex="1" />　｜快速求余：看最后两位÷4</p>
             </div>
+            <div className="bg-gray-50 rounded-lg p-3">
+              <p className="font-bold mb-1">数的分类</p>
+              <p>自然数 ⊂ 整数 ⊂ 有理数 ⊂ 实数 ⊂ <strong>复数</strong></p>
+              <p className="mt-1">复数 = 实部 + 虚部：<Math tex="a + bi" />（<Math tex="a,b" /> 为实数，<Math tex="i^2=-1" />）</p>
+            </div>
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-purple-800">
+              <p className="font-bold mb-1">🎯 本章核心能力清单</p>
+              <div className="grid grid-cols-2 gap-1 text-xs text-gray-700">
+                <p>✅ 区分实数与复数</p>
+                <p>✅ 脱口而出 1²~13²</p>
+                <p>✅ 分数加减乘除约分</p>
+                <p>✅ 用 FOIL / 完全平方 / 平方差展开</p>
+                <p>✅ 负数运算不出错</p>
+                <p>✅ 秒算 <Math tex="i" /> 的任意次幂</p>
+              </div>
+            </div>
           </div>
         </Collapsible>
       </section>
+
+      <PageBreak label="自测清单" />
 
       {/* Self test */}
       <section className="mb-8">
@@ -447,6 +590,46 @@ export function PrereqPage() {
           description="10道选择题，确认初中基础没问题。"
         />
       </section>
+
+      {/* 答案与解析版块 — 仅打印时显示 */}
+      {isPrinting && printOptions.showAnswers && (
+        <>
+          <PageBreak label="答案与解析" />
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+
+            {[
+              { label: '一、数的分类 — 即时练习', questions: prereqPractice1 },
+              { label: '二、平方与平方根 — 即时练习', questions: prereqPractice2 },
+              { label: '三、常用平方数 — 即时练习', questions: prereqPractice3 },
+              { label: '四、分数运算 — 即时练习', questions: prereqPractice4 },
+              { label: '五、多项式展开 — 即时练习', questions: prereqPractice5 },
+              { label: '六、负数运算 — 即时练习', questions: prereqPractice6 },
+              { label: '七、除以4求余数 — 即时练习', questions: prereqPractice7 },
+              { label: '自测清单', questions: prereqSelfTest },
+            ].map((section) => (
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-1 text-sm border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-gray-700">
+                  {section.questions.map((q, idx) => (
+                    <div key={q.id} className="flex gap-1 items-baseline">
+                      <span className="text-blue-600 font-medium shrink-0">{idx + 1}.</span>
+                      <span>
+                        <span className="font-medium">{q.correctAnswer}</span>
+                        {q.explanationLatex ? (
+                          <span className="text-gray-500 ml-1">— <Math tex={q.explanationLatex} /></span>
+                        ) : q.explanation ? (
+                          <span className="text-gray-500 ml-1">— {q.explanation}</span>
+                        ) : null}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </section>
+        </>
+      )}
       </LessonLayout>
     </div>
   );
