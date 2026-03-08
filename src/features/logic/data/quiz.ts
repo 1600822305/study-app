@@ -136,4 +136,28 @@ export const logicQuizQuestions: QuizQuestionData[] = [
     correctAnswer: '若 x ≠ 1，则 x² ≠ 1',
     explanation: '逆否命题：条件和结论互换并取反。原命题"若p则q"的逆否命题是"若非q则非p"。',
   },
+  {
+    id: 'lq11',
+    question: '下列哪个是命题？',
+    options: [
+      { label: 'A', value: 'x > 3' },
+      { label: 'B', value: '请关门！' },
+      { label: 'C', value: '4 是偶数' },
+      { label: 'D', value: '明天会下雨吗？' },
+    ],
+    correctAnswer: '4 是偶数',
+    explanation: '"4是偶数"能明确判断真假（真命题），是命题。其余：x>3 真假不确定、"请关门"是祈使句、"明天会下雨吗？"是疑问句，都不是命题。',
+  },
+  {
+    id: 'lq12',
+    question: 'p: "2 > 1"（真），q: "5 是偶数"（假），则下列正确的是',
+    options: [
+      { label: 'A', value: 'p 且 q 为真' },
+      { label: 'B', value: 'p 或 q 为假' },
+      { label: 'C', value: 'p 且 q 为假，p 或 q 为真' },
+      { label: 'D', value: 'p 且 q 为真，p 或 q 为假' },
+    ],
+    correctAnswer: 'p 且 q 为假，p 或 q 为真',
+    explanation: '且：全真才真，一假就假 → p且q=假。或：一真就真 → p或q=真。',
+  },
 ];

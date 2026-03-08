@@ -1,19 +1,13 @@
 import { Flame, Lightbulb, AlertTriangle } from 'lucide-react';
 
-import { Math, QuizQuestion, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
 import { logicNarrations } from './data/narrations';
-import { useProgress, useQuiz } from '@/hooks';
+import { useProgress } from '@/hooks';
 import { logicQuizQuestions } from './data/quiz';
 import { logicProgressItems } from './data/progress';
 
 export function LogicPage() {
   const { items, toggle } = useProgress('logic', logicProgressItems);
-  const { stats: quizScore, recordAnswer } = useQuiz('logic');
-
-  const handleQuizAnswer = (id: string, correct: boolean) => {
-    const q = logicQuizQuestions.find((q) => q.id === id);
-    if (q) recordAnswer(id, correct ? q.correctAnswer : '', q.correctAnswer, correct);
-  };
 
   return (
     <div>
@@ -471,16 +465,8 @@ export function LogicPage() {
                 6
               </span>
               高考真题实战
-              {quizScore.total > 0 && (
-                <span className="ml-auto text-sm font-normal text-gray-500">
-                  {quizScore.correct}/{quizScore.total} 正确
-                </span>
-              )}
             </h2>
-
-            {logicQuizQuestions.map((q) => (
-              <QuizQuestion key={q.id} {...q} onAnswer={handleQuizAnswer} />
-            ))}
+            <QuizPanel module="logic" questions={logicQuizQuestions} title="逻辑用语真题实战" description="12道选择题，覆盖命题判断、四种命题、充分必要条件、量词否定、逻辑联结词全部考点" />
           </section>
 
           {/* Part 7: Summary */}
