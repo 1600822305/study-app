@@ -60,6 +60,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>(['/math']);
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(['第一阶段：数学语言']);
   const [mainDrawerPortal, setMainDrawerPortal] = useState<HTMLElement | null>(null);
 
   const mobile = isMobile();
@@ -85,6 +86,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const toggleSection = (path: string) => {
     setExpandedSections((prev) =>
       prev.includes(path) ? prev.filter((p) => p !== path) : [...prev, path],
+    );
+  };
+
+  const toggleGroup = (label: string) => {
+    setExpandedGroups((prev) =>
+      prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label],
     );
   };
 
@@ -128,10 +135,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       isNavGroup(entry) ? (
                         <div key={entry.groupLabel}>
                           {idx > 0 && <div className="mx-4 my-1 border-t border-slate-700/50" />}
-                          <p className="pl-6 pr-4 pt-3 pb-1 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                            {entry.groupLabel}
-                          </p>
-                          {entry.items.map((child) => (
+                          <button
+                            onClick={() => toggleGroup(entry.groupLabel)}
+                            className="w-full flex items-center pl-6 pr-4 pt-3 pb-1 text-xs font-bold text-slate-500 hover:text-slate-300 tracking-wider cursor-pointer transition-colors"
+                          >
+                            <ChevronRight
+                              size={12}
+                              className={`mr-1 transition-transform ${expandedGroups.includes(entry.groupLabel) ? 'rotate-90' : ''}`}
+                            />
+                            <span>{entry.groupLabel}</span>
+                          </button>
+                          {expandedGroups.includes(entry.groupLabel) && entry.items.map((child) => (
                             <Link
                               key={child.path}
                               to={child.path}
