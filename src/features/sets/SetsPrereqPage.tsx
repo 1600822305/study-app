@@ -1,7 +1,8 @@
 import { Mafs, Coordinates, Point, Line, Plot, Text as MafsText } from 'mafs';
 
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
+import { setsPrereqPractice1, setsPrereqPractice2, setsPrereqPractice3, setsPrereqPractice4 } from './data/practice';
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
 import { useProgress } from '@/hooks';
@@ -334,12 +335,7 @@ export function SetsPrereqPage() {
               <p className="text-xs text-gray-500 mt-1">高考90%的方程都能因式分解，配方法和公式法是保底的</p>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. <Math tex="x^2 - x - 6 = 0" />，x = ____　答案：<strong><Math tex="x=3 \text{ 或 } x=-2" /></strong></p>
-              <p className="text-gray-700">2. <Math tex="x^2 + 2x + 1 = 0" />，x = ____　答案：<strong><Math tex="x = -1" /></strong>（重根）</p>
-              <p className="text-gray-700">3. <Math tex="x^2 - 9 = 0" />，x = ____　答案：<strong><Math tex="x = \pm 3" /></strong>（平方差）</p>
-            </div>
+            <PracticeCard questions={setsPrereqPractice1} />
 
             <CalloutCard variant="warning" title="易错点">
               <p>找两个数时注意<strong>符号</strong>：乘起来=6、加起来=-5，那就是 -2 和 -3（都是负的）</p>
@@ -493,11 +489,7 @@ export function SetsPrereqPage() {
               <p><strong>为什么？</strong>二次函数 <Math tex="y = ax^2+bx+c" />（a{'>'} 0）的图像是开口朝上的抛物线。两个根之间在 x 轴下面（{'<'} 0），两边在 x 轴上面（{'>'} 0）。</p>
             </CalloutCard>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. <Math tex="x^2 - 5x + 6 < 0" /> 的解集 = ____　答案：<strong><Math tex="2 < x < 3" /></strong></p>
-              <p className="text-gray-700">2. <Math tex="x^2 - 4 \geq 0" /> 的解集 = ____　答案：<strong><Math tex="x \leq -2 \text{ 或 } x \geq 2" /></strong></p>
-            </div>
+            <PracticeCard questions={setsPrereqPractice2} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>“大于”和“小于”别搞反</strong>：大于取两边（远离根），小于取中间（夹在根之间）</p>
@@ -557,11 +549,7 @@ export function SetsPrereqPage() {
               <p className="text-blue-700 text-sm">● 实心圆 = 包含（对应 ≤ 或 ≥）</p>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. <Math tex="x \leq -1" /> 在数轴上，-1 用什么圆？　答案：<strong>实心圆 ●（含端点）</strong></p>
-              <p className="text-gray-700">2. <Math tex="1 < x < 4" /> 的两个端点分别用？　答案：<strong>1 空心 ○，4 空心 ○</strong></p>
-            </div>
+            <PracticeCard questions={setsPrereqPractice3} />
 
             <CalloutCard variant="warning" title="易错点">
               <p>{'<'} 和 ≤ 的区别就在于<strong>圆的空实</strong>：{'<'} 空心、≤ 实心</p>
@@ -612,11 +600,7 @@ export function SetsPrereqPage() {
               <p>无穷 ∞ → 永远用小括号</p>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. <Math tex="\{x \mid -3 < x \leq 5\}" /> = ____　答案：<strong><Math tex="(-3, 5]" /></strong></p>
-              <p className="text-gray-700">2. <Math tex="\{x \mid x \geq 3\}" /> = ____　答案：<strong><Math tex="[3, +\infty)" /></strong></p>
-            </div>
+            <PracticeCard questions={setsPrereqPractice4} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>∞ 永远用小括号</strong>：<Math tex="[3, +\infty)" /> ✓，<Math tex="[3, +\infty]" /> ✗</p>

@@ -1,5 +1,6 @@
-import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
 import { logicNarrations } from './data/narrations';
+import { logicPractice1, logicPractice2, logicPractice3, logicPractice4, logicPractice5 } from './data/practice';
 import { useProgress } from '@/hooks';
 import { logicQuizQuestions } from './data/quiz';
 import { logicProgressItems } from './data/progress';
@@ -147,15 +148,7 @@ export function LogicPage() {
                 <p className="text-sm text-slate-400 mt-1">能 → 是命题。不能 → 不是命题。</p>
               </div>
 
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                <p className="font-bold text-green-800 text-sm mb-2">✏️ 即时练习</p>
-                <div className="text-sm text-gray-700 space-y-1">
-                  <p>判断下列哪些是命题：</p>
-                  <p>1. "5 是质数" → <strong>是命题（真命题）</strong></p>
-                  <p>2. "x + 1 = 0" → <strong>不是命题（x 不确定）</strong></p>
-                  <p>3. "1 + 1 = 3" → <strong>是命题（假命题）</strong></p>
-                </div>
-              </div>
+              <PracticeCard questions={logicPractice1} />
             </div>
           </section>
 
@@ -213,14 +206,7 @@ export function LogicPage() {
               <p className="text-xs text-slate-500 mt-3">高考用法：直接证明原命题很难时 → 可以去证明逆否命题（等价的）</p>
             </CalloutCard>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <p className="font-bold text-green-800 text-sm mb-2">✏️ 即时练习</p>
-              <div className="text-sm text-gray-700 space-y-1">
-                <p>原命题："若 x = 2，则 x² = 4"（真命题）</p>
-                <p>1. 写出逆命题 → <strong>"若 x² = 4，则 x = 2"（假，x 也可能 = -2）</strong></p>
-                <p>2. 写出逆否命题 → <strong>"若 x² ≠ 4，则 x ≠ 2"（真，和原命题同真同假）</strong></p>
-              </div>
-            </div>
+            <PracticeCard questions={logicPractice2} />
           </section>
 
           {/* Part 3: Sufficient & Necessary Conditions */}
@@ -457,13 +443,7 @@ export function LogicPage() {
               </div>
             </Collapsible>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4 mb-4">
-              <p className="font-bold text-green-800 text-sm mb-2">✏️ 即时练习</p>
-              <div className="text-sm text-gray-700 space-y-1">
-                <p>1. p: x = 2，q: x² - 4 = 0。p 是 q 的什么条件？ → <strong>充分不必要条件</strong>（x=2→x²-4=0 ✓，但 x=-2 也满足）</p>
-                <p>2. p: x {'>'} 3，q: x {'>'} 1。p 是 q 的什么条件？ → <strong>充分不必要条件</strong>（A⊂B，小推大）</p>
-              </div>
-            </div>
+            <PracticeCard questions={logicPractice3} />
 
             <CalloutCard variant="warning" title="易错点">
               <p>1. <strong>方向别搞反</strong>：p→q 说的是 p 充分，不是 q 充分</p>
@@ -558,13 +538,7 @@ export function LogicPage() {
               </CalloutCard>
             </Collapsible>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-              <p className="font-bold text-green-800 text-sm mb-2">✏️ 即时练习</p>
-              <div className="text-sm text-gray-700 space-y-1">
-                <p>1. 写出 "<Math tex="\forall x \in \mathbb{R},\; 2x > 0" />" 的否定 → <strong><Math tex="\exists x \in \mathbb{R},\; 2x \leq 0" /></strong>（∀变∃，{'>'} 变 ≤）</p>
-                <p>2. 写出 "存在一个三角形，内角和不等于180°" 的否定 → <strong>"所有三角形的内角和都等于180°"</strong>（∃变∀）</p>
-              </div>
-            </div>
+            <PracticeCard questions={logicPractice4} />
           </section>
 
           {/* Part 5: Logical Connectives */}
@@ -647,13 +621,7 @@ export function LogicPage() {
               </div>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <p className="font-bold text-green-800 text-sm mb-2">✏️ 即时练习</p>
-              <div className="text-sm text-gray-700 space-y-1">
-                <p>1. p: 5 是奇数（真），q: 4 {'<'} 3（假），求 "p 且 q" 和 "p 或 q" → <strong>假、真</strong></p>
-                <p>2. 写出 "x ≤ -1 或 x {'>'} 5" 的否定 → <strong>"x {'>'} -1 且 x ≤ 5"</strong>（或变且，≤ 变 {'>'}，{'>'} 变 ≤）</p>
-              </div>
-            </div>
+            <PracticeCard questions={logicPractice5} />
           </section>
 
           {/* Part 6: Quiz */}

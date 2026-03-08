@@ -26,13 +26,22 @@ export interface QuizOption {
   isLatex?: boolean;
 }
 
-/** 选择题 */
+/** 题目类型 */
+export type QuizQuestionType = 'choice' | 'blank';
+
+/** 题目数据（选择题 / 填空题通用） */
 export interface QuizQuestionData {
   id: string;
+  /** 题型，默认 'choice' */
+  type?: QuizQuestionType;
   question: string;
   questionLatex?: string;
-  options: QuizOption[];
+  /** 选择题选项（type='choice' 时必填） */
+  options?: QuizOption[];
+  /** 标准答案 */
   correctAnswer: string;
+  /** 填空题可接受的其他正确答案 */
+  acceptableAnswers?: string[];
   explanation: string;
   explanationLatex?: string;
   explanationDiagram?: string;

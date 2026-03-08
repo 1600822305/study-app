@@ -1,5 +1,6 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
 import { logicPrereqNarrations } from './data/prereq-narrations';
+import { logicPrereqPractice1, logicPrereqPractice2, logicPrereqPractice3 } from './data/practice';
 import { logicPrereqProgressItems } from './data/prereq-progress';
 import { logicPrereqQuizQuestions } from './data/prereq-quiz';
 import { useProgress } from '@/hooks';
@@ -88,12 +89,7 @@ export function LogicPrereqPage() {
               </p>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. A = &#123;1,2&#125;，B = &#123;1,2,3&#125;，关系？　答案：<strong>A ⊂ B</strong></p>
-              <p className="text-gray-700">2. A = (-1, 3)，B = (-2, 5)，谁包含谁？　答案：<strong>A ⊂ B</strong></p>
-              <p className="text-gray-700">3. A = [1, 4]，B = [1, 4]，关系？　答案：<strong>A = B</strong></p>
-            </div>
+            <PracticeCard questions={logicPrereqPractice1} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>⊂ 和 ⊆ 的区别</strong>：⊂ 是真子集（不能相等），⊆ 是子集（可以相等）</p>
@@ -234,12 +230,7 @@ export function LogicPrereqPage() {
               </div>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-              <p className="text-gray-700">1. 解 <Math tex="x^2 - 5x + 6 < 0" /> → 答案：<strong>2 {'<'} x {'<'} 3</strong></p>
-              <p className="text-gray-700">2. 解 <Math tex="x^2 - 1 \geq 0" /> → 答案：<strong>x ≤ -1 或 x ≥ 1</strong></p>
-              <p className="text-gray-700">3. 解 <Math tex="|x + 2| < 3" /> → 答案：<strong>-5 {'<'} x {'<'} 1</strong></p>
-            </div>
+            <PracticeCard questions={logicPrereqPractice2} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>开闭区间别搞混</strong>：{'<'} 用开区间 ()，≤ 用闭区间 []</p>
@@ -370,12 +361,7 @@ export function LogicPrereqPage() {
               <p className="text-gray-500 text-xs mt-1">就这么简单，箭头方向就是推出方向</p>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-1">✏️ 即时练习（想想范围大小就行）</p>
-              <p className="text-gray-700">1. "它是正方形" → "它是矩形"，能推出吗？　答案：<strong>✓</strong>（正方形范围更小）</p>
-              <p className="text-gray-700">2. p: "x = 1"，q: "x² = 1"，p→q？　答案：<strong>✓</strong>　q→p？　答案：<strong>✗</strong>（x=-1也满足q）</p>
-              <p className="text-gray-700">3. p: "x {'>'} 5"，q: "x {'>'} 3"，p→q？　答案：<strong>✓</strong>（小范围→大范围）</p>
-            </div>
+            <PracticeCard questions={logicPrereqPractice3} title="✏️ 即时练习（想想范围大小就行）" />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>方向别搞反</strong>：问“A→B”就是问“A 成立时 B 是否一定成立”，不是反过来</p>

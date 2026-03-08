@@ -1,5 +1,6 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard } from '@/components/shared';
 import { setsNarrations } from './data/narrations';
+import { setsPractice0, setsPractice1, setsPractice2, setsPractice3, setsPractice4, setsPractice5 } from './data/practice';
 import { useProgress } from '@/hooks';
 import { setsQuizQuestions } from './data/quiz';
 import { setsProgressItems } from './data/progress';
@@ -87,11 +88,7 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-                  <p className="text-gray-700">1. A = &#123;2, 4, 6, 8&#125;，8 ____ A　答案：<strong>∈</strong></p>
-                  <p className="text-gray-700">2. B = &#123;x | x {'>'} 5&#125;，3 ____ B　答案：<strong>∉</strong>（3 不大于 5）</p>
-                </div>
+                <PracticeCard questions={setsPractice0} />
               </div>
             </Collapsible>
           </section>
@@ -154,12 +151,7 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-                  <p className="text-gray-700">1. 下列能构成集合的是？A. 好看的花　B. 不超过10的自然数 → 答案：<strong>B</strong></p>
-                  <p className="text-gray-700">2. &#123;1, 2, 3&#125; 和 &#123;3, 2, 1&#125; 是同一个集合吗？→ 答案：<strong>是</strong>（无序性）</p>
-                  <p className="text-gray-700">3. 集合 <Math tex="B = \{2,\; m,\; m^2 - m\}" />，m 不能取哪些值？→ 答案：<strong>m ≠ 2, m ≠ 0, m ≠ -1</strong>（分别让三对元素相等解出来，再排除）</p>
-                </div>
+                <PracticeCard questions={setsPractice1} />
               </div>
             </Collapsible>
           </section>
@@ -354,13 +346,7 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-                  <p className="text-gray-700">1. 用列举法表示"不超过 5 的正整数" → 答案：<strong>&#123;1, 2, 3, 4, 5&#125;</strong></p>
-                  <p className="text-gray-700">2. <Math tex="\{x \mid x^2 = 1\}" /> 用列举法 → 答案：<strong><Math tex="\{-1, 1\}" /></strong></p>
-                  <p className="text-gray-700">3. 把 <Math tex="\{x \mid -3 \leq x < 2\}" /> 写成区间 → 答案：<strong>[-3, 2)</strong></p>
-                  <p className="text-gray-700">4. 把 <Math tex="\{x \mid x > 5\}" /> 写成区间 → 答案：<strong>(5, +∞)</strong></p>
-                </div>
+                <PracticeCard questions={setsPractice2} />
               </div>
             </Collapsible>
           </section>
@@ -418,12 +404,7 @@ export function SetsPage() {
                   <p><strong>0 是自然数！</strong> <Math tex="0 \in \mathbb{N}" /> ✓，<Math tex="0 \notin \mathbb{N}^*" /> ✓</p>
                 </CalloutCard>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-                  <p className="text-gray-700">1. <Math tex="-3" /> ____ <Math tex="\mathbb{Z}" />　答案：<strong>∈</strong></p>
-                  <p className="text-gray-700">2. <Math tex="\sqrt{2}" /> ____ <Math tex="\mathbb{Q}" />　答案：<strong>∉</strong>（√2 是无理数）</p>
-                  <p className="text-gray-700">3. <Math tex="\pi" /> ____ <Math tex="\mathbb{R}" />　答案：<strong>∈</strong>（π 是实数）</p>
-                </div>
+                <PracticeCard questions={setsPractice3} />
               </div>
             </Collapsible>
           </section>
@@ -605,17 +586,7 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                {/* ───── 即时练习 ───── */}
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3 space-y-1">
-                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习（学完上面再做）</p>
-                  <p className="text-gray-700">1. &#123;1,2&#125; ⊆ &#123;1,2,3&#125; 对吗？&#123;1,2,3&#125; ⊆ &#123;1,2,3&#125; 呢？→ <strong>都对</strong>（自己也是自己的子集）</p>
-                  <p className="text-gray-700">2. &#123;1,2,3&#125; ⊊ &#123;1,2,3&#125; 对吗？→ <strong>不对</strong>（相等不算真子集）</p>
-                  <p className="text-gray-700">3. ∅ 和 &#123;0&#125; 一样吗？→ <strong>不一样</strong>（∅ 是 0 个元素，&#123;0&#125; 有 1 个元素）</p>
-                  <p className="text-gray-700">4. &#123;1, 2&#125; 的子集有几个？→ <strong>2² = 4 个</strong>（∅, &#123;1&#125;, &#123;2&#125;, &#123;1,2&#125;）</p>
-                  <p className="text-gray-700">5. &#123;1, 2&#125; 的非空子集有几个？→ <strong>2² - 1 = 3 个</strong>（&#123;1&#125;, &#123;2&#125;, &#123;1,2&#125;）</p>
-                  <p className="text-gray-700">6. &#123;1, 2&#125; 的非空真子集有几个？→ <strong>2² - 2 = 2 个</strong>（&#123;1&#125;, &#123;2&#125;）</p>
-                  <p className="text-gray-700">7. A = &#123;x | x {'<'} a&#125;，B = &#123;x | x {'<'} 3&#125;，若 B ⊆ A，则 a 的范围？→ <strong>a ≥ 3</strong></p>
-                </div>
+                <PracticeCard questions={setsPractice4} title="✏️ 即时练习（学完上面再做）" />
               </div>
             </Collapsible>
           </section>
@@ -1030,12 +1001,7 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
-                <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                  <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-                  <p className="text-gray-700">1. A = &#123;1,3,5,7&#125;，B = &#123;3,5,8&#125;，A ∩ B = ____　答案：<strong>&#123;3, 5&#125;</strong></p>
-                  <p className="text-gray-700">2. U = &#123;1,2,3,4,5&#125;，A = &#123;2,4&#125;，∁ᵤA = ____　答案：<strong>&#123;1, 3, 5&#125;</strong></p>
-                  <p className="text-gray-700">3. A = &#123;x | -1 ≤ x {'<'} 3&#125;，B = &#123;x | 2 {'<'} x ≤ 5&#125;，A ∩ B = ____　答案：<strong>(2, 3)</strong></p>
-                </div>
+                <PracticeCard questions={setsPractice5} />
 
                 <CalloutCard variant="warning" title="易错点">
                   <p>补集<strong>必须说明全集 U</strong>，没有全集就没有补集</p>

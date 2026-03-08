@@ -1,6 +1,7 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, CalloutCard } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, CalloutCard, PracticeCard } from '@/components/shared';
 import { prereqNarrations } from './data/narrations';
 import { prereqSelfTest } from './data/selftest';
+import { prereqPractice1, prereqPractice2, prereqPractice3, prereqPractice4, prereqPractice5, prereqPractice6, prereqPractice7 } from './data/practice';
 
 export function PrereqPage() {
 
@@ -81,12 +82,7 @@ export function PrereqPage() {
           <p className="text-sm text-gray-600 mt-2">
             每次扩展都是因为<strong>原来的数不够用了</strong>。复数不是奇怪的东西，它只是数的<strong>第5次自然升级</strong>。
           </p>
-          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-            <p className="text-gray-700">1. √2 是什么数？→ <strong>无理数（也是实数）</strong></p>
-            <p className="text-gray-700">2. -3 是什么数？→ <strong>整数（也是有理数、实数）</strong></p>
-            <p className="text-gray-700">3. 2 + 3i 是什么数？→ <strong>复数</strong></p>
-          </div>
+          <PracticeCard questions={prereqPractice1} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• <strong>0 是自然数</strong>，也是整数、有理数、实数</p>
             <p>• 无限不循环小数（如 √2、π）是<strong>无理数</strong>，不是有理数</p>
@@ -138,12 +134,7 @@ export function PrereqPage() {
               <p className="text-sm text-gray-600 mt-1">你现在不需要理解为什么这么算，只要知道 <Math tex="|\;\;|" /> 在复数里表示大小，计算时需要平方和开方。</p>
             </div>
           </div>
-          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-            <p className="text-gray-700">1. <Math tex="(-5)^2" /> = ? → <strong>25</strong></p>
-            <p className="text-gray-700">2. <Math tex="\sqrt{16+9}" /> = ? → <Math tex="\sqrt{25} = " /><strong>5</strong></p>
-            <p className="text-gray-700">3. <Math tex="|-7|" /> = ? → <strong>7</strong></p>
-          </div>
+          <PracticeCard questions={prereqPractice2} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• <strong><Math tex="(-3)^2 = 9" /></strong>，不是 -9！括号很重要：<Math tex="-3^2 = -(3^2) = -9" /></p>
             <p>• <strong><Math tex="\sqrt{\phantom{x}}" /> 号默认取正值</strong>：<Math tex="\sqrt{9} = 3" />，不是 ±3</p>
@@ -174,12 +165,7 @@ export function PrereqPage() {
               </div>
             </div>
           </div>
-          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-            <p className="text-gray-700">1. <Math tex="7^2" /> = ? → <strong>49</strong></p>
-            <p className="text-gray-700">2. <Math tex="\sqrt{144}" /> = ? → <strong>12</strong></p>
-            <p className="text-gray-700">3. <Math tex="5^2 + 12^2" /> = ? → <strong>169</strong>，即 <Math tex="\sqrt{169}" /> = <strong>13</strong></p>
-          </div>
+          <PracticeCard questions={prereqPractice3} />
         </Collapsible>
       </section>
 
@@ -229,12 +215,7 @@ export function PrereqPage() {
               <Math tex="\frac{4-2i}{2} = \frac{4}{2} - \frac{2}{2}i = 2 - i" display />
             </div>
           </div>
-          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-            <p className="text-gray-700">1. <Math tex="\frac{2}{3} + \frac{1}{4}" /> = ? → <Math tex="\frac{8}{12} + \frac{3}{12} = " /><strong><Math tex="\frac{11}{12}" /></strong></p>
-            <p className="text-gray-700">2. <Math tex="\frac{3}{5} \times \frac{2}{7}" /> = ? → <strong><Math tex="\frac{6}{35}" /></strong></p>
-            <p className="text-gray-700">3. <Math tex="\frac{18}{24}" /> 约分 = ? → <strong><Math tex="\frac{3}{4}" /></strong>（同除以6）</p>
-          </div>
+          <PracticeCard questions={prereqPractice4} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• 异分母<strong>不能直接加分子</strong>：<Math tex="\frac{1}{2} + \frac{1}{3} \neq \frac{2}{5}" />，必须先通分</p>
             <p>• 除以分数 = 乘以<strong>倒数</strong>，别忘了翻转</p>
@@ -290,12 +271,7 @@ export function PrereqPage() {
               </p>
             </CalloutCard>
           </div>
-          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-            <p className="text-gray-700">1. <Math tex="(3+i)(2-i)" /> = ? → <Math tex="6-3i+2i-i^2 = 6-i+1 = " /><strong><Math tex="7-i" /></strong></p>
-            <p className="text-gray-700">2. <Math tex="(1+i)^2" /> = ? → <Math tex="1+2i+i^2 = 1+2i-1 = " /><strong><Math tex="2i" /></strong></p>
-            <p className="text-gray-700">3. <Math tex="(3+2i)(3-2i)" /> = ? → <Math tex="9-4i^2 = 9+4 = " /><strong>13</strong></p>
-          </div>
+          <PracticeCard questions={prereqPractice5} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• 两个括号相乘<strong>不能只乘第一项</strong>：<Math tex="(a+b)(c+d) \neq ac+bd" /></p>
             <p>• 遇到 <Math tex="i^2" /> 一定要<strong>立刻替换成 -1</strong>，别漏了</p>
@@ -342,12 +318,7 @@ export function PrereqPage() {
               <p>忘记 <Math tex="i^2 = -1" /> 带入时的符号变化。</p>
             </CalloutCard>
           </div>
-          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-            <p className="text-gray-700">1. <Math tex="-3 - (-7)" /> = ? → <Math tex="-3 + 7 = " /><strong>4</strong></p>
-            <p className="text-gray-700">2. <Math tex="(-4) \times (-3)" /> = ? → <strong>12</strong>（同号得正）</p>
-            <p className="text-gray-700">3. <Math tex="2 - i^2" /> = ? → <Math tex="2 - (-1) = " /><strong>3</strong></p>
-          </div>
+          <PracticeCard questions={prereqPractice6} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• <strong>减去负数 = 加正数</strong>：5 - (-3) = 8，不是 2</p>
             <p>• <strong>负 × 负 = 正</strong>：(-1)×(-1) = 1</p>
@@ -400,12 +371,7 @@ export function PrereqPage() {
               </div>
             </div>
           </div>
-          <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-            <p className="font-bold text-green-800 mb-1">✏️ 即时练习</p>
-            <p className="text-gray-700">1. <Math tex="i^{53}" /> = ? → 53÷4=13余<strong>1</strong>，查表余1 → <strong><Math tex="i" /></strong></p>
-            <p className="text-gray-700">2. <Math tex="i^{100}" /> = ? → 100÷4=25余<strong>0</strong>，查表余0 → <strong>1</strong></p>
-            <p className="text-gray-700">3. <Math tex="i^{7}" /> = ? → 7÷4=1余<strong>3</strong>，查表余3 → <strong><Math tex="-i" /></strong></p>
-          </div>
+          <PracticeCard questions={prereqPractice7} />
           <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
             <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
             <p className="text-gray-700">• <strong>余0 对应 <Math tex="i^4 = 1" /></strong>，不是 <Math tex="i^0" /></p>
