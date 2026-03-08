@@ -15,11 +15,20 @@ interface NavChild {
   label: string;
 }
 
+interface NavGroup {
+  groupLabel: string;
+  items: NavChild[];
+}
+
 interface NavItem {
   path: string;
   label: string;
   icon?: React.ReactNode;
-  children?: NavChild[];
+  children?: (NavChild | NavGroup)[];
+}
+
+function isNavGroup(item: NavChild | NavGroup): item is NavGroup {
+  return 'groupLabel' in item;
 }
 
 const navItems: NavItem[] = [
@@ -29,12 +38,17 @@ const navItems: NavItem[] = [
     label: '高考数学',
     icon: <Calculator size={18} />,
     children: [
-      { path: '/math/prereq', label: '1.0 复数前置知识' },
-      { path: '/math/complex', label: '1.1 复数' },
-      { path: '/math/sets-prereq', label: '1.1.5 集合前置知识' },
-      { path: '/math/sets', label: '1.2 集合' },
-      { path: '/math/logic-prereq', label: '1.2.5 逻辑前置知识' },
-      { path: '/math/logic', label: '1.3 逻辑用语' },
+      {
+        groupLabel: '第一阶段：数学语言',
+        items: [
+          { path: '/math/prereq', label: '1.0 复数前置知识' },
+          { path: '/math/complex', label: '1.1 复数' },
+          { path: '/math/sets-prereq', label: '1.1.5 集合前置知识' },
+          { path: '/math/sets', label: '1.2 集合' },
+          { path: '/math/logic-prereq', label: '1.2.5 逻辑前置知识' },
+          { path: '/math/logic', label: '1.3 逻辑用语' },
+        ],
+      },
     ],
   },
   { path: '/chat', label: 'AI 对话', icon: <MessageCircle size={18} /> },
@@ -110,20 +124,43 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </button>
                 {!collapsed && expandedSections.includes(item.path) && (
                   <div className="ml-4 border-l border-slate-700">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.path}
-                        to={child.path}
-                        onClick={() => setMobileOpen(false)}
-                        className={`block pl-6 pr-4 py-3 md:py-2 text-sm transition-colors ${
-                          isActive(child.path)
-                            ? 'text-blue-400 bg-slate-800 font-medium'
-                            : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                        }`}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
+                    {item.children.map((entry, idx) =>
+                      isNavGroup(entry) ? (
+                        <div key={entry.groupLabel}>
+                          {idx > 0 && <div className="mx-4 my-1 border-t border-slate-700/50" />}
+                          <p className="pl-6 pr-4 pt-3 pb-1 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                            {entry.groupLabel}
+                          </p>
+                          {entry.items.map((child) => (
+                            <Link
+                              key={child.path}
+                              to={child.path}
+                              onClick={() => setMobileOpen(false)}
+                              className={`block pl-8 pr-4 py-3 md:py-2 text-sm transition-colors ${
+                                isActive(child.path)
+                                  ? 'text-blue-400 bg-slate-800 font-medium'
+                                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : (
+                        <Link
+                          key={entry.path}
+                          to={entry.path}
+                          onClick={() => setMobileOpen(false)}
+                          className={`block pl-6 pr-4 py-3 md:py-2 text-sm transition-colors ${
+                            isActive(entry.path)
+                              ? 'text-blue-400 bg-slate-800 font-medium'
+                              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                          }`}
+                        >
+                          {entry.label}
+                        </Link>
+                      ),
+                    )}
                   </div>
                 )}
               </>
