@@ -29,13 +29,13 @@ export function ComplexPage() {
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <p>一、为什么要发明复数 → i²=-1 的由来</p>
-          <p>二、什么是复数 → 标准形式 a+bi</p>
-          <p>三、复数的相等 → 实部=实部，虚部=虚部</p>
-          <p>四、四则运算 → 加减乘除，把i当字母</p>
-          <p>五、复平面 → 几何意义，判断象限</p>
-          <p>⚡ 考场技巧 → 速算秒杀5招</p>
-          <p>七、高考真题实战 → 真题模拟</p>
+          <button onClick={() => document.getElementById('complex-why')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、为什么要发明复数 → i²=-1 的由来</button>
+          <button onClick={() => document.getElementById('complex-what')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、什么是复数 → 标准形式 a+bi</button>
+          <button onClick={() => document.getElementById('complex-equality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、复数的相等 → 实部=实部，虚部=虚部</button>
+          <button onClick={() => document.getElementById('complex-ops')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、四则运算 → 加减乘除，把i当字母</button>
+          <button onClick={() => document.getElementById('complex-plane')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、复平面 → 几何意义，判断象限</button>
+          <button onClick={() => document.getElementById('complex-tips')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">⚡ 考场技巧 → 速算秒来5招</button>
+          <button onClick={() => document.getElementById('complex-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、高考真题实战 → 真题模拟</button>
         </div>
       </div>
 
@@ -73,7 +73,7 @@ export function ComplexPage() {
 
       <LessonLayout progressItems={items} onToggle={toggle}>
           {/* Part 1: Why */}
-          <section className="mb-8">
+          <section id="complex-why" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 1
@@ -133,7 +133,7 @@ export function ComplexPage() {
           </section>
 
           {/* Part 2: What */}
-          <section className="mb-8">
+          <section id="complex-what" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 2
@@ -232,7 +232,7 @@ export function ComplexPage() {
           </section>
 
           {/* Part 3: Equality */}
-          <section className="mb-8">
+          <section id="complex-equality" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 3
@@ -262,7 +262,7 @@ export function ComplexPage() {
           </section>
 
           {/* Part 4: Operations */}
-          <section className="mb-8">
+          <section id="complex-ops" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 4
@@ -519,7 +519,7 @@ export function ComplexPage() {
           </section>
 
           {/* Part 5: Complex Plane */}
-          <section className="mb-8">
+          <section id="complex-plane" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 5
@@ -587,7 +587,7 @@ export function ComplexPage() {
           </section>
 
           {/* Part 6: Tips & Tricks */}
-          <section className="mb-8">
+          <section id="complex-tips" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-orange-500 text-white flex items-center justify-center text-sm font-bold">
                 ⚡
@@ -682,7 +682,7 @@ export function ComplexPage() {
           </section>
 
           {/* Part 7: Quiz */}
-          <section className="mb-8">
+          <section id="complex-quiz" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
                 7

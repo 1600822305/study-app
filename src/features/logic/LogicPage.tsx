@@ -26,12 +26,12 @@ export function LogicPage() {
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <p>一、命题 → 能判断真假的陈述句</p>
-          <p>二、四种命题 → 逆、否、逆否</p>
-          <p>三、充分必要条件 → 集合法判断</p>
-          <p>四、量词与否定 → ∀ ↔ ∃ 互换</p>
-          <p>五、逻辑联结词 → 且、或、非</p>
-          <p>六、高考真题实战 → 真题模拟</p>
+          <button onClick={() => document.getElementById('logic-prop')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、命题 → 能判断真假的陈述句</button>
+          <button onClick={() => document.getElementById('logic-four')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、四种命题 → 逆、否、逆否</button>
+          <button onClick={() => document.getElementById('logic-cond')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、充分必要条件 → 集合法判断</button>
+          <button onClick={() => document.getElementById('logic-quant')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、量词与否定 → ∀ ↔ ∃ 互换</button>
+          <button onClick={() => document.getElementById('logic-conn')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、逻辑联结词 → 且、或、非</button>
+          <button onClick={() => document.getElementById('logic-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、高考真题实战 → 真题模拟</button>
         </div>
       </div>
 
@@ -126,7 +126,7 @@ export function LogicPage() {
 
       <LessonLayout progressItems={items} onToggle={toggle}>
           {/* Part 1: Propositions */}
-          <section className="mb-8">
+          <section id="logic-prop" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 1
@@ -166,7 +166,7 @@ export function LogicPage() {
           </section>
 
           {/* Part 2: Four Types of Propositions */}
-          <section className="mb-8">
+          <section id="logic-four" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 2
@@ -223,7 +223,7 @@ export function LogicPage() {
           </section>
 
           {/* Part 3: Sufficient & Necessary Conditions */}
-          <section className="mb-8">
+          <section id="logic-cond" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 3
@@ -465,7 +465,7 @@ export function LogicPage() {
           </section>
 
           {/* Part 4: Quantifiers */}
-          <section className="mb-8">
+          <section id="logic-quant" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 4
@@ -555,7 +555,7 @@ export function LogicPage() {
           </section>
 
           {/* Part 5: Logical Connectives */}
-          <section className="mb-8">
+          <section id="logic-conn" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-blue-500 text-white flex items-center justify-center text-sm font-bold">
                 5
@@ -638,7 +638,7 @@ export function LogicPage() {
           </section>
 
           {/* Part 6: Quiz */}
-          <section className="mb-8">
+          <section id="logic-quiz" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
                 6

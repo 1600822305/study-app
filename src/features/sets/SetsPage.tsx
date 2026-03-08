@@ -26,13 +26,13 @@ export function SetsPage() {
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <p>一、什么是集合 → 三大性质</p>
-          <p>二、元素与集合 → ∈ 和 ∉</p>
-          <p>三、集合的表示 → 列举法、描述法、区间</p>
-          <p>四、常见数集 → ℕ, ℤ, ℚ, ℝ</p>
-          <p>五、子集与真子集 → ⊆ 和 ⊂</p>
-          <p>六、集合的运算 → 交集、并集、补集</p>
-          <p>七、高考真题实战 → 真题模拟</p>
+          <button onClick={() => document.getElementById('sets-what')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、什么是集合 → 三大性质</button>
+          <button onClick={() => document.getElementById('sets-props')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、元素与集合 → ∈ 和 ∉</button>
+          <button onClick={() => document.getElementById('sets-repr')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、集合的表示 → 列举法、描述法、区间</button>
+          <button onClick={() => document.getElementById('sets-numsets')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、常见数集 → ℕ, ℤ, ℚ, ℝ</button>
+          <button onClick={() => document.getElementById('sets-subset')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、子集与真子集 → ⊆ 和 ⊂</button>
+          <button onClick={() => document.getElementById('sets-ops')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、集合的运算 → 交集、并集、补集</button>
+          <button onClick={() => document.getElementById('sets-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、高考真题实战 → 真题模拟</button>
         </div>
       </div>
 
@@ -101,7 +101,7 @@ export function SetsPage() {
           </section>
 
           {/* Section 1: 集合是什么 */}
-          <section className="mb-6">
+          <section id="sets-what" className="mb-6 scroll-mt-4">
             <Collapsible title="一、集合是什么？" defaultOpen storageKey="sets:what-is-set" headerExtra={<SpeakButton text={setsNarrations.whatIsSet} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：理解集合的概念，区分元素和集合的关系。</p>
               <div className="space-y-3 text-sm text-gray-700">
@@ -140,7 +140,7 @@ export function SetsPage() {
           </section>
 
           {/* Section 2: 三大性质 */}
-          <section className="mb-6">
+          <section id="sets-props" className="mb-6 scroll-mt-4">
             <Collapsible title="二、集合的三大性质（必须记住！）" defaultOpen storageKey="sets:properties" headerExtra={<SpeakButton text={setsNarrations.threeProperties} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：判断一组对象能否构成集合，识别高考中的互异性陷阱。</p>
               <div className="space-y-3 text-sm text-gray-700">
@@ -203,7 +203,7 @@ export function SetsPage() {
           </section>
 
           {/* Section 3: 表示方法 */}
-          <section className="mb-6">
+          <section id="sets-repr" className="mb-6 scroll-mt-4">
             <Collapsible title="三、集合的表示方法" defaultOpen storageKey="sets:representation" headerExtra={<SpeakButton text={setsNarrations.representation} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用列举法和描述法表示集合，读懂 Venn 图。</p>
               <div className="space-y-3 text-sm text-gray-700">
@@ -398,7 +398,7 @@ export function SetsPage() {
           </section>
 
           {/* Section 4: 常见数集 */}
-          <section className="mb-6">
+          <section id="sets-numsets" className="mb-6 scroll-mt-4">
             <Collapsible title="四、常见的数集（背下来）" defaultOpen storageKey="sets:number-sets" headerExtra={<SpeakButton text={setsNarrations.numberSets} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：记住 N, N*, Z, Q, R 各代表什么，判断元素属于哪个数集。</p>
               <div className="space-y-3 text-sm text-gray-700">
@@ -456,7 +456,7 @@ export function SetsPage() {
           </section>
 
           {/* Section 5: 集合间的关系 */}
-          <section className="mb-6">
+          <section id="sets-subset" className="mb-6 scroll-mt-4">
             <Collapsible title="五、集合间的关系" defaultOpen storageKey="sets:relations" headerExtra={<SpeakButton text={setsNarrations.subsets} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：判断子集和真子集关系，计算子集个数，记住空集铁律。</p>
               <div className="space-y-4 text-sm text-gray-700">
@@ -638,7 +638,7 @@ export function SetsPage() {
           </section>
 
           {/* Section 6: 集合的运算 */}
-          <section className="mb-6">
+          <section id="sets-ops" className="mb-6 scroll-mt-4">
             <Collapsible title="六、集合的运算（高考核心！）" defaultOpen storageKey="sets:operations" headerExtra={<SpeakButton text={setsNarrations.operations} />}>
               <p className="text-xs text-blue-600 mb-3">🎯 学完你能：熟练做交集、并集、补集运算，掌握混合运算技巧。</p>
               <div className="space-y-3 text-sm text-gray-700">
@@ -1221,7 +1221,7 @@ export function SetsPage() {
           </section>
 
           {/* Section 8: Quiz */}
-          <section className="mb-8">
+          <section id="sets-quiz" className="mb-8 scroll-mt-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
                 8
