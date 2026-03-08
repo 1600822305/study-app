@@ -174,6 +174,7 @@ export function ComplexPage() {
                       ['5 - 4i', '5', '-4', '虚数'],
                       ['7', '7', '0', '实数'],
                       ['3i', '0', '3', '纯虚数'],
+                      ['0', '0', '0', '实数（也是复数）'],
                     ].map(([z, a, b, type], idx) => (
                       <tr key={idx} className="hover:bg-blue-50">
                         <td className="border border-gray-200 px-3 py-2">
@@ -514,7 +515,9 @@ export function ComplexPage() {
             <CalloutCard variant="warning" title="易错点" className="mt-3">
               <p>• 遇到 <Math tex="i^2" /> <strong>必须立刻换成 -1</strong></p>
               <p>• 除法三步走：写共轭 → 上下同乘 → 整理成 <Math tex="a+bi" /></p>
+              <p>• <strong>虚部是 <Math tex="b" />，不是 <Math tex="bi" /></strong></p>
               <p>• i 的幂次：<strong>除以4看余数</strong>，余1→i，余2→-1，余3→-i，余0→1</p>
+              <p>• 共轭相乘 <Math tex="z \cdot \bar{z} = a^2+b^2" />，结果一定是<strong>非负实数</strong></p>
             </CalloutCard>
           </section>
 
@@ -722,8 +725,16 @@ export function ComplexPage() {
                   </p>
                 </div>
                 <div>
+                  <p className="text-slate-400 text-xs mb-1">运算</p>
+                  <p>把 <Math tex="i" /> 当字母，展开计算，<Math tex="i^2" /> 换成 <Math tex="-1" /></p>
+                </div>
+                <div>
                   <p className="text-slate-400 text-xs mb-1">除法</p>
                   <p>上下同乘分母的共轭</p>
+                </div>
+                <div>
+                  <p className="text-slate-400 text-xs mb-1">共轭性质</p>
+                  <p><Math tex="z \cdot \bar{z} = a^2 + b^2" /></p>
                 </div>
                 <div>
                   <p className="text-slate-400 text-xs mb-1">模</p>
