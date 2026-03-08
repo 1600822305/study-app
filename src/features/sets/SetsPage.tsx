@@ -2,6 +2,7 @@ import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, Ca
 import { setsNarrations } from './data/narrations';
 import { setsPractice0, setsPractice1, setsPractice2, setsPractice3, setsPractice4, setsPractice5 } from './data/practice';
 import { useProgress, usePrintMode } from '@/hooks';
+import { scrollToId } from '@/lib/scroll';
 import { setsQuizQuestions } from './data/quiz';
 import { setsProgressItems } from './data/progress';
 
@@ -31,13 +32,13 @@ export function SetsPage() {
       <div className="bg-gray-50 rounded-xl p-3 mb-4 text-sm text-gray-600">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <button onClick={() => document.getElementById('sets-what')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合是什么 → 定义 + ∈ 和 ∉</button>
-          <button onClick={() => document.getElementById('sets-props')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、三大性质 → 确定性·互异性·无序性</button>
-          <button onClick={() => document.getElementById('sets-repr')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、集合的表示 → 列举法、描述法、区间</button>
-          <button onClick={() => document.getElementById('sets-numsets')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、常见数集 → ℕ, ℤ, ℚ, ℝ</button>
-          <button onClick={() => document.getElementById('sets-subset')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、子集与真子集 → ⊆ 和 ⊂</button>
-          <button onClick={() => document.getElementById('sets-ops')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、集合的运算 → 交集、并集、补集</button>
-          <button onClick={() => document.getElementById('sets-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、高考真题实战 → 真题模拟</button>
+          <button onClick={() => scrollToId('sets-what')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合是什么 → 定义 + ∈ 和 ∉</button>
+          <button onClick={() => scrollToId('sets-props')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、三大性质 → 确定性·互异性·无序性</button>
+          <button onClick={() => scrollToId('sets-repr')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、集合的表示 → 列举法、描述法、区间</button>
+          <button onClick={() => scrollToId('sets-numsets')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、常见数集 → ℕ, ℤ, ℚ, ℝ</button>
+          <button onClick={() => scrollToId('sets-subset')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、子集与真子集 → ⊆ 和 ⊂</button>
+          <button onClick={() => scrollToId('sets-ops')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、集合的运算 → 交集、并集、补集</button>
+          <button onClick={() => scrollToId('sets-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、高考真题实战 → 真题模拟</button>
         </div>
       </div>
 

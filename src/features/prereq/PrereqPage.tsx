@@ -5,6 +5,7 @@ import { prereqPractice1, prereqPractice2, prereqPractice3, prereqPractice4, pre
 import { prereqProgressItems } from './data/progress';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
+import { scrollToId } from '@/lib/scroll';
 
 export function PrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('prereq', prereqProgressItems);
@@ -32,13 +33,13 @@ export function PrereqPage() {
       <div className="bg-gray-50 rounded-xl p-3 mb-3 text-sm text-gray-600 print:p-2 print:mb-2">
         <p className="font-bold text-gray-800 mb-1">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <button onClick={() => document.getElementById('prereq-numclass')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、数的分类 → 复数在数系中的位置</button>
-          <button onClick={() => document.getElementById('prereq-square')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、平方与平方根 → 计算复数模的基础</button>
-          <button onClick={() => document.getElementById('prereq-sqtable')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、常用平方数 → 心算提速</button>
-          <button onClick={() => document.getElementById('prereq-fraction')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、分数运算 → 复数除法结果经常是分数</button>
-          <button onClick={() => document.getElementById('prereq-poly')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、多项式展开 → 复数乘法的核心</button>
-          <button onClick={() => document.getElementById('prereq-negative')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、负数运算 → i²=-1 必须处理负数</button>
-          <button onClick={() => document.getElementById('prereq-remainder')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、除以4求余数 → 判断 i 的幂次</button>
+          <button onClick={() => scrollToId('prereq-numclass')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、数的分类 → 复数在数系中的位置</button>
+          <button onClick={() => scrollToId('prereq-square')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、平方与平方根 → 计算复数模的基础</button>
+          <button onClick={() => scrollToId('prereq-sqtable')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、常用平方数 → 心算提速</button>
+          <button onClick={() => scrollToId('prereq-fraction')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、分数运算 → 复数除法结果经常是分数</button>
+          <button onClick={() => scrollToId('prereq-poly')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、多项式展开 → 复数乘法的核心</button>
+          <button onClick={() => scrollToId('prereq-negative')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、负数运算 → i²=-1 必须处理负数</button>
+          <button onClick={() => scrollToId('prereq-remainder')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、除以4求余数 → 判断 i 的幂次</button>
         </div>
       </div>
 

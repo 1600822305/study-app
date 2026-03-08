@@ -4,6 +4,7 @@ import { logicPrereqPractice1, logicPrereqPractice2, logicPrereqPractice3 } from
 import { logicPrereqProgressItems } from './data/prereq-progress';
 import { logicPrereqQuizQuestions } from './data/prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
+import { scrollToId } from '@/lib/scroll';
 
 export function LogicPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('logic-prereq', logicPrereqProgressItems);
@@ -30,11 +31,11 @@ export function LogicPrereqPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="text-sm text-gray-600 space-y-1">
-          <button onClick={() => document.getElementById('lp-subset')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合的子集关系 ── 判断“谁包含谁”，这是充分必要条件的基础</button>
-          <button onClick={() => document.getElementById('lp-inequality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解不等式 ── 把条件转成集合，比较范围大小</button>
-          <button onClick={() => document.getElementById('lp-reasoning')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、基本推理能力 ── 判断“p 能不能推出 q”</button>
-          <button onClick={() => document.getElementById('lp-cheatsheet')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、公式速查表 ── 一页纸总结</button>
-          <button onClick={() => document.getElementById('lp-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、选择题自测（8题）</button>
+          <button onClick={() => scrollToId('lp-subset')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合的子集关系 ── 判断“谁包含谁”，这是充分必要条件的基础</button>
+          <button onClick={() => scrollToId('lp-inequality')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解不等式 ── 把条件转成集合，比较范围大小</button>
+          <button onClick={() => scrollToId('lp-reasoning')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、基本推理能力 ── 判断“p 能不能推出 q”</button>
+          <button onClick={() => scrollToId('lp-cheatsheet')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、公式速查表 ── 一页纸总结</button>
+          <button onClick={() => scrollToId('lp-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、选择题自测（8题）</button>
         </div>
       </div>
 

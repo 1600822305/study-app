@@ -4,6 +4,7 @@ import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, Ca
 import { complexNarrations } from './data/narrations';
 import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/practice';
 import { useProgress, usePrintMode } from '@/hooks';
+import { scrollToId } from '@/lib/scroll';
 import { complexQuizQuestions } from './data/quiz';
 import { complexProgressItems } from './data/progress';
 
@@ -33,13 +34,13 @@ export function ComplexPage() {
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <button onClick={() => document.getElementById('complex-why')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、为什么要发明复数 → i²=-1 的由来</button>
-          <button onClick={() => document.getElementById('complex-what')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、什么是复数 → 标准形式 a+bi</button>
-          <button onClick={() => document.getElementById('complex-equality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、复数的相等 → 实部=实部，虚部=虚部</button>
-          <button onClick={() => document.getElementById('complex-ops')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、四则运算 → 加减乘除，把i当字母</button>
-          <button onClick={() => document.getElementById('complex-plane')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、复平面 → 几何意义，判断象限</button>
-          <button onClick={() => document.getElementById('complex-tips')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">⚡ 考场技巧 → 速算秒来5招</button>
-          <button onClick={() => document.getElementById('complex-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、高考真题实战 → 真题模拟</button>
+          <button onClick={() => scrollToId('complex-why')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、为什么要发明复数 → i²=-1 的由来</button>
+          <button onClick={() => scrollToId('complex-what')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、什么是复数 → 标准形式 a+bi</button>
+          <button onClick={() => scrollToId('complex-equality')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、复数的相等 → 实部=实部，虚部=虚部</button>
+          <button onClick={() => scrollToId('complex-ops')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、四则运算 → 加减乘除，把i当字母</button>
+          <button onClick={() => scrollToId('complex-plane')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、复平面 → 几何意义，判断象限</button>
+          <button onClick={() => scrollToId('complex-tips')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">⚡ 考场技巧 → 速算秒来5招</button>
+          <button onClick={() => scrollToId('complex-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、高考真题实战 → 真题模拟</button>
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, Ca
 import { logicNarrations } from './data/narrations';
 import { logicPractice1, logicPractice2, logicPractice3, logicPractice4, logicPractice5 } from './data/practice';
 import { useProgress, usePrintMode } from '@/hooks';
+import { scrollToId } from '@/lib/scroll';
 import { logicQuizQuestions } from './data/quiz';
 import { logicProgressItems } from './data/progress';
 
@@ -31,12 +32,12 @@ export function LogicPage() {
       <div className="bg-gray-50 rounded-xl p-5 mb-6 text-base text-gray-600">
         <p className="font-bold text-gray-800 mb-3 text-lg">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-x-4 gap-y-2 leading-7">
-          <button onClick={() => document.getElementById('logic-prop')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、命题 → 能判断真假的陈述句</button>
-          <button onClick={() => document.getElementById('logic-four')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、四种命题 → 逆、否、逆否</button>
-          <button onClick={() => document.getElementById('logic-cond')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、充分必要条件 → 集合法判断</button>
-          <button onClick={() => document.getElementById('logic-quant')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、量词与否定 → ∀ ↔ ∃ 互换</button>
-          <button onClick={() => document.getElementById('logic-conn')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、逻辑联结词 → 且、或、非</button>
-          <button onClick={() => document.getElementById('logic-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、高考真题实战 → 真题模拟</button>
+          <button onClick={() => scrollToId('logic-prop')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、命题 → 能判断真假的陈述句</button>
+          <button onClick={() => scrollToId('logic-four')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、四种命题 → 逆、否、逆否</button>
+          <button onClick={() => scrollToId('logic-cond')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、充分必要条件 → 集合法判断</button>
+          <button onClick={() => scrollToId('logic-quant')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、量词与否定 → ∀ ↔ ∃ 互换</button>
+          <button onClick={() => scrollToId('logic-conn')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、逻辑联结词 → 且、或、非</button>
+          <button onClick={() => scrollToId('logic-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、高考真题实战 → 真题模拟</button>
         </div>
       </div>
 

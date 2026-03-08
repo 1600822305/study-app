@@ -6,6 +6,7 @@ import { setsPrereqPractice1, setsPrereqPractice2, setsPrereqPractice3, setsPrer
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
+import { scrollToId } from '@/lib/scroll';
 
 
 export function SetsPrereqPage() {
@@ -33,11 +34,11 @@ export function SetsPrereqPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="text-sm text-gray-600 space-y-1">
-          <button onClick={() => document.getElementById('sp-equation')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、解一元二次方程（开平方 + 因式分解 + 公式法）</button>
-          <button onClick={() => document.getElementById('sp-inequality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解一元二次不等式（大于取两边，小于取中间）</button>
-          <button onClick={() => document.getElementById('sp-numberline')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、数轴的使用（○ 和 ●）</button>
-          <button onClick={() => document.getElementById('sp-interval')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、区间表示法（开闭区间 + ∞）</button>
-          <button onClick={() => document.getElementById('sp-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、选择题自测（16题）</button>
+          <button onClick={() => scrollToId('sp-equation')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、解一元二次方程（开平方 + 因式分解 + 公式法）</button>
+          <button onClick={() => scrollToId('sp-inequality')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解一元二次不等式（大于取两边，小于取中间）</button>
+          <button onClick={() => scrollToId('sp-numberline')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、数轴的使用（○ 和 ●）</button>
+          <button onClick={() => scrollToId('sp-interval')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、区间表示法（开闭区间 + ∞）</button>
+          <button onClick={() => scrollToId('sp-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、选择题自测（16题）</button>
         </div>
       </div>
 
