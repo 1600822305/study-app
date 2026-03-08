@@ -109,11 +109,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {!collapsed && <h1 className="text-lg font-bold tracking-tight">{APP_NAME}</h1>}
       </div>
 
-      <nav className="flex-1 overflow-y-auto py-3">
+      <nav className="flex-1 overflow-y-auto py-2">
         {navItems.map((item) => (
           <div key={item.path}>
             {item.children ? (
-              <>
+              <div className="mb-1">
                 <button
                   onClick={() => toggleSection(item.path)}
                   className="w-full flex items-center gap-3 px-4 py-3 md:py-2.5 text-sm text-slate-300 hover:bg-slate-800 hover:text-white transition-colors cursor-pointer"
@@ -121,7 +121,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   {item.icon}
                   {!collapsed && (
                     <>
-                      <span className="flex-1 text-left">{item.label}</span>
+                      <span className="flex-1 text-left font-medium">{item.label}</span>
                       <ChevronRight
                         size={14}
                         className={`transition-transform ${expandedSections.includes(item.path) ? 'rotate-90' : ''}`}
@@ -130,45 +130,49 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   )}
                 </button>
                 {!collapsed && expandedSections.includes(item.path) && (
-                  <div className="ml-4 border-l border-slate-700">
+                  <div className="mt-1">
                     {item.children.map((entry, idx) =>
                       isNavGroup(entry) ? (
-                        <div key={entry.groupLabel}>
-                          {idx > 0 && <div className="mx-4 my-1 border-t border-slate-700/50" />}
+                        <div key={entry.groupLabel} className="mb-1">
+                          {idx > 0 && <div className="mx-4 my-2 border-t border-slate-700/40" />}
                           <button
                             onClick={() => toggleGroup(entry.groupLabel)}
-                            className="w-full flex items-center pl-6 pr-4 pt-3 pb-1 text-xs font-bold text-slate-500 hover:text-slate-300 tracking-wider cursor-pointer transition-colors"
+                            className="w-full flex items-center gap-2 px-4 py-2 text-[13px] text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors cursor-pointer"
                           >
                             <ChevronRight
-                              size={12}
-                              className={`mr-1 transition-transform ${expandedGroups.includes(entry.groupLabel) ? 'rotate-90' : ''}`}
+                              size={14}
+                              className={`shrink-0 transition-transform ${expandedGroups.includes(entry.groupLabel) ? 'rotate-90' : ''}`}
                             />
-                            <span>{entry.groupLabel}</span>
+                            <span className="font-medium">{entry.groupLabel}</span>
                           </button>
-                          {expandedGroups.includes(entry.groupLabel) && entry.items.map((child) => (
-                            <Link
-                              key={child.path}
-                              to={child.path}
-                              onClick={() => setMobileOpen(false)}
-                              className={`block pl-8 pr-4 py-3 md:py-2 text-sm transition-colors ${
-                                isActive(child.path)
-                                  ? 'text-blue-400 bg-slate-800 font-medium'
-                                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                              }`}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
+                          {expandedGroups.includes(entry.groupLabel) && (
+                            <div className="ml-5 border-l-2 border-slate-700/60">
+                              {entry.items.map((child) => (
+                                <Link
+                                  key={child.path}
+                                  to={child.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className={`block pl-4 pr-4 py-2.5 md:py-2 text-sm transition-colors ${
+                                    isActive(child.path)
+                                      ? 'text-blue-400 bg-blue-500/10 font-medium border-l-2 border-blue-400 -ml-[2px]'
+                                      : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                                  }`}
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ) : (
                         <Link
                           key={entry.path}
                           to={entry.path}
                           onClick={() => setMobileOpen(false)}
-                          className={`block pl-6 pr-4 py-3 md:py-2 text-sm transition-colors ${
+                          className={`block pl-10 pr-4 py-2.5 md:py-2 text-sm transition-colors ${
                             isActive(entry.path)
-                              ? 'text-blue-400 bg-slate-800 font-medium'
-                              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                              ? 'text-blue-400 bg-blue-500/10 font-medium'
+                              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
                           }`}
                         >
                           {entry.label}
@@ -177,14 +181,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     )}
                   </div>
                 )}
-              </>
+              </div>
             ) : (
               <Link
                 to={item.path}
                 onClick={() => setMobileOpen(false)}
                 className={`flex items-center gap-3 px-4 py-3 md:py-2.5 text-sm transition-colors ${
                   isActive(item.path)
-                    ? 'text-blue-400 bg-slate-800 font-medium'
+                    ? 'text-blue-400 bg-blue-500/10 font-medium'
                     : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                 }`}
               >
