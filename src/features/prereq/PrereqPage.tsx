@@ -1,4 +1,4 @@
-import { Math, Collapsible, SpeakButton, QuizPanel } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader } from '@/components/shared';
 import { prereqNarrations } from './data/narrations';
 import { prereqSelfTest } from './data/selftest';
 
@@ -6,25 +6,17 @@ export function PrereqPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <div className="flex items-center gap-2 text-sm text-amber-600 mb-2">
-          <span>📚</span>
-          <span>前置准备</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-black text-gray-900 mb-2">1.0 前置知识回顾</h1>
-          <SpeakButton text={prereqNarrations.intro} />
-        </div>
-        <p className="text-gray-500">学复数之前，先确保这些初中数学没问题</p>
-        <div className="flex flex-wrap gap-3 mt-3">
-          <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
-            约30分钟
-          </span>
-          <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-            初中基础
-          </span>
-        </div>
-      </div>
+      <PageHeader
+        stage="前置准备"
+        variant="prereq"
+        title="1.0 前置知识回顾"
+        narration={prereqNarrations.intro}
+        subtitle="学复数之前，先确保这些初中数学没问题"
+        tags={[
+          { label: '约30分钟', color: 'amber' },
+          { label: '初中基础', color: 'green' },
+        ]}
+      />
 
       {/* Knowledge Map */}
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">

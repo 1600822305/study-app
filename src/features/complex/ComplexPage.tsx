@@ -1,7 +1,7 @@
-import { Flame, Lightbulb, AlertTriangle } from 'lucide-react';
+import { Lightbulb, AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Vector, Text as MafsText } from 'mafs';
 
-import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton, PageHeader } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
 import { useProgress } from '@/hooks';
 import { complexQuizQuestions } from './data/quiz';
@@ -12,29 +12,17 @@ export function ComplexPage() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-2 text-sm text-blue-600 mb-2">
-          <Flame size={16} />
-          <span>第一阶段 · 数学语言</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-black text-gray-900 mb-2">1.1 复数</h1>
-          <SpeakButton text={complexNarrations.intro} />
-        </div>
-        <p className="text-gray-500">从零到满分 · 2小时搞定高考必拿5分</p>
-        <div className="flex flex-wrap gap-3 mt-3">
-          <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-            难度 ★☆☆☆☆
-          </span>
-          <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
-            高考必考 5分
-          </span>
-          <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">
-            约2小时
-          </span>
-        </div>
-      </div>
+      <PageHeader
+        stage="第一阶段 · 数学语言"
+        title="1.1 复数"
+        narration={complexNarrations.intro}
+        subtitle="从零到满分 · 2小时搞定高考必拿5分"
+        tags={[
+          { label: '难度 ★☆☆☆☆', color: 'green' },
+          { label: '高考必考 5分', color: 'blue' },
+          { label: '约2小时', color: 'purple' },
+        ]}
+      />
 
       {/* Knowledge Map */}
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">

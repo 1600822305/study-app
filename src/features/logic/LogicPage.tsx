@@ -1,6 +1,6 @@
-import { Flame, Lightbulb, AlertTriangle } from 'lucide-react';
+import { Lightbulb, AlertTriangle } from 'lucide-react';
 
-import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton, PageHeader } from '@/components/shared';
 import { logicNarrations } from './data/narrations';
 import { useProgress } from '@/hooks';
 import { logicQuizQuestions } from './data/quiz';
@@ -11,29 +11,17 @@ export function LogicPage() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center gap-2 text-sm text-blue-600 mb-2">
-          <Flame size={16} />
-          <span>第一阶段 · 数学语言</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-black text-gray-900 mb-2">1.3 常用逻辑用语</h1>
-          <SpeakButton text={logicNarrations.intro} />
-        </div>
-        <p className="text-gray-500">从零到满分 · 2-3小时搞定</p>
-        <div className="flex flex-wrap gap-3 mt-3">
-          <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-            难度 ★★☆☆☆
-          </span>
-          <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
-            高考常考 5分
-          </span>
-          <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">
-            约2-3小时
-          </span>
-        </div>
-      </div>
+      <PageHeader
+        stage="第一阶段 · 数学语言"
+        title="1.3 常用逻辑用语"
+        narration={logicNarrations.intro}
+        subtitle="从零到满分 · 2-3小时搞定"
+        tags={[
+          { label: '难度 ★★☆☆☆', color: 'green' },
+          { label: '高考常考 5分', color: 'blue' },
+          { label: '约2-3小时', color: 'purple' },
+        ]}
+      />
 
       {/* 速通路线图 */}
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-6">

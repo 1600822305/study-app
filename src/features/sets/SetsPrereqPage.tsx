@@ -1,7 +1,7 @@
 import { Lightbulb, AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Line, Plot, Text as MafsText } from 'mafs';
 
-import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel, PageHeader } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
@@ -13,25 +13,17 @@ export function SetsPrereqPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <div className="flex items-center gap-2 text-sm text-amber-600 mb-2">
-          <span>📚</span>
-          <span>前置准备</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-black text-gray-900 mb-2">1.1.5 集合前置知识</h1>
-          <SpeakButton text={setsPrereqNarrations.intro} />
-        </div>
-        <p className="text-gray-500">学集合之前，先确保解方程、解不等式、画数轴没问题</p>
-        <div className="flex flex-wrap gap-3 mt-3">
-          <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
-            约20-30分钟
-          </span>
-          <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-            初中+高一基础
-          </span>
-        </div>
-      </div>
+      <PageHeader
+        stage="前置准备"
+        variant="prereq"
+        title="1.1.5 集合前置知识"
+        narration={setsPrereqNarrations.intro}
+        subtitle="学集合之前，先确保解方程、解不等式、画数轴没问题"
+        tags={[
+          { label: '约20-30分钟', color: 'amber' },
+          { label: '初中+高一基础', color: 'green' },
+        ]}
+      />
 
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>

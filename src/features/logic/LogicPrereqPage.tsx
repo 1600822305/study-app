@@ -1,6 +1,6 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel, PageHeader } from '@/components/shared';
 import { logicPrereqNarrations } from './data/prereq-narrations';
 import { logicPrereqProgressItems } from './data/prereq-progress';
 import { logicPrereqQuizQuestions } from './data/prereq-quiz';
@@ -11,25 +11,17 @@ export function LogicPrereqPage() {
 
   return (
     <div>
-      <div className="mb-8">
-        <div className="flex items-center gap-2 text-sm text-amber-600 mb-2">
-          <span>📚</span>
-          <span>前置准备</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-black text-gray-900 mb-2">1.2.5 逻辑用语前置知识</h1>
-          <SpeakButton text={logicPrereqNarrations.intro} />
-        </div>
-        <p className="text-gray-500">学逻辑之前，先确保子集关系、解不等式、基本推理没问题</p>
-        <div className="flex flex-wrap gap-3 mt-3">
-          <span className="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-medium rounded-full">
-            约15-20分钟
-          </span>
-          <span className="px-3 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
-            集合基础
-          </span>
-        </div>
-      </div>
+      <PageHeader
+        stage="前置准备"
+        variant="prereq"
+        title="1.2.5 逻辑用语前置知识"
+        narration={logicPrereqNarrations.intro}
+        subtitle="学逻辑之前，先确保子集关系、解不等式、基本推理没问题"
+        tags={[
+          { label: '约15-20分钟', color: 'amber' },
+          { label: '集合基础', color: 'green' },
+        ]}
+      />
 
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
