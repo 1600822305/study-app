@@ -109,4 +109,18 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
     explanation: '|x-3|≥2 → x-3≤-2 或 x-3≥2 → x≤1 或 x≥5，含等号。',
     explanationLatex: 'x-3 \\leq -2 \\text{ 或 } x-3 \\geq 2 \\Rightarrow x \\leq 1 \\text{ 或 } x \\geq 5',
   },
+  {
+    id: 'lpq9',
+    question: '',
+    questionLatex: '|x - 9| < |x - 1| \\text{ 的解集为}',
+    options: [
+      { label: 'A', value: '(5, +\\infty)', isLatex: true },
+      { label: 'B', value: '(-\\infty, 5)', isLatex: true },
+      { label: 'C', value: '(1, 9)', isLatex: false },
+      { label: 'D', value: '(-\\infty, 1) \\cup (9, +\\infty)', isLatex: true },
+    ],
+    correctAnswer: '(5, +\\infty)',
+    explanation: '两边平方：(x-9)²<(x-1)² → 展开消x² → -16x<-80 → 两边×(-1)变号 → x>5。',
+    explanationLatex: '(x\\!-\\!9)^2 < (x\\!-\\!1)^2 \\Rightarrow -16x < -80 \\Rightarrow x > 5',
+  },
 ];
