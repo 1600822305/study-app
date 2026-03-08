@@ -28,7 +28,7 @@ export function SetsPrereqPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="text-sm text-gray-600 space-y-1">
-          <button onClick={() => document.getElementById('sp-equation')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、解一元二次方程（因式分解 + 公式法）</button>
+          <button onClick={() => document.getElementById('sp-equation')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、解一元二次方程（开平方 + 因式分解 + 公式法）</button>
           <button onClick={() => document.getElementById('sp-inequality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解一元二次不等式（大于取两边，小于取中间）</button>
           <button onClick={() => document.getElementById('sp-numberline')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、数轴的使用（○ 和 ●）</button>
           <button onClick={() => document.getElementById('sp-interval')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、区间表示法（开闭区间 + ∞）</button>
@@ -427,8 +427,10 @@ export function SetsPrereqPage() {
               <p className="text-sm text-orange-600 mb-2">口诀（必记！）</p>
               <p className="text-lg font-bold text-gray-800">大于取两边，小于取中间</p>
               <div className="mt-3 text-sm text-gray-600 space-y-1 text-left">
-                <p><Math tex="ax^2+bx+c > 0 \;\Rightarrow\; x < x_1 \text{ 或 } x > x_2" /></p>
-                <p><Math tex="ax^2+bx+c < 0 \;\Rightarrow\; x_1 < x < x_2" /></p>
+                <p><Math tex="ax^2+bx+c > 0 \;\Rightarrow\; x < x_1 \text{ 或 } x > x_2" />（取两边）</p>
+                <p><Math tex="ax^2+bx+c < 0 \;\Rightarrow\; x_1 < x < x_2" />（取中间）</p>
+                <p><Math tex="ax^2+bx+c \geq 0 \;\Rightarrow\; x \leq x_1 \text{ 或 } x \geq x_2" />（含等号）</p>
+                <p><Math tex="ax^2+bx+c \leq 0 \;\Rightarrow\; x_1 \leq x \leq x_2" />（含等号）</p>
               </div>
             </div>
 
@@ -579,9 +581,13 @@ export function SetsPrereqPage() {
                   {[
                     ['a < x < b', '(a, b)', '开区间'],
                     ['a \\leq x \\leq b', '[a, b]', '闭区间'],
+                    ['a \\leq x < b', '[a, b)', '左闭右开'],
+                    ['a < x \\leq b', '(a, b]', '左开右闭'],
                     ['x > a', '(a, +\\infty)', '∞ 永远用小括号'],
                     ['x \\geq a', '[a, +\\infty)', ''],
                     ['x < b', '(-\\infty, b)', ''],
+                    ['x \\leq b', '(-\\infty, b]', ''],
+                    ['\\text{全体实数}', '(-\\infty, +\\infty)', ''],
                   ].map(([ineq, interval, note], idx) => (
                     <tr key={idx} className="hover:bg-blue-50">
                       <td className="border border-gray-200 px-3 py-2"><Math tex={ineq} /></td>
@@ -604,6 +610,7 @@ export function SetsPrereqPage() {
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>∞ 永远用小括号</strong>：<Math tex="[3, +\infty)" /> ✓，<Math tex="[3, +\infty]" /> ✗</p>
+              <p><strong>∪ 是并集符号</strong>，表示“或”，用来连接不相邻的区间</p>
               <p>区间写法和数轴对应：<strong>小括号 = ○，中括号 = ●</strong></p>
             </CalloutCard>
           </div>
