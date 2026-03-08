@@ -28,18 +28,18 @@ export function SetsPrereqPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="text-sm text-gray-600 space-y-1">
-          <p>一、解一元二次方程（因式分解 + 公式法）</p>
-          <p>二、解一元二次不等式（大于取两边，小于取中间）</p>
-          <p>三、数轴的使用（○ 和 ●）</p>
-          <p>四、区间表示法（开闭区间 + ∞）</p>
-          <p>五、选择题自测（16题）</p>
+          <button onClick={() => document.getElementById('sp-equation')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、解一元二次方程（因式分解 + 公式法）</button>
+          <button onClick={() => document.getElementById('sp-inequality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解一元二次不等式（大于取两边，小于取中间）</button>
+          <button onClick={() => document.getElementById('sp-numberline')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、数轴的使用（○ 和 ●）</button>
+          <button onClick={() => document.getElementById('sp-interval')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、区间表示法（开闭区间 + ∞）</button>
+          <button onClick={() => document.getElementById('sp-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、选择题自测（16题）</button>
         </div>
       </div>
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
 
       {/* Section 1: Solving Quadratic Equations */}
-      <section className="mb-6">
+      <section id="sp-equation" className="mb-6 scroll-mt-4">
         <Collapsible title="一、解一元二次方程" defaultOpen storageKey="sets-prereq:equation" headerExtra={<SpeakButton text={setsPrereqNarrations.equation} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用因式分解法和公式法解一元二次方程，快速确定集合的元素。</p>
           <div className="space-y-4 text-sm text-gray-700">
@@ -347,7 +347,7 @@ export function SetsPrereqPage() {
       </section>
 
         {/* Section 2: Quadratic Inequalities */}
-        <section className="mb-6">
+        <section id="sp-inequality" className="mb-6 scroll-mt-4">
           <Collapsible title="二、解一元二次不等式（集合最核心的前置技能！）" defaultOpen storageKey="sets-prereq:inequality" headerExtra={<SpeakButton text={setsPrereqNarrations.inequality} />}>
             <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用"三步走"方法独立解一元二次不等式，写出集合描述法的解集。</p>
             <div className="space-y-4 text-sm text-gray-700">
@@ -501,7 +501,7 @@ export function SetsPrereqPage() {
       </section>
 
       {/* Section 3: Number Line */}
-      <section className="mb-6">
+      <section id="sp-numberline" className="mb-6 scroll-mt-4">
         <Collapsible title="三、数轴的使用" defaultOpen storageKey="sets-prereq:numberline" headerExtra={<SpeakButton text={setsPrereqNarrations.numberLine} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：在数轴上正确表示不等式的解集，分清 ○ 和 ●。</p>
           <div className="space-y-3 text-sm text-gray-700">
@@ -561,7 +561,7 @@ export function SetsPrereqPage() {
       </section>
 
       {/* Section 4: Interval Notation */}
-      <section className="mb-6">
+      <section id="sp-interval" className="mb-6 scroll-mt-4">
         <Collapsible title="四、区间表示法" defaultOpen storageKey="sets-prereq:interval" headerExtra={<SpeakButton text={setsPrereqNarrations.interval} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：把不等式的解集用区间表示，正确使用小括号和中括号。</p>
           <div className="space-y-3 text-sm text-gray-700">
@@ -669,7 +669,7 @@ export function SetsPrereqPage() {
       </section>
 
       {/* Section 5: Quiz */}
-      <section className="mb-8">
+      <section id="sp-quiz" className="mb-8 scroll-mt-4">
         <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
           <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
             5

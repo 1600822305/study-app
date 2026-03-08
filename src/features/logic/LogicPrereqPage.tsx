@@ -25,18 +25,18 @@ export function LogicPrereqPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="text-sm text-gray-600 space-y-1">
-          <p>一、集合的子集关系 ──── 判断"谁包含谁"，充分必要条件的基础</p>
-          <p>二、解不等式 ──── 把条件转成集合，比较范围大小</p>
-          <p>三、基本推理能力 ──── 判断"p 能不能推出 q"</p>
-          <p>四、公式速查表 ──── 一页纸总结</p>
-          <p>五、选择题自测（8题）</p>
+          <button onClick={() => document.getElementById('lp-subset')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合的子集关系 ── 判断“谁包含谁”</button>
+          <button onClick={() => document.getElementById('lp-inequality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解不等式 ── 把条件转成集合</button>
+          <button onClick={() => document.getElementById('lp-reasoning')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、基本推理能力 ── 判断“p 能不能推出 q”</button>
+          <button onClick={() => document.getElementById('lp-cheatsheet')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、公式速查表 ── 一页纸总结</button>
+          <button onClick={() => document.getElementById('lp-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、选择题自测（8题）</button>
         </div>
       </div>
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
 
       {/* Section 1: Subset Relations */}
-      <section className="mb-6">
+      <section id="lp-subset" className="mb-6 scroll-mt-4">
         <Collapsible title="一、集合的子集关系" defaultOpen storageKey="logic-prereq:subset" headerExtra={<SpeakButton text={logicPrereqNarrations.subset} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用数轴快速判断两个区间的包含关系，说出"A⊂B"还是"B⊂A"。</p>
           <div className="space-y-3 text-sm text-gray-700">
@@ -100,7 +100,7 @@ export function LogicPrereqPage() {
       </section>
 
       {/* Section 2: Solving Inequalities */}
-      <section className="mb-6">
+      <section id="lp-inequality" className="mb-6 scroll-mt-4">
         <Collapsible title="二、解不等式" defaultOpen storageKey="logic-prereq:inequality" headerExtra={<SpeakButton text={logicPrereqNarrations.inequalityReview} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：快速解一元二次不等式和绝对值不等式，写成集合或区间。</p>
           <div className="space-y-4 text-sm text-gray-700">
@@ -241,7 +241,7 @@ export function LogicPrereqPage() {
       </section>
 
       {/* Section 3: Basic Reasoning */}
-      <section className="mb-6">
+      <section id="lp-reasoning" className="mb-6 scroll-mt-4">
         <Collapsible title="三、基本推理能力" defaultOpen storageKey="logic-prereq:reasoning" headerExtra={<SpeakButton text={logicPrereqNarrations.reasoning} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：3秒判断"A 能不能推出 B"。</p>
           <div className="space-y-4 text-sm text-gray-700">
@@ -372,7 +372,7 @@ export function LogicPrereqPage() {
       </section>
 
       {/* Section 4: 公式速查表 */}
-      <section className="mb-6">
+      <section id="lp-cheatsheet" className="mb-6 scroll-mt-4">
         <Collapsible title="📌 公式速查表" storageKey="logic-prereq:cheatsheet">
           <p className="text-xs text-gray-500 mb-3">考前翻一翻，30秒回忆全部知识点</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -421,7 +421,7 @@ export function LogicPrereqPage() {
       </section>
 
       {/* Section 5: Quiz */}
-      <section className="mb-8">
+      <section id="lp-quiz" className="mb-8 scroll-mt-4">
         <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
           <span className="w-8 h-8 rounded-lg bg-green-500 text-white flex items-center justify-center text-sm font-bold">
             5

@@ -26,18 +26,18 @@ export function PrereqPage() {
       <div className="bg-gray-50 rounded-xl p-4 mb-6 text-sm text-gray-600">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="grid grid-cols-2 gap-1">
-          <p>一、数的分类 → 复数在数系中的位置</p>
-          <p>二、平方与平方根 → 计算复数模的基础</p>
-          <p>三、常用平方数 → 心算提速</p>
-          <p>四、分数运算 → 复数除法结果经常是分数</p>
-          <p>五、多项式展开 → 复数乘法的核心</p>
-          <p>六、负数运算 → i²=-1 必须处理负数</p>
-          <p>七、除以4求余数 → 判断 i 的幂次</p>
+          <button onClick={() => document.getElementById('prereq-numclass')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、数的分类 → 复数在数系中的位置</button>
+          <button onClick={() => document.getElementById('prereq-square')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、平方与平方根 → 计算复数模的基础</button>
+          <button onClick={() => document.getElementById('prereq-sqtable')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、常用平方数 → 心算提速</button>
+          <button onClick={() => document.getElementById('prereq-fraction')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、分数运算 → 复数除法结果经常是分数</button>
+          <button onClick={() => document.getElementById('prereq-poly')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、多项式展开 → 复数乘法的核心</button>
+          <button onClick={() => document.getElementById('prereq-negative')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、负数运算 → i²=-1 必须处理负数</button>
+          <button onClick={() => document.getElementById('prereq-remainder')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、除以4求余数 → 判断 i 的幂次</button>
         </div>
       </div>
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
-      <section className="mb-6">
+      <section id="prereq-numclass" className="mb-6 scroll-mt-4">
         <Collapsible title="一、数的分类" defaultOpen storageKey="prereq:num-class" headerExtra={<SpeakButton text={prereqNarrations.numClass} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：说出自然数→整数→有理数→实数→复数的扩展关系，理解为什么需要复数。</p>
           <p className="text-sm text-gray-600 mb-4">
@@ -95,7 +95,7 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
-      <section className="mb-6">
+      <section id="prereq-square" className="mb-6 scroll-mt-4">
         <Collapsible title="二、平方与平方根" defaultOpen storageKey="prereq:square" headerExtra={<SpeakButton text={prereqNarrations.square} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：计算任意数的平方和开方，理解"实数平方≥0"为什么需要引入 i。</p>
           <div className="space-y-4 text-sm text-gray-700">
@@ -147,7 +147,7 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
-      <section className="mb-6">
+      <section id="prereq-sqtable" className="mb-6 scroll-mt-4">
         <Collapsible title="三、常用平方数" defaultOpen storageKey="prereq:square-table" headerExtra={<SpeakButton text={prereqNarrations.squareTable} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：脱口而出 1²~13² 的值，快速心算复数模。</p>
           <div className="space-y-3 text-sm text-gray-700">
@@ -173,7 +173,7 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
-      <section className="mb-6">
+      <section id="prereq-fraction" className="mb-6 scroll-mt-4">
         <Collapsible title="四、分数运算" defaultOpen storageKey="prereq:fraction" headerExtra={<SpeakButton text={prereqNarrations.fraction} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：熟练计算分数加减乘除和约分，为复数除法做准备。</p>
           <div className="space-y-3 text-sm text-gray-700">
@@ -228,7 +228,7 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
-      <section className="mb-6">
+      <section id="prereq-poly" className="mb-6 scroll-mt-4">
         <Collapsible title="五、多项式展开（复数乘法的核心）" defaultOpen storageKey="prereq:polynomial" headerExtra={<SpeakButton text={prereqNarrations.polynomial} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用分配律、FOIL法、完全平方和平方差公式展开任意两个括号的乘法。</p>
           <div className="space-y-4 text-sm text-gray-700">
@@ -284,7 +284,7 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
-      <section className="mb-6">
+      <section id="prereq-negative" className="mb-6 scroll-mt-4">
         <Collapsible title="六、负数运算" defaultOpen storageKey="prereq:negative" headerExtra={<SpeakButton text={prereqNarrations.negative} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：熟练处理负数加减乘除，不在 i²=-1 的符号变化上犯错。</p>
           <div className="space-y-3 text-sm text-gray-700">
@@ -331,7 +331,7 @@ export function PrereqPage() {
         </Collapsible>
       </section>
 
-      <section className="mb-6">
+      <section id="prereq-remainder" className="mb-6 scroll-mt-4">
         <Collapsible title="七、除以4求余数" defaultOpen storageKey="prereq:remainder" headerExtra={<SpeakButton text={prereqNarrations.remainder} />}>
           <p className="text-xs text-blue-600 mb-3">🎯 学完你能：用"除以4看余数"的方法，秒算 i 的任意次幂。</p>
           <div className="space-y-3 text-sm text-gray-700">
