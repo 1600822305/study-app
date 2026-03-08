@@ -22,6 +22,38 @@ export function SetsPage() {
         ]}
       />
 
+      {/* 速通路线图 */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-6">
+        <p className="font-black text-blue-900 text-lg mb-1">速通路线图：集合就 6 个知识点</p>
+        <p className="text-blue-700 text-sm mb-4">记住符号含义 + 画数轴，集合题就是送分题！</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">① 集合三性质</p>
+            <p className="text-gray-500 mt-1">确定性、互异性、无序性</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">② ∈ 和 ⊆</p>
+            <p className="text-gray-500 mt-1">∈ 是元素和集合的关系，⊆ 是集合和集合的关系</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">③ 表示方法</p>
+            <p className="text-gray-500 mt-1">列举法、描述法、区间表示</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">④ 子集与真子集</p>
+            <p className="text-gray-500 mt-1">n 个元素 → 2ⁿ 个子集</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">⑤ 交并补运算</p>
+            <p className="text-gray-500 mt-1">交=都有，并=合起来，补=剩下的</p>
+          </div>
+          <div className="bg-yellow-50 rounded-xl p-3 border border-yellow-200">
+            <p className="font-bold text-yellow-800">核心秘密</p>
+            <p className="text-yellow-700 mt-1">集合题的万能方法：画数轴！</p>
+          </div>
+        </div>
+      </div>
+
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
           {/* 符号速查 */}
           <section className="mb-6">

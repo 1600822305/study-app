@@ -39,6 +39,38 @@ export function ComplexPage() {
         </div>
       </div>
 
+      {/* 速通路线图 */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-5 mb-6">
+        <p className="font-black text-blue-900 text-lg mb-1">速通路线图：复数就 3 个核心</p>
+        <p className="text-blue-700 text-sm mb-4">把 i 当字母算，遇到 i² 换成 -1，就这么简单！高考稳拿 5 分。</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">① i² = -1</p>
+            <p className="text-gray-500 mt-1">整个复数的根基，记住就行</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">② 四则运算</p>
+            <p className="text-gray-500 mt-1">加减看对应，乘法展开，除法乘共轭</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">③ 复平面</p>
+            <p className="text-gray-500 mt-1">a+bi → 点(a,b)，判断象限看正负</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">④ i 的幂次</p>
+            <p className="text-gray-500 mt-1">4个一循环：i, -1, -i, 1</p>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-blue-100">
+            <p className="font-bold text-gray-800">⑤ 共轭复数</p>
+            <p className="text-gray-500 mt-1">a+bi 的共轭 = a-bi，虚部变号</p>
+          </div>
+          <div className="bg-yellow-50 rounded-xl p-3 border border-yellow-200">
+            <p className="font-bold text-yellow-800">核心秘密</p>
+            <p className="text-yellow-700 mt-1">复数题 = 计算题，不考思维，算对就满分！</p>
+          </div>
+        </div>
+      </div>
+
       <LessonLayout progressItems={items} onToggle={toggle}>
           {/* Part 1: Why */}
           <section className="mb-8">
