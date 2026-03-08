@@ -1,7 +1,7 @@
 import { Lightbulb, AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Line, Plot, Text as MafsText } from 'mafs';
 
-import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel, PageHeader } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout } from '@/components/shared';
 import { setsPrereqNarrations } from './data/prereq-narrations';
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
@@ -36,9 +36,7 @@ export function SetsPrereqPage() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Main content */}
-        <div className="flex-1 min-w-0">
+      <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
 
       {/* Section 1: Solving Quadratic Equations */}
       <section className="mb-6">
@@ -725,15 +723,8 @@ export function SetsPrereqPage() {
         </h2>
         <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="16道选择题，覆盖解方程、解不等式、区间表示、数轴全部知识点" />
       </section>
-        </div>
 
-        {/* Sidebar: Progress */}
-        <div className="lg:w-72 shrink-0">
-          <div className="lg:sticky lg:top-6">
-            <ProgressTracker items={progressItems} onToggle={toggleProgress} />
-          </div>
-        </div>
-      </div>
+      </LessonLayout>
     </div>
   );
 }

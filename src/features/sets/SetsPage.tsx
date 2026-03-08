@@ -1,6 +1,6 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { Math, Collapsible, ProgressTracker, SpeakButton, QuizPanel, PageHeader } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout } from '@/components/shared';
 import { setsNarrations } from './data/narrations';
 import { useProgress } from '@/hooks';
 import { setsQuizQuestions } from './data/quiz';
@@ -23,9 +23,7 @@ export function SetsPage() {
         ]}
       />
 
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Main content */}
-        <div className="flex-1 min-w-0">
+      <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
           {/* 符号速查 */}
           <section className="mb-6">
             <Collapsible title="📖 符号速查卡（看不懂符号先看这里）" storageKey="sets:symbols" defaultOpen={false}>
@@ -1380,15 +1378,7 @@ export function SetsPage() {
               </div>
             </div>
           </section>
-        </div>
-
-        {/* Sidebar: Progress */}
-        <div className="lg:w-72 shrink-0">
-          <div className="lg:sticky lg:top-6">
-            <ProgressTracker items={progressItems} onToggle={toggleProgress} />
-          </div>
-        </div>
-      </div>
+      </LessonLayout>
     </div>
   );
 }

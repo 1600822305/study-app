@@ -1,7 +1,7 @@
 import { Lightbulb, AlertTriangle } from 'lucide-react';
 import { Mafs, Coordinates, Point, Vector, Text as MafsText } from 'mafs';
 
-import { Math, QuizPanel, Collapsible, ProgressTracker, SpeakButton, PageHeader } from '@/components/shared';
+import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout } from '@/components/shared';
 import { complexNarrations } from './data/narrations';
 import { useProgress } from '@/hooks';
 import { complexQuizQuestions } from './data/quiz';
@@ -38,9 +38,7 @@ export function ComplexPage() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Main content */}
-        <div className="flex-1 min-w-0">
+      <LessonLayout progressItems={items} onToggle={toggle}>
           {/* Part 1: Why */}
           <section className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
@@ -751,15 +749,8 @@ export function ComplexPage() {
               </div>
             </div>
           </section>
-        </div>
 
-        {/* Sidebar: Progress */}
-        <div className="lg:w-72 shrink-0">
-          <div className="lg:sticky lg:top-6">
-            <ProgressTracker items={items} onToggle={toggle} />
-          </div>
-        </div>
-      </div>
+      </LessonLayout>
     </div>
   );
 }

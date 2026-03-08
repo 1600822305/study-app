@@ -1,6 +1,6 @@
 import { AlertTriangle } from 'lucide-react';
 
-import { Math, Collapsible, SpeakButton, ProgressTracker, QuizPanel, PageHeader } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout } from '@/components/shared';
 import { logicPrereqNarrations } from './data/prereq-narrations';
 import { logicPrereqProgressItems } from './data/prereq-progress';
 import { logicPrereqQuizQuestions } from './data/prereq-quiz';
@@ -34,9 +34,7 @@ export function LogicPrereqPage() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Main content */}
-        <div className="flex-1 min-w-0">
+      <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
 
       {/* Section 1: Subset Relations */}
       <section className="mb-6">
@@ -466,15 +464,8 @@ export function LogicPrereqPage() {
         </h2>
         <QuizPanel module="logic-prereq" questions={logicPrereqQuizQuestions} title="前置知识自测" description="8道选择题，覆盖子集关系、解不等式、推出判断全部知识点" />
       </section>
-        </div>
 
-        {/* Sidebar: Progress */}
-        <div className="lg:w-72 shrink-0">
-          <div className="lg:sticky lg:top-6">
-            <ProgressTracker items={progressItems} onToggle={toggleProgress} />
-          </div>
-        </div>
-      </div>
+      </LessonLayout>
     </div>
   );
 }
