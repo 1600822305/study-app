@@ -50,7 +50,7 @@ export function LogicPage() {
           </div>
           <div className="bg-white rounded-xl p-3 border border-blue-100">
             <p className="font-bold text-gray-800">③ 充分必要条件</p>
-            <p className="text-gray-500 mt-1">规则：解不等式 → 画集合 → 比大小</p>
+            <p className="text-gray-500 mt-1">规则：谁小谁充分，谁大谁必要</p>
           </div>
           <div className="bg-white rounded-xl p-3 border border-blue-100">
             <p className="font-bold text-gray-800">④ 量词否定</p>
@@ -64,6 +64,21 @@ export function LogicPage() {
             <p className="font-bold text-yellow-800">核心秘密</p>
             <p className="text-yellow-700 mt-1">这节课不考逻辑思维，考的是背规则！</p>
           </div>
+        </div>
+      </div>
+
+      {/* 必背清单 */}
+      <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
+        <p className="font-bold text-gray-800 mb-3">📝 必背清单：只背这 7 条，高考就够了</p>
+        <p className="text-xs text-gray-500 mb-3">不用理解为什么，死记硬背就行，考试直接套。</p>
+        <div className="space-y-2 text-sm text-gray-700">
+          <p>1. <strong>命题 = 能判断真假的陈述句</strong> — 疑问句、祈使句、感叹句都不是。含未知数的开放语句也不是。</p>
+          <p>2. <strong>逆否命题与原命题同真同假</strong> — 原命题难证？直接证逆否命题，效果一样。</p>
+          <p>3. <strong>谁小谁充分，谁大谁必要</strong> — 集合 A ⊂ B → A 小 → p 是 q 的充分条件。这一条能解 90% 的充要条件题。</p>
+          <p>4. <strong>充要条件做题三步：解范围 → 比大小 → 套公式</strong> — 不要想“谁推出谁”，直接解不等式画数轴比较。</p>
+          <p>5. <strong>量词否定：∀ ↔ ∃ 互换，条件取反</strong> — “所有”变“存在”，“存在”变“所有”，然后 {'>'} 变 ≤，{'<'} 变 ≥，= 变 ≠。</p>
+          <p>6. <strong>且（∧）：全真才真，有假就假</strong> — 像严格老师：所有条件都满足才算通过。</p>
+          <p>7. <strong>或（∨）：有真就真，全假才假</strong> — 像宽松老师：有一个条件满足就算通过。</p>
         </div>
       </div>
 
@@ -271,7 +286,15 @@ export function LogicPage() {
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-4 text-sm">
-                  <p className="font-bold text-gray-800 mb-2">例2：p: x² - 3x + 2 = 0，q: x = 1</p>
+                  <p className="font-bold text-gray-800 mb-2">例2：p: x {'>'} 1，q: x {'>'} 0</p>
+                  <div className="text-gray-600 space-y-1">
+                    <p>p → q：x {'>'} 1 → 当然 x {'>'} 0 ✓（能推出）</p>
+                    <p>q → p：x {'>'} 0 → 不一定 x {'>'} 1（比如 x = 0.5）✗（推不出）</p>
+                    <p className="font-bold text-gray-800">结论：p 是 q 的充分不必要条件</p>
+                  </div>
+                </div>
+                <div className="bg-white border border-gray-200 rounded-lg p-4 text-sm">
+                  <p className="font-bold text-gray-800 mb-2">例3：p: x² - 3x + 2 = 0，q: x = 1</p>
                   <div className="text-gray-600 space-y-1">
                     <p>p → q：x² - 3x + 2 = 0 → x = 1 或 x = 2，不一定 x = 1 ✗</p>
                     <p>q → p：x = 1 → 1 - 3 + 2 = 0 ✓</p>
@@ -375,6 +398,7 @@ export function LogicPage() {
                   <p>1. 假设 p 成立，看 q 是否一定成立</p>
                   <p>2. 假设 q 成立，看 p 是否一定成立<span className="text-gray-400">（推不出就举反例）</span></p>
                   <p>3. 查四种情况表，得出答案</p>
+                  <p className="text-gray-400 text-xs mt-1">互不包含 → 既不充分也不必要</p>
                 </div>
               </div>
             </Collapsible>
@@ -409,6 +433,19 @@ export function LogicPage() {
                   <p className="text-gray-600">"存在一个" "至少有一个"</p>
                   <p className="mt-2"><Math tex="\exists x \in \mathbb{R},\; x^2 - 1 = 0" /></p>
                 </div>
+              </div>
+
+              <div className="bg-gray-50 rounded-lg p-4 mb-3 text-sm space-y-2">
+                <p className="font-bold text-gray-800 mb-1">全称命题与特称命题</p>
+                <p>全称命题：<Math tex="\forall x \in M,\; p(x)" /> → “对所有 x 都满足 p”</p>
+                <p>特称命题：<Math tex="\exists x \in M,\; p(x)" /> → “存在某个 x 满足 p”</p>
+              </div>
+
+              <div className="bg-gray-50 rounded-lg p-4 text-sm space-y-1.5">
+                <p className="font-bold text-gray-800 mb-1">例</p>
+                <p><Math tex="\forall x \in \mathbb{R},\; x^2 \geq 0" /> → 真命题 ✓（所有实数的平方都≥0）</p>
+                <p><Math tex="\exists x \in \mathbb{R},\; x^2 < 0" /> → 假命题 ✗（不存在实数的平方小于0）</p>
+                <p><Math tex="\exists x \in \mathbb{R},\; x^2 - 1 = 0" /> → 真命题 ✓（x=1就行）</p>
               </div>
             </Collapsible>
 
@@ -588,7 +625,8 @@ export function LogicPage() {
                 </div>
                 <div>
                   <p className="text-slate-400 text-xs mb-1">充要条件</p>
-                  <p>集合法：谁小谁充分</p>
+                  <p>集合法：谁小谁充分，谁大谁必要</p>
+                  <p className="text-xs text-slate-400 mt-1">A⊂B → 充分不必要 · B⊂A → 必要不充分 · A=B → 充要</p>
                 </div>
                 <div>
                   <p className="text-slate-400 text-xs mb-1">量词否定</p>
