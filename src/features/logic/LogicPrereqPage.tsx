@@ -25,8 +25,8 @@ export function LogicPrereqPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="text-sm text-gray-600 space-y-1">
-          <button onClick={() => document.getElementById('lp-subset')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合的子集关系 ── 判断“谁包含谁”</button>
-          <button onClick={() => document.getElementById('lp-inequality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解不等式 ── 把条件转成集合</button>
+          <button onClick={() => document.getElementById('lp-subset')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、集合的子集关系 ── 判断“谁包含谁”，这是充分必要条件的基础</button>
+          <button onClick={() => document.getElementById('lp-inequality')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解不等式 ── 把条件转成集合，比较范围大小</button>
           <button onClick={() => document.getElementById('lp-reasoning')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、基本推理能力 ── 判断“p 能不能推出 q”</button>
           <button onClick={() => document.getElementById('lp-cheatsheet')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、公式速查表 ── 一页纸总结</button>
           <button onClick={() => document.getElementById('lp-quiz')?.scrollIntoView({ behavior: 'smooth' })} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、选择题自测（8题）</button>
@@ -411,6 +411,7 @@ export function LogicPrereqPage() {
             <div className="bg-green-50 border border-green-200 rounded-xl p-4">
               <p className="font-bold text-green-800 mb-2 text-sm">推出判断</p>
               <div className="space-y-1.5 text-sm">
+                <p><Math tex="p \Rightarrow q \;\Leftrightarrow\;" /> p的集合 <Math tex="\subseteq" /> q的集合</p>
                 <p>小范围 → 大范围　<strong className="text-green-600">✓</strong></p>
                 <p>大范围 → 小范围　<strong className="text-red-600">✗</strong></p>
                 <p className="text-green-600 text-xs font-bold mt-2">绝招：想范围大小 / 找反例</p>
