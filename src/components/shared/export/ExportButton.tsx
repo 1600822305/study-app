@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Printer, FileDown, ChevronDown, Eye, X } from 'lucide-react';
+import { Printer, FileDown, ChevronDown, Eye, X, BookOpen } from 'lucide-react';
 
 import { usePrintMode } from '@/hooks/usePrintMode';
 
@@ -28,14 +28,14 @@ export function ExportButton({ title }: ExportButtonProps) {
     return () => document.removeEventListener('mousedown', handleClick);
   }, [menuOpen]);
 
-  const handleExport = (showAnswers: boolean) => {
+  const handleExport = (showAnswers: boolean, answersOnly = false) => {
     setMenuOpen(false);
-    startPrint({ title, showAnswers });
+    startPrint({ title, showAnswers: showAnswers || answersOnly, answersOnly });
   };
 
-  const handlePreview = (showAnswers: boolean) => {
+  const handlePreview = (showAnswers: boolean, answersOnly = false) => {
     setMenuOpen(false);
-    togglePreview({ title, showAnswers });
+    togglePreview({ title, showAnswers: showAnswers || answersOnly, answersOnly });
   };
 
   // 预览模式：显示浮动工具栏
@@ -134,6 +134,28 @@ export function ExportButton({ title }: ExportButtonProps) {
             <div className="text-left">
               <p className="font-medium">A4 预览（含答案）</p>
               <p className="text-xs text-gray-400">在屏幕上模拟完整讲义效果</p>
+            </div>
+          </button>
+
+          <div className="px-3 py-1.5 text-xs text-gray-400 font-medium border-t border-b border-gray-100 mt-1">答案册</div>
+          <button
+            onClick={() => handleExport(false, true)}
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+          >
+            <BookOpen size={16} className="text-red-500" />
+            <div className="text-left">
+              <p className="font-medium">导出答案册</p>
+              <p className="text-xs text-gray-400">只含答案与解析，不含教学内容</p>
+            </div>
+          </button>
+          <button
+            onClick={() => handlePreview(false, true)}
+            className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer"
+          >
+            <Eye size={16} className="text-red-400" />
+            <div className="text-left">
+              <p className="font-medium">A4 预览（答案册）</p>
+              <p className="text-xs text-gray-400">预览答案册效果</p>
             </div>
           </button>
         </div>

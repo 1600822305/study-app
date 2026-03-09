@@ -597,7 +597,7 @@ export function PrereqPage() {
         <>
           <PageBreak label="答案与解析" />
           <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.0 复数前置知识 — 答案与解析</h2>
 
             {[
               { label: '一、数的分类 — 即时练习', questions: prereqPractice1 },

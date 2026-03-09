@@ -692,7 +692,7 @@ export function LogicPage() {
         <>
           <PageBreak label="答案与解析" />
           <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.3 逻辑用语 — 答案与解析</h2>
 
             {[
               { label: '一、命题判断 — 即时练习', questions: logicPractice1 },

@@ -795,7 +795,7 @@ export function ComplexPage() {
         <>
           <PageBreak label="答案与解析" />
           <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.1 复数 — 答案与解析</h2>
 
             {[
               { label: '一、虚数单位 i — 即时练习', questions: complexPractice1 },

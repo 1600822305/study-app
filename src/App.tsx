@@ -11,6 +11,8 @@ import { ComplexPage } from '@/features/complex';
 import { SetsPage, SetsPrereqPage } from '@/features/sets';
 import { LogicPage, LogicPrereqPage } from '@/features/logic';
 import { InequalityPrereqPage, InequalityPage } from '@/features/inequality';
+import { QuadraticPrereqPage, QuadraticPage } from '@/features/quadratic';
+import { FunctionReviewPage, FunctionPrereqPage, FunctionConceptPage, ElementaryFuncPrereqPage, ElementaryFuncPage, FunctionGraphPrereqPage, FunctionGraphPage, DerivativePrereqPage, DerivativeBasicPage } from '@/features/function';
 import { SettingsPage } from '@/features/settings/SettingsPage';
 import { TTSSettingsPage } from '@/features/settings/TTSSettingsPage';
 import { AISettingsPage } from '@/features/settings/AISettingsPage';
@@ -37,6 +39,17 @@ function App() {
           <Route path="/math/logic" element={<LogicPage />} />
           <Route path="/math/inequality-prereq" element={<InequalityPrereqPage />} />
           <Route path="/math/inequality" element={<InequalityPage />} />
+          <Route path="/math/quadratic-prereq" element={<QuadraticPrereqPage />} />
+          <Route path="/math/quadratic" element={<QuadraticPage />} />
+          <Route path="/math/function-review" element={<FunctionReviewPage />} />
+          <Route path="/math/function-prereq" element={<FunctionPrereqPage />} />
+          <Route path="/math/function-concept" element={<FunctionConceptPage />} />
+          <Route path="/math/elementary-func-prereq" element={<ElementaryFuncPrereqPage />} />
+          <Route path="/math/elementary-func" element={<ElementaryFuncPage />} />
+          <Route path="/math/function-graph-prereq" element={<FunctionGraphPrereqPage />} />
+          <Route path="/math/function-graph" element={<FunctionGraphPage />} />
+          <Route path="/math/derivative-prereq" element={<DerivativePrereqPage />} />
+          <Route path="/math/derivative-basic" element={<DerivativeBasicPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/tts" element={<TTSSettingsPage />} />
           <Route path="/settings/ai" element={<AISettingsPage />} />

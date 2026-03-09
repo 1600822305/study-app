@@ -736,7 +736,7 @@ export function InequalityPage() {
         <>
           <PageBreak label="答案与解析" />
           <section className="mb-2 print-answers">
-            <h2 className="text-base font-bold text-gray-900 mb-2">📝 答案与解析</h2>
+            <h2 className="text-base font-bold text-gray-900 mb-2">📝 2.1 不等式 — 答案与解析</h2>
 
             {[
               { label: '一、不等式性质 + 一元一次不等式 — 即时练习', questions: ineqPractice1 },

@@ -231,8 +231,10 @@ math-field::part(virtual-keyboard-toggle) {
   }
 
   /* 大型容器（Collapsible 展开后可能很长）：允许跨页分割 */
+  /* overflow:hidden 会阻止浏览器在打印时分页，必须覆盖 */
   .rounded-xl {
     break-inside: auto !important;
+    overflow: visible !important;
   }
 
   /* section 级别：允许跨页 */
@@ -662,4 +664,20 @@ html.print-preview-mode .text-amber-600 {
 /* 链接 */
 html.print-preview-mode a {
   text-decoration: none !important;
+}
+
+/* ============================================================
+   答案册模式 — [data-answers-only]
+   只显示 .print-answers 区块，隐藏所有教学内容
+   由 LessonLayout 组件设置 data-answers-only 属性
+   ============================================================ */
+
+/* LessonLayout 内：隐藏教学内容，保留答案区 */
+[data-answers-only] > *:not(.print-answers) {
+  display: none !important;
+}
+
+/* LessonLayout 外：隐藏 PageHeader、知识地图等 */
+div:has(> div > [data-answers-only]) > *:not(:has([data-answers-only])) {
+  display: none !important;
 }

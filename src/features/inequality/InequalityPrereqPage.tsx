@@ -376,15 +376,13 @@ export function InequalityPrereqPage() {
         </Collapsible>
       </section>
 
-      </LessonLayout>
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════ */}
       {isPrinting && printOptions.showAnswers && (
-        <section>
+        <section className="print-answers">
           <PageBreak />
-          <h2 className="text-xl font-bold text-gray-900 mb-3 border-b-2 border-gray-300 pb-2">参考答案与解析</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-3 border-b-2 border-gray-300 pb-2">📝 2.0 不等式前置知识 — 参考答案与解析</h2>
 
           <div className="mb-4">
             <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
@@ -430,6 +428,8 @@ export function InequalityPrereqPage() {
           </div>
         </section>
       )}
+
+      </LessonLayout>
     </div>
   );
 }

@@ -61,6 +61,20 @@ const navItems: NavItem[] = [
           { path: '/math/quadratic', label: '2.3 二次函数' },
         ],
       },
+      {
+        groupLabel: '第三阶段：函数思维',
+        items: [
+          { path: '/math/function-review', label: '3.0 初中函数回顾' },
+          { path: '/math/function-prereq', label: '3.0.5 区间与定义域基础' },
+          { path: '/math/function-concept', label: '3.1 函数的概念与性质' },
+          { path: '/math/elementary-func-prereq', label: '3.1.5 初等函数前置知识' },
+          { path: '/math/elementary-func', label: '3.2 基本初等函数' },
+          { path: '/math/function-graph-prereq', label: '3.2.5 图像与零点前置知识' },
+          { path: '/math/function-graph', label: '3.3 函数图像与零点' },
+          { path: '/math/derivative-prereq', label: '3.3.5 导数前置知识' },
+          { path: '/math/derivative-basic', label: '3.4 导数基础' },
+        ],
+      },
     ],
   },
   { path: '/chat', label: 'AI 对话', icon: <MessageCircle size={18} /> },
@@ -71,8 +85,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [expandedSections, setExpandedSections] = useState<string[]>(['/math']);
-  const [expandedGroups, setExpandedGroups] = useState<string[]>(['第一阶段：数学语言']);
+  const [expandedSections, setExpandedSections] = useState<string[]>(() => {
+    try { return JSON.parse(sessionStorage.getItem('nav-sections') || '[]'); } catch { return []; }
+  });
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(() => {
+    try { return JSON.parse(sessionStorage.getItem('nav-groups') || '[]'); } catch { return []; }
+  });
   const [mainDrawerPortal, setMainDrawerPortal] = useState<HTMLElement | null>(null);
 
   const mobile = isMobile();
@@ -96,15 +114,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toggleSection = (path: string) => {
-    setExpandedSections((prev) =>
-      prev.includes(path) ? prev.filter((p) => p !== path) : [...prev, path],
-    );
+    setExpandedSections((prev) => {
+      const next = prev.includes(path) ? prev.filter((p) => p !== path) : [...prev, path];
+      sessionStorage.setItem('nav-sections', JSON.stringify(next));
+      return next;
+    });
   };
 
   const toggleGroup = (label: string) => {
-    setExpandedGroups((prev) =>
-      prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label],
-    );
+    setExpandedGroups((prev) => {
+      const next = prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label];
+      sessionStorage.setItem('nav-groups', JSON.stringify(next));
+      return next;
+    });
   };
 
   const isActive = (path: string) =>

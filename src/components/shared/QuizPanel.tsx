@@ -166,9 +166,9 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
   // ── 打印模式：静态展示全部题目 ──
   if (isPrinting) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-3 my-2">
+      <div className="bg-white rounded-xl border border-gray-200 p-4 my-1">
         <p className="font-bold text-gray-800 text-base mb-2">{title}</p>
-        {description && <p className="text-sm text-gray-400 mb-2">{description}</p>}
+        {description && <p className="text-sm text-gray-400 mb-1.5">{description}</p>}
         <div className="space-y-2.5">
           {questions.map((q, idx) => (
             <div key={q.id} className="bg-gray-50 rounded border border-gray-200 px-3 py-2" style={{ breakInside: 'avoid' }}>
@@ -179,7 +179,7 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
 
               {/* 选择题选项 */}
               {q.type !== 'blank' && q.options && (
-                <div className="flex flex-wrap gap-x-5 gap-y-1 ml-4 mt-1 text-base">
+                <div className="flex flex-wrap gap-x-5 gap-y-1.5 ml-4 mt-1.5 text-base">
                   {q.options.map((opt) => (
                     <div key={opt.value} className="flex items-center gap-1 text-gray-800 font-medium">
                       <span className="w-3.5 h-3.5 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-500 shrink-0" style={{ fontSize: '9px' }}>

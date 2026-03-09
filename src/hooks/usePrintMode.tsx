@@ -5,6 +5,8 @@ interface PrintOptions {
   title?: string;
   /** 是否显示练习题答案 */
   showAnswers?: boolean;
+  /** 只打印答案（隐藏教学内容） */
+  answersOnly?: boolean;
 }
 
 interface PrintContextValue {
@@ -84,7 +86,9 @@ export function PrintProvider({ children }: { children: React.ReactNode }) {
     } else {
       html.classList.remove('print-preview-mode');
     }
-    return () => html.classList.remove('print-preview-mode');
+    return () => {
+      html.classList.remove('print-preview-mode');
+    };
   }, [isPreview]);
 
   // isPrinting → true 且非预览模式 → 等 DOM 更新后触发 window.print()
