@@ -226,8 +226,29 @@ export function ElementaryFuncPrereqPage() {
                 <p><Math tex="\dfrac{1}{\sqrt{a}} = a^{-\frac{1}{2}}" /></p>
                 <p><Math tex="\dfrac{1}{\sqrt[3]{a}} = a^{-\frac{1}{3}}" /></p>
               </div>
-              <p className="text-purple-700 font-bold mt-1">💡 把根号变成分数指数后，就可以用三大指数法则计算了！</p>
+              <p className="text-purple-700 font-bold mt-1">💡 把根号变成分数指数后，就可以用指数法则计算了！</p>
             </div>
+
+            {/* 综合小例子 */}
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
+              <p className="font-bold text-purple-800 mb-0.5">🧩 综合小例子：把根号变成指数再算</p>
+              <div className="leading-7">
+                <p>化简 <Math tex="\dfrac{\sqrt{a^3} \cdot \sqrt[3]{a^2}}{\sqrt[6]{a}}" /></p>
+                <p><strong>第①步 全部转成分数指数</strong>：<Math tex="\sqrt{a^3} = a^{\frac{3}{2}}" />，<Math tex="\sqrt[3]{a^2} = a^{\frac{2}{3}}" />，<Math tex="\sqrt[6]{a} = a^{\frac{1}{6}}" /></p>
+                <p><strong>第②步 同底相乘（分子）</strong>：<Math tex="a^{\frac{3}{2}} \cdot a^{\frac{2}{3}} = a^{\frac{3}{2}+\frac{2}{3}} = a^{\frac{9}{6}+\frac{4}{6}} = a^{\frac{13}{6}}" /></p>
+                <p><strong>第③步 同底相除</strong>：<Math tex="\dfrac{a^{\frac{13}{6}}}{a^{\frac{1}{6}}} = a^{\frac{13}{6}-\frac{1}{6}} = a^{\frac{12}{6}} = a^2" /></p>
+                <p><strong>结论</strong>：<Math tex="\dfrac{\sqrt{a^3} \cdot \sqrt[3]{a^2}}{\sqrt[6]{a}} = a^2" />　<span className="text-purple-700">根号全变指数 → 通分相加减 → 搞定！</span></p>
+              </div>
+            </div>
+
+            {/* 易错点 */}
+            <CalloutCard variant="warning" title="⚠️ 避坑指南">
+              <div className="space-y-1">
+                <p><strong>偶次根号下非负！</strong> <Math tex="\sqrt{a}" /> 要求 <Math tex="a \geq 0" />，转成 <Math tex="a^{\frac{1}{2}}" /> 同理</p>
+                <p><strong>分数指数 ≠ 除以 n！</strong> <Math tex="a^{\frac{1}{3}}" /> 是"三次方根"，不是"<Math tex="a \div 3" />"</p>
+                <p><strong>负指数 + 分数指数</strong>：<Math tex="\dfrac{1}{\sqrt{a}} = a^{-\frac{1}{2}}" />，先倒数再变指数</p>
+              </div>
+            </CalloutCard>
 
             {/* 即时练习 */}
             <PageBreak />
@@ -235,13 +256,6 @@ export function ElementaryFuncPrereqPage() {
               title="✏️ 即时练习：根式与分数指数幂（5题）"
               questions={elemPrereqPractice2}
             />
-
-            <CalloutCard variant="warning" title="⚠️ 易错点">
-              <div className="space-y-1">
-                <p><strong>分数指数的分子分母别搞反！</strong> <Math tex="\sqrt[3]{a^2} = a^{\frac{2}{3}}" />，分子是幂次 2，分母是根次 3</p>
-                <p><strong>负数没有偶次方根！</strong> <Math tex="\sqrt{-4}" /> 在实数范围内无意义</p>
-              </div>
-            </CalloutCard>
 
           </div>
         </Collapsible>
