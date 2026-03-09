@@ -242,9 +242,9 @@ export function ElementaryFuncPrereqPage() {
             </div>
 
             {/* 速查表 */}
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-0.5">📌 根式 ↔ 分数指数幂 速查表</p>
-              <div className="grid grid-cols-4 gap-x-2 gap-y-1 leading-8 text-gray-700">
+            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3">
+              <p className="font-bold text-indigo-800 mb-1">📌 根式 ↔ 分数指数幂 速查表</p>
+              <div className="grid grid-cols-4 gap-x-2 gap-y-2 leading-8 text-gray-700">
                 <p><Math tex="\sqrt{a} = a^{\frac{1}{2}}" /></p>
                 <p><Math tex="\sqrt[3]{a} = a^{\frac{1}{3}}" /></p>
                 <p><Math tex="\sqrt{a^3} = a^{\frac{3}{2}}" /></p>
@@ -254,6 +254,7 @@ export function ElementaryFuncPrereqPage() {
                 <p><Math tex="\sqrt[4]{a^3} = a^{\frac{3}{4}}" /></p>
                 <p><Math tex="\sqrt[6]{a} = a^{\frac{1}{6}}" /></p>
               </div>
+              <p className="text-indigo-700 font-bold mt-2">💡 口诀：n 次根号 a 的 m 次方 = 指数 m/n，分子是幂次，分母是根次</p>
             </div>
 
             {/* 即时练习 */}
