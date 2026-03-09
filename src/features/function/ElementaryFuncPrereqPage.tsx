@@ -1,20 +1,435 @@
-import { PageHeader } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
+import { elemPrereqNarrations } from './data/elem-prereq-narrations';
+import { elemPrereqProgressItems } from './data/elem-prereq-progress';
+import { elemPrereqPractice1, elemPrereqPractice2, elemPrereqPractice3 } from './data/elem-prereq-practice';
+import { elemPrereqQuizQuestions } from './data/elem-prereq-quiz';
+import { useProgress, usePrintMode } from '@/hooks';
+import { scrollToId } from '@/lib/scroll';
 
 export function ElementaryFuncPrereqPage() {
+  const { items: progressItems, toggle: toggleProgress } = useProgress('elem-func-prereq', elemPrereqProgressItems);
+  const { isPrinting, printOptions } = usePrintMode();
+
   return (
     <div>
       <PageHeader
-        stage="第三阶段 · 函数思维"
+        stage="前置准备"
+        variant="prereq"
         title="3.1.5 基本初等函数前置知识"
-        subtitle="指数·对数·幂的运算基础"
+        narration={elemPrereqNarrations.intro}
+        subtitle="指数·对数·幂的运算基础 — 学指数函数和对数函数之前必须搞定"
         tags={[
-          { label: '难度 ★★☆☆☆', color: 'green' },
-          { label: '约1小时', color: 'purple' },
+          { label: '约40-60分钟', color: 'amber' },
+          { label: '高中新概念', color: 'blue' },
         ]}
       />
-      <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
-        <p className="text-amber-800 text-lg font-bold">🚧 页面建设中...</p>
+
+      <div className="flex justify-end mb-2 print:hidden">
+        <ExportButton title="3.1.5 基本初等函数前置知识" />
       </div>
+
+      <div className="bg-white rounded-xl border border-gray-200 p-2 mb-1">
+        <p className="font-bold text-gray-800 mb-1">📋 知识地图</p>
+        <div className="text-gray-600 space-y-0.5">
+          <button onClick={() => scrollToId('ep-exponent')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、指数运算法则（初中到高中的桥梁）</button>
+          <button onClick={() => scrollToId('ep-radical')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、根式与分数指数幂（高中新语言）</button>
+          <button onClick={() => scrollToId('ep-logarithm')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、对数 — 指数的逆运算（全新概念）</button>
+          <button onClick={() => scrollToId('ep-quiz')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、综合自测（6题）</button>
+        </div>
+      </div>
+
+      <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
+
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* Section 1: 指数运算法则 */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      <section id="ep-exponent" className="mb-2 scroll-mt-4">
+        <Collapsible title="一、指数运算法则" defaultOpen storageKey="elem-prereq:exponent" headerExtra={<SpeakButton text={elemPrereqNarrations.exponentLaws} />}>
+          <p className="text-blue-600 mb-2">🎯 学完你能：秒算任何指数运算，包括零指数和负指数。</p>
+          <div className="space-y-2 text-gray-700">
+
+            {/* 回顾：什么是指数 */}
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
+              <p className="leading-7"><strong className="text-amber-800">📖 回顾：什么是指数？</strong> — <Math tex="2^3 = 2 \times 2 \times 2 = 8" />，其中 <strong>2</strong> 叫底数，<strong>3</strong> 叫指数，<strong>8</strong> 叫幂。指数就是"连乘几次"。</p>
+            </div>
+
+            {/* 三大运算法则 */}
+            <div className="bg-white rounded-xl border border-gray-200 p-2">
+              <p className="font-bold text-gray-800 mb-1">📖 三大运算法则（同底数幂）</p>
+              <table className="w-full text-base border-collapse">
+                <thead>
+                  <tr className="bg-purple-50">
+                    <th className="border border-purple-200 px-2 py-1 text-left text-purple-700">法则</th>
+                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">公式</th>
+                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">口诀</th>
+                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">例子</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-2 py-1 font-bold">同底相乘</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="a^m \cdot a^n = a^{m+n}" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">底不变，指数<strong>加</strong></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="2^3 \cdot 2^4 = 2^7" /></td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-2 py-1 font-bold">同底相除</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\dfrac{a^m}{a^n} = a^{m-n}" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">底不变，指数<strong>减</strong></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\dfrac{3^5}{3^2} = 3^3" /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-2 py-1 font-bold">幂的幂</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(a^m)^n = a^{mn}" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">底不变，指数<strong>乘</strong></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(5^2)^3 = 5^6" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* 零指数和负指数 */}
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
+                <p className="font-bold text-blue-800 mb-1">📌 零指数幂</p>
+                <div className="leading-7">
+                  <p><Math tex="a^0 = 1 \quad (a \neq 0)" /></p>
+                  <p>任何不为零的数的 0 次方 = <strong>1</strong></p>
+                  <p>为什么？<Math tex="\dfrac{a^n}{a^n} = a^{n-n} = a^0 = 1" /></p>
+                </div>
+              </div>
+              <div className="bg-green-50 border border-green-200 rounded-xl p-2">
+                <p className="font-bold text-green-800 mb-1">📌 负指数幂</p>
+                <div className="leading-7">
+                  <p><Math tex="a^{-n} = \dfrac{1}{a^n} \quad (a \neq 0)" /></p>
+                  <p>负指数 = <strong>取倒数</strong></p>
+                  <p>例：<Math tex="2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}" /></p>
+                </div>
+              </div>
+            </div>
+
+            {/* 即时练习 */}
+            <PracticeCard
+              title="✏️ 即时练习：指数运算（5题）"
+              questions={elemPrereqPractice1}
+            />
+
+            <CalloutCard variant="warning" title="⚠️ 易错点">
+              <div className="space-y-1">
+                <p><strong>底数不同不能用法则！</strong> <Math tex="2^3 \times 3^4" /> 不能合并，因为底数不同</p>
+                <p><strong>零的零次方无意义！</strong> <Math tex="0^0" /> 没有定义，只有 <Math tex="a \neq 0" /> 时 <Math tex="a^0 = 1" /></p>
+                <p><strong>负指数 ≠ 负数！</strong> <Math tex="2^{-3} = \dfrac{1}{8}" />（正数），不是 <Math tex="-8" /></p>
+              </div>
+            </CalloutCard>
+
+          </div>
+        </Collapsible>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* Section 2: 根式与分数指数幂 */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      <section id="ep-radical" className="mb-2 scroll-mt-4">
+        <Collapsible title="二、根式与分数指数幂" defaultOpen storageKey="elem-prereq:radical" headerExtra={<SpeakButton text={elemPrereqNarrations.radicalAndFraction} />}>
+          <p className="text-blue-600 mb-2">🎯 学完你能：把根号统一写成分数指数，用指数法则计算含根号的式子。</p>
+          <div className="space-y-2 text-gray-700">
+
+            {/* 回顾根号 */}
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
+              <p className="leading-7"><strong className="text-amber-800">📖 回顾：什么是根号？</strong> — <Math tex="\sqrt{9} = 3" />，因为 <Math tex="3^2 = 9" />。根号就是"乘方的逆运算"：<strong>几的平方等于 9？答案是 3</strong>。高中要把这个概念推广到 n 次方根。</p>
+            </div>
+
+            {/* n 次方根 */}
+            <div className="bg-white rounded-xl border border-gray-200 p-2">
+              <p className="font-bold text-gray-800 mb-1">📖 n 次方根</p>
+              <table className="w-full text-base border-collapse">
+                <thead>
+                  <tr className="bg-green-50">
+                    <th className="border border-green-200 px-2 py-1 text-left text-green-700">名称</th>
+                    <th className="border border-green-200 px-2 py-1 text-center text-green-700">符号</th>
+                    <th className="border border-green-200 px-2 py-1 text-center text-green-700">含义</th>
+                    <th className="border border-green-200 px-2 py-1 text-center text-green-700">例子</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-2 py-1 font-bold">平方根</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\sqrt{a}" /></td>
+                    <td className="border border-gray-200 px-2 py-1">谁的平方 = a？</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\sqrt{25} = 5" /></td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-2 py-1 font-bold">立方根</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\sqrt[3]{a}" /></td>
+                    <td className="border border-gray-200 px-2 py-1">谁的立方 = a？</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\sqrt[3]{8} = 2" /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-2 py-1 font-bold">n 次方根</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\sqrt[n]{a}" /></td>
+                    <td className="border border-gray-200 px-2 py-1">谁的 n 次方 = a？</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\sqrt[4]{16} = 2" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* 核心公式：根号 → 分数指数 */}
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-300 rounded-xl p-3">
+              <p className="font-bold text-purple-800 text-lg mb-2">🔑 核心公式（必背！）</p>
+              <div className="space-y-2 leading-8">
+                <p className="text-center text-lg"><Math tex="\sqrt[n]{a} = a^{\frac{1}{n}}" /></p>
+                <p className="text-center text-gray-600">n 次根号 = 指数变成 n 分之 1</p>
+                <p className="text-center text-lg mt-2"><Math tex="\sqrt[n]{a^m} = a^{\frac{m}{n}}" /></p>
+                <p className="text-center text-gray-600">n 次根号下 a 的 m 次方 = 指数变成 n 分之 m</p>
+              </div>
+            </div>
+
+            {/* 具体例子 */}
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-2">
+              <p className="font-bold text-gray-800 mb-1">🧠 转化练习：根号 → 分数指数</p>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1 leading-7">
+                <p><Math tex="\sqrt{a} = a^{\frac{1}{2}}" /></p>
+                <p><Math tex="\sqrt[3]{a} = a^{\frac{1}{3}}" /></p>
+                <p><Math tex="\sqrt{a^3} = a^{\frac{3}{2}}" /></p>
+                <p><Math tex="\sqrt[3]{a^2} = a^{\frac{2}{3}}" /></p>
+                <p><Math tex="\dfrac{1}{\sqrt{a}} = a^{-\frac{1}{2}}" /></p>
+                <p><Math tex="\dfrac{1}{\sqrt[3]{a}} = a^{-\frac{1}{3}}" /></p>
+              </div>
+              <p className="text-purple-700 font-bold mt-1">💡 把根号变成分数指数后，就可以用三大指数法则计算了！</p>
+            </div>
+
+            {/* 即时练习 */}
+            <PracticeCard
+              title="✏️ 即时练习：根式与分数指数幂（5题）"
+              questions={elemPrereqPractice2}
+            />
+
+            <CalloutCard variant="warning" title="⚠️ 易错点">
+              <div className="space-y-1">
+                <p><strong>分数指数的分子分母别搞反！</strong> <Math tex="\sqrt[3]{a^2} = a^{\frac{2}{3}}" />，分子是幂次 2，分母是根次 3</p>
+                <p><strong>负数没有偶次方根！</strong> <Math tex="\sqrt{-4}" /> 在实数范围内无意义</p>
+              </div>
+            </CalloutCard>
+
+          </div>
+        </Collapsible>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* Section 3: 对数 */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      <section id="ep-logarithm" className="mb-2 scroll-mt-4">
+        <Collapsible title="三、对数 — 指数的逆运算" defaultOpen storageKey="elem-prereq:logarithm" headerExtra={<SpeakButton text={elemPrereqNarrations.logarithm} />}>
+          <p className="text-blue-600 mb-2">🎯 学完你能：理解对数的定义，会算简单对数，知道 lg 和 ln 是什么。</p>
+          <div className="space-y-2 text-gray-700">
+
+            {/* 引入 */}
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
+              <p className="leading-7"><strong className="text-amber-800">🤔 一个问题引入对数</strong> — <Math tex="2^x = 8" />，<Math tex="x = ?" /> 你一眼看出 <Math tex="x = 3" />。但如果问 <Math tex="2^x = 10" />，<Math tex="x = ?" /> 你就算不出来了。<strong>对数就是为了回答"指数是几"而发明的</strong>。</p>
+            </div>
+
+            {/* 对数定义 */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl p-3">
+              <p className="font-bold text-blue-800 text-lg mb-2">🔑 对数的定义（必背！）</p>
+              <div className="text-center space-y-2 leading-8">
+                <p className="text-lg">如果 <Math tex="a^x = N" />，那么 <Math tex="x = \log_a N" /></p>
+                <div className="flex items-center justify-center gap-4 text-gray-600 mt-1">
+                  <span><Math tex="a" /> = <strong>底数</strong></span>
+                  <span><Math tex="N" /> = <strong>真数</strong></span>
+                  <span><Math tex="x" /> = <strong>对数值</strong></span>
+                </div>
+                <p className="text-gray-600 mt-1">读作："以 a 为底 N 的对数等于 x"</p>
+              </div>
+            </div>
+
+            {/* 指数 ↔ 对数 转化 */}
+            <div className="bg-white rounded-xl border border-gray-200 p-2">
+              <p className="font-bold text-gray-800 mb-1">📖 指数式 ↔ 对数式 互相转化</p>
+              <table className="w-full text-base border-collapse">
+                <thead>
+                  <tr className="bg-blue-50">
+                    <th className="border border-blue-200 px-2 py-1 text-center text-blue-700">指数式</th>
+                    <th className="border border-blue-200 px-2 py-1 text-center text-blue-700">→</th>
+                    <th className="border border-blue-200 px-2 py-1 text-center text-blue-700">对数式</th>
+                    <th className="border border-blue-200 px-2 py-1 text-center text-blue-700">理解</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="2^3 = 8" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">→</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\log_2 8 = 3" /></td>
+                    <td className="border border-gray-200 px-2 py-1">2 的几次方等于 8？3 次</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="10^2 = 100" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">→</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\log_{10} 100 = 2" /></td>
+                    <td className="border border-gray-200 px-2 py-1">10 的几次方等于 100？2 次</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="3^4 = 81" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">→</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\log_3 81 = 4" /></td>
+                    <td className="border border-gray-200 px-2 py-1">3 的几次方等于 81？4 次</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="5^0 = 1" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">→</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\log_5 1 = 0" /></td>
+                    <td className="border border-gray-200 px-2 py-1">5 的几次方等于 1？0 次</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* 两条铁律 + 特殊对数 */}
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-orange-50 border border-orange-200 rounded-xl p-2">
+                <p className="font-bold text-orange-800 mb-1">📌 两条铁律</p>
+                <div className="leading-8 space-y-1">
+                  <p><Math tex="\log_a 1 = 0" /></p>
+                  <p className="text-gray-600 text-sm">（任何数的 0 次方 = 1）</p>
+                  <p><Math tex="\log_a a = 1" /></p>
+                  <p className="text-gray-600 text-sm">（a 的 1 次方 = a）</p>
+                </div>
+              </div>
+              <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
+                <p className="font-bold text-indigo-800 mb-1">📌 两个特殊对数</p>
+                <div className="leading-8 space-y-1">
+                  <p><Math tex="\lg N = \log_{10} N" /></p>
+                  <p className="text-gray-600 text-sm">常用对数（底数为 10）</p>
+                  <p><Math tex="\ln N = \log_{e} N" /></p>
+                  <p className="text-gray-600 text-sm">自然对数（<Math tex="e \approx 2.718" />）</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 对数限制条件 */}
+            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
+              <p className="font-bold text-red-800 mb-1">� 对数的限制条件</p>
+              <div className="leading-7">
+                <p><strong>底数</strong> <Math tex="a > 0" /> 且 <Math tex="a \neq 1" />（底数必须是正数且不等于 1）</p>
+                <p><strong>真数</strong> <Math tex="N > 0" />（真数必须是正数，不能取 0 或负数）</p>
+                <p className="text-red-700 mt-1">⚠️ 求对数函数定义域时，真数 &gt; 0 是最常用的条件！</p>
+              </div>
+            </div>
+
+            {/* 即时练习 */}
+            <PracticeCard
+              title="✏️ 即时练习：对数基础（5题）"
+              questions={elemPrereqPractice3}
+            />
+
+            <CalloutCard variant="warning" title="⚠️ 易错点">
+              <div className="space-y-1">
+                <p><strong>底数和真数别搞混！</strong> <Math tex="\log_2 8 = 3" />，底数是 2（下标），真数是 8（后面的数）</p>
+                <p><strong>lg 不是 log！</strong> <Math tex="\lg" /> = <Math tex="\log_{10}" />（底数 10 省略不写），<Math tex="\ln" /> = <Math tex="\log_e" /></p>
+                <p><strong>真数不能为 0 或负数！</strong> <Math tex="\log_2 0" /> 和 <Math tex="\log_2(-4)" /> 都无意义</p>
+              </div>
+            </CalloutCard>
+
+          </div>
+        </Collapsible>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* Section 4: 综合自测 */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      <section id="ep-quiz" className="mb-2 scroll-mt-4">
+        <Collapsible title="四、综合自测（6题）" defaultOpen storageKey="elem-prereq:quiz">
+          <p className="text-gray-600 mb-3">全对 → 可以开始学基本初等函数！错 2 题以上 → 回头再看一遍对应章节。</p>
+          <QuizPanel
+            questions={elemPrereqQuizQuestions}
+            module="elem-prereq-quiz"
+          />
+        </Collapsible>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* 速查表 */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2 mt-1">
+        <p className="font-bold text-indigo-800 mb-1">📌 速查表（打印贴墙上）</p>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-1 leading-7 text-gray-700">
+          <p><strong>同底相乘</strong>：<Math tex="a^m \cdot a^n = a^{m+n}" /></p>
+          <p><strong>同底相除</strong>：<Math tex="\dfrac{a^m}{a^n} = a^{m-n}" /></p>
+          <p><strong>幂的幂</strong>：<Math tex="(a^m)^n = a^{mn}" /></p>
+          <p><strong>零指数</strong>：<Math tex="a^0 = 1" /></p>
+          <p><strong>负指数</strong>：<Math tex="a^{-n} = \dfrac{1}{a^n}" /></p>
+          <p><strong>分数指数</strong>：<Math tex="a^{\frac{m}{n}} = \sqrt[n]{a^m}" /></p>
+          <p><strong>对数定义</strong>：<Math tex="a^x = N \Leftrightarrow x = \log_a N" /></p>
+          <p><strong>铁律</strong>：<Math tex="\log_a 1 = 0,\; \log_a a = 1" /></p>
+          <p><strong>常用对数</strong>：<Math tex="\lg = \log_{10}" /></p>
+          <p><strong>自然对数</strong>：<Math tex="\ln = \log_e" /></p>
+        </div>
+      </div>
+
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* 打印模式答案区 */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      {isPrinting && printOptions.showAnswers && (
+        <>
+          <PageBreak label="答案与解析" />
+          <section className="print-answers">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.1.5 基本初等函数前置知识 — 答案与解析</h2>
+
+            <div className="mb-4">
+              <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
+              <div className="space-y-3">
+                <div>
+                  <p className="font-bold text-gray-700 mb-2">第一节：指数运算</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {elemPrereqPractice1.map((q, i) => (
+                      <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                        <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
+                        {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-bold text-gray-700 mb-2">第二节：根式与分数指数幂</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {elemPrereqPractice2.map((q, i) => (
+                      <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                        <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
+                        {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-bold text-gray-700 mb-2">第三节：对数基础</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {elemPrereqPractice3.map((q, i) => (
+                      <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                        <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
+                        {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
+              <div className="space-y-2">
+                {elemPrereqQuizQuestions.map((q, i) => (
+                  <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                    <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
+                    {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+
+      </LessonLayout>
     </div>
   );
 }
