@@ -115,8 +115,10 @@ export function ElementaryFuncPrereqPage() {
                 <div className="leading-7">
                   <p><Math tex="a^{-n} = \dfrac{1}{a^n} \quad (a \neq 0)" /></p>
                   <p>负指数 = <strong>取倒数</strong></p>
-                  <p>例1：<Math tex="2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}" /></p>
-                  <p>例2：<Math tex="\left(\dfrac{1}{3}\right)^{-2} = 3^2 = 9" /></p>
+                  <div className="grid grid-cols-2 gap-2">
+                    <p>例1：<Math tex="2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}" /></p>
+                    <p>例2：<Math tex="\left(\dfrac{1}{3}\right)^{-2} = 3^2 = 9" /></p>
+                  </div>
                   <p className="text-green-700">底数取倒数，指数变正！</p>
                 </div>
               </div>
