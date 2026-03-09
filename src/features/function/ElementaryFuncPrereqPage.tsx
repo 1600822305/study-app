@@ -253,6 +253,8 @@ export function ElementaryFuncPrereqPage() {
                 <p><strong>偶次根号下非负！</strong> <Math tex="\sqrt{a}" /> 要求 <Math tex="a \geq 0" />，转成 <Math tex="a^{\frac{1}{2}}" /> 同理</p>
                 <p><strong>分数指数 ≠ 除以 n！</strong> <Math tex="a^{\frac{1}{3}}" /> 是"三次方根"，不是"<Math tex="a \div 3" />"</p>
                 <p><strong>负指数 + 分数指数</strong>：<Math tex="\dfrac{1}{\sqrt{a}} = a^{-\frac{1}{2}}" />，先倒数再变指数</p>
+                <p><strong>分子分母别搞反！</strong> <Math tex="\sqrt[3]{a^2} = a^{\frac{2}{3}}" />，分子是幂次 2，分母是根次 3，不是 <Math tex="a^{\frac{3}{2}}" /></p>
+                <p><strong>转化后才能用法则！</strong> 根号混合运算时，先全部转成分数指数，再用同底相乘/相除法则</p>
               </div>
             </CalloutCard>
 
