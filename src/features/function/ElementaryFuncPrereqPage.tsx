@@ -241,7 +241,13 @@ export function ElementaryFuncPrereqPage() {
               </div>
             </div>
 
-            {/* 易错点 */}
+            {/* 即时练习 */}
+            <PageBreak />
+            <PracticeCard
+              title="✏️ 即时练习：根式与分数指数幂（5题）"
+              questions={elemPrereqPractice2}
+            />
+
             <CalloutCard variant="warning" title="⚠️ 避坑指南">
               <div className="space-y-1">
                 <p><strong>偶次根号下非负！</strong> <Math tex="\sqrt{a}" /> 要求 <Math tex="a \geq 0" />，转成 <Math tex="a^{\frac{1}{2}}" /> 同理</p>
@@ -249,13 +255,6 @@ export function ElementaryFuncPrereqPage() {
                 <p><strong>负指数 + 分数指数</strong>：<Math tex="\dfrac{1}{\sqrt{a}} = a^{-\frac{1}{2}}" />，先倒数再变指数</p>
               </div>
             </CalloutCard>
-
-            {/* 即时练习 */}
-            <PageBreak />
-            <PracticeCard
-              title="✏️ 即时练习：根式与分数指数幂（5题）"
-              questions={elemPrereqPractice2}
-            />
 
           </div>
         </Collapsible>
