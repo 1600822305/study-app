@@ -237,14 +237,12 @@ export function PracticeCard({ title = '✏️ 即时练习', questions }: Pract
               {isCorrect ? '✓ 正确！' : `✗ 错了　正确答案：${current.correctAnswer}`}
             </p>
             {current.explanation && (
-              <p className="text-gray-600 text-sm">
-                {current.explanation}
-                {current.explanationLatex && (
-                  <span className="block mt-1">
-                    <MathTex tex={current.explanationLatex} display />
-                  </span>
-                )}
-              </p>
+              <p className="text-gray-600 text-sm">{current.explanation}</p>
+            )}
+            {current.explanationLatex && (
+              <div className="mt-1">
+                <MathTex tex={current.explanationLatex} display />
+              </div>
             )}
           </div>
         )}

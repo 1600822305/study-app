@@ -79,20 +79,6 @@ export const inequalityQuizQuestions: QuizQuestionData[] = [
     explanationLatex: 'a+b = (a+b) \\cdot 1 = (a+b)(\\frac{1}{a}+\\frac{4}{b}) = 5 + \\frac{4a}{b} + \\frac{b}{a} \\geq 5 + 2\\sqrt{4} = 9 \\\\[4pt] \\text{等号：} \\frac{4a}{b} = \\frac{b}{a} \\Rightarrow b = 2a \\Rightarrow a = 3, b = 6',
   },
   {
-    id: 'iqz6',
-    question: '（精华题·换元技巧）',
-    questionLatex: '\\text{已知 } x > 1 \\text{，则 } x + \\frac{4}{x - 1} \\text{ 的最小值为}',
-    options: [
-      { label: 'A', value: '4' },
-      { label: 'B', value: '5' },
-      { label: 'C', value: '6' },
-      { label: 'D', value: '8' },
-    ],
-    correctAnswer: '5',
-    explanation: '高考高频考点："凑"基本不等式。先换元拆出能用基本不等式的形式，再加回常数。',
-    explanationLatex: 'x + \\frac{4}{x-1} = (x-1) + \\frac{4}{x-1} + 1 \\geq 2\\sqrt{4} + 1 = 5 \\quad\\text{等号：} x-1 = 2 \\Rightarrow x = 3',
-  },
-  {
     id: 'iqz7',
     question: '（精华题·应用）',
     questionLatex: '\\text{某矩形面积为 } 36 \\text{，其周长的最小值为}',

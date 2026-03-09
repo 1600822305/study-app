@@ -166,20 +166,20 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
   // ── 打印模式：静态展示全部题目 ──
   if (isPrinting) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-2 my-2">
-        <p className="font-bold text-gray-800 text-sm mb-1">{title}</p>
-        {description && <p className="text-xs text-gray-400 mb-1">{description}</p>}
-        <div className="space-y-1.5">
+      <div className="bg-white rounded-xl border border-gray-200 p-3 my-2">
+        <p className="font-bold text-gray-800 text-base mb-2">{title}</p>
+        {description && <p className="text-sm text-gray-400 mb-2">{description}</p>}
+        <div className="space-y-2.5">
           {questions.map((q, idx) => (
-            <div key={q.id} className="bg-gray-50 rounded border border-gray-200 px-2.5 py-1.5" style={{ breakInside: 'avoid' }}>
-              <p className="text-gray-900 font-bold text-sm leading-5">
+            <div key={q.id} className="bg-gray-50 rounded border border-gray-200 px-3 py-2" style={{ breakInside: 'avoid' }}>
+              <p className="text-gray-900 font-bold text-base leading-7">
                 <span className="text-blue-700 mr-1 font-extrabold">{idx + 1}.</span>
                 {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}
               </p>
 
               {/* 选择题选项 */}
               {q.type !== 'blank' && q.options && (
-                <div className="flex flex-wrap gap-x-4 gap-y-0 ml-4 text-sm">
+                <div className="flex flex-wrap gap-x-5 gap-y-1 ml-4 mt-1 text-base">
                   {q.options.map((opt) => (
                     <div key={opt.value} className="flex items-center gap-1 text-gray-800 font-medium">
                       <span className="w-3.5 h-3.5 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-500 shrink-0" style={{ fontSize: '9px' }}>
@@ -306,14 +306,12 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
                       </>
                     )}
                     {q.explanation && (
-                      <p className="text-xs text-gray-600 mt-1">
-                        {q.explanation}
-                        {q.explanationLatex && (
-                          <span className="block mt-1">
-                            <MathTex tex={q.explanationLatex} />
-                          </span>
-                        )}
-                      </p>
+                      <p className="text-xs text-gray-600 mt-1">{q.explanation}</p>
+                    )}
+                    {q.explanationLatex && (
+                      <div className="mt-1">
+                        <MathTex tex={q.explanationLatex} />
+                      </div>
                     )}
                   </div>
                 );
@@ -456,16 +454,14 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
               {isCorrect ? '✓ 正确！' : `✗ 错了　正确答案：${current.correctAnswer}`}
             </p>
             {current.explanation && (
-              <p className="text-gray-700 text-sm">
-                {current.explanation}
-                {current.explanationLatex && (
-                  <span className="block mt-1">
-                    <MathTex tex={current.explanationLatex} display />
-                  </span>
-                )}
-                <QuizDiagrams name={current.explanationDiagram} />
-              </p>
+              <p className="text-gray-700 text-sm">{current.explanation}</p>
             )}
+            {current.explanationLatex && (
+              <div className="mt-1">
+                <MathTex tex={current.explanationLatex} display />
+              </div>
+            )}
+            <QuizDiagrams name={current.explanationDiagram} />
           </div>
         )}
 

@@ -1,3 +1,4 @@
+import { Mafs, Coordinates, Plot, Point, Text as MafsText } from 'mafs';
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { inequalityNarrations } from './data/narrations';
 import { ineqPractice1, ineqPractice2 } from './data/practice';
@@ -249,7 +250,7 @@ export function InequalityPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 2: 一元一次不等式 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="ineq-linear" className="mb-8 scroll-mt-4">
+      <section id="ineq-linear" className="mb-2 scroll-mt-4">
         <Collapsible title="二、一元一次不等式" defaultOpen storageKey="ineq:linear">
           <p className="text-blue-600 font-bold mb-4 text-base leading-7">
             🎯 学完你能：像解方程一样解不等式，知道什么时候要翻转不等号。
@@ -337,108 +338,246 @@ export function InequalityPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 3: 基本不等式 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="ineq-amgm" className="mb-8 scroll-mt-4">
+      <section id="ineq-amgm" className="mb-2 scroll-mt-4">
         <Collapsible title="三、基本不等式（求最值神器）" defaultOpen storageKey="ineq:amgm">
-          <p className="text-blue-600 font-bold mb-4 text-base leading-7">
+          <p className="text-blue-600 font-bold mb-1 text-base leading-7">
             🎯 学完你能：用基本不等式求最大值和最小值，记住"一正二定三相等"。
           </p>
           <SpeakButton text={inequalityNarrations.basicInequality} />
 
-          <div className="space-y-5 mt-4">
-            {/* 公式引入 */}
-            <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl p-5">
-              <p className="font-bold text-purple-900 text-xl mb-3">🌟 基本不等式（AM-GM不等式）</p>
-              <div className="bg-white rounded-lg p-4 mb-3 text-center">
-                <p className="text-xl"><Math tex="\frac{a + b}{2} \geq \sqrt{ab} \quad (a > 0, \, b > 0)" /></p>
-                <p className="text-gray-500 mt-2">算术平均数 ≥ 几何平均数</p>
+          <div className="space-y-1.5 mt-1">
+            {/* 核心公式 + 常用变式 */}
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl p-2">
+              <p className="font-bold text-purple-900 text-lg leading-tight mb-0.5">🌟 基本不等式</p>
+              <div className="bg-white rounded-lg p-1.5 mb-1 text-center">
+                <p className="text-xl"><Math tex="a + b \geq 2\sqrt{ab} \quad (a > 0, \, b > 0, \; \text{当 } a = b \text{ 时取等})" /></p>
               </div>
-              <p className="text-gray-700 leading-7 mb-2">等价形式（更常用）：</p>
-              <div className="bg-white rounded-lg p-4 text-center">
-                <p className="text-xl"><Math tex="a + b \geq 2\sqrt{ab} \quad (a > 0, \, b > 0)" /></p>
-                <p className="text-purple-700 font-bold mt-2">等号成立条件：<Math tex="a = b" /></p>
-              </div>
-            </div>
 
-            {/* 通俗理解 */}
-            <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
-              <p className="font-bold text-blue-900 text-lg mb-2">🤔 大白话理解</p>
-              <p className="text-gray-700 leading-7 mb-2">想象你有一根绳子，总长 10 米（<Math tex="a + b = 10" />），要围成一个矩形（面积 = <Math tex="ab" />）。</p>
-              <p className="text-gray-700 leading-7 mb-2">什么时候面积最大？<strong>正方形</strong>！也就是 <Math tex="a = b = 5" /> 时，面积 <Math tex="= 25" />。</p>
-              <p className="text-gray-700 leading-7">这就是基本不等式在说的事：<strong>和固定时，越"均匀"积越大</strong>。</p>
-            </div>
-
-            {/* 使用条件 */}
-            <div className="bg-red-50 rounded-xl border-2 border-red-300 p-5">
-              <p className="font-bold text-red-800 text-lg mb-3">⚠️ 使用三条件：一正二定三相等（缺一不可！）</p>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <span className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0">正</span>
-                  <div>
-                    <p className="font-bold text-gray-800">一正：a, b 都必须是正数</p>
-                    <p className="text-gray-600 leading-7">如果有负数，<Math tex="\sqrt{ab}" /> 可能无意义</p>
-                  </div>
+              <p className="font-bold text-purple-800 text-sm mb-0.5">📌 常用变式（都是从上面这个公式变来的）</p>
+              <div className="space-y-0.5">
+                <div className="bg-white rounded-lg p-2 border border-purple-100 flex items-center gap-3">
+                  <span className="text-purple-600 font-bold shrink-0">变式1</span>
+                  <span className="leading-8"><Math tex="a^2 + b^2 \geq 2ab" />　← 把 <Math tex="a, b" /> 换成 <Math tex="a^2, b^2" /> 再开根号就回到原式</span>
                 </div>
-                <div className="flex items-start gap-3">
-                  <span className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0">定</span>
-                  <div>
-                    <p className="font-bold text-gray-800">二定：和（a+b）或积（ab）中必须有一个是定值</p>
-                    <p className="text-gray-600 leading-7">否则不等式右边不是固定的数，没法说"最小值是多少"</p>
-                  </div>
+                <div className="bg-white rounded-lg p-2 border border-purple-100 flex items-center gap-3">
+                  <span className="text-purple-600 font-bold shrink-0">变式2</span>
+                  <span className="leading-8"><Math tex="\dfrac{a+b}{2} \geq \sqrt{ab}" />　← 两边除以 2，算术平均数 ≥ 几何平均数</span>
                 </div>
-                <div className="flex items-start gap-3">
-                  <span className="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center font-bold shrink-0">等</span>
-                  <div>
-                    <p className="font-bold text-gray-800">三相等：a = b 这个条件必须能取到</p>
-                    <p className="text-gray-600 leading-7">如果题目限制了 a ≠ b，那等号取不到，只有 ≥ 没有 =，最值不存在</p>
-                  </div>
+                <div className="bg-white rounded-lg p-2 border border-purple-100 flex items-center gap-3">
+                  <span className="text-purple-600 font-bold shrink-0">变式3</span>
+                  <span className="leading-8"><Math tex="ab \leq \left(\dfrac{a+b}{2}\right)^2" />　← 变式2两边平方，用来求乘积最大值</span>
+                </div>
+                <div className="bg-white rounded-lg p-2 border border-purple-100 flex items-center gap-3">
+                  <span className="text-purple-600 font-bold shrink-0">变式4</span>
+                  <span className="leading-8"><Math tex="a + b + C \geq 2\sqrt{ab} + C" />　← <Math tex="C" /> 是常数（正负都行），不影响求最值，直接搬过去</span>
                 </div>
               </div>
             </div>
 
-            {/* 两个方向 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
-              <p className="font-bold text-gray-800 text-lg mb-3">📊 两种题型：和定求积 vs 积定求和</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                  <p className="font-bold text-green-800 mb-2">和定 → 积最大</p>
-                  <p className="text-gray-700 leading-7"><Math tex="a + b = S \text{（定值）}" /></p>
-                  <p className="text-gray-700 leading-7 mt-1"><Math tex="ab \leq \left(\frac{S}{2}\right)^2" /></p>
-                  <p className="text-green-700 font-bold mt-1">当 <Math tex="a = b = \frac{S}{2}" /> 时取最大值</p>
+            {/* 必背清单 */}
+            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl border-2 border-purple-300 p-2">
+              <p className="font-black text-purple-900 text-lg mb-1">📋 基本不等式 · 必背清单</p>
+
+              {/* 核心公式 */}
+              <div className="bg-white rounded-lg p-1.5 border border-purple-200 text-center mb-1">
+                <p className="text-xl leading-10"><Math tex="a + b \geq 2\sqrt{ab} \quad (a > 0, \; b > 0, \; \text{当 } a = b \text{ 时取等})" /></p>
+              </div>
+
+              {/* 使用条件 + 做题步骤 并排 */}
+              <div className="grid grid-cols-2 gap-1.5 mb-1">
+                <div className="bg-white rounded-lg p-2 border border-purple-200">
+                  <p className="font-bold text-red-600 text-center mb-1">使用条件：一正 · 二定 · 三相等</p>
+                  <div className="space-y-0.5 text-gray-700 leading-7">
+                    <p><strong>一正</strong>：a、b 都必须是正数</p>
+                    <p><strong>二定</strong>：加起来或乘起来，有一个是固定的数</p>
+                    <p className="text-gray-500 text-sm pl-4">比如 <Math tex="a+b=2" /> → 和是固定的（=2）<br/>比如 <Math tex="ab=9" /> → 积是固定的（=9）</p>
+                    <p><strong>三相等</strong>：a = b 这个条件能取到</p>
+                  </div>
                 </div>
-                <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
-                  <p className="font-bold text-orange-800 mb-2">积定 → 和最小</p>
-                  <p className="text-gray-700 leading-7"><Math tex="ab = P \text{（定值）}" /></p>
-                  <p className="text-gray-700 leading-7 mt-1"><Math tex="a + b \geq 2\sqrt{P}" /></p>
-                  <p className="text-orange-700 font-bold mt-1">当 <Math tex="a = b = \sqrt{P}" /> 时取最小值</p>
+                <div className="bg-white rounded-lg p-2 border border-purple-200">
+                  <p className="font-bold text-purple-700 text-center mb-1">做题三步走</p>
+                  <div className="space-y-0.5 text-gray-700 leading-7">
+                    <p><strong>①</strong> 检查正数条件 → 不是正数不能用</p>
+                    <p><strong>②</strong> 看加起来还是乘起来是固定的 → 决定求最大还是最小</p>
+                    <p><strong>③</strong> 验证 a = b 能否取到 → 取不到没最值</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 两个方向 + 数轴图解 */}
+              <p className="font-bold text-blue-800 mb-1">🔑 一个公式，两个方向</p>
+              <div className="grid grid-cols-2 gap-2">
+                {/* ≥ → 最小值 */}
+                <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
+                  <p className="font-bold text-orange-800 mb-1">知道乘积，求和的<span className="text-red-600">最小值</span></p>
+                  <p className="text-center leading-10"><Math tex="a+b \geq 2\sqrt{ab}" /></p>
+                  <div className="relative mx-2" style={{height: 48}}>
+                    <div className="absolute border-l-2 border-t-2 border-orange-400 rounded-tl-sm" style={{left: '50%', right: 0, top: 0, height: 10}}></div>
+                    <div className="absolute text-orange-600 font-bold text-xs" style={{left: '56%', top: -2}}>≥ 4</div>
+                    <div className="absolute left-0 right-0 bg-gray-300" style={{top: 22, height: 1}}></div>
+                    {[0,2,4,6,8].map((n, i) => (
+                      <div key={n} className="absolute flex flex-col items-center" style={{left: `${i * 25}%`, top: 18}}>
+                        <div className={`w-px h-2 ${n === 4 ? 'bg-orange-500' : 'bg-gray-400'}`}></div>
+                        <span className={`text-xs mt-0.5 ${n === 4 ? 'text-orange-600 font-bold' : 'text-gray-400'}`}>{n}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-orange-700 text-sm text-center font-bold"><Math tex="\geq" /> 就是最小值</p>
+                </div>
+
+                {/* ≤ → 最大值 */}
+                <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+                  <p className="font-bold text-green-800 mb-1">知道和，求积的<span className="text-red-600">最大值</span></p>
+                  <p className="text-center leading-10"><Math tex="ab \leq \left(\dfrac{a+b}{2}\right)^2" /></p>
+                  <div className="relative mx-2" style={{height: 48}}>
+                    <div className="absolute border-r-2 border-t-2 border-green-400 rounded-tr-sm" style={{left: 0, right: '25%', top: 0, height: 10}}></div>
+                    <div className="absolute text-green-600 font-bold text-xs" style={{right: '29%', top: -2}}>≤ 9</div>
+                    <div className="absolute left-0 right-0 bg-gray-300" style={{top: 22, height: 1}}></div>
+                    {[0,3,6,9,12].map((n, i) => (
+                      <div key={n} className="absolute flex flex-col items-center" style={{left: `${i * 25}%`, top: 18}}>
+                        <div className={`w-px h-2 ${n === 9 ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                        <span className={`text-xs mt-0.5 ${n === 9 ? 'text-green-600 font-bold' : 'text-gray-400'}`}>{n}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-green-700 text-sm text-center font-bold"><Math tex="\leq" /> 就是最大值</p>
                 </div>
               </div>
             </div>
 
             {/* 例题 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
-              <p className="font-bold text-gray-800 text-lg mb-3">✍️ 经典例题</p>
-              <div className="space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="font-bold text-gray-800 mb-2">例1：已知 <Math tex="x > 0" />，求 <Math tex="x + \frac{4}{x}" /> 的最小值</p>
-                  <div className="pl-3 border-l-2 border-purple-300 space-y-1">
-                    <p className="leading-7">检查三条件：✅ <Math tex="x > 0" />（正）；✅ <Math tex="x \cdot \frac{4}{x} = 4" />（积为定值）；✅ <Math tex="x = \frac{4}{x}" /> 时 <Math tex="x = 2" />（等号可取）</p>
-                    <p className="leading-7"><Math tex="x + \frac{4}{x} \geq 2\sqrt{x \cdot \frac{4}{x}} = 2\sqrt{4} = 4" /></p>
+            <div className="bg-white rounded-xl border border-gray-200 p-3">
+              <p className="font-bold text-gray-800 text-lg leading-tight mb-2">✍️ 经典例题</p>
+              <div className="space-y-2">
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">例1：已知 <Math tex="x > 0" />，求 <Math tex="x + \frac{4}{x}" /> 的最小值</p>
+                  <div className="pl-3 border-l-2 border-purple-300 space-y-0.5">
+                    <p className="leading-7">分析题目：✅ <Math tex="x > 0" />（正）；✅ <Math tex="x \cdot \frac{4}{x} = 4" />（乘起来是固定的）<strong>⇒ 求和最小值</strong></p>
+                    <p className="leading-7">套公式：<Math tex="x + \frac{4}{x} \geq 2\sqrt{4} = 4" /></p>
+                    <p className="leading-7">验证等号：<Math tex="x = \frac{4}{x}" /> ⇒ <Math tex="x = 2" />（能取到 ✅）</p>
                   </div>
-                  <p className="text-green-600 font-bold mt-2">最小值 = 4，当 x = 2 时取到</p>
+                  <p className="text-green-600 font-bold mt-1">最小值 = 4，当 x = 2 时取到</p>
                 </div>
 
-                <PageBreak label="基本不等式例题" />
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="font-bold text-gray-800 mb-2">例2：已知 <Math tex="a > 0, b > 0, a + b = 6" />，求 <Math tex="ab" /> 的最大值</p>
-                  <div className="pl-3 border-l-2 border-purple-300 space-y-1">
-                    <p className="leading-7">和定积最大：<Math tex="a + b = 6 \geq 2\sqrt{ab}" /></p>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <p className="font-bold text-gray-800 mb-1">例2：已知 <Math tex="a > 0, b > 0, a + b = 6" />，求 <Math tex="ab" /> 的最大值</p>
+                  <div className="pl-3 border-l-2 border-purple-300 space-y-0.5">
+                    <p className="leading-7">分析题目：✅ <Math tex="a,b > 0" />（正）；✅ <Math tex="a+b=6" />（和是固定的）<strong>⇒ 求乘积最大值</strong></p>
+                    <p className="leading-7">套公式：<Math tex="a + b = 6 \geq 2\sqrt{ab}" /></p>
                     <p className="leading-7"><Math tex="3 \geq \sqrt{ab}" />，所以 <Math tex="ab \leq 9" /></p>
                   </div>
-                  <p className="text-green-600 font-bold mt-2">最大值 = 9，当 a = b = 3 时取到</p>
+                  <p className="text-green-600 font-bold mt-1">最大值 = 9，当 a = b = 3 时取到</p>
                 </div>
               </div>
             </div>
 
+            {/* 做题决策流程 */}
+            <div className="bg-blue-50 rounded-xl border border-blue-200 p-3">
+              <p className="font-bold text-blue-800 text-lg leading-tight mb-2">🧭 遇到求最值的题，按这个流程走</p>
+              <div className="space-y-1.5">
+                <div className="flex items-start gap-2">
+                  <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0 text-sm font-bold">1</span>
+                  <div className="flex-1 bg-white rounded-lg p-2 border border-blue-100">
+                    <p className="leading-7">检查 <strong className="text-red-600">a, b 是不是正数</strong> → 不是正数？<span className="text-red-500 font-bold">不能用基本不等式！</span></p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0 text-sm font-bold">2</span>
+                  <div className="flex-1 bg-white rounded-lg p-2 border border-blue-100">
+                    <p className="leading-7"><strong>乘起来</strong>是固定的？→ 套公式求<span className="text-orange-600 font-bold">和的最小值</span></p>
+                    <p className="leading-7"><strong>加起来</strong>是固定的？→ 套公式求<span className="text-green-600 font-bold">积的最大值</span></p>
+                    <p className="leading-7 text-gray-500">都不固定？→ 用<strong>换元凑形</strong>或<strong>1的代换</strong>先凑出来（见下页）</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center shrink-0 text-sm font-bold">3</span>
+                  <div className="flex-1 bg-white rounded-lg p-2 border border-blue-100">
+                    <p className="leading-7">验证 <strong>a = b 能不能取到</strong> → 取不到就<span className="text-red-500 font-bold">没有最值</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 进阶技巧 */}
+            <PageBreak label="基本不等式进阶技巧" />
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl border-2 border-amber-300 p-4">
+              <p className="font-black text-amber-900 text-lg mb-1">🔥 进阶技巧：遇到不能直接套公式怎么办？</p>
+              <p className="text-gray-600 mb-3">考试题往往不会直接给你"和"或"积"是固定的，需要你自己"凑"出来。</p>
+
+              <div className="space-y-3">
+                {/* 技巧1：换元凑形 */}
+                <div className="bg-white rounded-lg p-4 border border-amber-200">
+                  <p className="font-bold text-amber-800 text-base mb-1">技巧一：换元凑形</p>
+                  <p className="text-gray-500 mb-2">看到 <Math tex="x + \frac{k}{x-a}" /> <span className="text-amber-700 font-bold">就要</span>把 <Math tex="x" /> 拆成 <Math tex="(x-a)+a" />，让乘起来变成固定的</p>
+
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 mb-1">例：已知 <Math tex="x > 1" />，求 <Math tex="x + \frac{4}{x-1}" /> 的最小值</p>
+                    <div className="pl-3 border-l-2 border-amber-300 space-y-0.5">
+                      <p className="leading-8 text-red-600">❌ 分析：<Math tex="x \cdot \frac{4}{x-1} = \frac{4x}{x-1}" /> 不是固定的，不能直接用</p>
+                      <p className="leading-8 text-green-700">✅ <strong>第①步 拆</strong>：<Math tex="x = (x{-}1)+1" /><span className="text-gray-500">　（因为分母是 <Math tex="x{-}1" />，所以把 <Math tex="x" /> 也凑出 <Math tex="x{-}1" />）</span></p>
+                      <p className="leading-8 pl-4"><Math tex="x + \frac{4}{x-1} \;=\; \underbrace{(x{-}1) + \frac{4}{x-1}}_{\text{只需求这部分的最小值}} + 1" /></p>
+                      <p className="leading-8 text-gray-600">　　常数 <Math tex="+1" /> 不影响求最值，所以只要算 <Math tex="(x{-}1)+\frac{4}{x-1}" /> 的最小值，最后加1就行</p>
+                      <p className="leading-8">　<strong>第②步 验证</strong>：<Math tex="(x{-}1) \cdot \frac{4}{x-1} = 4" /> <span className="text-green-600 font-bold">乘起来是固定的！可以套公式</span></p>
+                      <p className="leading-8">　<strong>第③步 套公式</strong>：<Math tex="(x{-}1) + \frac{4}{x-1} \geq 2\sqrt{4} = 4" />，加上常数1，原式 <Math tex="\geq 4 + 1 = 5" /></p>
+                      <p className="leading-8">　<strong>等号验证</strong>：<Math tex="x{-}1 = \frac{4}{x-1}" /> <span className="text-blue-600">解得</span> <Math tex="x = 3" /> ✓</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 技巧2：1的代换 */}
+                <div className="bg-white rounded-lg p-4 border border-amber-200">
+                  <p className="font-bold text-amber-800 text-base mb-1">技巧二：1的代换</p>
+                  <p className="text-gray-500 mb-2">已知 <Math tex="a+b=k" />，求含 <Math tex="\frac{1}{a},\frac{1}{b}" /> 的式子 <span className="text-amber-700 font-bold">就要</span>把 <Math tex="(a+b)" /> 乘进去（等于乘以 <Math tex="k" />）</p>
+
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <p className="font-bold text-gray-800 mb-1">例：已知 <Math tex="a > 0, b > 0, a+b=1" />，求 <Math tex="\frac{1}{a}+\frac{1}{b}" /> 的最小值</p>
+                    <div className="pl-3 border-l-2 border-amber-300 space-y-0.5">
+                      <p className="leading-8 text-red-600">❌ 分析：<Math tex="\frac{1}{a}" /> 和 <Math tex="\frac{1}{b}" /> 的和、积都不固定，不能直接用</p>
+                      <p className="leading-8 text-green-700">✅ <strong>第①步 乘进去</strong>：因为 <Math tex="a{+}b=1" />，乘以它等于乘以1，值不变</p>
+                      <p className="leading-8 pl-4"><Math tex="\frac{1}{a}+\frac{1}{b} = (\frac{1}{a}+\frac{1}{b}) \times (a+b)" /></p>
+                      <p className="leading-8">　<strong>第②步 展开</strong>：<Math tex="= 1 + \frac{b}{a} + \frac{a}{b} + 1 = 2 + \frac{b}{a} + \frac{a}{b}" /></p>
+                      <p className="leading-8">　<strong>第③步 验证</strong>：<Math tex="\frac{b}{a} \cdot \frac{a}{b} = 1" /> <span className="text-green-600">乘起来是固定的！</span></p>
+                      <p className="leading-8">　<strong>第④步 套公式</strong>：<Math tex="\frac{b}{a}+\frac{a}{b} \geq 2\sqrt{1} = 2" /></p>
+                      <p className="leading-8">　<strong>结论</strong>：<Math tex="\frac{1}{a}+\frac{1}{b} \geq 2+2 = 4" /></p>
+                      <p className="leading-8">　<strong>等号验证</strong>：<Math tex="a=b=\frac{1}{2}" /> 时取等 ✓</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 技巧速查 */}
+            <div className="bg-white rounded-xl border border-gray-200 p-3 mt-2">
+              <p className="font-bold text-gray-800 text-base mb-2">📋 技巧速查：看到什么题型，用什么招</p>
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="border border-gray-200 p-2 text-left font-bold">题目长什么样</th>
+                    <th className="border border-gray-200 p-2 text-left font-bold">用什么招</th>
+                    <th className="border border-gray-200 p-2 text-left font-bold">关键动作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 p-2"><Math tex="x + \frac{k}{x}" />，积直接固定</td>
+                    <td className="border border-gray-200 p-2 text-orange-700 font-bold">直接套公式</td>
+                    <td className="border border-gray-200 p-2">验证乘积是常数，套 <Math tex="\geq 2\sqrt{k}" /></td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 p-2"><Math tex="x + \frac{k}{x-a}" />，积不固定</td>
+                    <td className="border border-gray-200 p-2 text-amber-700 font-bold">换元凑形</td>
+                    <td className="border border-gray-200 p-2">拆 <Math tex="x=(x{-}a)+a" />，常数搬走</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 p-2">已知 <Math tex="a+b=k" />，求 <Math tex="\frac{1}{a}+\frac{1}{b}" /></td>
+                    <td className="border border-gray-200 p-2 text-blue-700 font-bold">1的代换</td>
+                    <td className="border border-gray-200 p-2">原式 <Math tex="\times (a+b) = k" />，展开配对</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <PageBreak label="即时练习：基本不等式" />
             <PracticeCard
               title="✏️ 即时练习：基本不等式"
               questions={ineqPractice2}
@@ -451,6 +590,16 @@ export function InequalityPage() {
                 <p><strong>和定积最大 vs 积定和最小搞混</strong>：口诀"和定积大，积定和小"。</p>
               </div>
             </CalloutCard>
+
+            {/* 自测清单 */}
+            <div className="bg-green-50 rounded-xl border border-green-200 p-3">
+              <p className="font-bold text-green-800 text-base mb-1">✅ 自测：全部打勾就过关</p>
+              <div className="text-gray-700 leading-7 space-y-0.5">
+                <p>□　积定求和最小，和定求积最大</p>
+                <p>□　不能直接套公式时，会用换元凑形 / 1的代换</p>
+                <p>□　做题第一步先检查<strong className="text-red-600">一正、二定、三相等</strong></p>
+              </div>
+            </div>
           </div>
         </Collapsible>
       </section>
@@ -468,145 +617,104 @@ export function InequalityPage() {
 
           <div className="space-y-5 mt-4">
             {/* 三胞胎关系 */}
-            <div className="bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-xl p-5">
-              <p className="font-bold text-indigo-900 text-xl mb-3">🔗 "三胞胎"关系：函数、方程、不等式</p>
-              <p className="text-gray-700 leading-7 mb-3">同一个二次表达式 <Math tex="ax^2 + bx + c" />，可以出现在三种场景中：</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="bg-white rounded-lg p-4 border border-indigo-100 text-center">
-                  <p className="font-bold text-indigo-800 mb-1">二次函数</p>
+            <div className="bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-xl p-3">
+              <p className="font-bold text-indigo-900 text-xl mb-1">🔗 "三胞胎"关系：函数、方程、不等式</p>
+              <p className="text-gray-700 leading-7 mb-1">同一个二次表达式 <Math tex="ax^2 + bx + c" />，可以出现在三种场景中：</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <div className="bg-white rounded-lg p-2 border border-indigo-100 text-center">
+                  <p className="font-bold text-indigo-800 mb-0.5">二次函数</p>
                   <p><Math tex="y = ax^2 + bx + c" /></p>
-                  <p className="text-gray-500 mt-1">→ 画图像（抛物线）</p>
+                  <p className="text-gray-500">→ 画图像（抛物线）</p>
                 </div>
-                <div className="bg-white rounded-lg p-4 border border-indigo-100 text-center">
-                  <p className="font-bold text-indigo-800 mb-1">二次方程</p>
+                <div className="bg-white rounded-lg p-2 border border-indigo-100 text-center">
+                  <p className="font-bold text-indigo-800 mb-0.5">二次方程</p>
                   <p><Math tex="ax^2 + bx + c = 0" /></p>
-                  <p className="text-gray-500 mt-1">→ 找根（与x轴交点）</p>
+                  <p className="text-gray-500">→ 找根（与x轴交点）</p>
                 </div>
-                <div className="bg-white rounded-lg p-4 border border-indigo-100 text-center">
-                  <p className="font-bold text-indigo-800 mb-1">二次不等式</p>
+                <div className="bg-white rounded-lg p-2 border border-indigo-100 text-center">
+                  <p className="font-bold text-indigo-800 mb-0.5">二次不等式</p>
                   <p><Math tex="ax^2 + bx + c > 0" /></p>
-                  <p className="text-gray-500 mt-1">→ 找图像在x轴上方的部分</p>
+                  <p className="text-gray-500">→ 找图像在x轴上方的部分</p>
                 </div>
               </div>
-              <p className="text-indigo-800 font-bold mt-3 text-center text-base">解不等式 = 在函数图像上找满足条件的 x 的范围</p>
+              <p className="text-indigo-800 font-bold mt-1.5 text-center text-base">解不等式 = 在函数图像上找满足条件的 x 的范围</p>
             </div>
 
-            {/* 解题三步法 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-5">
-              <p className="font-bold text-gray-800 text-lg mb-3">🔧 解一元二次不等式：三步法</p>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3 bg-blue-50 rounded-lg p-4">
-                  <span className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold shrink-0">1</span>
-                  <div>
-                    <p className="font-bold text-gray-800">化标准形式</p>
-                    <p className="text-gray-600 leading-7">让最高次系数 <Math tex="a > 0" />。如果 <Math tex="a < 0" />，两边乘以 -1（不等号反转）</p>
+            {/* 看图理解口诀 */}
+            <div className="bg-white rounded-xl border border-gray-200 p-3">
+              <p className="font-bold text-gray-800 text-lg mb-1">👀 看图秒懂：以 <Math tex="(x-1)(x-4)" /> 为例</p>
+              <p className="text-gray-500 leading-6 mb-2">因式分解后根是 1 和 4，抛物线和 x 轴交于这两个点。<strong>看曲线在 x 轴的哪一边</strong>就知道答案：</p>
+
+              {/* 两个图并排 */}
+              <div className="grid grid-cols-2 gap-2 mb-2">
+                {/* > 0：大于取两边 */}
+                <div className="rounded-lg border-2 border-green-300 overflow-hidden">
+                  <div className="bg-green-50 px-2 py-1 text-center">
+                    <p className="font-bold text-green-700 text-sm"><Math tex="> 0" /> → 大于取<strong>两边</strong></p>
                   </div>
+                  <Mafs viewBox={{ x: [-0.8, 5.8], y: [-2.8, 3] }} preserveAspectRatio={false} height={120}>
+                    <Coordinates.Cartesian xAxis={{ lines: false, labels: (x) => ([1,2,3,4].includes(x) ? x : '') }} yAxis={{ lines: false, labels: () => '' }} />
+                    <Plot.OfX y={(x) => (x - 1) * (x - 4)} color="#d1d5db" weight={1.5} />
+                    <Plot.OfX y={(x) => (x - 1) * (x - 4)} domain={[-0.8, 1]} color="#22c55e" weight={3.5} />
+                    <Plot.OfX y={(x) => (x - 1) * (x - 4)} domain={[4, 5.8]} color="#22c55e" weight={3.5} />
+                    <Point x={1} y={0} color="#ef4444" />
+                    <Point x={4} y={0} color="#ef4444" />
+                    <MafsText x={-0.3} y={2} size={13} color="#22c55e">{'>0 ✓'}</MafsText>
+                    <MafsText x={5.2} y={2} size={13} color="#22c55e">{'>0 ✓'}</MafsText>
+                  </Mafs>
+                  <p className="text-center text-green-700 font-bold text-sm py-0.5"><Math tex="x < 1" /> 或 <Math tex="x > 4" /></p>
                 </div>
-                <div className="flex items-start gap-3 bg-blue-50 rounded-lg p-4">
-                  <span className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold shrink-0">2</span>
-                  <div>
-                    <p className="font-bold text-gray-800">解对应方程，找两个根</p>
-                    <p className="text-gray-600 leading-7">用因式分解或求根公式 <Math tex="x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}" /></p>
+                {/* < 0：小于取中间 */}
+                <div className="rounded-lg border-2 border-red-300 overflow-hidden">
+                  <div className="bg-red-50 px-2 py-1 text-center">
+                    <p className="font-bold text-red-700 text-sm"><Math tex="< 0" /> → 小于取<strong>中间</strong></p>
                   </div>
-                </div>
-                <div className="flex items-start gap-3 bg-red-50 rounded-lg p-4 border border-red-200">
-                  <span className="w-8 h-8 rounded-full bg-red-600 text-white flex items-center justify-center text-sm font-bold shrink-0">3</span>
-                  <div>
-                    <p className="font-bold text-gray-800">画图写解集</p>
-                    <p className="text-red-600 font-bold leading-7"><Math tex="> 0" />（在x轴上方）→ <strong>大于取两边</strong>：<Math tex="x < x_1" /> 或 <Math tex="x > x_2" /></p>
-                    <p className="text-blue-600 font-bold leading-7"><Math tex="< 0" />（在x轴下方）→ <strong>小于取中间</strong>：<Math tex="x_1 < x < x_2" /></p>
-                  </div>
+                  <Mafs viewBox={{ x: [-0.8, 5.8], y: [-2.8, 3] }} preserveAspectRatio={false} height={120}>
+                    <Coordinates.Cartesian xAxis={{ lines: false, labels: (x) => ([1,2,3,4].includes(x) ? x : '') }} yAxis={{ lines: false, labels: () => '' }} />
+                    <Plot.OfX y={(x) => (x - 1) * (x - 4)} color="#d1d5db" weight={1.5} />
+                    <Plot.OfX y={(x) => (x - 1) * (x - 4)} domain={[1, 4]} color="#ef4444" weight={3.5} />
+                    <Point x={1} y={0} color="#ef4444" />
+                    <Point x={4} y={0} color="#ef4444" />
+                    <MafsText x={2.5} y={-1.8} size={13} color="#ef4444">{'<0'}</MafsText>
+                  </Mafs>
+                  <p className="text-center text-red-700 font-bold text-sm py-0.5"><Math tex="1 < x < 4" /></p>
                 </div>
               </div>
+
             </div>
 
-            {/* 口诀卡片 */}
-            <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-400 rounded-xl px-4 py-2 text-center">
-              <p className="text-lg font-black text-yellow-800">🔑 口诀：<span className="text-gray-800">大于取两边，小于取中间</span></p>
-              <p className="text-gray-500 text-sm">（前提：最高次系数 <Math tex="a > 0" />，即抛物线开口向上）</p>
+            {/* 解集速查表（紧凑版） */}
+            <div className="bg-white rounded-xl border border-gray-200 p-3">
+              <p className="font-bold text-gray-800 text-base mb-1">📊 解集速查表（设 <Math tex="a > 0" />，根 <Math tex="x_1 < x_2" />）</p>
+              <table className="w-full text-base border-collapse">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="border border-gray-300 px-3 py-1.5 text-left">判别式</th>
+                    <th className="border border-gray-300 px-3 py-1.5 text-center text-green-700"><Math tex="> 0" /> 的解集</th>
+                    <th className="border border-gray-300 px-3 py-1.5 text-center text-red-700"><Math tex="< 0" /> 的解集</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-3 py-1.5 font-bold"><Math tex="\Delta > 0" /></td>
+                    <td className="border border-gray-300 px-3 py-1.5 text-center"><Math tex="x < x_1" /> 或 <Math tex="x > x_2" /><br/><span className="text-green-600 font-bold text-sm">大于取两边</span></td>
+                    <td className="border border-gray-300 px-3 py-1.5 text-center"><Math tex="x_1 < x < x_2" /><br/><span className="text-red-600 font-bold text-sm">小于取中间</span></td>
+                  </tr>
+                  <tr className="bg-amber-50">
+                    <td className="border border-gray-300 px-3 py-1.5 font-bold"><Math tex="\Delta = 0" /></td>
+                    <td className="border border-gray-300 px-3 py-1.5 text-center"><Math tex="x \neq x_0" /> 的所有实数</td>
+                    <td className="border border-gray-300 px-3 py-1.5 text-center"><Math tex="\varnothing" />（空集）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-3 py-1.5 font-bold"><Math tex="\Delta < 0" /></td>
+                    <td className="border border-gray-300 px-3 py-1.5 text-center"><Math tex="\mathbb{R}" />（全体实数）</td>
+                    <td className="border border-gray-300 px-3 py-1.5 text-center"><Math tex="\varnothing" />（空集）</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-red-600 font-bold mt-1.5 text-sm">⚠️ <Math tex="a < 0" /> 时先乘 <Math tex="-1" /> 翻转不等号，再查表。<Math tex="\leq / \geq" /> 时端点要取。</p>
             </div>
 
-            {/* 例题 */}
-            <PageBreak label="一元二次不等式例题" />
-            <div className="bg-white rounded-xl border border-gray-200 p-4">
-              <p className="font-bold text-gray-800 text-lg mb-2">✍️ 例题演示</p>
-              <div className="space-y-3">
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 mb-1">例1：解 <Math tex="x^2 - 5x + 6 > 0" /></p>
-                  <div className="pl-3 border-l-2 border-blue-300 space-y-1">
-                    <p className="leading-7">① 已经是标准形式（<Math tex="a = 1 > 0" />）✓</p>
-                    <p className="leading-7">② 解方程：<Math tex="x^2 - 5x + 6 = (x-2)(x-3) = 0" />，根为 <Math tex="x_1 = 2, x_2 = 3" /></p>
-                    <p className="leading-7">③ {'>'} 0 取两边：<Math tex="x < 2" /> 或 <Math tex="x > 3" /></p>
-                  </div>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 mb-1">例2：解 <Math tex="x^2 - 4x + 3 \leq 0" /></p>
-                  <div className="pl-3 border-l-2 border-blue-300 space-y-1">
-                    <p className="leading-7">① 标准形式 ✓</p>
-                    <p className="leading-7">② <Math tex="(x-1)(x-3) = 0" />，根为 <Math tex="x_1 = 1, x_2 = 3" /></p>
-                    <p className="leading-7">③ ≤ 0 取中间（含端点）：<Math tex="1 \leq x \leq 3" /></p>
-                  </div>
-                </div>
-
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <p className="font-bold text-gray-800 mb-1">例3（最高次系数为负⚠️）：解 <Math tex="-x^2 + 2x + 3 > 0" /></p>
-                  <div className="pl-3 border-l-2 border-red-400 space-y-1">
-                    <p className="leading-7">① <strong className="text-red-600">两边乘以 -1</strong>：<Math tex="x^2 - 2x - 3 < 0" />（注意不等号反转！）</p>
-                    <p className="leading-7">② <Math tex="(x+1)(x-3) = 0" />，根为 <Math tex="x_1 = -1, x_2 = 3" /></p>
-                    <p className="leading-7">③ {'<'} 0 取中间：<Math tex="-1 < x < 3" /></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 特殊情况：Δ < 0 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-4">
-              <p className="font-bold text-gray-800 text-lg mb-2">🔍 特殊情况：方程无实数根（Δ {'<'} 0）</p>
-              <p className="text-gray-600 leading-7 mb-2">当判别式 <Math tex="\Delta = b^2 - 4ac < 0" /> 时，抛物线不与 x 轴相交。</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="bg-green-50 rounded-lg p-3 border border-green-200">
-                  <p className="font-bold text-green-800 mb-1"><Math tex="a > 0, \Delta < 0" /></p>
-                  <p className="text-gray-700 leading-7">抛物线全在 x 轴上方</p>
-                  <p className="text-gray-700 leading-7"><Math tex="> 0" /> → 解集 = <Math tex="\mathbb{R}" />（全体实数）</p>
-                  <p className="text-gray-700 leading-7"><Math tex="< 0" /> → 解集 = <Math tex="\varnothing" />（空集）</p>
-                </div>
-                <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
-                  <p className="font-bold text-orange-800 mb-1"><Math tex="a < 0, \Delta < 0" /></p>
-                  <p className="text-gray-700 leading-7">抛物线全在 x 轴下方</p>
-                  <p className="text-gray-700 leading-7"><Math tex="> 0" /> → 解集 = <Math tex="\varnothing" /></p>
-                  <p className="text-gray-700 leading-7"><Math tex="< 0" /> → 解集 = <Math tex="\mathbb{R}" /></p>
-                </div>
-              </div>
-            </div>
-
-            <CalloutCard variant="warning" title="⚠️ 易错点">
-              <div className="space-y-1 text-base leading-7">
-                <p><strong>最高次系数为负忘翻转</strong>：<Math tex="-x^2 + 4 > 0" /> 必须先变成 <Math tex="x^2 - 4 < 0" />（乘 -1，反转），再用口诀。</p>
-                <p><strong>口诀用反</strong>：记住"大于取两边，小于取中间"。</p>
-                <p><strong>等号区别</strong>：<Math tex="\leq" /> 端点取（闭区间 <Math tex="[\ ]" />），<Math tex="<" /> 端点不取（开区间 <Math tex="(\ )" />）。</p>
-              </div>
-            </CalloutCard>
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════ */}
-      {/* Section 5: 知识总结卡片 */}
-      {/* ════════════════════════════════════════════════════════ */}
-      <section id="ineq-summary" className="mb-4 scroll-mt-4">
-        <Collapsible title="五、知识总结卡片（考前速看）" defaultOpen storageKey="ineq:summary">
-          <SpeakButton text={inequalityNarrations.summary} />
-          <div className="mt-2">
-            <div className="bg-green-50 border border-green-200 text-gray-800 rounded-2xl p-4">
-              <p className="font-black text-green-800 text-base mb-2">📋 考前速记卡</p>
-              <div className="space-y-1.5 leading-7">
-                <p><span className="text-green-700 font-bold">性质：</span>加减不变号 | 乘除正数不变号 | <strong className="text-red-600">乘除负数变号</strong></p>
-                <p><span className="text-green-700 font-bold">基本不等式：</span><Math tex="a + b \geq 2\sqrt{ab}" />（<Math tex="a,b > 0" />）一正二定三相等 | 和定积大 | 积定和小</p>
-                <p><span className="text-green-700 font-bold">二次不等式：</span><Math tex="> 0" /> → <strong className="text-orange-600">取两边</strong>，<Math tex="< 0" /> → <strong className="text-blue-600">取中间</strong>，<Math tex="\Delta < 0" /> 时看开口方向</p>
-                <p><span className="text-green-700 font-bold">陷阱：</span><span className="text-red-600">① 乘除负数忘变号 ② 条件不全 ③ 系数负没处理 ④ 开闭区间搞混</span></p>
-              </div>
-            </div>
           </div>
         </Collapsible>
       </section>
@@ -614,8 +722,9 @@ export function InequalityPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 6: 综合测试 */}
       {/* ════════════════════════════════════════════════════════ */}
+      <PageBreak label="综合测试" />
       <section id="ineq-quiz" className="mb-4 scroll-mt-4">
-        <Collapsible title="六、综合测试（高考真题 + 精华题·12题）" defaultOpen storageKey="ineq:quiz">
+        <Collapsible title="六、综合测试（高考真题 + 精华题·11题）" defaultOpen storageKey="ineq:quiz">
           <QuizPanel module="inequality" questions={inequalityQuizQuestions} title="不等式综合测试" />
         </Collapsible>
       </section>
@@ -626,37 +735,40 @@ export function InequalityPage() {
       {isPrinting && printOptions.showAnswers && (
         <>
           <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 答案与解析</h2>
+          <section className="mb-2 print-answers">
+            <h2 className="text-base font-bold text-gray-900 mb-2">📝 答案与解析</h2>
 
             {[
               { label: '一、不等式性质 + 一元一次不等式 — 即时练习', questions: ineqPractice1 },
               { label: '三、基本不等式 — 即时练习', questions: ineqPractice2 },
               { label: '综合测试（高考真题 + 精华题）', questions: inequalityQuizQuestions },
             ].map((section) => (
-              <div key={section.label} className="mb-3">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="space-y-2 text-gray-700">
+              <div key={section.label} className="mb-1.5">
+                <p className="font-bold text-gray-800 text-sm mb-1 border-b border-gray-200 pb-0.5">{section.label}</p>
+                <div className={`${section.label.includes('综合测试') ? 'space-y-1' : 'space-y-0.5'} text-gray-700`}>
                   {section.questions.map((q, idx) => {
                     const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
                     const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
                     const answerTex = isSimpleFractionAnswer
                       ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
                       : q.correctAnswer;
+                    const isQuiz = section.label.includes('综合测试');
+                    const fontSize = isQuiz ? 'text-[13px]' : 'text-sm';
+                    const latexSize = isQuiz ? 'text-[15px]' : 'text-sm';
                     return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
+                      <div key={q.id} className="flex gap-1.5 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className={`text-blue-600 font-bold shrink-0 ${fontSize}`}>{idx + 1}.</span>
                         <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
+                          <p className={`font-bold text-gray-900 ${fontSize}`}>
                             答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
                           </p>
                           {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
+                            <div className={`text-gray-700 ${latexSize}`} style={{ marginTop: '1px' }}>
                               <Math tex={q.explanationLatex} />
                             </div>
                           )}
                           {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
+                            <p className={`text-gray-700 ${fontSize}`} style={{ marginTop: '1px' }}>{q.explanation}</p>
                           )}
                         </div>
                       </div>
