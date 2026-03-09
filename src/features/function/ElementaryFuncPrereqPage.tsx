@@ -263,6 +263,7 @@ export function ElementaryFuncPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* Section 3: 对数 */}
       {/* ════════════════════════════════════════════════════════════ */}
+      <PageBreak />
       <section id="ep-logarithm" className="mb-2 scroll-mt-4">
         <Collapsible title="三、对数 — 指数的逆运算" defaultOpen storageKey="elem-prereq:logarithm" headerExtra={<SpeakButton text={elemPrereqNarrations.logarithm} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：理解对数的定义，会算简单对数，知道 lg 和 ln 是什么。</p>
