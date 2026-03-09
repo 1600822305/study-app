@@ -255,6 +255,7 @@ export function ElementaryFuncPrereqPage() {
                 <p><strong>负指数 + 分数指数</strong>：<Math tex="\dfrac{1}{\sqrt{a}} = a^{-\frac{1}{2}}" />，先倒数再变指数</p>
                 <p><strong>分子分母别搞反！</strong> <Math tex="\sqrt[3]{a^2} = a^{\frac{2}{3}}" />，分子是幂次 2，分母是根次 3，不是 <Math tex="a^{\frac{3}{2}}" /></p>
                 <p><strong>转化后才能用法则！</strong> 根号混合运算时，先全部转成分数指数，再用同底相乘/相除法则</p>
+                <p><strong>通分是关键！</strong> <Math tex="a^{\frac{3}{2}} \cdot a^{\frac{2}{3}}" /> 指数相加要先通分：<Math tex="\frac{3}{2}+\frac{2}{3}=\frac{9}{6}+\frac{4}{6}=\frac{13}{6}" /></p>
               </div>
             </CalloutCard>
 
