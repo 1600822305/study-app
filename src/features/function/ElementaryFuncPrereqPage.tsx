@@ -45,8 +45,8 @@ export function ElementaryFuncPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       <section id="ep-exponent" className="mb-2 scroll-mt-4">
         <Collapsible title="一、指数运算法则" defaultOpen storageKey="elem-prereq:exponent" headerExtra={<SpeakButton text={elemPrereqNarrations.exponentLaws} />}>
-          <p className="text-blue-600 mb-2">🎯 学完你能：秒算任何指数运算，包括零指数和负指数。</p>
-          <div className="space-y-2 text-gray-700">
+          <p className="text-blue-600 mb-1">🎯 学完你能：秒算任何指数运算，包括零指数和负指数。</p>
+          <div className="space-y-1.5 text-gray-700">
 
             {/* 回顾：什么是指数 */}
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
@@ -101,7 +101,7 @@ export function ElementaryFuncPrereqPage() {
             </div>
 
             {/* 零指数和负指数 */}
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-1.5">
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
                 <p className="font-bold text-blue-800 mb-1">📌 零指数幂</p>
                 <div className="leading-7">
