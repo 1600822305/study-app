@@ -67,7 +67,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions }: Pract
     return (
       <div className="print-practice bg-green-50 border border-green-200 rounded-xl p-2 my-2">
         <p className="font-bold text-green-800 mb-1">{title}</p>
-        <div className="space-y-1.5">
+        <div className="space-y-0">
           {questions.map((q, idx) => (
             <div key={idx} className="bg-white rounded-lg border border-green-100 p-2" style={{ breakInside: 'avoid' }}>
               <p className="text-gray-800 font-medium mb-1">
