@@ -122,6 +122,16 @@ export function ElementaryFuncPrereqPage() {
               </div>
             </div>
 
+            {/* 综合小例子 */}
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
+              <p className="font-bold text-purple-800 mb-0.5">💡 综合小例子：五大法则串联</p>
+              <div className="leading-7">
+                <p>化简 <Math tex="\dfrac{(2a^3)^2 \cdot a^{-1}}{a^5}" /></p>
+                <p><strong>①</strong> 积的幂：<Math tex="(2a^3)^2 = 2^2 \cdot (a^3)^2 = 4a^6" /> <strong>②</strong> 幂的幂：指数相乘得 <Math tex="a^6" /></p>
+                <p><strong>③</strong> 同底相乘：<Math tex="4a^6 \cdot a^{-1} = 4a^{6+(-1)} = 4a^5" /> <strong>④</strong> 同底相除：<Math tex="\dfrac{4a^5}{a^5} = 4a^0 = 4" /></p>
+              </div>
+            </div>
+
             {/* 即时练习 */}
             <PageBreak />
             <PracticeCard
