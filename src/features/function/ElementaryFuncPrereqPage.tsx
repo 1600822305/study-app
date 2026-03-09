@@ -127,8 +127,10 @@ export function ElementaryFuncPrereqPage() {
               <p className="font-bold text-purple-800 mb-0.5">💡 综合小例子：五大法则串联</p>
               <div className="leading-7">
                 <p>化简 <Math tex="\dfrac{(2a^3)^2 \cdot a^{-1}}{a^5}" /></p>
-                <p><strong>①</strong> 积的幂：<Math tex="(2a^3)^2 = 2^2 \cdot (a^3)^2 = 4a^6" /> <strong>②</strong> 幂的幂：指数相乘得 <Math tex="a^6" /></p>
-                <p><strong>③</strong> 同底相乘：<Math tex="4a^6 \cdot a^{-1} = 4a^{6+(-1)} = 4a^5" /> <strong>④</strong> 同底相除：<Math tex="\dfrac{4a^5}{a^5} = 4a^0 = 4" /></p>
+                <p><strong>第①步 积的幂</strong>：<Math tex="(2a^3)^2 = 2^2 \cdot (a^3)^2" />，把乘积的幂拆成各自的幂</p>
+                <p><strong>第②步 幂的幂</strong>：<Math tex="(a^3)^2 = a^{3 \times 2} = a^6" />，指数相乘，所以分子第一项 = <Math tex="4a^6" /></p>
+                <p><strong>第③步 同底相乘</strong>：<Math tex="4a^6 \cdot a^{-1} = 4a^{6+(-1)} = 4a^5" />，底不变指数相加（含负指数）</p>
+                <p><strong>第④步 同底相除 + 零指数</strong>：<Math tex="\dfrac{4a^5}{a^5} = 4 \cdot a^{5-5} = 4 \cdot a^0 = 4 \times 1 = 4" /></p>
               </div>
             </div>
 
