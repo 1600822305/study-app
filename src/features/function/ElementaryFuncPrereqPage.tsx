@@ -55,7 +55,7 @@ export function ElementaryFuncPrereqPage() {
 
             {/* 三大运算法则 */}
             <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📖 三大运算法则（同底数幂）</p>
+              <p className="font-bold text-gray-800 mb-1">📖 五大运算法则</p>
               <table className="w-full text-base border-collapse">
                 <thead>
                   <tr className="bg-purple-50">
@@ -84,6 +84,18 @@ export function ElementaryFuncPrereqPage() {
                     <td className="border border-gray-200 px-2 py-1 text-center">底不变，指数<strong>乘</strong></td>
                     <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(5^2)^3 = 5^6" /></td>
                   </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-2 py-1 font-bold">积的幂</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(ab)^n = a^n b^n" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">积的幂 = 幂的<strong>积</strong></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(2x)^3 = 8x^3" /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-2 py-1 font-bold">商的幂</td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}" /></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center">商的幂 = 幂的<strong>商</strong></td>
+                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\left(\dfrac{3}{2}\right)^2 = \dfrac{9}{4}" /></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -95,7 +107,7 @@ export function ElementaryFuncPrereqPage() {
                 <div className="leading-7">
                   <p><Math tex="a^0 = 1 \quad (a \neq 0)" /></p>
                   <p>任何不为零的数的 0 次方 = <strong>1</strong></p>
-                  <p>为什么？<Math tex="\dfrac{a^n}{a^n} = a^{n-n} = a^0 = 1" /></p>
+                  <p>为什么？当 <Math tex="a \neq 0" /> 时，<Math tex="\dfrac{a^n}{a^n} = 1" />；同时根据同底相除法则，<Math tex="\dfrac{a^n}{a^n} = a^{n-n} = a^0" />，所以 <Math tex="a^0 = 1" /></p>
                 </div>
               </div>
               <div className="bg-green-50 border border-green-200 rounded-xl p-2">
@@ -103,7 +115,9 @@ export function ElementaryFuncPrereqPage() {
                 <div className="leading-7">
                   <p><Math tex="a^{-n} = \dfrac{1}{a^n} \quad (a \neq 0)" /></p>
                   <p>负指数 = <strong>取倒数</strong></p>
-                  <p>例：<Math tex="2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}" /></p>
+                  <p>例1：<Math tex="2^{-3} = \dfrac{1}{2^3} = \dfrac{1}{8}" /></p>
+                  <p>例2：<Math tex="\left(\dfrac{1}{3}\right)^{-2} = 3^2 = 9" /></p>
+                  <p className="text-green-700">底数取倒数，指数变正！</p>
                 </div>
               </div>
             </div>
@@ -116,9 +130,10 @@ export function ElementaryFuncPrereqPage() {
 
             <CalloutCard variant="warning" title="⚠️ 易错点">
               <div className="space-y-1">
-                <p><strong>底数不同不能用法则！</strong> <Math tex="2^3 \times 3^4" /> 不能合并，因为底数不同</p>
+                <p><strong>底数不同不能直接用法则！</strong> <Math tex="2^3 \times 3^4" /> 不能合并，底数不同时要先统一底数（如 <Math tex="4^3 = (2^2)^3 = 2^6" />）</p>
                 <p><strong>零的零次方无意义！</strong> <Math tex="0^0" /> 没有定义，只有 <Math tex="a \neq 0" /> 时 <Math tex="a^0 = 1" /></p>
                 <p><strong>负指数 ≠ 负数！</strong> <Math tex="2^{-3} = \dfrac{1}{8}" />（正数），不是 <Math tex="-8" /></p>
+                <p><strong>积的幂别漏项！</strong> <Math tex="(2x)^3 = 2^3 \cdot x^3 = 8x^3" />，不是 <Math tex="2x^3" /></p>
               </div>
             </CalloutCard>
 
@@ -356,6 +371,8 @@ export function ElementaryFuncPrereqPage() {
           <p><strong>同底相乘</strong>：<Math tex="a^m \cdot a^n = a^{m+n}" /></p>
           <p><strong>同底相除</strong>：<Math tex="\dfrac{a^m}{a^n} = a^{m-n}" /></p>
           <p><strong>幂的幂</strong>：<Math tex="(a^m)^n = a^{mn}" /></p>
+          <p><strong>积的幂</strong>：<Math tex="(ab)^n = a^n b^n" /></p>
+          <p><strong>商的幂</strong>：<Math tex="\left(\dfrac{a}{b}\right)^n = \dfrac{a^n}{b^n}" /></p>
           <p><strong>零指数</strong>：<Math tex="a^0 = 1" /></p>
           <p><strong>负指数</strong>：<Math tex="a^{-n} = \dfrac{1}{a^n}" /></p>
           <p><strong>分数指数</strong>：<Math tex="a^{\frac{m}{n}} = \sqrt[n]{a^m}" /></p>
