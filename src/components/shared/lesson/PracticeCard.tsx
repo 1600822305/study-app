@@ -69,7 +69,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions }: Pract
         <p className="font-bold text-green-800 mb-1">{title}</p>
         <div className="space-y-1.5">
           {questions.map((q, idx) => (
-            <div key={idx} className="bg-white rounded-lg border border-green-100 p-2" style={{ breakInside: 'avoid' }}>
+            <div key={idx} className="bg-white rounded-lg border border-green-100 p-[7px]" style={{ breakInside: 'avoid' }}>
               <p className="text-gray-800 font-medium mb-1">
                 <span className="text-green-600 mr-2">{idx + 1}.</span>
                 {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}
