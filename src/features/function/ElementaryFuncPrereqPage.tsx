@@ -230,6 +230,7 @@ export function ElementaryFuncPrereqPage() {
             </div>
 
             {/* 即时练习 */}
+            <PageBreak />
             <PracticeCard
               title="✏️ 即时练习：根式与分数指数幂（5题）"
               questions={elemPrereqPractice2}
