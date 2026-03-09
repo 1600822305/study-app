@@ -241,6 +241,19 @@ export function ElementaryFuncPrereqPage() {
               </div>
             </div>
 
+            {/* 速查表 */}
+            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
+              <p className="font-bold text-indigo-800 mb-0.5">📌 根式 ↔ 分数指数幂 速查表</p>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 leading-7 text-gray-700">
+                <p><Math tex="\sqrt{a} = a^{\frac{1}{2}}" /></p>
+                <p><Math tex="\sqrt[3]{a} = a^{\frac{1}{3}}" /></p>
+                <p><Math tex="\sqrt{a^3} = a^{\frac{3}{2}}" /></p>
+                <p><Math tex="\sqrt[3]{a^2} = a^{\frac{2}{3}}" /></p>
+                <p><Math tex="\dfrac{1}{\sqrt{a}} = a^{-\frac{1}{2}}" /></p>
+                <p><Math tex="\dfrac{1}{\sqrt[3]{a}} = a^{-\frac{1}{3}}" /></p>
+              </div>
+            </div>
+
             {/* 即时练习 */}
             <PageBreak />
             <PracticeCard
