@@ -412,8 +412,21 @@ export function ElementaryFuncPrereqPage() {
                 <p><strong>底数和真数别搞混！</strong> <Math tex="\log_2 8 = 3" />，底数是 2（下标），真数是 8（后面的数）</p>
                 <p><strong>lg 不是 log！</strong> <Math tex="\lg" /> = <Math tex="\log_{10}" />（底数 10 省略不写），<Math tex="\ln" /> = <Math tex="\log_e" /></p>
                 <p><strong>真数不能为 0 或负数！</strong> <Math tex="\log_2 0" /> 和 <Math tex="\log_2(-4)" /> 都无意义</p>
+                <p><strong>底数不能为 1！</strong> <Math tex="\log_1 5" /> 无意义，因为 <Math tex="1" /> 的任何次方都是 <Math tex="1" />，永远得不到 <Math tex="5" /></p>
+                <p><strong>恒等式别记反！</strong> <Math tex="a^{\log_a N} = N" />（指数套对数消掉），<Math tex="\log_a a^x = x" />（对数套指数消掉）</p>
               </div>
             </CalloutCard>
+
+            {/* 对数速查表 */}
+            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3">
+              <p className="font-bold text-indigo-800 mb-1">📌 对数核心公式速查表</p>
+              <div className="grid grid-cols-4 gap-x-2 gap-y-2 leading-9 text-lg text-gray-700">
+                <p><Math tex="\log_a 1 = 0" /></p>
+                <p><Math tex="\log_a a = 1" /></p>
+                <p><Math tex="a^{\log_a N} = N" /></p>
+                <p><Math tex="\log_a a^x = x" /></p>
+              </div>
+            </div>
 
           </div>
         </Collapsible>
