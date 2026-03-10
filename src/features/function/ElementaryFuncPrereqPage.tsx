@@ -480,34 +480,43 @@ export function ElementaryFuncPrereqPage() {
                 <div>
                   <p className="font-bold text-gray-700 mb-2">第一节：指数运算</p>
                   <div className="grid grid-cols-2 gap-2">
-                    {elemPrereqPractice1.map((q, i) => (
-                      <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                        <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
-                        {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                      </div>
-                    ))}
+                    {elemPrereqPractice1.map((q, i) => {
+                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
+                      return (
+                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
+                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <div>
                   <p className="font-bold text-gray-700 mb-2">第二节：根式与分数指数幂</p>
                   <div className="grid grid-cols-2 gap-2">
-                    {elemPrereqPractice2.map((q, i) => (
-                      <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                        <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
-                        {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                      </div>
-                    ))}
+                    {elemPrereqPractice2.map((q, i) => {
+                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
+                      return (
+                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
+                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
                 <div>
                   <p className="font-bold text-gray-700 mb-2">第三节：对数基础</p>
                   <div className="grid grid-cols-2 gap-2">
-                    {elemPrereqPractice3.map((q, i) => (
-                      <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                        <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
-                        {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                      </div>
-                    ))}
+                    {elemPrereqPractice3.map((q, i) => {
+                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
+                      return (
+                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
+                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -516,12 +525,15 @@ export function ElementaryFuncPrereqPage() {
             <div>
               <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
               <div className="space-y-2">
-                {elemPrereqQuizQuestions.map((q, i) => (
-                  <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                    <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
-                    {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                  </div>
-                ))}
+                {elemPrereqQuizQuestions.map((q, i) => {
+                  const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
+                  return (
+                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
+                      <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
+                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </section>
