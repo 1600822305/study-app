@@ -379,6 +379,27 @@ export function ElementaryFuncPrereqPage() {
               </div>
             </div>
 
+            {/* 对数恒等式 */}
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
+              <p className="font-bold text-purple-800 mb-1">🧩 对数恒等式（必背！）</p>
+              <div className="leading-8">
+                <p><Math tex="a^{\log_a N} = N" /></p>
+                <p>含义：<Math tex="a" /> 的"以 <Math tex="a" /> 为底 <Math tex="N" /> 的对数"次方，结果就是 <Math tex="N" /></p>
+                <div className="grid grid-cols-2 gap-x-4 leading-7 text-gray-600">
+                  <p>例：<Math tex="2^{\log_2 5} = 5" /></p>
+                  <p>例：<Math tex="10^{\lg 3} = 3" /></p>
+                </div>
+              </div>
+              <div className="leading-8 mt-2">
+                <p><Math tex="\log_a a^x = x" /></p>
+                <p>含义：以 <Math tex="a" /> 为底 <Math tex="a^x" /> 的对数，结果就是 <Math tex="x" /></p>
+                <div className="grid grid-cols-2 gap-x-4 leading-7 text-gray-600">
+                  <p>例：<Math tex="\log_3 3^4 = 4" /></p>
+                  <p>例：<Math tex="\ln e^2 = 2" /></p>
+                </div>
+              </div>
+            </div>
+
             {/* 即时练习 */}
             <PageBreak />
             <PracticeCard
