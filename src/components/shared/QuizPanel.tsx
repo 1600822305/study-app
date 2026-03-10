@@ -166,12 +166,11 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
   // ── 打印模式：静态展示全部题目 ──
   if (isPrinting) {
     return (
-      <div className="bg-white rounded-xl border border-gray-200 p-4 my-1">
-        <p className="font-bold text-gray-800 text-base mb-2">{title}</p>
-        {description && <p className="text-sm text-gray-400 mb-1.5">{description}</p>}
-        <div className="space-y-2.5">
+      <div className="bg-white rounded-xl border border-gray-200 p-2 my-1">
+        <p className="font-bold text-gray-800 text-base mb-1">{title}</p>
+        <div className="space-y-0">
           {questions.map((q, idx) => (
-            <div key={q.id} className="bg-gray-50 rounded border border-gray-200 px-3 py-2" style={{ breakInside: 'avoid' }}>
+            <div key={q.id} className="bg-gray-50 rounded border border-gray-200 px-2 py-1.5" style={{ breakInside: 'avoid' }}>
               <p className="text-gray-900 font-bold text-base leading-7">
                 <span className="text-blue-700 mr-1 font-extrabold">{idx + 1}.</span>
                 {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}

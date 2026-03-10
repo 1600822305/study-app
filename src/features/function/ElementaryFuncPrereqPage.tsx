@@ -436,8 +436,7 @@ export function ElementaryFuncPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       <PageBreak />
       <section id="ep-quiz" className="mb-2 scroll-mt-4">
-        <Collapsible title="四、综合自测（8题）" defaultOpen storageKey="elem-prereq:quiz">
-          <p className="text-gray-600 mb-3">全对 → 可以开始学基本初等函数！错 2 题以上 → 回头再看一遍对应章节。</p>
+        <Collapsible title="四、综合自测（8题）— 全对可进入下一章，错2题以上回看对应节" defaultOpen storageKey="elem-prereq:quiz">
           <QuizPanel
             questions={elemPrereqQuizQuestions}
             module="elem-prereq-quiz"
