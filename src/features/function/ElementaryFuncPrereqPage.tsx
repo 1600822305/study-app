@@ -422,6 +422,7 @@ export function ElementaryFuncPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* Section 4: 综合自测 */}
       {/* ════════════════════════════════════════════════════════════ */}
+      <PageBreak />
       <section id="ep-quiz" className="mb-2 scroll-mt-4">
         <Collapsible title="四、综合自测（6题）" defaultOpen storageKey="elem-prereq:quiz">
           <p className="text-gray-600 mb-3">全对 → 可以开始学基本初等函数！错 2 题以上 → 回头再看一遍对应章节。</p>
