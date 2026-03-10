@@ -380,6 +380,7 @@ export function ElementaryFuncPrereqPage() {
             </div>
 
             {/* 即时练习 */}
+            <PageBreak />
             <PracticeCard
               title="✏️ 即时练习：对数基础（5题）"
               questions={elemPrereqPractice3}
