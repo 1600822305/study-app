@@ -171,7 +171,7 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
         <div className="space-y-0">
           {questions.map((q, idx) => (
             <div key={q.id} className="bg-gray-50 rounded border border-gray-200 px-2 py-1.5" style={{ breakInside: 'avoid' }}>
-              <p className="text-gray-900 font-bold text-base leading-7">
+              <p className="text-gray-900 font-bold text-lg leading-8">
                 <span className="text-blue-700 mr-1 font-extrabold">{idx + 1}.</span>
                 {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}
               </p>
