@@ -46,6 +46,8 @@ interface CalloutCardProps {
   title?: string;
   /** 覆盖默认图标，传 null 隐藏图标 */
   icon?: React.ReactNode | null;
+  /** 紧凑模式，减少内边距 */
+  compact?: boolean;
   /** 额外的 className */
   className?: string;
   children: React.ReactNode;
@@ -55,6 +57,7 @@ export function CalloutCard({
   variant = 'warning',
   title,
   icon,
+  compact = false,
   className = '',
   children,
 }: CalloutCardProps) {
@@ -62,7 +65,7 @@ export function CalloutCard({
   const resolvedIcon = icon === null ? null : (icon ?? config.icon);
 
   return (
-    <div className={`${config.bg} border ${config.border} rounded-lg p-4 ${className}`}>
+    <div className={`${config.bg} border ${config.border} rounded-lg ${compact ? 'p-2' : 'p-4'} ${className}`}>
       <div className="flex items-start gap-3">
         {resolvedIcon && <span className="shrink-0 mt-0.5">{resolvedIcon}</span>}
         <div className="flex-1 min-w-0">

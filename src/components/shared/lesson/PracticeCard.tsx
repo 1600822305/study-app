@@ -20,11 +20,13 @@ function checkBlankAnswer(input: string, q: QuizQuestionData): boolean {
 interface PracticeCardProps {
   title?: string;
   questions: QuizQuestionData[];
+  /** 打印模式下选项列数，默认 1 */
+  printOptionCols?: 1 | 2;
 }
 
 // ── Component ──
 
-export function PracticeCard({ title = '✏️ 即时练习', questions }: PracticeCardProps) {
+export function PracticeCard({ title = '✏️ 即时练习', questions, printOptionCols = 1 }: PracticeCardProps) {
   const { isPrinting } = usePrintMode();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -77,7 +79,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions }: Pract
 
               {/* 选择题选项 */}
               {q.type !== 'blank' && q.options && (
-                <div className="space-y-1 ml-4">
+                <div className={`${printOptionCols === 2 ? 'grid grid-cols-2 gap-1' : 'space-y-1'} ml-4`}>
                   {q.options.map((opt) => (
                     <div key={opt.value} className="flex items-center gap-2 text-gray-700">
                       <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
