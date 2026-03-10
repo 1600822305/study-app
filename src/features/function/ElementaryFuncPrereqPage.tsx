@@ -34,7 +34,7 @@ export function ElementaryFuncPrereqPage() {
           <button onClick={() => scrollToId('ep-exponent')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、指数运算法则（初中到高中的桥梁）</button>
           <button onClick={() => scrollToId('ep-radical')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、根式与分数指数幂（高中新语言）</button>
           <button onClick={() => scrollToId('ep-logarithm')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、对数 — 指数的逆运算（全新概念）</button>
-          <button onClick={() => scrollToId('ep-quiz')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、综合自测（6题）</button>
+          <button onClick={() => scrollToId('ep-quiz')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、综合自测（8题）</button>
         </div>
       </div>
 
@@ -436,7 +436,7 @@ export function ElementaryFuncPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       <PageBreak />
       <section id="ep-quiz" className="mb-2 scroll-mt-4">
-        <Collapsible title="四、综合自测（6题）" defaultOpen storageKey="elem-prereq:quiz">
+        <Collapsible title="四、综合自测（8题）" defaultOpen storageKey="elem-prereq:quiz">
           <p className="text-gray-600 mb-3">全对 → 可以开始学基本初等函数！错 2 题以上 → 回头再看一遍对应章节。</p>
           <QuizPanel
             questions={elemPrereqQuizQuestions}
