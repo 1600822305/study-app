@@ -420,12 +420,12 @@ export function ElementaryFuncPrereqPage() {
             {/* 对数速查表 */}
             <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3">
               <p className="font-bold text-indigo-800 mb-1">📌 对数核心公式速查表</p>
-              <div className="grid grid-cols-4 gap-x-2 gap-y-2 leading-9 text-lg text-gray-700">
-                <p><Math tex="\log_a 1 = 0" /></p>
-                <p><Math tex="\log_a a = 1" /></p>
-                <p><Math tex="a^{\log_a N} = N" /></p>
-                <p><Math tex="\log_a a^x = x" /></p>
-              </div>
+              <p className="text-lg leading-10 text-gray-700 text-center">
+                <Math tex="\log_a 1 = 0" /><span className="mx-3 text-indigo-300">|</span>
+                <Math tex="\log_a a = 1" /><span className="mx-3 text-indigo-300">|</span>
+                <Math tex="a^{\log_a N} = N" /><span className="mx-3 text-indigo-300">|</span>
+                <Math tex="\log_a a^x = x" />
+              </p>
             </div>
 
           </div>
