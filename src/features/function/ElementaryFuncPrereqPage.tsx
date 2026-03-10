@@ -411,8 +411,7 @@ export function ElementaryFuncPrereqPage() {
               <div className="space-y-1">
                 <p><strong>底数和真数别搞混！</strong> <Math tex="\log_2 8 = 3" />，底数是 2（下标），真数是 8（后面的数）</p>
                 <p><strong>lg 不是 log！</strong> <Math tex="\lg" /> = <Math tex="\log_{10}" />（底数 10 省略不写），<Math tex="\ln" /> = <Math tex="\log_e" /></p>
-                <p><strong>真数不能为 0 或负数！</strong> <Math tex="\log_2 0" /> 和 <Math tex="\log_2(-4)" /> 都无意义</p>
-                <p><strong>底数不能为 1！</strong> <Math tex="\log_1 5" /> 无意义，因为 <Math tex="1" /> 的任何次方都是 <Math tex="1" />，永远得不到 <Math tex="5" /></p>
+                <p><strong>真数 &gt; 0，底数 ≠ 1！</strong> <Math tex="\log_2 0" />、<Math tex="\log_2(-4)" />、<Math tex="\log_1 5" /> 都无意义</p>
                 <p><strong>恒等式别记反！</strong> <Math tex="a^{\log_a N} = N" />（指数套对数消掉），<Math tex="\log_a a^x = x" />（对数套指数消掉）</p>
               </div>
             </CalloutCard>
