@@ -169,7 +169,7 @@ export const setsQuizQuestions: QuizQuestionData[] = [
     id: 'sq12',
     question: '已知集合 A = {1, a, b}，且',
     questionLatex:
-      'A = \\{1, a, b\\},\\; a^2 \\in A,\\; b^2 \\in A,\\; \\text{则 } a + b =',
+      'A = \\{1, a, b\\}\\;(a \\neq b),\\; a^2 \\in A,\\; b^2 \\in A,\\; \\text{则 } a + b =',
     options: [
       { label: 'A', value: '0' },
       { label: 'B', value: '-1' },

@@ -45,6 +45,10 @@ export interface QuizQuestionData {
   explanation: string;
   explanationLatex?: string;
   explanationDiagram?: string;
+  /** 题目配图（QuizDiagrams key） */
+  questionDiagram?: string;
+  /** 打印时在此题前分页 */
+  pageBreak?: boolean;
 }
 
 /** 学习进度条目 */

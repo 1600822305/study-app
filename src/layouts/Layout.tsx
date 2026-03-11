@@ -41,6 +41,7 @@ const navItems: NavItem[] = [
       { path: '/math/cover', label: '📕 封面' },
       { path: '/math/toc', label: '📑 目录' },
       { path: '/math/overview', label: '📊 高考分析报告' },
+      { path: '/math/score-grading', label: '📋 分值判定标准' },
       {
         groupLabel: '第一阶段：数学语言',
         items: [
@@ -50,6 +51,7 @@ const navItems: NavItem[] = [
           { path: '/math/sets', label: '1.2 集合' },
           { path: '/math/logic-prereq', label: '1.2.5 逻辑前置知识' },
           { path: '/math/logic', label: '1.3 逻辑用语' },
+          { path: '/math/stage1-exam', label: '📝 阶段考试' },
         ],
       },
       {
@@ -59,6 +61,7 @@ const navItems: NavItem[] = [
           { path: '/math/inequality', label: '2.1 不等式' },
           { path: '/math/quadratic-prereq', label: '2.2 二次函数前置知识' },
           { path: '/math/quadratic', label: '2.3 二次函数' },
+          { path: '/math/stage2-exam', label: '📝 阶段考试' },
         ],
       },
       {
@@ -73,6 +76,27 @@ const navItems: NavItem[] = [
           { path: '/math/function-graph', label: '3.3 函数图像与零点' },
           { path: '/math/derivative-prereq', label: '3.3.5 导数前置知识' },
           { path: '/math/derivative-basic', label: '3.4 导数基础' },
+          { path: '/math/stage3-exam', label: '📝 阶段考试' },
+        ],
+      },
+      {
+        groupLabel: '第四阶段：平面向量',
+        items: [
+          { path: '/math/vector-prereq', label: '4.0 向量前置知识' },
+          { path: '/math/vector', label: '4.1 平面向量' },
+          { path: '/math/vector-trig-prereq', label: '4.2 三角函数速成' },
+          { path: '/math/vector-coord', label: '4.3 坐标运算与数量积' },
+          { path: '/math/stage4-exam', label: '📝 阶段考试' },
+        ],
+      },
+      {
+        groupLabel: '第五阶段：三角世界',
+        items: [
+          { path: '/math/trig-prereq', label: '5.0 三角前置知识' },
+          { path: '/math/trig-func', label: '5.1 三角函数' },
+          { path: '/math/trig-identity', label: '5.2 三角恒等变换' },
+          { path: '/math/solve-triangle', label: '5.3 解三角形' },
+          { path: '/math/stage5-exam', label: '📝 阶段考试' },
         ],
       },
     ],

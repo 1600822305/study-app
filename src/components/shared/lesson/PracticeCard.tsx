@@ -236,7 +236,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
         {answered && (
           <div className={`mt-3 p-3 rounded-lg ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
             <p className={`font-bold text-sm mb-1 ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-              {isCorrect ? '✓ 正确！' : `✗ 错了　正确答案：${current.correctAnswer}`}
+              {isCorrect ? '✓ 正确！' : <>✗ 错了　正确答案：{current.options?.find(o => o.value === current.correctAnswer)?.label ?? current.correctAnswer}</>}
             </p>
             {current.explanation && (
               <p className="text-gray-600 text-sm">{current.explanation}</p>
