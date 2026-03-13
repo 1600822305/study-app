@@ -177,6 +177,11 @@ math-field::part(virtual-keyboard-toggle) {
     --mafs-fg: black !important;
   }
 
+  /* Mafs 图表：打印时放大 SVG 文字（A4 较窄导致 SVG 整体缩小） */
+  .MafsView svg text {
+    font-size: 130% !important;
+  }
+
   /* ═══════════════════════════════════════
      4. 排版 — A4 纸质阅读优化
      ═══════════════════════════════════════ */
