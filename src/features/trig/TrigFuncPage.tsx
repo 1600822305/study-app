@@ -447,19 +447,18 @@ export function TrigFuncPage() {
       <section id="tf-transform" className="mb-3 scroll-mt-4">
         <Collapsible title="三、y = Asin(ωx+φ) 的图像变换" defaultOpen storageKey="trig-func:transform" headerExtra={<SpeakButton text={trigFuncNarrations.transform} />}>
           <p className="text-blue-600 mb-1">🎯 学完你能：理解 A、ω、φ 的含义，掌握图像变换，由图像写出解析式。</p>
-          <p className="text-gray-600 mb-2 text-sm">这是高考大题的常客——给你一段图像，让你写出解析式。别怕，一步步来！</p>
           <div className="space-y-2 text-gray-700">
 
             {/* ── 3.1 认识三个参数 ── */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">3.1 先认识三个“旋钮”</p>
-              <p className="mb-1">把 <MathTex tex="y = A\sin(\omega x + \varphi)" /> 想象成一个<strong>调音台</strong>，有三个旋钮可以调节波形：</p>
+              <p className="font-bold text-lg text-blue-800 mb-0.5">3.1 先认识四个"旋钮"</p>
+              <p className="mb-0.5">把 <MathTex tex="y = A\sin(\omega x + \varphi) + B" /> 想象成一个<strong>调音台</strong>，有四个旋钮可以调节波形：</p>
 
               {/* A — 振幅 */}
-              <div className="bg-white rounded-lg p-2 border-l-4 border-red-500">
-                <p className="font-bold text-red-700 mb-1 text-lg">旋钮 A — 控制“波的高度”（振幅）</p>
-                <p className="mb-1">A 决定了波浪能<strong>上下摆动多远</strong>。想象弹簧的弹跳高度：</p>
-                <div className="grid grid-cols-3 gap-2 mb-1 text-center">
+              <div className="bg-white rounded-lg p-1.5 border-l-4 border-red-500">
+                <p className="font-bold text-red-700 mb-0.5 text-lg">旋钮 A — 控制"波的高度"（振幅）</p>
+                <p className="mb-0.5">A 决定了波浪能<strong>上下摆动多远</strong>。想象弹簧的弹跳高度：</p>
+                <div className="grid grid-cols-3 gap-1.5 mb-1 text-center">
                   <div className="bg-red-50 rounded-lg p-1.5">
                     <p className="font-bold">A = 1（标准）</p>
                     <p>最高到 1，最低到 -1</p>
@@ -473,17 +472,17 @@ export function TrigFuncPage() {
                     <p>最高到 0.5，最低到 -0.5</p>
                   </div>
                 </div>
-                <div className="bg-red-50 rounded-lg p-1.5">
+                <div className="bg-red-50 rounded-lg p-1">
                   <p><strong>公式：</strong><MathTex tex="A = \frac{y_{max} - y_{min}}{2}" /></p>
                   <p><strong>举例：</strong>波最高到 3，最低到 -1 → <MathTex tex="A = \frac{3-(-1)}{2} = 2" /></p>
                 </div>
               </div>
 
               {/* ω — 角频率 */}
-              <div className="bg-white rounded-lg p-2 border-l-4 border-blue-500">
-                <p className="font-bold text-blue-700 mb-1 text-lg">旋钮 ω — 控制“波的疏密”（角频率）</p>
-                <p className="mb-1">ω 决定了波浪的<strong>重复的快慢</strong>。想象心跳的节奏：</p>
-                <div className="grid grid-cols-3 gap-2 mb-1 text-center">
+              <div className="bg-white rounded-lg p-1.5 border-l-4 border-blue-500">
+                <p className="font-bold text-blue-700 mb-0.5 text-lg">旋钮 ω — 控制"波的疏密"（角频率）</p>
+                <p className="mb-0.5">ω 决定了波浪的<strong>重复的快慢</strong>。想象心跳的节奏：</p>
+                <div className="grid grid-cols-3 gap-1.5 mb-1 text-center">
                   <div className="bg-blue-50 rounded-lg p-1.5">
                     <p className="font-bold">ω = 1（标准）</p>
                     <p>周期 <MathTex tex="T = 2\pi \approx 6.28" /></p>
@@ -499,13 +498,13 @@ export function TrigFuncPage() {
                     <p className="text-blue-600">波更宽！</p>
                   </div>
                 </div>
-                <div className="bg-blue-50 rounded-lg p-1.5 mb-1">
+                <div className="bg-blue-50 rounded-lg p-1.5 mb-0.5">
                   <p><strong>核心公式：</strong><MathTex tex="T = \frac{2\pi}{\omega}" /> &nbsp;↔&nbsp; <MathTex tex="\omega = \frac{2\pi}{T}" /></p>
-                  <p className="text-gray-600 mt-0.5"><strong>记忆：</strong>ω 越大 → T 越小 → 波越密。就像心跳加快！</p>
+                  <p className="text-gray-600"><strong>记忆：</strong>ω 越大 → T 越小 → 波越密。就像心跳加快！</p>
                 </div>
                 <div className="bg-yellow-50 rounded-lg p-1.5 border border-yellow-200">
                   <p className="font-bold text-yellow-800">💡 怎么从图上找周期 T？</p>
-                  <p className="mt-0.5">方法①：两个<strong>相邻最高点</strong>之间的水平距离 = T</p>
+                  <p>方法①：两个<strong>相邻最高点</strong>之间的水平距离 = T</p>
                   <p>方法②：两个<strong>相邻最低点</strong>之间的水平距离 = T</p>
                   <p>方法③：<strong>相邻的同向零点</strong>（都从下往上穿）之间的距离 = T</p>
                   <p>方法④：最高点到相邻最低点的距离 = <strong>T/2</strong>（半个周期），乘 2 即可</p>
@@ -513,10 +512,10 @@ export function TrigFuncPage() {
               </div>
 
               {/* φ — 初相 */}
-              <div className="bg-white rounded-lg p-2 border-l-4 border-green-500">
-                <p className="font-bold text-green-700 mb-1 text-lg">旋钮 φ — 控制“波的起跑位置”（初相）</p>
-                <p className="mb-1">φ 决定了波浪的<strong>起跑位置</strong>：</p>
-                <div className="grid grid-cols-3 gap-2 mb-1 text-center">
+              <div className="bg-white rounded-lg p-1.5 border-l-4 border-green-500">
+                <p className="font-bold text-green-700 mb-0.5 text-lg">旋钮 φ — 控制"波的起跑位置"（初相）</p>
+                <p className="mb-0.5">φ 决定了波浪的<strong>起跑位置</strong>：</p>
+                <div className="grid grid-cols-3 gap-1.5 mb-1 text-center">
                   <div className="bg-green-50 rounded-lg p-1.5">
                     <p className="font-bold">φ = 0</p>
                     <p>从原点开始（标准）</p>
@@ -530,125 +529,147 @@ export function TrigFuncPage() {
                     <p>整个波<strong>向右移</strong></p>
                   </div>
                 </div>
-                <div className="bg-green-50 rounded-lg p-1.5">
-                  <p><strong>口诀：</strong>“左加右减”——加 φ 左移，减 φ 右移</p>
+                <div className="bg-green-50 rounded-lg p-1.5 mb-1">
+                  <p><strong>口诀：</strong>"左加右减"——加 φ 左移，减 φ 右移</p>
                   <p className="text-gray-600 mt-0.5">高考通常要求 <MathTex tex="|\varphi| \leq \frac{\pi}{2}" />，这样 φ 有唯一解</p>
                 </div>
               </div>
 
               {/* 总结表 */}
               <div>
-                <table className="w-full text-sm border-collapse">
+                <table className="w-full text-base border-collapse">
                   <thead>
                     <tr className="bg-blue-100">
-                      <th className="border border-blue-200 p-2 text-left">参数</th>
-                      <th className="border border-blue-200 p-2 text-left">控制什么</th>
-                      <th className="border border-blue-200 p-2 text-left">怎么求</th>
-                      <th className="border border-blue-200 p-2 text-left">怎么看图</th>
+                      <th className="border border-blue-200 p-1.5 text-left">参数</th>
+                      <th className="border border-blue-200 p-1.5 text-left">控制什么</th>
+                      <th className="border border-blue-200 p-1.5 text-left">怎么求</th>
+                      <th className="border border-blue-200 p-1.5 text-left">怎么看图</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-blue-200 p-2 font-bold text-red-600">A</td>
-                      <td className="border border-blue-200 p-2">波的高度（振幅）</td>
-                      <td className="border border-blue-200 p-2"><MathTex tex="A = \frac{y_{max} - y_{min}}{2}" /></td>
-                      <td className="border border-blue-200 p-2">看最高点和最低点</td>
+                      <td className="border border-blue-200 p-1.5 font-bold text-red-600 text-lg">A</td>
+                      <td className="border border-blue-200 p-1.5">波的高度（振幅）</td>
+                      <td className="border border-blue-200 p-1.5 text-lg"><MathTex tex="A = \dfrac{y_{max} - y_{min}}{2}" /></td>
+                      <td className="border border-blue-200 p-1.5">看最高点和最低点</td>
                     </tr>
                     <tr className="bg-blue-50">
-                      <td className="border border-blue-200 p-2 font-bold text-blue-600">ω</td>
-                      <td className="border border-blue-200 p-2">波的疏密（周期）</td>
-                      <td className="border border-blue-200 p-2"><MathTex tex="\omega = \frac{2\pi}{T}" /></td>
-                      <td className="border border-blue-200 p-2">量两个最高点的距离</td>
+                      <td className="border border-blue-200 p-1.5 font-bold text-blue-600 text-lg">ω</td>
+                      <td className="border border-blue-200 p-1.5">波的疏密（周期）</td>
+                      <td className="border border-blue-200 p-1.5 text-lg"><MathTex tex="\omega = \dfrac{2\pi}{T}" /></td>
+                      <td className="border border-blue-200 p-1.5">量两个最高点的距离</td>
                     </tr>
                     <tr>
-                      <td className="border border-blue-200 p-2 font-bold text-green-600">φ</td>
-                      <td className="border border-blue-200 p-2">波的起跑位置</td>
-                      <td className="border border-blue-200 p-2">代入已知点求解</td>
-                      <td className="border border-blue-200 p-2">看波从哪里"出发"</td>
+                      <td className="border border-blue-200 p-1.5 font-bold text-green-600 text-lg">φ</td>
+                      <td className="border border-blue-200 p-1.5">波的起跑位置</td>
+                      <td className="border border-blue-200 p-1.5">代入已知点求解</td>
+                      <td className="border border-blue-200 p-1.5">看波从哪里"出发"</td>
+                    </tr>
+                    <tr className="bg-orange-50">
+                      <td className="border border-blue-200 p-1.5 font-bold text-orange-600 text-lg">B</td>
+                      <td className="border border-blue-200 p-1.5">波的上下位置</td>
+                      <td className="border border-blue-200 p-1.5 text-lg"><MathTex tex="B = \dfrac{y_{max} + y_{min}}{2}" /></td>
+                      <td className="border border-blue-200 p-1.5">看中线在哪</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
-            {/* 3.1 实战例题 */}
-            <div className="bg-white rounded-lg p-2 border border-blue-200 mb-1">
-              <p className="font-bold text-blue-800 mb-1">📝 例题 — 读参数</p>
+            {/* ── 3.1.5 第四个旋钮 B — 纵向平移 ── */}
+            <div className="bg-white rounded-lg p-1.5 border-l-4 border-orange-500">
+              <p className="font-bold text-orange-700 mb-0.5 text-lg">旋钮 B — 控制"波的上下位置"（纵向平移）</p>
+              <p className="mb-0.5">完整形式其实是 <MathTex tex="y = A\sin(\omega x + \varphi) + B" />，多了一个 <strong>+B</strong>。</p>
+              <p className="mb-1">B 决定了整条波浪<strong>上下平移</strong>多少。想象水面涨潮——波形不变，只是整体抬高了。</p>
+
+              <div className="grid grid-cols-3 gap-1 mb-1 text-center">
+                <div className="bg-orange-50 rounded-lg p-1">
+                  <p className="font-bold">B = 0（标准）</p>
+                  <p>波在 x 轴上下摆动</p>
+                  <p>中线：y = 0</p>
+                </div>
+                <div className="bg-orange-50 rounded-lg p-1">
+                  <p className="font-bold">B = 1（上移）</p>
+                  <p>整条波<strong>上移 1</strong></p>
+                  <p>中线：y = 1</p>
+                </div>
+                <div className="bg-orange-50 rounded-lg p-1">
+                  <p className="font-bold">B = -2（下移）</p>
+                  <p>整条波<strong>下移 2</strong></p>
+                  <p>中线：y = -2</p>
+                </div>
+              </div>
+
+              <div className="bg-orange-50 rounded-lg p-1 mb-1">
+                <p className="font-bold mb-0.5">核心公式</p>
+                <p className="text-lg"><MathTex tex="B = \frac{y_{max} + y_{min}}{2}" />（中线位置）</p>
+                <p><strong>对比 A 的公式：</strong><MathTex tex="A = \frac{y_{max} - y_{min}}{2}" />（半高度）</p>
+                <p className="text-gray-600">A 是"差的一半"，B 是"和的一半"——一对好兄弟，记住一个另一个自然就有了。</p>
+              </div>
+
+              <div className="bg-orange-50 rounded-lg p-1 mb-1">
+                <p className="font-bold mb-0.5">加了 B 之后性质怎么变？</p>
+                <div className="space-y-0.5">
+                  <p><strong>值域：</strong>从 [-A, A] 变成 <MathTex tex="[B - A,\; B + A]" /></p>
+                  <p><strong>最大值：</strong><MathTex tex="y_{max} = A + B" />（sin = 1 时）</p>
+                  <p><strong>最小值：</strong><MathTex tex="y_{min} = -A + B" />（sin = -1 时）</p>
+                  <p><strong>周期、单调区间、对称轴/中心：</strong><span className="text-green-700 font-bold">完全不变</span>（B 只平移，不影响形状）</p>
+                </div>
+              </div>
+
+              <div className="bg-red-50 rounded-lg p-1 border border-red-200">
+                <p className="font-bold text-red-700 mb-0.5">⚠️ 高考怎么考 +B？</p>
+                <div className="space-y-0.5">
+                  <p>最常见的坑：题目说"最高点 y = 5，最低点 y = -1"，很多人直接写 A = 5 或 A = -1。</p>
+                  <p className="font-bold">正确做法：先算 A 和 B，再写解析式！</p>
+                  <p><MathTex tex="A = \frac{5-(-1)}{2} = 3,\quad B = \frac{5+(-1)}{2} = 2" /></p>
+                  <p>所以是 <MathTex tex="y = 3\sin(\cdots) + 2" />，<strong>不是</strong> <MathTex tex="y = 5\sin(\cdots)" /></p>
+                </div>
+              </div>
+            </div>
+
+            {/* 3.1 综合实战例题 */}
+            <div className="bg-white rounded-lg p-2 border border-blue-200">
+              <p className="font-bold text-blue-800 mb-1">📝 实战例题 — 综合读参数</p>
+
+              <p className="font-bold text-gray-700 mb-0.5">例 1（含 B）</p>
+              <div className="bg-gray-50 rounded p-1.5 mb-1">
+                <p>已知某正弦函数图像最高点 <MathTex tex="y = 5" />，最低点 <MathTex tex="y = -1" />，最小正周期 <MathTex tex="T = \pi" />，且 <MathTex tex="f(0) = 2" />。</p>
+                <p>求 <MathTex tex="f(x) = A\sin(\omega x + \varphi) + B" /> 的解析式（<MathTex tex="A > 0,\; \omega > 0,\; |\varphi| \leq \frac{\pi}{2}" />）。</p>
+              </div>
+              <div className="space-y-1 mb-2">
+                <div className="border-l-4 border-red-300 pl-2">
+                  <p className="text-lg"><strong>第①步 求 A：</strong><MathTex tex="A = \frac{5 - (-1)}{2} = 3" /></p>
+                </div>
+                <div className="border-l-4 border-orange-300 pl-2">
+                  <p className="text-lg"><strong>第②步 求 B：</strong>不对称 → <MathTex tex="B = \frac{5 + (-1)}{2} = 2" /></p>
+                </div>
+                <div className="border-l-4 border-blue-300 pl-2">
+                  <p className="text-lg"><strong>第③步 求 ω：</strong><MathTex tex="\omega = \frac{2\pi}{\pi} = 2" /></p>
+                </div>
+                <div className="border-l-4 border-green-300 pl-2">
+                  <p><strong>第④步 求 φ：</strong>代入 f(0) = 2 → <MathTex tex="3\sin\varphi = 0 \;\Rightarrow\; \varphi = 0" /></p>
+                </div>
+                <p className="font-bold text-green-700 bg-green-50 p-1.5 rounded">∴ <MathTex tex="f(x) = 3\sin(2x) + 2" />，值域 <MathTex tex="[-1,\; 5]" /></p>
+              </div>
+
+              <p className="font-bold text-gray-700 mb-0.5">例 2（不含 B）</p>
               <div className="bg-gray-50 rounded p-1.5 mb-1">
                 <p>已知 <MathTex tex="y = 3\sin(4x + \varphi)" />，求振幅 A、角频率 ω、最小正周期 T 和值域。</p>
               </div>
-              <div className="space-y-1 border-l-4 border-blue-300 pl-2">
+              <div className="space-y-1">
                 <div className="border-l-4 border-red-300 pl-2">
-                  <p><strong>求 A：</strong>直接读系数</p>
-                  <p className="text-lg"><MathTex tex="A = 3" /></p>
+                  <p><strong>第①步 求 A：</strong>直接读系数 → <MathTex tex="A = 3" /></p>
                 </div>
                 <div className="border-l-4 border-blue-300 pl-2">
-                  <p><strong>求 ω 和 T：</strong>直接读系数，再套公式</p>
+                  <p><strong>第②步 求 ω 和 T：</strong></p>
                   <p className="text-lg"><MathTex tex="\omega = 4,\quad T = \frac{2\pi}{\omega} = \frac{2\pi}{4} = \frac{\pi}{2}" /></p>
+                </div>
+                <div className="border-l-4 border-orange-300 pl-2">
+                  <p><strong>第③步 有 B 吗？</strong>最高 3、最低 -3，关于 x 轴对称 → <MathTex tex="B = \frac{3+(-3)}{2} = 0" /></p>
                 </div>
                 <p className="font-bold text-green-700 bg-green-50 p-1.5 rounded">∴ 振幅 <MathTex tex="A = 3" />，周期 <MathTex tex="T = \frac{\pi}{2}" />，值域 <MathTex tex="[-3,\; 3]" /></p>
               </div>
-            </div>
-
-            <div className="bg-white rounded-lg p-2 border border-blue-200 mb-1">
-              <p className="font-bold text-blue-800 mb-1">📝 例题 — 由最高最低点求 A</p>
-              <div className="bg-gray-50 rounded p-1.5 mb-1">
-                <p>已知某正弦函数图像最高点 <MathTex tex="y = 5" />，最低点 <MathTex tex="y = -1" />，求振幅 A。</p>
-              </div>
-              <div className="border-l-4 border-red-300 pl-2">
-                <p className="text-lg"><MathTex tex="A = \frac{y_{max} - y_{min}}{2} = \frac{5 - (-1)}{2} = \frac{6}{2} = 3" /></p>
-              </div>
-              <p className="font-bold text-green-700 bg-green-50 p-1.5 rounded mt-1">∴ <MathTex tex="A = 3" />，值域 <MathTex tex="[-1,\; 5]" /></p>
-            </div>
-
-            <div className="bg-white rounded-lg p-2 border border-blue-200 mb-1">
-              <p className="font-bold text-blue-800 mb-1">📝 例题 — 由周期求 ω</p>
-              <div className="bg-gray-50 rounded p-1.5 mb-1">
-                <p>已知 <MathTex tex="f(x) = 2\sin(\omega x + \varphi)" /> 的最小正周期 <MathTex tex="T = \frac{2\pi}{3}" />（<MathTex tex="\omega > 0" />），求 <MathTex tex="\omega" />。</p>
-              </div>
-              <div className="border-l-4 border-blue-300 pl-2">
-                <p><strong>套公式：</strong></p>
-                <p className="text-lg"><MathTex tex="\omega = \frac{2\pi}{T} = \frac{2\pi}{\frac{2\pi}{3}} = 2\pi \times \frac{3}{2\pi} = 3" /></p>
-              </div>
-              <p className="font-bold text-green-700 bg-green-50 p-1.5 rounded mt-1">∴ <MathTex tex="\omega = 3" /></p>
-            </div>
-
-            <div className="bg-white rounded-lg p-2 border border-blue-200 mb-1">
-              <p className="font-bold text-blue-800 mb-1">📝 例题 — 从图上量周期</p>
-              <div className="bg-gray-50 rounded p-1.5 mb-1">
-                <p>已知 <MathTex tex="f(x) = A\sin(\omega x + \varphi)" /> 的图像上两个相邻最高点的 x 坐标分别为 <MathTex tex="\frac{\pi}{6}" /> 和 <MathTex tex="\frac{7\pi}{6}" />，求 T 和 ω。</p>
-              </div>
-              <div className="space-y-1">
-                <div className="border-l-4 border-blue-300 pl-2">
-                  <p><strong>求 T：</strong>两个相邻最高点距离 = 一个周期</p>
-                  <p className="text-lg"><MathTex tex="T = \frac{7\pi}{6} - \frac{\pi}{6} = \frac{6\pi}{6} = \pi" /></p>
-                </div>
-                <div className="border-l-4 border-blue-300 pl-2">
-                  <p><strong>求 ω：</strong></p>
-                  <p className="text-lg"><MathTex tex="\omega = \frac{2\pi}{T} = \frac{2\pi}{\pi} = 2" /></p>
-                </div>
-              </div>
-              <p className="font-bold text-green-700 bg-green-50 p-1.5 rounded mt-1">∴ <MathTex tex="T = \pi,\quad \omega = 2" /></p>
-            </div>
-
-            <div className="bg-white rounded-lg p-2 border border-blue-200 mb-1">
-              <p className="font-bold text-blue-800 mb-1">📝 例题 — 综合读参数</p>
-              <div className="bg-gray-50 rounded p-1.5 mb-1">
-                <p>已知 <MathTex tex="y = 5\sin\!\left(\frac{1}{2}x + \frac{\pi}{6}\right)" />，求 A、ω、T、φ 以及值域。</p>
-              </div>
-              <div className="space-y-1">
-                <div className="border-l-4 border-red-300 pl-2">
-                  <p><strong>求 A：</strong>系数 → <MathTex tex="A = 5" /></p>
-                </div>
-                <div className="border-l-4 border-blue-300 pl-2">
-                  <p><strong>求 ω 和 T：</strong></p>
-                  <p className="text-lg"><MathTex tex="\omega = \frac{1}{2},\quad T = \frac{2\pi}{\omega} = \frac{2\pi}{\frac{1}{2}} = 4\pi" /></p>
-                </div>
-                <div className="border-l-4 border-green-300 pl-2">
-                  <p><strong>求 φ：</strong>直接读 → <MathTex tex="\varphi = \frac{\pi}{6}" /></p>
-                </div>
-              </div>
-              <p className="font-bold text-green-700 bg-green-50 p-1.5 rounded mt-1">∴ <MathTex tex="A = 5,\; \omega = \frac{1}{2},\; T = 4\pi,\; \varphi = \frac{\pi}{6}" />，值域 <MathTex tex="[-5,\; 5]" /></p>
             </div>
 
             <PageBreak />

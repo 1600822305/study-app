@@ -14,7 +14,7 @@ import { InequalityPrereqPage, InequalityPage } from '@/features/inequality';
 import { QuadraticPrereqPage, QuadraticPage } from '@/features/quadratic';
 import { FunctionReviewPage, FunctionPrereqPage, FunctionConceptPage, ElementaryFuncPrereqPage, ElementaryFuncPage, FunctionGraphPrereqPage, FunctionGraphPage, DerivativePrereqPage, DerivativeBasicPage } from '@/features/function';
 import { VectorPrereqPage, VectorPage, VectorTrigPrereqPage, VectorCoordPage } from '@/features/vector';
-import { TrigPrereqPage, TrigFuncPage, TrigIdentityPage, SolveTrianglePage } from '@/features/trig';
+import { TrigPrereqPage, TrigFuncPage, TrigIdentityPage, SolveTrianglePage, PrintTestPage } from '@/features/trig';
 import { SettingsPage } from '@/features/settings/SettingsPage';
 import { TTSSettingsPage } from '@/features/settings/TTSSettingsPage';
 import { AISettingsPage } from '@/features/settings/AISettingsPage';
@@ -66,6 +66,7 @@ function App() {
           <Route path="/math/trig-func" element={<TrigFuncPage />} />
           <Route path="/math/trig-identity" element={<TrigIdentityPage />} />
           <Route path="/math/solve-triangle" element={<SolveTrianglePage />} />
+          <Route path="/math/print-test" element={<PrintTestPage />} />
           <Route path="/math/stage5-exam" element={<Stage5ExamPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/tts" element={<TTSSettingsPage />} />

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, ChevronLeft, ChevronRight, Home, Calculator, Menu, Settings, MessageCircle } from 'lucide-react';
+import { BookOpen, ChevronLeft, ChevronRight, Home, Calculator, Menu, Settings, MessageCircle, Printer } from 'lucide-react';
 
 import { APP_NAME } from '@/lib/constants';
 import { isMobile } from '@/lib/env';
@@ -99,10 +99,20 @@ const navItems: NavItem[] = [
           { path: '/math/stage5-exam', label: '📝 阶段考试' },
         ],
       },
+      {
+        groupLabel: '第六阶段：数列套路',
+        items: [
+          { path: '/math/sequence-prereq', label: '6.0 数列前置知识' },
+          { path: '/math/sequence-basic', label: '6.1 等差与等比数列' },
+          { path: '/math/sequence-sum', label: '6.2 数列求和与递推' },
+          { path: '/math/stage6-exam', label: '📝 阶段考试' },
+        ],
+      },
     ],
   },
   { path: '/chat', label: 'AI 对话', icon: <MessageCircle size={18} /> },
   { path: '/settings', label: '设置', icon: <Settings size={18} /> },
+  { path: '/math/print-test', label: '打印测量', icon: <Printer size={18} /> },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
