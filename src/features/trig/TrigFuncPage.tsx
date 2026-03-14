@@ -969,10 +969,10 @@ export function TrigFuncPage() {
                   <p>找图上一个<strong>能读出坐标的点</strong>，代入公式求 φ。</p>
                   <div className="bg-green-50 rounded p-1.5 mt-0.5">
                     <p><strong>技巧：优先用这些特殊点 👇</strong></p>
-                    <p className="text-lg">• <strong>最高点</strong> (x₀, A)：sin = 1 → <MathTex tex="\omega x_0 + \varphi = \frac{\pi}{2}" /></p>
-                    <p className="text-lg">• <strong>上升零点</strong> (x₀, 0)：sin = 0 → <MathTex tex="\omega x_0 + \varphi = 0" /></p>
-                    <p className="text-lg">• <strong>最低点</strong> (x₀, −A)：sin = −1 → <MathTex tex="\omega x_0 + \varphi = -\frac{\pi}{2}" /></p>
-                    <p className="text-red-600 font-bold mt-0.5">⚠️ 最后别忘了检查：|φ| ≤ π/2</p>
+                    <p className="text-lg">• <strong>最高点</strong> <MathTex tex="(x_0,\, A)" />：<MathTex tex="\sin = 1" /> → <MathTex tex="\omega x_0 + \varphi = \frac{\pi}{2}" /></p>
+                    <p className="text-lg">• <strong>上升零点</strong> <MathTex tex="(x_0,\, 0)" />：<MathTex tex="\sin = 0" /> → <MathTex tex="\omega x_0 + \varphi = 0" /></p>
+                    <p className="text-lg">• <strong>最低点</strong> <MathTex tex="(x_0,\, -A)" />：<MathTex tex="\sin = -1" /> → <MathTex tex="\omega x_0 + \varphi = -\frac{\pi}{2}" /></p>
+                    <p className="text-red-600 font-bold mt-0.5">⚠️ 最后别忘了检查：<MathTex tex="|\varphi| \leq \dfrac{\pi}{2}" /></p>
                   </div>
                 </div>
               </div>

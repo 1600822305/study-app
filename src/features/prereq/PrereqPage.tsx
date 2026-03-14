@@ -38,7 +38,7 @@ export function PrereqPage() {
           <button onClick={() => scrollToId('prereq-sqtable')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、常用平方数 → 心算提速</button>
           <button onClick={() => scrollToId('prereq-fraction')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、分数运算 → 复数除法结果经常是分数</button>
           <button onClick={() => scrollToId('prereq-poly')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、多项式展开 → 复数乘法的核心</button>
-          <button onClick={() => scrollToId('prereq-negative')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、负数运算 → i²=-1 必须处理负数</button>
+          <button onClick={() => scrollToId('prereq-negative')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、负数运算 → i²=−1 必须处理负数</button>
           <button onClick={() => scrollToId('prereq-remainder')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">七、除以4求余数 → 判断 i 的幂次</button>
         </div>
       </div>
@@ -138,9 +138,9 @@ export function PrereqPage() {
             <div>
               <p className="font-bold mb-2">关键性质：任何实数的平方 <Math tex="\geq 0" /></p>
               <div className="bg-gray-50 rounded-lg p-3 space-y-1 font-mono">
-                <p>正数² = 正数</p>
-                <p>负数² = 正数</p>
-                <p>0² = 0</p>
+                <p><Math tex="\text{正数}^2 = \text{正数}" /></p>
+                <p><Math tex="\text{负数}^2 = \text{正数}" /></p>
+                <p><Math tex="0^2 = 0" /></p>
               </div>
               <p className="mt-2 text-gray-600">所以实数范围内<strong>不存在平方等于负数的数</strong> → 需要发明 <Math tex="i" />（<Math tex="i^2 = -1" />）</p>
             </div>
@@ -409,7 +409,7 @@ export function PrereqPage() {
 
       <section id="prereq-negative" className="mb-6 scroll-mt-4">
         <Collapsible title="六、负数运算" defaultOpen storageKey="prereq:negative" headerExtra={<SpeakButton text={prereqNarrations.negative} />}>
-          <p className="text-xs text-blue-600 mb-2">🎯 学完你能：熟练处理负数加减乘除，不在 i²=-1 的符号变化上犯错。</p>
+          <p className="text-xs text-blue-600 mb-2">🎯 学完你能：熟练处理负数加减乘除，不在 i²=−1 的符号变化上犯错。</p>
           <div className="space-y-2 text-sm text-gray-700">
             <div>
               <p className="font-bold mb-1">负数的加减：</p>
@@ -517,23 +517,23 @@ export function PrereqPage() {
           <div className="space-y-3 text-sm text-gray-700">
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="font-bold mb-1">平方与平方根</p>
-              <p>任何实数² ≥ 0　　<Math tex="i^2 = -1" />　　<Math tex="\sqrt{\phantom{x}}" /> 号默认取正值</p>
+              <p>任何实数的平方 <Math tex="\geq 0" />　　<Math tex="i^2 = -1" />　　<Math tex="\sqrt{\phantom{x}}" /> 号默认取正值</p>
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="font-bold mb-1">常用平方数</p>
               <div className="grid grid-cols-7 gap-1 text-center text-xs">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((n) => (
-                  <span key={n}>{n}²={n * n}</span>
+                  <span key={n}><Math tex={`${n}^2=${n * n}`} /></span>
                 ))}
               </div>
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
               <p className="font-bold mb-1">高频组合</p>
               <div className="grid grid-cols-2 gap-1 text-xs">
-                <p>3²+4²=25 → √25=5</p>
-                <p>5²+12²=169 → √169=13</p>
-                <p>1²+1²=2 → √2≈1.414</p>
-                <p>1²+2²=5 → √5≈2.236</p>
+                <p><Math tex="3^2+4^2=25 \to \sqrt{25}=5" /></p>
+                <p><Math tex="5^2+12^2=169 \to \sqrt{169}=13" /></p>
+                <p><Math tex="1^2+1^2=2 \to \sqrt{2}\approx 1.414" /></p>
+                <p><Math tex="1^2+2^2=5 \to \sqrt{5}\approx 2.236" /></p>
               </div>
             </div>
             <div className="bg-gray-50 rounded-lg p-3">
@@ -568,7 +568,7 @@ export function PrereqPage() {
               <p className="font-bold mb-1">🎯 本章核心能力清单</p>
               <div className="grid grid-cols-2 gap-1 text-xs text-gray-700">
                 <p>✅ 区分实数与复数</p>
-                <p>✅ 脱口而出 1²~13²</p>
+                <p>✅ 脱口而出 <Math tex="1^2" />~<Math tex="13^2" /></p>
                 <p>✅ 分数加减乘除约分</p>
                 <p>✅ 用 FOIL / 完全平方 / 平方差展开</p>
                 <p>✅ 负数运算不出错</p>

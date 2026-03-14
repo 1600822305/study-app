@@ -716,7 +716,7 @@ export function SetsPage() {
 
                   <CalloutCard variant="warning" title="高考经典陷阱">
                     <p>题目说 A ⊆ B，很多人忘了 <strong>A 可能是 ∅</strong>！</p>
-                    <p>比如 A = &#123;x | x²+1=0&#125;，这个方程无实数解 → A = ∅</p>
+                    <p>比如 <Math tex="A = \{x \mid x^2+1=0\}" />，这个方程无实数解 → A = ∅</p>
                     <p><strong>做子集题，第一步永远是：别忘了空集！</strong></p>
                   </CalloutCard>
 
@@ -742,7 +742,7 @@ export function SetsPage() {
 
                   <div className="bg-white rounded-lg border p-3 text-sm">
                     <p className="font-bold mb-1">例：A = &#123;a, b, c&#125;（3 个元素）</p>
-                    <p>全部子集 = 2³ = <strong>8</strong> 个：∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</p>
+                    <p>全部子集 = <Math tex="2^3 = 8" /> 个：∅, &#123;a&#125;, &#123;b&#125;, &#123;c&#125;, &#123;a,b&#125;, &#123;a,c&#125;, &#123;b,c&#125;, &#123;a,b,c&#125;</p>
                     <p className="mt-1">真子集 = 8 - 1 = <strong>7</strong> 个（去掉 &#123;a,b,c&#125; 自己）</p>
                     <p>非空子集 = 8 - 1 = <strong>7</strong> 个（去掉 ∅）</p>
                     <p>非空真子集 = 8 - 2 = <strong>6</strong> 个（两头都去掉）</p>
@@ -1526,11 +1526,11 @@ export function SetsPage() {
                         </div>
                         <div>
                           <p className="text-blue-600 font-bold">第②步：b = 0 代入</p>
-                          <p className="text-gray-700 mt-1">A = &#123;1, -a, 0&#125;　B = &#123;0, a², -a&#125;</p>
-                          <p className="text-gray-700">-a 在两边都有 ✓ → 剩下 &#123;1, 0&#125; = &#123;0, a²&#125; → <strong>a² = 1</strong></p>
+                          <p className="text-gray-700 mt-1">A = &#123;1, -a, 0&#125;　B = &#123;0, <Math tex="a^2" />, -a&#125;</p>
+                          <p className="text-gray-700">-a 在两边都有 ✓ → 剩下 &#123;1, 0&#125; = &#123;0, <Math tex="a^2" />&#125; → <Math tex="a^2 = 1" /></p>
                         </div>
                         <div>
-                          <p className="text-blue-600 font-bold">第③步：解 a² = 1 并验证互异性</p>
+                          <p className="text-blue-600 font-bold">第③步：解 <Math tex="a^2 = 1" /> 并验证互异性</p>
                           <p className="text-gray-700 mt-1">a = 1：A = &#123;1, -1, 0&#125;，全部不重复 ✓</p>
                           <p className="text-gray-700">a = -1：A = &#123;1, <strong className="text-red-600">1</strong>, 0&#125;，1 重复了 ✗</p>
                         </div>

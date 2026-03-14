@@ -479,8 +479,8 @@ export function TrigIdentityPage() {
               <div className="bg-yellow-50 rounded-lg p-2 border border-yellow-200 mt-2">
                 <p className="font-bold text-yellow-800 mb-1">🧠 记忆技巧</p>
                 <p>tan 的万能公式就是 tan 的二倍角公式（把 <MathTex tex="\alpha" /> 换成 <MathTex tex="\frac{\alpha}{2}" />）。</p>
-                <p className="mt-1">sin 和 cos 的分母都是 <strong>1 + t²</strong>。</p>
-                <p className="mt-1">sin 分子 <strong>2t</strong>，cos 分子 <strong>1 - t²</strong>。</p>
+                <p className="mt-1">sin 和 cos 的分母都是 <MathTex tex="1 + t^2" />。</p>
+                <p className="mt-1">sin 分子 <MathTex tex="2t" />，cos 分子 <MathTex tex="1 - t^2" />。</p>
               </div>
             </div>
 

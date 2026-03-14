@@ -54,8 +54,8 @@ export function SetsPrereqPage() {
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <p className="font-bold text-blue-800 mb-2">先搞清楚：什么是一元二次方程？</p>
               <p className="text-blue-700">长这样的方程：<Math tex="ax^2 + bx + c = 0" />（其中 a ≠ 0）</p>
-              <p className="text-blue-700 mt-1">只有<strong>一个未知数 x</strong>，x 的最高次方是 <strong>2</strong>，所以叫"一元二次"。</p>
-              <p className="text-blue-600 mt-2 text-xs">集合题里经常说"A = {'{'} x | x² - 5x + 6 = 0 {'}'}"，你需要解出 x 才能知道集合里有什么元素。</p>
+              <p className="text-blue-700 mt-1">只有<strong>一个未知数 x</strong>，x 的最高次方是 <strong><Math tex="2" /></strong>，所以叫"一元二次"。</p>
+              <p className="text-blue-600 mt-2 text-xs">集合题里经常说“<Math tex="A = \{x \mid x^2 - 5x + 6 = 0\}" />”，你需要解出 x 才能知道集合里有什么元素。</p>
             </div>
 
             {/* 必背公式 */}
@@ -152,7 +152,7 @@ export function SetsPrereqPage() {
                   <div className="space-y-2">
                     <div className="bg-white rounded-lg p-3 border border-blue-100">
                       <p className="font-bold text-gray-800 text-xs mb-1">套路一：平方差（没有 x 的一次项）</p>
-                      <p className="text-xs text-gray-500 mb-1">看到 x² - 一个数 → 拆成 (x+?)(x-?)</p>
+                      <p className="text-xs text-gray-500 mb-1">看到 <Math tex="x^2" /> − 一个数 → 拆成 <Math tex="(x+?)(x-?)" /></p>
                       <p><Math tex="x^2 - 4 = 0 \;\Rightarrow\; (x+2)(x-2) = 0 \;\Rightarrow\; x = \pm 2" /></p>
                     </div>
                     <div className="bg-white rounded-lg p-3 border border-blue-100">
@@ -182,7 +182,7 @@ export function SetsPrereqPage() {
                   <div className="bg-white rounded-lg p-3 border border-blue-100 space-y-2 text-sm">
                     <div>
                       <p className="text-gray-800"><Math tex="x^2 + 2x - 1 = 0" /></p>
-                      <p className="text-gray-500 text-xs pl-3">a = <strong className="text-blue-600">1</strong>（x² 前面的数），b = <strong className="text-blue-600">+2</strong>（x 前面的数），c = <strong className="text-red-500">-1</strong>（常数项，<strong>符号要带上</strong>）</p>
+                      <p className="text-gray-500 text-xs pl-3"><Math tex="a" /> = <strong className="text-blue-600">1</strong>（<Math tex="x^2" /> 前面的数），<Math tex="b" /> = <strong className="text-blue-600">+2</strong>（<Math tex="x" /> 前面的数），<Math tex="c" /> = <strong className="text-red-500">−1</strong>（常数项，<strong>符号要带上</strong>）</p>
                     </div>
                     <div>
                       <p className="text-gray-800"><Math tex="2x^2 - 3x + 5 = 0" /></p>
@@ -201,7 +201,7 @@ export function SetsPrereqPage() {
                       <p className="text-xs text-gray-500">从 <Math tex="ax^2 + bx + c = 0" /> 出发，一步步变形：</p>
                       <div className="pl-3 border-l-2 border-purple-300 space-y-2">
                         <div>
-                          <p className="text-xs text-purple-600 font-bold">第一步：两边除以 a，让 x² 系数变 1</p>
+                          <p className="text-xs text-purple-600 font-bold">第一步：两边除以 <Math tex="a" />，让 <Math tex="x^2" /> 系数变 1</p>
                           <p><Math tex="x^2 + \frac{b}{a}x + \frac{c}{a} = 0" /></p>
                         </div>
                         <div>
@@ -283,7 +283,7 @@ export function SetsPrereqPage() {
                   </div>
                   <div className="bg-white rounded-lg p-3 border border-blue-100 mt-2 text-xs text-gray-600">
                     <p className="mb-1">验证：<Math tex="x^2 + 6x" />，x 前面系数是 6</p>
-                    <p>6 ÷ 2 = 3，3² = <strong>9</strong> → 加 9 → <Math tex="x^2 + 6x + 9 = (x+3)^2" /> ✓</p>
+                    <p><Math tex="6 \div 2 = 3" />，<Math tex="3^2 = 9" /> → 加 9 → <Math tex="x^2 + 6x + 9 = (x+3)^2" /> ✓</p>
                   </div>
                 </div>
 
@@ -296,7 +296,7 @@ export function SetsPrereqPage() {
                       <p className="pl-4"><Math tex="x^2 + 6x = -5" /></p>
                     </div>
                     <div>
-                      <p><span className="text-blue-600 font-bold">第二步</span>：x 前面系数是 6 → <span className="text-red-500 font-bold">6 ÷ 2 = 3，3² = 9</span> → 两边都加 9</p>
+                      <p><span className="text-blue-600 font-bold">第二步</span>：<Math tex="x" /> 前面系数是 6 → <span className="text-red-500 font-bold"><Math tex="6 \div 2 = 3" />，<Math tex="3^2 = 9" /></span> → 两边都加 9</p>
                       <p className="pl-4"><Math tex="x^2 + 6x + 9 = -5 + 9" /></p>
                     </div>
                     <div>
@@ -319,7 +319,7 @@ export function SetsPrereqPage() {
                       <p>常数项移右边：<Math tex="x^2 - 4x = -1" /></p>
                     </div>
                     <div>
-                      <p>x 前面系数是 -4 → <span className="text-red-500 font-bold">-4 ÷ 2 = -2，(-2)² = 4</span> → 两边都加 4</p>
+                      <p><Math tex="x" /> 前面系数是 <Math tex="-4" /> → <span className="text-red-500 font-bold"><Math tex="-4 \div 2 = -2" />，<Math tex="(-2)^2 = 4" /></span> → 两边都加 4</p>
                       <p className="pl-4"><Math tex="x^2 - 4x + 4 = -1 + 4" /></p>
                     </div>
                     <div>

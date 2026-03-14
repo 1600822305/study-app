@@ -15,6 +15,7 @@ import { QuadraticPrereqPage, QuadraticPage } from '@/features/quadratic';
 import { FunctionReviewPage, FunctionPrereqPage, FunctionConceptPage, ElementaryFuncPrereqPage, ElementaryFuncPage, FunctionGraphPrereqPage, FunctionGraphPage, DerivativePrereqPage, DerivativeBasicPage } from '@/features/function';
 import { VectorPrereqPage, VectorPage, VectorTrigPrereqPage, VectorCoordPage } from '@/features/vector';
 import { TrigPrereqPage, TrigFuncPage, TrigIdentityPage, SolveTrianglePage, PrintTestPage } from '@/features/trig';
+import { SequencePrereqPage, SequenceBasicPage } from '@/features/sequence';
 import { SettingsPage } from '@/features/settings/SettingsPage';
 import { TTSSettingsPage } from '@/features/settings/TTSSettingsPage';
 import { AISettingsPage } from '@/features/settings/AISettingsPage';
@@ -68,6 +69,8 @@ function App() {
           <Route path="/math/solve-triangle" element={<SolveTrianglePage />} />
           <Route path="/math/print-test" element={<PrintTestPage />} />
           <Route path="/math/stage5-exam" element={<Stage5ExamPage />} />
+          <Route path="/math/sequence-prereq" element={<SequencePrereqPage />} />
+          <Route path="/math/sequence-basic" element={<SequenceBasicPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/tts" element={<TTSSettingsPage />} />
           <Route path="/settings/ai" element={<AISettingsPage />} />

@@ -269,7 +269,7 @@ export function LogicPage() {
                     <div className="text-sm">
                       <p className="font-bold text-gray-800">解出范围</p>
                       <p className="text-gray-600">把 p 和 q 各自解成不等式或具体值，得到集合 A 和 B</p>
-                      <p className="text-gray-500 mt-1">例：p: x² {'<'} 4 → A = (-2, 2)，q: x {'>'} 0 → B = (0, +∞)</p>
+                      <p className="text-gray-500 mt-1">例：p: <Math tex="x^2 < 4" /> → A = (-2, 2)，q: <Math tex="x > 0" /> → B = (0, +∞)</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
@@ -300,10 +300,10 @@ export function LogicPage() {
             <Collapsible title="武器一：直接推理法" storageKey="logic:direct-method">
               <div className="space-y-3">
                 <div className="bg-white border border-gray-200 rounded-lg p-4 text-sm">
-                  <p className="font-bold text-gray-800 mb-2">例1：p: x = 1，q: x² = 1</p>
+                  <p className="font-bold text-gray-800 mb-2">例1：p: <Math tex="x = 1" />，q: <Math tex="x^2 = 1" /></p>
                   <div className="text-gray-600 space-y-1">
-                    <p>p → q：x = 1 → x² = 1 ✓（能推出）</p>
-                    <p>q → p：x² = 1 → x = ±1，不一定 x = 1 ✗（推不出）</p>
+                    <p>p → q：<Math tex="x = 1 \Rightarrow x^2 = 1" /> ✓（能推出）</p>
+                    <p>q → p：<Math tex="x^2 = 1 \Rightarrow x = \pm 1" />，不一定 <Math tex="x = 1" /> ✗（推不出）</p>
                     <p className="font-bold text-gray-800">结论：p 是 q 的充分不必要条件</p>
                   </div>
                 </div>
@@ -316,10 +316,10 @@ export function LogicPage() {
                   </div>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-lg p-4 text-sm">
-                  <p className="font-bold text-gray-800 mb-2">例3：p: x² - 3x + 2 = 0，q: x = 1</p>
+                  <p className="font-bold text-gray-800 mb-2">例3：p: <Math tex="x^2 - 3x + 2 = 0" />，q: <Math tex="x = 1" /></p>
                   <div className="text-gray-600 space-y-1">
-                    <p>p → q：x² - 3x + 2 = 0 → x = 1 或 x = 2，不一定 x = 1 ✗</p>
-                    <p>q → p：x = 1 → 1 - 3 + 2 = 0 ✓</p>
+                    <p>p → q：<Math tex="x^2 - 3x + 2 = 0 \Rightarrow x = 1" /> 或 <Math tex="x = 2" />，不一定 <Math tex="x = 1" /> ✗</p>
+                    <p>q → p：<Math tex="x = 1 \Rightarrow 1 - 3 + 2 = 0" /> ✓</p>
                     <p className="font-bold text-gray-800">结论：p 是 q 的必要不充分条件</p>
                   </div>
                 </div>
@@ -377,12 +377,12 @@ export function LogicPage() {
               <div className="space-y-4 text-sm">
                 <div className="bg-white border border-blue-200 rounded-lg p-4">
                   <p className="font-bold text-blue-800 mb-2">实战 1（集合法）</p>
-                  <p className="text-gray-700 mb-3">题目：p: x² {'<'} 4，q: x {'<'} 2</p>
+                  <p className="text-gray-700 mb-3">题目：p: <Math tex="x^2 < 4" />，q: <Math tex="x < 2" /></p>
 
                   <div className="space-y-2">
                     <div className="bg-blue-50 rounded-lg p-3">
                       <p className="font-bold text-blue-800 mb-1">第 1 步：解范围</p>
-                      <p className="text-gray-700">p: x² {'<'} 4 → -2 {'<'} x {'<'} 2，所以 <strong>A = (-2, 2)</strong></p>
+                      <p className="text-gray-700">p: <Math tex="x^2 < 4 \Rightarrow -2 < x < 2" />，所以 <strong>A = (−2, 2)</strong></p>
                       <p className="text-gray-700">q: x {'<'} 2，所以 <strong>B = (-∞, 2)</strong></p>
                     </div>
                     <div className="bg-blue-50 rounded-lg p-3">

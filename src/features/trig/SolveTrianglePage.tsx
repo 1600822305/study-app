@@ -240,17 +240,6 @@ export function SolveTrianglePage() {
                 <div className="border-l-4 border-blue-300 pl-2">
                   <p><strong>用余弦定理：</strong></p>
                   <p className="text-lg"><MathTex tex="a^2 = b^2 + c^2 - 2bc\cos A = 9 + 25 - 2 \cdot 3 \cdot 5 \cdot \cos 120°" /></p>
-                </div>
-                <div className="border-l-4 border-green-300 pl-2">
-                  <p className="text-lg"><MathTex tex="= 34 - 30 \cdot (-\frac{1}{2}) = 34 + 15 = 49" /></p>
-                  <p className="text-lg"><MathTex tex="a = 7" /></p>
-                </div>
-                <p className="text-gray-600 mt-1">注意：cos120° = <strong>-½</strong>，是负的！所以减号变加号，a² 变大了。钝角对边最长，合理。</p>
-              </div>
-
-              <p className="font-bold text-gray-700 mb-0.5">例 2：已知 △ABC 中 a = 7，b = 5，c = 3，求最大角 A</p>
-              <div className="space-y-1 mb-2">
-                <div className="border-l-4 border-blue-300 pl-2">
                   <p><strong>用求角公式：</strong></p>
                   <p className="text-lg"><MathTex tex="\cos A = \frac{b^2 + c^2 - a^2}{2bc} = \frac{25 + 9 - 49}{2 \cdot 5 \cdot 3} = \frac{-15}{30} = -\frac{1}{2}" /></p>
                 </div>
@@ -423,7 +412,7 @@ export function SolveTrianglePage() {
                 </div>
                 <div className="bg-white rounded-lg p-2 border border-purple-100">
                   <p className="font-bold text-purple-700">方法③ 余弦定理直接展开</p>
-                  <p>如果等式中出现 a²、b²、c²，优先考虑余弦定理展开</p>
+                  <p>如果等式中出现 <MathTex tex="a^2" />、<MathTex tex="b^2" />、<MathTex tex="c^2" />，优先考虑余弦定理展开</p>
                 </div>
               </div>
             </div>
@@ -539,9 +528,9 @@ export function SolveTrianglePage() {
 
               <div className="space-y-1">
                 <div className="border-l-4 border-red-300 pl-2">
-                  <p><strong>方法：角化边</strong>（等式中有 a²、b²，用余弦定理）</p>
+                  <p><strong>方法：角化边</strong>（等式中有 <MathTex tex="a^2" />、<MathTex tex="b^2" />，用余弦定理）</p>
                   <p>由余弦定理：<MathTex tex="a^2 = b^2 + c^2 - 2bc\cos A" /></p>
-                  <p>代入条件 a² = b² + bc：</p>
+                  <p>代入条件 <MathTex tex="a^2 = b^2 + bc" />：</p>
                   <p className="text-lg"><MathTex tex="b^2 + bc = b^2 + c^2 - 2bc\cos A" /></p>
                   <p className="text-lg"><MathTex tex="bc = c^2 - 2bc\cos A" /></p>
                 </div>
@@ -550,7 +539,7 @@ export function SolveTrianglePage() {
                   <p className="text-lg"><MathTex tex="a = \frac{b\sin 2B}{\sin B} = \frac{2b\sin B\cos B}{\sin B} = 2b\cos B" /></p>
                 </div>
                 <div className="border-l-4 border-green-300 pl-2">
-                  <p>代入 a² = b² + bc：<MathTex tex="4b^2\cos^2 B = b^2 + bc" /></p>
+                  <p>代入 <MathTex tex="a^2 = b^2 + bc" />：<MathTex tex="4b^2\cos^2 B = b^2 + bc" /></p>
                   <p>两边除以 b：<MathTex tex="4b\cos^2 B = b + c" /></p>
                   <p>再由余弦定理求 c… 或直接代入简化，最终得 <strong>B = π/6 (30°)</strong></p>
                 </div>
@@ -567,7 +556,7 @@ export function SolveTrianglePage() {
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">2</span>
-                  <p><strong>看到 a²、b²、c² →</strong> 优先考虑余弦定理展开</p>
+                  <p><strong>看到 <MathTex tex="a^2" />、<MathTex tex="b^2" />、<MathTex tex="c^2" /> →</strong> 优先考虑余弦定理展开</p>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">3</span>
