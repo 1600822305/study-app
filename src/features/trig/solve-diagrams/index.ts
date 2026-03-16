@@ -4,3 +4,5 @@ export { SolveTriSSA } from './SolveTriSSA';
 export { SolveTriObtuse120 } from './SolveTriObtuse120';
 export { SolveTriAreaHeight } from './SolveTriAreaHeight';
 export { CosineLawDiagram } from './CosineLawDiagram';
+export { SolveTriCosineAngle } from './SolveTriCosineAngle';
+export { SolveTriTypeJudge } from './SolveTriTypeJudge';

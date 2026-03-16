@@ -364,7 +364,7 @@ export function DText(props: ComponentProps<typeof MafsText>) {
 /* ── DLatex — 可调试的 LaTeX ── */
 const LATEX_SIZES = ['\\tiny', '\\scriptsize', '\\small', '(normal)', '\\large', '\\Large', '\\LARGE'];
 
-function DLatexDebug({ at, tex, color }: { at: [number, number]; tex: string; color?: string }) {
+function DLatexDebug({ at, tex, color, scale = 3 }: { at: [number, number]; tex: string; color?: string; scale?: number }) {
   const register = useContext(DebugRegisterCtx);
   const selectFn = useContext(DebugSelectCtx);
   const selectedId = useContext(DebugSelectedCtx);
@@ -375,7 +375,7 @@ function DLatexDebug({ at, tex, color }: { at: [number, number]; tex: string; co
 
   const ov = overrideMap.get(id);
   const finalColor = ov?.color ?? color;
-  const scaleIdx = ov?.scale ?? 3;
+  const scaleIdx = ov?.scale ?? scale;
   const sizeCmd = LATEX_SIZES[scaleIdx];
   const scaledTex = scaleIdx === 3 ? tex : `{${sizeCmd} ${tex}}`;
 
@@ -400,8 +400,10 @@ function DLatexDebug({ at, tex, color }: { at: [number, number]; tex: string; co
   );
 }
 
-export function DLatex({ at, tex, color }: { at: [number, number]; tex: string; color?: string }) {
+export function DLatex({ at, tex, color, scale = 3 }: { at: [number, number]; tex: string; color?: string; scale?: number }) {
   const debug = useContext(MafsDebugCtx);
-  if (debug) return <DLatexDebug at={at} tex={tex} color={color} />;
-  return <MafsLaTeX at={at} tex={tex} color={color} />;
+  const sizeCmd = LATEX_SIZES[scale];
+  const scaledTex = scale === 3 ? tex : `{${sizeCmd} ${tex}}`;
+  if (debug) return <DLatexDebug at={at} tex={tex} color={color} scale={scale} />;
+  return <MafsLaTeX at={at} tex={scaledTex} color={color} />;
 }

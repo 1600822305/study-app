@@ -5,7 +5,7 @@ import { trigSolveProgressItems } from './data/solve-progress';
 import { sineLawPractice, cosineLawPractice, areaPractice, comprehensivePractice } from './data/solve-questions';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { SolveTriGeneric, SolveTriSineLaw1, SolveTriSSA, SolveTriObtuse120, SolveTriAreaHeight, CosineLawDiagram } from './solve-diagrams';
+import { SolveTriGeneric, SolveTriSineLaw1, SolveTriSSA, SolveTriObtuse120, SolveTriAreaHeight, CosineLawDiagram, SolveTriCosineAngle, SolveTriTypeJudge } from './solve-diagrams';
 
 export function SolveTrianglePage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('trig-solve', trigSolveProgressItems);
@@ -252,18 +252,21 @@ export function SolveTrianglePage() {
               <p>直接用上面的求角变形公式：已知三条边，代入就能算出任意角。高考经常让你"判断角是锐角还是钝角"，就用这个。</p>
             </div>
 
-            <div className="bg-white rounded p-1.5 border border-blue-200">
-              <p className="font-bold text-blue-800 mb-0.5">📝 例题2：已知三边求角</p>
-              <p>在 <MathTex tex="\triangle ABC" /> 中，<MathTex tex="a=\sqrt{13}, b=3, c=1" />，求 <MathTex tex="A" /></p>
-              <div className="space-y-0.5 mt-0.5">
-                <div className="border-l-4 border-red-300 pl-2">
-                  <p><strong>第①步 代入求角公式：</strong></p>
-                  <p><MathTex tex="\cos A = \dfrac{b^2+c^2-a^2}{2bc} = \dfrac{9+1-13}{2 \cdot 3 \cdot 1} = \dfrac{-3}{6} = -\dfrac{1}{2}" /></p>
-                </div>
-                <div className="border-l-4 border-green-300 pl-2">
-                  <p><strong>第②步 查表反推：</strong><MathTex tex="\cos A = -\frac{1}{2}" /> → <MathTex tex="A = 120°" /></p>
+            <div className="flex gap-2 items-center">
+              <div className="flex-1 bg-white rounded p-1.5 border border-blue-200">
+                <p className="font-bold text-blue-800 mb-0.5">📝 例题2：已知三边求角</p>
+                <p>在 <MathTex tex="\triangle ABC" /> 中，<MathTex tex="a=\sqrt{13}, b=3, c=1" />，求 <MathTex tex="\angle A" /></p>
+                <div className="space-y-0.5 mt-0.5">
+                  <div className="border-l-4 border-red-300 pl-2">
+                    <p><strong>第①步 代入求角公式：</strong></p>
+                    <p><MathTex tex="\cos A = \dfrac{b^2+c^2-a^2}{2bc} = \dfrac{9+1-13}{2 \cdot 3 \cdot 1} = \dfrac{-3}{6} = -\dfrac{1}{2}" /></p>
+                  </div>
+                  <div className="border-l-4 border-green-300 pl-2">
+                    <p><strong>第②步 查表反推：</strong><MathTex tex="\cos A = -\frac{1}{2}" /> → <MathTex tex="A = 120°" /></p>
+                  </div>
                 </div>
               </div>
+              <div className="shrink-0 w-[230px]"><SolveTriCosineAngle /></div>
             </div>
 
             {/* ───── 第五层：用法3 · 判断三角形类型 ───── */}
@@ -277,21 +280,24 @@ export function SolveTrianglePage() {
               </div>
             </div>
 
-            <div className="bg-white rounded p-1.5 border border-blue-200">
-              <p className="font-bold text-blue-800 mb-0.5">� 例题3：判断三角形类型</p>
-              <p>三边为 <MathTex tex="3, 5, 7" />，判断三角形类型</p>
-              <div className="space-y-0.5 mt-0.5">
-                <div className="border-l-4 border-red-300 pl-2">
-                  <p><strong>第①步 找最大边：</strong><MathTex tex="c=7" /></p>
-                </div>
-                <div className="border-l-4 border-blue-300 pl-2">
-                  <p><strong>第②步 比较：</strong><MathTex tex="a^2+b^2 = 9+25 = 34" />，<MathTex tex="c^2 = 49" /></p>
-                  <p><MathTex tex="34 < 49" /> → <MathTex tex="a^2+b^2 < c^2" /></p>
-                </div>
-                <div className="border-l-4 border-green-300 pl-2">
-                  <p><strong>结论：</strong><MathTex tex="\cos C < 0" /> → <strong>钝角三角形</strong></p>
+            <div className="flex gap-2 items-center">
+              <div className="flex-1 bg-white rounded p-1.5 border border-blue-200">
+                <p className="font-bold text-blue-800 mb-0.5">📝 例题3：判断三角形类型</p>
+                <p>三边为 <MathTex tex="3, 5, 7" />，判断三角形类型</p>
+                <div className="space-y-0.5 mt-0.5">
+                  <div className="border-l-4 border-red-300 pl-2">
+                    <p><strong>第①步 找最大边：</strong><MathTex tex="c=7" /></p>
+                  </div>
+                  <div className="border-l-4 border-blue-300 pl-2">
+                    <p><strong>第②步 比较：</strong><MathTex tex="a^2+b^2 = 9+25 = 34" />，<MathTex tex="c^2 = 49" /></p>
+                    <p><MathTex tex="34 < 49" /> → <MathTex tex="a^2+b^2 < c^2" /></p>
+                  </div>
+                  <div className="border-l-4 border-green-300 pl-2">
+                    <p><strong>结论：</strong><MathTex tex="\cos C < 0" /> → <strong>钝角三角形</strong></p>
+                  </div>
                 </div>
               </div>
+              <div className="shrink-0 w-[230px]"><SolveTriTypeJudge /></div>
             </div>
 
             {/* ───── 第六层：易错 + 对比 ───── */}
