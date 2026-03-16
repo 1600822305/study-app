@@ -5,7 +5,7 @@ import { trigPrereqPractice } from './data/prereq-questions';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
-import { UnitCircleDiagram, QuadrantSignDiagram } from './TrigDiagrams';
+import { UnitCircleDiagram, QuadrantSignDiagram } from './trig-diagrams';
 
 export function TrigPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('trig-prereq', trigPrereqProgressItems);

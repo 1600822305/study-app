@@ -5,7 +5,7 @@ import { trigFuncExam, trigGraphPractice } from './data/func-questions';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
-import { SinGraphDiagram, CosGraphDiagram, TanGraphDiagram, SymNegative, SymPiMinus, SymPiPlus, SymHalfPiMinus, SymHalfPiPlus } from './TrigDiagrams';
+import { SinGraphDiagram, CosGraphDiagram, TanGraphDiagram, SymNegative, SymPiMinus, SymPiPlus, SymHalfPiMinus, SymHalfPiPlus } from './trig-diagrams';
 import { DebugToggle } from './MafsDebug.tsx';
 
 export function TrigFuncPage() {
