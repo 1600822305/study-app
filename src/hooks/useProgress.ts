@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { storage } from '@/lib/storage';
 
@@ -46,10 +46,13 @@ export function useProgress(
     [module],
   );
 
-  const items: ProgressItem[] = itemDefs.map((def) => ({
-    ...def,
-    checked: checkedIds.has(def.id),
-  }));
+  const items: ProgressItem[] = useMemo(
+    () => itemDefs.map((def) => ({
+      ...def,
+      checked: checkedIds.has(def.id),
+    })),
+    [itemDefs, checkedIds],
+  );
 
   return { items, toggle, loading };
 }

@@ -1,5 +1,5 @@
+import { memo, useMemo } from 'react';
 import katex from 'katex';
-import { useRef, useEffect } from 'react';
 
 interface MathProps {
   tex: string;
@@ -7,18 +7,16 @@ interface MathProps {
   className?: string;
 }
 
-export function Math({ tex, display = false, className = '' }: MathProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (ref.current) {
-      katex.render(tex, ref.current, {
+export const Math = memo(function Math({ tex, display = false, className = '' }: MathProps) {
+  const html = useMemo(
+    () =>
+      katex.renderToString(tex, {
         displayMode: display,
         throwOnError: false,
         trust: true,
-      });
-    }
-  }, [tex, display]);
+      }),
+    [tex, display],
+  );
 
-  return <span ref={ref} className={className} />;
-}
+  return <span className={className} dangerouslySetInnerHTML={{ __html: html }} />;
+});
