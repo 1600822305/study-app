@@ -94,7 +94,7 @@ export function SinGraphDiagram() {
 
   return (
     <div className="my-1">
-      <DebugMafs viewBox={{ x: [-0.5, 7.5], y: [-1.8, 1.8] }} preserveAspectRatio="contain" height={220}>
+      <DebugMafs viewBox={{ x: [-0.5, 7.5], y: [-1.35, 1.58] }} preserveAspectRatio="contain" height={160}>
         <Coordinates.Cartesian
           xAxis={{ lines: false, labels: () => '' }}
           yAxis={{ lines: false, labels: (n) => (n === 1 || n === -1 ? n : '') }}
@@ -118,10 +118,10 @@ export function SinGraphDiagram() {
         <DLatex at={[4.71, -0.31]} tex="\frac{3\pi}{2}" color="#6b7280" />
         <DText x={6.29} y={-0.28} size={14} color="#6b7280">2π</DText>
         {/* 最值标注 */}
-        <DText x={1.56} y={1.28} size={19} color="#dc2626">最大值 1</DText>
-        <DText x={4.72} y={-1.32} size={14} color="#dc2626">最小值 -1</DText>
+        <DText x={1.76} y={1.41} size={19} color="#dc2626">最大值 1</DText>
+        <DText x={4.74} y={-1.41} size={14} color="#dc2626">最小值 -1</DText>
         {/* 函数名 */}
-        <DText x={6.77} y={1.79} size={28} color="#16a34a">y = sin x</DText>
+        <DText x={10.61} y={1.50} size={24} color="#16a34a">y = sin x</DText>
       </DebugMafs>
     </div>
   );
@@ -136,7 +136,7 @@ export function CosGraphDiagram() {
 
   return (
     <div className="my-1">
-      <DebugMafs viewBox={{ x: [-0.3, 7], y: [-1.6, 1.6] }} preserveAspectRatio="contain" height={220}>
+      <DebugMafs viewBox={{ x: [-0.3, 7], y: [-1.35, 1.4] }} preserveAspectRatio="contain" height={153}>
         <Coordinates.Cartesian
           xAxis={{ lines: false, labels: () => '' }}
           yAxis={{ lines: false, labels: (n) => (n === 1 || n === -1 ? n : '') }}
@@ -179,7 +179,7 @@ export function TanGraphDiagram() {
 
   return (
     <div className="my-1">
-      <DebugMafs viewBox={{ x: [-0.3, 7], y: [-3, 3] }} preserveAspectRatio="contain" height={209}>
+      <DebugMafs viewBox={{ x: [-0.3, 7], y: [-2.2, 2.5] }} preserveAspectRatio="contain" height={148}>
         <Coordinates.Cartesian
           xAxis={{ lines: false, labels: () => '' }}
           yAxis={{ lines: false, labels: (n) => (n === 1 || n === -1 ? n : '') }}
@@ -202,14 +202,14 @@ export function TanGraphDiagram() {
         <Line.Segment point1={[HP3, -0.12]} point2={[HP3, 0.12]} color="#6b7280" weight={1.5} />
         <Line.Segment point1={[TP, -0.12]} point2={[TP, 0.12]} color="#6b7280" weight={1.5} />
         {/* x 轴刻度标签 */}
-        <DLatex at={[HP, -0.5]} tex="\frac{\pi}{2}" color="#6b7280" />
-        <DText x={PI} y={-0.4} size={14} color="#6b7280">π</DText>
-        <DLatex at={[HP3, -0.5]} tex="\frac{3\pi}{2}" color="#6b7280" />
-        <DText x={TP} y={-0.4} size={14} color="#6b7280">2π</DText>
+        <DLatex at={[1.57, -0.5]} tex="\frac{\pi}{2}" color="#6b7280" />
+        <DText x={3.14} y={-0.4} size={14} color="#6b7280">π</DText>
+        <DLatex at={[4.71, -0.5]} tex="\frac{3\pi}{2}" color="#6b7280" />
+        <DText x={6.28} y={-0.4} size={14} color="#6b7280">2π</DText>
         {/* 渐近线标注 */}
-        <DText x={HP + 0.35} y={2.5} size={13} color="#ef4444">渐近线</DText>
+        <DText x={1.64} y={1.45} size={13} color="#ef4444">渐近线</DText>
         {/* 函数名 */}
-        <DText x={5.8} y={2.5} size={15} color="#7c3aed">y = tan x</DText>
+        <DText x={5.91} y={2.18} size={15} color="#7c3aed">y = tan x</DText>
       </DebugMafs>
     </div>
   );

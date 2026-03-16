@@ -13,7 +13,7 @@ import { createContext, useContext, useState, useRef, useCallback, useEffect, us
 import { Mafs, useMovablePoint, Text as MafsText, LaTeX as MafsLaTeX } from 'mafs';
 
 /* ── 全局调试开关 ── */
-let _debugGlobal = false;
+let _debugGlobal = true;
 const _listeners = new Set<() => void>();
 function _subscribe(cb: () => void) { _listeners.add(cb); return () => _listeners.delete(cb); }
 function _getSnapshot() { return _debugGlobal; }

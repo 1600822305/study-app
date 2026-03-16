@@ -1,14 +1,16 @@
 import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard } from '@/components/shared';
 import { trigFuncNarrations } from './data/func-narrations';
 import { trigFuncProgressItems } from './data/func-progress';
-import { trigFuncExam } from './data/func-questions';
+import { trigFuncExam, trigGraphPractice } from './data/func-questions';
 import { useProgress } from '@/hooks';
+import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
-import { SinGraphDiagram, CosGraphDiagram, TanGraphDiagram, SymNegative, SymPiMinus, SymPiPlus, SymHalfPiMinus, SymHalfPiPlus, MiniQ1SinIncreasing, MiniQ2CosEven, MiniQ3CosCompare, MiniQ4TanPeriod, MiniQ5SinCenter } from './TrigDiagrams';
+import { SinGraphDiagram, CosGraphDiagram, TanGraphDiagram, SymNegative, SymPiMinus, SymPiPlus, SymHalfPiMinus, SymHalfPiPlus } from './TrigDiagrams';
 import { DebugToggle } from './MafsDebug.tsx';
 
 export function TrigFuncPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('trig-func', trigFuncProgressItems);
+  const { isPrinting, printOptions } = usePrintMode();
 
   return (
     <div>
@@ -317,16 +319,13 @@ export function TrigFuncPage() {
       {/* ════════════════════════════════════════════════════════ */}
       <section id="tf-graphs" className="mb-3 scroll-mt-4">
         <Collapsible title="二、三角函数的图像与性质" defaultOpen storageKey="trig-func:graphs" headerExtra={<SpeakButton text={trigFuncNarrations.graphs} />}>
-          <p className="text-blue-600 mb-1">🎯 学完你能：看图就知道函数的周期、单调区间、对称轴。</p>
-          <p className="text-gray-600 mb-2 text-sm">图像是理解性质的最直观方式——看懂波形，性质自然就记住了。</p>
-          <div className="space-y-1 text-gray-700">
+          <div className="space-y-0 text-gray-700">
 
-            <div className="bg-green-50 border border-green-200 rounded-xl p-3">
-              <p className="font-bold text-lg text-green-800 mb-1">y = sin x 的图像</p>
+            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
+              <p className="font-bold text-green-800 mb-0">y = sin x 的图像</p>
               <SinGraphDiagram />
-              <p className="text-gray-500 mt-1">💡 图上标的点就是特殊角值表里的值——波峰是 sin 90° = 1，波谷是 sin 270° = -1，过零点对应 0°、180°、360°。</p>
-              <div className="bg-white rounded-lg p-3 border border-green-100 mt-1">
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+              <div className="bg-white rounded-lg p-2 border border-green-100 mt-0.5">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-0.5">
                   <p><strong>定义域：</strong><MathTex tex="(-\infty, +\infty)" /></p>
                   <p><strong>值域：</strong><MathTex tex="[-1, 1]" /></p>
                   <p><strong>周期：</strong><MathTex tex="T = 2\pi" /></p>
@@ -339,11 +338,11 @@ export function TrigFuncPage() {
               </div>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-              <p className="font-bold text-lg text-blue-800 mb-1">y = cos x 的图像</p>
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
+              <p className="font-bold text-blue-800 mb-0">y = cos x 的图像</p>
               <CosGraphDiagram />
-              <div className="bg-white rounded-lg p-3 border border-blue-100 mt-1">
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+              <div className="bg-white rounded-lg p-2 border border-blue-100 mt-0.5">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-0.5">
                   <p><strong>定义域：</strong><MathTex tex="(-\infty, +\infty)" /></p>
                   <p><strong>值域：</strong><MathTex tex="[-1, 1]" /></p>
                   <p><strong>周期：</strong><MathTex tex="T = 2\pi" /></p>
@@ -356,18 +355,11 @@ export function TrigFuncPage() {
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <p className="font-bold text-amber-800 mb-1">🔗 sin 和 cos 的关系</p>
-              <p>cos 的图像就是 sin 向<strong>左平移 <MathTex tex="\frac{\pi}{2}" /></strong> 得到的：<MathTex tex="\cos x = \sin\!\left(x + \frac{\pi}{2}\right)" /></p>
-              <p className="mt-1">记住一个的性质，另一个就自动知道了！</p>
-            </div>
-
-            <PageBreak />
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-3">
-              <p className="font-bold text-lg text-purple-800 mb-1">y = tan x 的图像</p>
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
+              <p className="font-bold text-purple-800 mb-0">y = tan x 的图像</p>
               <TanGraphDiagram />
-              <div className="bg-white rounded-lg p-3 border border-purple-100 mt-1">
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+              <div className="bg-white rounded-lg p-2 border border-purple-100 mt-0.5">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-0.5">
                   <p><strong>定义域：</strong><MathTex tex="x \neq \frac{\pi}{2}+k\pi" /></p>
                   <p><strong>值域：</strong><MathTex tex="(-\infty, +\infty)" /></p>
                   <p><strong>周期：</strong><MathTex tex="T = \pi" />（比 sin/cos 短一半！）</p>
@@ -380,60 +372,189 @@ export function TrigFuncPage() {
               </div>
             </div>
 
-            <div className="bg-orange-50 border border-orange-200 rounded-xl p-3">
-              <p className="font-bold text-lg text-orange-800 mb-2">🔥 实战大题 — 三角函数图像与性质</p>
-              <div className="bg-white rounded-lg p-3 border border-orange-100">
-                <p className="font-bold text-lg mb-2">已知 <MathTex tex="f(x) = \sin x" />，<MathTex tex="g(x) = \cos x" />，回答以下问题：</p>
+            <PageBreak />
 
-                <div className="flex gap-2 mb-2">
-                  <div className="flex-1 border-l-4 border-blue-400 pl-3">
-                    <p className="font-bold text-blue-700">（1）求 <MathTex tex="f(x)" /> 在 <MathTex tex="[-\pi,\;\pi]" /> 上的单调递增区间</p>
-                    <p className="mt-1">sin 的递增区间：<MathTex tex="\left[-\frac{\pi}{2}+2k\pi,\;\frac{\pi}{2}+2k\pi\right]" /></p>
-                    <p className="mt-1">取 k=0 得 <MathTex tex="\left[-\frac{\pi}{2},\;\frac{\pi}{2}\right]" />，在 <MathTex tex="[-\pi,\;\pi]" /> 内</p>
-                    <p className="font-bold mt-1">答：<MathTex tex="\left[-\frac{\pi}{2},\;\frac{\pi}{2}\right]" /></p>
-                  </div>
-                  <div className="w-36 flex-shrink-0 self-center"><MiniQ1SinIncreasing /></div>
+            {/* ── sin 与 cos 的关系：为图像变换铺路 ── */}
+            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-3">
+              <p className="font-bold text-lg text-indigo-800 mb-2">💡 发现：sin 和 cos 其实是"同一条曲线"！</p>
+              <p className="mb-1">仔细对比上面的两张图，你会发现一个惊人的事实：</p>
+
+              <div className="bg-white rounded-lg p-2 border border-indigo-100 mb-2">
+                <p className="text-center text-lg font-bold text-indigo-700 mb-1">cos 的图像 = sin 的图像向左平移 <MathTex tex="\frac{\pi}{2}" /></p>
+                <p className="text-center">用公式写就是：<MathTex tex="\cos x = \sin\!\left(x + \frac{\pi}{2}\right)" /></p>
+                <p className="text-center text-gray-500 mt-1">这不就是诱导公式里的<strong>规律③</strong>吗！图像帮你"看见"了公式。</p>
+              </div>
+
+              <div className="bg-white rounded-lg p-2 border border-indigo-100 mb-2">
+                <p className="font-bold text-indigo-700 mb-1">验证一下（用图像上的点）</p>
+                <div className="space-y-0.5">
+                  <p>• sin 在 <MathTex tex="x = 0" /> 处值为 0 → cos 在 <MathTex tex="x = -\frac{\pi}{2}" /> 处值为 0 ✓（左移了 <MathTex tex="\frac{\pi}{2}" />）</p>
+                  <p>• sin 在 <MathTex tex="x = \frac{\pi}{2}" /> 处到达波峰 → cos 在 <MathTex tex="x = 0" /> 处到达波峰 ✓</p>
+                  <p>• sin 在 <MathTex tex="x = \pi" /> 处过零点 → cos 在 <MathTex tex="x = \frac{\pi}{2}" /> 处过零点 ✓</p>
                 </div>
+                <p className="mt-1 text-gray-600">每个关键点都左移了 <MathTex tex="\frac{\pi}{2}" />，完全吻合！</p>
+              </div>
 
-                <div className="flex gap-2 mb-2">
-                  <div className="flex-1 border-l-4 border-green-500 pl-3">
-                    <p className="font-bold text-green-700">（2）判断：<MathTex tex="g(x)" /> 是奇函数还是偶函数？写出它的一条对称轴</p>
-                    <p className="mt-1"><MathTex tex="g(-x) = \cos(-x) = \cos x = g(x)" /> → <strong>偶函数</strong>（关于 y 轴对称）</p>
-                    <p className="mt-1">对称轴在波峰/波谷处：<MathTex tex="x = k\pi" />，例如 <MathTex tex="x = 0" /> 或 <MathTex tex="x = \pi" /></p>
-                  </div>
-                  <div className="w-36 flex-shrink-0 self-center"><MiniQ2CosEven /></div>
-                </div>
-
-                <div className="flex gap-2 mb-2">
-                  <div className="flex-1 border-l-4 border-purple-400 pl-3">
-                    <p className="font-bold text-purple-700">（3）比较大小：<MathTex tex="\cos\frac{\pi}{5}" /> 与 <MathTex tex="\cos\frac{\pi}{3}" /></p>
-                    <p className="mt-1">cos 在 <MathTex tex="[0,\;\pi]" /> 上<strong>单调递减</strong>，而 <MathTex tex="\frac{\pi}{5} < \frac{\pi}{3}" /></p>
-                    <p className="font-bold mt-1">所以 <MathTex tex="\cos\frac{\pi}{5} > \cos\frac{\pi}{3}" />（自变量小的反而大，因为递减）</p>
-                  </div>
-                  <div className="w-36 flex-shrink-0 self-center"><MiniQ3CosCompare /></div>
-                </div>
-
-                <div className="flex gap-2 mb-2">
-                  <div className="flex-1 border-l-4 border-amber-500 pl-3">
-                    <p className="font-bold text-amber-700">（4）<MathTex tex="y = \tan x" /> 的周期是多少？它在 <MathTex tex="\left(-\frac{\pi}{2},\;\frac{\pi}{2}\right)" /> 上是递增还是递减？</p>
-                    <p className="mt-1">周期 <MathTex tex="T = \pi" />（比 sin/cos 的 <MathTex tex="2\pi" /> 短一半）</p>
-                    <p className="mt-1">看图：每段曲线从左下到右上 → <strong>递增</strong></p>
-                    <p className="font-bold mt-1">答：周期 <MathTex tex="\pi" />，在该区间上单调递增</p>
-                  </div>
-                  <div className="w-36 flex-shrink-0 self-center"><MiniQ4TanPeriod /></div>
-                </div>
-
-                <div className="flex gap-2">
-                  <div className="flex-1 border-l-4 border-red-400 pl-3">
-                    <p className="font-bold text-red-700">（5）<MathTex tex="(\pi,\;0)" /> 是 <MathTex tex="f(x)" /> 的对称中心还是对称轴？<MathTex tex="x = \pi" /> 呢？</p>
-                    <p className="mt-1"><MathTex tex="(\pi,\;0)" /> 是过零点 → <strong>对称中心</strong>  ✓</p>
-                    <p className="mt-1"><MathTex tex="x = \pi" /> 不是波峰也不是波谷 → <strong>不是对称轴</strong>  ✗</p>
-                    <p className="mt-1 text-gray-600">记：波峰/波谷 = 对称轴，过零点 = 对称中心</p>
-                  </div>
-                  <div className="w-36 flex-shrink-0 self-center"><MiniQ5SinCenter /></div>
+              <div className="bg-indigo-100 rounded-lg p-2">
+                <p className="font-bold text-indigo-800 mb-0.5">🔑 这告诉我们什么？</p>
+                <div className="space-y-0.5">
+                  <p><strong>①</strong> sin 和 cos 不是两个独立的函数，而是<strong>同一条波浪在不同起跑位置</strong></p>
+                  <p><strong>②</strong> "平移"可以把一个三角函数变成另一个——这就是下一节要学的<strong>图像变换</strong></p>
+                  <p><strong>③</strong> 如果有人给你 <MathTex tex="y = \sin\!\left(x + \frac{\pi}{2}\right)" />，你直接就知道它就是 cos x！</p>
                 </div>
               </div>
             </div>
+
+            {/* ── 五点作图法 ── */}
+            <div className="space-y-1.5">
+              <p className="font-bold text-lg text-gray-800">✏️ 五点作图法 — 自己动手画正弦波</p>
+              <p>高考要你<strong>画出来</strong>。方法：找 5 个关键点，光滑曲线连起来。</p>
+
+              <div className="border-l-4 border-green-500 pl-3">
+                <p className="font-bold text-green-700 mb-0.5">关键规律：一个周期的 y 值永远是</p>
+                <p className="text-lg font-bold">0 → <span className="text-red-600">A</span>（波峰）→ 0 → <span className="text-blue-600">−A</span>（波谷）→ 0</p>
+              </div>
+
+              <div className="border-l-4 border-blue-500 pl-3">
+                <p className="font-bold text-blue-700 mb-0.5">标准 y = sin x 的五点表（x 把 <MathTex tex="[0,\; 2\pi]" /> 四等分）</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-center border-collapse text-base">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="border border-gray-300 p-1.5">x</th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="0" /></th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{\pi}{2}" /></th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="\pi" /></th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{3\pi}{2}" /></th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="2\pi" /></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 p-1.5 font-bold">sin x</td>
+                        <td className="border border-gray-300 p-1.5 font-bold">0</td>
+                        <td className="border border-gray-300 p-1.5 font-bold text-red-600">1</td>
+                        <td className="border border-gray-300 p-1.5 font-bold">0</td>
+                        <td className="border border-gray-300 p-1.5 font-bold text-blue-600">−1</td>
+                        <td className="border border-gray-300 p-1.5 font-bold">0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-gray-600 mt-0.5">描点 → <strong>光滑曲线</strong>连接（不是折线！）→ 标准正弦图像。</p>
+              </div>
+
+              <div className="border-l-4 border-purple-500 pl-3">
+                <p className="font-bold text-purple-700 mb-0.5">推广到 <MathTex tex="y = A\sin(\omega x + \varphi)" /></p>
+                <p>令整体 <MathTex tex="u = \omega x + \varphi" />，u 取 <MathTex tex="0,\;\dfrac{\pi}{2},\;\pi,\;\dfrac{3\pi}{2},\;2\pi" /></p>
+                <p>解出 <MathTex tex="x = \dfrac{u - \varphi}{\omega}" />，y 依次为 <strong>0, A, 0, −A, 0</strong></p>
+              </div>
+
+              <div className="border-l-4 border-orange-500 pl-3">
+                <p className="font-bold text-orange-700 mb-0.5">📝 例：画 <MathTex tex="y = 2\sin\!\left(2x + \dfrac{\pi}{3}\right)" /> 的一个周期</p>
+                <p className="mb-0.5">令 <MathTex tex="u = 2x + \dfrac{\pi}{3}" />，解 <MathTex tex="x = \dfrac{u - \pi/3}{2}" /></p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-center border-collapse text-base">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="border border-gray-300 p-1.5">u</th>
+                        <th className="border border-gray-300 p-1.5">0</th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{\pi}{2}" /></th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="\pi" /></th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{3\pi}{2}" /></th>
+                        <th className="border border-gray-300 p-1.5"><MathTex tex="2\pi" /></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 p-1.5 font-bold">x</td>
+                        <td className="border border-gray-300 p-1.5"><MathTex tex="-\dfrac{\pi}{6}" /></td>
+                        <td className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{\pi}{12}" /></td>
+                        <td className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{\pi}{3}" /></td>
+                        <td className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{7\pi}{12}" /></td>
+                        <td className="border border-gray-300 p-1.5"><MathTex tex="\dfrac{5\pi}{6}" /></td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 p-1.5 font-bold">y</td>
+                        <td className="border border-gray-300 p-1.5 font-bold">0</td>
+                        <td className="border border-gray-300 p-1.5 font-bold text-red-600">2</td>
+                        <td className="border border-gray-300 p-1.5 font-bold">0</td>
+                        <td className="border border-gray-300 p-1.5 font-bold text-blue-600">−2</td>
+                        <td className="border border-gray-300 p-1.5 font-bold">0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-gray-600 mt-0.5">周期 <MathTex tex="T = \pi" />，从 <MathTex tex="x = -\dfrac{\pi}{6}" /> 到 <MathTex tex="\dfrac{5\pi}{6}" />。</p>
+              </div>
+
+              <div className="border-l-4 border-red-400 pl-3">
+                <p className="font-bold text-red-700">💡 口诀：<span className="text-lg">列表三步 —— "令 u、解 x、填 y"</span>，y 值永远 <span className="text-lg">0 → A → 0 → −A → 0</span></p>
+              </div>
+            </div>
+
+            <PageBreak />
+
+            {/* ── 实战例题 + 即时训练 ── */}
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-2">
+              <p className="font-bold text-lg text-orange-800 mb-1">🔥 实战例题 — 图像性质综合</p>
+
+              <div className="flex gap-1.5">
+                {/* 左侧：例题 */}
+                <div className="flex-1 bg-white rounded-lg p-1.5 border border-orange-100">
+                  <p className="font-bold mb-0.5">例 1：已知 <MathTex tex="f(x) = \sin x" />，<MathTex tex="g(x) = \cos x" /></p>
+
+                  <div className="border-l-4 border-blue-400 pl-2 mb-1">
+                    <p className="font-bold text-blue-700">（1）求 <MathTex tex="f(x)" /> 在 <MathTex tex="[-\pi,\;\pi]" /> 上的单调递增区间</p>
+                    <p className="mt-0.5">sin 的递增区间公式：<MathTex tex="\left[-\dfrac{\pi}{2}+2k\pi,\;\dfrac{\pi}{2}+2k\pi\right]" /></p>
+                    <p>取 k=0 → <MathTex tex="\left[-\dfrac{\pi}{2},\;\dfrac{\pi}{2}\right]" />，在 <MathTex tex="[-\pi,\;\pi]" /> 内 ✓</p>
+                    <p className="font-bold mt-0.5">答：<MathTex tex="\left[-\dfrac{\pi}{2},\;\dfrac{\pi}{2}\right]" /></p>
+                  </div>
+
+                  <div className="border-l-4 border-green-500 pl-2 mb-1">
+                    <p className="font-bold text-green-700">（2）<MathTex tex="g(x)" /> 是奇函数还是偶函数？写出一条对称轴</p>
+                    <p className="mt-0.5"><MathTex tex="g(-x) = \cos(-x) = \cos x = g(x)" /> → <strong>偶函数</strong></p>
+                    <p>对称轴在波峰/波谷处：<MathTex tex="x = k\pi" />，例如 <MathTex tex="x = 0" /> 或 <MathTex tex="x = \pi" /></p>
+                  </div>
+
+                  <div className="border-l-4 border-purple-400 pl-2 mb-1">
+                    <p className="font-bold text-purple-700">（3）比较大小：<MathTex tex="\cos\dfrac{\pi}{5}" /> 与 <MathTex tex="\cos\dfrac{\pi}{3}" /></p>
+                    <p className="mt-0.5">cos 在 <MathTex tex="[0,\;\pi]" /> 上<strong>递减</strong>，而 <MathTex tex="\dfrac{\pi}{5} < \dfrac{\pi}{3}" /></p>
+                    <p className="font-bold">∴ <MathTex tex="\cos\dfrac{\pi}{5} > \cos\dfrac{\pi}{3}" />（递减函数中，自变量小的反而大）</p>
+                  </div>
+
+                  <div className="border-l-4 border-amber-500 pl-2 mb-1">
+                    <p className="font-bold text-amber-700">（4）<MathTex tex="y = \tan x" /> 的周期？在 <MathTex tex="\left(-\dfrac{\pi}{2},\;\dfrac{\pi}{2}\right)" /> 上递增还是递减？</p>
+                    <p className="mt-0.5">周期 <MathTex tex="T = \pi" />（sin/cos 的一半），该区间上<strong>递增</strong>（每段都从左下到右上）</p>
+                  </div>
+
+                  <div className="border-l-4 border-red-400 pl-2">
+                    <p className="font-bold text-red-700">（5）<MathTex tex="(\pi,\;0)" /> 是 <MathTex tex="f(x)" /> 的对称中心还是对称轴？</p>
+                    <p className="mt-0.5"><MathTex tex="(\pi,\;0)" /> 是过零点 → <strong>对称中心</strong> ✓ &nbsp;|&nbsp; <MathTex tex="x = \pi" /> 不是波峰也不是波谷 → <strong>不是对称轴</strong> ✗</p>
+                    <p className="text-gray-600">记：波峰/波谷 = 对称轴，过零点 = 对称中心</p>
+                  </div>
+                </div>
+
+                {/* 右侧：参考图 */}
+                <div className="w-[170px] flex-shrink-0">
+                  <div style={{ transform: 'scaleY(0.82)', transformOrigin: 'top' }}>
+                    <p className="text-center text-xs font-bold text-green-700">y = sin x</p>
+                    <SinGraphDiagram />
+                  </div>
+                  <div style={{ transform: 'scaleY(0.82)', transformOrigin: 'top' }}>
+                    <p className="text-center text-xs font-bold text-blue-700">y = cos x</p>
+                    <CosGraphDiagram />
+                  </div>
+                  <div style={{ transform: 'scaleY(0.82)', transformOrigin: 'top' }}>
+                    <p className="text-center text-xs font-bold text-purple-700">y = tan x</p>
+                    <TanGraphDiagram />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ── 即时训练 ── */}
+            <PracticeCard questions={trigGraphPractice} title="✅ 即时训练 — 图像性质（4 题）" printOptionCols={2} />
 
           </div>
         </Collapsible>
@@ -1078,6 +1199,40 @@ export function TrigFuncPage() {
               </div>
             </div>
 
+            {/* 速查卡：填充页底空白 */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-2 mt-1" style={{ breakInside: 'avoid' }}>
+              <table className="w-full text-center text-base">
+                <thead>
+                  <tr className="border-b-2 border-blue-300">
+                    <th className="py-0.5 text-blue-700">步骤</th>
+                    <th className="py-0.5 text-blue-700">求什么</th>
+                    <th className="py-0.5 text-blue-700">怎么求</th>
+                    <th className="py-0.5 text-blue-700">公式</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-blue-100">
+                    <td className="py-0.5 font-bold text-red-600 text-lg">①</td>
+                    <td className="py-0.5 text-lg"><MathTex tex="A" /></td>
+                    <td className="py-0.5">最大值或振幅</td>
+                    <td className="py-0.5 text-lg"><MathTex tex="A = \frac{y_{\max} - y_{\min}}{2}" /></td>
+                  </tr>
+                  <tr className="border-b border-blue-100">
+                    <td className="py-0.5 font-bold text-blue-600 text-lg">②</td>
+                    <td className="py-0.5 text-lg"><MathTex tex="\omega" /></td>
+                    <td className="py-0.5">周期 T</td>
+                    <td className="py-0.5 text-lg"><MathTex tex="\omega = \frac{2\pi}{T}" /></td>
+                  </tr>
+                  <tr>
+                    <td className="py-0.5 font-bold text-green-600 text-lg">③</td>
+                    <td className="py-0.5 text-lg"><MathTex tex="\varphi" /></td>
+                    <td className="py-0.5">代特殊点</td>
+                    <td className="py-0.5 text-lg">解 <MathTex tex="\sin=?" />，查 <MathTex tex="|\varphi|\leq\frac{\pi}{2}" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
         </Collapsible>
       </section>
@@ -1089,47 +1244,251 @@ export function TrigFuncPage() {
       {/* ════════════════════════════════════════════════════════ */}
       <section id="tf-properties" className="mb-3 scroll-mt-4">
         <Collapsible title="四、性质综合应用" defaultOpen storageKey="trig-func:properties" headerExtra={<SpeakButton text={trigFuncNarrations.properties} />}>
-          <p className="text-blue-600 mb-1">🎯 学完你能：求 y = Asin(ωx+φ) 的单调区间、对称轴、最值。</p>
+          <p className="text-blue-600 mb-1">🎯 学完你能：求 y = Asin(ωx+φ) 的单调区间、对称轴、对称中心、给定区间上的最值。</p>
           <p className="text-gray-600 mb-2">高考选择/填空必考一道，大题也经常涉及。掌握"整体法"就够了。</p>
-          <div className="space-y-1 text-gray-700">
+          <div className="space-y-0 text-gray-700">
 
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-              <p className="font-bold text-lg text-blue-800 mb-2">整体法（万能方法）</p>
-              <div className="bg-white rounded-lg p-3 border border-blue-100">
-                <p className="mb-1">把 <MathTex tex="\omega x + \varphi" /> 看作一个<strong>整体</strong>（记作 u），然后套 sin u 的性质：</p>
-                <div className="mt-2 space-y-1.5">
-                  <p><strong>求单调递增区间：</strong>令 <MathTex tex="-\frac{\pi}{2} + 2k\pi \leq \omega x + \varphi \leq \frac{\pi}{2} + 2k\pi" />，解出 x 的范围</p>
-                  <p><strong>求单调递减区间：</strong>令 <MathTex tex="\frac{\pi}{2} + 2k\pi \leq \omega x + \varphi \leq \frac{3\pi}{2} + 2k\pi" />，解出 x 的范围</p>
-                  <p><strong>求对称轴：</strong>令 <MathTex tex="\omega x + \varphi = \frac{\pi}{2} + k\pi" />，解出 x</p>
-                  <p><strong>求对称中心：</strong>令 <MathTex tex="\omega x + \varphi = k\pi" />，解出 x，对称中心为 (x, 0)</p>
-                  <p><strong>求最值：</strong>最大值 = A（当 <MathTex tex="\sin = 1" /> 时），最小值 = -A（当 <MathTex tex="\sin = -1" /> 时）</p>
+            {/* ── 4.1 整体法核心思路 ── */}
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
+              <p className="font-bold text-lg text-blue-800 mb-0.5">4.1 整体法（万能方法）</p>
+              <p className="mb-0.5">核心思路：把 <MathTex tex="\omega x + \varphi" /> 看作一个<strong>整体</strong>（记作 u），然后直接套 <MathTex tex="y = \sin u" /> 的性质。</p>
+
+              <div className="bg-white rounded-lg p-1.5 border border-blue-100">
+                <p className="font-bold text-blue-700 mb-1">解题模板（每次都是这三步）</p>
+                <div className="space-y-1">
+                  <div className="flex items-start gap-2">
+                    <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">1</span>
+                    <p>写出 u 的表达式：<MathTex tex="u = \omega x + \varphi" /></p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">2</span>
+                    <p>套 sin u 的性质（递增/递减/对称轴/对称中心/最值）</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0 mt-0.5">3</span>
+                    <p>解不等式或方程，把 u 还原成 x</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg p-1.5 border border-blue-100 mt-0.5">
+                <p className="font-bold text-blue-700 mb-1">要套的 sin u 性质一览</p>
+                <div className="space-y-0.5">
+                  <p><strong>递增：</strong><MathTex tex="-\frac{\pi}{2} + 2k\pi \leq u \leq \frac{\pi}{2} + 2k\pi" /></p>
+                  <p><strong>递减：</strong><MathTex tex="\frac{\pi}{2} + 2k\pi \leq u \leq \frac{3\pi}{2} + 2k\pi" /></p>
+                  <p><strong>对称轴：</strong><MathTex tex="u = \frac{\pi}{2} + k\pi" />（波峰/波谷处）</p>
+                  <p><strong>对称中心：</strong><MathTex tex="u = k\pi" /> → 对称中心为 <MathTex tex="(x,\; 0)" /></p>
+                  <p><strong>最大值：</strong><MathTex tex="\sin u = 1" /> 时 <MathTex tex="y = A" />　　<strong>最小值：</strong><MathTex tex="\sin u = -1" /> 时 <MathTex tex="y = -A" /></p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-              <p className="font-bold text-green-800 mb-2">🔥 实战演示</p>
-              <div className="bg-white rounded-lg p-3 border border-green-100">
-                <p className="font-bold mb-1">求 <MathTex tex="f(x) = 2\sin\!\left(2x + \frac{\pi}{6}\right)" /> 的单调递增区间</p>
-                <p className="mt-1">令 <MathTex tex="-\frac{\pi}{2} + 2k\pi \leq 2x + \frac{\pi}{6} \leq \frac{\pi}{2} + 2k\pi" /></p>
-                <p className="mt-1">减去 <MathTex tex="\frac{\pi}{6}" />：<MathTex tex="-\frac{2\pi}{3} + 2k\pi \leq 2x \leq \frac{\pi}{3} + 2k\pi" /></p>
-                <p className="mt-1">除以 2：<MathTex tex="-\frac{\pi}{3} + k\pi \leq x \leq \frac{\pi}{6} + k\pi" /></p>
-                <p className="font-bold text-green-700 mt-1">∴ 递增区间为 <MathTex tex="\left[-\frac{\pi}{3}+k\pi,\;\frac{\pi}{6}+k\pi\right]" />（k ∈ Z）</p>
+            {/* ── 4.2 例题1：求单调递增区间 ── */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-2">
+              <p className="font-bold text-green-800 mb-0.5">📝 例题 1 — 求单调递增区间</p>
+              <div className="bg-gray-50 rounded p-1 mb-0.5">
+                <p>求 <MathTex tex="f(x) = 2\sin\!\left(2x + \frac{\pi}{6}\right)" /> 的单调递增区间。</p>
+              </div>
+              <div className="bg-white rounded-lg p-1.5 border border-green-100">
+                <div className="border-l-4 border-blue-300 pl-3 mb-0.5">
+                  <p><strong>第①步 写 u：</strong><MathTex tex="u = 2x + \frac{\pi}{6}" /></p>
+                </div>
+                <div className="border-l-4 border-blue-300 pl-3 mb-0.5">
+                  <p><strong>第②步 套递增条件：</strong></p>
+                  <p className="text-lg"><MathTex tex="-\frac{\pi}{2} + 2k\pi \leq 2x + \frac{\pi}{6} \leq \frac{\pi}{2} + 2k\pi" /></p>
+                </div>
+                <div className="border-l-4 border-blue-300 pl-3 mb-0.5">
+                  <p><strong>第③步 解出 x：</strong></p>
+                  <p>两边减 <MathTex tex="\frac{\pi}{6}" />：<MathTex tex="-\frac{2\pi}{3} + 2k\pi \leq 2x \leq \frac{\pi}{3} + 2k\pi" /></p>
+                  <p>两边除以 2：<MathTex tex="-\frac{\pi}{3} + k\pi \leq x \leq \frac{\pi}{6} + k\pi" /></p>
+                </div>
+                <p className="font-bold text-green-700 bg-green-50 p-1 rounded">∴ 递增区间为 <MathTex tex="\left[-\frac{\pi}{3}+k\pi,\;\frac{\pi}{6}+k\pi\right]" />（k ∈ Z）</p>
               </div>
             </div>
 
-            <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-              <p className="font-bold text-red-800 mb-1">⚠️ 易错点</p>
+            {/* ── 4.3 例题2：求单调递减区间 ── */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-2">
+              <p className="font-bold text-green-800 mb-0.5">📝 例题 2 — 求单调递减区间</p>
+              <div className="bg-gray-50 rounded p-1 mb-0.5">
+                <p>求 <MathTex tex="f(x) = 2\sin\!\left(2x + \frac{\pi}{6}\right)" /> 的单调递减区间。</p>
+              </div>
+              <div className="bg-white rounded-lg p-1 border border-green-100">
+                <div className="border-l-4 border-purple-300 pl-3 mb-0.5">
+                  <p><strong>第①步 写 u：</strong><MathTex tex="u = 2x + \frac{\pi}{6}" />（和例 1 完全一样）</p>
+                </div>
+                <div className="border-l-4 border-purple-300 pl-3 mb-0.5">
+                  <p><strong>第②步 套递减条件：</strong>（唯一区别：换成递减的范围）</p>
+                  <p className="text-lg"><MathTex tex="\frac{\pi}{2} + 2k\pi \leq 2x + \frac{\pi}{6} \leq \frac{3\pi}{2} + 2k\pi" /></p>
+                </div>
+                <div className="border-l-4 border-purple-300 pl-3 mb-0.5">
+                  <p><strong>第③步 解出 x：</strong></p>
+                  <p>两边减 <MathTex tex="\frac{\pi}{6}" />：<MathTex tex="\frac{\pi}{3} + 2k\pi \leq 2x \leq \frac{4\pi}{3} + 2k\pi" /></p>
+                  <p>两边除以 2：<MathTex tex="\frac{\pi}{6} + k\pi \leq x \leq \frac{2\pi}{3} + k\pi" /></p>
+                </div>
+                <p className="font-bold text-green-700 bg-green-50 p-1 rounded">∴ 递减区间为 <MathTex tex="\left[\frac{\pi}{6}+k\pi,\;\frac{2\pi}{3}+k\pi\right]" />（k ∈ Z）</p>
+                <p className="text-gray-500 mt-0.5">💡 对比例 1：递增区间的右端点 = 递减区间的左端点（都是 <MathTex tex="\frac{\pi}{6}+k\pi" />），因为那里是波峰！</p>
+              </div>
+            </div>
+
+            <PageBreak />
+
+            {/* ── 4.4 例题3：求对称轴和对称中心 ── */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-2">
+              <p className="font-bold text-green-800 mb-0.5">📝 例题 3 — 求对称轴和对称中心</p>
+              <div className="bg-gray-50 rounded p-1 mb-0.5">
+                <p>求 <MathTex tex="f(x) = \sin\!\left(2x + \frac{\pi}{6}\right)" /> 的对称轴和对称中心。</p>
+              </div>
+              <div className="bg-white rounded-lg p-1 border border-green-100">
+                <div className="grid grid-cols-2 gap-1">
+                  <div>
+                    <p className="font-bold text-blue-700 mb-0.5">求对称轴</p>
+                    <p>令 <MathTex tex="2x + \frac{\pi}{6} = \frac{\pi}{2} + k\pi" /></p>
+                    <p><MathTex tex="2x = \frac{\pi}{3} + k\pi" /></p>
+                    <p><MathTex tex="x = \frac{\pi}{6} + \frac{k\pi}{2}" /></p>
+                    <p className="font-bold text-blue-700 mt-0.5">∴ 对称轴：<MathTex tex="x = \frac{\pi}{6} + \frac{k\pi}{2}" /></p>
+                    <p className="text-gray-500 mt-0.5">例如 k=0：<MathTex tex="x = \frac{\pi}{6}" />（波峰）</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-purple-700 mb-0.5">求对称中心</p>
+                    <p>令 <MathTex tex="2x + \frac{\pi}{6} = k\pi" /></p>
+                    <p><MathTex tex="2x = -\frac{\pi}{6} + k\pi" /></p>
+                    <p><MathTex tex="x = -\frac{\pi}{12} + \frac{k\pi}{2}" /></p>
+                    <p className="font-bold text-purple-700 mt-0.5">∴ 对称中心：<MathTex tex="\left(-\frac{\pi}{12}+\frac{k\pi}{2},\; 0\right)" /></p>
+                    <p className="text-gray-500 mt-0.5">例如 k=0：<MathTex tex="\left(-\frac{\pi}{12},\; 0\right)" /></p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-amber-50 rounded p-1 border border-amber-200 mt-0.5">
+                <p><strong>记忆口诀：</strong>对称轴 = <MathTex tex="\frac{\pi}{2} + k\pi" />（波峰/波谷），对称中心 = <MathTex tex="k\pi" />（过零点）。两者交替出现！</p>
+              </div>
+            </div>
+
+            {/* ── 4.5 例题4：给定区间求最值（高考大题核心） ── */}
+            <div className="bg-red-50 border-2 border-red-300 rounded-xl p-2">
+              <p className="font-bold text-lg text-red-700 mb-0.5">📝 例题 4 — 🔥 给定区间上求最值（高考大题核心）</p>
+              <div className="bg-gray-50 rounded p-1 mb-0.5">
+                <p>求 <MathTex tex="f(x) = 2\sin\!\left(2x + \frac{\pi}{6}\right)" /> 在 <MathTex tex="\left[0,\;\frac{\pi}{2}\right]" /> 上的最大值和最小值。</p>
+              </div>
+
+              <div className="bg-white rounded-lg p-1 border border-red-200 mb-0.5">
+                <p className="font-bold text-red-700 mb-0.5">⚠️ 为什么不能直接写“最大值 = 2，最小值 = -2”？</p>
+                <p>因为 <MathTex tex="x \in \left[0,\;\frac{\pi}{2}\right]" /> 只是一小段，<strong>不一定包含波峰和波谷</strong>！</p>
+                <p className="mt-0.5">就像问"上午 8 点到 10 点的最高气温"——不能直接说是全天最高温，要看那段时间气温具体在涨还是在跌。</p>
+              </div>
+
+              <div className="bg-white rounded-lg p-1 border border-red-100">
+                <p className="font-bold text-blue-700 mb-0.5">解题四步走</p>
+
+                <div className="border-l-4 border-blue-300 pl-3 mb-1">
+                  <p><strong>第①步 求 u 的范围：</strong>把 x 的范围代入 <MathTex tex="u = 2x + \frac{\pi}{6}" /></p>
+                  <p className="mt-0.5">当 <MathTex tex="x = 0" /> 时，<MathTex tex="u = \frac{\pi}{6}" /></p>
+                  <p>当 <MathTex tex="x = \frac{\pi}{2}" /> 时，<MathTex tex="u = 2 \times \frac{\pi}{2} + \frac{\pi}{6} = \frac{7\pi}{6}" /></p>
+                  <p className="font-bold mt-0.5">所以 <MathTex tex="u \in \left[\frac{\pi}{6},\;\frac{7\pi}{6}\right]" /></p>
+                </div>
+
+                <div className="border-l-4 border-green-300 pl-3 mb-1">
+                  <p><strong>第②步 画 sin u 在这段范围内的"走势"：</strong></p>
+                  <p className="mt-0.5">在 <MathTex tex="\left[\frac{\pi}{6},\;\frac{7\pi}{6}\right]" /> 内，sin u 的走势是：</p>
+                  <div className="bg-blue-50 rounded p-1.5 mt-0.5">
+                    <p><MathTex tex="u = \frac{\pi}{6}" />：<MathTex tex="\sin\frac{\pi}{6} = \frac{1}{2}" />（起点）</p>
+                    <p><MathTex tex="u = \frac{\pi}{2}" />：<MathTex tex="\sin\frac{\pi}{2} = 1" />（<strong className="text-red-600">最高点 ✓</strong>）</p>
+                    <p><MathTex tex="u = \frac{7\pi}{6}" />：<MathTex tex="\sin\frac{7\pi}{6} = -\frac{1}{2}" />（终点，也是<strong className="text-blue-600">最低点 ✓</strong>）</p>
+                  </div>
+                  <p className="mt-0.5">走势：<strong>先升后降</strong>（从 <MathTex tex="\frac{1}{2}" /> 升到 1，再降到 <MathTex tex="-\frac{1}{2}" />）</p>
+                </div>
+
+                <div className="border-l-4 border-red-300 pl-3 mb-1">
+                  <p><strong>第③步 找 sin u 的最大值和最小值：</strong></p>
+                  <p className="mt-0.5"><MathTex tex="\sin u" /> 的最大值 = 1（在 <MathTex tex="u = \frac{\pi}{2}" /> 处，即 <MathTex tex="x = \frac{\pi}{6}" />）</p>
+                  <p><MathTex tex="\sin u" /> 的最小值 = <MathTex tex="-\frac{1}{2}" />（在 <MathTex tex="u = \frac{7\pi}{6}" /> 处，即 <MathTex tex="x = \frac{\pi}{2}" />）</p>
+                </div>
+
+                <div className="border-l-4 border-amber-300 pl-3 mb-1">
+                  <p><strong>第④步 乘以 A 得最终答案：</strong></p>
+                  <p className="mt-0.5">最大值 = <MathTex tex="2 \times 1 = 2" />（在 <MathTex tex="x = \frac{\pi}{6}" /> 时取得）</p>
+                  <p>最小值 = <MathTex tex="2 \times \left(-\frac{1}{2}\right) = -1" />（在 <MathTex tex="x = \frac{\pi}{2}" /> 时取得）</p>
+                </div>
+
+                <p className="font-bold text-green-700 bg-green-50 p-2 rounded">∴ <MathTex tex="f(x)" /> 在 <MathTex tex="\left[0,\;\frac{\pi}{2}\right]" /> 上的最大值为 <strong>2</strong>，最小值为 <strong>-1</strong></p>
+              </div>
+
+              <div className="bg-yellow-50 rounded p-1.5 mt-0.5 border border-yellow-200">
+                <p className="font-bold text-yellow-800 mb-0.5">💡 解题要点总结</p>
+                <div className="space-y-0.5">
+                  <p><strong>①</strong> 先把 x 的范围转换为 u 的范围</p>
+                  <p><strong>②</strong> 在 u 的范围内找 sin u 的最大/最小（比较起点、终点、可能的波峰/波谷）</p>
+                  <p><strong>③</strong> 别忘了最后乘以 A（如果有 +B 还要加 B）</p>
+                  <p><strong>④</strong> 最小值 ≠ -A！只有当区间足够大（包含波谷）时才等于 -A</p>
+                </div>
+              </div>
+            </div>
+
+            <PageBreak />
+
+            {/* ── 4.6 例题5：给定区间求最值（含 +B） ── */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-2">
+              <p className="font-bold text-green-800 mb-0.5">📝 例题 5 — 给定区间求最值（含 +B）</p>
+              <div className="bg-gray-50 rounded p-1.5 mb-1">
+                <p>求 <MathTex tex="f(x) = 2\sin\!\left(2x + \frac{\pi}{6}\right) + 1" /> 在 <MathTex tex="\left[0,\;\frac{\pi}{4}\right]" /> 上的最大值和最小值。</p>
+              </div>
+              <div className="bg-white rounded-lg p-1.5 border border-green-100">
+                <div className="border-l-4 border-blue-300 pl-3 mb-0.5">
+                  <p><strong>第①步 求 u 的范围：</strong></p>
+                  <p><MathTex tex="x \in \left[0,\;\frac{\pi}{4}\right]" /> → <MathTex tex="u = 2x + \frac{\pi}{6} \in \left[\frac{\pi}{6},\;\frac{2\pi}{3}\right]" /></p>
+                </div>
+                <div className="border-l-4 border-green-300 pl-3 mb-0.5">
+                  <p><strong>第②步 找 sin u 的最大/最小：</strong></p>
+                  <p>在 <MathTex tex="\left[\frac{\pi}{6},\;\frac{2\pi}{3}\right]" /> 内，<MathTex tex="\frac{\pi}{2}" /> 在区间内 → 波峰存在</p>
+                  <p><MathTex tex="\sin u" /> 最大值 = 1（<MathTex tex="u = \frac{\pi}{2}" />），最小值 = <MathTex tex="\sin\frac{\pi}{6} = \frac{1}{2}" /> 和 <MathTex tex="\sin\frac{2\pi}{3} = \frac{\sqrt{3}}{2}" /> 中较小的 = <MathTex tex="\frac{1}{2}" /></p>
+                </div>
+                <div className="border-l-4 border-amber-300 pl-3 mb-0.5">
+                  <p><strong>第③步 乘 A 加 B：</strong></p>
+                  <p>最大值 = <MathTex tex="2 \times 1 + 1 = 3" />　　最小值 = <MathTex tex="2 \times \frac{1}{2} + 1 = 2" /></p>
+                </div>
+                <p className="font-bold text-green-700 bg-green-50 p-1 rounded">∴ 最大值为 <strong>3</strong>，最小值为 <strong>2</strong>（注意：最小值不是 <MathTex tex="-A + B = -1" />！）</p>
+              </div>
+            </div>
+
+            {/* ── 4.7 补充：ω为负数时怎么办 ── */}
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-2">
+              <p className="font-bold text-purple-800 mb-0.5">📝 补充 — ω 为负数时怎么办？</p>
+              <div className="bg-gray-50 rounded p-1 mb-0.5">
+                <p>求 <MathTex tex="f(x) = \sin(-2x + \frac{\pi}{3})" /> 的单调递增区间。</p>
+              </div>
+              <div className="bg-white rounded-lg p-1.5 border border-purple-100">
+                <div className="border-l-4 border-red-300 pl-3 mb-0.5">
+                  <p><strong>第〇步 先化正！</strong>利用 <MathTex tex="\sin(-\theta) = -\sin\theta" />：</p>
+                  <p><MathTex tex="f(x) = \sin(-2x + \frac{\pi}{3}) = -\sin(2x - \frac{\pi}{3})" /></p>
+                </div>
+                <div className="border-l-4 border-blue-300 pl-3 mb-0.5">
+                  <p><strong>关键转换：</strong>前面有负号 → <strong>原函数递增 = sin 递减</strong></p>
+                  <p>令 <MathTex tex="\frac{\pi}{2} + 2k\pi \leq 2x - \frac{\pi}{3} \leq \frac{3\pi}{2} + 2k\pi" /></p>
+                </div>
+                <div className="border-l-4 border-blue-300 pl-3 mb-0.5">
+                  <p>加 <MathTex tex="\frac{\pi}{3}" />：<MathTex tex="\frac{5\pi}{6} + 2k\pi \leq 2x \leq \frac{11\pi}{6} + 2k\pi" /></p>
+                  <p>除以 2：<MathTex tex="\frac{5\pi}{12} + k\pi \leq x \leq \frac{11\pi}{12} + k\pi" /></p>
+                </div>
+                <p className="font-bold text-purple-700 bg-purple-50 p-1 rounded">∴ 递增区间为 <MathTex tex="\left[\frac{5\pi}{12}+k\pi,\;\frac{11\pi}{12}+k\pi\right]" />（k ∈ Z）</p>
+              </div>
+              <p className="text-gray-500 mt-0.5">💡 口诀：<strong>负号提出来，递增变递减</strong>（反过来也一样）</p>
+            </div>
+
+            {/* ── 4.8 易错总结 ── */}
+            <div className="bg-red-50 border border-red-200 rounded-lg p-2">
+              <p className="font-bold text-red-800 mb-0.5">⚠️ 本节六大易错点</p>
               <div className="space-y-1">
-                <p>❌ ω 为负数时忘记先用诱导公式化正 → <MathTex tex="\sin(-x) = -\sin x" /></p>
-                <p>❌ 求单调区间时忘记加 <MathTex tex="2k\pi" /> → 三角函数是周期性的，区间有无穷多个</p>
-                <p>❌ 在给定区间上求最值时，直接写 A 和 -A → 要先检查这个区间是否包含最高/最低点</p>
-                <p>❌ 图像变换时搞混平移量 → 先平移后伸缩：移 φ；先伸缩后平移：移 φ/ω</p>
+                <p><strong className="text-red-700">❶</strong> ω 为负数时忘记先化正：<MathTex tex="\sin(-u) = -\sin u" />，先提负号再做题</p>
+                <p><strong className="text-red-700">❷</strong> 求单调区间时忘记加 <MathTex tex="2k\pi" />：三角函数是周期性的，区间有无穷多个</p>
+                <p><strong className="text-red-700">❸</strong> 给定区间求最值时，直接写 A 和 -A：<strong>要先把 x 范围转为 u 范围，再看 sin u 在该范围内能到多大/多小</strong></p>
+                <p><strong className="text-red-700">❹</strong> 比较端点值时算错：记得比较<strong>起点、终点、区间内的波峰/波谷</strong>三者</p>
+                <p><strong className="text-red-700">❺</strong> 有 +B 时忘记加 B：最终答案 = A × sin(最值) <strong>+ B</strong></p>
+                <p><strong className="text-red-700">❻</strong> 对称轴和对称中心搞混：波峰/波谷 = 对称轴（一条线），过零点 = 对称中心（一个点）</p>
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-              <p className="font-bold text-amber-800 mb-2">📝 性质速查表</p>
+            {/* ── 4.9 性质速查表 ── */}
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-2">
+              <p className="font-bold text-amber-800 mb-1">📝 性质速查表</p>
               <div className="bg-white rounded-lg p-2 border border-amber-100 overflow-x-auto">
                 <table className="w-full text-sm text-center">
                   <thead>
@@ -1143,9 +1502,9 @@ export function TrigFuncPage() {
                   <tbody>
                     <tr className="border-b border-gray-200">
                       <td className="py-1 px-2 text-left font-bold">周期</td>
-                      <td className="py-1 px-2">2π</td>
-                      <td className="py-1 px-2">2π</td>
-                      <td className="py-1 px-2">π</td>
+                      <td className="py-1 px-2"><MathTex tex="2\pi" /></td>
+                      <td className="py-1 px-2"><MathTex tex="2\pi" /></td>
+                      <td className="py-1 px-2"><MathTex tex="\pi" /></td>
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-1 px-2 text-left font-bold">奇偶性</td>
@@ -1155,15 +1514,15 @@ export function TrigFuncPage() {
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-1 px-2 text-left font-bold">值域</td>
-                      <td className="py-1 px-2">[-1, 1]</td>
-                      <td className="py-1 px-2">[-1, 1]</td>
-                      <td className="py-1 px-2">(-∞, +∞)</td>
+                      <td className="py-1 px-2"><MathTex tex="[-1,\; 1]" /></td>
+                      <td className="py-1 px-2"><MathTex tex="[-1,\; 1]" /></td>
+                      <td className="py-1 px-2"><MathTex tex="(-\infty, +\infty)" /></td>
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-1 px-2 text-left font-bold">递增</td>
-                      <td className="py-1 px-2"><MathTex tex="[-\frac{\pi}{2}, \frac{\pi}{2}]" /></td>
-                      <td className="py-1 px-2"><MathTex tex="[-\pi, 0]" /></td>
-                      <td className="py-1 px-2"><MathTex tex="(-\frac{\pi}{2}, \frac{\pi}{2})" /></td>
+                      <td className="py-1 px-2"><MathTex tex="\left[-\frac{\pi}{2},\;\frac{\pi}{2}\right]" /></td>
+                      <td className="py-1 px-2"><MathTex tex="[-\pi,\; 0]" /></td>
+                      <td className="py-1 px-2"><MathTex tex="\left(-\frac{\pi}{2},\;\frac{\pi}{2}\right)" /></td>
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-1 px-2 text-left font-bold">对称轴</td>
@@ -1173,9 +1532,9 @@ export function TrigFuncPage() {
                     </tr>
                     <tr>
                       <td className="py-1 px-2 text-left font-bold">对称中心</td>
-                      <td className="py-1 px-2">(kπ, 0)</td>
-                      <td className="py-1 px-2"><MathTex tex="(\frac{\pi}{2}+k\pi, 0)" /></td>
-                      <td className="py-1 px-2"><MathTex tex="(\frac{k\pi}{2}, 0)" /></td>
+                      <td className="py-1 px-2"><MathTex tex="(k\pi,\; 0)" /></td>
+                      <td className="py-1 px-2"><MathTex tex="\left(\frac{\pi}{2}+k\pi,\; 0\right)" /></td>
+                      <td className="py-1 px-2"><MathTex tex="\left(\frac{k\pi}{2},\; 0\right)" /></td>
                     </tr>
                   </tbody>
                 </table>
@@ -1194,8 +1553,25 @@ export function TrigFuncPage() {
       <section className="mb-3">
         <h2 className="text-xl font-bold text-red-800 mb-2 border-b-2 border-red-300 pb-1">🔥 高考真题 & 精华题</h2>
         <p className="text-gray-600 mb-2">覆盖前面所学全部知识点：诱导公式、图像性质、参数识别、图像变换、由图求解析式、性质综合应用。</p>
-        <PracticeCard questions={trigFuncExam} title="🔥 高考真题 & 精华题（8 题）" />
+        <PracticeCard questions={trigFuncExam} title="🔥 高考真题 & 精华题（8 题）" printOptionCols={2} />
       </section>
+
+      {/* ═══ 打印模式：答案与解析（两列布局） ═══ */}
+      {isPrinting && printOptions.showAnswers && (
+        <div className="mt-4">
+          <h2 className="text-lg font-bold text-gray-800 mb-2 border-b pb-1">📝 5.1 三角函数 — 答案与解析</h2>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+            {trigFuncExam.map((q, i) => (
+              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700">
+                <p className="font-bold">{i + 1}. {q.question}</p>
+                <p className="ml-4">答案：<span className="font-bold text-blue-700">{q.options?.find(o => o.value === q.correctAnswer)?.label ?? q.correctAnswer}</span></p>
+                {q.explanationLatex && <div className="ml-4"><MathTex tex={q.explanationLatex} /></div>}
+                {q.explanation && !q.explanationLatex && <p className="ml-4 text-gray-600">{q.explanation}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       </LessonLayout>
       <DebugToggle />

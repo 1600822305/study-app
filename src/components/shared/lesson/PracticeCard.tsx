@@ -21,7 +21,7 @@ interface PracticeCardProps {
   title?: string;
   questions: QuizQuestionData[];
   /** 打印模式下选项列数，默认 1 */
-  printOptionCols?: 1 | 2;
+  printOptionCols?: 1 | 2 | 4;
 }
 
 // ── Component ──
@@ -79,7 +79,12 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
 
               {/* 选择题选项 */}
               {q.type !== 'blank' && q.options && (
-                <div className={`${printOptionCols === 2 ? 'grid grid-cols-2 gap-1' : 'space-y-1'} ml-4`}>
+                <div className={`${
+                  q.printCols === 4 ? 'grid grid-cols-4 gap-x-4 gap-y-0.5' :
+                  q.printCols === 2 ? 'grid grid-cols-2 gap-1' :
+                  printOptionCols === 4 ? 'grid grid-cols-4 gap-x-4 gap-y-0.5' :
+                  printOptionCols === 2 ? 'grid grid-cols-2 gap-1' : 'space-y-1'
+                } ml-4`}>
                   {q.options.map((opt) => (
                     <div key={opt.value} className="flex items-center gap-2 text-gray-700">
                       <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">

@@ -49,6 +49,8 @@ export interface QuizQuestionData {
   questionDiagram?: string;
   /** 打印时在此题前分页 */
   pageBreak?: boolean;
+  /** 打印模式下此题选项列数（覆盖 PracticeCard 的 printOptionCols） */
+  printCols?: 1 | 2 | 4;
 }
 
 /** 学习进度条目 */

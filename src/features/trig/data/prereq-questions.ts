@@ -1,39 +1,73 @@
 import type { QuizQuestionData } from '@/types';
 
-// ── 即时练习（弧度制 + 特殊角值） ──
+// ── 5.0 三角前置知识 · 综合练习（合并练一练 + 自测） ──
+// 覆盖五个知识点：弧度制、单位圆、特殊角、象限符号、函数性质术语
 export const trigPrereqPractice: QuizQuestionData[] = [
+  // ── 一、弧度制（2 题） ──
   {
-    id: 'tp-p1',
-    question: '将 60° 转换为弧度制，结果是',
-    questionLatex: '\\text{将 } 60° \\text{ 转换为弧度制，结果是}',
+    id: 'tp-1',
+    question: '将 120° 转换为弧度制，结果是',
+    questionLatex: '\\text{将 } 120° \\text{ 转换为弧度制，结果是}',
     options: [
-      { label: 'A', value: '\\dfrac{\\pi}{6}', isLatex: true },
-      { label: 'B', value: '\\dfrac{\\pi}{4}', isLatex: true },
-      { label: 'C', value: '\\dfrac{\\pi}{3}', isLatex: true },
-      { label: 'D', value: '\\dfrac{\\pi}{2}', isLatex: true },
+      { label: 'A', value: '\\dfrac{\\pi}{3}', isLatex: true },
+      { label: 'B', value: '\\dfrac{2\\pi}{3}', isLatex: true },
+      { label: 'C', value: '\\dfrac{3\\pi}{4}', isLatex: true },
+      { label: 'D', value: '\\dfrac{5\\pi}{6}', isLatex: true },
     ],
-    correctAnswer: '\\dfrac{\\pi}{3}',
+    correctAnswer: '\\dfrac{2\\pi}{3}',
     explanation: '',
-    explanationLatex: '60° = 60 \\times \\dfrac{\\pi}{180} = \\dfrac{\\pi}{3}',
+    explanationLatex: '120° = 120 \\times \\dfrac{\\pi}{180} = \\dfrac{2\\pi}{3}',
   },
   {
-    id: 'tp-p2',
-    question: '弧度 π/4 等于多少度？',
-    questionLatex: '\\text{弧度 } \\dfrac{\\pi}{4} \\text{ 等于多少度？}',
+    id: 'tp-2',
+    question: '弧度 5π/6 等于多少度？',
+    questionLatex: '\\dfrac{5\\pi}{6} \\text{ 弧度等于多少度？}',
     options: [
-      { label: 'A', value: '30°', isLatex: false },
-      { label: 'B', value: '45°', isLatex: false },
-      { label: 'C', value: '60°', isLatex: false },
-      { label: 'D', value: '90°', isLatex: false },
+      { label: 'A', value: '120°', isLatex: false },
+      { label: 'B', value: '135°', isLatex: false },
+      { label: 'C', value: '150°', isLatex: false },
+      { label: 'D', value: '160°', isLatex: false },
     ],
-    correctAnswer: '45°',
+    correctAnswer: '150°',
     explanation: '',
-    explanationLatex: '\\dfrac{\\pi}{4} = \\dfrac{\\pi}{4} \\times \\dfrac{180°}{\\pi} = 45°',
+    explanationLatex: '\\dfrac{5\\pi}{6} = \\dfrac{5\\pi}{6} \\times \\dfrac{180°}{\\pi} = \\dfrac{5 \\times 180°}{6} = 150°',
+  },
+
+  // ── 二、单位圆与三角函数定义（2 题） ──
+  {
+    id: 'tp-3',
+    question: '在单位圆上，角 θ 对应的点 P 的坐标是',
+    questionLatex: '\\text{在单位圆上，角 } \\theta \\text{ 对应的点 } P \\text{ 的坐标是}',
+    options: [
+      { label: 'A', value: '(\\sin\\theta,\\; \\cos\\theta)', isLatex: true },
+      { label: 'B', value: '(\\cos\\theta,\\; \\sin\\theta)', isLatex: true },
+      { label: 'C', value: '(\\tan\\theta,\\; \\sin\\theta)', isLatex: true },
+      { label: 'D', value: '(1,\\; \\theta)', isLatex: true },
+    ],
+    correctAnswer: '(\\cos\\theta,\\; \\sin\\theta)',
+    explanation: '',
+    explanationLatex: '\\text{单位圆上 } P = (\\cos\\theta,\\; \\sin\\theta)\\\\[4pt]\\text{x 坐标 = cos，y 坐标 = sin}',
   },
   {
-    id: 'tp-p3',
-    question: 'sin 30° 的值是',
-    questionLatex: '\\sin 30° \\text{ 的值是}',
+    id: 'tp-4',
+    question: 'sin²θ + cos²θ 的值等于',
+    questionLatex: '\\sin^2\\theta + \\cos^2\\theta \\text{ 的值等于}',
+    options: [
+      { label: 'A', value: '0', isLatex: false },
+      { label: 'B', value: '1', isLatex: false },
+      { label: 'C', value: '2', isLatex: false },
+      { label: 'D', value: '不确定', isLatex: false },
+    ],
+    correctAnswer: '1',
+    explanation: '',
+    explanationLatex: '\\text{勾股定理：单位圆上 } x^2 + y^2 = 1\\\\[4pt]\\therefore \\sin^2\\theta + \\cos^2\\theta = 1',
+  },
+
+  // ── 三、特殊角的三角函数值（2 题） ──
+  {
+    id: 'tp-5',
+    question: 'cos 60° 的值是',
+    questionLatex: '\\cos 60° \\text{ 的值是}',
     options: [
       { label: 'A', value: '\\dfrac{1}{2}', isLatex: true },
       { label: 'B', value: '\\dfrac{\\sqrt{2}}{2}', isLatex: true },
@@ -42,84 +76,10 @@ export const trigPrereqPractice: QuizQuestionData[] = [
     ],
     correctAnswer: '\\dfrac{1}{2}',
     explanation: '',
-    explanationLatex: '\\text{口诀：根号下 0,1,2,3,4 除以 2}\\\\[4pt]\\sin 30° = \\dfrac{\\sqrt{1}}{2} = \\dfrac{1}{2}',
+    explanationLatex: '\\text{口诀：cos 从大到小（1→0），根号下 4→0 除以 2}\\\\[4pt]\\cos 60° = \\dfrac{\\sqrt{1}}{2} = \\dfrac{1}{2}',
   },
   {
-    id: 'tp-p4',
-    question: 'cos 120° 的值是',
-    questionLatex: '\\cos 120° \\text{ 的值是}',
-    options: [
-      { label: 'A', value: '\\dfrac{1}{2}', isLatex: true },
-      { label: 'B', value: '-\\dfrac{1}{2}', isLatex: true },
-      { label: 'C', value: '\\dfrac{\\sqrt{3}}{2}', isLatex: true },
-      { label: 'D', value: '-\\dfrac{\\sqrt{3}}{2}', isLatex: true },
-    ],
-    correctAnswer: '-\\dfrac{1}{2}',
-    explanation: '',
-    explanationLatex: '120° = 180° - 60°\\\\[4pt]\\cos(180°-\\theta) = -\\cos\\theta\\\\[4pt]\\cos 120° = -\\cos 60° = -\\dfrac{1}{2}',
-  },
-  {
-    id: 'tp-p5',
-    question: 'tan 45° 的值是',
-    questionLatex: '\\tan 45° \\text{ 的值是}',
-    options: [
-      { label: 'A', value: '0', isLatex: false },
-      { label: 'B', value: '\\dfrac{\\sqrt{3}}{3}', isLatex: true },
-      { label: 'C', value: '1', isLatex: false },
-      { label: 'D', value: '\\sqrt{3}', isLatex: true },
-    ],
-    correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\tan 45° = \\dfrac{\\sin 45°}{\\cos 45°} = \\dfrac{\\frac{\\sqrt{2}}{2}}{\\frac{\\sqrt{2}}{2}} = 1',
-  },
-];
-
-// ── 自测题（综合：弧度、定义、特殊角、象限符号） ──
-export const trigPrereqQuiz: QuizQuestionData[] = [
-  {
-    id: 'tp-q1',
-    question: '将 150° 转换为弧度制，结果是',
-    questionLatex: '\\text{将 } 150° \\text{ 转换为弧度制，结果是}',
-    options: [
-      { label: 'A', value: '\\dfrac{2\\pi}{3}', isLatex: true },
-      { label: 'B', value: '\\dfrac{3\\pi}{4}', isLatex: true },
-      { label: 'C', value: '\\dfrac{5\\pi}{6}', isLatex: true },
-      { label: 'D', value: '\\dfrac{5\\pi}{4}', isLatex: true },
-    ],
-    correctAnswer: '\\dfrac{5\\pi}{6}',
-    explanation: '',
-    explanationLatex: '150° = 150 \\times \\dfrac{\\pi}{180} = \\dfrac{150\\pi}{180} = \\dfrac{5\\pi}{6}',
-  },
-  {
-    id: 'tp-q2',
-    question: '在单位圆上，角 θ 对应的点 P 的坐标是',
-    questionLatex: '\\text{在单位圆上，角 } \\theta \\text{ 对应的点 } P \\text{ 的坐标是}',
-    options: [
-      { label: 'A', value: '(\\sin\\theta,\\; \\cos\\theta)', isLatex: true },
-      { label: 'B', value: '(\\cos\\theta,\\; \\sin\\theta)', isLatex: true },
-      { label: 'C', value: '(\\tan\\theta,\\; \\sin\\theta)', isLatex: true },
-      { label: 'D', value: '(\\cos\\theta,\\; \\tan\\theta)', isLatex: true },
-    ],
-    correctAnswer: '(\\cos\\theta,\\; \\sin\\theta)',
-    explanation: '',
-    explanationLatex: '\\text{单位圆上点 } P \\text{ 的坐标为 } (\\cos\\theta,\\; \\sin\\theta)\\\\[4pt]\\text{x 坐标 = cos，y 坐标 = sin}',
-  },
-  {
-    id: 'tp-q3',
-    question: 'sin²θ + cos²θ 的值等于',
-    questionLatex: '\\sin^2\\theta + \\cos^2\\theta \\text{ 的值等于}',
-    options: [
-      { label: 'A', value: '0', isLatex: false },
-      { label: 'B', value: '1', isLatex: false },
-      { label: 'C', value: '2', isLatex: false },
-      { label: 'D', value: '\\text{不确定}', isLatex: true },
-    ],
-    correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\text{勾股定理：单位圆上 } x^2 + y^2 = 1\\\\[4pt]\\therefore \\sin^2\\theta + \\cos^2\\theta = 1',
-  },
-  {
-    id: 'tp-q4',
+    id: 'tp-6',
     question: 'sin 135° 的值是',
     questionLatex: '\\sin 135° \\text{ 的值是}',
     options: [
@@ -132,59 +92,64 @@ export const trigPrereqQuiz: QuizQuestionData[] = [
     explanation: '',
     explanationLatex: '135° = 180° - 45°\\\\[4pt]\\sin(180°-\\theta) = \\sin\\theta\\\\[4pt]\\sin 135° = \\sin 45° = \\dfrac{\\sqrt{2}}{2}',
   },
+
+  // ── 四、各象限的符号规律（2 题） ──
   {
-    id: 'tp-q5',
-    question: '在第二象限（90°~180°），下列哪个三角函数值为正？',
+    id: 'tp-7',
+    question: '在第三象限（180°~270°），下列哪个三角函数值为正？',
     options: [
-      { label: 'A', value: 'cos θ', isLatex: false },
-      { label: 'B', value: 'sin θ', isLatex: false },
+      { label: 'A', value: 'sin θ', isLatex: false },
+      { label: 'B', value: 'cos θ', isLatex: false },
       { label: 'C', value: 'tan θ', isLatex: false },
       { label: 'D', value: '以上都不是', isLatex: false },
     ],
-    correctAnswer: 'sin θ',
+    correctAnswer: 'tan θ',
     explanation: '',
-    explanationLatex: '\\text{口诀：一全正，二正弦，三正切，四余弦}\\\\[4pt]\\text{第二象限只有 sin 为正}\\\\[4pt]\\text{（y > 0 所以 sin > 0，x < 0 所以 cos < 0）}',
+    explanationLatex: '\\text{口诀：一全正，二正弦，三正切，四余弦}\\\\[4pt]\\text{第三象限：sin−, cos−, 但 tan = sin/cos = 负/负 = 正}',
   },
   {
-    id: 'tp-q6',
-    question: 'tan 60° 的值是',
-    questionLatex: '\\tan 60° \\text{ 的值是}',
+    id: 'tp-8',
+    question: 'cos 210° 的符号是',
+    questionLatex: '\\cos 210° \\text{ 的符号是}',
     options: [
-      { label: 'A', value: '\\dfrac{\\sqrt{3}}{3}', isLatex: true },
-      { label: 'B', value: '1', isLatex: false },
-      { label: 'C', value: '\\sqrt{3}', isLatex: true },
-      { label: 'D', value: '2', isLatex: false },
+      { label: 'A', value: '正', isLatex: false },
+      { label: 'B', value: '负', isLatex: false },
+      { label: 'C', value: '零', isLatex: false },
+      { label: 'D', value: '无法确定', isLatex: false },
     ],
-    correctAnswer: '\\sqrt{3}',
+    correctAnswer: '负',
     explanation: '',
-    explanationLatex: '\\tan 60° = \\dfrac{\\sin 60°}{\\cos 60°} = \\dfrac{\\frac{\\sqrt{3}}{2}}{\\frac{1}{2}} = \\sqrt{3}',
+    explanationLatex: '210° \\text{ 在第三象限（180°~270°）}\\\\[4pt]\\text{第三象限 cos < 0（x 坐标为负）}\\\\[4pt]\\therefore \\cos 210° < 0',
+  },
+
+  // ── 五、函数性质术语（2 题） ──
+  {
+    id: 'tp-9',
+    question: '"函数在某区间上 x 增大时 y 也增大"描述的是哪个性质？',
+    options: [
+      { label: 'A', value: '周期性', isLatex: false },
+      { label: 'B', value: '奇偶性', isLatex: false },
+      { label: 'C', value: '单调递增', isLatex: false },
+      { label: 'D', value: '对称性', isLatex: false },
+    ],
+    correctAnswer: '单调递增',
+    explanation: '',
+    explanationLatex: '\\text{递增 = x 增大 → y 也增大（图像在"上坡"）}',
   },
   {
-    id: 'tp-q7',
-    question: '2π/3 弧度等于多少度？',
-    questionLatex: '\\dfrac{2\\pi}{3} \\text{ 弧度等于多少度？}',
+    id: 'tp-10',
+    question: '三角函数图像中，"波峰/波谷处"对应的是',
     options: [
-      { label: 'A', value: '60°', isLatex: false },
-      { label: 'B', value: '90°', isLatex: false },
-      { label: 'C', value: '120°', isLatex: false },
-      { label: 'D', value: '150°', isLatex: false },
+      { label: 'A', value: '对称中心', isLatex: false },
+      { label: 'B', value: '对称轴', isLatex: false },
+      { label: 'C', value: '渐近线', isLatex: false },
+      { label: 'D', value: '零点', isLatex: false },
     ],
-    correctAnswer: '120°',
+    correctAnswer: '对称轴',
     explanation: '',
-    explanationLatex: '\\dfrac{2\\pi}{3} = \\dfrac{2\\pi}{3} \\times \\dfrac{180°}{\\pi} = \\dfrac{2 \\times 180°}{3} = 120°',
-  },
-  {
-    id: 'tp-q8',
-    question: '已知 sin θ = 3/5，cos θ = 4/5，则 tan θ =',
-    questionLatex: '\\text{已知 } \\sin\\theta = \\dfrac{3}{5},\\; \\cos\\theta = \\dfrac{4}{5}\\text{，则 } \\tan\\theta =',
-    options: [
-      { label: 'A', value: '\\dfrac{3}{4}', isLatex: true },
-      { label: 'B', value: '\\dfrac{4}{3}', isLatex: true },
-      { label: 'C', value: '\\dfrac{3}{5}', isLatex: true },
-      { label: 'D', value: '\\dfrac{4}{5}', isLatex: true },
-    ],
-    correctAnswer: '\\dfrac{3}{4}',
-    explanation: '',
-    explanationLatex: '\\tan\\theta = \\dfrac{\\sin\\theta}{\\cos\\theta} = \\dfrac{\\frac{3}{5}}{\\frac{4}{5}} = \\dfrac{3}{4}',
+    explanationLatex: '\\text{波峰/波谷处 = 对称轴（一条竖线，左右折叠重合）}\\\\[4pt]\\text{过零点处 = 对称中心（一个点，旋转 180° 重合）}',
   },
 ];
+
+// 保留 trigPrereqQuiz 为空数组（已合并到 practice）
+export const trigPrereqQuiz: QuizQuestionData[] = [];

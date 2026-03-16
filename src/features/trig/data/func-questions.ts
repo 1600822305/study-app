@@ -74,6 +74,66 @@ export const trigFuncPractice: QuizQuestionData[] = [
   },
 ];
 
+// ── 即时训练（图像性质 + 五点作图） ──
+export const trigGraphPractice: QuizQuestionData[] = [
+  {
+    id: 'tg-p1',
+    question: 'y = cos x 在 [0, 2π] 上的单调递减区间是',
+    questionLatex: 'y = \\cos x \\text{ 在 } [0,\\; 2\\pi] \\text{ 上的单调递减区间是}',
+    options: [
+      { label: 'A', value: '[0,\\; \\pi]', isLatex: true },
+      { label: 'B', value: '[0,\\; 2\\pi]', isLatex: true },
+      { label: 'C', value: '[\\pi,\\; 2\\pi]', isLatex: true },
+      { label: 'D', value: '\\left[\\dfrac{\\pi}{2},\\; \\dfrac{3\\pi}{2}\\right]', isLatex: true },
+    ],
+    correctAnswer: '[0,\\; \\pi]',
+    explanation: '',
+    explanationLatex: '\\cos x \\text{ 在 } [2k\\pi,\\; \\pi+2k\\pi] \\text{ 上递减}\\\\[4pt]\\text{取 } k=0 \\text{，得 } [0,\\; \\pi]',
+  },
+  {
+    id: 'tg-p2',
+    question: '比较大小：sin(π/3) 与 sin(π/4)',
+    questionLatex: '\\text{比较大小：}\\sin\\dfrac{\\pi}{3} \\text{ 与 } \\sin\\dfrac{\\pi}{4}',
+    options: [
+      { label: 'A', value: '\\sin\\dfrac{\\pi}{3} > \\sin\\dfrac{\\pi}{4}', isLatex: true },
+      { label: 'B', value: '\\sin\\dfrac{\\pi}{3} < \\sin\\dfrac{\\pi}{4}', isLatex: true },
+      { label: 'C', value: '\\sin\\dfrac{\\pi}{3} = \\sin\\dfrac{\\pi}{4}', isLatex: true },
+      { label: 'D', value: '\\text{无法比较}', isLatex: true },
+    ],
+    correctAnswer: '\\sin\\dfrac{\\pi}{3} > \\sin\\dfrac{\\pi}{4}',
+    explanation: '',
+    explanationLatex: '\\sin x \\text{ 在 } \\left[0,\\;\\frac{\\pi}{2}\\right] \\text{ 上递增}\\\\[4pt]\\frac{\\pi}{3} > \\frac{\\pi}{4} \\Rightarrow \\sin\\frac{\\pi}{3} > \\sin\\frac{\\pi}{4}',
+  },
+  {
+    id: 'tg-p3',
+    question: '(π/2, 0) 是 y = cos x 的',
+    questionLatex: '\\left(\\dfrac{\\pi}{2},\\; 0\\right) \\text{ 是 } y = \\cos x \\text{ 的}',
+    options: [
+      { label: 'A', value: '\\text{对称轴}', isLatex: true },
+      { label: 'B', value: '\\text{对称中心}', isLatex: true },
+      { label: 'C', value: '\\text{最高点}', isLatex: true },
+      { label: 'D', value: '\\text{以上都不是}', isLatex: true },
+    ],
+    correctAnswer: '\\text{对称中心}',
+    explanation: '',
+    explanationLatex: '\\cos\\frac{\\pi}{2} = 0\\text{（过零点）→ 对称中心}\\\\[4pt]\\text{cos 的对称中心为 }\\left(\\frac{\\pi}{2}+k\\pi,\\;0\\right)',
+  },
+  {
+    id: 'tg-p4',
+    question: 'y = sin x 在 x = π/2 处是',
+    questionLatex: 'y = \\sin x \\text{ 在 } x = \\dfrac{\\pi}{2} \\text{ 处是}',
+    options: [
+      { label: 'A', value: '\\text{对称轴}', isLatex: true },
+      { label: 'B', value: '\\text{对称中心}', isLatex: true },
+      { label: 'C', value: '\\text{零点}', isLatex: true },
+      { label: 'D', value: '\\text{以上都不是}', isLatex: true },
+    ],
+    correctAnswer: '\\text{对称轴}',
+    explanation: '',
+    explanationLatex: '\\sin\\frac{\\pi}{2} = 1\\text{（波峰）→ 对称轴}\\\\[4pt]\\text{sin 的对称轴为 } x = \\frac{\\pi}{2}+k\\pi\\text{（波峰/波谷处）}',
+  },
+];
+
 // ── 高考真题 & 精华题 ──
 export const trigFuncExam: QuizQuestionData[] = [
   {
