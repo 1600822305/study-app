@@ -293,6 +293,11 @@ export function MiniQ5SinCenter() {
 }
 
 /* ── 象限符号图解 ── */
+/* ═══════════════════════════════════════════════════════
+   解三角形配图 — Solve Triangle Page
+   ═══════════════════════════════════════════════════════ */
+
+/* ── 象限符号图解 ── */
 export function QuadrantSignDiagram() {
   return (
     <div className="my-3" style={{ maxWidth: 360, margin: '0 auto' }}>

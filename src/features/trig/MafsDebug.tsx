@@ -173,6 +173,8 @@ function DebugPanel({ mafsProps, onClose, children, origWidth }: {
           style={{ overflow: 'hidden', width: origWidth || '100%', margin: '0 auto', cursor: 'grab' }}
           onMouseDown={e => {
             if (e.button !== 0) return;
+            const tag = (e.target as Element).tagName.toLowerCase();
+            if (tag === 'circle' || tag === 'ellipse') return;
             const startX = e.clientX, startY = e.clientY;
             const startPanX = panX, startPanY = panY;
             const xRange = origVB ? (origVB.x[1] - origVB.x[0]) / zoom : 8;
@@ -316,8 +318,7 @@ export function DebugMafs({ children, ...mafsProps }: DebugMafsProps) {
 }
 
 /* ── DText — 可调试的 MafsText ── */
-export function DText(props: ComponentProps<typeof MafsText>) {
-  const debug = useContext(MafsDebugCtx);
+function DTextDebug(props: ComponentProps<typeof MafsText>) {
   const register = useContext(DebugRegisterCtx);
   const selectFn = useContext(DebugSelectCtx);
   const selectedId = useContext(DebugSelectedCtx);
@@ -333,16 +334,12 @@ export function DText(props: ComponentProps<typeof MafsText>) {
   const finalColor = ov?.color ?? color;
 
   useEffect(() => {
-    if (debug && register) register(id, { label, type: 'text', x: point.x, y: point.y, size: finalSize as number, color: finalColor as string });
-    if (debug && selectFn && (point.x !== prevPos.current[0] || point.y !== prevPos.current[1])) {
+    if (register) register(id, { label, type: 'text', x: point.x, y: point.y, size: finalSize as number, color: finalColor as string });
+    if (selectFn && (point.x !== prevPos.current[0] || point.y !== prevPos.current[1])) {
       selectFn(id);
       prevPos.current = [point.x, point.y];
     }
   });
-
-  if (!debug) {
-    return <MafsText x={x} y={y} size={size} color={color} {...rest}>{children}</MafsText>;
-  }
 
   const isSelected = selectedId === id;
 
@@ -357,11 +354,17 @@ export function DText(props: ComponentProps<typeof MafsText>) {
   );
 }
 
+export function DText(props: ComponentProps<typeof MafsText>) {
+  const debug = useContext(MafsDebugCtx);
+  if (debug) return <DTextDebug {...props} />;
+  const { x, y, children, size, color, ...rest } = props;
+  return <MafsText x={x} y={y} size={size} color={color} {...rest}>{children}</MafsText>;
+}
+
 /* ── DLatex — 可调试的 LaTeX ── */
 const LATEX_SIZES = ['\\tiny', '\\scriptsize', '\\small', '(normal)', '\\large', '\\Large', '\\LARGE'];
 
-export function DLatex({ at, tex, color }: { at: [number, number]; tex: string; color?: string }) {
-  const debug = useContext(MafsDebugCtx);
+function DLatexDebug({ at, tex, color }: { at: [number, number]; tex: string; color?: string }) {
   const register = useContext(DebugRegisterCtx);
   const selectFn = useContext(DebugSelectCtx);
   const selectedId = useContext(DebugSelectedCtx);
@@ -377,16 +380,12 @@ export function DLatex({ at, tex, color }: { at: [number, number]; tex: string; 
   const scaledTex = scaleIdx === 3 ? tex : `{${sizeCmd} ${tex}}`;
 
   useEffect(() => {
-    if (debug && register) register(id, { label: tex, type: 'latex', x: point.x, y: point.y, size: scaleIdx, color: finalColor as string });
-    if (debug && selectFn && (point.x !== prevPos.current[0] || point.y !== prevPos.current[1])) {
+    if (register) register(id, { label: tex, type: 'latex', x: point.x, y: point.y, size: scaleIdx, color: finalColor as string });
+    if (selectFn && (point.x !== prevPos.current[0] || point.y !== prevPos.current[1])) {
       selectFn(id);
       prevPos.current = [point.x, point.y];
     }
   });
-
-  if (!debug) {
-    return <MafsLaTeX at={at} tex={tex} color={color} />;
-  }
 
   const isSelected = selectedId === id;
 
@@ -399,4 +398,10 @@ export function DLatex({ at, tex, color }: { at: [number, number]; tex: string; 
       )}
     </>
   );
+}
+
+export function DLatex({ at, tex, color }: { at: [number, number]; tex: string; color?: string }) {
+  const debug = useContext(MafsDebugCtx);
+  if (debug) return <DLatexDebug at={at} tex={tex} color={color} />;
+  return <MafsLaTeX at={at} tex={tex} color={color} />;
 }

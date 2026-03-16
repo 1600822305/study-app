@@ -1,0 +1,283 @@
+import type { QuizQuestionData } from '@/types';
+
+/** ── 正弦定理即时训练（5 题）── */
+export const sineLawPractice: QuizQuestionData[] = [
+  {
+    id: 'st-sl-1',
+    question: '在 △ABC 中，A=30°，B=45°，a=2，则 b=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}A=30°,\\;B=45°,\\;a=2\\text{，则 }b=\\text{？}',
+    options: [
+      { label: 'A', value: '\\sqrt{2}', isLatex: true },
+      { label: 'B', value: '2\\sqrt{2}', isLatex: true },
+      { label: 'C', value: '2', isLatex: true },
+      { label: 'D', value: '\\sqrt{6}', isLatex: true },
+    ],
+    correctAnswer: '2\\sqrt{2}',
+    explanation: '',
+    explanationLatex: '\\text{由正弦定理}\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}\\\\[4pt]b=\\dfrac{a\\sin B}{\\sin A}=\\dfrac{2\\times\\frac{\\sqrt{2}}{2}}{\\frac{1}{2}}=2\\sqrt{2}',
+  },
+  {
+    id: 'st-sl-2',
+    question: '在 △ABC 中，sinA:sinB:sinC=2:3:4，则 a:b:c=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}\\sin A:\\sin B:\\sin C=2:3:4\\text{，则 }a:b:c=\\text{？}',
+    options: [
+      { label: 'A', value: '2:3:4', isLatex: false },
+      { label: 'B', value: '4:9:16', isLatex: false },
+      { label: 'C', value: '4:3:2', isLatex: false },
+      { label: 'D', value: '1:2:3', isLatex: false },
+    ],
+    correctAnswer: '2:3:4',
+    explanation: '',
+    explanationLatex: '\\text{由正弦定理}\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}=2R\\\\[4pt]\\text{所以 }a=2R\\sin A,\\;b=2R\\sin B,\\;c=2R\\sin C\\\\[4pt]\\therefore a:b:c=\\sin A:\\sin B:\\sin C=2:3:4',
+  },
+  {
+    id: 'st-sl-3',
+    question: '在 △ABC 中，a/sinA=b/sinB=2R，R 是外接圆半径。若 R=1，A=30°，则 a=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}\\dfrac{a}{\\sin A}=2R\\text{，}R\\text{ 是外接圆半径。若 }R=1,\\;A=30°\\text{，则 }a=\\text{？}',
+    options: [
+      { label: 'A', value: '1', isLatex: false },
+      { label: 'B', value: '2', isLatex: false },
+      { label: 'C', value: '\\sqrt{3}', isLatex: true },
+      { label: 'D', value: '\\dfrac{\\sqrt{3}}{2}', isLatex: true },
+    ],
+    correctAnswer: '1',
+    explanation: '',
+    explanationLatex: 'a=2R\\sin A=2\\times 1\\times\\sin 30°=2\\times\\dfrac{1}{2}=1',
+  },
+  {
+    id: 'st-sl-5',
+    question: '在 △ABC 中，a=1，b=√3，A=30°，则 B 的可能值有几个？',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a=1,\\;b=\\sqrt{3},\\;A=30°\\text{，则 }B\\text{ 的可能值有几个？}',
+    options: [
+      { label: 'A', value: '0 \\text{ 个}', isLatex: true },
+      { label: 'B', value: '1 \\text{ 个}', isLatex: true },
+      { label: 'C', value: '2 \\text{ 个}', isLatex: true },
+      { label: 'D', value: '3 \\text{ 个}', isLatex: true },
+    ],
+    correctAnswer: '2 \\text{ 个}',
+    explanation: '',
+    explanationLatex: '\\dfrac{\\sin B}{b}=\\dfrac{\\sin A}{a}\\Rightarrow\\sin B=\\dfrac{\\sqrt{3}\\cdot\\frac{1}{2}}{1}=\\dfrac{\\sqrt{3}}{2}\\\\[4pt]B=60°\\text{ 或 }B=120°\\\\[4pt]\\text{验证 }B=60°\\text{：}A+B=90°<180°\\checkmark\\\\[2pt]\\text{验证 }B=120°\\text{：}A+B=150°<180°\\checkmark\\\\[4pt]\\text{两个都合法，所以 }B\\text{ 有 }\\textbf{2 个}\\text{可能值}\\\\[4pt]\\textbf{SSA 两解口诀：}\\text{已知两边和小边对角→可能有两解，需逐一验证}',
+  },
+  {
+    id: 'st-sl-6',
+    question: '在 △ABC 中，A=60°，B=45°，b=2，则 a=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}A=60°,\\;B=45°,\\;b=2\\text{，则 }a=\\text{？}',
+    options: [
+      { label: 'A', value: '\\sqrt{2}', isLatex: true },
+      { label: 'B', value: '\\sqrt{3}', isLatex: true },
+      { label: 'C', value: '\\sqrt{6}', isLatex: true },
+      { label: 'D', value: '2\\sqrt{3}', isLatex: true },
+    ],
+    correctAnswer: '\\sqrt{6}',
+    explanation: '',
+    explanationLatex: 'a=\\dfrac{b\\sin A}{\\sin B}=\\dfrac{2\\times\\frac{\\sqrt{3}}{2}}{\\frac{\\sqrt{2}}{2}}=\\dfrac{\\sqrt{3}}{\\frac{\\sqrt{2}}{2}}=\\dfrac{2\\sqrt{3}}{\\sqrt{2}}=\\sqrt{6}',
+  },
+];
+
+/** ── 余弦定理即时训练（5 题）── */
+export const cosineLawPractice: QuizQuestionData[] = [
+  {
+    id: 'st-cl-1',
+    question: '在 △ABC 中，b=3，c=5，A=120°，则 a²=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}b=3,\\;c=5,\\;A=120°\\text{，则 }a^2=\\text{？}',
+    options: [
+      { label: 'A', value: '19', isLatex: false },
+      { label: 'B', value: '34', isLatex: false },
+      { label: 'C', value: '49', isLatex: false },
+      { label: 'D', value: '64', isLatex: false },
+    ],
+    correctAnswer: '49',
+    explanation: '',
+    explanationLatex: 'a^2=b^2+c^2-2bc\\cos A=9+25-2(3)(5)\\cos 120°\\\\[4pt]=34-30\\times(-\\tfrac{1}{2})=34+15=49',
+  },
+  {
+    id: 'st-cl-2',
+    question: '在 △ABC 中，a=5，b=8，c=7，则最大角是？',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a=5,\\;b=8,\\;c=7\\text{，则最大角是？}',
+    options: [
+      { label: 'A', value: 'A', isLatex: false },
+      { label: 'B', value: 'B', isLatex: false },
+      { label: 'C', value: 'C', isLatex: false },
+      { label: 'D', value: '\\text{无法确定}', isLatex: true },
+    ],
+    correctAnswer: 'B',
+    explanation: '',
+    explanationLatex: '\\text{最长边 }b=8\\text{ 对应最大角 }B\\\\[4pt]\\cos B=\\dfrac{a^2+c^2-b^2}{2ac}=\\dfrac{25+49-64}{2\\cdot 5\\cdot 7}=\\dfrac{10}{70}=\\dfrac{1}{7}\\\\[4pt]\\text{答案为 }B',
+  },
+  {
+    id: 'st-cl-3',
+    question: '三角形三边为 3, 5, 7，该三角形是',
+    questionLatex: '\\text{三角形三边为 }3,\\;5,\\;7\\text{，该三角形是}',
+    options: [
+      { label: 'A', value: '\\text{锐角三角形}', isLatex: true },
+      { label: 'B', value: '\\text{直角三角形}', isLatex: true },
+      { label: 'C', value: '\\text{钝角三角形}', isLatex: true },
+      { label: 'D', value: '\\text{不构成三角形}', isLatex: true },
+    ],
+    correctAnswer: '\\text{钝角三角形}',
+    explanation: '',
+    explanationLatex: '\\text{最大边 }c=7\\text{，检验：}a^2+b^2=9+25=34\\\\[4pt]c^2=49>34=a^2+b^2\\\\[4pt]\\therefore\\cos C<0\\Rightarrow C>90°\\text{，是\\textbf{钝角}三角形}\\\\[4pt]\\textbf{口诀：}a^2+b^2>c^2\\text{→锐角；}=c^2\\text{→直角；}<c^2\\text{→钝角}',
+  },
+  {
+    id: 'st-cl-4',
+    question: '在 △ABC 中，a²=b²+c²+bc，则 A=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a^2=b^2+c^2+bc\\text{，则 }A=\\text{？}',
+    options: [
+      { label: 'A', value: '60°', isLatex: false },
+      { label: 'B', value: '90°', isLatex: false },
+      { label: 'C', value: '120°', isLatex: false },
+      { label: 'D', value: '150°', isLatex: false },
+    ],
+    correctAnswer: '120°',
+    explanation: '',
+    explanationLatex: '\\cos A=\\dfrac{b^2+c^2-a^2}{2bc}=\\dfrac{b^2+c^2-(b^2+c^2+bc)}{2bc}=\\dfrac{-bc}{2bc}=-\\dfrac{1}{2}\\\\[4pt]\\therefore A=120°',
+  },
+  {
+    id: 'st-cl-5',
+    question: '在 △ABC 中，a=√13，b=3，c=1，则 A=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a=\\sqrt{13},\\;b=3,\\;c=1\\text{，则 }A=\\text{？}',
+    options: [
+      { label: 'A', value: '60°', isLatex: false },
+      { label: 'B', value: '90°', isLatex: false },
+      { label: 'C', value: '120°', isLatex: false },
+      { label: 'D', value: '150°', isLatex: false },
+    ],
+    correctAnswer: '120°',
+    explanation: '',
+    explanationLatex: '\\cos A=\\dfrac{b^2+c^2-a^2}{2bc}=\\dfrac{9+1-13}{2\\cdot 3\\cdot 1}=\\dfrac{-3}{6}=-\\dfrac{1}{2}\\\\[4pt]\\therefore A=120°',
+  },
+];
+
+/** ── 面积公式即时训练（4 题）── */
+export const areaPractice: QuizQuestionData[] = [
+  {
+    id: 'st-ar-1',
+    question: '在 △ABC 中，a=6，b=4，C=30°，则面积 S=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a=6,\\;b=4,\\;C=30°\\text{，则面积 }S=\\text{？}',
+    options: [
+      { label: 'A', value: '6', isLatex: false },
+      { label: 'B', value: '12', isLatex: false },
+      { label: 'C', value: '6\\sqrt{3}', isLatex: true },
+      { label: 'D', value: '12\\sqrt{3}', isLatex: true },
+    ],
+    correctAnswer: '6',
+    explanation: '',
+    explanationLatex: 'S=\\dfrac{1}{2}ab\\sin C=\\dfrac{1}{2}\\cdot 6\\cdot 4\\cdot\\sin 30°=\\dfrac{1}{2}\\cdot 6\\cdot 4\\cdot\\dfrac{1}{2}=6',
+  },
+  {
+    id: 'st-ar-2',
+    question: '等边三角形边长为 2，则面积 S=?',
+    questionLatex: '\\text{等边三角形边长为 }2\\text{，则面积 }S=\\text{？}',
+    options: [
+      { label: 'A', value: '1', isLatex: false },
+      { label: 'B', value: '\\sqrt{3}', isLatex: true },
+      { label: 'C', value: '2', isLatex: false },
+      { label: 'D', value: '2\\sqrt{3}', isLatex: true },
+    ],
+    correctAnswer: '\\sqrt{3}',
+    explanation: '',
+    explanationLatex: 'S=\\dfrac{1}{2}\\cdot 2\\cdot 2\\cdot\\sin 60°=2\\cdot\\dfrac{\\sqrt{3}}{2}=\\sqrt{3}\\\\[4pt]\\textbf{记住：}\\text{等边三角形面积}=\\dfrac{\\sqrt{3}}{4}a^2=\\dfrac{\\sqrt{3}}{4}\\cdot 4=\\sqrt{3}',
+  },
+  {
+    id: 'st-ar-3',
+    question: '在 △ABC 中，sinA=4/5，b=3，c=5，则面积 S=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}\\sin A=\\dfrac{4}{5},\\;b=3,\\;c=5\\text{，则面积 }S=\\text{？}',
+    options: [
+      { label: 'A', value: '6', isLatex: false },
+      { label: 'B', value: '10', isLatex: false },
+      { label: 'C', value: '12', isLatex: false },
+      { label: 'D', value: '15', isLatex: false },
+    ],
+    correctAnswer: '6',
+    explanation: '',
+    explanationLatex: 'S=\\dfrac{1}{2}bc\\sin A=\\dfrac{1}{2}\\cdot 3\\cdot 5\\cdot\\dfrac{4}{5}=6',
+  },
+  {
+    id: 'st-ar-4',
+    question: '在 △ABC 中，a=5，b=8，c=7，则面积 S=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a=5,\\;b=8,\\;c=7\\text{，则面积 }S=\\text{？}',
+    options: [
+      { label: 'A', value: '10', isLatex: false },
+      { label: 'B', value: '10\\sqrt{3}', isLatex: true },
+      { label: 'C', value: '20', isLatex: false },
+      { label: 'D', value: '14\\sqrt{3}', isLatex: true },
+    ],
+    correctAnswer: '10\\sqrt{3}',
+    explanation: '',
+    explanationLatex: '\\text{先用余弦定理求角：}\\cos C=\\dfrac{a^2+b^2-c^2}{2ab}=\\dfrac{25+64-49}{80}=\\dfrac{40}{80}=\\dfrac{1}{2}\\\\[4pt]\\therefore C=60°,\\;\\sin C=\\dfrac{\\sqrt{3}}{2}\\\\[4pt]S=\\dfrac{1}{2}ab\\sin C=\\dfrac{1}{2}\\cdot 5\\cdot 8\\cdot\\dfrac{\\sqrt{3}}{2}=10\\sqrt{3}',
+  },
+];
+
+/** ── 综合实战即时训练（5 题）── */
+export const comprehensivePractice: QuizQuestionData[] = [
+  {
+    id: 'st-cp-1',
+    question: '在 △ABC 中，b²+c²-a²=bc，则 A=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}b^2+c^2-a^2=bc\\text{，则 }A=\\text{？}',
+    options: [
+      { label: 'A', value: '\\dfrac{\\pi}{6}', isLatex: true },
+      { label: 'B', value: '\\dfrac{\\pi}{3}', isLatex: true },
+      { label: 'C', value: '\\dfrac{\\pi}{4}', isLatex: true },
+      { label: 'D', value: '\\dfrac{2\\pi}{3}', isLatex: true },
+    ],
+    correctAnswer: '\\dfrac{\\pi}{3}',
+    explanation: '',
+    explanationLatex: '\\cos A=\\dfrac{b^2+c^2-a^2}{2bc}=\\dfrac{bc}{2bc}=\\dfrac{1}{2}\\\\[4pt]\\therefore A=\\dfrac{\\pi}{3}',
+  },
+  {
+    id: 'st-cp-2',
+    question: '在 △ABC 中，a=2，A=60°，b+c=4，则面积 S=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a=2,\\;A=60°,\\;b+c=4\\text{，则面积 }S=\\text{？}',
+    options: [
+      { label: 'A', value: '\\sqrt{3}', isLatex: true },
+      { label: 'B', value: '2\\sqrt{3}', isLatex: true },
+      { label: 'C', value: '3', isLatex: false },
+      { label: 'D', value: '2', isLatex: false },
+    ],
+    correctAnswer: '\\sqrt{3}',
+    explanation: '',
+    explanationLatex: '\\textbf{第①步：}a^2=b^2+c^2-2bc\\cos 60°\\Rightarrow 4=(b+c)^2-2bc-bc=16-3bc\\\\[4pt]\\therefore bc=4\\\\[4pt]\\textbf{第②步：}S=\\dfrac{1}{2}bc\\sin A=\\dfrac{1}{2}\\cdot 4\\cdot\\dfrac{\\sqrt{3}}{2}=\\sqrt{3}',
+  },
+  {
+    id: 'st-cp-3',
+    question: '在 △ABC 中，A=π/3，b=1，面积 S=√3/4，则 a=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}A=\\dfrac{\\pi}{3},\\;b=1,\\;S=\\dfrac{\\sqrt{3}}{4}\\text{，则 }a=\\text{？}',
+    options: [
+      { label: 'A', value: '1', isLatex: false },
+      { label: 'B', value: '\\sqrt{2}', isLatex: true },
+      { label: 'C', value: '\\sqrt{3}', isLatex: true },
+      { label: 'D', value: '2', isLatex: false },
+    ],
+    correctAnswer: '1',
+    explanation: '',
+    explanationLatex: 'S=\\dfrac{1}{2}bc\\sin A\\Rightarrow\\dfrac{\\sqrt{3}}{4}=\\dfrac{1}{2}\\cdot 1\\cdot c\\cdot\\dfrac{\\sqrt{3}}{2}=\\dfrac{\\sqrt{3}c}{4}\\\\[4pt]\\therefore c=1\\\\[4pt]a^2=b^2+c^2-2bc\\cos A=1+1-2\\cdot 1\\cdot 1\\cdot\\dfrac{1}{2}=1\\\\[4pt]\\therefore a=1\\text{（等边三角形）}',
+  },
+  {
+    id: 'st-cp-4',
+    question: '在 △ABC 中，2cosC(acosB+bcosA)=c，则 C=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}2\\cos C(a\\cos B+b\\cos A)=c\\text{，则 }C=\\text{？}',
+    options: [
+      { label: 'A', value: '\\dfrac{\\pi}{6}', isLatex: true },
+      { label: 'B', value: '\\dfrac{\\pi}{3}', isLatex: true },
+      { label: 'C', value: '\\dfrac{\\pi}{4}', isLatex: true },
+      { label: 'D', value: '\\dfrac{2\\pi}{3}', isLatex: true },
+    ],
+    correctAnswer: '\\dfrac{\\pi}{3}',
+    explanation: '',
+    explanationLatex: '\\textbf{关键：射影定理 }a\\cos B+b\\cos A=c\\\\[4pt]\\text{代入：}2\\cos C\\cdot c=c\\\\[4pt]2\\cos C=1\\Rightarrow\\cos C=\\dfrac{1}{2}\\Rightarrow C=\\dfrac{\\pi}{3}',
+  },
+  {
+    id: 'st-cp-5',
+    question: '在 △ABC 中，a=2sinA，则外接圆半径 R=?',
+    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}a=2\\sin A\\text{，则外接圆半径 }R=\\text{？}',
+    options: [
+      { label: 'A', value: '\\dfrac{1}{2}', isLatex: true },
+      { label: 'B', value: '1', isLatex: false },
+      { label: 'C', value: '2', isLatex: false },
+      { label: 'D', value: '\\text{无法确定}', isLatex: true },
+    ],
+    correctAnswer: '1',
+    explanation: '',
+    explanationLatex: '\\text{由正弦定理：}\\dfrac{a}{\\sin A}=2R\\\\[4pt]\\text{又 }a=2\\sin A\\Rightarrow\\dfrac{2\\sin A}{\\sin A}=2R\\\\[4pt]2=2R\\Rightarrow R=1',
+  },
+];
