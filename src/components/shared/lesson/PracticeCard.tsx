@@ -22,11 +22,13 @@ interface PracticeCardProps {
   questions: QuizQuestionData[];
   /** 打印模式下选项列数，默认 1 */
   printOptionCols?: 1 | 2 | 4;
+  /** 交互模式下选项列数，默认 1（纵向堆叠） */
+  optionCols?: 1 | 2 | 4;
 }
 
 // ── Component ──
 
-export function PracticeCard({ title = '✏️ 即时练习', questions, printOptionCols = 1 }: PracticeCardProps) {
+export function PracticeCard({ title = '✏️ 即时练习', questions, printOptionCols = 1, optionCols = 1 }: PracticeCardProps) {
   const { isPrinting } = usePrintMode();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -182,7 +184,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
 
         {/* 选择题选项 */}
         {!isBlank && current.options && (
-          <div className="space-y-2">
+          <div className={optionCols === 4 ? 'grid grid-cols-4 gap-1.5' : optionCols === 2 ? 'grid grid-cols-2 gap-1.5' : 'space-y-2'}>
             {current.options.map((opt) => {
               let cls = 'border-gray-200 bg-white text-gray-700 hover:border-green-400 hover:bg-green-50';
               if (answered) {

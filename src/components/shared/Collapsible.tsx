@@ -49,8 +49,8 @@ export function Collapsible({
   };
 
   return (
-    <div className={`rounded-xl border ${styles[variant]} mb-3 overflow-hidden`}>
-      <div className="flex items-center px-4 py-3">
+    <div className={`rounded-xl border ${styles[variant]} mb-1.5 overflow-hidden`}>
+      <div className="flex items-center px-4 py-2">
         <button
           onClick={() => setOpen(!open)}
           className="flex-1 flex items-center gap-2 text-left font-medium cursor-pointer hover:opacity-80 transition-opacity"
@@ -65,7 +65,7 @@ export function Collapsible({
         )}
       </div>
       {open && (
-        <div className="px-4 pb-4 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-3">
+        <div className="px-4 pb-2 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-2">
           {children}
         </div>
       )}
