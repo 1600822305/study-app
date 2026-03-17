@@ -2,7 +2,7 @@ import type { QuizQuestionData } from '@/types';
 import type { EssayQuestion } from '@/components/shared/ExamPaper';
 
 import { trigPrereqPractice } from '@/features/trig/data/prereq-questions';
-import { trigFuncExam, trigGraphPractice } from '@/features/trig/data/func-questions';
+import { trigFuncExam } from '@/features/trig/data/func-questions';
 import {
   sumDiffPractice,
   comprehensivePractice,
@@ -33,9 +33,26 @@ const choicePicks = [
   ...pick(trigPrereqPractice, [
     'tp-6',   // sin135° 诱导公式
   ]),
-  ...pick(trigGraphPractice, [
-    'tg-p1',  // cos x 递减区间
-  ]),
+  // 2025 高考第 4 题：tan 函数对称中心
+  {
+    id: 's5e-gk25-4',
+    question: '（2025高考）若点(a,0)(a>0)是函数 y=2tan(x−π/3) 图象的一个对称中心，则 a 的最小值为',
+    questionLatex:
+      '\\text{（2025高考）若点 } (a,0)\\;(a>0) \\text{ 是函数 } y=2\\tan\\!\\left(x-\\dfrac{\\pi}{3}\\right) \\text{ 图象的一个对称中心，则 } a \\text{ 的最小值为}',
+    type: 'choice' as const,
+    options: [
+      { label: 'A', value: '\\dfrac{\\pi}{6}' },
+      { label: 'B', value: '\\dfrac{\\pi}{3}' },
+      { label: 'C', value: '\\dfrac{\\pi}{2}' },
+      { label: 'D', value: '\\dfrac{4\\pi}{3}' },
+    ],
+    correctAnswer: 'B',
+    explanation: '',
+    explanationLatex:
+      'y=2\\tan\\!\\left(x-\\dfrac{\\pi}{3}\\right) \\text{ 的对称中心在零点处}\\\\[4pt]' +
+      '\\tan\\!\\left(a-\\dfrac{\\pi}{3}\\right)=0 \\Rightarrow a-\\dfrac{\\pi}{3}=k\\pi\\;(k\\in\\mathbb{Z})\\\\[4pt]' +
+      'a=k\\pi+\\dfrac{\\pi}{3},\\; a>0 \\text{ 时最小值为 } k=0 \\Rightarrow a=\\dfrac{\\pi}{3}',
+  },
   ...pick(trigFuncExam, [
     'tf-e4',  // 图像变换（先平移后伸缩）
     'tf-e7',  // 给定区间上的最值
@@ -157,7 +174,7 @@ export const stage5ExamQuestions: QuizQuestionData[] = [
 // 题 17（10分）：降幂+辅助角→性质综合（2023新课标I卷风格）
 // 题 18（10分）：条件等式推角→正弦定理+面积（2024新课标I卷风格）
 // 题 19（8分）：诱导公式+二倍角化简→已知值求值（综合运算）
-// 题 20（6分）：三角函数图像→由图反求解析式+性质
+// 题 20（6分）：2025高考改编→二倍角+解三角形综合（cos2A+cos2B+面积条件求C和AB）
 // 题 21（6分）：解三角形→由面积+边角关系求边+判断三角形形状
 export const stage5EssayQuestions: EssayQuestion[] = [
   {
@@ -227,21 +244,32 @@ export const stage5EssayQuestions: EssayQuestion[] = [
     id: 's5e-essay-4',
     pageBreak: true,
     questionLatex:
-      '\\text{已知函数 } f(x) = A\\sin(\\omega x+\\varphi)\\;(A>0,\\;\\omega>0,\\;|\\varphi|<\\dfrac{\\pi}{2})\\text{ 的}' +
-      '\\text{相邻两条对称轴之间的距离为 } \\dfrac{\\pi}{2}\\text{，且 } f\\!\\left(\\dfrac{\\pi}{6}\\right) = \\sqrt{3}\\text{。}\\\\[6pt]' +
-      '\\text{（1）求 } f(x) \\text{ 的解析式；}\\\\[4pt]' +
-      '\\text{（2）求 } f(x) \\text{ 在 } \\left[-\\dfrac{\\pi}{4},\\;\\dfrac{\\pi}{4}\\right] \\text{ 上的最大值和最小值。}',
+      '\\text{（2025高考改编）已知 } \\triangle ABC \\text{ 的面积为 } \\dfrac{1}{4}\\text{，且满足}\\\\[6pt]' +
+      '\\cos 2A + \\cos 2B + 2\\sin C = 2\\text{，}\\quad \\cos A\\cos B\\sin C = \\dfrac{1}{4}\\text{。}\\\\[6pt]' +
+      '\\text{（1）求角 } C \\text{ 的大小；}\\\\[4pt]' +
+      '\\text{（2）求 } AB \\text{ 的值。}',
     score: 6,
-    lines: 17,
+    lines: 18,
     answerLatex:
-      '\\text{（1）相邻对称轴距离} = \\dfrac{T}{2} = \\dfrac{\\pi}{2} \\Rightarrow T = \\pi \\Rightarrow \\omega = \\dfrac{2\\pi}{T} = 2 \\\\[4pt]' +
-      'f\\!\\left(\\dfrac{\\pi}{6}\\right) = A\\sin\\!\\left(\\dfrac{\\pi}{3}+\\varphi\\right) = \\sqrt{3} \\\\[4pt]' +
-      '\\text{尝试 } A=\\sqrt{3}\\text{：} \\sin\\!\\left(\\dfrac{\\pi}{3}+\\varphi\\right) = 1 \\Rightarrow \\dfrac{\\pi}{3}+\\varphi = \\dfrac{\\pi}{2} \\Rightarrow \\varphi = \\dfrac{\\pi}{6} \\\\[4pt]' +
-      '\\text{验证 } |\\varphi| = \\dfrac{\\pi}{6} < \\dfrac{\\pi}{2} \\;\\checkmark \\\\[4pt]' +
-      '\\therefore f(x) = \\sqrt{3}\\sin\\!\\left(2x+\\dfrac{\\pi}{6}\\right) \\\\[6pt]' +
-      '\\text{（2）} x \\in \\left[-\\dfrac{\\pi}{4},\\dfrac{\\pi}{4}\\right] \\Rightarrow 2x+\\dfrac{\\pi}{6} \\in \\left[-\\dfrac{\\pi}{3},\\dfrac{2\\pi}{3}\\right] \\\\[4pt]' +
-      '\\sin\\!\\left(2x+\\dfrac{\\pi}{6}\\right) \\in \\left[-\\dfrac{\\sqrt{3}}{2},\\;1\\right] \\\\[4pt]' +
-      'f_{\\max} = \\sqrt{3},\\; f_{\\min} = \\sqrt{3}\\!\\times\\!\\left(-\\dfrac{\\sqrt{3}}{2}\\right) = -\\dfrac{3}{2}',
+      '\\text{（1）}\\cos 2A+\\cos 2B+2\\sin C=2\\\\[4pt]' +
+      '(1-2\\sin^2 A)+(1-2\\sin^2 B)+2\\sin C=2\\\\[4pt]' +
+      '\\sin^2 A+\\sin^2 B = \\sin C \\quad \\cdots(*)\\\\[4pt]' +
+      '\\text{由正弦定理 } \\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}=2R\\\\[4pt]' +
+      '(*) \\Rightarrow a^2+b^2 = 4R^2\\sin C = 2R \\cdot c\\\\[4pt]' +
+      '\\text{面积 } S=\\dfrac{1}{2}ab\\sin C=\\dfrac{1}{4},\\; \\cos A\\cos B\\sin C=\\dfrac{1}{4}\\\\[4pt]' +
+      '\\text{由积化和差：} \\cos A\\cos B = \\dfrac{1}{2}[\\cos(A-B)+\\cos(A+B)]\\\\[4pt]' +
+      '= \\dfrac{1}{2}[\\cos(A-B)-\\cos C]\\\\[4pt]' +
+      '\\text{结合 } (*) \\text{ 和面积条件，设 } C=\\dfrac{\\pi}{2}\\text{：}\\\\[4pt]' +
+      '\\sin C=1,\\; (*) \\Rightarrow \\sin^2 A+\\sin^2 B=1=\\sin^2 A+\\cos^2 A \\Rightarrow \\sin B=\\cos A\\\\[4pt]' +
+      '\\text{即 } B=\\dfrac{\\pi}{2}-A\\text{，验证 } A+B+C=\\pi \\;\\checkmark\\\\[4pt]' +
+      '\\cos A\\cos B\\sin C=\\cos A\\sin A=\\dfrac{1}{2}\\sin 2A=\\dfrac{1}{4} \\Rightarrow \\sin 2A=\\dfrac{1}{2}\\\\[4pt]' +
+      '\\therefore C = \\dfrac{\\pi}{2}\\\\[6pt]' +
+      '\\text{（2）} S=\\dfrac{1}{2}ab=\\dfrac{1}{4} \\Rightarrow ab=\\dfrac{1}{2}\\\\[4pt]' +
+      '\\sin 2A=\\dfrac{1}{2} \\Rightarrow 2A=\\dfrac{\\pi}{6} \\text{ 或 } \\dfrac{5\\pi}{6},\\; A=\\dfrac{\\pi}{12} \\text{ 或 } \\dfrac{5\\pi}{12}\\\\[4pt]' +
+      'AB=c=\\sqrt{a^2+b^2}\\;(\\text{勾股}),\\; a^2+b^2=(a+b)^2-2ab\\\\[4pt]' +
+      '\\text{由 } a=2R\\sin A,\\;b=2R\\cos A,\\;ab=\\dfrac{1}{2} \\Rightarrow 2R^2\\sin 2A=\\dfrac{1}{2} \\Rightarrow R^2=\\dfrac{1}{2}\\\\[4pt]' +
+      'a^2+b^2=4R^2(\\sin^2 A+\\cos^2 A)=4R^2=2\\\\[4pt]' +
+      'AB=c=\\sqrt{2}',
   },
   {
     id: 's5e-essay-5',
