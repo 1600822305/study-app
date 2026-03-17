@@ -6,36 +6,41 @@ import {
   stage4BlankQuestions,
   stage4EssayQuestions,
 } from './data/stage4-exam';
+import { Stage4ExamAnswers } from './stage4-exam-answers';
 
 export function Stage4ExamPage() {
-  const { isPrinting } = usePrintMode();
+  const { isPrinting, printOptions } = usePrintMode();
 
   // 打印模式：渲染正式试卷格式
   if (isPrinting) {
     return (
-      <ExamPaper
-        title="第四阶段测试卷：平面向量"
-        subtitle="（向量运算 · 数量积 · 垂直与平行）"
-        timeLimit={60}
-        totalScore={120}
-        sections={[
-          {
-            title: '选择题',
-            scorePerQuestion: 5,
-            questions: stage4ChoiceQuestions,
-          },
-          {
-            title: '填空题',
-            scorePerQuestion: 5,
-            questions: stage4BlankQuestions,
-          },
-          {
-            variant: 'essay',
-            title: '解答题',
-            questions: stage4EssayQuestions,
-          },
-        ]}
-      />
+      <>
+        <ExamPaper
+          title="第四阶段测试卷：平面向量"
+          subtitle="（向量运算 · 数量积 · 垂直与平行）"
+          timeLimit={60}
+          totalScore={120}
+          hideBuiltinAnswers
+          sections={[
+            {
+              title: '选择题',
+              scorePerQuestion: 5,
+              questions: stage4ChoiceQuestions,
+            },
+            {
+              title: '填空题',
+              scorePerQuestion: 5,
+              questions: stage4BlankQuestions,
+            },
+            {
+              variant: 'essay',
+              title: '解答题',
+              questions: stage4EssayQuestions,
+            },
+          ]}
+        />
+        {printOptions.showAnswers && <Stage4ExamAnswers />}
+      </>
     );
   }
 
@@ -45,7 +50,7 @@ export function Stage4ExamPage() {
       <PageHeader
         stage="第四阶段 · 平面向量"
         title="📝 阶段考试"
-        subtitle={`选择题（6题）+ 填空题（5题），共 ${stage4ExamQuestions.length} 题`}
+        subtitle={`选择题（8题）+ 填空题（6题），共 ${stage4ExamQuestions.length} 题`}
         tags={[
           { label: '垂直判定', color: 'blue' },
           { label: '平行判定', color: 'green' },

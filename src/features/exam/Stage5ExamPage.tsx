@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { QuizPanel, ExportButton, PageHeader, ExamPaper } from '@/components/shared';
 import { usePrintMode } from '@/hooks';
 import {
@@ -7,9 +8,26 @@ import {
   stage5EssayQuestions,
 } from './data/stage5-exam';
 import { Stage5ExamAnswers } from './stage5-exam-answers';
+import { Exam18Triangle, Exam20RightTriangle, Exam21TriangleHeight } from './exam-diagrams';
+
+// 解答题配图映射（id → mafs 组件）
+const essayDiagramMap: Record<string, React.ReactNode> = {
+  's5e-essay-2': <Exam18Triangle />,
+  's5e-essay-4': <Exam20RightTriangle />,
+  's5e-essay-5': <Exam21TriangleHeight />,
+};
 
 export function Stage5ExamPage() {
   const { isPrinting, printOptions } = usePrintMode();
+
+  // 将 mafs 配图注入解答题数据
+  const essayWithDiagrams = useMemo(
+    () => stage5EssayQuestions.map((q) => ({
+      ...q,
+      diagramNode: essayDiagramMap[q.id],
+    })),
+    [],
+  );
 
   // 打印模式：渲染正式试卷格式
   if (isPrinting) {
@@ -36,7 +54,7 @@ export function Stage5ExamPage() {
             {
               variant: 'essay',
               title: '解答题',
-              questions: stage5EssayQuestions,
+              questions: essayWithDiagrams,
             },
           ]}
         />

@@ -1,44 +1,225 @@
 import type { QuizQuestionData } from '@/types';
 import type { EssayQuestion } from '@/components/shared/ExamPaper';
 
-import { vectorExamQuestions } from '@/features/vector/data/vector-exam';
+// ── 第四阶段考试：平面向量（全部独立自编，按高考考点分布） ──
+// 选择题 8×5 = 40分，填空题 6×5 = 30分，解答题 12+12+13+13 = 50分，共 120 分
+// 答案与解析统一在 stage4-exam-answers.tsx 中，此文件只存题目数据
 
-// ── 第四阶段考试：平面向量 ──
-// 选择题 6×5 = 30分，填空题 5×5 = 25分，解答题 20+15+15+15 = 65分，共 120 分
+// ── 选择题（8 题，从易到难） ──
+export const stage4ChoiceQuestions: QuizQuestionData[] = [
+  // 1. 向量基本概念（共线/相等）
+  {
+    id: 's4e-c1',
+    question: '向量基本概念',
+    questionLatex:
+      '\\text{下列说法正确的是}',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '\\text{零向量没有方向}', isLatex: true },
+      { label: 'B', value: '\\text{模相等的两个向量是相等向量}', isLatex: true },
+      { label: 'C', value: '\\text{共线向量一定在同一直线上}', isLatex: true },
+      { label: 'D', value: '\\text{不共线的两个非零向量可以作为一组基底}', isLatex: true },
+    ],
+    correctAnswer: 'D',
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 2. 向量线性运算（坐标）
+  {
+    id: 's4e-c2',
+    question: '向量线性运算',
+    questionLatex:
+      '\\text{已知 } \\vec{a}=(2,-1),\\; \\vec{b}=(-3,4)\\text{，则 } 2\\vec{a}-\\vec{b} =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '(7,-6)', isLatex: true },
+      { label: 'B', value: '(1,-6)', isLatex: true },
+      { label: 'C', value: '(7,2)', isLatex: true },
+      { label: 'D', value: '(1,2)', isLatex: true },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 3. 平行判定求参数
+  {
+    id: 's4e-c3',
+    question: '平行判定',
+    questionLatex:
+      '\\text{若 } \\vec{a}=(2,3),\\; \\vec{b}=(m,-2)\\text{，且 } \\vec{a} \\parallel \\vec{b}\\text{，则 } m =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '-\\dfrac{4}{3}', isLatex: true },
+      { label: 'B', value: '\\dfrac{4}{3}', isLatex: true },
+      { label: 'C', value: '-\\dfrac{3}{2}', isLatex: true },
+      { label: 'D', value: '\\dfrac{3}{2}', isLatex: true },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 4. 垂直判定求参数（高频考点）
+  {
+    id: 's4e-c4',
+    question: '垂直判定',
+    questionLatex:
+      '\\text{已知 } \\vec{a}=(1,2),\\; \\vec{b}=(x,1)\\text{，若 } \\vec{a} \\perp (\\vec{a}+\\vec{b})\\text{，则 } x =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '-7' },
+      { label: 'B', value: '-6' },
+      { label: 'C', value: '7' },
+      { label: 'D', value: '6' },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 5. 数量积与夹角
+  {
+    id: 's4e-c5',
+    question: '数量积求夹角',
+    questionLatex:
+      '\\text{已知 } \\vec{a}=(1,\\sqrt{3}),\\; \\vec{b}=(\\sqrt{3},1)\\text{，则 } \\vec{a} \\text{ 与 } \\vec{b} \\text{ 的夹角为}',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '30\\degree', isLatex: true },
+      { label: 'B', value: '45\\degree', isLatex: true },
+      { label: 'C', value: '60\\degree', isLatex: true },
+      { label: 'D', value: '90\\degree', isLatex: true },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 6. 模的展开计算
+  {
+    id: 's4e-c6',
+    question: '模的展开',
+    questionLatex:
+      '\\text{已知 } |\\vec{a}|=2,\\; |\\vec{b}|=1,\\; \\vec{a}\\cdot\\vec{b}=-1\\text{，则 } |\\vec{a}-2\\vec{b}| =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '2', isLatex: true },
+      { label: 'B', value: '2\\sqrt{2}', isLatex: true },
+      { label: 'C', value: '3', isLatex: true },
+      { label: 'D', value: '2\\sqrt{3}', isLatex: true },
+    ],
+    correctAnswer: 'D',
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 7. 垂直条件+展开（综合）
+  {
+    id: 's4e-c7',
+    question: '垂直+展开综合',
+    questionLatex:
+      '\\text{已知 } |\\vec{a}|=2,\\; |\\vec{b}|=1\\text{，且 } \\vec{a} \\perp (\\vec{a}-2\\vec{b})\\text{，则 } |\\vec{a}-\\vec{b}| =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '1', isLatex: true },
+      { label: 'B', value: '\\sqrt{2}', isLatex: true },
+      { label: 'C', value: '\\sqrt{3}', isLatex: true },
+      { label: 'D', value: '2', isLatex: true },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 8.（2023高考改编）含参垂直
+  {
+    id: 's4e-c8',
+    question: '（2023高考改编）含参垂直',
+    questionLatex:
+      '\\text{已知 } \\vec{a}=(1,1),\\; \\vec{b}=(1,-1)\\text{，若 } (\\vec{a}+\\lambda\\vec{b}) \\perp (\\vec{a}+\\mu\\vec{b})\\text{，则}',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '\\lambda + \\mu = 1', isLatex: true },
+      { label: 'B', value: '\\lambda + \\mu = -1', isLatex: true },
+      { label: 'C', value: '\\lambda\\mu = 1', isLatex: true },
+      { label: 'D', value: '\\lambda\\mu = -1', isLatex: true },
+    ],
+    correctAnswer: 'D',
+    explanation: '',
+    explanationLatex: '',
+  },
+];
 
-/** 按 ID 从题库中筛选 */
-function pick(pool: QuizQuestionData[], ids: string[]): QuizQuestionData[] {
-  const idSet = new Set(ids);
-  return pool.filter((q) => idSet.has(q.id));
-}
-
-/** 加前缀避免 ID 冲突 */
-function prefixIds(questions: QuizQuestionData[], prefix: string): QuizQuestionData[] {
-  return questions.map((q) => ({ ...q, id: `${prefix}-${q.id}` }));
-}
-
-// 选择题精选（6题）：垂直判定、平行判定、夹角、展开求模、圆上向量、垂直+展开综合
-const choicePicks = pick(vectorExamQuestions, [
-  'vex1',  // 垂直判定求参数（2023真题）
-  'vex2',  // 平行判定求参数
-  'vex3',  // 数量积求夹角
-  'vex4',  // |a-2b| 展开求模
-  'vex9',  // 圆上向量数量积（带图）
-  'vex10', // 垂直条件+展开求模综合
-]);
-
-// 填空题精选（5题）：坐标综合、平行四边形、三角形向量、对角线交点、夹角余弦
-const blankPicks = pick(vectorExamQuestions, [
-  'vex5',  // |a+b|=√10 求 x
-  'vex6',  // 平行四边形求第四顶点
-  'vex7',  // 三角形中 DE 用基底表示（带图）
-  'vex8',  // 平行四边形对角线交点（带图）
-  'vex11', // 数量积求夹角余弦
-]);
-
-// 分节导出（供 ExamPaper 使用）
-export const stage4ChoiceQuestions = prefixIds(choicePicks, 's4e');
-export const stage4BlankQuestions = prefixIds(blankPicks, 's4e');
+// ── 填空题（6 题） ──
+export const stage4BlankQuestions: QuizQuestionData[] = [
+  // 9. 向量加法求模
+  {
+    id: 's4e-b1',
+    question: '向量加法求模',
+    questionLatex:
+      '\\text{已知 } \\vec{a}=(1,2),\\; \\vec{b}=(x,1)\\text{，若 } |\\vec{a}+\\vec{b}|=\\sqrt{10}\\text{，则 } x = \\underline{\\qquad}',
+    type: 'blank',
+    correctAnswer: '0或-2',
+    acceptableAnswers: ['0 或 -2', '-2或0', '-2 或 0', '0,-2', '-2,0'],
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 10. 平行四边形求顶点
+  {
+    id: 's4e-b2',
+    question: '平行四边形求顶点',
+    questionLatex:
+      '\\text{平行四边形 } ABCD \\text{ 中，} A(1,2),\\; B(4,3),\\; C(6,7)\\text{，则 } D = \\underline{\\qquad}',
+    type: 'blank',
+    correctAnswer: '(3,6)',
+    acceptableAnswers: ['(3, 6)', '3,6', 'D(3,6)', 'D(3, 6)'],
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 11. 数量积求夹角余弦
+  {
+    id: 's4e-b3',
+    question: '数量积求夹角余弦',
+    questionLatex:
+      '\\text{已知 } |\\vec{a}|=3,\\; |\\vec{b}|=4,\\; \\vec{a}\\cdot\\vec{b}=6\\text{，则 } \\cos\\langle\\vec{a},\\vec{b}\\rangle = \\underline{\\qquad}',
+    type: 'blank',
+    correctAnswer: '1/2',
+    acceptableAnswers: ['0.5', '½', '\\frac{1}{2}'],
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 12. 向量投影
+  {
+    id: 's4e-b4',
+    question: '向量投影',
+    questionLatex:
+      '\\text{已知 } \\vec{a}=(3,4),\\; \\vec{b}=(1,0)\\text{，则 } \\vec{a} \\text{ 在 } \\vec{b} \\text{ 方向上的投影为 } \\underline{\\qquad}',
+    type: 'blank',
+    correctAnswer: '3',
+    acceptableAnswers: ['3.0'],
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 13. 中点向量
+  {
+    id: 's4e-b5',
+    question: '中点向量',
+    questionLatex:
+      '\\text{已知 } A(1,3),\\; B(5,7)\\text{，} M \\text{ 为 } AB \\text{ 中点，} O \\text{ 为原点，则 } \\overrightarrow{OM} = \\underline{\\qquad}',
+    type: 'blank',
+    correctAnswer: '(3,5)',
+    acceptableAnswers: ['(3, 5)', '3,5'],
+    explanation: '',
+    explanationLatex: '',
+  },
+  // 14. 基底表示（综合）
+  {
+    id: 's4e-b6',
+    question: '基底表示',
+    questionLatex:
+      '\\text{在 } \\triangle ABC \\text{ 中，} D \\text{ 是 } BC \\text{ 的中点，} E \\text{ 在 } AB \\text{ 上且 } \\overrightarrow{AE}=\\dfrac{1}{3}\\overrightarrow{AB}\\text{。}\\\\[4pt]\\text{用 } \\overrightarrow{AB},\\; \\overrightarrow{AC} \\text{ 表示 } \\overrightarrow{DE} = \\underline{\\qquad}',
+    type: 'blank',
+    correctAnswer: '-1/6 AB - 1/2 AC',
+    acceptableAnswers: ['-⅙AB-½AC', '-1/6AB-1/2AC'],
+    explanation: '',
+    explanationLatex: '',
+  },
+];
 
 // 合并导出（供 QuizPanel 使用）
 export const stage4ExamQuestions: QuizQuestionData[] = [
@@ -46,8 +227,9 @@ export const stage4ExamQuestions: QuizQuestionData[] = [
   ...stage4BlankQuestions,
 ];
 
-// ── 解答题（仅打印试卷使用） ──
+// ── 解答题（仅打印试卷使用，答案在 stage4-exam-answers.tsx）──
 export const stage4EssayQuestions: EssayQuestion[] = [
+  // 15（12分）：数量积+垂直+夹角综合
   {
     id: 's4e-essay-1',
     questionLatex:
@@ -55,20 +237,10 @@ export const stage4EssayQuestions: EssayQuestion[] = [
       '\\text{（1）求 } \\vec{a} \\cdot \\vec{b} \\text{ 和 } |\\vec{a}+\\vec{b}|\\text{；}\\\\[4pt]' +
       '\\text{（2）若 } \\vec{c} = \\vec{a} + t\\vec{b}\\text{，且 } \\vec{c} \\perp \\vec{a}\\text{，求实数 } t \\text{ 的值；}\\\\[4pt]' +
       '\\text{（3）求 } \\vec{a} \\text{ 与 } \\vec{b} \\text{ 的夹角 } \\theta\\text{。}',
-    score: 20,
+    score: 12,
     lines: 12,
-    answerLatex:
-      '\\text{（1）} \\vec{a} \\cdot \\vec{b} = 1 \\times 3 + 2 \\times 1 = 5 \\\\[4pt]' +
-      '\\vec{a}+\\vec{b} = (4,3),\\; |\\vec{a}+\\vec{b}| = \\sqrt{16+9} = 5 \\\\[6pt]' +
-      '\\text{（2）} \\vec{c} = \\vec{a}+t\\vec{b} = (1+3t,\\; 2+t) \\\\[4pt]' +
-      '\\vec{c} \\perp \\vec{a} \\Rightarrow \\vec{c} \\cdot \\vec{a} = 0 \\\\[4pt]' +
-      '1(1+3t) + 2(2+t) = 1+3t+4+2t = 5+5t = 0 \\\\[4pt]' +
-      't = -1,\\; \\vec{c} = (-2,\\; 1) \\\\[4pt]' +
-      '\\text{验证：} (-2)(1)+1(2)=0 \\;\\checkmark \\\\[6pt]' +
-      '\\text{（3）} |\\vec{a}| = \\sqrt{5},\\; |\\vec{b}| = \\sqrt{10} \\\\[4pt]' +
-      '\\cos\\theta = \\dfrac{5}{\\sqrt{5} \\times \\sqrt{10}} = \\dfrac{5}{\\sqrt{50}} = \\dfrac{5}{5\\sqrt{2}} = \\dfrac{\\sqrt{2}}{2} \\\\[4pt]' +
-      '\\theta = 45\\degree',
   },
+  // 16（12分）：平行四边形坐标综合
   {
     id: 's4e-essay-2',
     questionDiagram: 'essay-parallelogram',
@@ -77,20 +249,10 @@ export const stage4EssayQuestions: EssayQuestion[] = [
       '\\text{（1）求 } C \\text{ 的坐标及对角线交点 } O \\text{ 的坐标；}\\\\[4pt]' +
       '\\text{（2）求 } \\overrightarrow{AC} \\cdot \\overrightarrow{BD}\\text{；}\\\\[4pt]' +
       '\\text{（3）若点 } P \\text{ 在线段 } AB \\text{ 上，且 } \\overrightarrow{DP} \\perp \\overrightarrow{AB}\\text{，求 } P \\text{ 的坐标。}',
-    score: 15,
+    score: 12,
     lines: 14,
-    answerLatex:
-      '\\text{（1）} \\overrightarrow{AB}=(4,2),\\; \\overrightarrow{AD}=(1,3) \\\\[4pt]' +
-      '\\overrightarrow{AC} = \\overrightarrow{AB}+\\overrightarrow{AD} = (5,5) \\Rightarrow C(5,5) \\\\[4pt]' +
-      'O = \\text{AC中点} = \\left(\\dfrac{5}{2},\\; \\dfrac{5}{2}\\right) \\\\[6pt]' +
-      '\\text{（2）} \\overrightarrow{AC}=(5,5),\\; \\overrightarrow{BD}=D-B=(1-4,\\;3-2)=(-3,1) \\\\[4pt]' +
-      '\\overrightarrow{AC}\\cdot\\overrightarrow{BD} = 5 \\times (-3) + 5 \\times 1 = -15+5 = -10 \\\\[6pt]' +
-      '\\text{（3）} P \\text{ 在 } AB \\text{ 上：} P = A + t\\overrightarrow{AB} = (4t,\\; 2t),\\; 0 \\leq t \\leq 1 \\\\[4pt]' +
-      '\\overrightarrow{DP} = P - D = (4t-1,\\; 2t-3) \\\\[4pt]' +
-      '\\overrightarrow{DP} \\perp \\overrightarrow{AB}：\\; 4(4t-1)+2(2t-3)=0 \\\\[4pt]' +
-      '16t-4+4t-6=0 \\Rightarrow 20t=10 \\Rightarrow t=\\dfrac{1}{2} \\\\[4pt]' +
-      'P = (2,\\; 1)',
   },
+  // 17（13分）：三角形坐标+数量积+中线
   {
     id: 's4e-essay-3',
     pageBreak: true,
@@ -100,21 +262,10 @@ export const stage4EssayQuestions: EssayQuestion[] = [
       '\\text{（1）求 } \\overrightarrow{AB} \\cdot \\overrightarrow{AC}\\text{，并判断 } \\triangle ABC \\text{ 是否为直角三角形；}\\\\[4pt]' +
       '\\text{（2）设 } M \\text{ 是 } BC \\text{ 的中点，求 } |\\overrightarrow{AM}|\\text{；}\\\\[4pt]' +
       '\\text{（3）求 } \\cos\\angle BAC \\text{ 的值。}',
-    score: 15,
+    score: 13,
     lines: 15,
-    answerLatex:
-      '\\overrightarrow{AB} = (4,2),\\; \\overrightarrow{AC} = (2,6) \\\\[6pt]' +
-      '\\text{（1）} \\overrightarrow{AB}\\cdot\\overrightarrow{AC} = 4 \\times 2 + 2 \\times 6 = 8+12 = 20 \\neq 0 \\\\[4pt]' +
-      '\\therefore \\angle BAC \\neq 90\\degree \\\\[4pt]' +
-      '\\overrightarrow{AB}\\cdot\\overrightarrow{BC}：\\; \\overrightarrow{BC}=(-2,4),\\; 4(-2)+2(4)=0 \\\\[4pt]' +
-      '\\therefore \\overrightarrow{AB} \\perp \\overrightarrow{BC},\\; \\angle ABC = 90\\degree\\text{，是直角三角形} \\\\[6pt]' +
-      '\\text{（2）} M = \\left(\\dfrac{6+4}{2},\\; \\dfrac{3+7}{2}\\right) = (5,5) \\\\[4pt]' +
-      '\\overrightarrow{AM} = (5-2,\\; 5-1) = (3,4) \\\\[4pt]' +
-      '|\\overrightarrow{AM}| = \\sqrt{9+16} = 5 \\\\[6pt]' +
-      '\\text{（3）} |\\overrightarrow{AB}| = \\sqrt{16+4} = 2\\sqrt{5},\\; |\\overrightarrow{AC}| = \\sqrt{4+36} = 2\\sqrt{10} \\\\[4pt]' +
-      '\\cos\\angle BAC = \\dfrac{\\overrightarrow{AB}\\cdot\\overrightarrow{AC}}{|\\overrightarrow{AB}||\\overrightarrow{AC}|} = \\dfrac{20}{2\\sqrt{5} \\times 2\\sqrt{10}} = \\dfrac{20}{4\\sqrt{50}} = \\dfrac{20}{20\\sqrt{2}} = \\dfrac{\\sqrt{2}}{2} \\\\[4pt]' +
-      '\\therefore \\angle BAC = 45\\degree',
   },
+  // 18（13分）：基底表示+共线证明
   {
     id: 's4e-essay-4',
     questionDiagram: 'essay-triangle-mid-n',
@@ -124,17 +275,7 @@ export const stage4EssayQuestions: EssayQuestion[] = [
       '\\text{（1）用 } \\vec{a},\\; \\vec{b} \\text{ 表示 } \\overrightarrow{OM} \\text{ 和 } \\overrightarrow{ON}\\text{；}\\\\[4pt]' +
       '\\text{（2）用 } \\vec{a},\\; \\vec{b} \\text{ 表示 } \\overrightarrow{MN}\\text{；}\\\\[4pt]' +
       '\\text{（3）证明 } MN \\text{ 与 } OB \\text{ 不平行。}',
-    score: 15,
+    score: 13,
     lines: 16,
-    answerLatex:
-      '\\text{（1）} \\overrightarrow{OM} = \\dfrac{1}{2}\\overrightarrow{OA} = \\dfrac{1}{2}\\vec{a} \\\\[4pt]' +
-      '\\overrightarrow{ON} = \\overrightarrow{OA} + \\overrightarrow{AN} = \\vec{a} + \\dfrac{1}{3}\\overrightarrow{AB} \\\\[4pt]' +
-      '= \\vec{a} + \\dfrac{1}{3}(\\vec{b}-\\vec{a}) = \\dfrac{2}{3}\\vec{a} + \\dfrac{1}{3}\\vec{b} \\\\[6pt]' +
-      '\\text{（2）} \\overrightarrow{MN} = \\overrightarrow{ON} - \\overrightarrow{OM} \\\\[4pt]' +
-      '= \\dfrac{2}{3}\\vec{a} + \\dfrac{1}{3}\\vec{b} - \\dfrac{1}{2}\\vec{a} = \\dfrac{1}{6}\\vec{a} + \\dfrac{1}{3}\\vec{b} \\\\[6pt]' +
-      '\\text{（3）若 } \\overrightarrow{MN} \\parallel \\overrightarrow{OB}\\text{，则 } \\overrightarrow{MN} = k\\vec{b} \\\\[4pt]' +
-      '\\dfrac{1}{6}\\vec{a} + \\dfrac{1}{3}\\vec{b} = k\\vec{b} \\\\[4pt]' +
-      '\\text{需要 } \\dfrac{1}{6} = 0\\text{（} \\vec{a} \\text{ 的系数），矛盾} \\\\[4pt]' +
-      '\\therefore \\overrightarrow{MN} \\text{ 与 } \\overrightarrow{OB} \\text{ 不平行}',
   },
 ];

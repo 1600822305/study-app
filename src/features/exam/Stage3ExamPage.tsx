@@ -8,48 +8,51 @@ import {
   stage3DerivQuestions,
   stage3EssayQuestions,
 } from './data/stage3-exam';
+import { Stage3ExamAnswers } from './stage3-exam-answers';
 
 export function Stage3ExamPage() {
-  const { isPrinting } = usePrintMode();
+  const { isPrinting, printOptions } = usePrintMode();
 
   // 打印模式：渲染正式试卷格式
   if (isPrinting) {
     return (
-      <ExamPaper
-        title="第三阶段测试卷：函数思维"
-        subtitle="（函数性质 · 初等函数 · 图像零点 · 导数）"
-        timeLimit={50}
-        showChoiceExplanations
-        answerPageBreaks={[20]}
-        sections={[
-          {
-            title: '函数概念与性质',
-            scorePerQuestion: 3,
-            questions: stage3ConceptQuestions,
-          },
-          {
-            title: '基本初等函数',
-            scorePerQuestion: 3,
-            questions: stage3ElemFuncQuestions,
-          },
-          {
-            title: '函数图像与零点',
-            scorePerQuestion: 3,
-            questions: stage3GraphQuestions,
-          },
-          {
-            title: '导数基础',
-            scorePerQuestion: 3,
-            questions: stage3DerivQuestions,
-          },
-          {
-            variant: 'essay',
-            title: '综合题',
-            questions: stage3EssayQuestions,
-            pageBreak: true,
-          },
-        ]}
-      />
+      <>
+        <ExamPaper
+          title="第三阶段测试卷：函数思维"
+          subtitle="（函数性质 · 初等函数 · 图像零点 · 导数）"
+          timeLimit={50}
+          hideBuiltinAnswers
+          sections={[
+            {
+              title: '函数概念与性质',
+              scorePerQuestion: 3,
+              questions: stage3ConceptQuestions,
+            },
+            {
+              title: '基本初等函数',
+              scorePerQuestion: 3,
+              questions: stage3ElemFuncQuestions,
+            },
+            {
+              title: '函数图像与零点',
+              scorePerQuestion: 3,
+              questions: stage3GraphQuestions,
+            },
+            {
+              title: '导数基础',
+              scorePerQuestion: 3,
+              questions: stage3DerivQuestions,
+            },
+            {
+              variant: 'essay',
+              title: '综合题',
+              questions: stage3EssayQuestions,
+              pageBreak: true,
+            },
+          ]}
+        />
+        {printOptions.showAnswers && <Stage3ExamAnswers />}
+      </>
     );
   }
 

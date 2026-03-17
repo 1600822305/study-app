@@ -14,7 +14,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     ],
     correctAnswer: 'D',
     explanation: '',
-    explanationLatex: '\\vec{a}+\\lambda\\vec{b} = (1+\\lambda,\\; 1-\\lambda)\\\\[4pt]\\vec{a}+\\mu\\vec{b} = (1+\\mu,\\; 1-\\mu)\\\\[4pt]\\text{垂直条件：点乘} = 0\\\\[4pt](1+\\lambda)(1+\\mu) + (1-\\lambda)(1-\\mu) = 0\\\\[4pt]1+\\lambda+\\mu+\\lambda\\mu + 1-\\lambda-\\mu+\\lambda\\mu = 0\\\\[4pt]2 + 2\\lambda\\mu = 0 \\Rightarrow \\lambda\\mu = -1',
+    explanationLatex: '',
   },
 
   // ── 第2题：平行判定求参数 ──
@@ -30,7 +30,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     ],
     correctAnswer: 'A',
     explanation: '',
-    explanationLatex: '\\text{平行条件：} x_1 y_2 - x_2 y_1 = 0\\\\[4pt]2 \\times (-2) - m \\times 3 = 0\\\\[4pt]-4 - 3m = 0\\\\[4pt]m = -\\dfrac{4}{3}',
+    explanationLatex: '',
   },
 
   // ── 第3题：数量积求夹角 ──
@@ -46,7 +46,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     ],
     correctAnswer: 'A',
     explanation: '',
-    explanationLatex: '\\vec{a} \\cdot \\vec{b} = 1 \\times \\sqrt{3} + \\sqrt{3} \\times 1 = 2\\sqrt{3}\\\\[4pt]|\\vec{a}| = \\sqrt{1+3} = 2,\\quad |\\vec{b}| = \\sqrt{3+1} = 2\\\\[4pt]\\cos\\theta = \\dfrac{2\\sqrt{3}}{2 \\times 2} = \\dfrac{\\sqrt{3}}{2}\\\\[4pt]\\theta = 30\\degree',
+    explanationLatex: '',
   },
 
   // ── 第4题：|a+b| 展开求模 ──
@@ -62,7 +62,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     ],
     correctAnswer: 'D',
     explanation: '',
-    explanationLatex: '|\\vec{a}-2\\vec{b}|^2 = (\\vec{a}-2\\vec{b}) \\cdot (\\vec{a}-2\\vec{b})\\\\[4pt]= |\\vec{a}|^2 - 4\\vec{a}\\cdot\\vec{b} + 4|\\vec{b}|^2\\\\[4pt]= 4 - 4 \\times (-1) + 4 \\times 1\\\\[4pt]= 4 + 4 + 4 = 12\\\\[4pt]|\\vec{a}-2\\vec{b}| = \\sqrt{12} = 2\\sqrt{3}',
+    explanationLatex: '',
   },
 
   // ── 第5题：向量坐标运算综合（填空） ──
@@ -74,7 +74,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     correctAnswer: '0或-2',
     acceptableAnswers: ['0 或 -2', '-2或0', '-2 或 0', '0,-2', '-2,0', 'x=0或x=-2'],
     explanation: '',
-    explanationLatex: '\\vec{a}+\\vec{b} = (1+x,\\; 3)\\\\[4pt]|\\vec{a}+\\vec{b}| = \\sqrt{(1+x)^2 + 9} = \\sqrt{10}\\\\[4pt](1+x)^2 + 9 = 10\\\\[4pt](1+x)^2 = 1\\\\[4pt]1+x = \\pm 1\\\\[4pt]x = 0 \\text{ 或 } x = -2',
+    explanationLatex: '',
   },
 
   // ── 第6题：向量+解析几何综合（填空） ──
@@ -86,7 +86,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     correctAnswer: '(3,6)',
     acceptableAnswers: ['(3, 6)', '3,6', 'D(3,6)', 'D(3, 6)'],
     explanation: '',
-    explanationLatex: '\\text{平行四边形对角线互相平分}\\\\[4pt]AC \\text{ 中点} = \\left(\\dfrac{1+6}{2},\\; \\dfrac{2+7}{2}\\right) = (3.5,\\; 4.5)\\\\[4pt]BD \\text{ 中点也是 } (3.5,\\; 4.5)\\\\[4pt]\\dfrac{4+x}{2} = 3.5 \\Rightarrow x = 3\\\\[4pt]\\dfrac{3+y}{2} = 4.5 \\Rightarrow y = 6\\\\[4pt]D(3,\\; 6)',
+    explanationLatex: '',
   },
 
   // ── 第7题：三角形向量综合（带图） ──
@@ -99,7 +99,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     correctAnswer: '-⅙AB-½AC',
     acceptableAnswers: ['-1/6AB-1/2AC', '-⅙AB-½AC', '-\\frac{1}{6}AB-\\frac{1}{2}AC'],
     explanation: '',
-    explanationLatex: '\\overrightarrow{DE} = \\overrightarrow{AE} - \\overrightarrow{AD}\\\\[4pt]\\overrightarrow{AE} = \\dfrac{1}{3}\\overrightarrow{AB}\\\\[4pt]\\overrightarrow{AD} = \\overrightarrow{AB} + \\overrightarrow{BD} = \\overrightarrow{AB} + \\dfrac{1}{2}\\overrightarrow{BC}\\\\[4pt]= \\overrightarrow{AB} + \\dfrac{1}{2}(\\overrightarrow{AC} - \\overrightarrow{AB}) = \\dfrac{1}{2}\\overrightarrow{AB} + \\dfrac{1}{2}\\overrightarrow{AC}\\\\[4pt]\\overrightarrow{DE} = \\dfrac{1}{3}\\overrightarrow{AB} - \\dfrac{1}{2}\\overrightarrow{AB} - \\dfrac{1}{2}\\overrightarrow{AC}\\\\[4pt]= -\\dfrac{1}{6}\\overrightarrow{AB} - \\dfrac{1}{2}\\overrightarrow{AC}',
+    explanationLatex: '',
   },
 
   // ── 第8题：平行四边形对角线综合（带图） ──
@@ -112,7 +112,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     correctAnswer: 'C(5,3) O(2.5,1.5)',
     acceptableAnswers: ['C(5,3),O(2.5,1.5)', '(5,3) (2.5,1.5)', 'C=(5,3) O=(2.5,1.5)', 'C(5,3)，O(2.5,1.5)'],
     explanation: '',
-    explanationLatex: '\\overrightarrow{AB} = (4,0),\\; \\overrightarrow{AD} = (1,3)\\\\[4pt]\\overrightarrow{AC} = \\overrightarrow{AB} + \\overrightarrow{AD} = (5,3) \\Rightarrow C(5,3)\\\\[4pt]O \\text{ 是对角线交点（中点）}\\\\[4pt]O = \\left(\\dfrac{0+5}{2},\\; \\dfrac{0+3}{2}\\right) = (2.5,\\; 1.5)',
+    explanationLatex: '',
   },
 
   // ── 第9题：向量夹角与数量积综合（带图） ──
@@ -129,7 +129,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     ],
     correctAnswer: 'A',
     explanation: '',
-    explanationLatex: '\\overrightarrow{OA} \\cdot \\overrightarrow{OB} = |\\overrightarrow{OA}| \\cdot |\\overrightarrow{OB}| \\cdot \\cos\\theta\\\\[4pt]= 2 \\times 2 \\times \\cos 120\\degree\\\\[4pt]= 4 \\times \\left(-\\dfrac{1}{2}\\right) = -2',
+    explanationLatex: '',
   },
 
   // ── 第10题：垂直条件 + 展开求模（综合） ──
@@ -145,7 +145,7 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     ],
     correctAnswer: 'A',
     explanation: '',
-    explanationLatex: '\\vec{a} \\perp (\\vec{a}-2\\vec{b}) \\Rightarrow \\vec{a} \\cdot (\\vec{a}-2\\vec{b}) = 0\\\\[4pt]|\\vec{a}|^2 - 2\\vec{a}\\cdot\\vec{b} = 0\\\\[4pt]4 - 2\\vec{a}\\cdot\\vec{b} = 0 \\Rightarrow \\vec{a}\\cdot\\vec{b} = 2\\\\[4pt]|\\vec{a}-\\vec{b}|^2 = |\\vec{a}|^2 - 2\\vec{a}\\cdot\\vec{b} + |\\vec{b}|^2\\\\[4pt]= 4 - 4 + 1 = 1\\\\[4pt]|\\vec{a}-\\vec{b}| = 1',
+    explanationLatex: '',
   },
 
   // ── 第11题：数量积求夹角余弦 ──
@@ -157,6 +157,6 @@ export const vectorExamQuestions: QuizQuestionData[] = [
     correctAnswer: '1/2',
     acceptableAnswers: ['0.5', '½', '\\frac{1}{2}'],
     explanation: '',
-    explanationLatex: '\\cos\\theta = \\dfrac{\\vec{a}\\cdot\\vec{b}}{|\\vec{a}|\\cdot|\\vec{b}|} = \\dfrac{6}{3 \\times 4} = \\dfrac{6}{12} = \\dfrac{1}{2}',
+    explanationLatex: '',
   },
 ];

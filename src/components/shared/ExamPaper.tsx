@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Math as MathTex } from './Math';
 import { QuizDiagrams } from './QuizDiagrams';
 import { usePrintMode } from '@/hooks/usePrintMode';
@@ -21,6 +22,8 @@ export interface EssayQuestion {
   answerLatex?: string | string[];
   /** 题目配图（QuizDiagrams key） */
   questionDiagram?: string;
+  /** 题目配图（React 节点，用于 mafs 等自定义图表） */
+  diagramNode?: ReactNode;
 }
 
 /** 选择/填空题节 */
@@ -186,6 +189,7 @@ export function ExamPaper({ title, subtitle, timeLimit = 45, totalScore, section
                   return (
                     <div key={q.id} style={q.pageBreak ? { breakBefore: 'page' } : undefined}>
                       {q.questionDiagram && <QuizDiagrams name={q.questionDiagram} />}
+                      {q.diagramNode}
                       <p className="text-base leading-8">
                         <span className="font-bold mr-1">{num}.</span>
                         <MathTex tex={q.questionLatex} />
