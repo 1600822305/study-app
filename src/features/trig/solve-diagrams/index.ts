@@ -1,4 +1,6 @@
 export { SolveTriGeneric } from './SolveTriGeneric';
+export { SolveTriEx1 } from './SolveTriEx1';
+export { SolveTriEx2 } from './SolveTriEx2';
 export { SolveTriSineLaw1 } from './SolveTriSineLaw1';
 export { SolveTriSSA } from './SolveTriSSA';
 export { SolveTriObtuse120 } from './SolveTriObtuse120';

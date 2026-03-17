@@ -28,6 +28,15 @@ html, body, #root {
   .katex { font-size: 1.25em !important; }
 }
 
+/* Mafs 图中的 KaTeX：屏幕态只显示可视层，避免隐藏的 MathML 层露出来形成“多一条公式” */
+.MafsView .katex-mathml {
+  display: none !important;
+}
+
+.MafsView .katex-html {
+  display: inline-block !important;
+}
+
 /* 安全区域适配（刘海屏、底部手势条、edge-to-edge） */
 :root {
   --sat: env(safe-area-inset-top, 0px);
