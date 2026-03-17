@@ -2,6 +2,7 @@ import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, Ex
 import { trigIdentityNarrations } from './data/identity-narrations';
 import { trigIdentityProgressItems } from './data/identity-progress';
 import { sumDiffPractice, doubleAnglePractice, powerReductionPractice, halfAnglePractice, auxiliaryPractice, comprehensivePractice } from './data/identity-questions';
+import { TrigIdentityAnswers } from './identity-answers';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
@@ -1429,35 +1430,7 @@ export function TrigIdentityPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <section className="print-answers">
-          <PageBreak />
-          <h2 className="text-xl font-bold text-gray-900 mb-3 border-b-2 border-gray-300 pb-2">📝 5.2 三角恒等变换 — 参考答案与解析</h2>
-
-          <div className="space-y-4">
-            {[
-              { title: '一、和差公式', data: sumDiffPractice },
-              { title: '二、二倍角公式', data: doubleAnglePractice },
-              { title: '三、降幂公式', data: powerReductionPractice },
-              { title: '四、半角公式', data: halfAnglePractice },
-              { title: '五、辅助角公式', data: auxiliaryPractice },
-              { title: '六、综合应用', data: comprehensivePractice },
-            ].map(section => (
-              <div key={section.title}>
-                <h3 className="font-bold text-gray-800 mb-1">{section.title}</h3>
-                <div className="columns-2 gap-3">
-                  {section.data.map((q, i) => (
-                    <div key={q.id} className="text-gray-700 mb-1" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{q.options?.find(o => o.value === q.correctAnswer)?.label}</strong></p>
-                      {q.explanationLatex && <p><MathTex tex={q.explanationLatex} /></p>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {isPrinting && printOptions.showAnswers && <TrigIdentityAnswers />}
 
       </LessonLayout>
     </div>

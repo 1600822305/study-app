@@ -610,40 +610,37 @@ export function QuadraticPage() {
       {isPrinting && printOptions.showAnswers && (
         <>
           <PageBreak label="答案与解析" />
-          <section className="mb-2 print-answers">
-            <h2 className="text-base font-bold text-gray-900 mb-2">📝 2.3 二次函数 — 答案与解析</h2>
+          <section className="mb-8 print-answers">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 2.3 二次函数 — 答案与解析</h2>
 
             {[
               { label: '一、三种形式 + 图像 — 即时练习', questions: quadPractice1 },
               { label: '四、判别式 + 韦达定理 — 即时练习', questions: quadPractice2 },
               { label: '综合测试（高考真题 + 精华题）', questions: quadraticQuizQuestions },
             ].map((section) => (
-              <div key={section.label} className="mb-1.5">
-                <p className="font-bold text-gray-800 text-sm mb-1 border-b border-gray-200 pb-0.5">{section.label}</p>
-                <div className={`${section.label.includes('综合测试') ? 'space-y-1' : 'space-y-0.5'} text-gray-700`}>
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
                   {section.questions.map((q, idx) => {
                     const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
                     const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
                     const answerTex = isSimpleFractionAnswer
                       ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
                       : q.correctAnswer;
-                    const isQuiz = section.label.includes('综合测试');
-                    const fontSize = isQuiz ? 'text-[13px]' : 'text-sm';
-                    const latexSize = isQuiz ? 'text-[15px]' : 'text-sm';
                     return (
-                      <div key={q.id} className="flex gap-1.5 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className={`text-blue-600 font-bold shrink-0 ${fontSize}`}>{idx + 1}.</span>
+                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
+                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
                         <div className="min-w-0">
-                          <p className={`font-bold text-gray-900 ${fontSize}`}>
+                          <p className="font-bold text-gray-900">
                             答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
                           </p>
                           {q.explanationLatex && (
-                            <div className={`text-gray-700 ${latexSize}`} style={{ marginTop: '1px' }}>
+                            <div className="text-gray-700 mt-1">
                               <Math tex={q.explanationLatex} />
                             </div>
                           )}
                           {q.explanation && (
-                            <p className={`text-gray-700 ${fontSize}`} style={{ marginTop: '1px' }}>{q.explanation}</p>
+                            <p className="text-gray-700 mt-1">{q.explanation}</p>
                           )}
                         </div>
                       </div>

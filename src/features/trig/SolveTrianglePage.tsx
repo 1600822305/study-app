@@ -6,10 +6,12 @@ import { sineLawPractice, cosineLawPractice, areaPractice, comprehensivePractice
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { SolveTriGeneric, SolveTriEx1, SolveTriEx2, SolveTriSineLaw1, SolveTriSSA, SolveTriObtuse120, SolveTriAreaHeight, CosineLawDiagram, SolveTriCosineAngle, SolveTriTypeJudge } from './solve-diagrams';
+import { SolveTriangleAnswers } from './solve-answers';
 
 export function SolveTrianglePage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('trig-solve', trigSolveProgressItems);
   const { isPrinting, printOptions } = usePrintMode();
+
 
   return (
     <div>
@@ -834,50 +836,7 @@ export function SolveTrianglePage() {
       </section>
 
       {/* ══════════════ 打印模式答案区 ══════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <section className="print-answers">
-          <PageBreak label="答案与解析" />
-          <h2 className="text-xl font-bold text-gray-900 mb-3 border-b-2 border-gray-300 pb-2">📝 5.3 解三角形 — 答案与解析</h2>
-
-          <div className="space-y-4">
-            {[
-              { title: '一、正弦定理训练', data: sineLawPractice },
-              { title: '二、余弦定理训练', data: cosineLawPractice },
-              { title: '三、面积公式训练', data: areaPractice },
-              { title: '四、综合实战训练', data: comprehensivePractice },
-            ].map(section => {
-              const shortItems = section.data.filter((q) => !q.explanationLatex || q.explanationLatex.length < 120);
-              const longItems = section.data.filter((q) => q.explanationLatex && q.explanationLatex.length >= 120);
-              const getIdx = (q: typeof section.data[number]) => section.data.indexOf(q);
-              return (
-                <div key={section.title}>
-                  <h3 className="font-bold text-gray-800 mb-1">{section.title}</h3>
-                  {shortItems.length > 0 && (
-                    <div className="columns-2 gap-3">
-                      {shortItems.map((q) => (
-                        <div key={q.id} className="text-gray-700 mb-1" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{getIdx(q) + 1}. 答案：{q.options?.find(o => o.value === q.correctAnswer)?.label}</strong></p>
-                          {q.explanationLatex && <p><MathTex tex={q.explanationLatex} /></p>}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {longItems.length > 0 && (
-                    <div className="space-y-1 mt-1">
-                      {longItems.map((q) => (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{getIdx(q) + 1}. 答案：{q.options?.find(o => o.value === q.correctAnswer)?.label}</strong></p>
-                          {q.explanationLatex && <p><MathTex tex={q.explanationLatex} /></p>}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
+      {isPrinting && printOptions.showAnswers && <SolveTriangleAnswers />}
 
       </LessonLayout>
     </div>

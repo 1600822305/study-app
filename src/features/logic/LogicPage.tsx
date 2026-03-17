@@ -704,7 +704,7 @@ export function LogicPage() {
             ].map((section) => (
               <div key={section.label} className="mb-4">
                 <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="space-y-3 text-gray-700">
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
                   {section.questions.map((q, idx) => {
                     const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
                     const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);

@@ -2,6 +2,7 @@ import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, Ex
 import { trigFuncNarrations } from './data/func-narrations';
 import { trigFuncProgressItems } from './data/func-progress';
 import { trigFuncExam, trigGraphPractice } from './data/func-questions';
+import { TrigFuncAnswers } from './func-answers';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
@@ -1556,22 +1557,8 @@ export function TrigFuncPage() {
         <PracticeCard questions={trigFuncExam} title="🔥 高考真题 & 精华题（8 题）" printOptionCols={2} />
       </section>
 
-      {/* ═══ 打印模式：答案与解析（两列布局） ═══ */}
-      {isPrinting && printOptions.showAnswers && (
-        <div className="mt-4">
-          <h2 className="text-lg font-bold text-gray-800 mb-2 border-b pb-1">📝 5.1 三角函数 — 答案与解析</h2>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-            {trigFuncExam.map((q, i) => (
-              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700">
-                <p className="font-bold">{i + 1}. {q.question}</p>
-                <p className="ml-4">答案：<span className="font-bold text-blue-700">{q.options?.find(o => o.value === q.correctAnswer)?.label ?? q.correctAnswer}</span></p>
-                {q.explanationLatex && <div className="ml-4"><MathTex tex={q.explanationLatex} /></div>}
-                {q.explanation && !q.explanationLatex && <p className="ml-4 text-gray-600">{q.explanation}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* ═══ 打印模式：答案与解析 ═══ */}
+      {isPrinting && printOptions.showAnswers && <TrigFuncAnswers />}
 
       </LessonLayout>
       <DebugToggle />

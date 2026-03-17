@@ -2,6 +2,7 @@ import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, Ex
 import { trigPrereqNarrations } from './data/prereq-narrations';
 import { trigPrereqProgressItems } from './data/prereq-progress';
 import { trigPrereqPractice } from './data/prereq-questions';
+import { TrigPrereqAnswers } from './prereq-answers';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
@@ -527,47 +528,7 @@ export function TrigPrereqPage() {
       <PracticeCard title="✅ 综合练习（10 题）" questions={trigPrereqPractice} printOptionCols={4} />
 
       {/* ═══ 打印模式：答案与解析 ═══ */}
-      <PageBreak />
-      {isPrinting && printOptions.showAnswers && (() => {
-        const part1 = trigPrereqPractice.slice(0, 6);  // 1-6：含公式 → 单列
-        const part2 = trigPrereqPractice.slice(6, 8);   // 7-8：解析短 → 双列
-        const part3 = trigPrereqPractice.slice(8);       // 9-10：题目长 → 单列
-        return (
-        <div className="mt-4">
-          <h2 className="text-lg font-bold text-gray-800 mb-2 border-b pb-1">📝 5.0 三角前置知识 — 答案与解析</h2>
-          <div className="space-y-1.5 mb-1">
-            {part1.map((q, i) => (
-              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700">
-                <p className="font-bold">{i + 1}. {q.question}</p>
-                <p className="ml-4">答案：<span className="font-bold text-blue-700">{q.correctAnswer.includes('\\') ? <MathTex tex={q.correctAnswer} /> : q.correctAnswer}</span></p>
-                {q.explanationLatex && <div className="ml-4"><MathTex tex={q.explanationLatex} /></div>}
-                {q.explanation && !q.explanationLatex && <p className="ml-4 text-gray-600">{q.explanation}</p>}
-              </div>
-            ))}
-          </div>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-1 mb-1">
-            {part2.map((q, i) => (
-              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700">
-                <p className="font-bold">{i + 7}. {q.question}</p>
-                <p className="ml-4">答案：<span className="font-bold text-blue-700">{q.correctAnswer.includes('\\') ? <MathTex tex={q.correctAnswer} /> : q.correctAnswer}</span></p>
-                {q.explanationLatex && <div className="ml-4"><MathTex tex={q.explanationLatex} /></div>}
-                {q.explanation && !q.explanationLatex && <p className="ml-4 text-gray-600">{q.explanation}</p>}
-              </div>
-            ))}
-          </div>
-          <div className="space-y-1.5">
-            {part3.map((q, i) => (
-              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700">
-                <p className="font-bold">{i + 9}. {q.question}</p>
-                <p className="ml-4">答案：<span className="font-bold text-blue-700">{q.correctAnswer.includes('\\') ? <MathTex tex={q.correctAnswer} /> : q.correctAnswer}</span></p>
-                {q.explanationLatex && <div className="ml-4"><MathTex tex={q.explanationLatex} /></div>}
-                {q.explanation && !q.explanationLatex && <p className="ml-4 text-gray-600">{q.explanation}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-        );
-      })()}
+      {isPrinting && printOptions.showAnswers && <TrigPrereqAnswers />}
 
       </LessonLayout>
     </div>

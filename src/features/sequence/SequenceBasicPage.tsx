@@ -666,10 +666,10 @@ export function SequenceBasicPage() {
       {/* ═══ 打印模式：答案与解析 ═══ */}
       {isPrinting && printOptions.showAnswers && (
         <div className="mt-4">
-          <h2 className="text-lg font-bold text-gray-800 mb-2 border-b pb-1">📝 6.1 等差数列与等比数列 — 答案与解析</h2>
-          <div className="space-y-2">
+          <h2 className="text-xl font-bold text-gray-900 mb-3 border-b-2 border-gray-300 pb-2">📝 6.1 等差数列与等比数列 — 答案与解析</h2>
+          <div className="columns-2 gap-4">
             {[...sequenceBasicPractice, ...sequenceBasicQuiz].map((q, i) => (
-              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700">
+              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700 mb-2">
                 <p className="font-bold">{i + 1}. {q.question}</p>
                 <p className="ml-4">答案：<span className="font-bold text-blue-700">{q.correctAnswer}</span></p>
                 {q.explanationLatex && <div className="ml-4"><MathTex tex={q.explanationLatex} /></div>}

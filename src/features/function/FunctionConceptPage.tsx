@@ -1059,16 +1059,16 @@ export function FunctionConceptPage() {
       {isPrinting && printOptions.showAnswers && (
         <>
           <PageBreak label="答案与解析" />
-          <section className="mb-6 print-answers">
-            <h2 className="text-lg font-bold text-gray-900 mb-3">📝 3.1 函数的概念与性质 — 答案与解析</h2>
+          <section className="mb-8 print-answers">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.1 函数的概念与性质 — 答案与解析</h2>
 
             {[
               { label: '精华练习', questions: conceptPractice },
               { label: '高考真题实战', questions: conceptQuizQuestions },
             ].map((section) => (
-              <div key={section.label} className="mb-3">
-                <p className="font-bold text-gray-800 mb-1 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="space-y-2 text-gray-700">
+              <div key={section.label} className="mb-4">
+                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
                   {section.questions.map((q, idx) => {
                     const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
                     const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);

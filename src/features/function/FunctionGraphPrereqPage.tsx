@@ -583,7 +583,7 @@ export function FunctionGraphPrereqPage() {
 
             <div>
               <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
-              <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-2">
                 {graphPrereqQuizQuestions.map((q, i) => {
                   const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
                   return (

@@ -416,7 +416,7 @@ export function InequalityPrereqPage() {
 
           <div>
             <h3 className="font-bold text-gray-800 mb-2">自测答案</h3>
-            <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
               {inequalityPrereqQuizQuestions.map((q, i) => (
                 <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
                   <p><strong>{i + 1}. 答案：</strong>{q.correctAnswer.includes('\\') ? <Math tex={q.correctAnswer} /> : <strong>{q.correctAnswer}</strong>}</p>

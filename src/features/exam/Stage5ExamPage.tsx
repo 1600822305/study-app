@@ -1,23 +1,71 @@
-import { PageHeader } from '@/components/shared';
+import { QuizPanel, ExportButton, PageHeader, ExamPaper } from '@/components/shared';
+import { usePrintMode } from '@/hooks';
+import {
+  stage5ExamQuestions,
+  stage5ChoiceQuestions,
+  stage5BlankQuestions,
+  stage5EssayQuestions,
+} from './data/stage5-exam';
 
 export function Stage5ExamPage() {
+  const { isPrinting } = usePrintMode();
+
+  // 打印模式：渲染正式试卷格式
+  if (isPrinting) {
+    return (
+      <ExamPaper
+        title="第五阶段测试卷：三角世界"
+        subtitle="（三角函数 · 恒等变换 · 解三角形）"
+        timeLimit={90}
+        totalScore={120}
+        sections={[
+          {
+            title: '选择题',
+            scorePerQuestion: 5,
+            questions: stage5ChoiceQuestions,
+          },
+          {
+            title: '填空题',
+            scorePerQuestion: 5,
+            questions: stage5BlankQuestions,
+            pageBreak: true,
+          },
+          {
+            variant: 'essay',
+            title: '解答题',
+            questions: stage5EssayQuestions,
+          },
+        ]}
+      />
+    );
+  }
+
+  // 屏幕模式：交互式答题
   return (
     <div>
       <PageHeader
         stage="第五阶段 · 三角世界"
-        title="阶段考试"
-        subtitle="三角函数 + 解三角形 综合测试"
+        title="📝 阶段考试"
+        subtitle={`选择题（10题）+ 填空题（6题），共 ${stage5ExamQuestions.length} 题`}
         tags={[
-          { label: '考试', color: 'red' },
-          { label: '120分', color: 'blue' },
+          { label: '三角函数', color: 'blue' },
+          { label: '恒等变换', color: 'green' },
+          { label: '解三角形', color: 'purple' },
+          { label: '120分', color: 'red' },
         ]}
       />
 
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6 text-center mt-4">
-        <p className="text-2xl mb-2">🚧</p>
-        <p className="text-lg font-bold text-yellow-800">考试开发中</p>
-        <p className="text-yellow-700 mt-1">完成第五阶段全部教学内容后开放</p>
+      <div className="flex justify-end mb-4 print:hidden">
+        <ExportButton title="第五阶段考试" />
       </div>
+
+      <QuizPanel
+        module="stage5-exam"
+        questions={stage5ExamQuestions}
+        title="第五阶段考试"
+        description="题目顺序随机打乱，完成后查看成绩和错题回顾。"
+        shuffle={true}
+      />
     </div>
   );
 }
