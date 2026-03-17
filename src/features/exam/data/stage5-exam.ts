@@ -1,45 +1,34 @@
 import type { QuizQuestionData } from '@/types';
 import type { EssayQuestion } from '@/components/shared/ExamPaper';
 
-import { trigPrereqPractice } from '@/features/trig/data/prereq-questions';
-import { trigFuncExam } from '@/features/trig/data/func-questions';
-import {
-  sumDiffPractice,
-  comprehensivePractice,
-} from '@/features/trig/data/identity-questions';
-import {
-  sineLawPractice,
-  cosineLawPractice,
-  areaPractice,
-} from '@/features/trig/data/solve-questions';
-
-// ── 第五阶段考试：三角世界 ──
+// ── 第五阶段考试：三角世界（全部独立自编 + 高考真题） ──
 // 选择题 10×5 = 50分，填空题 6×5 = 30分，解答题 10+10+8+6+6 = 40分，共 120 分
+// 答案与解析统一在 stage5-exam-answers.tsx 中，此文件只存题目数据
 
-/** 按 ID 从题库中筛选 */
-function pick(pool: QuizQuestionData[], ids: string[]): QuizQuestionData[] {
-  const idSet = new Set(ids);
-  return pool.filter((q) => idSet.has(q.id));
-}
-
-/** 加前缀避免 ID 冲突 */
-function prefixIds(questions: QuizQuestionData[], prefix: string): QuizQuestionData[] {
-  return questions.map((q) => ({ ...q, id: `${prefix}-${q.id}` }));
-}
-
-// ── 选择题精选（10 题） ──
-// 覆盖：前置(1) + 三角函数(3) + 恒等变换(3) + 解三角形(3)
-const choicePicks = [
-  ...pick(trigPrereqPractice, [
-    'tp-6',   // sin135° 诱导公式
-  ]),
-  // 2025 高考第 4 题：tan 函数对称中心
+// ── 选择题（10 题） ──
+export const stage5ChoiceQuestions: QuizQuestionData[] = [
+  // 1. 诱导公式
   {
-    id: 's5e-gk25-4',
+    id: 's5e-c1',
+    question: 'sin 135° 的值是',
+    questionLatex: '\\sin 135° =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '\\dfrac{1}{2}' },
+      { label: 'B', value: '-\\dfrac{\\sqrt{2}}{2}' },
+      { label: 'C', value: '\\dfrac{\\sqrt{2}}{2}' },
+      { label: 'D', value: '\\dfrac{\\sqrt{3}}{2}' },
+    ],
+    correctAnswer: 'C',
+    explanation: '',
+  },
+  // 2.【2025高考第4题】tan 对称中心
+  {
+    id: 's5e-c2',
     question: '（2025高考）若点(a,0)(a>0)是函数 y=2tan(x−π/3) 图象的一个对称中心，则 a 的最小值为',
     questionLatex:
       '\\text{（2025高考）若点 } (a,0)\\;(a>0) \\text{ 是函数 } y=2\\tan\\!\\left(x-\\dfrac{\\pi}{3}\\right) \\text{ 图象的一个对称中心，则 } a \\text{ 的最小值为}',
-    type: 'choice' as const,
+    type: 'choice',
     options: [
       { label: 'A', value: '\\dfrac{\\pi}{6}' },
       { label: 'B', value: '\\dfrac{\\pi}{3}' },
@@ -48,28 +37,77 @@ const choicePicks = [
     ],
     correctAnswer: 'B',
     explanation: '',
-    explanationLatex:
-      'y=2\\tan\\!\\left(x-\\dfrac{\\pi}{3}\\right) \\text{ 的对称中心在零点处}\\\\[4pt]' +
-      '\\tan\\!\\left(a-\\dfrac{\\pi}{3}\\right)=0 \\Rightarrow a-\\dfrac{\\pi}{3}=k\\pi\\;(k\\in\\mathbb{Z})\\\\[4pt]' +
-      'a=k\\pi+\\dfrac{\\pi}{3},\\; a>0 \\text{ 时最小值为 } k=0 \\Rightarrow a=\\dfrac{\\pi}{3}',
   },
-  ...pick(trigFuncExam, [
-    'tf-e4',  // 图像变换（先平移后伸缩）
-    'tf-e7',  // 给定区间上的最值
-  ]),
-  ...pick(sumDiffPractice, [
-    'ti-sd-1', // sin75° 精确值
-  ]),
-  ...pick(comprehensivePractice, [
-    'ti-comp-1', // sin2α（二象限补全 + 二倍角）
-  ]),
-  // 2023 新课标 I 卷第 8 题改编：和差角+二倍角综合
+  // 3. 图像变换（先平移后伸缩）
   {
-    id: 's5e-gk8',
-    question: '（2023新课标I）已知 sin(α−β)=1/3，cosα·sinβ=1/6，则 cos(2α+2β)=',
+    id: 's5e-c3',
+    question: '图像变换',
+    questionLatex:
+      '\\text{将 } y=\\sin x \\text{ 向左平移 } \\dfrac{\\pi}{3} \\text{，再将横坐标缩短为原来的 } \\dfrac{1}{2}\\text{，所得函数为}',
+    type: 'choice',
+    options: [
+      { label: 'A', value: 'y=\\sin\\!\\left(2x+\\dfrac{\\pi}{3}\\right)' },
+      { label: 'B', value: 'y=\\sin\\!\\left(2x+\\dfrac{\\pi}{6}\\right)' },
+      { label: 'C', value: 'y=\\sin\\!\\left(2x+\\dfrac{2\\pi}{3}\\right)' },
+      { label: 'D', value: 'y=\\sin\\!\\left(\\dfrac{x}{2}+\\dfrac{\\pi}{3}\\right)' },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+  },
+  // 4. 闭区间上的最值
+  {
+    id: 's5e-c4',
+    question: '闭区间上最值',
+    questionLatex:
+      'f(x)=2\\sin\\!\\left(2x+\\dfrac{\\pi}{6}\\right) \\text{ 在 } \\left[0,\\;\\dfrac{\\pi}{2}\\right] \\text{ 上的最小值为}',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '-2' },
+      { label: 'B', value: '-1' },
+      { label: 'C', value: '0' },
+      { label: 'D', value: '1' },
+    ],
+    correctAnswer: 'B',
+    explanation: '',
+  },
+  // 5. sin75° 精确值（和角公式）
+  {
+    id: 's5e-c5',
+    question: 'sin75° 的精确值',
+    questionLatex: '\\sin 75° =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '\\dfrac{\\sqrt{6}+\\sqrt{2}}{4}' },
+      { label: 'B', value: '\\dfrac{\\sqrt{6}-\\sqrt{2}}{4}' },
+      { label: 'C', value: '\\dfrac{\\sqrt{3}+1}{4}' },
+      { label: 'D', value: '\\dfrac{\\sqrt{2}}{2}' },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+  },
+  // 6. sin2α（二象限+二倍角）
+  {
+    id: 's5e-c6',
+    question: 'sin2α',
+    questionLatex:
+      '\\text{已知 } \\sin\\alpha=\\dfrac{4}{5}\\text{（}\\alpha \\text{ 为第二象限角），则 } \\sin 2\\alpha =',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '-\\dfrac{24}{25}' },
+      { label: 'B', value: '\\dfrac{24}{25}' },
+      { label: 'C', value: '-\\dfrac{12}{25}' },
+      { label: 'D', value: '\\dfrac{12}{25}' },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+  },
+  // 7.【2023新课标I第8题】和差角+二倍角
+  {
+    id: 's5e-c7',
+    question: '（2023新课标I）cos(2α+2β)',
     questionLatex:
       '\\text{（2023新课标I）已知 } \\sin(\\alpha-\\beta)=\\dfrac{1}{3}\\text{，}\\cos\\alpha\\sin\\beta=\\dfrac{1}{6}\\text{，则 } \\cos(2\\alpha+2\\beta)=',
-    type: 'choice' as const,
+    type: 'choice',
     options: [
       { label: 'A', value: '\\dfrac{7}{9}' },
       { label: 'B', value: '\\dfrac{1}{9}' },
@@ -78,91 +116,125 @@ const choicePicks = [
     ],
     correctAnswer: 'B',
     explanation: '',
-    explanationLatex:
-      '\\sin(\\alpha-\\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta = \\dfrac{1}{3}\\\\[4pt]' +
-      '\\text{已知 } \\cos\\alpha\\sin\\beta = \\dfrac{1}{6}\\text{，代入得 } \\sin\\alpha\\cos\\beta = \\dfrac{1}{3}+\\dfrac{1}{6} = \\dfrac{1}{2}\\\\[4pt]' +
-      '\\sin(\\alpha+\\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta = \\dfrac{1}{2}+\\dfrac{1}{6} = \\dfrac{2}{3}\\\\[4pt]' +
-      '\\cos(2\\alpha+2\\beta) = 1-2\\sin^2(\\alpha+\\beta) = 1-2\\times\\dfrac{4}{9} = \\dfrac{1}{9}',
   },
-  ...pick(cosineLawPractice, [
-    'st-cl-4', // a²=b²+c²-bc，求∠A（对比余弦定理）
-  ]),
-  ...pick(sineLawPractice, [
-    'st-sl-5', // 正弦定理解的个数判断
-  ]),
-  ...pick(areaPractice, [
-    'st-ar-1', // 面积公式直接代入
-  ]),
+  // 8. 余弦定理对比求角
+  {
+    id: 's5e-c8',
+    question: '余弦定理求角',
+    questionLatex:
+      '\\text{在 }\\triangle ABC\\text{ 中，}a^2=b^2+c^2-bc\\text{，则 }\\angle A=',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '30°' },
+      { label: 'B', value: '60°' },
+      { label: 'C', value: '90°' },
+      { label: 'D', value: '120°' },
+    ],
+    correctAnswer: 'B',
+    explanation: '',
+  },
+  // 9. 正弦定理解的个数
+  {
+    id: 's5e-c9',
+    question: '解的个数',
+    questionLatex:
+      '\\text{在 }\\triangle ABC\\text{ 中，}a=1,\\;b=\\sqrt{3},\\;A=30°\\text{，则 }B\\text{ 的可能值有}',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '0 \\text{ 个}' },
+      { label: 'B', value: '1 \\text{ 个}' },
+      { label: 'C', value: '2 \\text{ 个}' },
+      { label: 'D', value: '3 \\text{ 个}' },
+    ],
+    correctAnswer: 'C',
+    explanation: '',
+  },
+  // 10. 面积公式
+  {
+    id: 's5e-c10',
+    question: '三角形面积',
+    questionLatex:
+      '\\text{在 }\\triangle ABC\\text{ 中，}a=8,\\;b=5,\\;C=30°\\text{，则面积 }S=',
+    type: 'choice',
+    options: [
+      { label: 'A', value: '10' },
+      { label: 'B', value: '20' },
+      { label: 'C', value: '10\\sqrt{3}' },
+      { label: 'D', value: '20\\sqrt{3}' },
+    ],
+    correctAnswer: 'A',
+    explanation: '',
+  },
 ];
 
 // ── 填空题（6 题） ──
-// 覆盖：前置(1) + 三角函数(2) + 恒等变换(2) + 解三角形(1)
-const blankQuestions: QuizQuestionData[] = [
+export const stage5BlankQuestions: QuizQuestionData[] = [
+  // 11. 弧度制转换
   {
-    id: 's5b-1',
-    question: '将 150° 转换为弧度制',
+    id: 's5e-b1',
+    question: '弧度制转换',
     questionLatex: '150° = \\underline{\\qquad}\\text{ rad}',
     type: 'blank',
     correctAnswer: '5π/6',
-    acceptableAnswers: ['\\frac{5\\pi}{6}', '\\dfrac{5\\pi}{6}'],
+    acceptableAnswers: ['\\frac{5\\pi}{6}', '\\dfrac{5\\pi}{6}', '5π/6'],
     explanation: '',
-    explanationLatex: '150° = 150 \\times \\dfrac{\\pi}{180} = \\dfrac{5\\pi}{6}',
   },
+  // 12. 周期与振幅
   {
-    id: 's5b-2',
-    question: '诱导公式',
-    questionLatex: '\\sin\\!\\left(\\dfrac{\\pi}{2} + \\alpha\\right) = \\underline{\\qquad}',
+    id: 's5e-b2',
+    question: '周期与振幅',
+    questionLatex:
+      '\\text{函数 } y=3\\sin\\!\\left(2x-\\dfrac{\\pi}{4}\\right) \\text{ 的最小正周期 } T=\\underline{\\qquad}\\text{，振幅 } A=\\underline{\\qquad}',
     type: 'blank',
-    correctAnswer: 'cosα',
-    acceptableAnswers: ['\\cos\\alpha', 'cos α', 'cos\\alpha'],
+    correctAnswer: 'π, 3',
+    acceptableAnswers: ['\\pi,3', 'π,3', 'T=π,A=3'],
     explanation: '',
-    explanationLatex: '\\dfrac{\\pi}{2} \\text{ 是奇数个 } \\dfrac{\\pi}{2}\\text{，名互换 sin→cos；第一象限为正}\\\\[4pt]\\therefore \\sin\\!\\left(\\dfrac{\\pi}{2}+\\alpha\\right) = \\cos\\alpha',
   },
+  // 13.【2023新课标I改编】三角函数零点
   {
-    id: 's5b-3',
+    id: 's5e-b3',
     question: '三角函数零点（2023新课标I改编）',
-    questionLatex: '\\text{已知 } f(x) = \\cos\\omega x - 1\\;(\\omega > 0) \\text{ 在 } [0,\\,2\\pi] \\text{ 上有且仅有 } 3 \\text{ 个零点，则 } \\omega \\text{ 的取值范围是 } \\underline{\\qquad}',
+    questionLatex:
+      '\\text{已知 } f(x)=\\cos\\omega x-1\\;(\\omega>0) \\text{ 在 } [0,\\,2\\pi] \\text{ 上有且仅有 } 3 \\text{ 个零点，则 } \\omega \\text{ 的取值范围是 } \\underline{\\qquad}',
     type: 'blank',
     correctAnswer: '[2, 3)',
     acceptableAnswers: ['[2,3)', '2≤ω<3', '2\\leq\\omega<3'],
     explanation: '',
-    explanationLatex: 'f(x)=0 \\Leftrightarrow \\cos\\omega x=1 \\Leftrightarrow \\omega x=2k\\pi\\;(k\\in\\mathbb{Z}) \\Leftrightarrow x=\\dfrac{2k\\pi}{\\omega}\\\\[4pt]\\text{在 } [0,2\\pi] \\text{ 上恰有 3 个零点 } x=0,\\,\\dfrac{2\\pi}{\\omega},\\,\\dfrac{4\\pi}{\\omega}\\\\[4pt]\\text{需 } \\dfrac{4\\pi}{\\omega}\\leq 2\\pi \\Rightarrow \\omega\\geq 2\\text{；且 } \\dfrac{6\\pi}{\\omega}>2\\pi \\Rightarrow \\omega<3\\\\[4pt]\\therefore \\omega\\in[2,\\,3)',
   },
+  // 14. 二倍角
   {
-    id: 's5b-4',
+    id: 's5e-b4',
     question: '二倍角',
-    questionLatex: '\\text{已知 } \\sin\\alpha = \\dfrac{3}{5}\\text{，}\\cos\\alpha = \\dfrac{4}{5}\\text{，则 } \\sin 2\\alpha = \\underline{\\qquad}',
+    questionLatex:
+      '\\text{已知 } \\sin\\alpha=\\dfrac{3}{5},\\;\\cos\\alpha=\\dfrac{4}{5}\\text{，则 } \\sin 2\\alpha=\\underline{\\qquad}',
     type: 'blank',
     correctAnswer: '24/25',
-    acceptableAnswers: ['\\frac{24}{25}', '\\dfrac{24}{25}', '0.96'],
+    acceptableAnswers: ['\\frac{24}{25}', '\\dfrac{24}{25}', '0.96', '24/25'],
     explanation: '',
-    explanationLatex: '\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha = 2 \\times \\dfrac{3}{5} \\times \\dfrac{4}{5} = \\dfrac{24}{25}',
   },
+  // 15. 辅助角公式
   {
-    id: 's5b-5',
-    question: '辅助角',
-    questionLatex: '\\sqrt{3}\\sin x + \\cos x = \\underline{\\qquad}\\;\\sin(x + \\underline{\\qquad})',
+    id: 's5e-b5',
+    question: '辅助角公式',
+    questionLatex:
+      '\\sqrt{3}\\sin x+\\cos x = \\underline{\\qquad}\\;\\sin(x+\\underline{\\qquad})',
     type: 'blank',
     correctAnswer: '2, π/6',
-    acceptableAnswers: ['2\\sin(x+\\frac{\\pi}{6})', '2, \\frac{\\pi}{6}'],
+    acceptableAnswers: ['2\\sin(x+\\frac{\\pi}{6})', '2, \\frac{\\pi}{6}', '2,π/6'],
     explanation: '',
-    explanationLatex: 'a=\\sqrt{3},\\;b=1,\\; R=\\sqrt{3+1}=2,\\; \\tan\\varphi=\\dfrac{1}{\\sqrt{3}} \\Rightarrow \\varphi=\\dfrac{\\pi}{6}\\\\[4pt]\\therefore \\sqrt{3}\\sin x+\\cos x = 2\\sin\\!\\left(x+\\dfrac{\\pi}{6}\\right)',
   },
+  // 16. 余弦定理求边
   {
-    id: 's5b-6',
+    id: 's5e-b6',
     question: '余弦定理求边',
-    questionLatex: '\\text{在 }\\triangle ABC\\text{ 中，}b=3,\\;c=5,\\;A=60°\\text{，则 }a = \\underline{\\qquad}',
+    questionLatex:
+      '\\text{在 }\\triangle ABC\\text{ 中，}b=3,\\;c=5,\\;A=60°\\text{，则 }a=\\underline{\\qquad}',
     type: 'blank',
     correctAnswer: '√19',
     acceptableAnswers: ['\\sqrt{19}'],
     explanation: '',
-    explanationLatex: 'a^2 = b^2+c^2-2bc\\cos A = 9+25-2 \\times 3 \\times 5 \\times \\dfrac{1}{2} = 34-15 = 19\\\\[4pt]\\therefore a = \\sqrt{19}',
   },
 ];
-
-// 分节导出（供 ExamPaper 使用）
-export const stage5ChoiceQuestions = prefixIds(choicePicks, 's5e');
-export const stage5BlankQuestions = prefixIds(blankQuestions, 's5e');
 
 // 合并导出（供 QuizPanel 使用）
 export const stage5ExamQuestions: QuizQuestionData[] = [
@@ -170,13 +242,9 @@ export const stage5ExamQuestions: QuizQuestionData[] = [
   ...stage5BlankQuestions,
 ];
 
-// ── 解答题（仅打印试卷使用）──
-// 题 17（10分）：降幂+辅助角→性质综合（2023新课标I卷风格）
-// 题 18（10分）：条件等式推角→正弦定理+面积（2024新课标I卷风格）
-// 题 19（8分）：诱导公式+二倍角化简→已知值求值（综合运算）
-// 题 20（6分）：2025高考改编→二倍角+解三角形综合（cos2A+cos2B+面积条件求C和AB）
-// 题 21（6分）：解三角形→由面积+边角关系求边+判断三角形形状
+// ── 解答题（仅打印试卷使用，答案在 stage5-exam-answers.tsx）──
 export const stage5EssayQuestions: EssayQuestion[] = [
+  // 17（10分）：降幂+辅助角→性质综合
   {
     id: 's5e-essay-1',
     questionLatex:
@@ -186,17 +254,8 @@ export const stage5EssayQuestions: EssayQuestion[] = [
       '\\text{（3）当 } x \\in \\left[0,\\;\\dfrac{\\pi}{2}\\right] \\text{ 时，求 } f(x) \\text{ 的值域。}',
     score: 10,
     lines: 20,
-    answerLatex:
-      '\\text{（1）降幂：} 2\\sin^2 x = 1-\\cos 2x \\\\[4pt]' +
-      'f(x) = \\sqrt{3}\\sin 2x - (1-\\cos 2x) = \\sqrt{3}\\sin 2x + \\cos 2x - 1 \\\\[4pt]' +
-      '\\text{辅助角：} \\sqrt{3}\\sin 2x+\\cos 2x = 2\\sin\\!\\left(2x+\\dfrac{\\pi}{6}\\right) \\\\[4pt]' +
-      '\\therefore f(x) = 2\\sin\\!\\left(2x+\\dfrac{\\pi}{6}\\right) - 1 \\\\[6pt]' +
-      '\\text{（2）令 } -\\dfrac{\\pi}{2}+2k\\pi \\leq 2x+\\dfrac{\\pi}{6} \\leq \\dfrac{\\pi}{2}+2k\\pi \\\\[4pt]' +
-      '\\Rightarrow -\\dfrac{\\pi}{3}+k\\pi \\leq x \\leq \\dfrac{\\pi}{6}+k\\pi \\quad (k\\in\\mathbb{Z}) \\\\[6pt]' +
-      '\\text{（3）} x\\in\\left[0,\\dfrac{\\pi}{2}\\right] \\Rightarrow 2x+\\dfrac{\\pi}{6} \\in \\left[\\dfrac{\\pi}{6},\\;\\dfrac{7\\pi}{6}\\right] \\\\[4pt]' +
-      '\\sin\\!\\left(2x+\\dfrac{\\pi}{6}\\right) \\in \\left[-\\dfrac{1}{2},\\;1\\right] \\\\[4pt]' +
-      '\\therefore f(x) \\in \\left[2\\!\\times\\!(-\\tfrac{1}{2})-1,\\; 2\\!\\times\\!1-1\\right] = [-2,\\;1]',
   },
+  // 18（10分）：条件等式推角→正弦定理+面积
   {
     id: 's5e-essay-2',
     questionLatex:
@@ -206,19 +265,8 @@ export const stage5EssayQuestions: EssayQuestion[] = [
       '\\text{（2）若 } a = 2\\text{，}\\triangle ABC \\text{ 的面积为 } \\sqrt{3}\\text{，求 } b + c \\text{ 的值。}',
     score: 10,
     lines: 17,
-    answerLatex:
-      '\\text{（1）由和角公式：} \\sin A\\cos C+\\cos A\\sin C = \\sin(A+C) \\\\[4pt]' +
-      '\\text{又 } A+B+C=\\pi \\Rightarrow A+C=\\pi-B \\\\[4pt]' +
-      '\\therefore \\sin(A+C)=\\sin(\\pi-B)=\\sin B \\\\[4pt]' +
-      '\\text{原式变为 } 2\\sin B\\cos A = \\sin B \\\\[4pt]' +
-      '\\sin B \\neq 0 \\Rightarrow \\cos A = \\dfrac{1}{2} \\Rightarrow A = \\dfrac{\\pi}{3} \\\\[6pt]' +
-      '\\text{（2）面积 } S = \\dfrac{1}{2}bc\\sin A = \\dfrac{1}{2}bc\\cdot\\dfrac{\\sqrt{3}}{2} = \\dfrac{\\sqrt{3}}{4}bc = \\sqrt{3} \\\\[4pt]' +
-      '\\therefore bc = 4 \\\\[4pt]' +
-      '\\text{由余弦定理 } a^2 = b^2+c^2-2bc\\cos A \\\\[4pt]' +
-      '4 = b^2+c^2-2\\cdot 4\\cdot\\dfrac{1}{2} = b^2+c^2-4 \\\\[4pt]' +
-      'b^2+c^2 = 8,\\quad (b+c)^2 = b^2+c^2+2bc = 8+8 = 16 \\\\[4pt]' +
-      '\\therefore b+c = 4',
   },
+  // 19（8分）：诱导公式+二倍角化简→求值
   {
     id: 's5e-essay-3',
     questionLatex:
@@ -228,18 +276,8 @@ export const stage5EssayQuestions: EssayQuestion[] = [
       '\\text{（3）求 } \\dfrac{\\sin\\alpha}{1 - \\dfrac{1}{\\tan\\alpha}} \\text{ 的值。}',
     score: 8,
     lines: 16,
-    answerLatex:
-      '\\text{（1）两边平方：} (\\sin\\alpha+\\cos\\alpha)^2 = \\dfrac{1}{3} \\\\[4pt]' +
-      '\\sin^2\\alpha+2\\sin\\alpha\\cos\\alpha+\\cos^2\\alpha = \\dfrac{1}{3} \\\\[4pt]' +
-      '1+2\\sin\\alpha\\cos\\alpha = \\dfrac{1}{3} \\Rightarrow \\sin\\alpha\\cos\\alpha = -\\dfrac{1}{3} \\\\[6pt]' +
-      '\\text{（2）} (\\sin\\alpha-\\cos\\alpha)^2 = 1-2\\sin\\alpha\\cos\\alpha = 1+\\dfrac{2}{3} = \\dfrac{5}{3} \\\\[4pt]' +
-      '\\alpha \\text{ 在第二象限} \\Rightarrow \\sin\\alpha>0,\\;\\cos\\alpha<0 \\Rightarrow \\sin\\alpha-\\cos\\alpha>0 \\\\[4pt]' +
-      '\\therefore \\sin\\alpha-\\cos\\alpha = \\dfrac{\\sqrt{15}}{3} \\\\[6pt]' +
-      '\\text{（3）原式} = \\dfrac{\\sin\\alpha}{1-\\frac{\\cos\\alpha}{\\sin\\alpha}} = \\dfrac{\\sin\\alpha}{\\frac{\\sin\\alpha-\\cos\\alpha}{\\sin\\alpha}} = \\dfrac{\\sin^2\\alpha}{\\sin\\alpha-\\cos\\alpha} \\\\[4pt]' +
-      '\\text{由（1）（2）解方程组得 } \\sin\\alpha = \\dfrac{\\frac{\\sqrt{3}}{3}+\\frac{\\sqrt{15}}{3}}{2} = \\dfrac{\\sqrt{3}+\\sqrt{15}}{6} \\\\[4pt]' +
-      '\\sin^2\\alpha = \\dfrac{(\\sqrt{3}+\\sqrt{15})^2}{36} = \\dfrac{3+2\\sqrt{45}+15}{36} = \\dfrac{18+6\\sqrt{5}}{36} = \\dfrac{3+\\sqrt{5}}{6} \\\\[4pt]' +
-      '\\therefore \\text{原式} = \\dfrac{\\frac{3+\\sqrt{5}}{6}}{\\frac{\\sqrt{15}}{3}} = \\dfrac{3+\\sqrt{5}}{2\\sqrt{15}} = \\dfrac{(3+\\sqrt{5})\\sqrt{15}}{30} = \\dfrac{3\\sqrt{15}+\\sqrt{75}}{30} = \\dfrac{3\\sqrt{15}+5\\sqrt{3}}{30}',
   },
+  // 20（6分）：2025高考改编→cos2A+cos2B+面积条件求C和AB
   {
     id: 's5e-essay-4',
     pageBreak: true,
@@ -250,27 +288,8 @@ export const stage5EssayQuestions: EssayQuestion[] = [
       '\\text{（2）求 } AB \\text{ 的值。}',
     score: 6,
     lines: 18,
-    answerLatex:
-      '\\text{（1）}\\cos 2A+\\cos 2B+2\\sin C=2\\\\[4pt]' +
-      '(1-2\\sin^2 A)+(1-2\\sin^2 B)+2\\sin C=2\\\\[4pt]' +
-      '\\sin^2 A+\\sin^2 B = \\sin C \\quad \\cdots(*)\\\\[4pt]' +
-      '\\text{由正弦定理 } \\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}=2R\\\\[4pt]' +
-      '(*) \\Rightarrow a^2+b^2 = 4R^2\\sin C = 2R \\cdot c\\\\[4pt]' +
-      '\\text{面积 } S=\\dfrac{1}{2}ab\\sin C=\\dfrac{1}{4},\\; \\cos A\\cos B\\sin C=\\dfrac{1}{4}\\\\[4pt]' +
-      '\\text{由积化和差：} \\cos A\\cos B = \\dfrac{1}{2}[\\cos(A-B)+\\cos(A+B)]\\\\[4pt]' +
-      '= \\dfrac{1}{2}[\\cos(A-B)-\\cos C]\\\\[4pt]' +
-      '\\text{结合 } (*) \\text{ 和面积条件，设 } C=\\dfrac{\\pi}{2}\\text{：}\\\\[4pt]' +
-      '\\sin C=1,\\; (*) \\Rightarrow \\sin^2 A+\\sin^2 B=1=\\sin^2 A+\\cos^2 A \\Rightarrow \\sin B=\\cos A\\\\[4pt]' +
-      '\\text{即 } B=\\dfrac{\\pi}{2}-A\\text{，验证 } A+B+C=\\pi \\;\\checkmark\\\\[4pt]' +
-      '\\cos A\\cos B\\sin C=\\cos A\\sin A=\\dfrac{1}{2}\\sin 2A=\\dfrac{1}{4} \\Rightarrow \\sin 2A=\\dfrac{1}{2}\\\\[4pt]' +
-      '\\therefore C = \\dfrac{\\pi}{2}\\\\[6pt]' +
-      '\\text{（2）} S=\\dfrac{1}{2}ab=\\dfrac{1}{4} \\Rightarrow ab=\\dfrac{1}{2}\\\\[4pt]' +
-      '\\sin 2A=\\dfrac{1}{2} \\Rightarrow 2A=\\dfrac{\\pi}{6} \\text{ 或 } \\dfrac{5\\pi}{6},\\; A=\\dfrac{\\pi}{12} \\text{ 或 } \\dfrac{5\\pi}{12}\\\\[4pt]' +
-      'AB=c=\\sqrt{a^2+b^2}\\;(\\text{勾股}),\\; a^2+b^2=(a+b)^2-2ab\\\\[4pt]' +
-      '\\text{由 } a=2R\\sin A,\\;b=2R\\cos A,\\;ab=\\dfrac{1}{2} \\Rightarrow 2R^2\\sin 2A=\\dfrac{1}{2} \\Rightarrow R^2=\\dfrac{1}{2}\\\\[4pt]' +
-      'a^2+b^2=4R^2(\\sin^2 A+\\cos^2 A)=4R^2=2\\\\[4pt]' +
-      'AB=c=\\sqrt{2}',
   },
+  // 21（6分）：2023新课标I→解三角形
   {
     id: 's5e-essay-5',
     questionLatex:
@@ -279,19 +298,5 @@ export const stage5EssayQuestions: EssayQuestion[] = [
       '\\text{（2）设 } AB = 5\\text{，求 } AB \\text{ 边上的高。}',
     score: 6,
     lines: 16,
-    answerLatex:
-      '\\text{（1）由 } A+B=3C \\text{ 及 } A+B+C=\\pi \\Rightarrow 4C=\\pi \\Rightarrow C=\\dfrac{\\pi}{4} \\\\[4pt]' +
-      '\\text{原式 } 2\\sin(A-C)=\\sin B=\\sin(\\pi-A-C) = \\sin(A+C) \\\\[4pt]' +
-      '2\\sin A\\cos C-2\\cos A\\sin C = \\sin A\\cos C+\\cos A\\sin C \\\\[4pt]' +
-      '\\sin A\\cos C = 3\\cos A\\sin C \\\\[4pt]' +
-      '\\tan A = 3\\tan C = 3\\tan\\dfrac{\\pi}{4} = 3 \\\\[4pt]' +
-      '\\sin A = \\dfrac{3}{\\sqrt{10}} = \\dfrac{3\\sqrt{10}}{10} \\\\[6pt]' +
-      '\\text{（2）由正弦定理 } \\dfrac{c}{\\sin C}=\\dfrac{AB}{\\sin C}=\\dfrac{5}{\\sin\\frac{\\pi}{4}}=5\\sqrt{2} \\\\[4pt]' +
-      '\\text{面积 } S = \\dfrac{1}{2}\\cdot AB\\cdot h = \\dfrac{1}{2}ab\\sin C \\\\[4pt]' +
-      'a = 5\\sqrt{2}\\sin A = 5\\sqrt{2}\\cdot\\dfrac{3\\sqrt{10}}{10} = 3\\sqrt{5},\\; b=5\\sqrt{2}\\sin B \\\\[4pt]' +
-      'B=\\pi-A-C,\\;\\sin B=\\sin(A+C)=\\sin A\\cos C+\\cos A\\sin C \\\\[4pt]' +
-      '= \\dfrac{3\\sqrt{10}}{10}\\cdot\\dfrac{\\sqrt{2}}{2}+\\dfrac{\\sqrt{10}}{10}\\cdot\\dfrac{\\sqrt{2}}{2} = \\dfrac{4\\sqrt{20}}{20}=\\dfrac{2\\sqrt{5}}{5},\\; b=5\\sqrt{2}\\cdot\\dfrac{2\\sqrt{5}}{5}=2\\sqrt{10} \\\\[4pt]' +
-      'S=\\dfrac{1}{2}\\cdot 3\\sqrt{5}\\cdot 2\\sqrt{10}\\cdot\\dfrac{\\sqrt{2}}{2}=\\dfrac{1}{2}\\cdot 3\\sqrt{5}\\cdot 2\\sqrt{10}\\cdot\\dfrac{\\sqrt{2}}{2}=\\dfrac{3\\sqrt{100}}{2}=15 \\\\[4pt]' +
-      'h=\\dfrac{2S}{AB}=\\dfrac{30}{5}=6',
   },
 ];

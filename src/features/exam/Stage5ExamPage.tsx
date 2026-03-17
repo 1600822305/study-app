@@ -6,37 +6,41 @@ import {
   stage5BlankQuestions,
   stage5EssayQuestions,
 } from './data/stage5-exam';
+import { Stage5ExamAnswers } from './stage5-exam-answers';
 
 export function Stage5ExamPage() {
-  const { isPrinting } = usePrintMode();
+  const { isPrinting, printOptions } = usePrintMode();
 
   // 打印模式：渲染正式试卷格式
   if (isPrinting) {
     return (
-      <ExamPaper
-        title="第五阶段测试卷：三角世界"
-        subtitle="（三角函数 · 恒等变换 · 解三角形）"
-        timeLimit={90}
-        totalScore={120}
-        sections={[
-          {
-            title: '选择题',
-            scorePerQuestion: 5,
-            questions: stage5ChoiceQuestions,
-          },
-          {
-            title: '填空题',
-            scorePerQuestion: 5,
-            questions: stage5BlankQuestions,
-            pageBreak: true,
-          },
-          {
-            variant: 'essay',
-            title: '解答题',
-            questions: stage5EssayQuestions,
-          },
-        ]}
-      />
+      <>
+        <ExamPaper
+          title="第五阶段测试卷：三角世界"
+          subtitle="（三角函数 · 恒等变换 · 解三角形）"
+          timeLimit={90}
+          totalScore={120}
+          sections={[
+            {
+              title: '选择题',
+              scorePerQuestion: 5,
+              questions: stage5ChoiceQuestions,
+            },
+            {
+              title: '填空题',
+              scorePerQuestion: 5,
+              questions: stage5BlankQuestions,
+              pageBreak: true,
+            },
+            {
+              variant: 'essay',
+              title: '解答题',
+              questions: stage5EssayQuestions,
+            },
+          ]}
+        />
+        {printOptions.showAnswers && <Stage5ExamAnswers />}
+      </>
     );
   }
 
