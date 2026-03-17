@@ -61,6 +61,8 @@ interface ExamPaperProps {
   showChoiceExplanations?: boolean;
   /** 答案页在哪些题号前分页（全局题号，如 [20] 表示第 20 题前分页） */
   answerPageBreaks?: number[];
+  /** 隐藏内置答案页（当使用独立答案组件时传 true） */
+  hideBuiltinAnswers?: boolean;
 }
 
 // ── Helpers ──
@@ -74,7 +76,7 @@ function toChineseNumeral(n: number): string {
 
 // ── Component ──
 
-export function ExamPaper({ title, subtitle, timeLimit = 45, totalScore, sections, showChoiceExplanations = false, answerPageBreaks = [] }: ExamPaperProps) {
+export function ExamPaper({ title, subtitle, timeLimit = 45, totalScore, sections, showChoiceExplanations = false, answerPageBreaks = [], hideBuiltinAnswers = false }: ExamPaperProps) {
   const { isPrinting } = usePrintMode();
 
   // 自动计算总分
@@ -206,7 +208,7 @@ export function ExamPaper({ title, subtitle, timeLimit = 45, totalScore, section
       </div>
 
       {/* ═══════ 答案与解析 ═══════ */}
-      <div style={{ breakBefore: 'page' }}>
+      {!hideBuiltinAnswers && <div style={{ breakBefore: 'page' }}>
         <div className="border-b-[3px] border-double border-black pb-3 mb-4">
           <h1 className="text-center text-2xl font-black tracking-widest">{title}</h1>
           <p className="text-center text-lg font-bold mt-1">答案与解析</p>
@@ -300,7 +302,7 @@ export function ExamPaper({ title, subtitle, timeLimit = 45, totalScore, section
             </div>
           );
         })}
-      </div>
+      </div>}
     </div>
   );
 }

@@ -20,6 +20,7 @@ export function Stage5ExamPage() {
           subtitle="（三角函数 · 恒等变换 · 解三角形）"
           timeLimit={90}
           totalScore={120}
+          hideBuiltinAnswers
           sections={[
             {
               title: '选择题',
