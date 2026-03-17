@@ -45,8 +45,28 @@ const choicePicks = [
   ]),
   ...pick(comprehensivePractice, [
     'ti-comp-1', // sin2α（二象限补全 + 二倍角）
-    'ti-comp-2', // tan(α+β)=1 展开求值
   ]),
+  // 2023 新课标 I 卷第 8 题改编：和差角+二倍角综合
+  {
+    id: 's5e-gk8',
+    question: '（2023新课标I）已知 sin(α−β)=1/3，cosα·sinβ=1/6，则 cos(2α+2β)=',
+    questionLatex:
+      '\\text{（2023新课标I）已知 } \\sin(\\alpha-\\beta)=\\dfrac{1}{3}\\text{，}\\cos\\alpha\\sin\\beta=\\dfrac{1}{6}\\text{，则 } \\cos(2\\alpha+2\\beta)=',
+    type: 'choice' as const,
+    options: [
+      { label: 'A', value: '\\dfrac{7}{9}' },
+      { label: 'B', value: '\\dfrac{1}{9}' },
+      { label: 'C', value: '-\\dfrac{1}{9}' },
+      { label: 'D', value: '-\\dfrac{7}{9}' },
+    ],
+    correctAnswer: 'B',
+    explanation: '',
+    explanationLatex:
+      '\\sin(\\alpha-\\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta = \\dfrac{1}{3}\\\\[4pt]' +
+      '\\text{已知 } \\cos\\alpha\\sin\\beta = \\dfrac{1}{6}\\text{，代入得 } \\sin\\alpha\\cos\\beta = \\dfrac{1}{3}+\\dfrac{1}{6} = \\dfrac{1}{2}\\\\[4pt]' +
+      '\\sin(\\alpha+\\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta = \\dfrac{1}{2}+\\dfrac{1}{6} = \\dfrac{2}{3}\\\\[4pt]' +
+      '\\cos(2\\alpha+2\\beta) = 1-2\\sin^2(\\alpha+\\beta) = 1-2\\times\\dfrac{4}{9} = \\dfrac{1}{9}',
+  },
   ...pick(cosineLawPractice, [
     'st-cl-4', // a²=b²+c²-bc，求∠A（对比余弦定理）
   ]),
@@ -83,13 +103,13 @@ const blankQuestions: QuizQuestionData[] = [
   },
   {
     id: 's5b-3',
-    question: '周期',
-    questionLatex: '\\text{函数 } y = 3\\sin\\!\\left(2x - \\dfrac{\\pi}{4}\\right) \\text{ 的最小正周期 } T = \\underline{\\qquad}',
+    question: '三角函数零点（2023新课标I改编）',
+    questionLatex: '\\text{已知 } f(x) = \\cos\\omega x - 1\\;(\\omega > 0) \\text{ 在 } [0,\\,2\\pi] \\text{ 上有且仅有 } 3 \\text{ 个零点，则 } \\omega \\text{ 的取值范围是 } \\underline{\\qquad}',
     type: 'blank',
-    correctAnswer: 'π',
-    acceptableAnswers: ['\\pi', 'pi'],
+    correctAnswer: '[2, 3)',
+    acceptableAnswers: ['[2,3)', '2≤ω<3', '2\\leq\\omega<3'],
     explanation: '',
-    explanationLatex: 'T = \\dfrac{2\\pi}{\\omega} = \\dfrac{2\\pi}{2} = \\pi',
+    explanationLatex: 'f(x)=0 \\Leftrightarrow \\cos\\omega x=1 \\Leftrightarrow \\omega x=2k\\pi\\;(k\\in\\mathbb{Z}) \\Leftrightarrow x=\\dfrac{2k\\pi}{\\omega}\\\\[4pt]\\text{在 } [0,2\\pi] \\text{ 上恰有 3 个零点 } x=0,\\,\\dfrac{2\\pi}{\\omega},\\,\\dfrac{4\\pi}{\\omega}\\\\[4pt]\\text{需 } \\dfrac{4\\pi}{\\omega}\\leq 2\\pi \\Rightarrow \\omega\\geq 2\\text{；且 } \\dfrac{6\\pi}{\\omega}>2\\pi \\Rightarrow \\omega<3\\\\[4pt]\\therefore \\omega\\in[2,\\,3)',
   },
   {
     id: 's5b-4',
@@ -212,7 +232,7 @@ export const stage5EssayQuestions: EssayQuestion[] = [
       '\\text{（1）求 } f(x) \\text{ 的解析式；}\\\\[4pt]' +
       '\\text{（2）求 } f(x) \\text{ 在 } \\left[-\\dfrac{\\pi}{4},\\;\\dfrac{\\pi}{4}\\right] \\text{ 上的最大值和最小值。}',
     score: 6,
-    lines: 16,
+    lines: 17,
     answerLatex:
       '\\text{（1）相邻对称轴距离} = \\dfrac{T}{2} = \\dfrac{\\pi}{2} \\Rightarrow T = \\pi \\Rightarrow \\omega = \\dfrac{2\\pi}{T} = 2 \\\\[4pt]' +
       'f\\!\\left(\\dfrac{\\pi}{6}\\right) = A\\sin\\!\\left(\\dfrac{\\pi}{3}+\\varphi\\right) = \\sqrt{3} \\\\[4pt]' +
@@ -226,20 +246,24 @@ export const stage5EssayQuestions: EssayQuestion[] = [
   {
     id: 's5e-essay-5',
     questionLatex:
-      '\\text{在 } \\triangle ABC \\text{ 中，角 } A,B,C \\text{ 的对边分别为 } a,b,c\\text{，}' +
-      '\\text{已知 } b = 3\\text{，}c = 1\\text{，}A = 60°\\text{。}\\\\[6pt]' +
-      '\\text{（1）求 } a \\text{ 的值；}\\\\[4pt]' +
-      '\\text{（2）求 } \\sin C \\text{ 的值，并判断 } \\triangle ABC \\text{ 是锐角三角形还是钝角三角形。}',
+      '\\text{（2023 新课标 I）在 } \\triangle ABC \\text{ 中，} A + B = 3C\\text{，}2\\sin(A-C) = \\sin B\\text{。}\\\\[6pt]' +
+      '\\text{（1）求 } \\sin A \\text{；}\\\\[4pt]' +
+      '\\text{（2）设 } AB = 5\\text{，求 } AB \\text{ 边上的高。}',
     score: 6,
-    lines: 14,
+    lines: 16,
     answerLatex:
-      '\\text{（1）由余弦定理 } a^2 = b^2+c^2-2bc\\cos A \\\\[4pt]' +
-      '= 9+1-2\\times 3\\times 1\\times\\dfrac{1}{2} = 10-3 = 7 \\\\[4pt]' +
-      '\\therefore a = \\sqrt{7} \\\\[6pt]' +
-      '\\text{（2）由正弦定理 } \\dfrac{a}{\\sin A} = \\dfrac{c}{\\sin C} \\\\[4pt]' +
-      '\\sin C = \\dfrac{c\\sin A}{a} = \\dfrac{1\\times\\frac{\\sqrt{3}}{2}}{\\sqrt{7}} = \\dfrac{\\sqrt{3}}{2\\sqrt{7}} = \\dfrac{\\sqrt{21}}{14} \\\\[4pt]' +
-      '\\text{因为 } c=1 \\text{ 是最短边，} \\sin C = \\dfrac{\\sqrt{21}}{14} < \\dfrac{1}{2} \\Rightarrow C < 30° \\\\[4pt]' +
-      '\\text{又 } A=60°,\\; B = 180°-60°-C > 90° \\\\[4pt]' +
-      '\\therefore B \\text{ 为钝角，}\\triangle ABC \\text{ 是钝角三角形}',
+      '\\text{（1）由 } A+B=3C \\text{ 及 } A+B+C=\\pi \\Rightarrow 4C=\\pi \\Rightarrow C=\\dfrac{\\pi}{4} \\\\[4pt]' +
+      '\\text{原式 } 2\\sin(A-C)=\\sin B=\\sin(\\pi-A-C) = \\sin(A+C) \\\\[4pt]' +
+      '2\\sin A\\cos C-2\\cos A\\sin C = \\sin A\\cos C+\\cos A\\sin C \\\\[4pt]' +
+      '\\sin A\\cos C = 3\\cos A\\sin C \\\\[4pt]' +
+      '\\tan A = 3\\tan C = 3\\tan\\dfrac{\\pi}{4} = 3 \\\\[4pt]' +
+      '\\sin A = \\dfrac{3}{\\sqrt{10}} = \\dfrac{3\\sqrt{10}}{10} \\\\[6pt]' +
+      '\\text{（2）由正弦定理 } \\dfrac{c}{\\sin C}=\\dfrac{AB}{\\sin C}=\\dfrac{5}{\\sin\\frac{\\pi}{4}}=5\\sqrt{2} \\\\[4pt]' +
+      '\\text{面积 } S = \\dfrac{1}{2}\\cdot AB\\cdot h = \\dfrac{1}{2}ab\\sin C \\\\[4pt]' +
+      'a = 5\\sqrt{2}\\sin A = 5\\sqrt{2}\\cdot\\dfrac{3\\sqrt{10}}{10} = 3\\sqrt{5},\\; b=5\\sqrt{2}\\sin B \\\\[4pt]' +
+      'B=\\pi-A-C,\\;\\sin B=\\sin(A+C)=\\sin A\\cos C+\\cos A\\sin C \\\\[4pt]' +
+      '= \\dfrac{3\\sqrt{10}}{10}\\cdot\\dfrac{\\sqrt{2}}{2}+\\dfrac{\\sqrt{10}}{10}\\cdot\\dfrac{\\sqrt{2}}{2} = \\dfrac{4\\sqrt{20}}{20}=\\dfrac{2\\sqrt{5}}{5},\\; b=5\\sqrt{2}\\cdot\\dfrac{2\\sqrt{5}}{5}=2\\sqrt{10} \\\\[4pt]' +
+      'S=\\dfrac{1}{2}\\cdot 3\\sqrt{5}\\cdot 2\\sqrt{10}\\cdot\\dfrac{\\sqrt{2}}{2}=\\dfrac{1}{2}\\cdot 3\\sqrt{5}\\cdot 2\\sqrt{10}\\cdot\\dfrac{\\sqrt{2}}{2}=\\dfrac{3\\sqrt{100}}{2}=15 \\\\[4pt]' +
+      'h=\\dfrac{2S}{AB}=\\dfrac{30}{5}=6',
   },
 ];
