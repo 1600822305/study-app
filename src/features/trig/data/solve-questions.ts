@@ -13,8 +13,6 @@ export const sineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '\\sqrt{6}', isLatex: true },
     ],
     correctAnswer: '2\\sqrt{2}',
-    explanation: '',
-    explanationLatex: '\\text{先找对边对角：边 }a\\text{ 对角 }A\\text{，边 }b\\text{ 对角 }B\\\\[4pt]\\text{由正弦定理 }\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}\\Rightarrow b=\\dfrac{a\\sin B}{\\sin A}\\\\[4pt]\\text{代入 }a=2,\\;A=30^\\circ,\\;B=45^\\circ\\\\[4pt]b=\\dfrac{2\\cdot \\sin 45^\\circ}{\\sin 30^\\circ}=\\dfrac{2\\cdot \\frac{\\sqrt{2}}{2}}{\\frac{1}{2}}=2\\sqrt{2}\\\\[4pt]\\therefore b=2\\sqrt{2}',
   },
   {
     id: 'st-sl-2',
@@ -27,8 +25,6 @@ export const sineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '1:2:3', isLatex: false },
     ],
     correctAnswer: '2:3:4',
-    explanation: '',
-    explanationLatex: '\\text{正弦定理告诉我们 }\\dfrac{a}{\\sin A}=\\dfrac{b}{\\sin B}=\\dfrac{c}{\\sin C}=2R\\\\[4pt]\\text{所以 }a=2R\\sin A,\\;b=2R\\sin B,\\;c=2R\\sin C\\\\[4pt]\\text{三边都同时乘了同一个数 }2R\\text{，比值不会变}\\\\[4pt]\\therefore a:b:c=\\sin A:\\sin B:\\sin C=2:3:4',
   },
   {
     id: 'st-sl-3',
@@ -41,8 +37,6 @@ export const sineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '\\dfrac{\\sqrt{3}}{2}', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\text{由 }\\dfrac{a}{\\sin A}=2R\\text{ 可得 }a=2R\\sin A\\\\[4pt]\\text{代入 }R=1,\\;A=30^\\circ\\\\[4pt]a=2\\cdot 1\\cdot \\sin 30^\\circ=2\\cdot \\dfrac{1}{2}=1\\\\[4pt]\\therefore a=1',
   },
   {
     id: 'st-sl-5',
@@ -55,8 +49,6 @@ export const sineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '3 \\text{ 个}', isLatex: true },
     ],
     correctAnswer: '2 \\text{ 个}',
-    explanation: '',
-    explanationLatex: '\\text{由正弦定理 }\\dfrac{\\sin B}{b}=\\dfrac{\\sin A}{a}\\\\[4pt]\\sin B=\\dfrac{b\\sin A}{a}=\\dfrac{\\sqrt{3}\\cdot \\frac{1}{2}}{1}=\\dfrac{\\sqrt{3}}{2}\\\\[4pt]\\text{因为 }\\sin 60^\\circ=\\sin 120^\\circ=\\dfrac{\\sqrt{3}}{2}\\\\[4pt]\\text{所以 }B\\text{ 可能是 }60^\\circ\\text{，也可能是 }120^\\circ\\\\[4pt]\\text{检验内角和：}30^\\circ+60^\\circ=90^\\circ<180^\\circ\\text{，成立}\\\\[2pt]30^\\circ+120^\\circ=150^\\circ<180^\\circ\\text{，也成立}\\\\[4pt]\\therefore B\\text{ 一共有 }2\\text{ 个可能值}',
   },
   {
     id: 'st-sl-6',
@@ -69,8 +61,6 @@ export const sineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '2\\sqrt{3}', isLatex: true },
     ],
     correctAnswer: '\\sqrt{6}',
-    explanation: '',
-    explanationLatex: '\\text{已知边 }b\\text{ 和它的对角 }B\\text{，可用正弦定理}\\\\[4pt]a=\\dfrac{b\\sin A}{\\sin B}=\\dfrac{2\\cdot \\sin 60^\\circ}{\\sin 45^\\circ}\\\\[4pt]=\\dfrac{2\\cdot \\frac{\\sqrt{3}}{2}}{\\frac{\\sqrt{2}}{2}}=\\dfrac{\\sqrt{3}}{\\frac{\\sqrt{2}}{2}}=\\dfrac{2\\sqrt{3}}{\\sqrt{2}}=\\sqrt{6}\\\\[4pt]\\therefore a=\\sqrt{6}',
   },
 ];
 
@@ -87,8 +77,6 @@ export const cosineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '64', isLatex: false },
     ],
     correctAnswer: '49',
-    explanation: '',
-    explanationLatex: '\\text{已知两边和夹角，直接用余弦定理}\\\\[4pt]a^2=b^2+c^2-2bc\\cos A\\\\[4pt]=3^2+5^2-2\\cdot 3\\cdot 5\\cdot \\cos 120^\\circ\\\\[4pt]=9+25-30\\cdot \\left(-\\dfrac{1}{2}\\right)=34+15=49\\\\[4pt]\\therefore a^2=49',
   },
   {
     id: 'st-cl-2',
@@ -101,8 +89,6 @@ export const cosineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '14', isLatex: false },
     ],
     correctAnswer: '2\\sqrt{13}',
-    explanation: '',
-    explanationLatex: '\\text{先用余弦定理求对边 }a\\\\[4pt]a^2=b^2+c^2-2bc\\cos A\\\\[4pt]=6^2+8^2-2\\cdot 6\\cdot 8\\cdot \\cos 60^\\circ\\\\[4pt]=36+64-96\\cdot \\dfrac{1}{2}=100-48=52\\\\[4pt]\\therefore a=\\sqrt{52}=2\\sqrt{13}',
   },
   {
     id: 'st-cl-3',
@@ -115,8 +101,6 @@ export const cosineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '150°', isLatex: false },
     ],
     correctAnswer: '120°',
-    explanation: '',
-    explanationLatex: '\\text{已知三边求角，用余弦定理变形}\\\\[4pt]\\cos A=\\dfrac{b^2+c^2-a^2}{2bc}=\\dfrac{3^2+1^2-(\\sqrt{13})^2}{2\\cdot 3\\cdot 1}\\\\[4pt]=\\dfrac{9+1-13}{6}=\\dfrac{-3}{6}=-\\dfrac{1}{2}\\\\[4pt]\\text{而 }\\cos 120^\\circ=-\\dfrac{1}{2}\\\\[4pt]\\therefore A=120^\\circ',
   },
   {
     id: 'st-cl-4',
@@ -129,8 +113,6 @@ export const cosineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '120°', isLatex: false },
     ],
     correctAnswer: '60°',
-    explanation: '',
-    explanationLatex: '\\text{把已知式和余弦定理 }a^2=b^2+c^2-2bc\\cos A\\text{ 对比}\\\\[4pt]b^2+c^2-2bc\\cos A=b^2+c^2-bc\\\\[4pt]\\Rightarrow -2bc\\cos A=-bc\\\\[4pt]\\Rightarrow 2\\cos A=1\\Rightarrow \\cos A=\\dfrac{1}{2}\\\\[4pt]\\therefore A=60^\\circ',
   },
   {
     id: 'st-cl-5',
@@ -143,8 +125,6 @@ export const cosineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无法确定}', isLatex: true },
     ],
     correctAnswer: '\\text{锐角三角形}',
-    explanation: '',
-    explanationLatex: '\\text{先看最大边 }c=6\\text{，最大边对最大角 }C\\\\[4pt]\\text{比较 }a^2+b^2\\text{ 与 }c^2\\\\[4pt]5^2+5^2=25+25=50,\\quad 6^2=36\\\\[4pt]\\text{因为 }50>36\\text{，所以最大角 }C<90^\\circ\\\\[4pt]\\text{最大角都小于 }90^\\circ\\text{，其余角更小}\\\\[4pt]\\therefore \\text{该三角形是锐角三角形}',
   },
   {
     id: 'st-cl-6',
@@ -157,8 +137,6 @@ export const cosineLawPractice: QuizQuestionData[] = [
       { label: 'D', value: '\\dfrac{3}{7}', isLatex: true },
     ],
     correctAnswer: '-\\dfrac{1}{4}',
-    explanation: '',
-    explanationLatex: '\\text{由余弦定理变形 }\\cos C=\\dfrac{a^2+b^2-c^2}{2ab}\\\\[4pt]=\\dfrac{7^2+8^2-13^2}{2\\cdot 7\\cdot 8}=\\dfrac{49+64-169}{112}\\\\[4pt]=\\dfrac{-56}{112}=-\\dfrac{1}{4}\\\\[4pt]\\therefore \\cos C=-\\dfrac{1}{4}',
   },
 ];
 
@@ -175,8 +153,6 @@ export const areaPractice: QuizQuestionData[] = [
       { label: 'D', value: '20\\sqrt{3}', isLatex: true },
     ],
     correctAnswer: '10',
-    explanation: '',
-    explanationLatex: '\\text{面积公式是 }S=\\dfrac{1}{2}ab\\sin C\\\\[4pt]\\text{这里 }a,b\\text{ 是夹角 }C\\text{ 的两边，可直接代入}\\\\[4pt]S=\\dfrac{1}{2}\\cdot 8\\cdot 5\\cdot \\sin 30^\\circ=20\\cdot \\dfrac{1}{2}=10\\\\[4pt]\\therefore S=10',
   },
   {
     id: 'st-ar-2',
@@ -189,8 +165,6 @@ export const areaPractice: QuizQuestionData[] = [
       { label: 'D', value: '20', isLatex: false },
     ],
     correctAnswer: '12',
-    explanation: '',
-    explanationLatex: '\\text{角 }A\\text{ 夹在边 }b,c\\text{ 之间，所以用 }S=\\dfrac{1}{2}bc\\sin A\\\\[4pt]S=\\dfrac{1}{2}\\cdot 10\\cdot 4\\cdot \\dfrac{3}{5}=20\\cdot \\dfrac{3}{5}=12\\\\[4pt]\\therefore S=12',
   },
   {
     id: 'st-ar-3',
@@ -203,8 +177,6 @@ export const areaPractice: QuizQuestionData[] = [
       { label: 'D', value: '8\\sqrt{3}', isLatex: true },
     ],
     correctAnswer: '4\\sqrt{3}',
-    explanation: '',
-    explanationLatex: '\\text{等边三角形每个角都是 }60^\\circ\\\\[4pt]\\text{所以 }S=\\dfrac{1}{2}\\cdot 4\\cdot 4\\cdot \\sin 60^\\circ\\\\[4pt]=8\\cdot \\dfrac{\\sqrt{3}}{2}=4\\sqrt{3}\\\\[4pt]\\therefore S=4\\sqrt{3}',
   },
   {
     id: 'st-ar-4',
@@ -217,8 +189,6 @@ export const areaPractice: QuizQuestionData[] = [
       { label: 'D', value: '1', isLatex: false },
     ],
     correctAnswer: '\\dfrac{1}{2}',
-    explanation: '',
-    explanationLatex: '\\text{由面积公式 }S=\\dfrac{1}{2}ab\\sin C\\\\[4pt]6=\\dfrac{1}{2}\\cdot 4\\cdot 6\\cdot \\sin C=12\\sin C\\\\[4pt]\\sin C=\\dfrac{6}{12}=\\dfrac{1}{2}\\\\[4pt]\\therefore \\sin C=\\dfrac{1}{2}',
   },
   {
     id: 'st-ar-5',
@@ -231,8 +201,6 @@ export const areaPractice: QuizQuestionData[] = [
       { label: 'D', value: '6\\sqrt{3}', isLatex: true },
     ],
     correctAnswer: '12',
-    explanation: '',
-    explanationLatex: '\\text{已知三边，先求角 }C\\text{ 的三角函数}\\\\[4pt]\\cos C=\\dfrac{a^2+b^2-c^2}{2ab}=\\dfrac{25+25-36}{2\\cdot 5\\cdot 5}=\\dfrac{14}{50}=\\dfrac{7}{25}\\\\[4pt]\\sin C=\\sqrt{1-\\cos^2 C}=\\sqrt{1-\\left(\\dfrac{7}{25}\\right)^2}=\\dfrac{24}{25}\\\\[4pt]\\text{再代入面积公式 }S=\\dfrac{1}{2}ab\\sin C\\\\[4pt]S=\\dfrac{1}{2}\\cdot 5\\cdot 5\\cdot \\dfrac{24}{25}=12\\\\[4pt]\\therefore S=12',
   },
   {
     id: 'st-ar-6',
@@ -245,8 +213,6 @@ export const areaPractice: QuizQuestionData[] = [
       { label: 'D', value: '7', isLatex: false },
     ],
     correctAnswer: '\\sqrt{37}',
-    explanation: '',
-    explanationLatex: '\\text{先由面积公式求 }\\sin C\\\\[4pt]3\\sqrt{3}=\\dfrac{1}{2}\\cdot 3\\cdot 4\\cdot \\sin C=6\\sin C\\\\[4pt]\\sin C=\\dfrac{\\sqrt{3}}{2}\\\\[4pt]\\text{若 }C\\text{ 是锐角，则 }C=60^\\circ\\text{；题目说 }C\\text{ 是钝角}\\\\[4pt]\\therefore C=120^\\circ\\\\[4pt]\\text{再用余弦定理求 }c\\\\[4pt]c^2=a^2+b^2-2ab\\cos C=3^2+4^2-2\\cdot 3\\cdot 4\\cdot \\cos 120^\\circ\\\\[4pt]=9+16-24\\cdot \\left(-\\dfrac{1}{2}\\right)=25+12=37\\\\[4pt]\\therefore c=\\sqrt{37}',
   },
 ];
 
@@ -263,8 +229,6 @@ export const comprehensivePractice: QuizQuestionData[] = [
       { label: 'D', value: '2\\sqrt{3}', isLatex: true },
     ],
     correctAnswer: '\\dfrac{3\\sqrt{3}}{2}',
-    explanation: '',
-    explanationLatex: '\\text{先把已知式和余弦定理 }a^2=b^2+c^2-2bc\\cos A\\text{ 对比}\\\\[4pt]b^2+c^2-2bc\\cos A=b^2+c^2+bc\\\\[4pt]\\Rightarrow -2bc\\cos A=bc\\\\[4pt]\\Rightarrow \\cos A=-\\dfrac{1}{2}\\\\[4pt]\\therefore A=120^\\circ\\\\[4pt]\\text{再求面积：}S=\\dfrac{1}{2}bc\\sin A=\\dfrac{1}{2}\\cdot 2\\cdot 3\\cdot \\sin 120^\\circ\\\\[4pt]=3\\cdot \\dfrac{\\sqrt{3}}{2}=\\dfrac{3\\sqrt{3}}{2}',
   },
   {
     id: 'st-cp-2',
@@ -277,8 +241,6 @@ export const comprehensivePractice: QuizQuestionData[] = [
       { label: 'D', value: '\\dfrac{2\\pi}{3}', isLatex: true },
     ],
     correctAnswer: '\\dfrac{\\pi}{3}',
-    explanation: '',
-    explanationLatex: '\\text{关键结论：在三角形中 }a\\cos B+b\\cos A=c\\\\[4pt]\\text{把它代入原式 }2\\cos C(a\\cos B+b\\cos A)=c\\\\[4pt]\\Rightarrow 2\\cos C\\cdot c=c\\\\[4pt]\\text{三角形边长 }c>0\\text{，可两边同时除以 }c\\\\[4pt]2\\cos C=1\\Rightarrow \\cos C=\\dfrac{1}{2}\\\\[4pt]\\therefore C=\\dfrac{\\pi}{3}',
   },
   {
     id: 'st-cp-3',
@@ -291,7 +253,5 @@ export const comprehensivePractice: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无法确定}', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\text{由正弦定理 }\\dfrac{a}{\\sin A}=2R\\\\[4pt]\\text{题目又给 }a=2\\sin A\\\\[4pt]\\therefore \\dfrac{a}{\\sin A}=\\dfrac{2\\sin A}{\\sin A}=2\\\\[4pt]\\text{所以 }2R=2\\Rightarrow R=1',
   },
 ];

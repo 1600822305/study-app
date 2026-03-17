@@ -6,7 +6,7 @@ import { sineLawPractice, cosineLawPractice, areaPractice, comprehensivePractice
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { SolveTriGeneric, SolveTriEx1, SolveTriEx2, SolveTriSineLaw1, SolveTriSSA, SolveTriObtuse120, SolveTriAreaHeight, CosineLawDiagram, SolveTriCosineAngle, SolveTriTypeJudge } from './solve-diagrams';
-import { SolveTriangleAnswers } from './solve-answers';
+import { SolveTriangleAnswers, solveTriExplanations } from './solve-answers';
 
 export function SolveTrianglePage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('trig-solve', trigSolveProgressItems);
@@ -170,7 +170,7 @@ export function SolveTrianglePage() {
               <div className="shrink-0 w-[280px]"><SolveTriSSA /></div>
             </div>
 
-            <PracticeCard title="✏️ 正弦定理即时训练" questions={sineLawPractice} optionCols={4} printOptionCols={4} />
+            <PracticeCard title="✏️ 正弦定理即时训练" questions={sineLawPractice} optionCols={4} printOptionCols={4} explanations={solveTriExplanations} />
           </div>
         </Collapsible>
       </section>
@@ -339,7 +339,7 @@ export function SolveTrianglePage() {
             </div>
 
             {/* ───── 第七层：即时训练 + 高频变形 ───── */}
-            <PracticeCard title="✏️ 余弦定理即时训练" questions={cosineLawPractice} optionCols={4} printOptionCols={4} />
+            <PracticeCard title="✏️ 余弦定理即时训练" questions={cosineLawPractice} optionCols={4} printOptionCols={4} explanations={solveTriExplanations} />
 
             <div className="bg-blue-50 rounded p-1.5 border border-blue-200">
               <p className="font-bold text-blue-800 mb-0.5">🔑 余弦定理高频变形（高考套路）</p>
@@ -526,7 +526,7 @@ export function SolveTrianglePage() {
               <p>③ 代入余弦定理 <MathTex tex="a^2=b^2+c^2-2bc\cos A" />，求出 <MathTex tex="a" /></p>
             </div>
 
-            <PracticeCard title="✏️ 面积公式即时训练" questions={areaPractice} optionCols={4} printOptionCols={4} />
+            <PracticeCard title="✏️ 面积公式即时训练" questions={areaPractice} optionCols={4} printOptionCols={4} explanations={solveTriExplanations} />
           </div>
         </Collapsible>
       </section>
@@ -773,7 +773,7 @@ export function SolveTrianglePage() {
               <p className="text-red-700 font-bold">高考套路：第①问求角 → 第②问求面积/边长。年年都考！</p>
             </div>
 
-            <PracticeCard title="✏️ 综合实战训练" questions={comprehensivePractice} optionCols={4} printOptionCols={4} />
+            <PracticeCard title="✏️ 综合实战训练" questions={comprehensivePractice} optionCols={4} printOptionCols={4} explanations={solveTriExplanations} />
 
             {/* 全章速查表 */}
             <div className="bg-blue-50 rounded p-2 border border-blue-200">

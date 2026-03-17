@@ -3,6 +3,7 @@ import { logicPrereqNarrations } from './data/prereq-narrations';
 import { logicPrereqPractice1, logicPrereqPractice2, logicPrereqPractice3 } from './data/practice';
 import { logicPrereqProgressItems } from './data/prereq-progress';
 import { logicPrereqQuizQuestions } from './data/prereq-quiz';
+import { LogicPrereqAnswers, logicPrereqExplanations } from './logic-prereq-answers';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 
@@ -123,7 +124,7 @@ export function LogicPrereqPage() {
 
             <PageBreak />
 
-            <PracticeCard questions={logicPrereqPractice1} />
+            <PracticeCard questions={logicPrereqPractice1} explanations={logicPrereqExplanations} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>⊂ 和 ⊆ 的区别</strong>：⊂ 是真子集（不能相等），⊆ 是子集（可以相等）</p>
@@ -333,7 +334,7 @@ export function LogicPrereqPage() {
 
             <PageBreak />
 
-            <PracticeCard questions={logicPrereqPractice2} />
+            <PracticeCard questions={logicPrereqPractice2} explanations={logicPrereqExplanations} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>开闭区间别搞混</strong>：{'<'} 用开区间 ()，≤ 用闭区间 []</p>
@@ -473,7 +474,7 @@ export function LogicPrereqPage() {
               <p>找反例只需要<strong>一个</strong>就够了（狗是动物但不是猫 → 一个反例搞定）</p>
             </CalloutCard>
 
-            <PracticeCard questions={logicPrereqPractice3} title="✏️ 即时练习（想想范围大小就行）" />
+            <PracticeCard questions={logicPrereqPractice3} title="✏️ 即时练习（想想范围大小就行）" explanations={logicPrereqExplanations} />
           </div>
         </Collapsible>
       </section>
@@ -559,93 +560,10 @@ export function LogicPrereqPage() {
           </span>
           选择题自测
         </h2>
-        <QuizPanel module="logic-prereq" questions={logicPrereqQuizQuestions} title="前置知识自测" description="8道选择题，覆盖子集关系、解不等式、推出判断全部知识点" />
+        <QuizPanel module="logic-prereq" questions={logicPrereqQuizQuestions} title="前置知识自测" description="8道选择题，覆盖子集关系、解不等式、推出判断全部知识点" explanations={logicPrereqExplanations} />
       </section>
 
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.2.5 逻辑前置知识 — 答案与解析</h2>
-
-            {[
-              { label: '一、集合包含关系 — 即时练习', questions: logicPrereqPractice1 },
-              { label: '二、解不等式 — 即时练习', questions: logicPrereqPractice2 },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-
-          <PageBreak />
-
-          <section className="mb-8 print-answers">
-            {[
-              { label: '三、基本推理 — 即时练习', questions: logicPrereqPractice3 },
-              { label: '选择题自测', questions: logicPrereqQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <LogicPrereqAnswers />}
 
       </LessonLayout>
     </div>

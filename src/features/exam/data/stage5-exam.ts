@@ -20,8 +20,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '-\\dfrac{1}{5}', isLatex: true },
       { label: 'D', value: '\\text{无法确定}', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
+    correctAnswer: '0',
   },
   // 2. sin75° 精确值（和角公式）
   {
@@ -35,8 +34,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\dfrac{\\sqrt{3}+1}{4}', isLatex: true },
       { label: 'D', value: '\\dfrac{\\sqrt{2}}{2}', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
+    correctAnswer: '\\dfrac{\\sqrt{6}+\\sqrt{2}}{4}',
   },
   // 3. 余弦定理对比求角
   {
@@ -51,8 +49,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '90°' },
       { label: 'D', value: '120°' },
     ],
-    correctAnswer: 'B',
-    explanation: '',
+    correctAnswer: '60°',
   },
   // 4. 面积公式
   {
@@ -67,8 +64,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '10\\sqrt{3}', isLatex: true },
       { label: 'D', value: '20\\sqrt{3}', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
+    correctAnswer: '10',
   },
   // 5. sin2α（二象限+二倍角）
   {
@@ -83,8 +79,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '-\\dfrac{12}{25}', isLatex: true },
       { label: 'D', value: '\\dfrac{12}{25}', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
+    correctAnswer: '-\\dfrac{24}{25}',
   },
   // 6. 降幂公式（补充教学中的降幂知识点考查）
   {
@@ -99,8 +94,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '1-2\\sin^2\\alpha', isLatex: true },
       { label: 'D', value: '\\text{A 和 C 都对}', isLatex: true },
     ],
-    correctAnswer: 'D',
-    explanation: '',
+    correctAnswer: '\\text{A 和 C 都对}',
   },
   // 7. 图像变换（先平移后伸缩）
   {
@@ -115,8 +109,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: 'y=\\sin\\!\\left(2x+\\dfrac{2\\pi}{3}\\right)', isLatex: true },
       { label: 'D', value: 'y=\\sin\\!\\left(\\dfrac{x}{2}+\\dfrac{\\pi}{3}\\right)', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
+    correctAnswer: 'y=\\sin\\!\\left(2x+\\dfrac{\\pi}{3}\\right)',
   },
   // 8. 闭区间上的最值
   {
@@ -131,8 +124,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '0' },
       { label: 'D', value: '1' },
     ],
-    correctAnswer: 'B',
-    explanation: '',
+    correctAnswer: '-1',
   },
   // 9. 正弦定理解的个数
   {
@@ -147,8 +139,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '2' },
       { label: 'D', value: '3' },
     ],
-    correctAnswer: 'C',
-    explanation: '',
+    correctAnswer: '2',
   },
   // 10.【2025高考第4题】tan 对称中心（压轴）
   {
@@ -163,8 +154,7 @@ export const stage5ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\dfrac{\\pi}{2}', isLatex: true },
       { label: 'D', value: '\\dfrac{4\\pi}{3}', isLatex: true },
     ],
-    correctAnswer: 'B',
-    explanation: '',
+    correctAnswer: '\\dfrac{\\pi}{3}',
   },
 ];
 
@@ -178,7 +168,6 @@ export const stage5BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '5π/6',
     acceptableAnswers: ['\\frac{5\\pi}{6}', '\\dfrac{5\\pi}{6}', '5π/6'],
-    explanation: '',
   },
   // 12. 周期
   {
@@ -189,7 +178,6 @@ export const stage5BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: 'π',
     acceptableAnswers: ['\\pi', 'π', '3.14'],
-    explanation: '',
   },
   // 13. 半角公式（补充教学中半角知识点考查）
   {
@@ -200,7 +188,6 @@ export const stage5BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '3/5',
     acceptableAnswers: ['\\frac{3}{5}', '\\dfrac{3}{5}', '3/5', '0.6'],
-    explanation: '',
   },
   // 14.【2023新课标I改编】三角函数零点
   {
@@ -211,7 +198,6 @@ export const stage5BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '[2, 3)',
     acceptableAnswers: ['[2,3)', '2≤ω<3', '2\\leq\\omega<3'],
-    explanation: '',
   },
   // 15. 辅助角公式
   {
@@ -222,7 +208,6 @@ export const stage5BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '2sin(x+π/6)',
     acceptableAnswers: ['2\\sin(x+\\frac{\\pi}{6})', '2\\sin\\!(x+\\frac{\\pi}{6})', '2sin(x+π/6)', '2sin(x+30°)'],
-    explanation: '',
   },
   // 16. 余弦定理求边
   {
@@ -233,7 +218,6 @@ export const stage5BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '√19',
     acceptableAnswers: ['\\sqrt{19}'],
-    explanation: '',
   },
 ];
 

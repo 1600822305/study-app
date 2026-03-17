@@ -5,6 +5,7 @@ import { setsPrereqNarrations } from './data/prereq-narrations';
 import { setsPrereqPractice1, setsPrereqPractice2, setsPrereqPractice3, setsPrereqPractice4 } from './data/practice';
 import { setsPrereqProgressItems } from './data/prereq-progress';
 import { setsPrereqQuizQuestions } from './data/prereq-quiz';
+import { SetsPrereqAnswers, setsPrereqExplanations } from './sets-prereq-answers';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 
@@ -342,7 +343,7 @@ export function SetsPrereqPage() {
               <p className="text-xs text-gray-500 mt-1">高考90%的方程都能因式分解，配方法和公式法是保底的</p>
             </div>
 
-            <PracticeCard questions={setsPrereqPractice1} />
+            <PracticeCard questions={setsPrereqPractice1} explanations={setsPrereqExplanations} />
 
             <CalloutCard variant="warning" title="易错点">
               <p>找两个数时注意<strong>符号</strong>：乘起来=6、加起来=-5，那就是 -2 和 -3（都是负的）</p>
@@ -526,7 +527,7 @@ export function SetsPrereqPage() {
             </CalloutCard>
             <PageBreak />
 
-            <PracticeCard questions={setsPrereqPractice2} />
+            <PracticeCard questions={setsPrereqPractice2} explanations={setsPrereqExplanations} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>“大于”和“小于”别搞反</strong>：大于取两边（远离根），小于取中间（夹在根之间）</p>
@@ -588,7 +589,7 @@ export function SetsPrereqPage() {
               <p className="text-blue-700 text-sm">● 实心圆 = 包含（对应 ≤ 或 ≥）</p>
             </div>
 
-            <PracticeCard questions={setsPrereqPractice3} />
+            <PracticeCard questions={setsPrereqPractice3} explanations={setsPrereqExplanations} />
 
             <CalloutCard variant="warning" title="易错点">
               <p>{'<'} 和 ≤ 的区别就在于<strong>圆的空实</strong>：{'<'} 空心、≤ 实心</p>
@@ -645,7 +646,7 @@ export function SetsPrereqPage() {
               <p>无穷 ∞ → 永远用小括号</p>
             </div>
 
-            <PracticeCard questions={setsPrereqPractice4} />
+            <PracticeCard questions={setsPrereqPractice4} explanations={setsPrereqExplanations} />
 
             <CalloutCard variant="warning" title="易错点">
               <p><strong>∞ 永远用小括号</strong>：<Math tex="[3, +\infty)" /> ✓，<Math tex="[3, +\infty]" /> ✗</p>
@@ -726,56 +727,10 @@ export function SetsPrereqPage() {
           </span>
           选择题自测
         </h2>
-        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="16道选择题，覆盖解方程、解不等式、区间表示、数轴全部知识点" />
+        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="16道选择题，覆盖解方程、解不等式、区间表示、数轴全部知识点" explanations={setsPrereqExplanations} />
       </section>
 
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.1.5 集合前置知识 — 答案与解析</h2>
-
-            {[
-              { label: '一、解方程 — 即时练习', questions: setsPrereqPractice1 },
-              { label: '二、解不等式 — 即时练习', questions: setsPrereqPractice2 },
-              { label: '三、数轴 — 即时练习', questions: setsPrereqPractice3 },
-              { label: '四、区间表示法 — 即时练习', questions: setsPrereqPractice4 },
-              { label: '选择题自测', questions: setsPrereqQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <SetsPrereqAnswers />}
 
       </LessonLayout>
     </div>

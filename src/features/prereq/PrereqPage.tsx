@@ -3,6 +3,7 @@ import { prereqNarrations } from './data/narrations';
 import { prereqSelfTest } from './data/selftest';
 import { prereqPractice1, prereqPractice2, prereqPractice3, prereqPractice4, prereqPractice5, prereqPractice6, prereqPractice7 } from './data/practice';
 import { prereqProgressItems } from './data/progress';
+import { PrereqAnswers, prereqExplanations } from './prereq-answers';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
@@ -109,7 +110,7 @@ export function PrereqPage() {
             <p className="text-gray-500 mt-2">遇到新问题，就升级工具箱。复数是数的<strong>第5次自然升级</strong>。</p>
           </div>
 
-          <PracticeCard questions={prereqPractice1} />
+          <PracticeCard questions={prereqPractice1} explanations={prereqExplanations} />
 
           <CalloutCard variant="warning" title="易错点" className="mt-4">
             <p>• <strong>0 是自然数</strong>，也是整数、有理数、实数</p>
@@ -199,7 +200,7 @@ export function PrereqPage() {
             </div>
           </div>
           <PageBreak label="即时练习" />
-          <PracticeCard questions={prereqPractice2} />
+          <PracticeCard questions={prereqPractice2} explanations={prereqExplanations} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• <strong><Math tex="(-3)^2 = 9" /></strong>，不是 -9！括号很重要：<Math tex="-3^2 = -(3^2) = -9" /></p>
             <p>• <strong><Math tex="\sqrt{\phantom{x}}" /> 号默认取正值</strong>：<Math tex="\sqrt{9} = 3" />，不是 ±3</p>
@@ -232,7 +233,7 @@ export function PrereqPage() {
               </div>
             </div>
           </div>
-          <PracticeCard questions={prereqPractice3} />
+          <PracticeCard questions={prereqPractice3} explanations={prereqExplanations} />
         </Collapsible>
       </section>
 
@@ -305,7 +306,7 @@ export function PrereqPage() {
             </div>
           </div>
           <PageBreak label="即时练习" />
-          <PracticeCard questions={prereqPractice4} />
+          <PracticeCard questions={prereqPractice4} explanations={prereqExplanations} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• 异分母<strong>不能直接加分子</strong>：<Math tex="\frac{1}{2} + \frac{1}{3} \neq \frac{2}{5}" />，必须先通分</p>
             <p>• 除以分数 = 乘以<strong>倒数</strong>，别忘了翻转</p>
@@ -385,7 +386,7 @@ export function PrereqPage() {
             </div>
           </div>
           <PageBreak label="即时练习" />
-          <PracticeCard questions={prereqPractice5} />
+          <PracticeCard questions={prereqPractice5} explanations={prereqExplanations} />
           <CalloutCard variant="warning" title="易错点" className="mt-3">
             <p>• 两个括号相乘<strong>不能只乘第一项</strong>：<Math tex="(a+b)(c+d) \neq ac+bd" /></p>
             <p>• 遇到 <Math tex="i^2" /> 一定要<strong>立刻替换成 -1</strong>，别漏了</p>
@@ -445,7 +446,7 @@ export function PrereqPage() {
               <p>忘记 <Math tex="i^2 = -1" /> 带入时的符号变化。</p>
             </CalloutCard>
           </div>
-          <PracticeCard questions={prereqPractice6} />
+          <PracticeCard questions={prereqPractice6} explanations={prereqExplanations} />
           <CalloutCard variant="warning" title="易错点" className="mt-2">
             <p>• <strong>减去负数 = 加正数</strong>：5 - (-3) = 8，不是 2</p>
             <p>• <strong>负 × 负 = 正</strong>：(-1)×(-1) = 1</p>
@@ -500,7 +501,7 @@ export function PrereqPage() {
               </div>
             </div>
           </div>
-          <PracticeCard questions={prereqPractice7} />
+          <PracticeCard questions={prereqPractice7} explanations={prereqExplanations} />
           <div className="mt-3 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
             <p className="font-bold text-amber-800 mb-1">⚠️ 易错点</p>
             <p className="text-gray-700">• <strong>余0 对应 <Math tex="i^4 = 1" /></strong>，不是 <Math tex="i^0" /></p>
@@ -589,60 +590,12 @@ export function PrereqPage() {
           questions={prereqSelfTest}
           title="前置知识自测"
           description="10道选择题，确认初中基础没问题。"
+          explanations={prereqExplanations}
         />
       </section>
 
       {/* 答案与解析版块 — 仅打印时显示 */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.0 复数前置知识 — 答案与解析</h2>
-
-            {[
-              { label: '一、数的分类 — 即时练习', questions: prereqPractice1 },
-              { label: '二、平方与平方根 — 即时练习', questions: prereqPractice2 },
-              { label: '三、常用平方数 — 即时练习', questions: prereqPractice3 },
-              { label: '四、分数运算 — 即时练习', questions: prereqPractice4 },
-              { label: '五、多项式展开 — 即时练习', questions: prereqPractice5 },
-              { label: '六、负数运算 — 即时练习', questions: prereqPractice6 },
-              { label: '七、除以4求余数 — 即时练习', questions: prereqPractice7 },
-              { label: '自测清单', questions: prereqSelfTest },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <PrereqAnswers />}
       </LessonLayout>
     </div>
   );

@@ -14,8 +14,6 @@ export const prereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '复数（非实数）' },
     ],
     correctAnswer: '无理数',
-    explanation: '√2 = 1.41421356...，是无限不循环小数。无限不循环小数就是无理数。无理数也是实数，但不是有理数。',
-    explanationLatex: '\\sqrt{2} = 1.41421\\cdots \\text{（无限不循环） → 无理数}',
   },
   {
     id: 'pp1-2',
@@ -29,8 +27,6 @@ export const prereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '复数（非实数）' },
     ],
     correctAnswer: '整数',
-    explanation: '-3 是负整数。整数包括 ...,-2,-1,0,1,2,...。整数都是有理数，有理数都是实数。所以 -3 是整数、有理数、实数。',
-    explanationLatex: '-3 \\in \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R} \\text{（整数 ⊂ 有理数 ⊂ 实数）}',
   },
   {
     id: 'pp1-3',
@@ -44,8 +40,6 @@ export const prereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '复数' },
     ],
     correctAnswer: '复数',
-    explanation: '2+3i 含有虚部 3i（虚部系数 b=3≠0），所以不是实数。它是复数，而且是非实数的复数。实数、无理数、整数都不对。',
-    explanationLatex: '2+3i \\text{：虚部 } b=3 \\neq 0 \\text{ → 复数（且不是实数）}',
   },
   {
     id: 'pp1-4',
@@ -59,8 +53,6 @@ export const prereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '无理数' },
     ],
     correctAnswer: '自然数、整数、有理数、实数',
-    explanation: '0 是自然数（我国规定 0 是自然数）。自然数 ⊂ 整数 ⊂ 有理数 ⊂ 实数，所以 0 同时属于这四种数。',
-    explanationLatex: '0 \\in \\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R} \\text{（全部属于）}',
   },
 ];
 
@@ -72,8 +64,6 @@ export const prereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: '(-5)^2 = \\text{?}',
     correctAnswer: '25',
-    explanation: '括号内整体平方：(-5)² = (-5)×(-5)。负负得正，所以答案是 25。记住：任何数的平方都 ≥ 0。',
-    explanationLatex: '(-5)^2 = (-5) \\times (-5) = 25 \\quad \\text{（负负得正）}',
   },
   {
     id: 'pp2-2',
@@ -81,8 +71,6 @@ export const prereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: '\\sqrt{16+9} = \\text{?}',
     correctAnswer: '5',
-    explanation: '先算根号里面的加法：16+9=25，再开方：√25=5。注意不能分开算成 √16+√9=4+3=7，这是错的！',
-    explanationLatex: '\\sqrt{16+9} = \\sqrt{25} = 5 \\quad (\\neq \\sqrt{16}+\\sqrt{9}=7)',
   },
   {
     id: 'pp2-3',
@@ -90,8 +78,6 @@ export const prereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: '|-7| = \\text{?}',
     correctAnswer: '7',
-    explanation: '绝对值表示到原点的距离，永远非负。-7 到原点距离是 7，所以 |-7|=7。',
-    explanationLatex: '|-7| = 7 \\quad \\text{（去掉负号）}',
   },
   {
     id: 'pp2-4',
@@ -99,8 +85,6 @@ export const prereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: '-4^2 = \\text{?}',
     correctAnswer: '-16',
-    explanation: '没有括号！运算顺序：先算幂 4²=16，再加负号，所以 -4²=-(4²)=-16。跟 (-4)²=16 完全不同！这是极其常见的陷阱。',
-    explanationLatex: '-4^2 = -(4^2) = -16 \\quad (\\neq (-4)^2 = 16)',
   },
   {
     id: 'pp2-5',
@@ -108,8 +92,6 @@ export const prereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: '\\sqrt{49} = \\text{?}',
     correctAnswer: '7',
-    explanation: '想一想哪个数的平方等于 49？7²=49，所以 √49=7。这属于常见平方数，要能秒答。',
-    explanationLatex: '7^2 = 49 \\Rightarrow \\sqrt{49} = 7',
   },
   {
     id: 'pp2-6',
@@ -123,8 +105,6 @@ export const prereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '不相等，一个是 -4，一个是 4' },
     ],
     correctAnswer: '不相等，一个是 4，一个是 -4',
-    explanation: '(-2)²：括号内整体平方，(-2)×(-2)=4。-2²：没括号，先算 2²=4 再加负号，得 -4。括号决定一切！高考必考陷阱。',
-    explanationLatex: '(-2)^2 = (-2)\\times(-2) = 4 \\quad \\text{vs} \\quad -2^2 = -(2^2) = -4',
   },
   {
     id: 'pp2-7',
@@ -132,8 +112,6 @@ export const prereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: '\\sqrt{(-3)^2} = \\text{?}',
     correctAnswer: '3',
-    explanation: '分两步：①先算括号里 (-3)²=9，②再开方 √9=3。注意：√ 号的结果永远取正值（算术平方根），所以答案是 3 不是 -3。',
-    explanationLatex: '\\sqrt{(-3)^2} = \\sqrt{9} = 3 \\quad \\text{（√ 取正值）}',
   },
 ];
 
@@ -145,8 +123,6 @@ export const prereqPractice3: QuizQuestionData[] = [
     question: '',
     questionLatex: '7^2 = \\text{?}',
     correctAnswer: '49',
-    explanation: '7² = 7×7 = 49。常见平方数要能秒答。',
-    explanationLatex: '7^2 = 7 \\times 7 = 49',
   },
   {
     id: 'pp3-2',
@@ -154,8 +130,6 @@ export const prereqPractice3: QuizQuestionData[] = [
     question: '',
     questionLatex: '\\sqrt{144} = \\text{?}',
     correctAnswer: '12',
-    explanation: '想哪个数平方得 144？12²=144，所以 √144=12。这个必须能秒答。',
-    explanationLatex: '12^2 = 144 \\Rightarrow \\sqrt{144} = 12',
   },
   {
     id: 'pp3-3',
@@ -163,8 +137,6 @@ export const prereqPractice3: QuizQuestionData[] = [
     question: '',
     questionLatex: '5^2 + 12^2 = \\text{?}',
     correctAnswer: '169',
-    explanation: '分步算：5²=25，12²=144，加起来 25+144=169。补充：√169=13，这是勾股数(5,12,13)。',
-    explanationLatex: '5^2 + 12^2 = 25 + 144 = 169 \\quad (\\sqrt{169}=13)',
   },
   {
     id: 'pp3-4',
@@ -172,8 +144,6 @@ export const prereqPractice3: QuizQuestionData[] = [
     question: '',
     questionLatex: '11^2 = \\text{?}',
     correctAnswer: '121',
-    explanation: '11² = 11×11 = 121。记住常见平方数：11²=121，12²=144，13²=169。',
-    explanationLatex: '11^2 = 11 \\times 11 = 121',
   },
   {
     id: 'pp3-5',
@@ -181,8 +151,6 @@ export const prereqPractice3: QuizQuestionData[] = [
     question: '',
     questionLatex: '3^2 + 4^2 = \\text{?}',
     correctAnswer: '25',
-    explanation: '3²=9，4²=16，9+16=25。√25=5。这是最经典的勾股数组(3,4,5)，求模时经常用到。',
-    explanationLatex: '3^2 + 4^2 = 9 + 16 = 25 \\quad (\\sqrt{25}=5)',
   },
   {
     id: 'pp3-6',
@@ -190,8 +158,6 @@ export const prereqPractice3: QuizQuestionData[] = [
     question: '',
     questionLatex: '\\sqrt{81} = \\text{?}',
     correctAnswer: '9',
-    explanation: '9²=81，所以 √81=9。常见平方数要熔：1,4,9,16,25,36,49,64,81,100,121,144。',
-    explanationLatex: '9^2 = 81 \\Rightarrow \\sqrt{81} = 9',
   },
 ];
 
@@ -204,8 +170,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{2}{3} + \\dfrac{1}{4} = \\text{?}',
     correctAnswer: '11/12',
     acceptableAnswers: ['11／12'],
-    explanation: '分母不同，先通分。最小公倍数是 12。把 2/3 变成 8/12，1/4 变成 3/12，然后加起来 8/12+3/12=11/12。',
-    explanationLatex: '\\frac{2}{3}+\\frac{1}{4} = \\frac{8}{12}+\\frac{3}{12} = \\frac{11}{12}',
   },
   {
     id: 'pp4-2',
@@ -214,8 +178,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{3}{5} \\times \\dfrac{2}{7} = \\text{?}',
     correctAnswer: '6/35',
     acceptableAnswers: ['6／35'],
-    explanation: '分数乘法规则：分子乘分子，分母乘分母。分子 3×2=6，分母 5×7=35，所以答案是 6/35。',
-    explanationLatex: '\\frac{3}{5} \\times \\frac{2}{7} = \\frac{3\\times 2}{5\\times 7} = \\frac{6}{35}',
   },
   {
     id: 'pp4-3',
@@ -224,8 +186,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{18}{24} \\text{ 约分} = \\text{?}',
     correctAnswer: '3/4',
     acceptableAnswers: ['3／4'],
-    explanation: '找 18 和 24 的最大公因数：18=2×3×3，24=2×2×2×3，公因数是 2×3=6。分子分母同除 6：18÷6=3，24÷6=4，所以 18/24=3/4。',
-    explanationLatex: '\\frac{18}{24} = \\frac{18 \\div 6}{24 \\div 6} = \\frac{3}{4}',
   },
   {
     id: 'pp4-4',
@@ -234,8 +194,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{1}{2} - \\dfrac{1}{5} = \\text{?}',
     correctAnswer: '3/10',
     acceptableAnswers: ['3／10'],
-    explanation: '通分，最小公倍数是 10。1/2=5/10，1/5=2/10，然后相减 5/10-2/10=3/10。',
-    explanationLatex: '\\frac{1}{2}-\\frac{1}{5} = \\frac{5}{10}-\\frac{2}{10} = \\frac{3}{10}',
   },
   {
     id: 'pp4-5',
@@ -244,8 +202,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{3}{4} \\div \\dfrac{1}{2} = \\text{?}',
     correctAnswer: '3/2',
     acceptableAnswers: ['3／2', '1.5'],
-    explanation: '分数除法 = 乘以倒数。1/2 的倒数是 2/1。所以 3/4÷1/2 = 3/4×2/1 = 6/4，约分得 3/2。',
-    explanationLatex: '\\frac{3}{4} \\div \\frac{1}{2} = \\frac{3}{4} \\times \\frac{2}{1} = \\frac{6}{4} = \\frac{3}{2}',
   },
   {
     id: 'pp4-6',
@@ -254,8 +210,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{5}{6} - \\dfrac{1}{3} = \\text{?}',
     correctAnswer: '1/2',
     acceptableAnswers: ['1／2', '0.5'],
-    explanation: '先通分：1/3 = 2/6（上下同乘 2）。然后 5/6-2/6=3/6，约分得 1/2。',
-    explanationLatex: '\\frac{5}{6}-\\frac{1}{3} = \\frac{5}{6}-\\frac{2}{6} = \\frac{3}{6} = \\frac{1}{2}',
   },
   {
     id: 'pp4-7',
@@ -264,8 +218,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{2}{9} \\div \\dfrac{1}{3} = \\text{?}',
     correctAnswer: '2/3',
     acceptableAnswers: ['2／3'],
-    explanation: '除以分数 = 乘以倒数。1/3 的倒数是 3。所以 2/9×3 = 6/9，约分得 2/3。',
-    explanationLatex: '\\frac{2}{9} \\div \\frac{1}{3} = \\frac{2}{9} \\times 3 = \\frac{6}{9} = \\frac{2}{3}',
   },
   {
     id: 'pp4-8',
@@ -274,8 +226,6 @@ export const prereqPractice4: QuizQuestionData[] = [
     questionLatex: '\\dfrac{14}{21} \\text{ 约分} = \\text{?}',
     correctAnswer: '2/3',
     acceptableAnswers: ['2／3'],
-    explanation: '14 和 21 都能被 7 整除，最大公因数是 7。14÷7=2，21÷7=3，所以 14/21=2/3。',
-    explanationLatex: '\\frac{14}{21} = \\frac{14 \\div 7}{21 \\div 7} = \\frac{2}{3}',
   },
 ];
 
@@ -288,8 +238,6 @@ export const prereqPractice5: QuizQuestionData[] = [
     questionLatex: '(3+i)(2-i) = \\text{?}',
     correctAnswer: '7-i',
     acceptableAnswers: ['7 - i', '7- i', '7 -i'],
-    explanation: '用 FOIL 法展开：3×2=6，3×(-i)=-3i，i×2=2i，i×(-i)=-i²。合并：6-3i+2i-i²。因为 i²=-1，所以 -i²=1。最终：6+1+(-3+2)i = 7-i。',
-    explanationLatex: '(3+i)(2-i) = 6-3i+2i-i^2 = 6-i-(-1) = 6-i+1 = 7-i',
   },
   {
     id: 'pp5-2',
@@ -298,8 +246,6 @@ export const prereqPractice5: QuizQuestionData[] = [
     questionLatex: '(1+i)^2 = \\text{?}',
     correctAnswer: '2i',
     acceptableAnswers: ['2 i'],
-    explanation: '完全平方公式 (a+b)²=a²+2ab+b²。这里 a=1, b=i：1²+2×1×i+i² = 1+2i+(-1) = 2i。这个结果很重要，高考必记！',
-    explanationLatex: '(1+i)^2 = 1^2+2 \\cdot 1 \\cdot i + i^2 = 1+2i+(-1) = 2i',
   },
   {
     id: 'pp5-3',
@@ -307,8 +253,6 @@ export const prereqPractice5: QuizQuestionData[] = [
     question: '',
     questionLatex: '(3+2i)(3-2i) = \\text{?}',
     correctAnswer: '13',
-    explanation: '平方差公式 (a+b)(a-b)=a²-b²。这里 a=3, b=2i：3²-(2i)² = 9-4i²。因为 i²=-1，所以 9-4×(-1)=9+4=13。这就是“分母实数化”的原理！',
-    explanationLatex: '(3+2i)(3-2i) = 3^2-(2i)^2 = 9-4i^2 = 9-4(-1) = 13',
   },
   {
     id: 'pp5-4',
@@ -317,8 +261,6 @@ export const prereqPractice5: QuizQuestionData[] = [
     questionLatex: '(1-i)^2 = \\text{?}',
     correctAnswer: '-2i',
     acceptableAnswers: ['-2 i', '- 2i'],
-    explanation: '完全平方公式 (a-b)²=a²-2ab+b²。a=1, b=i：1-2i+i² = 1-2i+(-1) = -2i。和 (1+i)²=2i 刚好相反，一起记！',
-    explanationLatex: '(1-i)^2 = 1^2-2 \\cdot 1 \\cdot i + i^2 = 1-2i+(-1) = -2i',
   },
   {
     id: 'pp5-5',
@@ -326,8 +268,6 @@ export const prereqPractice5: QuizQuestionData[] = [
     question: '',
     questionLatex: '(4+i)(4-i) = \\text{?}',
     correctAnswer: '17',
-    explanation: '平方差公式：4²-i² = 16-(-1) = 16+1 = 17。这就是 z·z̄=|z|² 的应用。',
-    explanationLatex: '(4+i)(4-i) = 4^2-i^2 = 16-(-1) = 17',
   },
   {
     id: 'pp5-6',
@@ -336,8 +276,6 @@ export const prereqPractice5: QuizQuestionData[] = [
     questionLatex: '3(2-i) = \\text{?}',
     correctAnswer: '6-3i',
     acceptableAnswers: ['6 - 3i', '6- 3i', '6 -3i'],
-    explanation: '分配律：实数乘复数，分别乘实部和虚部。3×2=6，3×(-i)=-3i，所以 3(2-i)=6-3i。',
-    explanationLatex: '3(2-i) = 3 \\times 2 + 3 \\times (-i) = 6-3i',
   },
   {
     id: 'pp5-7',
@@ -346,8 +284,6 @@ export const prereqPractice5: QuizQuestionData[] = [
     questionLatex: '(2+i)(1+i) = \\text{?}',
     correctAnswer: '1+3i',
     acceptableAnswers: ['1 + 3i', '1+ 3i', '1 +3i'],
-    explanation: 'FOIL 展开：2×1=2，2×i=2i，i×1=i，i×i=i²=-1。合并：2+2i+i+(-1) = (2-1)+(2+1)i = 1+3i。',
-    explanationLatex: '(2+i)(1+i) = 2+2i+i+i^2 = 2+3i+(-1) = 1+3i',
   },
 ];
 
@@ -359,8 +295,6 @@ export const prereqPractice6: QuizQuestionData[] = [
     question: '',
     questionLatex: '-3 - (-7) = \\text{?}',
     correctAnswer: '4',
-    explanation: '减去一个负数 = 加上它的相反数。所以 -3-(-7) = -3+7 = 4。记住：“减负得正”。',
-    explanationLatex: '-3-(-7) = -3+7 = 4 \\quad \\text{（减负得正）}',
   },
   {
     id: 'pp6-2',
@@ -368,8 +302,6 @@ export const prereqPractice6: QuizQuestionData[] = [
     question: '',
     questionLatex: '(-4) \\times (-3) = \\text{?}',
     correctAnswer: '12',
-    explanation: '负数×负数 = 正数。(-4)×(-3) = 12。记住符号规则：同号得正，异号得负。',
-    explanationLatex: '(-4) \\times (-3) = 12 \\quad \\text{（负负得正）}',
   },
   {
     id: 'pp6-3',
@@ -377,8 +309,6 @@ export const prereqPractice6: QuizQuestionData[] = [
     question: '',
     questionLatex: '2 - i^2 = \\text{?}',
     correctAnswer: '3',
-    explanation: '先把 i² 替换成 -1：2-i² = 2-(-1)。然后“减负得正”：2+1=3。这种替换是复数运算的核心操作。',
-    explanationLatex: '2-i^2 = 2-(-1) = 2+1 = 3',
   },
 ];
 
@@ -390,8 +320,6 @@ export const prereqPractice7: QuizQuestionData[] = [
     question: '',
     questionLatex: 'i^{53} = \\text{?}',
     correctAnswer: 'i',
-    explanation: 'i 的幂次周期是 4：i¹=i, i²=-1, i³=-i, i⁴=1。用指数÷4 看余数：53÷4=13余1，余数是 1，查表得 i¹=i。',
-    explanationLatex: '53 \\div 4 = 13 \\cdots\\cdots 1 \\Rightarrow i^{53} = i^1 = i',
   },
   {
     id: 'pp7-2',
@@ -399,8 +327,6 @@ export const prereqPractice7: QuizQuestionData[] = [
     question: '',
     questionLatex: 'i^{100} = \\text{?}',
     correctAnswer: '1',
-    explanation: '100÷4=25，整除，余数是 0。余数为 0 时对应 i⁴=1，所以 i¹⁰⁰=1。',
-    explanationLatex: '100 \\div 4 = 25 \\cdots\\cdots 0 \\Rightarrow i^{100} = i^4 = 1',
   },
   {
     id: 'pp7-3',
@@ -409,8 +335,6 @@ export const prereqPractice7: QuizQuestionData[] = [
     questionLatex: 'i^{7} = \\text{?}',
     correctAnswer: '-i',
     acceptableAnswers: ['- i'],
-    explanation: '7÷4=1余3，余数是 3，查表得 i³=-i。',
-    explanationLatex: '7 \\div 4 = 1 \\cdots\\cdots 3 \\Rightarrow i^7 = i^3 = -i',
   },
   {
     id: 'pp7-4',
@@ -419,7 +343,5 @@ export const prereqPractice7: QuizQuestionData[] = [
     questionLatex: 'i^{2025} + i^{2024} = \\text{?}',
     correctAnswer: '1+i',
     acceptableAnswers: ['1 + i', '1+ i', '1 +i', 'i+1', 'i + 1'],
-    explanation: '分别算：2025÷4 余1 → i²⁰²⁵=i；2024÷4 余0 → i²⁰²⁴=1。然后相加：i+1=1+i。',
-    explanationLatex: 'i^{2025}=i^1=i,\\quad i^{2024}=i^0=1 \\quad \\Rightarrow i+1=1+i',
   },
 ];

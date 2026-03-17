@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo, type ReactNode } from 'react';
 import { ChevronRight, RotateCcw, Trophy, Clock, Target, CheckCircle, XCircle, Send } from 'lucide-react';
 
 import { Math as MathTex } from './Math';
@@ -36,6 +36,8 @@ interface QuizPanelProps {
   description?: string;
   /** 是否打乱题目顺序，默认 true */
   shuffle?: boolean;
+  /** 外部提供的解析内容，key 为题目 id，优先于 explanationLatex */
+  explanations?: Record<string, ReactNode>;
 }
 
 interface AnswerRecord {
@@ -59,7 +61,7 @@ interface QuizSession {
 
 // ── Component ──
 
-export function QuizPanel({ module, questions, title = '自测', description, shuffle = true }: QuizPanelProps) {
+export function QuizPanel({ module, questions, title = '自测', description, shuffle = true, explanations }: QuizPanelProps) {
   const { isPrinting } = usePrintMode();
   const { recordAnswer } = useQuiz(module);
 
@@ -306,13 +308,19 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
                         </p>
                       </>
                     )}
-                    {q.explanation && (
-                      <p className="text-xs text-gray-600 mt-1">{q.explanation}</p>
-                    )}
-                    {q.explanationLatex && (
-                      <div className="mt-1">
-                        <MathTex tex={q.explanationLatex} />
-                      </div>
+                    {explanations?.[q.id] ? (
+                      <div className="mt-1 text-sm text-gray-700">{explanations[q.id]}</div>
+                    ) : (
+                      <>
+                        {q.explanation && (
+                          <p className="text-xs text-gray-600 mt-1">{q.explanation}</p>
+                        )}
+                        {q.explanationLatex && (
+                          <div className="mt-1">
+                            <MathTex tex={q.explanationLatex} />
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 );
@@ -454,13 +462,19 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
             <p className={`font-bold text-sm mb-1 ${isCorrect ? 'text-green-700' : 'text-amber-700'}`}>
               {isCorrect ? '✓ 正确！' : `✗ 错了　正确答案：${current.correctAnswer}`}
             </p>
-            {current.explanation && (
-              <p className="text-gray-700 text-sm">{current.explanation}</p>
-            )}
-            {current.explanationLatex && (
-              <div className="mt-1">
-                <MathTex tex={current.explanationLatex} display />
-              </div>
+            {explanations?.[current.id] ? (
+              <div className="mt-1 text-gray-700">{explanations[current.id]}</div>
+            ) : (
+              <>
+                {current.explanation && (
+                  <p className="text-gray-700 text-sm">{current.explanation}</p>
+                )}
+                {current.explanationLatex && (
+                  <div className="mt-1">
+                    <MathTex tex={current.explanationLatex} display />
+                  </div>
+                )}
+              </>
             )}
             <QuizDiagrams name={current.explanationDiagram} />
           </div>

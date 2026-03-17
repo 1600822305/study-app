@@ -12,8 +12,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'x=-2 \\text{ 或 } x=-6', isLatex: true },
     ],
     correctAnswer: 'x=3 \\text{ 或 } x=4',
-    explanation: '找两个数，乘积=12、加和=(-7)。那就是 -3 和 -4（因为 (-3)×(-4)=12，(-3)+(-4)=-7）。所以 (x-3)(x-4)=0，x=3 或 x=4。',
-    explanationLatex: '(x-3)(x-4)=0 \\Rightarrow x=3 \\text{ 或 } x=4',
   },
   {
     id: 'spq2',
@@ -26,8 +24,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '-4' },
     ],
     correctAnswer: '8',
-    explanation: '判别式公式 Δ=b²-4ac。这里 a=1, b=2, c=-1。代入：Δ=2²-4×1×(-1)=4-(-4)=4+4=8。Δ>0 说明有两个不相等的实数根。',
-    explanationLatex: '\\Delta = 2^2 - 4 \\times 1 \\times (-1) = 4 + 4 = 8',
   },
   {
     id: 'spq3',
@@ -40,8 +36,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\{x \\mid -4 < x < -1\\}', isLatex: true },
     ],
     correctAnswer: '\\{x \\mid 1 < x < 4\\}',
-    explanation: '先解方程 x²-5x+4=0，因式分解 (x-1)(x-4)=0，根为 x=1, 4。原式 < 0，用口诀“小于取中间”，解集为 1 < x < 4。',
-    explanationLatex: '(x-1)(x-4)=0 \\Rightarrow x=1,4 \\quad \\text{小于取中间} \\Rightarrow 1 < x < 4',
   },
   {
     id: 'spq4',
@@ -54,8 +48,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\{x \\mid -2 \\leq x \\leq 3\\}', isLatex: true },
     ],
     correctAnswer: '\\{x \\mid x \\leq -3 \\text{ 或 } x \\geq 2\\}',
-    explanation: '解方程 x²+x-6=0，找乘积 -6、加和 1 的两个数：3 和 -2。(x+3)(x-2)=0，根为 x=-3, 2。原式 ≥ 0，“大于取两边”含等号：x ≤ -3 或 x ≥ 2。',
-    explanationLatex: '(x+3)(x-2)=0 \\Rightarrow x=-3,2 \\quad \\text{大于取两边} \\Rightarrow x \\leq -3 \\text{ 或 } x \\geq 2',
   },
   {
     id: 'spq5',
@@ -68,8 +60,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '[-2, 5)', isLatex: false },
     ],
     correctAnswer: '(-2, 5]',
-    explanation: '-2 用 <（不含）→ 小括号 (；5 用 ≤（含）→ 方括号 ]。所以写成 (-2, 5]。记住：小括号=不含，方括号=包含。',
-    explanationLatex: '-2 \\text{ 不含} \\Rightarrow (\\quad 5 \\text{ 含} \\Rightarrow ] \\quad \\Rightarrow (-2, 5]',
   },
   {
     id: 'spq6',
@@ -82,7 +72,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(3, +\\infty]', isLatex: true },
     ],
     correctAnswer: '[3, +\\infty)',
-    explanation: 'x ≥ 3，3 包含→方括号 [；+∞ 永远取不到→小括号 )。所以 [3, +∞)。注意：∞ 永远不能用方括号！C 和 D 都错在用了 ]。',
   },
   {
     id: 'spq7',
@@ -94,7 +83,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '方块 □' },
     ],
     correctAnswer: '实心圆 ●',
-    explanation: 'x ≤ -1 包含等号，端点 -1 要取到，所以用实心圆 ●。记住：有等号=实心，没等号=空心。',
   },
   {
     id: 'spq8',
@@ -107,8 +95,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'x=2 \\text{ 或 } x=1', isLatex: true },
     ],
     correctAnswer: 'x=2 \\text{ 或 } x=-\\dfrac{1}{2}',
-    explanation: '交叉相乘法：2x²-3x-2 = (2x+1)(x-2)=0。所以 2x+1=0 得 x=-1/2，或 x-2=0 得 x=2。也可以用公式法：Δ=9+16=25，x=(3±5)/4。',
-    explanationLatex: '(2x+1)(x-2)=0 \\Rightarrow x=2 \\text{ 或 } x=-\\frac{1}{2}',
   },
   {
     id: 'spq9',
@@ -121,8 +107,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'x=2 \\text{ 或 } x=3', isLatex: true },
     ],
     correctAnswer: 'x=3 \\text{ 或 } x=-2',
-    explanation: '找乘积=-6、加和=-1 的两个数：-3 和 2（-3×2=-6，-3+2=-1）。所以 (x-3)(x+2)=0，x=3 或 x=-2。',
-    explanationLatex: '(x-3)(x+2)=0 \\Rightarrow x=3 \\text{ 或 } x=-2',
   },
   {
     id: 'spq10',
@@ -135,8 +119,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\{x \\mid 2 \\leq x \\leq 3\\}', isLatex: true },
     ],
     correctAnswer: '\\{x \\mid 2 < x < 3\\}',
-    explanation: '因式分解 (x-2)(x-3)=0，根为 x=2, 3。原式 < 0，“小于取中间”，解集 2 < x < 3。注意不含等号，端点取不到。',
-    explanationLatex: '(x-2)(x-3)=0 \\Rightarrow x=2,3 \\quad \\text{小于取中间} \\Rightarrow 2 < x < 3',
   },
   {
     id: 'spq11',
@@ -149,8 +131,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\{x \\mid -2 < x < 2\\}', isLatex: true },
     ],
     correctAnswer: '\\{x \\mid x \\leq -2 \\text{ 或 } x \\geq 2\\}',
-    explanation: '平方差因式分解 (x+2)(x-2)=0，根为 x=-2, 2。原式 ≥ 0，“大于取两边”含等号：x ≤ -2 或 x ≥ 2。',
-    explanationLatex: '(x+2)(x-2)=0 \\Rightarrow x=-2,2 \\quad \\text{大于取两边} \\Rightarrow x \\leq -2 \\text{ 或 } x \\geq 2',
   },
   {
     id: 'spq12',
@@ -163,7 +143,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '[-3, 5)', isLatex: false },
     ],
     correctAnswer: '(-3, 5]',
-    explanation: '-3 用 <（不含）→ 小括号；5 用 ≤（含）→ 方括号。所以 (-3, 5]。和第5题一样的规则：小括号=不含，方括号=含。',
   },
   {
     id: 'spq13',
@@ -175,7 +154,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '都是空心 ○' },
     ],
     correctAnswer: '1 实心 ●，4 空心 ○',
-    explanation: '1 ≤ x 中，1 用 ≤ 包含等号→实心 ●；x < 4 中，4 用 < 不含等号→空心 ○。每个端点单独判断，看它自己的符号。',
   },
   {
     id: 'spq14',
@@ -188,8 +166,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'x = 9', isLatex: true },
     ],
     correctAnswer: 'x = \\pm 3',
-    explanation: 'x²=9 直接开平方：x=±√9=±3。最常见错误是只写 x=3 漏掉负根！记住：开平方永远有正负两个根（除非等于0）。',
-    explanationLatex: 'x^2 = 9 \\Rightarrow x = \\pm\\sqrt{9} = \\pm 3',
   },
   {
     id: 'spq15',
@@ -202,8 +178,6 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'x = \\dfrac{-3 \\pm \\sqrt{7}}{2}', isLatex: true },
     ],
     correctAnswer: 'x = \\dfrac{-3 \\pm \\sqrt{13}}{2}',
-    explanation: '认出 a=1, b=3, c=-1。先算Δ=b²-4ac=9-4(1)(-1)=9+4=13。再套公式 x=(-b±√Δ)/(2a)=(-3±√13)/2。',
-    explanationLatex: 'x = \\frac{-3 \\pm \\sqrt{3^2 - 4(1)(-1)}}{2 \\times 1} = \\frac{-3 \\pm \\sqrt{13}}{2}',
   },
   {
     id: 'spq16',
@@ -216,7 +190,5 @@ export const setsPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(-2, 2)', isLatex: true },
     ],
     correctAnswer: '(-\\infty, -2] \\cup [2, +\\infty)',
-    explanation: '先解不等式：x²-4≥0 → (x+2)(x-2)≥0，“大于取两边”含等号：x≤-2 或 x≥2。再转区间：≤ 用方括号，∞ 用小括号，两段用 ∪ 连接。',
-    explanationLatex: 'x \\leq -2 \\text{ 或 } x \\geq 2 \\Rightarrow (-\\infty, -2] \\cup [2, +\\infty)',
   },
 ];

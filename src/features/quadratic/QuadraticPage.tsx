@@ -6,6 +6,7 @@ import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { quadraticQuizQuestions } from './data/quiz';
 import { quadraticProgressItems } from './data/progress';
+import { QuadraticAnswers, quadraticExplanations } from './quadratic-answers';
 
 export function QuadraticPage() {
   const { items, toggle } = useProgress('quadratic', quadraticProgressItems);
@@ -355,6 +356,7 @@ export function QuadraticPage() {
             <PageBreak />
             <PracticeCard
               questions={quadPractice1}
+              explanations={quadraticExplanations}
               title="即时练习：三种形式 + 图像"
             />
 
@@ -579,6 +581,7 @@ export function QuadraticPage() {
             <PageBreak />
             <PracticeCard
               questions={quadPractice2}
+              explanations={quadraticExplanations}
               title="即时练习：判别式 + 韦达定理"
             />
 
@@ -600,60 +603,20 @@ export function QuadraticPage() {
       <PageBreak label="综合测试" />
       <section id="quad-quiz" className="mb-4 scroll-mt-4">
         <Collapsible title="五、综合测试（高考真题 + 精华题·10题）" defaultOpen storageKey="quad:quiz">
-          <QuizPanel module="quadratic" questions={quadraticQuizQuestions} title="二次函数综合测试" />
+          <QuizPanel
+            module="quadratic"
+            questions={quadraticQuizQuestions}
+            explanations={quadraticExplanations}
+            title="二次函数综合测试"
+          />
         </Collapsible>
       </section>
 
       {/* ════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 2.3 二次函数 — 答案与解析</h2>
-
-            {[
-              { label: '一、三种形式 + 图像 — 即时练习', questions: quadPractice1 },
-              { label: '四、判别式 + 韦达定理 — 即时练习', questions: quadPractice2 },
-              { label: '综合测试（高考真题 + 精华题）', questions: quadraticQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
-
-      </LessonLayout>
-    </div>
-  );
+      {isPrinting && printOptions.showAnswers && <QuadraticAnswers />}
+    </LessonLayout>
+  </div>
+);
 }

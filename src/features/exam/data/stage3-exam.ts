@@ -16,9 +16,7 @@ export const stage3ConceptQuestions: QuizQuestionData[] = [
       { label: 'C', value: '[1, 3]', isLatex: true },
       { label: 'D', value: '(1, 3]', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '[1, 3)',
   },
   {
     id: 's3e-c2',
@@ -31,9 +29,7 @@ export const stage3ConceptQuestions: QuizQuestionData[] = [
       { label: 'C', value: 'f(-2) < f(1) < f(-3)', isLatex: true },
       { label: 'D', value: 'f(1) < f(-3) < f(-2)', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: 'f(1) < f(-2) < f(-3)',
   },
   {
     id: 's3e-c3',
@@ -46,9 +42,7 @@ export const stage3ConceptQuestions: QuizQuestionData[] = [
       { label: 'C', value: 'x^2 - 4x + 6', isLatex: true },
       { label: 'D', value: 'x^2 + 4x + 6', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: 'x^2 + 2',
   },
   {
     id: 's3e-c4',
@@ -61,9 +55,7 @@ export const stage3ConceptQuestions: QuizQuestionData[] = [
       { label: 'C', value: '-3' },
       { label: 'D', value: '3' },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '7',
   },
   {
     id: 's3e-c5',
@@ -76,9 +68,7 @@ export const stage3ConceptQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\{y \\mid y > 1\\}', isLatex: true },
       { label: 'D', value: '\\mathbb{R}', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '\\{y \\mid y \\neq 1\\}',
   },
   {
     id: 's3e-c6',
@@ -91,9 +81,7 @@ export const stage3ConceptQuestions: QuizQuestionData[] = [
       { label: 'C', value: '-1' },
       { label: 'D', value: '0' },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '2',
   },
 ];
 
@@ -110,9 +98,7 @@ export const stage3ElemFuncQuestions: QuizQuestionData[] = [
       { label: 'C', value: '3', isLatex: true },
       { label: 'D', value: '5', isLatex: true },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '\\dfrac{5}{2}',
   },
   {
     id: 's3e-e2',
@@ -125,9 +111,7 @@ export const stage3ElemFuncQuestions: QuizQuestionData[] = [
       { label: 'C', value: 'c > a > b', isLatex: true },
       { label: 'D', value: 'b > a > c', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: 'a > c > b',
   },
   {
     id: 's3e-e3',
@@ -140,9 +124,7 @@ export const stage3ElemFuncQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\dfrac{1}{4}', isLatex: true },
       { label: 'D', value: '\\dfrac{1}{2}', isLatex: true },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '2',
   },
   {
     id: 's3e-e4',
@@ -155,9 +137,7 @@ export const stage3ElemFuncQuestions: QuizQuestionData[] = [
       { label: 'C', value: '(2, +\\infty)', isLatex: true },
       { label: 'D', value: '(0, 1)', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '(1, 2)',
   },
   {
     id: 's3e-e5',
@@ -170,9 +150,7 @@ export const stage3ElemFuncQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\dfrac{1}{2}', isLatex: true },
       { label: 'D', value: '-\\dfrac{1}{3}', isLatex: true },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '\\dfrac{1}{3}',
   },
   {
     id: 's3e-e6',
@@ -185,9 +163,7 @@ export const stage3ElemFuncQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\dfrac{15}{2}', isLatex: true },
       { label: 'D', value: '10', isLatex: true },
     ],
-    correctAnswer: 'C',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '\\dfrac{15}{2}',
   },
 ];
 
@@ -204,9 +180,7 @@ export const stage3GraphQuestions: QuizQuestionData[] = [
       { label: 'C', value: '1 \\text{ 和 } -3', isLatex: true },
       { label: 'D', value: '-1 \\text{ 和 } 3', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '1 \\text{ 和 } 3',
   },
   {
     id: 's3e-g2',
@@ -219,9 +193,7 @@ export const stage3GraphQuestions: QuizQuestionData[] = [
       { label: 'C', value: '(1, 2)', isLatex: true },
       { label: 'D', value: '(-2, -1)', isLatex: true },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '(0, 1)',
   },
   {
     id: 's3e-g3',
@@ -234,9 +206,7 @@ export const stage3GraphQuestions: QuizQuestionData[] = [
       { label: 'C', value: '2' },
       { label: 'D', value: '3' },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '1',
   },
   {
     id: 's3e-g4',
@@ -249,9 +219,7 @@ export const stage3GraphQuestions: QuizQuestionData[] = [
       { label: 'C', value: '3' },
       { label: 'D', value: '4' },
     ],
-    correctAnswer: 'C',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '3',
   },
   {
     id: 's3e-g5',
@@ -264,9 +232,7 @@ export const stage3GraphQuestions: QuizQuestionData[] = [
       { label: 'C', value: '2' },
       { label: 'D', value: '3' },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '1',
   },
 ];
 
@@ -283,9 +249,7 @@ export const stage3DerivQuestions: QuizQuestionData[] = [
       { label: 'C', value: '6' },
       { label: 'D', value: '4' },
     ],
-    correctAnswer: 'B',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '12',
   },
   {
     id: 's3e-d2',
@@ -298,9 +262,7 @@ export const stage3DerivQuestions: QuizQuestionData[] = [
       { label: 'C', value: '(-\\infty, 0)', isLatex: true },
       { label: 'D', value: '(2, +\\infty)', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '(0, 2)',
   },
   {
     id: 's3e-d3',
@@ -313,9 +275,7 @@ export const stage3DerivQuestions: QuizQuestionData[] = [
       { label: 'C', value: '-2' },
       { label: 'D', value: '2' },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '-16',
   },
   {
     id: 's3e-d4',
@@ -328,9 +288,7 @@ export const stage3DerivQuestions: QuizQuestionData[] = [
       { label: 'C', value: '(0, +\\infty)', isLatex: true },
       { label: 'D', value: '(-\\infty, 0)', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '(-1, +\\infty)',
   },
   {
     id: 's3e-d5',
@@ -343,9 +301,7 @@ export const stage3DerivQuestions: QuizQuestionData[] = [
       { label: 'C', value: '0' },
       { label: 'D', value: '4' },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '-5',
   },
 ];
 

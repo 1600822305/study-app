@@ -2,7 +2,7 @@ import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, Ex
 import { trigIdentityNarrations } from './data/identity-narrations';
 import { trigIdentityProgressItems } from './data/identity-progress';
 import { sumDiffPractice, doubleAnglePractice, powerReductionPractice, halfAnglePractice, auxiliaryPractice, comprehensivePractice } from './data/identity-questions';
-import { TrigIdentityAnswers } from './identity-answers';
+import { TrigIdentityAnswers, trigIdentityExplanations } from './identity-answers';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
@@ -292,7 +292,7 @@ export function TrigIdentityPage() {
             </div>
 
             {/* 即时训练 */}
-            <PracticeCard questions={sumDiffPractice} title="✏️ 即时训练 — 和差公式（5 题）" optionCols={4} printOptionCols={4} />
+            <PracticeCard questions={sumDiffPractice} title="✏️ 即时训练 — 和差公式（5 题）" optionCols={4} printOptionCols={4} explanations={trigIdentityExplanations} />
 
           </div>
         </Collapsible>
@@ -469,7 +469,7 @@ export function TrigIdentityPage() {
             </div>
 
             {/* 即时训练 */}
-            <PracticeCard questions={doubleAnglePractice} title="✏️ 即时训练 — 二倍角公式（2 题）" optionCols={4} printOptionCols={4} />
+            <PracticeCard questions={doubleAnglePractice} title="✏️ 即时训练 — 二倍角公式（2 题）" optionCols={4} printOptionCols={4} explanations={trigIdentityExplanations} />
 
           </div>
         </Collapsible>
@@ -591,7 +591,7 @@ export function TrigIdentityPage() {
             </div>
 
             {/* 即时训练 */}
-            <PracticeCard questions={powerReductionPractice} title="✏️ 即时训练 — 降幂公式（4 题）" optionCols={4} printOptionCols={4} />
+            <PracticeCard questions={powerReductionPractice} title="✏️ 即时训练 — 降幂公式（4 题）" optionCols={4} printOptionCols={4} explanations={trigIdentityExplanations} />
 
           </div>
         </Collapsible>
@@ -730,7 +730,7 @@ export function TrigIdentityPage() {
             </div>
 
             {/* 即时训练 */}
-            <PracticeCard questions={halfAnglePractice} title="✏️ 即时训练 — 半角公式（3 题）" optionCols={4} printOptionCols={4} />
+            <PracticeCard questions={halfAnglePractice} title="✏️ 即时训练 — 半角公式（3 题）" optionCols={4} printOptionCols={4} explanations={trigIdentityExplanations} />
 
           </div>
         </Collapsible>
@@ -985,7 +985,7 @@ export function TrigIdentityPage() {
             </div>
 
             {/* 即时训练 */}
-            <PracticeCard questions={auxiliaryPractice} title="✏️ 即时训练 — 辅助角公式（5 题，含真题）" optionCols={4} printOptionCols={4} />
+            <PracticeCard questions={auxiliaryPractice} title="✏️ 即时训练 — 辅助角公式（5 题，含真题）" optionCols={4} printOptionCols={4} explanations={trigIdentityExplanations} />
 
             {/* 学完自查 */}
             <div className="bg-purple-50 border border-purple-200 rounded-lg p-1.5">
@@ -1299,7 +1299,7 @@ export function TrigIdentityPage() {
             </div>
 
             {/* 即时训练 */}
-            <PracticeCard questions={comprehensivePractice} title="✏️ 即时训练 — 综合应用（5 题，含真题）" optionCols={4} printOptionCols={4} />
+            <PracticeCard questions={comprehensivePractice} title="✏️ 即时训练 — 综合应用（5 题，含真题）" optionCols={4} printOptionCols={4} explanations={trigIdentityExplanations} />
 
           </div>
         </Collapsible>

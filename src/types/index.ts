@@ -42,7 +42,7 @@ export interface QuizQuestionData {
   correctAnswer: string;
   /** 填空题可接受的其他正确答案 */
   acceptableAnswers?: string[];
-  explanation: string;
+  explanation?: string;
   explanationLatex?: string;
   explanationDiagram?: string;
   /** 题目配图（QuizDiagrams key） */

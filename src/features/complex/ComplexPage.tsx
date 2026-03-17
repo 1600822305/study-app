@@ -7,6 +7,7 @@ import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { complexQuizQuestions } from './data/quiz';
 import { complexProgressItems } from './data/progress';
+import { ComplexAnswers, complexExplanations } from './complex-answers';
 
 export function ComplexPage() {
   const { items, toggle } = useProgress('complex', complexProgressItems);
@@ -130,7 +131,7 @@ export function ComplexPage() {
               </div>
             </div>
 
-            <PracticeCard questions={complexPractice1} />
+            <PracticeCard questions={complexPractice1} explanations={complexExplanations} />
             <CalloutCard variant="warning" title="易错点" className="mt-3">
               <p>• <strong>i² = -1</strong>，不是 i = -1（i 本身不等于 -1）</p>
               <p>• i 不在数轴上，不能和实数比大小</p>
@@ -234,7 +235,7 @@ export function ComplexPage() {
               </div>
             </div>
 
-            <PracticeCard questions={complexPractice2} />
+            <PracticeCard questions={complexPractice2} explanations={complexExplanations} />
           </section>
 
           {/* Part 3: Equality */}
@@ -260,7 +261,7 @@ export function ComplexPage() {
               </div>
             </div>
 
-            <PracticeCard questions={complexPractice3} />
+            <PracticeCard questions={complexPractice3} explanations={complexExplanations} />
             <CalloutCard variant="warning" title="易错点" className="mt-2">
               <p>• <strong>虚数不能比大小！</strong> 3+2i 和 1+5i 谁大？没有意义，只有实数才能比大小</p>
               <p>• 复数等于0 ⇔ <strong>实部和虚部都等于0</strong></p>
@@ -524,7 +525,7 @@ export function ComplexPage() {
 
             <PageBreak label="四则运算练习" />
 
-            <PracticeCard questions={complexPractice4} />
+            <PracticeCard questions={complexPractice4} explanations={complexExplanations} />
             <CalloutCard variant="warning" title="易错点" className="mt-3">
               <p>• 遇到 <Math tex="i^2" /> <strong>必须立刻换成 -1</strong></p>
               <p>• 除法三步走：写共轭 → 上下同乘 → 整理成 <Math tex="a+bi" /></p>
@@ -608,7 +609,7 @@ export function ComplexPage() {
               </div>
             </div>
 
-            <PracticeCard questions={complexPractice5} />
+            <PracticeCard questions={complexPractice5} explanations={complexExplanations} />
             <CalloutCard variant="warning" title="易错点" className="mt-2">
               <p>• 实部是 x 坐标，虚部是 y 坐标，<strong>别搞反</strong></p>
               <p>• 点在坐标轴上<strong>不属于任何象限</strong></p>
@@ -726,6 +727,7 @@ export function ComplexPage() {
               questions={complexQuizQuestions}
               title="复数真题"
               description="16道高考真题，覆盖全部复数考法。"
+              explanations={complexExplanations}
             />
           </section>
 
@@ -791,54 +793,7 @@ export function ComplexPage() {
             </div>
           </section>
 
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.1 复数 — 答案与解析</h2>
-
-            {[
-              { label: '一、虚数单位 i — 即时练习', questions: complexPractice1 },
-              { label: '二、复数的概念 — 即时练习', questions: complexPractice2 },
-              { label: '三、复数的相等 — 即时练习', questions: complexPractice3 },
-              { label: '四、四则运算 — 即时练习', questions: complexPractice4 },
-              { label: '五、复平面 — 即时练习', questions: complexPractice5 },
-              { label: '高考真题实战', questions: complexQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <ComplexAnswers />}
       </LessonLayout>
     </div>
   );

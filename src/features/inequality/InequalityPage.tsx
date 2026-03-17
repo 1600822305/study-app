@@ -6,6 +6,7 @@ import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { inequalityQuizQuestions } from './data/quiz';
 import { inequalityProgressItems } from './data/progress';
+import { InequalityAnswers, inequalityExplanations } from './inequality-answers';
 
 export function InequalityPage() {
   const { items, toggle } = useProgress('inequality', inequalityProgressItems);
@@ -323,6 +324,7 @@ export function InequalityPage() {
             <PracticeCard
               title="✏️ 即时练习：不等式性质 + 一元一次不等式"
               questions={ineqPractice1}
+              explanations={inequalityExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错点">
@@ -452,8 +454,8 @@ export function InequalityPage() {
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="font-bold text-gray-800 mb-1">例1：已知 <Math tex="x > 0" />，求 <Math tex="x + \frac{4}{x}" /> 的最小值</p>
                   <div className="pl-3 border-l-2 border-purple-300 space-y-0.5">
-                    <p className="leading-7">分析题目：✅ <Math tex="x > 0" />（正）；✅ <Math tex="x \cdot \frac{4}{x} = 4" />（乘起来是固定的）<strong>⇒ 求和最小值</strong></p>
-                    <p className="leading-7">套公式：<Math tex="x + \frac{4}{x} \geq 2\sqrt{4} = 4" /></p>
+                    <p className="leading-7 text-red-600">❌ 分析：<Math tex="x \cdot \frac{4}{x} = 4" /> 是固定的，能用</p>
+                    <p className="leading-7 text-green-700">✅ 套公式：<Math tex="x + \frac{4}{x} \geq 2\sqrt{4} = 4" /></p>
                     <p className="leading-7">验证等号：<Math tex="x = \frac{4}{x}" /> ⇒ <Math tex="x = 2" />（能取到 ✅）</p>
                   </div>
                   <p className="text-green-600 font-bold mt-1">最小值 = 4，当 x = 2 时取到</p>
@@ -462,8 +464,8 @@ export function InequalityPage() {
                 <div className="bg-gray-50 rounded-lg p-3">
                   <p className="font-bold text-gray-800 mb-1">例2：已知 <Math tex="a > 0, b > 0, a + b = 6" />，求 <Math tex="ab" /> 的最大值</p>
                   <div className="pl-3 border-l-2 border-purple-300 space-y-0.5">
-                    <p className="leading-7">分析题目：✅ <Math tex="a,b > 0" />（正）；✅ <Math tex="a+b=6" />（和是固定的）<strong>⇒ 求乘积最大值</strong></p>
-                    <p className="leading-7">套公式：<Math tex="a + b = 6 \geq 2\sqrt{ab}" /></p>
+                    <p className="leading-7 text-red-600">❌ 分析：<Math tex="a+b=6" /> 是固定的，能用</p>
+                    <p className="leading-7 text-green-700">✅ 套公式：<Math tex="a + b = 6 \geq 2\sqrt{ab}" /></p>
                     <p className="leading-7"><Math tex="3 \geq \sqrt{ab}" />，所以 <Math tex="ab \leq 9" /></p>
                   </div>
                   <p className="text-green-600 font-bold mt-1">最大值 = 9，当 a = b = 3 时取到</p>
@@ -547,7 +549,7 @@ export function InequalityPage() {
             </div>
 
             {/* 技巧速查 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-3 mt-2">
+            <div className="bg-white rounded-xl border border-gray-200 p-3">
               <p className="font-bold text-gray-800 text-base mb-2">📋 技巧速查：看到什么题型，用什么招</p>
               <table className="w-full text-sm border-collapse">
                 <thead>
@@ -563,7 +565,7 @@ export function InequalityPage() {
                     <td className="border border-gray-200 p-2 text-orange-700 font-bold">直接套公式</td>
                     <td className="border border-gray-200 p-2">验证乘积是常数，套 <Math tex="\geq 2\sqrt{k}" /></td>
                   </tr>
-                  <tr className="bg-gray-50">
+                  <tr className="bg-amber-50">
                     <td className="border border-gray-200 p-2"><Math tex="x + \frac{k}{x-a}" />，积不固定</td>
                     <td className="border border-gray-200 p-2 text-amber-700 font-bold">换元凑形</td>
                     <td className="border border-gray-200 p-2">拆 <Math tex="x=(x{-}a)+a" />，常数搬走</td>
@@ -581,6 +583,7 @@ export function InequalityPage() {
             <PracticeCard
               title="✏️ 即时练习：基本不等式"
               questions={ineqPractice2}
+              explanations={inequalityExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错点">
@@ -725,60 +728,15 @@ export function InequalityPage() {
       <PageBreak label="综合测试" />
       <section id="ineq-quiz" className="mb-4 scroll-mt-4">
         <Collapsible title="六、综合测试（高考真题 + 精华题·11题）" defaultOpen storageKey="ineq:quiz">
-          <QuizPanel module="inequality" questions={inequalityQuizQuestions} title="不等式综合测试" />
+          <QuizPanel module="inequality" questions={inequalityQuizQuestions} title="不等式综合测试" explanations={inequalityExplanations} />
         </Collapsible>
       </section>
 
       {/* ════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 2.1 不等式 — 答案与解析</h2>
-
-            {[
-              { label: '一、不等式性质 + 一元一次不等式 — 即时练习', questions: ineqPractice1 },
-              { label: '三、基本不等式 — 即时练习', questions: ineqPractice2 },
-              { label: '综合测试（高考真题 + 精华题）', questions: inequalityQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
-
-      </LessonLayout>
-    </div>
-  );
-}
+      {isPrinting && printOptions.showAnswers && <InequalityAnswers />}
+    </LessonLayout>
+  </div>
+);
+} 

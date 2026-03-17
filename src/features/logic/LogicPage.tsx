@@ -5,6 +5,7 @@ import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { logicQuizQuestions } from './data/quiz';
 import { logicProgressItems } from './data/progress';
+import { LogicAnswers, logicExplanations } from './logic-answers';
 
 export function LogicPage() {
   const { items, toggle } = useProgress('logic', logicProgressItems);
@@ -127,7 +128,7 @@ export function LogicPage() {
                 <p className="text-sm text-slate-400 mt-1">能 → 是命题。不能 → 不是命题。</p>
               </div>
 
-              <PracticeCard questions={logicPractice1} />
+              <PracticeCard questions={logicPractice1} explanations={logicExplanations} />
 
               <CalloutCard variant="warning" title="易错提醒">
                 <p>"x + 1 = 0" 含未知数 x，真假不确定 → <strong>不是命题</strong></p>
@@ -192,7 +193,7 @@ export function LogicPage() {
               <p className="text-xs text-slate-500 mt-3">高考用法：直接证明原命题很难时 → 可以去证明逆否命题（等价的）</p>
             </CalloutCard>
 
-            <PracticeCard questions={logicPractice2} />
+            <PracticeCard questions={logicPractice2} explanations={logicExplanations} />
 
             <CalloutCard variant="warning" title="易错提醒">
               <p><strong>否命题 ≠ 否定原命题！</strong>否命题是条件和结论都取反，不是说原命题"不对"。</p>
@@ -429,7 +430,7 @@ export function LogicPage() {
               </div>
             </Collapsible>
 
-            <PracticeCard questions={logicPractice3} />
+            <PracticeCard questions={logicPractice3} explanations={logicExplanations} />
 
             <CalloutCard variant="warning" title="易错点">
               <p>1. <strong>方向别搞反</strong>：p→q 说的是 p 充分，不是 q 充分</p>
@@ -539,7 +540,7 @@ export function LogicPage() {
               </CalloutCard>
             </Collapsible>
 
-            <PracticeCard questions={logicPractice4} />
+            <PracticeCard questions={logicPractice4} explanations={logicExplanations} />
           </section>
 
           <PageBreak label="逻辑联结词" />
@@ -635,7 +636,7 @@ export function LogicPage() {
             </div>
 
             <PageBreak label="逻辑联结词 — 即时练习" />
-            <PracticeCard questions={logicPractice5} />
+            <PracticeCard questions={logicPractice5} explanations={logicExplanations} />
 
             {/* Part 7: Summary - fills blank after practice */}
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6 mt-4">
@@ -685,57 +686,10 @@ export function LogicPage() {
               </span>
               高考真题实战
             </h2>
-            <QuizPanel module="logic" questions={logicQuizQuestions} title="逻辑用语真题实战" description="12道选择题，覆盖命题判断、四种命题、充分必要条件、量词否定、逻辑联结词全部考点" />
+            <QuizPanel module="logic" questions={logicQuizQuestions} title="逻辑用语真题实战" description="12道选择题，覆盖命题判断、四种命题、充分必要条件、量词否定、逻辑联结词全部考点" explanations={logicExplanations} />
           </section>
 
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.3 逻辑用语 — 答案与解析</h2>
-
-            {[
-              { label: '一、命题判断 — 即时练习', questions: logicPractice1 },
-              { label: '二、四种命题 — 即时练习', questions: logicPractice2 },
-              { label: '三、充分必要条件 — 即时练习', questions: logicPractice3 },
-              { label: '四、量词与否定 — 即时练习', questions: logicPractice4 },
-              { label: '五、逻辑联结词 — 即时练习', questions: logicPractice5 },
-              { label: '高考真题实战', questions: logicQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <LogicAnswers />}
 
       </LessonLayout>
     </div>

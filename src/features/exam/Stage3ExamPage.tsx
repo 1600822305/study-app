@@ -8,7 +8,7 @@ import {
   stage3DerivQuestions,
   stage3EssayQuestions,
 } from './data/stage3-exam';
-import { Stage3ExamAnswers } from './stage3-exam-answers';
+import { Stage3ExamAnswers, stage3Explanations } from './stage3-exam-answers';
 
 export function Stage3ExamPage() {
   const { isPrinting, printOptions } = usePrintMode();
@@ -79,8 +79,8 @@ export function Stage3ExamPage() {
         module="stage3-exam"
         questions={stage3ExamQuestions}
         title="第三阶段考试"
-        description="题目顺序随机打乱，完成后查看成绩和错题回顾。"
-        shuffle={true}
+        description="按顺序答题，完成后查看成绩和错题回顾。"
+        explanations={stage3Explanations}
       />
     </div>
   );

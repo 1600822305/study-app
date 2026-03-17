@@ -2,7 +2,7 @@ import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, Ex
 import { trigFuncNarrations } from './data/func-narrations';
 import { trigFuncProgressItems } from './data/func-progress';
 import { trigFuncExam, trigGraphPractice } from './data/func-questions';
-import { TrigFuncAnswers } from './func-answers';
+import { TrigFuncAnswers, trigFuncExplanations } from './func-answers';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
@@ -555,7 +555,7 @@ export function TrigFuncPage() {
             </div>
 
             {/* ── 即时训练 ── */}
-            <PracticeCard questions={trigGraphPractice} title="✅ 即时训练 — 图像性质（4 题）" printOptionCols={2} />
+            <PracticeCard questions={trigGraphPractice} title="✅ 即时训练 — 图像性质（4 题）" printOptionCols={2} explanations={trigFuncExplanations} />
 
           </div>
         </Collapsible>
@@ -1554,7 +1554,7 @@ export function TrigFuncPage() {
       <section className="mb-3">
         <h2 className="text-xl font-bold text-red-800 mb-2 border-b-2 border-red-300 pb-1">🔥 高考真题 & 精华题</h2>
         <p className="text-gray-600 mb-2">覆盖前面所学全部知识点：诱导公式、图像性质、参数识别、图像变换、由图求解析式、性质综合应用。</p>
-        <PracticeCard questions={trigFuncExam} title="🔥 高考真题 & 精华题（8 题）" printOptionCols={2} />
+        <PracticeCard questions={trigFuncExam} title="🔥 高考真题 & 精华题（8 题）" printOptionCols={2} explanations={trigFuncExplanations} />
       </section>
 
       {/* ═══ 打印模式：答案与解析 ═══ */}

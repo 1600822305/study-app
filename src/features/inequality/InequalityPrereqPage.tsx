@@ -3,6 +3,7 @@ import { inequalityPrereqNarrations } from './data/prereq-narrations';
 import { ineqPrereqPractice1, ineqPrereqPractice2 } from './data/prereq-practice';
 import { inequalityPrereqProgressItems } from './data/prereq-progress';
 import { inequalityPrereqQuizQuestions } from './data/prereq-quiz';
+import { InequalityPrereqAnswers, inequalityPrereqExplanations } from './inequality-prereq-answers';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 
@@ -134,6 +135,7 @@ export function InequalityPrereqPage() {
             <PracticeCard
               title="✏️ 即时练习"
               questions={ineqPrereqPractice1}
+              explanations={inequalityPrereqExplanations}
             />
           </div>
         </Collapsible>
@@ -237,6 +239,7 @@ export function InequalityPrereqPage() {
             <PracticeCard
               title="✏️ 即时练习"
               questions={ineqPrereqPractice2}
+              explanations={inequalityPrereqExplanations}
             />
           </div>
         </Collapsible>
@@ -372,6 +375,7 @@ export function InequalityPrereqPage() {
           <QuizPanel
             questions={inequalityPrereqQuizQuestions}
             module="inequality-prereq-quiz"
+            explanations={inequalityPrereqExplanations}
           />
         </Collapsible>
       </section>
@@ -379,55 +383,7 @@ export function InequalityPrereqPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <section className="print-answers">
-          <PageBreak />
-          <h2 className="text-xl font-bold text-gray-900 mb-3 border-b-2 border-gray-300 pb-2">📝 2.0 不等式前置知识 — 参考答案与解析</h2>
-
-          <div className="mb-4">
-            <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
-            <div className="space-y-2">
-              <div>
-                <p className="font-bold text-gray-700 mb-2">第一节：正负数运算</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {ineqPrereqPractice1.map((q, i) => (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                      {q.explanation && <p>{q.explanation}</p>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="font-bold text-gray-700 mb-2">第二节：解方程</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {ineqPrereqPractice2.map((q, i) => (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                      {q.explanation && <p>{q.explanation}</p>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-bold text-gray-800 mb-2">自测答案</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {inequalityPrereqQuizQuestions.map((q, i) => (
-                <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                  <p><strong>{i + 1}. 答案：</strong>{q.correctAnswer.includes('\\') ? <Math tex={q.correctAnswer} /> : <strong>{q.correctAnswer}</strong>}</p>
-                  {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                  {q.explanation && <p>{q.explanation}</p>}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {isPrinting && printOptions.showAnswers && <InequalityPrereqAnswers />}
 
       </LessonLayout>
     </div>

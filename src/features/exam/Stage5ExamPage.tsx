@@ -7,7 +7,7 @@ import {
   stage5BlankQuestions,
   stage5EssayQuestions,
 } from './data/stage5-exam';
-import { Stage5ExamAnswers } from './stage5-exam-answers';
+import { Stage5ExamAnswers, stage5Explanations } from './stage5-exam-answers';
 import { Exam18Triangle, Exam20RightTriangle, Exam21TriangleHeight } from './exam-diagrams';
 
 // 解答题配图映射（id → mafs 组件）
@@ -86,8 +86,8 @@ export function Stage5ExamPage() {
         module="stage5-exam"
         questions={stage5ExamQuestions}
         title="第五阶段考试"
-        description="题目顺序随机打乱，完成后查看成绩和错题回顾。"
-        shuffle={true}
+        description="按顺序答题，完成后查看成绩和错题回顾。"
+        explanations={stage5Explanations}
       />
     </div>
   );

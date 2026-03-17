@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, type ReactNode } from 'react';
 import { ChevronRight, RotateCcw, CheckCircle, XCircle, Send } from 'lucide-react';
 
 import { Math as MathTex } from '../Math';
@@ -24,11 +24,13 @@ interface PracticeCardProps {
   printOptionCols?: 1 | 2 | 4;
   /** 交互模式下选项列数，默认 1（纵向堆叠） */
   optionCols?: 1 | 2 | 4;
+  /** 外部提供的解析内容，key 为题目 id，优先于 explanationLatex */
+  explanations?: Record<string, ReactNode>;
 }
 
 // ── Component ──
 
-export function PracticeCard({ title = '✏️ 即时练习', questions, printOptionCols = 1, optionCols = 1 }: PracticeCardProps) {
+export function PracticeCard({ title = '✏️ 即时练习', questions, printOptionCols = 1, optionCols = 1, explanations }: PracticeCardProps) {
   const { isPrinting } = usePrintMode();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -245,13 +247,19 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
             <p className={`font-bold text-sm mb-1 ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
               {isCorrect ? '✓ 正确！' : <>✗ 错了　正确答案：{current.options?.find(o => o.value === current.correctAnswer)?.label ?? current.correctAnswer}</>}
             </p>
-            {current.explanation && (
-              <p className="text-gray-600 text-sm">{current.explanation}</p>
-            )}
-            {current.explanationLatex && (
-              <div className="mt-1">
-                <MathTex tex={current.explanationLatex} display />
-              </div>
+            {explanations?.[current.id] ? (
+              <div className="mt-1 text-gray-700">{explanations[current.id]}</div>
+            ) : (
+              <>
+                {current.explanation && (
+                  <p className="text-gray-600 text-sm">{current.explanation}</p>
+                )}
+                {current.explanationLatex && (
+                  <div className="mt-1">
+                    <MathTex tex={current.explanationLatex} display />
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}

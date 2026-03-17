@@ -1,9 +1,150 @@
+import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
+import { stage5ChoiceQuestions, stage5BlankQuestions } from './data/stage5-exam';
+import type { QuizQuestionData } from '@/types';
+
+// ══════════════════════════════════════════════════════════
+// 解析内容（唯一数据源）— 交互 + 打印共用
+// 选择题 + 填空题的解析，key = 题目 id
+// ══════════════════════════════════════════════════════════
+
+export const stage5Explanations: Record<string, ReactNode> = {
+  // ── 选择题 ──
+  's5e-c1': (
+    <>
+      <p className="mt-1.5"><MathTex tex="\cos(\pi-\alpha)=-\cos\alpha" /></p>
+      <p className="mt-1.5"><MathTex tex="\sin\!\left(\dfrac{\pi}{2}-\alpha\right)=\cos\alpha" /></p>
+      <p className="mt-1.5"><MathTex tex="\therefore\;\text{原式}=-\cos\alpha+\cos\alpha=0" /></p>
+      <p className="mt-1 text-gray-500">与 <MathTex tex="\sin\alpha" /> 的值无关！</p>
+    </>
+  ),
+  's5e-c2': (
+    <>
+      <p className="mt-1.5"><MathTex tex="\sin 75°=\sin(45°+30°)" /></p>
+      <p className="mt-1.5"><MathTex tex="=\dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2}+\dfrac{\sqrt{2}}{2}\cdot\dfrac{1}{2}=\dfrac{\sqrt{6}+\sqrt{2}}{4}" /></p>
+    </>
+  ),
+  's5e-c3': (
+    <>
+      <p className="mt-1">与余弦定理对比：</p>
+      <p className="mt-1.5"><MathTex tex="-2bc\cos A=-bc \Rightarrow \cos A=\dfrac{1}{2} \Rightarrow A=60°" /></p>
+    </>
+  ),
+  's5e-c4': (
+    <>
+      <p className="mt-1.5"><MathTex tex="S=\dfrac{1}{2}\cdot 8\cdot 5\cdot\sin 30°=20\times\dfrac{1}{2}=10" /></p>
+    </>
+  ),
+  's5e-c5': (
+    <>
+      <p className="mt-1.5"><MathTex tex="\alpha" /> 在第二象限 <MathTex tex="\Rightarrow \cos\alpha=-\dfrac{3}{5}" /></p>
+      <p className="mt-1.5"><MathTex tex="\sin 2\alpha=2\cdot\dfrac{4}{5}\cdot\!\left(-\dfrac{3}{5}\right)=-\dfrac{24}{25}" /></p>
+    </>
+  ),
+  's5e-c6': (
+    <>
+      <p className="mt-1.5"><MathTex tex="\cos^2\alpha-\sin^2\alpha=\cos 2\alpha" />（和差化积）</p>
+      <p className="mt-1">而 <MathTex tex="\cos 2\alpha=1-2\sin^2\alpha" />（二倍角余弦第二形式）</p>
+      <p className="mt-1">所以 A 和 C 表达的是同一个值，都对。</p>
+    </>
+  ),
+  's5e-c7': (
+    <>
+      <p className="mt-1">先平移后伸缩：</p>
+      <p className="mt-1.5"><MathTex tex="y=\sin x \xrightarrow{\text{左移}\frac{\pi}{3}} \sin\!\left(x+\frac{\pi}{3}\right) \xrightarrow{\text{横}\div 2} \sin\!\left(2x+\frac{\pi}{3}\right)" /></p>
+    </>
+  ),
+  's5e-c8': (
+    <>
+      <p className="mt-1.5"><MathTex tex="x\in[0,\frac{\pi}{2}] \Rightarrow 2x+\frac{\pi}{6}\in[\frac{\pi}{6},\frac{7\pi}{6}]" /></p>
+      <p className="mt-1.5"><MathTex tex="\sin\frac{7\pi}{6}=-\frac{1}{2},\; f_{\min}=2\times\!\left(-\frac{1}{2}\right)=-1" /></p>
+      <p className="mt-1">注意不是 <MathTex tex="-2" />，区间内 sin 没到 <MathTex tex="-1" /></p>
+    </>
+  ),
+  's5e-c9': (
+    <>
+      <p className="mt-1.5"><MathTex tex="\dfrac{\sin B}{b}=\dfrac{\sin A}{a} \Rightarrow \sin B=\dfrac{\sqrt{3}}{2}" /></p>
+      <p className="mt-1.5"><MathTex tex="B=60° \text{ 或 } 120°" /></p>
+      <p className="mt-1">两者均满足 <MathTex tex="A+B<180°" />，有 2 解</p>
+    </>
+  ),
+  's5e-c10': (
+    <>
+      <p className="mt-1">tan 函数的对称中心在零点处：</p>
+      <p className="mt-1.5"><MathTex tex="\tan\!\left(a-\dfrac{\pi}{3}\right)=0 \Rightarrow a=k\pi+\dfrac{\pi}{3}" /></p>
+      <p className="mt-1.5"><MathTex tex="a>0 \Rightarrow a_{\min}=\dfrac{\pi}{3}" /></p>
+    </>
+  ),
+
+  // ── 填空题 ──
+  's5e-b1': (
+    <>
+      <p className="mt-1.5"><MathTex tex="150°=150\times\dfrac{\pi}{180}=\dfrac{5\pi}{6}" /></p>
+    </>
+  ),
+  's5e-b2': (
+    <>
+      <p className="mt-1.5"><MathTex tex="T=\dfrac{2\pi}{\omega}=\dfrac{2\pi}{2}=\pi" /></p>
+    </>
+  ),
+  's5e-b3': (
+    <>
+      <p className="mt-1">半角公式：<MathTex tex="\sin^2\dfrac{\alpha}{2}=\dfrac{1-\cos\alpha}{2}" /></p>
+      <p className="mt-1.5"><MathTex tex="=\dfrac{1-\frac{7}{25}}{2}=\dfrac{\frac{18}{25}}{2}=\dfrac{9}{25}" /></p>
+      <p className="mt-1.5"><MathTex tex="\alpha\in(0,\pi) \Rightarrow \dfrac{\alpha}{2}\in(0,\dfrac{\pi}{2}) \Rightarrow \sin\dfrac{\alpha}{2}>0" /></p>
+      <p className="mt-1.5"><MathTex tex="\therefore \sin\dfrac{\alpha}{2}=\dfrac{3}{5}" /></p>
+    </>
+  ),
+  's5e-b4': (
+    <>
+      <p className="mt-1">零点 <MathTex tex="x=\dfrac{2k\pi}{\omega}" />，在 <MathTex tex="[0,2\pi]" /> 上恰 3 个：</p>
+      <p className="mt-1.5"><MathTex tex="x=0,\;\dfrac{2\pi}{\omega},\;\dfrac{4\pi}{\omega}" /></p>
+      <p className="mt-1.5"><MathTex tex="\dfrac{4\pi}{\omega}\leq 2\pi \Rightarrow \omega\geq 2" />；<MathTex tex="\dfrac{6\pi}{\omega}>2\pi \Rightarrow \omega<3" /></p>
+    </>
+  ),
+  's5e-b5': (
+    <>
+      <p className="mt-1.5"><MathTex tex="R=\sqrt{(\sqrt{3})^2+1^2}=2" /></p>
+      <p className="mt-1.5"><MathTex tex="\tan\varphi=\dfrac{1}{\sqrt{3}} \Rightarrow \varphi=\dfrac{\pi}{6}" /></p>
+    </>
+  ),
+  's5e-b6': (
+    <>
+      <p className="mt-1.5"><MathTex tex="a^2=9+25-2\times 3\times 5\times\cos 60°=34-15=19" /></p>
+      <p className="mt-1.5"><MathTex tex="\therefore a=\sqrt{19}" /></p>
+    </>
+  ),
+};
+
+// ══════════════════════════════════════════════════════════
+// 打印答案组件 — 布局自由控制，内容从 explanations 取
+// ══════════════════════════════════════════════════════════
+
+function AnswerSection({ title, questions, startNum = 1 }: { title: string; questions: QuizQuestionData[]; startNum?: number }) {
+  return (
+    <div className="mb-5">
+      <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{title}</p>
+      <div className="columns-2 gap-4 text-gray-700" style={{ columnRule: '1px solid #e5e7eb' }}>
+        {questions.map((q, i) => (
+          <div key={q.id} className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
+            <span className="text-blue-600 font-bold shrink-0">{startNum + i}.</span>
+            <div className="min-w-0">
+              <p className="font-bold text-gray-900">
+                答案：{q.type === 'blank' ? q.correctAnswer : (q.options?.find(o => o.value === q.correctAnswer)?.label ?? q.correctAnswer)}
+              </p>
+              {stage5Explanations[q.id] && <div className="mt-1">{stage5Explanations[q.id]}</div>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 /**
  * 第五阶段考试 — 答案与解析（独立组件）
  *
- * 纯 JSX 自由布局，选择题+填空题双列，解答题单列
+ * 选择题+填空题从 explanations 对象循环渲染，解答题保持原始 JSX
  */
 export function Stage5ExamAnswers() {
   return (
@@ -11,189 +152,8 @@ export function Stage5ExamAnswers() {
       <PageBreak label="答案与解析" />
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 第五阶段考试 — 答案与解析</h2>
 
-      {/* ═══════════ 一、选择题（10 题）═══════════ */}
-      <div className="mb-5">
-        <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">一、选择题</p>
-
-        <div className="columns-2 gap-4 text-gray-700">
-
-          {/* 第 1 题 — 诱导公式条件求值 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">1.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A（0）</p>
-              <p className="mt-1.5"><MathTex tex="\cos(\pi-\alpha)=-\cos\alpha" /></p>
-              <p className="mt-1.5"><MathTex tex="\sin\!\left(\dfrac{\pi}{2}-\alpha\right)=\cos\alpha" /></p>
-              <p className="mt-1.5"><MathTex tex="\therefore\;\text{原式}=-\cos\alpha+\cos\alpha=0" /></p>
-              <p className="mt-1 text-gray-500">与 <MathTex tex="\sin\alpha" /> 的值无关！</p>
-            </div>
-          </div>
-
-          {/* 第 2 题 — sin75° */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">2.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A</p>
-              <p className="mt-1.5"><MathTex tex="\sin 75°=\sin(45°+30°)" /></p>
-              <p className="mt-1.5"><MathTex tex="=\dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2}+\dfrac{\sqrt{2}}{2}\cdot\dfrac{1}{2}=\dfrac{\sqrt{6}+\sqrt{2}}{4}" /></p>
-            </div>
-          </div>
-
-          {/* 第 3 题 — 余弦定理求角 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">3.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：B（60°）</p>
-              <p className="mt-1">与余弦定理对比：</p>
-              <p className="mt-1.5"><MathTex tex="-2bc\cos A=-bc \Rightarrow \cos A=\dfrac{1}{2} \Rightarrow A=60°" /></p>
-            </div>
-          </div>
-
-          {/* 第 4 题 — 面积公式 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">4.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A（10）</p>
-              <p className="mt-1.5"><MathTex tex="S=\dfrac{1}{2}\cdot 8\cdot 5\cdot\sin 30°=20\times\dfrac{1}{2}=10" /></p>
-            </div>
-          </div>
-
-          {/* 第 5 题 — sin2α 二倍角 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">5.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A</p>
-              <p className="mt-1.5"><MathTex tex="\alpha" /> 在第二象限 <MathTex tex="\Rightarrow \cos\alpha=-\dfrac{3}{5}" /></p>
-              <p className="mt-1.5"><MathTex tex="\sin 2\alpha=2\cdot\dfrac{4}{5}\cdot\!\left(-\dfrac{3}{5}\right)=-\dfrac{24}{25}" /></p>
-            </div>
-          </div>
-
-          {/* 第 6 题 — 降幂公式 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">6.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：D（A 和 C 都对）</p>
-              <p className="mt-1.5"><MathTex tex="\cos^2\alpha-\sin^2\alpha=\cos 2\alpha" />（和差化积）</p>
-              <p className="mt-1">而 <MathTex tex="\cos 2\alpha=1-2\sin^2\alpha" />（二倍角余弦第二形式）</p>
-              <p className="mt-1">所以 A 和 C 表达的是同一个值，都对。</p>
-            </div>
-          </div>
-
-          {/* 第 7 题 — 图像变换 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">7.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A</p>
-              <p className="mt-1">先平移后伸缩：</p>
-              <p className="mt-1.5"><MathTex tex="y=\sin x \xrightarrow{\text{左移}\frac{\pi}{3}} \sin\!\left(x+\frac{\pi}{3}\right) \xrightarrow{\text{横}\div 2} \sin\!\left(2x+\frac{\pi}{3}\right)" /></p>
-            </div>
-          </div>
-
-          {/* 第 8 题 — 闭区间最值 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">8.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：B（<MathTex tex="-1" />）</p>
-              <p className="mt-1.5"><MathTex tex="x\in[0,\frac{\pi}{2}] \Rightarrow 2x+\frac{\pi}{6}\in[\frac{\pi}{6},\frac{7\pi}{6}]" /></p>
-              <p className="mt-1.5"><MathTex tex="\sin\frac{7\pi}{6}=-\frac{1}{2},\; f_{\min}=2\times\!\left(-\frac{1}{2}\right)=-1" /></p>
-              <p className="mt-1">注意不是 <MathTex tex="-2" />，区间内 sin 没到 <MathTex tex="-1" /></p>
-            </div>
-          </div>
-
-          {/* 第 9 题 — 正弦定理解的个数 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">9.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：C（2）</p>
-              <p className="mt-1.5"><MathTex tex="\dfrac{\sin B}{b}=\dfrac{\sin A}{a} \Rightarrow \sin B=\dfrac{\sqrt{3}}{2}" /></p>
-              <p className="mt-1.5"><MathTex tex="B=60° \text{ 或 } 120°" /></p>
-              <p className="mt-1">两者均满足 <MathTex tex="A+B<180°" />，有 2 解</p>
-            </div>
-          </div>
-
-          {/* 第 10 题 — 2025高考 tan 对称中心 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">10.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：B</p>
-              <p className="mt-1">tan 函数的对称中心在零点处：</p>
-              <p className="mt-1.5"><MathTex tex="\tan\!\left(a-\dfrac{\pi}{3}\right)=0 \Rightarrow a=k\pi+\dfrac{\pi}{3}" /></p>
-              <p className="mt-1.5"><MathTex tex="a>0 \Rightarrow a_{\min}=\dfrac{\pi}{3}" /></p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* ═══════════ 二、填空题（6 题）═══════════ */}
-      <div className="mb-5">
-        <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">二、填空题</p>
-
-        <div className="columns-2 gap-4 text-gray-700">
-
-          {/* 第 11 题 — 弧度制 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">11.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="\dfrac{5\pi}{6}" /></p>
-              <p className="mt-1.5"><MathTex tex="150°=150\times\dfrac{\pi}{180}=\dfrac{5\pi}{6}" /></p>
-            </div>
-          </div>
-
-          {/* 第 12 题 — 周期 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">12.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="\pi" /></p>
-              <p className="mt-1.5"><MathTex tex="T=\dfrac{2\pi}{\omega}=\dfrac{2\pi}{2}=\pi" /></p>
-            </div>
-          </div>
-
-          {/* 第 13 题 — 半角公式 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">13.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="\dfrac{3}{5}" /></p>
-              <p className="mt-1">半角公式：<MathTex tex="\sin^2\dfrac{\alpha}{2}=\dfrac{1-\cos\alpha}{2}" /></p>
-              <p className="mt-1.5"><MathTex tex="=\dfrac{1-\frac{7}{25}}{2}=\dfrac{\frac{18}{25}}{2}=\dfrac{9}{25}" /></p>
-              <p className="mt-1.5"><MathTex tex="\alpha\in(0,\pi) \Rightarrow \dfrac{\alpha}{2}\in(0,\dfrac{\pi}{2}) \Rightarrow \sin\dfrac{\alpha}{2}>0" /></p>
-              <p className="mt-1.5"><MathTex tex="\therefore \sin\dfrac{\alpha}{2}=\dfrac{3}{5}" /></p>
-            </div>
-          </div>
-
-          {/* 第 14 题 — 2023真题零点 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">14.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="[2,\,3)" /></p>
-              <p className="mt-1">零点 <MathTex tex="x=\dfrac{2k\pi}{\omega}" />，在 <MathTex tex="[0,2\pi]" /> 上恰 3 个：</p>
-              <p className="mt-1.5"><MathTex tex="x=0,\;\dfrac{2\pi}{\omega},\;\dfrac{4\pi}{\omega}" /></p>
-              <p className="mt-1.5"><MathTex tex="\dfrac{4\pi}{\omega}\leq 2\pi \Rightarrow \omega\geq 2" />；<MathTex tex="\dfrac{6\pi}{\omega}>2\pi \Rightarrow \omega<3" /></p>
-            </div>
-          </div>
-
-          {/* 第 15 题 — 辅助角公式 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">15.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="2\sin\!\left(x+\dfrac{\pi}{6}\right)" /></p>
-              <p className="mt-1.5"><MathTex tex="R=\sqrt{(\sqrt{3})^2+1^2}=2" /></p>
-              <p className="mt-1.5"><MathTex tex="\tan\varphi=\dfrac{1}{\sqrt{3}} \Rightarrow \varphi=\dfrac{\pi}{6}" /></p>
-            </div>
-          </div>
-
-          {/* 第 16 题 — 余弦定理求边 */}
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">16.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="\sqrt{19}" /></p>
-              <p className="mt-1.5"><MathTex tex="a^2=9+25-2\times 3\times 5\times\cos 60°=34-15=19" /></p>
-              <p className="mt-1.5"><MathTex tex="\therefore a=\sqrt{19}" /></p>
-            </div>
-          </div>
-
-        </div>
-      </div>
+      <AnswerSection title="一、选择题" questions={stage5ChoiceQuestions} />
+      <AnswerSection title="二、填空题" questions={stage5BlankQuestions} startNum={11} />
 
       {/* ═══════════ 三、解答题（5 题，每题 8 分）═══════════ */}
       <div className="mb-5">

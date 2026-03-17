@@ -2,7 +2,7 @@ import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, Ex
 import { trigPrereqNarrations } from './data/prereq-narrations';
 import { trigPrereqProgressItems } from './data/prereq-progress';
 import { trigPrereqPractice } from './data/prereq-questions';
-import { TrigPrereqAnswers } from './prereq-answers';
+import { TrigPrereqAnswers, trigPrereqExplanations } from './prereq-answers';
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
@@ -525,7 +525,7 @@ export function TrigPrereqPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* 练习 + 自测 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <PracticeCard title="✅ 综合练习（10 题）" questions={trigPrereqPractice} printOptionCols={4} />
+      <PracticeCard title="✅ 综合练习（10 题）" questions={trigPrereqPractice} printOptionCols={4} explanations={trigPrereqExplanations} />
 
       {/* ═══ 打印模式：答案与解析 ═══ */}
       {isPrinting && printOptions.showAnswers && <TrigPrereqAnswers />}

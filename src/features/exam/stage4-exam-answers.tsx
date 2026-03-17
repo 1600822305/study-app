@@ -1,9 +1,142 @@
+import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
+import { stage4ChoiceQuestions, stage4BlankQuestions } from './data/stage4-exam';
+import type { QuizQuestionData } from '@/types';
+
+// ══════════════════════════════════════════════════════════
+// 解析内容（唯一数据源）— 交互 + 打印共用
+// 选择题 + 填空题的解析，key = 题目 id
+// ══════════════════════════════════════════════════════════
+
+export const stage4Explanations: Record<string, ReactNode> = {
+  // ── 选择题 ──
+  's4e-c1': (
+    <>
+      <p className="mt-1">A 错：零向量方向是任意的，不是没有</p>
+      <p className="mt-1">B 错：模相等方向不同不是相等向量</p>
+      <p className="mt-1">C 错：共线向量方向平行，不一定在同一直线</p>
+      <p className="mt-1">D 对：不共线的两个非零向量可以作基底</p>
+    </>
+  ),
+  's4e-c2': (
+    <>
+      <p className="mt-1"><MathTex tex="2\vec{a}-\vec{b}=2(2,-1)-(-3,4)" /></p>
+      <p className="mt-1"><MathTex tex="=(4,-2)-(-3,4)=(7,-6)" /></p>
+    </>
+  ),
+  's4e-c3': (
+    <>
+      <p className="mt-1">平行条件：<MathTex tex="x_1y_2-x_2y_1=0" /></p>
+      <p className="mt-1"><MathTex tex="2\times(-2)-m\times3=0" /></p>
+      <p className="mt-1"><MathTex tex="-4-3m=0\Rightarrow m=-\dfrac{4}{3}" /></p>
+    </>
+  ),
+  's4e-c4': (
+    <>
+      <p className="mt-1"><MathTex tex="\vec{a}+\vec{b}=(1+x,\;3)" /></p>
+      <p className="mt-1"><MathTex tex="\vec{a}\perp(\vec{a}+\vec{b})\Rightarrow\vec{a}\cdot(\vec{a}+\vec{b})=0" /></p>
+      <p className="mt-1"><MathTex tex="1(1+x)+2\times3=0" /></p>
+      <p className="mt-1"><MathTex tex="1+x+6=0\Rightarrow x=-7" /></p>
+    </>
+  ),
+  's4e-c5': (
+    <>
+      <p className="mt-1"><MathTex tex="\vec{a}\cdot\vec{b}=\sqrt{3}+\sqrt{3}=2\sqrt{3}" /></p>
+      <p className="mt-1"><MathTex tex="|\vec{a}|=2,\;|\vec{b}|=2" /></p>
+      <p className="mt-1"><MathTex tex="\cos\theta=\dfrac{2\sqrt{3}}{4}=\dfrac{\sqrt{3}}{2}\Rightarrow\theta=30\degree" /></p>
+    </>
+  ),
+  's4e-c6': (
+    <>
+      <p className="mt-1"><MathTex tex="|\vec{a}-2\vec{b}|^2=|\vec{a}|^2-4\vec{a}\cdot\vec{b}+4|\vec{b}|^2" /></p>
+      <p className="mt-1"><MathTex tex="=4-4(-1)+4=12" /></p>
+      <p className="mt-1"><MathTex tex="|\vec{a}-2\vec{b}|=2\sqrt{3}" /></p>
+    </>
+  ),
+  's4e-c7': (
+    <>
+      <p className="mt-1"><MathTex tex="\vec{a}\perp(\vec{a}-2\vec{b})\Rightarrow|\vec{a}|^2-2\vec{a}\cdot\vec{b}=0" /></p>
+      <p className="mt-1"><MathTex tex="4-2\vec{a}\cdot\vec{b}=0\Rightarrow\vec{a}\cdot\vec{b}=2" /></p>
+      <p className="mt-1"><MathTex tex="|\vec{a}-\vec{b}|^2=4-4+1=1" /></p>
+    </>
+  ),
+  's4e-c8': (
+    <>
+      <p className="mt-1"><MathTex tex="\vec{a}+\lambda\vec{b}=(1+\lambda,\;1-\lambda)" /></p>
+      <p className="mt-1"><MathTex tex="\vec{a}+\mu\vec{b}=(1+\mu,\;1-\mu)" /></p>
+      <p className="mt-1">垂直：<MathTex tex="2+2\lambda\mu=0\Rightarrow\lambda\mu=-1" /></p>
+    </>
+  ),
+
+  // ── 填空题 ──
+  's4e-b1': (
+    <>
+      <p className="mt-1"><MathTex tex="\vec{a}+\vec{b}=(1+x,\;3)" /></p>
+      <p className="mt-1"><MathTex tex="(1+x)^2+9=10\Rightarrow(1+x)^2=1" /></p>
+      <p className="mt-1"><MathTex tex="x=0\text{ 或 }x=-2" /></p>
+    </>
+  ),
+  's4e-b2': (
+    <>
+      <p className="mt-1">对角线互相平分，AC 中点 = BD 中点</p>
+      <p className="mt-1"><MathTex tex="\dfrac{4+x}{2}=\dfrac{1+6}{2}\Rightarrow x=3" /></p>
+      <p className="mt-1"><MathTex tex="\dfrac{3+y}{2}=\dfrac{2+7}{2}\Rightarrow y=6" /></p>
+    </>
+  ),
+  's4e-b3': (
+    <>
+      <p className="mt-1"><MathTex tex="\cos\theta=\dfrac{\vec{a}\cdot\vec{b}}{|\vec{a}||\vec{b}|}=\dfrac{6}{3\times4}=\dfrac{1}{2}" /></p>
+    </>
+  ),
+  's4e-b4': (
+    <>
+      <p className="mt-1">投影 = <MathTex tex="\dfrac{\vec{a}\cdot\vec{b}}{|\vec{b}|}=\dfrac{3\times1+4\times0}{1}=3" /></p>
+    </>
+  ),
+  's4e-b5': (
+    <>
+      <p className="mt-1"><MathTex tex="M=\left(\dfrac{1+5}{2},\;\dfrac{3+7}{2}\right)=(3,5)" /></p>
+      <p className="mt-1"><MathTex tex="\overrightarrow{OM}=(3,5)" /></p>
+    </>
+  ),
+  's4e-b6': (
+    <>
+      <p className="mt-1"><MathTex tex="\overrightarrow{AD}=\dfrac{1}{2}\overrightarrow{AB}+\dfrac{1}{2}\overrightarrow{AC}" /></p>
+      <p className="mt-1"><MathTex tex="\overrightarrow{AE}=\dfrac{1}{3}\overrightarrow{AB}" /></p>
+      <p className="mt-1"><MathTex tex="\overrightarrow{DE}=\overrightarrow{AE}-\overrightarrow{AD}=-\dfrac{1}{6}\overrightarrow{AB}-\dfrac{1}{2}\overrightarrow{AC}" /></p>
+    </>
+  ),
+};
+
+// ══════════════════════════════════════════════════════════
+// 打印答案组件 — 布局自由控制，内容从 explanations 取
+// ══════════════════════════════════════════════════════════
+
+function AnswerSection({ title, questions, startNum = 1 }: { title: string; questions: QuizQuestionData[]; startNum?: number }) {
+  return (
+    <div className="mb-5">
+      <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{title}</p>
+      <div className="columns-2 gap-4 text-gray-700" style={{ columnRule: '1px solid #e5e7eb' }}>
+        {questions.map((q, i) => (
+          <div key={q.id} className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
+            <span className="text-blue-600 font-bold shrink-0">{startNum + i}.</span>
+            <div className="min-w-0">
+              <p className="font-bold text-gray-900">
+                答案：{q.type === 'blank' ? q.correctAnswer : (q.options?.find(o => o.value === q.correctAnswer)?.label ?? q.correctAnswer)}
+              </p>
+              {stage4Explanations[q.id] && <div className="mt-1">{stage4Explanations[q.id]}</div>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 /**
  * 第四阶段考试 — 答案与解析（独立组件）
  *
- * 纯 JSX 自由布局，选择题+填空题双列，解答题双列流式
+ * 选择题+填空题从 explanations 对象循环渲染，解答题保持原始 JSX
  */
 export function Stage4ExamAnswers() {
   return (
@@ -11,159 +144,8 @@ export function Stage4ExamAnswers() {
       <PageBreak label="答案与解析" />
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 第四阶段考试 — 答案与解析</h2>
 
-      {/* ═══════════ 一、选择题（8 题）═══════════ */}
-      <div className="mb-5">
-        <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">一、选择题</p>
-
-        <div className="columns-2 gap-4 text-gray-700">
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">1.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：D</p>
-              <p className="mt-1">A 错：零向量方向是任意的，不是没有</p>
-              <p className="mt-1">B 错：模相等方向不同不是相等向量</p>
-              <p className="mt-1">C 错：共线向量方向平行，不一定在同一直线</p>
-              <p className="mt-1">D 对：不共线的两个非零向量可以作基底 ✓</p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">2.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A（<MathTex tex="(7,-6)" />）</p>
-              <p className="mt-1"><MathTex tex="2\vec{a}-\vec{b}=2(2,-1)-(-3,4)" /></p>
-              <p className="mt-1"><MathTex tex="=(4,-2)-(-3,4)=(7,-6)" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">3.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A（<MathTex tex="-\dfrac{4}{3}" />）</p>
-              <p className="mt-1">平行条件：<MathTex tex="x_1y_2-x_2y_1=0" /></p>
-              <p className="mt-1"><MathTex tex="2\times(-2)-m\times3=0" /></p>
-              <p className="mt-1"><MathTex tex="-4-3m=0\Rightarrow m=-\dfrac{4}{3}" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">4.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A（-7）</p>
-              <p className="mt-1"><MathTex tex="\vec{a}+\vec{b}=(1+x,\;3)" /></p>
-              <p className="mt-1"><MathTex tex="\vec{a}\perp(\vec{a}+\vec{b})\Rightarrow\vec{a}\cdot(\vec{a}+\vec{b})=0" /></p>
-              <p className="mt-1"><MathTex tex="1(1+x)+2\times3=0" /></p>
-              <p className="mt-1"><MathTex tex="1+x+6=0\Rightarrow x=-7" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">5.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A（30°）</p>
-              <p className="mt-1"><MathTex tex="\vec{a}\cdot\vec{b}=\sqrt{3}+\sqrt{3}=2\sqrt{3}" /></p>
-              <p className="mt-1"><MathTex tex="|\vec{a}|=2,\;|\vec{b}|=2" /></p>
-              <p className="mt-1"><MathTex tex="\cos\theta=\dfrac{2\sqrt{3}}{4}=\dfrac{\sqrt{3}}{2}\Rightarrow\theta=30\degree" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">6.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：D（<MathTex tex="2\sqrt{3}" />）</p>
-              <p className="mt-1"><MathTex tex="|\vec{a}-2\vec{b}|^2=|\vec{a}|^2-4\vec{a}\cdot\vec{b}+4|\vec{b}|^2" /></p>
-              <p className="mt-1"><MathTex tex="=4-4(-1)+4=12" /></p>
-              <p className="mt-1"><MathTex tex="|\vec{a}-2\vec{b}|=2\sqrt{3}" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">7.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：A（1）</p>
-              <p className="mt-1"><MathTex tex="\vec{a}\perp(\vec{a}-2\vec{b})\Rightarrow|\vec{a}|^2-2\vec{a}\cdot\vec{b}=0" /></p>
-              <p className="mt-1"><MathTex tex="4-2\vec{a}\cdot\vec{b}=0\Rightarrow\vec{a}\cdot\vec{b}=2" /></p>
-              <p className="mt-1"><MathTex tex="|\vec{a}-\vec{b}|^2=4-4+1=1" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">8.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：D（<MathTex tex="\lambda\mu=-1" />）</p>
-              <p className="mt-1"><MathTex tex="\vec{a}+\lambda\vec{b}=(1+\lambda,\;1-\lambda)" /></p>
-              <p className="mt-1"><MathTex tex="\vec{a}+\mu\vec{b}=(1+\mu,\;1-\mu)" /></p>
-              <p className="mt-1">垂直：<MathTex tex="2+2\lambda\mu=0\Rightarrow\lambda\mu=-1" /></p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      {/* ═══════════ 二、填空题（6 题）═══════════ */}
-      <div className="mb-5">
-        <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">二、填空题</p>
-
-        <div className="columns-2 gap-4 text-gray-700">
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">9.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="0" /> 或 <MathTex tex="-2" /></p>
-              <p className="mt-1"><MathTex tex="\vec{a}+\vec{b}=(1+x,\;3)" /></p>
-              <p className="mt-1"><MathTex tex="(1+x)^2+9=10\Rightarrow(1+x)^2=1" /></p>
-              <p className="mt-1"><MathTex tex="x=0\text{ 或 }x=-2" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">10.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="D(3,6)" /></p>
-              <p className="mt-1">对角线互相平分，AC 中点 = BD 中点</p>
-              <p className="mt-1"><MathTex tex="\dfrac{4+x}{2}=\dfrac{1+6}{2}\Rightarrow x=3" /></p>
-              <p className="mt-1"><MathTex tex="\dfrac{3+y}{2}=\dfrac{2+7}{2}\Rightarrow y=6" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">11.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="\dfrac{1}{2}" /></p>
-              <p className="mt-1"><MathTex tex="\cos\theta=\dfrac{\vec{a}\cdot\vec{b}}{|\vec{a}||\vec{b}|}=\dfrac{6}{3\times4}=\dfrac{1}{2}" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">12.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：3</p>
-              <p className="mt-1">投影 = <MathTex tex="\dfrac{\vec{a}\cdot\vec{b}}{|\vec{b}|}=\dfrac{3\times1+4\times0}{1}=3" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">13.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="(3,5)" /></p>
-              <p className="mt-1"><MathTex tex="M=\left(\dfrac{1+5}{2},\;\dfrac{3+7}{2}\right)=(3,5)" /></p>
-              <p className="mt-1"><MathTex tex="\overrightarrow{OM}=(3,5)" /></p>
-            </div>
-          </div>
-
-          <div className="flex gap-2 items-start mb-3" style={{ breakInside: 'avoid' }}>
-            <span className="text-blue-600 font-bold shrink-0">14.</span>
-            <div className="min-w-0">
-              <p className="font-bold text-gray-900">答案：<MathTex tex="-\dfrac{1}{6}\overrightarrow{AB}-\dfrac{1}{2}\overrightarrow{AC}" /></p>
-              <p className="mt-1"><MathTex tex="\overrightarrow{AD}=\dfrac{1}{2}\overrightarrow{AB}+\dfrac{1}{2}\overrightarrow{AC}" /></p>
-              <p className="mt-1"><MathTex tex="\overrightarrow{AE}=\dfrac{1}{3}\overrightarrow{AB}" /></p>
-              <p className="mt-1"><MathTex tex="\overrightarrow{DE}=\overrightarrow{AE}-\overrightarrow{AD}=-\dfrac{1}{6}\overrightarrow{AB}-\dfrac{1}{2}\overrightarrow{AC}" /></p>
-            </div>
-          </div>
-
-        </div>
-      </div>
+      <AnswerSection title="一、选择题" questions={stage4ChoiceQuestions} />
+      <AnswerSection title="二、填空题" questions={stage4BlankQuestions} startNum={9} />
 
       <PageBreak label="解答题答案" />
 

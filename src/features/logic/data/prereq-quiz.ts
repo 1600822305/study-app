@@ -11,8 +11,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '互不包含' },
     ],
     correctAnswer: 'A \\subset B',
-    explanation: '(1,4) 完全在 (0,5) 里面，所以 A⊂B。',
-    explanationLatex: '(1,4) \\subset (0,5)',
   },
   {
     id: 'lpq2',
@@ -25,8 +23,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(-4, -1)', isLatex: false },
     ],
     correctAnswer: '[1, 4]',
-    explanation: '(x-1)(x-4)≤0，小于取中间，含等号用中括号。',
-    explanationLatex: '(x-1)(x-4) \\leq 0 \\Rightarrow 1 \\leq x \\leq 4 \\Rightarrow [1,4]',
   },
   {
     id: 'lpq3',
@@ -39,8 +35,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(-3, 3)', isLatex: false },
     ],
     correctAnswer: '(-5, 1)',
-    explanation: '|x+2|<3 → -2-3 < x < -2+3 → -5 < x < 1，不含端点。',
-    explanationLatex: '-2-3 < x < -2+3 \\Rightarrow -5 < x < 1',
   },
   {
     id: 'lpq4',
@@ -52,8 +46,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '都推不出' },
     ],
     correctAnswer: 'p→q 但 q↛p',
-    explanation: 'x=1 → x²=1 ✓，但 x²=1 → x=±1，不一定是1。',
-    explanationLatex: 'x=1 \\Rightarrow x^2=1 \\;\\checkmark \\quad x^2=1 \\Rightarrow x=\\pm 1 \\;\\text{(反例: }x=-1\\text{)}',
   },
   {
     id: 'lpq5',
@@ -65,8 +57,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '都推不出' },
     ],
     correctAnswer: 'p→q 但 q↛p',
-    explanation: 'x>5 当然 x>2 ✓，但 x>2 不一定 x>5（如 x=3）。',
-    explanationLatex: '(5,+\\infty) \\subset (2,+\\infty) \\Rightarrow p \\Rightarrow q \\;\\checkmark',
   },
   {
     id: 'lpq6',
@@ -78,8 +68,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'A = B' },
     ],
     correctAnswer: '不是',
-    explanation: 'A 的右端 6 不在 B=(1,5) 里，所以 A 不被 B 包含。',
-    explanationLatex: '6 \\notin (1,5) \\Rightarrow [2,6] \\not\\subset (1,5)',
   },
   {
     id: 'lpq7',
@@ -92,8 +80,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\{x \\mid x \\leq -3 \\text{ 或 } x \\geq 1\\}', isLatex: true },
     ],
     correctAnswer: '\\{x \\mid x < -3 \\text{ 或 } x > 1\\}',
-    explanation: '(x+3)(x-1)>0，大于取两边，不含等号。',
-    explanationLatex: '(x+3)(x-1)>0 \\Rightarrow x<-3 \\text{ 或 } x>1',
   },
   {
     id: 'lpq8',
@@ -106,8 +92,6 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\{x \\mid x < 1 \\text{ 或 } x > 5\\}', isLatex: true },
     ],
     correctAnswer: '\\{x \\mid x \\leq 1 \\text{ 或 } x \\geq 5\\}',
-    explanation: '|x-3|≥2 → x-3≤-2 或 x-3≥2 → x≤1 或 x≥5，含等号。',
-    explanationLatex: 'x-3 \\leq -2 \\text{ 或 } x-3 \\geq 2 \\Rightarrow x \\leq 1 \\text{ 或 } x \\geq 5',
   },
   {
     id: 'lpq9',
@@ -120,7 +104,5 @@ export const logicPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(-\\infty, 1) \\cup (9, +\\infty)', isLatex: true },
     ],
     correctAnswer: '(5, +\\infty)',
-    explanation: '两边平方：(x-9)²<(x-1)² → 展开消x² → -16x<-80 → 两边×(-1)变号 → x>5。',
-    explanationLatex: '(x\\!-\\!9)^2 < (x\\!-\\!1)^2 \\Rightarrow -16x < -80 \\Rightarrow x > 5',
   },
 ];

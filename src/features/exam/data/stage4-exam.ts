@@ -20,9 +20,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\text{共线向量一定在同一直线上}', isLatex: true },
       { label: 'D', value: '\\text{不共线的两个非零向量可以作为一组基底}', isLatex: true },
     ],
-    correctAnswer: 'D',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '\\text{不共线的两个非零向量可以作为一组基底}',
   },
   // 2. 向量线性运算（坐标）
   {
@@ -37,9 +35,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '(7,2)', isLatex: true },
       { label: 'D', value: '(1,2)', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '(7,-6)',
   },
   // 3. 平行判定求参数
   {
@@ -54,9 +50,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '-\\dfrac{3}{2}', isLatex: true },
       { label: 'D', value: '\\dfrac{3}{2}', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '-\\dfrac{4}{3}',
   },
   // 4. 垂直判定求参数（高频考点）
   {
@@ -71,9 +65,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '7' },
       { label: 'D', value: '6' },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '-7',
   },
   // 5. 数量积与夹角
   {
@@ -88,9 +80,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '60\\degree', isLatex: true },
       { label: 'D', value: '90\\degree', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '30\\degree',
   },
   // 6. 模的展开计算
   {
@@ -105,9 +95,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '3', isLatex: true },
       { label: 'D', value: '2\\sqrt{3}', isLatex: true },
     ],
-    correctAnswer: 'D',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '2\\sqrt{3}',
   },
   // 7. 垂直条件+展开（综合）
   {
@@ -122,9 +110,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\sqrt{3}', isLatex: true },
       { label: 'D', value: '2', isLatex: true },
     ],
-    correctAnswer: 'A',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '1',
   },
   // 8.（2023高考改编）含参垂直
   {
@@ -139,9 +125,7 @@ export const stage4ChoiceQuestions: QuizQuestionData[] = [
       { label: 'C', value: '\\lambda\\mu = 1', isLatex: true },
       { label: 'D', value: '\\lambda\\mu = -1', isLatex: true },
     ],
-    correctAnswer: 'D',
-    explanation: '',
-    explanationLatex: '',
+    correctAnswer: '\\lambda\\mu = -1',
   },
 ];
 
@@ -156,8 +140,6 @@ export const stage4BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '0或-2',
     acceptableAnswers: ['0 或 -2', '-2或0', '-2 或 0', '0,-2', '-2,0'],
-    explanation: '',
-    explanationLatex: '',
   },
   // 10. 平行四边形求顶点
   {
@@ -168,8 +150,6 @@ export const stage4BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '(3,6)',
     acceptableAnswers: ['(3, 6)', '3,6', 'D(3,6)', 'D(3, 6)'],
-    explanation: '',
-    explanationLatex: '',
   },
   // 11. 数量积求夹角余弦
   {
@@ -180,8 +160,6 @@ export const stage4BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '1/2',
     acceptableAnswers: ['0.5', '½', '\\frac{1}{2}'],
-    explanation: '',
-    explanationLatex: '',
   },
   // 12. 向量投影
   {
@@ -192,8 +170,6 @@ export const stage4BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '3',
     acceptableAnswers: ['3.0'],
-    explanation: '',
-    explanationLatex: '',
   },
   // 13. 中点向量
   {
@@ -204,8 +180,6 @@ export const stage4BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '(3,5)',
     acceptableAnswers: ['(3, 5)', '3,5'],
-    explanation: '',
-    explanationLatex: '',
   },
   // 14. 基底表示（综合）
   {
@@ -216,8 +190,6 @@ export const stage4BlankQuestions: QuizQuestionData[] = [
     type: 'blank',
     correctAnswer: '-1/6 AB - 1/2 AC',
     acceptableAnswers: ['-⅙AB-½AC', '-1/6AB-1/2AC'],
-    explanation: '',
-    explanationLatex: '',
   },
 ];
 
@@ -255,7 +227,6 @@ export const stage4EssayQuestions: EssayQuestion[] = [
   // 17（13分）：三角形坐标+数量积+中线
   {
     id: 's4e-essay-3',
-    pageBreak: true,
     questionDiagram: 'essay-triangle-abc',
     questionLatex:
       '\\text{如图，在 } \\triangle ABC \\text{ 中，} A(2,1),\\; B(6,3),\\; C(4,7)\\text{。}\\\\[6pt]' +
@@ -276,6 +247,6 @@ export const stage4EssayQuestions: EssayQuestion[] = [
       '\\text{（2）用 } \\vec{a},\\; \\vec{b} \\text{ 表示 } \\overrightarrow{MN}\\text{；}\\\\[4pt]' +
       '\\text{（3）证明 } MN \\text{ 与 } OB \\text{ 不平行。}',
     score: 13,
-    lines: 16,
+    lines: 15,
   },
 ];

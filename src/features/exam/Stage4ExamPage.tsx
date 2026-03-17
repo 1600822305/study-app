@@ -6,7 +6,7 @@ import {
   stage4BlankQuestions,
   stage4EssayQuestions,
 } from './data/stage4-exam';
-import { Stage4ExamAnswers } from './stage4-exam-answers';
+import { Stage4ExamAnswers, stage4Explanations } from './stage4-exam-answers';
 
 export function Stage4ExamPage() {
   const { isPrinting, printOptions } = usePrintMode();
@@ -67,8 +67,8 @@ export function Stage4ExamPage() {
         module="stage4-exam"
         questions={stage4ExamQuestions}
         title="第四阶段考试"
-        description="题目顺序随机打乱，完成后查看成绩和错题回顾。"
-        shuffle={true}
+        description="按顺序答题，完成后查看成绩和错题回顾。"
+        explanations={stage4Explanations}
       />
     </div>
   );

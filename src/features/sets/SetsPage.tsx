@@ -5,6 +5,7 @@ import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { setsQuizQuestions } from './data/quiz';
 import { setsProgressItems } from './data/progress';
+import { SetsAnswers, setsExplanations } from './sets-answers';
 
 export function SetsPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sets', setsProgressItems);
@@ -140,7 +141,7 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                <PracticeCard questions={setsPractice0} />
+                <PracticeCard questions={setsPractice0} explanations={setsExplanations} />
               </div>
             </Collapsible>
           </section>
@@ -206,7 +207,7 @@ export function SetsPage() {
                 </div>
 
                 <PageBreak />
-                <PracticeCard questions={setsPractice1} />
+                <PracticeCard questions={setsPractice1} explanations={setsExplanations} />
               </div>
             </Collapsible>
           </section>
@@ -561,7 +562,7 @@ export function SetsPage() {
                 </Collapsible>
 
                 <PageBreak />
-                <PracticeCard questions={setsPractice2} />
+                <PracticeCard questions={setsPractice2} explanations={setsExplanations} />
               </div>
             </Collapsible>
           </section>
@@ -621,7 +622,7 @@ export function SetsPage() {
                   <p><strong>0 是自然数！</strong> <Math tex="0 \in \mathbb{N}" /> ✓，<Math tex="0 \notin \mathbb{N}^*" /> ✓</p>
                 </CalloutCard>
 
-                <PracticeCard questions={setsPractice3} />
+                <PracticeCard questions={setsPractice3} explanations={setsExplanations} />
               </div>
             </Collapsible>
           </section>
@@ -807,7 +808,7 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                <PracticeCard questions={setsPractice4} title="✏️ 即时练习（学完上面再做）" />
+                <PracticeCard questions={setsPractice4} title="✏️ 即时练习（学完上面再做）" explanations={setsExplanations} />
               </div>
             </Collapsible>
           </section>
@@ -1472,7 +1473,7 @@ export function SetsPage() {
                   </div>
                 </Collapsible>
 
-                <PracticeCard questions={setsPractice5} />
+                <PracticeCard questions={setsPractice5} explanations={setsExplanations} />
 
                 <CalloutCard variant="warning" title="集合运算三大易错点">
                   <p><strong>① 补集必须有全集：</strong>没说 U 是什么就没法求补集</p>
@@ -1758,58 +1759,10 @@ export function SetsPage() {
               </span>
               高考真题实战
             </h2>
-            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="22道选择题，覆盖高考集合全部题型" />
+            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="22道选择题，覆盖高考集合全部题型" explanations={setsExplanations} />
           </section>
 
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.2 集合 — 答案与解析</h2>
-
-            {[
-              { label: '一、集合的概念 — 即时练习', questions: setsPractice0 },
-              { label: '二、元素与集合 — 即时练习', questions: setsPractice1 },
-              { label: '三、集合的表示 — 即时练习', questions: setsPractice2 },
-              { label: '四、区间 — 即时练习', questions: setsPractice3 },
-              { label: '五、集合间的关系 — 即时练习', questions: setsPractice4 },
-              { label: '六、集合的运算 — 即时练习', questions: setsPractice5 },
-              { label: '高考真题实战', questions: setsQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <SetsAnswers />}
       </LessonLayout>
     </div>
   );

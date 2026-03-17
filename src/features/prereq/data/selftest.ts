@@ -12,8 +12,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '-6', isLatex: false },
     ],
     correctAnswer: '9',
-    explanation: '负数的平方：(-3)×(-3) = 9，负负得正。',
-    explanationLatex: '(-3)^2 = (-3) \\times (-3) = 9',
   },
   {
     id: 'prereq-2',
@@ -26,8 +24,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '\\sqrt{7}', isLatex: true },
     ],
     correctAnswer: '5',
-    explanation: '先算里面：9+16=25，再开方：√25=5。',
-    explanationLatex: '\\sqrt{9+16} = \\sqrt{25} = 5',
   },
   {
     id: 'prereq-3',
@@ -40,8 +36,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '20', isLatex: false },
     ],
     correctAnswer: '15',
-    explanation: '先算括号里：2+3=5，4-1=3，再相乘：5×3=15。',
-    explanationLatex: '(2+3)(4-1) = 5 \\times 3 = 15',
   },
   {
     id: 'prereq-4',
@@ -54,8 +48,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: 'a^2 - 2ab + b^2', isLatex: true },
     ],
     correctAnswer: 'a^2 - b^2',
-    explanation: '平方差公式：(a+b)(a-b) = a² - b²。复数除法的核心公式！',
-    explanationLatex: '(a+b)(a-b) = a^2 - b^2',
   },
   {
     id: 'prereq-5',
@@ -68,8 +60,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '2 + 2x + x^2', isLatex: true },
     ],
     correctAnswer: '1 + 2x + x^2',
-    explanation: '完全平方公式：(a+b)² = a² + 2ab + b²。这里 a=1, b=x。',
-    explanationLatex: '(1+x)^2 = 1^2 + 2(1)(x) + x^2 = 1 + 2x + x^2',
   },
   {
     id: 'prereq-6',
@@ -82,8 +72,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '15', isLatex: false },
     ],
     correctAnswer: '8',
-    explanation: '减去负数等于加上正数：5-(-3) = 5+3 = 8。',
-    explanationLatex: '5 - (-3) = 5 + 3 = 8',
   },
   {
     id: 'prereq-7',
@@ -96,8 +84,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '-7', isLatex: false },
     ],
     correctAnswer: '10',
-    explanation: '负×负=正（同号得正）：(-2)×(-5) = 10。',
-    explanationLatex: '(-2) \\times (-5) = 10',
   },
   {
     id: 'prereq-8',
@@ -110,8 +96,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '\\frac{1}{2}', isLatex: true },
     ],
     correctAnswer: '\\frac{11}{12}',
-    explanation: '通分：4和6的公倍数是12。3/4 = 9/12，1/6 = 2/12，加起来 = 11/12。',
-    explanationLatex: '\\frac{3}{4} + \\frac{1}{6} = \\frac{9}{12} + \\frac{2}{12} = \\frac{11}{12}',
   },
   {
     id: 'prereq-9',
@@ -123,8 +107,6 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '0', isLatex: false },
     ],
     correctAnswer: '3',
-    explanation: '67 ÷ 4 = 16 余 3。所以 i⁶⁷ = i³ = -i。',
-    explanationLatex: '67 \\div 4 = 16 \\cdots\\cdots 3',
   },
   {
     id: 'prereq-10',
@@ -137,7 +119,5 @@ export const prereqSelfTest: QuizQuestionData[] = [
       { label: 'D', value: '2', isLatex: false },
     ],
     correctAnswer: '1',
-    explanation: '同号得正：(-1)×(-1) = 1。这就是 i⁴ = (i²)² = (-1)² = 1 的原理。',
-    explanationLatex: '(-1) \\times (-1) = 1',
   },
 ];
