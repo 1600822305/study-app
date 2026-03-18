@@ -14,8 +14,6 @@ export const elemFuncPractice1: QuizQuestionData[] = [
       { label: 'D', value: '10' },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\text{积的对数 = 对数的和：}\\\\[4pt]\\lg 2 + \\lg 5 = \\lg(2 \\times 5) = \\lg 10 = 1',
   },
   {
     id: 'efp1-2',
@@ -29,8 +27,6 @@ export const elemFuncPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\log_2 8', isLatex: true },
     ],
     correctAnswer: '3',
-    explanation: '',
-    explanationLatex: '\\text{商的对数 = 对数的差：}\\\\[4pt]\\log_2 24 - \\log_2 3 = \\log_2 \\dfrac{24}{3} = \\log_2 8 = 3',
   },
   {
     id: 'efp1-3',
@@ -44,8 +40,6 @@ export const elemFuncPractice1: QuizQuestionData[] = [
       { label: 'D', value: '2^5', isLatex: true },
     ],
     correctAnswer: '5\\lg 2',
-    explanation: '',
-    explanationLatex: '\\text{幂的对数 = 指数乘对数：}\\\\[4pt]\\lg 2^5 = 5 \\lg 2\\\\[4pt]\\text{（指数 5 搬到前面当系数）}',
   },
   {
     id: 'efp1-4',
@@ -59,8 +53,6 @@ export const elemFuncPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\dfrac{1}{2}', isLatex: true },
     ],
     correctAnswer: '\\dfrac{3}{2}',
-    explanation: '',
-    explanationLatex: '\\text{换底公式：}\\log_a b = \\dfrac{\\lg b}{\\lg a}\\\\[4pt]\\log_4 8 = \\dfrac{\\lg 8}{\\lg 4} = \\dfrac{\\lg 2^3}{\\lg 2^2} = \\dfrac{3\\lg 2}{2\\lg 2} = \\dfrac{3}{2}',
   },
 ];
 
@@ -78,8 +70,6 @@ export const elemFuncPractice2: QuizQuestionData[] = [
       { label: 'D', value: '(0, 5)', isLatex: true },
     ],
     correctAnswer: '(0, 1)',
-    explanation: '',
-    explanationLatex: '\\text{所有指数函数都过 }(0, 1)\\\\[4pt]\\text{因为 }a^0 = 1\\text{，代入：}5^0 = 1',
   },
   {
     id: 'efp2-2',
@@ -93,8 +83,6 @@ export const elemFuncPractice2: QuizQuestionData[] = [
       { label: 'D', value: '不确定' },
     ],
     correctAnswer: '减函数',
-    explanation: '',
-    explanationLatex: '\\text{底数 }a = 0.3\\text{，满足 }0 < a < 1\\\\[4pt]\\text{底数小于 1} \\Rightarrow \\text{减函数}',
   },
   {
     id: 'efp2-3',
@@ -108,8 +96,6 @@ export const elemFuncPractice2: QuizQuestionData[] = [
       { label: 'D', value: '无法比较' },
     ],
     correctAnswer: '3^{0.2} < 3^{0.7}',
-    explanation: '',
-    explanationLatex: '\\text{底数 }3 > 1 \\Rightarrow \\text{增函数}\\\\[4pt]\\text{指数大的值大：}0.2 < 0.7 \\Rightarrow 3^{0.2} < 3^{0.7}',
   },
   {
     id: 'efp2-4',
@@ -123,8 +109,6 @@ export const elemFuncPractice2: QuizQuestionData[] = [
       { label: 'D', value: '(1, +\\infty)', isLatex: true },
     ],
     correctAnswer: '(0, +\\infty)',
-    explanation: '',
-    explanationLatex: '\\text{指数函数值域都是 }(0, +\\infty)\\\\[4pt]y = a^x > 0\\text{ 永远成立，y 不会等于 0}',
   },
   {
     id: 'efp2-5',
@@ -138,8 +122,6 @@ export const elemFuncPractice2: QuizQuestionData[] = [
       { label: 'D', value: '都大于 1' },
     ],
     correctAnswer: '2^{0.5} > 0.5^2',
-    explanation: '',
-    explanationLatex: '2^{0.5}\\text{：底 2>1，指数>0} \\Rightarrow \\text{结果 > 1}\\\\[4pt]0.5^2\\text{：底 0.5<1，指数>0} \\Rightarrow \\text{结果 < 1}\\\\[4pt]\\text{所以 }2^{0.5} > 1 > 0.5^2',
   },
   {
     id: 'efp2-6',
@@ -153,8 +135,6 @@ export const elemFuncPractice2: QuizQuestionData[] = [
       { label: 'D', value: '1' },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '\\text{先算指数部分：}\\lg 2 + \\lg 5 = \\lg(2 \\times 5) = \\lg 10 = 1\\\\[4pt]\\text{所以 }2^{\\lg 2 + \\lg 5} = 2^1 = 2',
   },
   {
     id: 'efp2-7',
@@ -168,8 +148,6 @@ export const elemFuncPractice2: QuizQuestionData[] = [
       { label: 'D', value: '9' },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '3^x = 9 = 3^2 \\Rightarrow x = 2\\\\[4pt]\\text{指数和对数互为逆运算：}3^2 = 9 \\Leftrightarrow \\log_3 9 = 2',
   },
 ];
 
@@ -187,8 +165,6 @@ export const elemFuncPractice3: QuizQuestionData[] = [
       { label: 'D', value: '(3, 0)', isLatex: true },
     ],
     correctAnswer: '(1, 0)',
-    explanation: '',
-    explanationLatex: '\\text{所有对数函数都过 }(1, 0)\\\\[4pt]\\text{因为 }\\log_a 1 = 0\\text{，代入：}\\log_3 1 = 0',
   },
   {
     id: 'efp3-2',
@@ -202,8 +178,6 @@ export const elemFuncPractice3: QuizQuestionData[] = [
       { label: 'D', value: '不确定' },
     ],
     correctAnswer: '减函数',
-    explanation: '',
-    explanationLatex: '\\text{底数 }a = 0.5\\text{，满足 }0 < a < 1\\\\[4pt]\\text{底数小于 1} \\Rightarrow \\text{减函数}',
   },
   {
     id: 'efp3-3',
@@ -217,8 +191,6 @@ export const elemFuncPractice3: QuizQuestionData[] = [
       { label: 'D', value: '无法比较' },
     ],
     correctAnswer: '\\log_2 3 > \\log_3 2',
-    explanation: '',
-    explanationLatex: '\\text{借助特殊值 1：}\\\\[4pt]\\log_2 3 > \\log_2 2 = 1\\\\[4pt]\\log_3 2 < \\log_3 3 = 1\\\\[4pt]\\text{所以 }\\log_2 3 > 1 > \\log_3 2',
   },
   {
     id: 'efp3-4',
@@ -232,8 +204,6 @@ export const elemFuncPractice3: QuizQuestionData[] = [
       { label: 'D', value: '(0, 3)', isLatex: true },
     ],
     correctAnswer: '(-\\infty, 3)',
-    explanation: '',
-    explanationLatex: '\\text{lg = }\\log_{10}\\text{，真数必须 > 0：}\\\\[4pt]3 - x > 0 \\Rightarrow x < 3\\\\[4pt]\\text{定义域为 }(-\\infty, 3)',
   },
   {
     id: 'efp3-5',
@@ -247,8 +217,6 @@ export const elemFuncPractice3: QuizQuestionData[] = [
       { label: 'D', value: '(-\\infty, 0)', isLatex: true },
     ],
     correctAnswer: '\\mathbb{R}',
-    explanation: '',
-    explanationLatex: '\\text{所有对数函数值域都是 }\\mathbb{R}\\\\[4pt]\\text{ln = }\\log_e\\text{，底数 }e \\approx 2.718 > 1\\\\[4pt]x > 1\\text{ 时 }y > 0\\text{，}x < 1\\text{ 时 }y < 0\\text{，}x = 1\\text{ 时 }y = 0',
   },
   {
     id: 'efp3-6',
@@ -262,8 +230,6 @@ export const elemFuncPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\lg 10', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\text{对数加法法则：}\\lg 2 + \\lg 5 = \\lg(2 \\times 5) = \\lg 10 = 1\\\\[4pt]\\text{(D 也对，但 }\\lg 10 = 1\\text{，所以 B 更简洁)}',
   },
   {
     id: 'efp3-7',
@@ -277,8 +243,6 @@ export const elemFuncPractice3: QuizQuestionData[] = [
       { label: 'D', value: '25' },
     ],
     correctAnswer: '5',
-    explanation: '',
-    explanationLatex: '\\text{指数和对数互为逆运算：}\\\\[4pt]a^{\\log_a x} = x\\\\[4pt]\\text{所以 }2^{\\log_2 5} = 5',
   },
 ];
 
@@ -296,8 +260,6 @@ export const elemFuncPractice4: QuizQuestionData[] = [
       { label: 'D', value: 'y = x^2 + 1', isLatex: true },
     ],
     correctAnswer: 'y = x^2',
-    explanation: '',
-    explanationLatex: '\\text{幂函数形式：}y = x^{\\alpha}\\text{（系数必须是 1）}\\\\[4pt]\\text{A: 指数函数（常数在下）}\\\\[4pt]\\text{B: 幂函数}\\checkmark\\\\[4pt]\\text{C: 系数是 2，不是幂函数}\\\\[4pt]\\text{D: 多了 +1，不是幂函数}',
   },
   {
     id: 'efp4-2',
@@ -311,8 +273,6 @@ export const elemFuncPractice4: QuizQuestionData[] = [
       { label: 'D', value: '(0, 0)', isLatex: true },
     ],
     correctAnswer: '(1, 1)',
-    explanation: '',
-    explanationLatex: '1^{\\alpha} = 1\\text{，所以过 }(1,1)\\\\[4pt]\\text{对比：指数过 }(0,1)\\text{，对数过 }(1,0)\\text{，幂函数过 }(1,1)',
   },
   {
     id: 'efp4-3',
@@ -326,8 +286,6 @@ export const elemFuncPractice4: QuizQuestionData[] = [
       { label: 'D', value: '常函数' },
     ],
     correctAnswer: '减函数',
-    explanation: '',
-    explanationLatex: '\\alpha = -1 < 0 \\Rightarrow \\text{减函数}\\\\[4pt]\\text{验证：}x=1 \\to y=1\\text{，}x=2 \\to y=0.5\\text{，越来越小}',
   },
   {
     id: 'efp4-4',
@@ -341,8 +299,6 @@ export const elemFuncPractice4: QuizQuestionData[] = [
       { label: 'D', value: 'x \\neq 0', isLatex: true },
     ],
     correctAnswer: '[0, +\\infty)',
-    explanation: '',
-    explanationLatex: '\\sqrt{x}\\text{ 要求根号下 }\\geq 0\\\\[4pt]\\text{所以 }x \\geq 0\\text{，定义域为 }[0, +\\infty)\\\\[4pt]\\text{注意：包含 0，因为 }\\sqrt{0} = 0',
   },
   {
     id: 'efp4-5',
@@ -356,8 +312,6 @@ export const elemFuncPractice4: QuizQuestionData[] = [
       { label: 'D', value: '\\lg 100', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '\\text{对数加法法则：}\\lg 2 + \\lg 50 = \\lg(2 \\times 50) = \\lg 100\\\\[4pt]\\lg 100 = \\lg 10^2 = 2\\\\[4pt]\\text{(D 也对，但 }\\lg 100 = 2\\text{，B 更简洁)}',
   },
   {
     id: 'efp4-6',
@@ -371,8 +325,6 @@ export const elemFuncPractice4: QuizQuestionData[] = [
       { label: 'D', value: 'y = x', isLatex: true },
     ],
     correctAnswer: 'y = \\log_2 x',
-    explanation: '',
-    explanationLatex: '\\text{A: }y=x^2\\text{ 定义域 }\\mathbb{R}\\\\[4pt]\\text{B: }y=2^x\\text{ 定义域 }\\mathbb{R}\\\\[4pt]\\text{C: }y=\\log_2 x\\text{ 定义域 }(0,+\\infty)\\checkmark\\\\[4pt]\\text{D: }y=x\\text{ 定义域 }\\mathbb{R}',
   },
   {
     id: 'efp4-7',
@@ -386,7 +338,5 @@ export const elemFuncPractice4: QuizQuestionData[] = [
       { label: 'D', value: 'y = x^{-1}', isLatex: true },
     ],
     correctAnswer: 'y = x^{-1}',
-    explanation: '',
-    explanationLatex: '\\text{A: }\\alpha=2>0 \\Rightarrow \\text{增}\\\\[4pt]\\text{B: 底数 }2>1 \\Rightarrow \\text{增}\\\\[4pt]\\text{C: 底数 }2>1 \\Rightarrow \\text{增}\\\\[4pt]\\text{D: }\\alpha=-1<0 \\Rightarrow \\text{减}\\checkmark',
   },
 ];

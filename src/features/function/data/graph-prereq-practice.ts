@@ -14,8 +14,6 @@ export const graphPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{第四象限}', isLatex: true },
     ],
     correctAnswer: '\\text{第四象限}',
-    explanation: '',
-    explanationLatex: 'ab < 0 \\rightarrow a,b\\text{ 异号}\\\\[4pt]a + b > 0 \\rightarrow \\text{正的那个绝对值更大}\\\\[4pt]\\text{所以 }a > 0,\\; b < 0 \\rightarrow \\text{第四象限}',
   },
   {
     id: 'gpp1-2',
@@ -29,8 +27,6 @@ export const graphPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{第一或第四象限}', isLatex: true },
     ],
     correctAnswer: 'y\\text{ 轴或第一、二象限}',
-    explanation: '',
-    explanationLatex: 'a^2 \\geq 0 \\Rightarrow a^2 + 1 \\geq 1 > 0\\\\[4pt]\\text{所以 }y > 0\\text{ 恒成立}\\\\[4pt]a > 0 \\rightarrow \\text{第一象限；}a < 0 \\rightarrow \\text{第二象限；}a = 0 \\rightarrow y\\text{ 轴}',
   },
   {
     id: 'gpp1-3',
@@ -44,8 +40,6 @@ export const graphPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '(-3, -1)', isLatex: true },
     ],
     correctAnswer: '(3, -1)',
-    explanation: '',
-    explanationLatex: 'A(3,1) \\xrightarrow{\\text{关于原点}} B(-3,-1) \\xrightarrow{\\text{关于 y 轴}} C(3,-1)\\\\[4pt]\\text{原点对称：x,y 都变号；y 轴对称：x 变号}',
   },
   {
     id: 'gpp1-4',
@@ -59,8 +53,6 @@ export const graphPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '2\\text{ 或 }8', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '\\text{第二象限：}a < 0,\\; b > 0\\\\[4pt]|a| = 3 \\Rightarrow a = -3\\\\[4pt]|b| = 5 \\Rightarrow b = 5\\\\[4pt]a + b = -3 + 5 = 2',
   },
   {
     id: 'gpp1-5',
@@ -74,8 +66,6 @@ export const graphPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '(6, -3)', isLatex: true },
     ],
     correctAnswer: '(-2, 3)',
-    explanation: '',
-    explanationLatex: 'A(2,-3) \\xrightarrow{x\\text{ 轴对称}} B(2, 3)\\\\[4pt]B(2,3) \\xrightarrow{\\text{左移 4}} C(2-4,\\; 3) = (-2, 3)',
   },
 ];
 
@@ -93,8 +83,6 @@ export const graphPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '(0, 0)\\text{ 和 }(1, 0)', isLatex: true },
     ],
     correctAnswer: '(0, 0)\\text{ 和 }(2, 0)',
-    explanation: '',
-    explanationLatex: '\\text{令 }y = 0\\text{：}x^2 - 2x = 0\\\\[4pt]x(x - 2) = 0 \\Rightarrow x = 0\\text{ 或 }x = 2\\\\[4pt]\\text{交点为 }(0,0)\\text{ 和 }(2,0)',
   },
   {
     id: 'gpp2-2',
@@ -108,8 +96,6 @@ export const graphPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{开口向上，交于 }(4, 0)', isLatex: true },
     ],
     correctAnswer: '\\text{开口向下，交于 }(0, 4)',
-    explanation: '',
-    explanationLatex: 'a = -1 < 0 \\rightarrow \\text{开口向下}\\\\[4pt]\\text{令 }x = 0\\text{：}y = -0 + 4 = 4\\\\[4pt]\\text{与 y 轴交于 }(0, 4)',
   },
   {
     id: 'gpp2-3',
@@ -123,8 +109,6 @@ export const graphPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '-1', isLatex: true },
     ],
     correctAnswer: '4',
-    explanation: '',
-    explanationLatex: 'f(a) = 2a - 3 = 5\\\\[4pt]2a = 8 \\Rightarrow a = 4\\\\[4pt]\\text{即点 }(4, 5)\\text{ 在函数图像上}',
   },
   {
     id: 'gpp2-4',
@@ -138,8 +122,6 @@ export const graphPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{最小值 }1\\text{，最大值 }4', isLatex: true },
     ],
     correctAnswer: '\\text{最小值 }0\\text{，最大值 }4',
-    explanation: '',
-    explanationLatex: 'x = 0\\text{ 时 }y = 0\\text{（最低点）}\\\\[4pt]x = \\pm 2\\text{ 时 }y = 4\\text{（两端最高）}\\\\[4pt]\\text{最小值 }0\\text{，最大值 }4',
   },
   {
     id: 'gpp2-5',
@@ -153,8 +135,6 @@ export const graphPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{向右平移 1 个单位}', isLatex: true },
     ],
     correctAnswer: '\\text{向下平移 1 个单位}',
-    explanation: '',
-    explanationLatex: 'y = x^2 - 1 = x^2 + (-1)\\\\[4pt]\\text{相当于 }y = x^2\\text{ 整体向下移 1}\\\\[4pt]\\text{口诀：上加下减，变的是式子后面的数}',
   },
   {
     id: 'gpp2-6',
@@ -168,8 +148,6 @@ export const graphPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: 'x \\leq 1', isLatex: true },
     ],
     correctAnswer: 'x \\geq 1',
-    explanation: '',
-    explanationLatex: '\\text{根号下 }\\geq 0\\text{：}x - 1 \\geq 0\\\\[4pt]x \\geq 1\\\\[4pt]\\text{定义域决定了图像从哪里开始画}',
   },
   {
     id: 'gpp2-7',
@@ -183,8 +161,6 @@ export const graphPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '-1', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\text{令 }x = 0\\text{：}y = 2^0 = 1\\\\[4pt]\\text{所有指数函数 }y = a^x\\text{ 都过 }(0, 1)\\\\[4pt]\\text{因为 }a^0 = 1\\text{（零指数幂）}',
   },
 ];
 
@@ -202,8 +178,6 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: 'y = (x - 3)^2', isLatex: true },
     ],
     correctAnswer: 'y = x^2 + 3',
-    explanation: '',
-    explanationLatex: '\\text{上加下减：向上平移 }\\rightarrow\\text{ 式子后面加 3}\\\\[4pt]y = x^2 \\rightarrow y = x^2 + 3',
   },
   {
     id: 'gpp3-2',
@@ -217,8 +191,6 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: 'y = x^2 - 2', isLatex: true },
     ],
     correctAnswer: 'y = (x + 2)^2',
-    explanation: '',
-    explanationLatex: '\\text{左加右减：向左平移 }\\rightarrow x\\text{ 旁边加 2}\\\\[4pt]y = x^2 \\rightarrow y = (x+2)^2',
   },
   {
     id: 'gpp3-3',
@@ -232,8 +204,6 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: 'y = 2x - 4', isLatex: true },
     ],
     correctAnswer: 'y = 2(x - 1) - 3',
-    explanation: '',
-    explanationLatex: '\\text{先下移 3：}y = 2x - 3\\\\[4pt]\\text{再右移 1：}y = 2(x-1) - 3\\\\[4pt]\\text{注意：平移顺序不影响结果！先左右再上下也一样}',
   },
   {
     id: 'gpp3-4',
@@ -247,8 +217,6 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{右移 1，上移 2}', isLatex: true },
     ],
     correctAnswer: '\\text{左移 1，下移 2}',
-    explanation: '',
-    explanationLatex: '(x+1) \\rightarrow x\\text{ 加了 1 }\\rightarrow\\text{ 左移 1（左加右减）}\\\\[4pt]-2 \\rightarrow y\\text{ 减了 2 }\\rightarrow\\text{ 下移 2（上加下减）}\\\\[4pt]\\text{顶点 }(0,0) \\rightarrow (-1, -2)',
   },
   {
     id: 'gpp3-5',
@@ -262,8 +230,6 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: 'x > -1', isLatex: true },
     ],
     correctAnswer: 'x \\geq -1',
-    explanation: '',
-    explanationLatex: '\\text{左移 1：}y = \\sqrt{x} \\rightarrow y = \\sqrt{x+1}\\\\[4pt]\\text{根号下 }\\geq 0\\text{：}x + 1 \\geq 0\\\\[4pt]x \\geq -1',
   },
   {
     id: 'gpp3-6',
@@ -277,8 +243,6 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '4', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '\\text{左移 1：}y = 2^x \\rightarrow y = 2^{x+1}\\\\[4pt]\\text{令 }x = 0\\text{：}y = 2^{0+1} = 2^1 = 2\\\\[4pt]\\text{过定点 }(0, 2)',
   },
   {
     id: 'gpp3-7',
@@ -292,7 +256,5 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{顶点 }(-3, -4)\\text{，对称轴 }x = -3', isLatex: true },
     ],
     correctAnswer: '\\text{顶点 }(3, 4)\\text{，对称轴 }x = 3',
-    explanation: '',
-    explanationLatex: 'y = (x-3)^2 + 4\\text{ 即 }y = x^2\\text{ 右移 3、上移 4}\\\\[4pt]\\text{顶点 }(0,0) \\rightarrow (3, 4)\\\\[4pt]\\text{对称轴过顶点：}x = 3',
   },
 ];

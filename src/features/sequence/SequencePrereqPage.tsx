@@ -5,6 +5,7 @@ import { sequencePrereqPractice, sequencePrereqQuiz } from './data/prereq-questi
 import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
+import { SequencePrereqAnswers, sequencePrereqExplanations } from './sequence-prereq-answers';
 
 export function SequencePrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sequence-prereq', sequencePrereqProgressItems);
@@ -565,30 +566,17 @@ export function SequencePrereqPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* 练习 + 自测 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <PracticeCard title="练一练" questions={sequencePrereqPractice} />
+      <PracticeCard title="练一练" questions={sequencePrereqPractice} explanations={sequencePrereqExplanations} />
 
       <QuizPanel
         title="自测：数列前置知识过关了吗？"
         questions={sequencePrereqQuiz}
         module="sequence-prereq"
+        explanations={sequencePrereqExplanations}
       />
 
       {/* ═══ 打印模式：答案与解析 ═══ */}
-      {isPrinting && printOptions.showAnswers && (
-        <div className="mt-4">
-          <h2 className="text-xl font-bold text-gray-900 mb-3 border-b-2 border-gray-300 pb-2">📝 6.0 数列前置知识 — 答案与解析</h2>
-          <div className="columns-2 gap-4">
-            {[...sequencePrereqPractice, ...sequencePrereqQuiz].map((q, i) => (
-              <div key={q.id} style={{ breakInside: 'avoid' }} className="text-base text-gray-700 mb-2">
-                <p className="font-bold">{i + 1}. {q.question}</p>
-                <p className="ml-4">答案：<span className="font-bold text-blue-700">{q.correctAnswer}</span></p>
-                {q.explanationLatex && <div className="ml-4"><MathTex tex={q.explanationLatex} /></div>}
-                {q.explanation && !q.explanationLatex && <p className="ml-4 text-gray-600">{q.explanation}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {isPrinting && printOptions.showAnswers && <SequencePrereqAnswers />}
 
       </LessonLayout>
     </div>

@@ -5,6 +5,7 @@ import { elemPrereqPractice1, elemPrereqPractice2, elemPrereqPractice3 } from '.
 import { elemPrereqQuizQuestions } from './data/elem-prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
+import { ElementaryFuncPrereqAnswers, elementaryFuncPrereqExplanations } from './elementary-func-prereq-answers';
 
 export function ElementaryFuncPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('elem-func-prereq', elemPrereqProgressItems);
@@ -141,6 +142,7 @@ export function ElementaryFuncPrereqPage() {
             <PracticeCard
               title="✏️ 即时练习：指数运算（5题）"
               questions={elemPrereqPractice1}
+              explanations={elementaryFuncPrereqExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错点">
@@ -261,6 +263,7 @@ export function ElementaryFuncPrereqPage() {
             <PracticeCard
               title="✏️ 即时练习：根式与分数指数幂（5题）"
               questions={elemPrereqPractice2}
+              explanations={elementaryFuncPrereqExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 避坑指南">
@@ -405,6 +408,7 @@ export function ElementaryFuncPrereqPage() {
             <PracticeCard
               title="✏️ 即时练习：对数基础（5题）"
               questions={elemPrereqPractice3}
+              explanations={elementaryFuncPrereqExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错点">
@@ -440,6 +444,7 @@ export function ElementaryFuncPrereqPage() {
           <QuizPanel
             questions={elemPrereqQuizQuestions}
             module="elem-prereq-quiz"
+            explanations={elementaryFuncPrereqExplanations}
           />
         </Collapsible>
       </section>
@@ -468,77 +473,7 @@ export function ElementaryFuncPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.1.5 基本初等函数前置知识 — 答案与解析</h2>
-
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第一节：指数运算</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {elemPrereqPractice1.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第二节：根式与分数指数幂</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {elemPrereqPractice2.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第三节：对数基础</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {elemPrereqPractice3.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {elemPrereqQuizQuestions.map((q, i) => {
-                  const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                  return (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <ElementaryFuncPrereqAnswers />}
 
       </LessonLayout>
     </div>

@@ -6,6 +6,7 @@ import { elemFuncPractice1, elemFuncPractice2, elemFuncPractice3, elemFuncPracti
 import { elemFuncQuizQuestions } from './data/elem-func-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
+import { ElementaryFuncAnswers, elementaryFuncExplanations } from './elementary-func-answers';
 
 export function ElementaryFuncPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('elem-func', elemFuncProgressItems);
@@ -219,6 +220,7 @@ export function ElementaryFuncPage() {
               title="✏️ 即时练习：对数运算法则（4题）"
               questions={elemFuncPractice1}
               printOptionCols={2}
+              explanations={elementaryFuncExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -464,6 +466,7 @@ export function ElementaryFuncPage() {
               title="✏️ 即时练习：指数函数（7题，含指数对数混合）"
               questions={elemFuncPractice2}
               printOptionCols={2}
+              explanations={elementaryFuncExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -739,6 +742,7 @@ export function ElementaryFuncPage() {
               title="✏️ 即时练习：对数函数（7题，含指数对数混合）"
               questions={elemFuncPractice3}
               printOptionCols={2}
+              explanations={elementaryFuncExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -999,6 +1003,7 @@ export function ElementaryFuncPage() {
               title="✏️ 即时练习：幂函数（7题，含四种函数综合）"
               questions={elemFuncPractice4}
               printOptionCols={2}
+              explanations={elementaryFuncExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -1039,7 +1044,7 @@ export function ElementaryFuncPage() {
       <PageBreak />
       <section id="ef-quiz" className="mb-2 scroll-mt-4">
         <Collapsible title="五、高考真题精选（8题）— 改编自近年高考，检验学习成果" defaultOpen storageKey="elem-func:quiz">
-          <QuizPanel questions={elemFuncQuizQuestions} module="elem-func-quiz" />
+          <QuizPanel questions={elemFuncQuizQuestions} module="elem-func-quiz" explanations={elementaryFuncExplanations} />
         </Collapsible>
       </section>
 
@@ -1061,91 +1066,7 @@ export function ElementaryFuncPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.2 基本初等函数 — 答案与解析</h2>
-
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第一节：对数运算法则</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {elemFuncPractice1.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第二节：指数函数</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {elemFuncPractice2.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第三节：对数函数</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {elemFuncPractice3.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第四节：幂函数</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {elemFuncPractice4.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-gray-800 mb-2">高考真题答案</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {elemFuncQuizQuestions.map((q, i) => {
-                  const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                  return (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <ElementaryFuncAnswers />}
 
       </LessonLayout>
     </div>

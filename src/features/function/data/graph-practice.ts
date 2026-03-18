@@ -14,8 +14,6 @@ export const graphPractice1: QuizQuestionData[] = [
       { label: 'D', value: 'x = 1\\text{ 和 }x = 6', isLatex: true },
     ],
     correctAnswer: 'x = 2\\text{ 和 }x = 3',
-    explanation: '',
-    explanationLatex: 'x^2 - 5x + 6 = 0\\\\[4pt](x-2)(x-3) = 0\\\\[4pt]x = 2\\text{ 或 }x = 3\\\\[4pt]\\text{B 错：零点是数不是点！C 错：符号搞反了}',
   },
   {
     id: 'fgp1-2',
@@ -29,8 +27,6 @@ export const graphPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无法确定}', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '2^x - 2 = 0 \\Rightarrow 2^x = 2 \\Rightarrow x = 1\\\\[4pt]\\text{只有一个零点 }x = 1\\\\[4pt]\\text{指数函数是单调的，所以最多一个零点}',
   },
   {
     id: 'fgp1-3',
@@ -44,8 +40,6 @@ export const graphPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{方程的根比零点多}', isLatex: true },
     ],
     correctAnswer: '\\text{方程的根就是函数的零点}',
-    explanation: '',
-    explanationLatex: '\\text{三角等价关系：}\\\\[4pt]f(x)\\text{ 的零点} \\Leftrightarrow f(x) = 0\\text{ 的根} \\Leftrightarrow \\text{图像与 x 轴交点的横坐标}\\\\[4pt]\\text{B 选项说"交点"不够准确，应该是交点的横坐标}',
   },
   {
     id: 'fgp1-4',
@@ -59,8 +53,6 @@ export const graphPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无穷多个}', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: 'f(x) = (x+1)^2 = 0 \\Rightarrow x = -1\\\\[4pt]\\Delta = 4 - 4 = 0\\text{（判别式为 0）}\\\\[4pt]\\text{只有一个零点（重根）}x = -1',
   },
   {
     id: 'fgp1-5',
@@ -74,8 +66,6 @@ export const graphPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无法确定}', isLatex: true },
     ],
     correctAnswer: '0',
-    explanation: '',
-    explanationLatex: 'x^2 + 1 \\geq 1 > 0\\text{，对所有实数 }x\\text{ 恒成立}\\\\[4pt]\\text{函数值永远大于 0，不可能等于 0}\\\\[4pt]\\Delta = 0 - 4 = -4 < 0\\text{，无实数根}',
   },
 ];
 
@@ -93,8 +83,6 @@ export const graphPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无法判断}', isLatex: true },
     ],
     correctAnswer: '\\text{一定有零点}',
-    explanation: '',
-    explanationLatex: 'f(1) = -1 < 0,\\; f(2) = 5 > 0\\\\[4pt]f(1) \\cdot f(2) < 0\\text{（异号）}\\\\[4pt]\\text{多项式函数连续} \\rightarrow \\text{满足零点存在性定理}\\\\[4pt]\\text{所以在 }(1, 2)\\text{ 内一定有零点}',
   },
   {
     id: 'fgp2-2',
@@ -108,8 +96,6 @@ export const graphPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{能，所以有两个零点}', isLatex: true },
     ],
     correctAnswer: '\\text{不能，因为 }f(x)\\text{ 在 }[-1,1]\\text{ 上不连续}',
-    explanation: '',
-    explanationLatex: 'f(x) = \\dfrac{1}{x}\\text{ 在 }x = 0\\text{ 处无定义}\\\\[4pt]\\text{不满足"在 }[-1,1]\\text{ 上连续"的条件}\\\\[4pt]\\text{两个条件缺一不可：连续 + 异号}',
   },
   {
     id: 'fgp2-3',
@@ -123,8 +109,6 @@ export const graphPractice2: QuizQuestionData[] = [
       { label: 'D', value: '(4, 5)', isLatex: true },
     ],
     correctAnswer: '(2, 3)',
-    explanation: '',
-    explanationLatex: 'f(2) = \\ln 2 + 4 - 6 = \\ln 2 - 2 \\approx 0.69 - 2 = -1.31 < 0\\\\[4pt]f(3) = \\ln 3 + 6 - 6 = \\ln 3 \\approx 1.10 > 0\\\\[4pt]f(2) \\cdot f(3) < 0\\text{，零点在 }(2, 3)\\text{ 内}',
   },
   {
     id: 'fgp2-4',
@@ -138,8 +122,6 @@ export const graphPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{定理只对一次函数有效}', isLatex: true },
     ],
     correctAnswer: '\\text{不满足定理条件不代表没有零点}',
-    explanation: '',
-    explanationLatex: 'x = 0\\text{ 是 }f(x) = x^2\\text{ 的不变号零点}\\\\[4pt]\\text{零点两侧函数值同号（都是正数）}\\\\[4pt]\\text{定理是充分不必要条件：}\\\\[4pt]\\text{满足条件} \\rightarrow \\text{一定有零点}\\\\[4pt]\\text{不满足条件} \\nrightarrow \\text{没有零点}',
   },
   {
     id: 'fgp2-5',
@@ -153,8 +135,6 @@ export const graphPractice2: QuizQuestionData[] = [
       { label: 'D', value: '(0, 2)\\text{ 内有一个}', isLatex: true },
     ],
     correctAnswer: '(1, 2)',
-    explanation: '',
-    explanationLatex: 'f(0) = -1 < 0,\\; f(1) \\approx -0.28 < 0\\text{（同号，不能判断）}\\\\[4pt]f(1) \\approx -0.28 < 0,\\; f(2) \\approx 3.39 > 0\\text{（异号！）}\\\\[4pt]\\text{所以零点在 }(1, 2)\\text{ 内}',
   },
 ];
 
@@ -172,8 +152,6 @@ export const graphPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{已找到零点}', isLatex: true },
     ],
     correctAnswer: '(1, 1.5)\\text{ 内继续}',
-    explanation: '',
-    explanationLatex: 'f(1) = 1 - 2 = -1 < 0,\\; f(1.5) = 1.375 > 0\\\\[4pt]\\text{零点在 }f\\text{ 值异号的一侧}\\\\[4pt]f(1) < 0,\\; f(1.5) > 0 \\rightarrow \\text{零点在 }(1, 1.5)\\text{ 内}',
   },
   {
     id: 'fgp3-2',
@@ -187,8 +165,6 @@ export const graphPractice3: QuizQuestionData[] = [
       { label: 'D', value: '10\\text{ 次}', isLatex: true },
     ],
     correctAnswer: '4\\text{ 次}',
-    explanation: '',
-    explanationLatex: '\\text{初始区间长度 }= 2 - 1 = 1\\\\[4pt]\\text{每次二分，区间长度减半：}\\\\[4pt]1\\text{ 次后 }0.5,\\; 2\\text{ 次后 }0.25,\\; 3\\text{ 次后 }0.125,\\; 4\\text{ 次后 }0.0625\\\\[4pt]0.0625 < 0.1 \\rightarrow 4\\text{ 次足够}',
   },
   {
     id: 'fgp3-3',
@@ -202,8 +178,6 @@ export const graphPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{函数端点值异号即可}', isLatex: true },
     ],
     correctAnswer: '\\text{函数在区间上连续，且端点函数值异号}',
-    explanation: '',
-    explanationLatex: '\\text{二分法基于零点存在性定理}\\\\[4pt]\\text{必须同时满足两个条件：}\\\\[4pt](1)\\text{ 函数在 }[a, b]\\text{ 上连续}\\\\[4pt](2)\\; f(a) \\cdot f(b) < 0\\text{（端点异号）}',
   },
   {
     id: 'fgp3-4',
@@ -217,8 +191,6 @@ export const graphPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{用计算器}', isLatex: true },
     ],
     correctAnswer: '\\text{构造 }f(x) = 2^x - 3\\text{，找异号区间}',
-    explanation: '',
-    explanationLatex: '\\text{二分法步骤：}\\\\[4pt](1)\\text{ 将方程转化为 }f(x) = 0\\text{ 的形式}\\\\[4pt]2^x = 3 \\rightarrow f(x) = 2^x - 3 = 0\\\\[4pt](2)\\text{ 找区间：}f(1) = -1 < 0,\\; f(2) = 1 > 0\\\\[4pt]\\text{零点在 }(1, 2)\\text{ 内，开始二分}',
   },
   {
     id: 'fgp3-5',
@@ -232,8 +204,6 @@ export const graphPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{二分法不需要函数连续}', isLatex: true },
     ],
     correctAnswer: '\\text{二分法只能求近似值}',
-    explanation: '',
-    explanationLatex: '\\text{二分法是逐步逼近的方法，只能求近似解}\\\\[4pt]\\text{每次将区间缩小到原来的 }\\dfrac{1}{2}\\text{（不是 }\\dfrac{1}{3}\\text{）}\\\\[4pt]\\text{精度越高，需要二分的次数越多}',
   },
 ];
 
@@ -251,8 +221,6 @@ export const graphPractice4: QuizQuestionData[] = [
       { label: 'D', value: '3', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\text{转化为两个函数图像交点问题：}\\\\[4pt]y_1 = \\ln x\\text{（对数曲线）}\\\\[4pt]y_2 = 2 - x\\text{（直线，过 }(0,2)\\text{，斜率 }-1\\text{）}\\\\[4pt]\\text{画图可知两条曲线只有 1 个交点}',
   },
   {
     id: 'fgp4-2',
@@ -266,8 +234,6 @@ export const graphPractice4: QuizQuestionData[] = [
       { label: 'D', value: '3', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: 'e^x = \\dfrac{1}{x}\\text{，即 }y_1 = e^x\\text{ 与 }y_2 = \\dfrac{1}{x}\\text{（}x > 0\\text{）的交点}\\\\[4pt]y_1 = e^x\\text{ 单调递增，过 }(0, 1)\\\\[4pt]y_2 = \\dfrac{1}{x}\\text{ 单调递减，}x \\to 0^+\\text{ 时 }\\to +\\infty\\\\[4pt]\\text{一增一减，只有 1 个交点}',
   },
   {
     id: 'fgp4-3',
@@ -281,8 +247,6 @@ export const graphPractice4: QuizQuestionData[] = [
       { label: 'D', value: '4', isLatex: true },
     ],
     correctAnswer: '3',
-    explanation: '',
-    explanationLatex: 'y_1 = x^2\\text{（抛物线）与 }y_2 = 2^x\\text{（指数曲线）}\\\\[4pt]\\text{交点：}x = 2\\text{ 时 }4 = 4\\checkmark,\\; x = 4\\text{ 时 }16 = 16\\checkmark\\\\[4pt]x < 0\\text{ 时 }x^2 > 0,\\; 0 < 2^x < 1\\text{，还有 1 个交点}\\\\[4pt]\\text{共 3 个交点}',
   },
   {
     id: 'fgp4-4',
@@ -296,8 +260,6 @@ export const graphPractice4: QuizQuestionData[] = [
       { label: 'D', value: '0', isLatex: true },
     ],
     correctAnswer: '3',
-    explanation: '',
-    explanationLatex: 'f(-2) = -8 + 6 + 1 = -1 < 0\\\\[4pt]f(0) = 1 > 0 \\rightarrow (-2, 0)\\text{ 内有零点}\\\\[4pt]f(1) = 1 - 3 + 1 = -1 < 0 \\rightarrow (0, 1)\\text{ 内有零点}\\\\[4pt]f(2) = 8 - 6 + 1 = 3 > 0 \\rightarrow (1, 2)\\text{ 内有零点}\\\\[4pt]\\text{三次函数最多 3 个零点，所以恰好 3 个}',
   },
   {
     id: 'fgp4-5',
@@ -311,8 +273,6 @@ export const graphPractice4: QuizQuestionData[] = [
       { label: 'D', value: '3', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: 'y_1 = |x - 1|\\text{（V 形，顶点在 }(1, 0)\\text{）}\\\\[4pt]y_2 = \\lg x\\text{（对数曲线，过 }(1, 0)\\text{）}\\\\[4pt]\\text{两条曲线在 }(1, 0)\\text{ 处相交}\\\\[4pt]x > 1\\text{ 时 }|x-1|\\text{ 增长比 }\\lg x\\text{ 快，不再相交}\\\\[4pt]0 < x < 1\\text{ 时 }|x-1| > 0,\\; \\lg x < 0\\text{，不相交}\\\\[4pt]\\text{只有 1 个交点}',
   },
   {
     id: 'fgp4-6',
@@ -326,7 +286,5 @@ export const graphPractice4: QuizQuestionData[] = [
       { label: 'D', value: '3', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: 'y_1 = \\ln x,\\; y_2 = \\dfrac{x}{e}\\text{（过原点，斜率 }\\dfrac{1}{e}\\text{）}\\\\[4pt]\\text{令 }g(x) = \\ln x - \\dfrac{x}{e},\\; g\'(x) = \\dfrac{1}{x} - \\dfrac{1}{e}\\\\[4pt]g\'(x) = 0 \\rightarrow x = e\\\\[4pt]g(e) = \\ln e - \\dfrac{e}{e} = 1 - 1 = 0\\\\[4pt]\\text{最大值恰好为 0，说明直线与曲线相切}\\\\[4pt]\\text{只有 1 个交点（相切点 }x = e\\text{）}',
   },
 ];

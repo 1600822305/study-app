@@ -5,6 +5,7 @@ import { derivBasicPractice1, derivBasicPractice2, derivBasicPractice3, derivBas
 import { derivBasicQuizQuestions } from './data/deriv-basic-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
+import { DerivativeBasicAnswers, derivativeBasicExplanations } from './derivative-basic-answers';
 
 export function DerivativeBasicPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('deriv-basic', derivBasicProgressItems);
@@ -182,6 +183,7 @@ export function DerivativeBasicPage() {
               title="✏️ 即时练习：基本导数公式（8题）"
               questions={derivBasicPractice1}
               printOptionCols={2}
+              explanations={derivativeBasicExplanations}
             />
 
           </div>
@@ -320,6 +322,7 @@ export function DerivativeBasicPage() {
               title="✏️ 即时练习：求导法则（6题）"
               questions={derivBasicPractice2}
               printOptionCols={2}
+              explanations={derivativeBasicExplanations}
             />
 
             <BigQuestionCard
@@ -627,6 +630,7 @@ export function DerivativeBasicPage() {
               title="✏️ 即时练习：导数与单调性（7题）"
               questions={derivBasicPractice3}
               printOptionCols={2}
+              explanations={derivativeBasicExplanations}
             />
 
             <BigQuestionCard
@@ -932,6 +936,7 @@ export function DerivativeBasicPage() {
               title="✏️ 即时练习：极值与最值（7题）"
               questions={derivBasicPractice4}
               printOptionCols={2}
+              explanations={derivativeBasicExplanations}
             />
 
             <BigQuestionCard
@@ -1238,6 +1243,7 @@ export function DerivativeBasicPage() {
               title="✏️ 即时练习：切线方程（7题）"
               questions={derivBasicPractice5}
               printOptionCols={2}
+              explanations={derivativeBasicExplanations}
             />
 
             <BigQuestionCard
@@ -1257,7 +1263,7 @@ export function DerivativeBasicPage() {
       <section id="db-quiz" className="mb-2 scroll-mt-4">
         <Collapsible title="六、高考真题实战（7题选择 + 1题大题）" defaultOpen storageKey="deriv-basic:quiz">
           <div className="-mx-4 -mt-3 -mb-4">
-            <QuizPanel questions={derivBasicQuizQuestions} module="deriv-basic-quiz" />
+            <QuizPanel questions={derivBasicQuizQuestions} module="deriv-basic-quiz" explanations={derivativeBasicExplanations} />
           </div>
           <BigQuestionCard
             questionLatex={"\\text{（2021 全国甲 改编）已知 }f(x) = x^3 - 3x\\\\[6pt]\\text{（1）求 }f(x)\\text{ 的单调递增区间和单调递减区间}\\\\[4pt]\\text{（2）求 }f(x)\\text{ 在 }[-3, 2]\\text{ 上的最大值和最小值}"}
@@ -1270,57 +1276,7 @@ export function DerivativeBasicPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.4 导数基础 — 答案与解析</h2>
-
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
-              <div className="space-y-3">
-                {[
-                  { title: '第一节：基本导数公式', questions: derivBasicPractice1 },
-                  { title: '第二节：求导法则', questions: derivBasicPractice2 },
-                  { title: '第三节：导数与单调性', questions: derivBasicPractice3 },
-                  { title: '第四节：极值与最值', questions: derivBasicPractice4 },
-                  { title: '第五节：切线方程', questions: derivBasicPractice5 },
-                ].map(({ title, questions }) => (
-                  <div key={title}>
-                    <p className="font-bold text-gray-700 mb-2">{title}</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {questions.map((q, i) => {
-                        const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                        return (
-                          <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                            <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                            {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {derivBasicQuizQuestions.map((q, i) => {
-                  const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                  return (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <DerivativeBasicAnswers />}
 
       </LessonLayout>
     </div>

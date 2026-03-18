@@ -6,6 +6,7 @@ import { graphPractice1, graphPractice2, graphPractice3, graphPractice4 } from '
 import { graphQuizQuestions } from './data/graph-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
+import { FunctionGraphAnswers, functionGraphExplanations } from './function-graph-answers';
 
 const NativeMath = globalThis.Math;
 
@@ -169,6 +170,7 @@ export function FunctionGraphPage() {
               title="✏️ 即时练习：零点概念（5题）"
               questions={graphPractice1}
               printOptionCols={2}
+              explanations={functionGraphExplanations}
             />
 
             {/* 常见函数零点速查 */}
@@ -324,6 +326,7 @@ export function FunctionGraphPage() {
               title="✏️ 即时练习：零点存在性定理（5题）"
               questions={graphPractice2}
               printOptionCols={2}
+              explanations={functionGraphExplanations}
             />
 
             {/* 定理速查 */}
@@ -516,6 +519,7 @@ export function FunctionGraphPage() {
               title="✏️ 即时练习：二分法（5题）"
               questions={graphPractice3}
               printOptionCols={2}
+              explanations={functionGraphExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -697,6 +701,7 @@ export function FunctionGraphPage() {
               title="✏️ 即时练习：数形结合（6题）"
               questions={graphPractice4}
               printOptionCols={2}
+              explanations={functionGraphExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -747,7 +752,7 @@ export function FunctionGraphPage() {
       <PageBreak />
       <section id="fg-quiz" className="mb-2 scroll-mt-4">
         <Collapsible title="五、高考真题自测（8题）— 全对可进入下一章，错2题以上回看对应节" defaultOpen storageKey="func-graph:quiz">
-          <QuizPanel questions={graphQuizQuestions} module="func-graph-quiz" />
+          <QuizPanel questions={graphQuizQuestions} module="func-graph-quiz" explanations={functionGraphExplanations} />
         </Collapsible>
       </section>
 
@@ -769,91 +774,7 @@ export function FunctionGraphPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.3 函数图像与零点 — 答案与解析</h2>
-
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第一节：零点的概念</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {graphPractice1.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第二节：零点存在性定理</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {graphPractice2.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第三节：二分法</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {graphPractice3.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第四节：数形结合求零点个数</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {graphPractice4.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {graphQuizQuestions.map((q, i) => {
-                  const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                  return (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <FunctionGraphAnswers />}
 
       </LessonLayout>
     </div>

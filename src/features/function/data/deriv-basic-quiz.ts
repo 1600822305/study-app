@@ -14,8 +14,6 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'y = 4x + 1', isLatex: true },
     ],
     correctAnswer: 'y = x + 1',
-    explanation: '',
-    explanationLatex: 'y\' = 3x^2 + 1\\\\[4pt]y\'(0) = 0 + 1 = 1\\\\[4pt]\\text{切点 }(0, 1)\\text{，点斜式：}y - 1 = 1 \\cdot (x - 0)\\\\[4pt]y = x + 1',
   },
   {
     id: 'dbq-2',
@@ -29,8 +27,6 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(-\\infty, -1) \\cup (1, +\\infty)', isLatex: true },
     ],
     correctAnswer: '(-1, 1)',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 3x^2 - 3 = 3(x+1)(x-1)\\\\[4pt]f\'(x) < 0 \\implies -1 < x < 1\\\\[4pt]\\text{递减区间：}(-1, 1)\\\\[4pt]\\text{注意：A 和 C 是递增区间}',
   },
   {
     id: 'dbq-3',
@@ -44,8 +40,6 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '-\\dfrac{1}{e}', isLatex: true },
     ],
     correctAnswer: '-1',
-    explanation: '',
-    explanationLatex: 'f\'(x) = e^x + (x-1)e^x = xe^x\\\\[4pt]f\'(x) = 0 \\implies x = 0\\text{（因 }e^x > 0\\text{）}\\\\[4pt]x < 0\\text{ 时 }f\' < 0\\text{，}x > 0\\text{ 时 }f\' > 0\\\\[4pt]\\text{极小值 }f(0) = (0-1) \\cdot e^0 = -1',
   },
   {
     id: 'dbq-4',
@@ -59,8 +53,6 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '1 + \\ln 2', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 1 - \\dfrac{1}{x} = \\dfrac{x - 1}{x}\\;(x > 0)\\\\[4pt]f\'(x) = 0 \\implies x = 1\\\\[4pt]x \\in (0,1)\\text{ 时 }f\' < 0\\text{，}x \\in (1, +\\infty)\\text{ 时 }f\' > 0\\\\[4pt]\\text{极小值即最小值 }f(1) = 1 - \\ln 1 = 1 - 0 = 1',
   },
   {
     id: 'dbq-5',
@@ -74,8 +66,6 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '-4', isLatex: true },
     ],
     correctAnswer: '12',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 6x^2 - 6x - 12 = 6(x-2)(x+1)\\\\[4pt]\\text{令 }f\'(x) = 0 \\implies x = -1\\text{ 或 }x = 2\\\\[4pt]f(-2) = -16-12+24+5 = 1\\\\[4pt]f(-1) = -2-3+12+5 = 12\\\\[4pt]f(2) = 16-12-24+5 = -15\\\\[4pt]f(3) = 54-27-36+5 = -4\\\\[4pt]\\text{最大值} = 12',
   },
   {
     id: 'dbq-6',
@@ -89,8 +79,6 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'y = ex + e', isLatex: true },
     ],
     correctAnswer: 'y = ex',
-    explanation: '',
-    explanationLatex: 'y\' = e^x,\\; y\'(1) = e\\\\[4pt]\\text{切点 }(1, e)\\text{，点斜式：}\\\\[4pt]y - e = e(x - 1) \\implies y = ex - e + e = ex\\\\[4pt]\\text{B 错在常数项，C 斜率不对，D 多了 }e',
   },
   {
     id: 'dbq-7',
@@ -104,8 +92,6 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '4\\text{ 个}', isLatex: true },
     ],
     correctAnswer: '4\\text{ 个}',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 3x^2 - 6x = 3x(x-2)\\\\[4pt]f\'(x) = 0 \\implies x = 0\\text{ 或 }x = 2\\\\[4pt]\\text{(1) }(0,2)\\text{ 上 }f\'(x) < 0\\text{，递减 }\\checkmark\\\\[4pt]\\text{(2) }x=0\\text{ 处 }f\'\\text{ 从正变负，极大值点 }\\checkmark\\\\[4pt]\\text{(3) }f(0)=1,\\;f(2)=8-12+1=-3\\text{ }\\checkmark\\\\[4pt]\\text{(4) }f(-1)=-1-3+1=-3,\\;f(3)=27-27+1=1\\\\[4pt]\\max\\{-3,1,-3,1\\}=1\\text{ }\\checkmark\\\\[4pt]\\text{全部正确，答案 D}',
   },
   // ─── 8. 2025·新高考Ⅰ卷·第12题（填空改编）— 已知切线求参数 ───
   {
@@ -120,7 +106,5 @@ export const derivBasicQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '5', isLatex: true },
     ],
     correctAnswer: '4',
-    explanation: '',
-    explanationLatex: 'y\' = e^x + 1\\\\[4pt]\\text{切线斜率为 2：}e^{x_0} + 1 = 2 \\Rightarrow e^{x_0} = 1 \\Rightarrow x_0 = 0\\\\[4pt]\\text{切点纵坐标：}y_0 = e^0 + 0 + a = 1 + a\\\\[4pt]\\text{切点在直线上：}1 + a = 2 \\times 0 + 5 = 5\\\\[4pt]\\therefore a = 4',
   },
 ];

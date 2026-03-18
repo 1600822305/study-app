@@ -6,6 +6,7 @@ import { graphPrereqPractice1, graphPrereqPractice2, graphPrereqPractice3 } from
 import { graphPrereqQuizQuestions } from './data/graph-prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
+import { FunctionGraphPrereqAnswers, functionGraphPrereqExplanations } from './function-graph-prereq-answers';
 
 export function FunctionGraphPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('graph-prereq', graphPrereqProgressItems);
@@ -164,9 +165,9 @@ export function FunctionGraphPrereqPage() {
 
             {/* 练习 */}
             <PracticeCard
-              title="✏️ 即时练习：坐标系（5题）"
+              title="✏️ 即时练习：坐标系回顾（5题）"
               questions={graphPrereqPractice1}
-              printOptionCols={2}
+              explanations={functionGraphPrereqExplanations}
             />
 
             {/* 描点法预告 + 口诀速记 */}
@@ -331,7 +332,7 @@ export function FunctionGraphPrereqPage() {
             <PracticeCard
               title="✏️ 即时练习：描点画图（7题）"
               questions={graphPrereqPractice2}
-              printOptionCols={2}
+              explanations={functionGraphPrereqExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -482,9 +483,9 @@ export function FunctionGraphPrereqPage() {
 
             {/* 练习 */}
             <PracticeCard
-              title="✏️ 即时练习：图像平移（7题）"
+              title="✏️ 即时练习：图像平移变换（7题）"
               questions={graphPrereqPractice3}
-              printOptionCols={2}
+              explanations={functionGraphPrereqExplanations}
             />
 
             <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
@@ -504,8 +505,8 @@ export function FunctionGraphPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       <PageBreak />
       <section id="gp-quiz" className="mb-2 scroll-mt-4">
-        <Collapsible title="四、综合自测（8题）— 全对可进入下一章，错2题以上回看对应节" defaultOpen storageKey="graph-prereq:quiz">
-          <QuizPanel questions={graphPrereqQuizQuestions} module="graph-prereq-quiz" />
+        <Collapsible title="四、综合自测（8题）" defaultOpen storageKey="graph-prereq:quiz">
+          <QuizPanel questions={graphPrereqQuizQuestions} module="graph-prereq-quiz" explanations={functionGraphPrereqExplanations} />
         </Collapsible>
       </section>
 
@@ -527,77 +528,7 @@ export function FunctionGraphPrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.2.5 函数图像前置知识 — 答案与解析</h2>
-
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第一节：坐标系回顾</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {graphPrereqPractice1.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第二节：描点法画图</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {graphPrereqPractice2.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第三节：图像平移变换</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {graphPrereqPractice3.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {graphPrereqQuizQuestions.map((q, i) => {
-                  const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                  return (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <FunctionGraphPrereqAnswers />}
 
       </LessonLayout>
     </div>

@@ -15,8 +15,6 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\text{常数列 }5, 5, 5, \\cdots\\text{ 的极限是 5}', isLatex: true },
     ],
     correctAnswer: '\\text{趋近于 1 的数列，每一项都小于 1}',
-    explanation: '',
-    explanationLatex: '\\text{C 错：}2, 1.5, 1.25, \\cdots\\text{ 趋近 1，但每项都大于 1}\\\\[4pt]\\text{也可以从两侧交替趋近，如 }0.9, 1.1, 0.99, 1.01, \\cdots\\\\[4pt]\\text{A 对：数学上 }0.\\overline{9} = 1\\\\[4pt]\\text{B 对：如 }\\dfrac{1}{2}, \\dfrac{2}{3}, \\cdots\\text{ 趋近 1 但永远不等于 1}\\\\[4pt]\\text{D 对：常数列极限就是它本身}',
   },
   // Q2 平均变化率计算 + 陷阱（分子分母顺序）
   {
@@ -31,8 +29,6 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '8', isLatex: true },
     ],
     correctAnswer: '7',
-    explanation: '',
-    explanationLatex: 'f(1) = 1 + 2 = 3,\\quad f(4) = 16 + 8 = 24\\\\[4pt]\\dfrac{f(4) - f(1)}{4 - 1} = \\dfrac{24 - 3}{3} = \\dfrac{21}{3} = 7\\\\[4pt]\\text{陷阱：C 选项 21 是分子 }\\Delta y\\text{，忘了除以 }\\Delta x',
   },
   // Q3 反向推理：已知平均变化率求参数
   {
@@ -47,8 +43,6 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '4', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: 'f(1) = 1 + a,\\quad f(3) = 9 + 3a\\\\[4pt]\\dfrac{f(3)-f(1)}{3-1} = \\dfrac{(9+3a)-(1+a)}{2} = \\dfrac{8+2a}{2} = 4+a\\\\[4pt]4+a = 6 \\implies a = 2',
   },
   // Q4 一次函数陷阱：区间变了，平均变化率变不变？
   {
@@ -63,8 +57,6 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无法确定}', isLatex: true },
     ],
     correctAnswer: 'k_1 = k_2 = 3',
-    explanation: '',
-    explanationLatex: '\\text{一次函数 }y = kx + b\\text{ 的平均变化率恒等于斜率 }k\\\\[4pt]\\text{不管选哪个区间，结果都是 }k = 3\\\\[4pt]\\text{这是一次函数的特殊性质：割线就是它自己}',
   },
   // Q5 Δx→0 推理：需要先化简再代入
   {
@@ -79,8 +71,6 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '9 + \\Delta x', isLatex: true },
     ],
     correctAnswer: '6 + \\Delta x',
-    explanation: '',
-    explanationLatex: '\\dfrac{f(3+\\Delta x) - f(3)}{\\Delta x} = \\dfrac{(3+\\Delta x)^2 - 9}{\\Delta x}\\\\[4pt]= \\dfrac{9 + 6\\Delta x + (\\Delta x)^2 - 9}{\\Delta x} = \\dfrac{6\\Delta x + (\\Delta x)^2}{\\Delta x} = 6 + \\Delta x\\\\[4pt]\\text{当 }\\Delta x \\rightarrow 0\\text{ 时，平均变化率 }\\rightarrow 6\\text{（即 }f\'(3) = 6\\text{）}',
   },
   // Q6 几何意义经典陷阱："在某点的切线" vs "过某点的切线"
   {
@@ -95,8 +85,6 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\text{切线不可能和曲线再有其他交点}', isLatex: true },
     ],
     correctAnswer: '\\text{切线斜率等于该点处的导数值}',
-    explanation: '',
-    explanationLatex: '\\text{C 对：切线斜率 }= f\'(x_0)\\text{，这是导数的几何意义}\\\\[4pt]\\text{A 错：切线可能在其他地方和曲线再相交（如 }y = x^3\\text{）}\\\\[4pt]\\text{B 错：高考经典陷阱！"在 P 处"指切点是 P；"过 P"指切线经过 P，P 不一定是切点}\\\\[4pt]\\text{D 错：同 A 的理由}',
   },
   // Q7 综合：割线→切线的本质
   {
@@ -111,8 +99,6 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\text{计算 }f(4) - f(2)', isLatex: true },
     ],
     correctAnswer: '\\text{让 }B\\text{ 沿曲线无限靠近 }A\\text{，割线斜率的极限}',
-    explanation: '',
-    explanationLatex: '\\text{B 对：这正是导数的定义过程}\\\\[4pt]\\text{当 B 无限靠近 A 时，}\\Delta x \\rightarrow 0\\\\[4pt]\\text{割线斜率 }\\rightarrow\\text{ 切线斜率 }= f\'(2) = 4\\\\[4pt]\\text{A 错：那只是一条特定割线的斜率（= 5），不是切线}\\\\[4pt]\\text{C 错：}f(2) \\div 2 = 2\\text{，和导数无关}\\\\[4pt]\\text{D 错：}f(4)-f(2) = 12\\text{，是函数值的差，不是斜率}',
   },
   // Q8 多选项辨析：考综合理解
   {
@@ -127,7 +113,5 @@ export const derivPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '4 \\text{ 个}', isLatex: true },
     ],
     correctAnswer: '3 \\text{ 个}',
-    explanation: '',
-    explanationLatex: '\\text{① 对：}f\'(x) = 2x \\implies f\'(2) = 4\\\\[4pt]\\text{② 对：过 }(2,4)\\text{，斜率 4 }\\implies y - 4 = 4(x-2) \\implies y = 4x-4\\\\[4pt]\\text{③ 对：导数 = 瞬时变化率，这是定义}\\\\[4pt]\\text{④ 错：}f(2) = 4\\text{ 是函数值，}f\'(2) = 4\\text{ 是导数值}\\\\\\text{数值碰巧相等，但含义完全不同！}\\\\[4pt]\\text{正确的有 ①②③ 共 3 个}',
   },
 ];

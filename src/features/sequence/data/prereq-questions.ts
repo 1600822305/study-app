@@ -12,8 +12,6 @@ export const sequencePrereqPractice: QuizQuestionData[] = [
       { label: 'D', value: '18', isLatex: false },
     ],
     correctAnswer: '12',
-    explanation: '',
-    explanationLatex: '\\text{数列 } 3, 6, 9, 12, 15, \\ldots\\\\[4pt]\\text{第 1 项} = 3,\\; \\text{第 2 项} = 6,\\; \\text{第 3 项} = 9,\\; \\text{第 4 项} = 12',
   },
   {
     id: 'seq-p2',
@@ -26,8 +24,6 @@ export const sequencePrereqPractice: QuizQuestionData[] = [
       { label: 'D', value: 'a_n = 2n + 1', isLatex: true },
     ],
     correctAnswer: 'a_n = 2n',
-    explanation: '',
-    explanationLatex: '\\text{验证：}a_1 = 2 \\times 1 = 2,\\; a_2 = 2 \\times 2 = 4,\\; a_3 = 2 \\times 3 = 6\\\\[4pt]\\text{每一项都等于 2 乘以项数，所以 } a_n = 2n',
   },
   {
     id: 'seq-p3',
@@ -40,8 +36,6 @@ export const sequencePrereqPractice: QuizQuestionData[] = [
       { label: 'D', value: '16', isLatex: false },
     ],
     correctAnswer: '14',
-    explanation: '',
-    explanationLatex: 'a_5 = 3 \\times 5 - 1 = 15 - 1 = 14',
   },
   {
     id: 'seq-p4',
@@ -54,8 +48,6 @@ export const sequencePrereqPractice: QuizQuestionData[] = [
       { label: 'D', value: '18', isLatex: false },
     ],
     correctAnswer: '16',
-    explanation: '',
-    explanationLatex: 'S_4 = 1 + 3 + 5 + 7 = 16',
   },
   {
     id: 'seq-p5',
@@ -68,8 +60,6 @@ export const sequencePrereqPractice: QuizQuestionData[] = [
       { label: 'D', value: '10', isLatex: false },
     ],
     correctAnswer: '4',
-    explanation: '',
-    explanationLatex: 'a_3 = S_3 - S_2 = 10 - 6 = 4\\\\[4pt]\\text{前 3 项的和减去前 2 项的和，剩下的就是第 3 项}',
   },
 ];
 
@@ -86,8 +76,6 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: 'a_n = 2^n', isLatex: true },
     ],
     correctAnswer: 'a_n = n^2',
-    explanation: '',
-    explanationLatex: '1 = 1^2,\\; 4 = 2^2,\\; 9 = 3^2,\\; 16 = 4^2,\\; 25 = 5^2\\\\[4pt]\\text{每一项都是项数的平方，所以 } a_n = n^2',
   },
   {
     id: 'seq-q2',
@@ -100,8 +88,6 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: '16', isLatex: false },
     ],
     correctAnswer: '14',
-    explanation: '',
-    explanationLatex: 'a_1 = 2^1 = 2,\\; a_2 = 2^2 = 4,\\; a_3 = 2^3 = 8\\\\[4pt]a_1 + a_2 + a_3 = 2 + 4 + 8 = 14',
   },
   {
     id: 'seq-q3',
@@ -114,8 +100,6 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: '15', isLatex: false },
     ],
     correctAnswer: '13',
-    explanation: '',
-    explanationLatex: 'a_1 = 3\\\\[4pt]a_2 = a_1 + 5 = 3 + 5 = 8\\\\[4pt]a_3 = a_2 + 5 = 8 + 5 = 13\\\\[4pt]\\text{每一项比前一项大 5，从 3 开始往后推}',
   },
   {
     id: 'seq-q4',
@@ -128,8 +112,6 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: '12', isLatex: false },
     ],
     correctAnswer: '6',
-    explanation: '',
-    explanationLatex: 'a_3 = S_3 - S_2\\\\[4pt]S_3 = 3^2 + 3 = 12\\\\[4pt]S_2 = 2^2 + 2 = 6\\\\[4pt]a_3 = 12 - 6 = 6',
   },
   {
     id: 'seq-q5',
@@ -142,8 +124,6 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: 'a_n = 1 - \\dfrac{1}{n}', isLatex: true },
     ],
     correctAnswer: 'a_n = \\dfrac{1}{n}',
-    explanation: '',
-    explanationLatex: '\\text{验证：}a_1 = \\dfrac{1}{1} = 1,\\; a_2 = \\dfrac{1}{2},\\; a_3 = \\dfrac{1}{3},\\; a_4 = \\dfrac{1}{4}\\\\[4pt]\\text{每一项就是 1 除以项数}',
   },
   {
     id: 'seq-q6',
@@ -156,8 +136,6 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: '36', isLatex: false },
     ],
     correctAnswer: '30',
-    explanation: '',
-    explanationLatex: '\\sum_{i=1}^{4} i^2 = 1^2 + 2^2 + 3^2 + 4^2\\\\[4pt]= 1 + 4 + 9 + 16 = 30',
   },
   {
     id: 'seq-q7',
@@ -170,8 +148,6 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: '16', isLatex: false },
     ],
     correctAnswer: '8',
-    explanation: '',
-    explanationLatex: 'a_1 = 1\\\\[4pt]a_2 = 2 \\times a_1 = 2 \\times 1 = 2\\\\[4pt]a_3 = 2 \\times a_2 = 2 \\times 2 = 4\\\\[4pt]a_4 = 2 \\times a_3 = 2 \\times 4 = 8\\\\[4pt]\\text{每一项都是前一项的 2 倍}',
   },
   {
     id: 'seq-q8',
@@ -184,7 +160,5 @@ export const sequencePrereqQuiz: QuizQuestionData[] = [
       { label: 'D', value: 'a_n = 3n - 3', isLatex: true },
     ],
     correctAnswer: 'a_n = 3',
-    explanation: '',
-    explanationLatex: '\\text{当 } n \\geq 2 \\text{ 时：}\\\\[4pt]a_n = S_n - S_{n-1} = 3n - 3(n-1) = 3n - 3n + 3 = 3\\\\[4pt]\\text{验证 } n=1\\text{：}a_1 = S_1 = 3 \\times 1 = 3 \\; \\checkmark\\\\[4pt]\\text{所以每一项都是 3（常数列）}',
   },
 ];

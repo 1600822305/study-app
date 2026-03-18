@@ -14,8 +14,6 @@ export const derivPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '-1', isLatex: true },
     ],
     correctAnswer: '0',
-    explanation: '',
-    explanationLatex: '1,\\; \\dfrac{1}{2},\\; \\dfrac{1}{4},\\; \\dfrac{1}{8},\\; \\cdots\\text{ 每次缩小一半，越来越接近 0}',
   },
   {
     id: 'dpp1-2',
@@ -29,8 +27,6 @@ export const derivPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '2', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '\\dfrac{1}{2},\\; \\dfrac{2}{3},\\; \\dfrac{3}{4},\\; \\cdots\\text{ 分子比分母少 1}\\\\[4pt]\\text{数越大，差距越小，越接近 1}\\\\[4pt]\\text{无限接近但永远不等于 1 → 极限是 1}',
   },
   {
     id: 'dpp1-3',
@@ -44,8 +40,6 @@ export const derivPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{极限只存在于无穷大的情况}', isLatex: true },
     ],
     correctAnswer: '\\text{趋近于某个数 = 可以无限接近那个数}',
-    explanation: '',
-    explanationLatex: '\\text{极限的核心含义是"无限接近"}\\\\[4pt]\\text{可能等于（如常数列），也可能永远不等于}\\\\[4pt]\\text{A 错：不一定等于；B 错：有时可以等于}\\\\[4pt]\\text{D 错：有限范围也有极限}',
   },
   {
     id: 'dpp1-4',
@@ -59,8 +53,6 @@ export const derivPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\text{不存在}', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: '0.9 = 1 - 0.1,\\; 0.99 = 1 - 0.01,\\; \\cdots\\\\[4pt]\\text{和 1 的差距：}0.1 \\rightarrow 0.01 \\rightarrow 0.001 \\rightarrow \\cdots\\\\[4pt]\\text{差距趋近 0 → 极限就是 1（数学上 }0.\\overline{9} = 1\\text{）}',
   },
   {
     id: 'dpp1-5',
@@ -74,8 +66,6 @@ export const derivPrereqPractice1: QuizQuestionData[] = [
       { label: 'D', value: '8', isLatex: true },
     ],
     correctAnswer: '7',
-    explanation: '',
-    explanationLatex: 'x \\rightarrow 2 \\text{ 时，}f(x) = 3(2) + 1 = 7\\\\[4pt]\\text{连续函数的极限可以直接代入求值}',
   },
 ];
 
@@ -93,8 +83,6 @@ export const derivPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '30\\text{ km/h}', isLatex: true },
     ],
     correctAnswer: '15\\text{ km/h}',
-    explanation: '',
-    explanationLatex: '\\text{平均速度} = \\dfrac{\\text{总路程}}{\\text{总时间}} = \\dfrac{30}{2} = 15\\text{ km/h}',
   },
   {
     id: 'dpp2-2',
@@ -108,8 +96,6 @@ export const derivPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '8', isLatex: true },
     ],
     correctAnswer: '4',
-    explanation: '',
-    explanationLatex: '\\dfrac{\\Delta y}{\\Delta x} = \\dfrac{f(3) - f(1)}{3 - 1} = \\dfrac{9 - 1}{2} = \\dfrac{8}{2} = 4',
   },
   {
     id: 'dpp2-3',
@@ -123,8 +109,6 @@ export const derivPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{不确定}', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '\\dfrac{f(x_2) - f(x_1)}{x_2 - x_1} = \\dfrac{(2x_2+1) - (2x_1+1)}{x_2 - x_1} = \\dfrac{2(x_2 - x_1)}{x_2 - x_1} = 2\\\\[4pt]\\text{一次函数的平均变化率 = 斜率（常数）}',
   },
   {
     id: 'dpp2-4',
@@ -138,8 +122,6 @@ export const derivPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '0.41', isLatex: true },
     ],
     correctAnswer: '4.1',
-    explanation: '',
-    explanationLatex: '\\dfrac{f(2.1) - f(2)}{2.1 - 2} = \\dfrac{4.41 - 4}{0.1} = \\dfrac{0.41}{0.1} = 4.1',
   },
   {
     id: 'dpp2-5',
@@ -153,8 +135,6 @@ export const derivPrereqPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\text{面积}', isLatex: true },
     ],
     correctAnswer: '\\text{割线的斜率}',
-    explanation: '',
-    explanationLatex: '\\text{平均变化率} = \\dfrac{f(x_2) - f(x_1)}{x_2 - x_1}\\\\[4pt]\\text{就是过 }(x_1, f(x_1))\\text{ 和 }(x_2, f(x_2))\\text{ 两点的直线斜率}\\\\[4pt]\\text{这条直线叫做割线（连接曲线上两点的线段）}',
   },
 ];
 
@@ -172,8 +152,6 @@ export const derivPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '8', isLatex: true },
     ],
     correctAnswer: '4',
-    explanation: '',
-    explanationLatex: '\\text{平均变化率} = 4 + \\Delta x\\\\[4pt]\\Delta x \\rightarrow 0 \\text{ 时，}4 + \\Delta x \\rightarrow 4\\\\[4pt]\\text{这就是 }f(x) = x^2\\text{ 在 }x = 2\\text{ 处的导数}',
   },
   {
     id: 'dpp3-2',
@@ -187,8 +165,6 @@ export const derivPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{渐近线}', isLatex: true },
     ],
     correctAnswer: '\\text{切线}',
-    explanation: '',
-    explanationLatex: '\\text{割线连接曲线上两点}\\\\[4pt]\\text{当两点无限接近时，割线 }\\rightarrow\\text{ 切线}\\\\[4pt]\\text{切线只"碰"曲线于一点（局部来看）}',
   },
   {
     id: 'dpp3-3',
@@ -202,8 +178,6 @@ export const derivPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{截距}', isLatex: true },
     ],
     correctAnswer: '\\text{切线斜率}',
-    explanation: '',
-    explanationLatex: '\\text{平均变化率 = 割线斜率}\\\\[4pt]\\Delta x \\rightarrow 0 \\text{ 后}\\\\[4pt]\\text{瞬时变化率 = 切线斜率 = 导数}',
   },
   {
     id: 'dpp3-4',
@@ -217,8 +191,6 @@ export const derivPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{总路程}', isLatex: true },
     ],
     correctAnswer: '\\text{瞬时速度}',
-    explanation: '',
-    explanationLatex: '\\text{速度表显示"此时此刻"的速度}\\\\[4pt]\\text{即极短时间内的平均速度的极限}\\\\[4pt]\\text{这就是瞬时速度（位移对时间的导数）}',
   },
   {
     id: 'dpp3-5',
@@ -232,7 +204,5 @@ export const derivPrereqPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{导数是两个函数值的差}', isLatex: true },
     ],
     correctAnswer: '\\text{导数是平均变化率当 }\\Delta x \\rightarrow 0\\text{ 的极限}',
-    explanation: '',
-    explanationLatex: '\\text{导数 = 当 }\\Delta x \\rightarrow 0\\text{ 时，平均变化率的极限}\\\\[4pt]\\text{即 }\\dfrac{\\Delta y}{\\Delta x}\\text{ 在 }\\Delta x\\text{ 无限缩小后趋近的值}\\\\[4pt]\\text{A 错：导数是瞬时变化率，不是平均变化率}',
   },
 ];

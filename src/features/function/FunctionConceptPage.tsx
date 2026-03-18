@@ -6,6 +6,7 @@ import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { conceptPractice } from './data/concept-practice';
 import { conceptQuizQuestions } from './data/concept-quiz';
+import { FunctionConceptAnswers, functionConceptExplanations } from './function-concept-answers';
 
 export function FunctionConceptPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('function-concept', functionConceptProgressItems);
@@ -1035,7 +1036,7 @@ export function FunctionConceptPage() {
           </span>
           精华练习（10 道）
         </h2>
-        <PracticeCard questions={conceptPractice} />
+        <PracticeCard questions={conceptPractice} explanations={functionConceptExplanations} />
       </section>
 
       <PageBreak label="高考真题" />
@@ -1053,53 +1054,11 @@ export function FunctionConceptPage() {
           questions={conceptQuizQuestions}
           title="函数真题"
           description="8道新高考真题（2021-2025），覆盖函数核心考法。"
+          explanations={functionConceptExplanations}
         />
       </section>
 
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="mb-8 print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.1 函数的概念与性质 — 答案与解析</h2>
-
-            {[
-              { label: '精华练习', questions: conceptPractice },
-              { label: '高考真题实战', questions: conceptQuizQuestions },
-            ].map((section) => (
-              <div key={section.label} className="mb-4">
-                <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">{section.label}</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-gray-700">
-                  {section.questions.map((q, idx) => {
-                    const hasLatexAnswer = /[\\^_{}]/.test(q.correctAnswer);
-                    const isSimpleFractionAnswer = /^-?\d+\/\d+$/.test(q.correctAnswer);
-                    const answerTex = isSimpleFractionAnswer
-                      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
-                      : q.correctAnswer;
-                    return (
-                      <div key={q.id} className="flex gap-2 items-start" style={{ breakInside: 'avoid' }}>
-                        <span className="text-blue-600 font-bold shrink-0">{idx + 1}.</span>
-                        <div className="min-w-0">
-                          <p className="font-bold text-gray-900">
-                            答案：{hasLatexAnswer || isSimpleFractionAnswer ? <Math tex={answerTex} /> : q.correctAnswer}
-                          </p>
-                          {q.explanationLatex && (
-                            <div className="text-gray-700 mt-1">
-                              <Math tex={q.explanationLatex} />
-                            </div>
-                          )}
-                          {q.explanation && (
-                            <p className="text-gray-700 mt-1">{q.explanation}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <FunctionConceptAnswers />}
       </LessonLayout>
     </div>
   );

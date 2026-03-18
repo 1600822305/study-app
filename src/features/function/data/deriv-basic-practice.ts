@@ -14,8 +14,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: '-5', isLatex: true },
     ],
     correctAnswer: '0',
-    explanation: '',
-    explanationLatex: '\\text{常数的导数恒为 0}\\\\[4pt](C)\' = 0\\text{（常数不变化，变化率为 0）}',
   },
   {
     id: 'dbp1-2',
@@ -29,8 +27,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: '2x^3', isLatex: true },
     ],
     correctAnswer: '3x^2',
-    explanation: '',
-    explanationLatex: '(x^n)\' = nx^{n-1}\\\\[4pt](x^3)\' = 3x^{3-1} = 3x^2',
   },
   {
     id: 'dbp1-3',
@@ -44,8 +40,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\dfrac{1}{2}x', isLatex: true },
     ],
     correctAnswer: '\\dfrac{1}{2\\sqrt{x}}',
-    explanation: '',
-    explanationLatex: '\\sqrt{x} = x^{\\frac{1}{2}}\\\\[4pt](x^{\\frac{1}{2}})\' = \\dfrac{1}{2}x^{-\\frac{1}{2}} = \\dfrac{1}{2\\sqrt{x}}',
   },
   {
     id: 'dbp1-4',
@@ -59,8 +53,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: 'xe^x', isLatex: true },
     ],
     correctAnswer: 'e^x',
-    explanation: '',
-    explanationLatex: '(e^x)\' = e^x\\\\[4pt]\\text{e}^x\\text{ 是唯一"导数等于自己"的函数}',
   },
   {
     id: 'dbp1-5',
@@ -74,8 +66,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: 'e^x', isLatex: true },
     ],
     correctAnswer: '\\dfrac{1}{x}',
-    explanation: '',
-    explanationLatex: '(\\ln x)\' = \\dfrac{1}{x}\\\\[4pt]\\text{对数和指数互为逆运算，导数也有对应关系}',
   },
   {
     id: 'dbp1-6',
@@ -89,8 +79,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\sin x', isLatex: true },
     ],
     correctAnswer: '\\cos x',
-    explanation: '',
-    explanationLatex: '(\\sin x)\' = \\cos x\\\\[4pt]\\text{正弦变余弦，注意不带负号}',
   },
   {
     id: 'dbp1-7',
@@ -104,8 +92,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: '\\cos x', isLatex: true },
     ],
     correctAnswer: '-\\sin x',
-    explanation: '',
-    explanationLatex: '(\\cos x)\' = -\\sin x\\\\[4pt]\\text{余弦变负正弦，别忘了负号！}',
   },
   {
     id: 'dbp1-8',
@@ -119,8 +105,6 @@ export const derivBasicPractice1: QuizQuestionData[] = [
       { label: 'D', value: '(\\ln x)\' = x', isLatex: true },
     ],
     correctAnswer: '(x^4)\' = 4x^3',
-    explanation: '',
-    explanationLatex: 'A\\text{ 正确：}(x^4)\' = 4x^3\\\\[4pt]B\\text{ 错：}(e^x)\' = e^x\\text{（不可用幂函数求导公式）}\\\\[4pt]C\\text{ 错：}(\\cos x)\' = -\\sin x\\text{（少了负号）}\\\\[4pt]D\\text{ 错：}(\\ln x)\' = \\dfrac{1}{x}\\text{（不是 }x\\text{）}',
   },
 ];
 
@@ -138,8 +122,6 @@ export const derivBasicPractice2: QuizQuestionData[] = [
       { label: 'D', value: '6x + 2x', isLatex: true },
     ],
     correctAnswer: '6x + 2',
-    explanation: '',
-    explanationLatex: '(3x^2)\' + (2x)\' + (-1)\'\\\\[4pt]= 3 \\cdot 2x + 2 \\cdot 1 + 0 = 6x + 2',
   },
   {
     id: 'dbp2-2',
@@ -153,8 +135,6 @@ export const derivBasicPractice2: QuizQuestionData[] = [
       { label: 'D', value: '(1-x)e^x', isLatex: true },
     ],
     correctAnswer: '(1+x)e^x',
-    explanation: '',
-    explanationLatex: '\\text{积的求导：}(uv)\' = u\'v + uv\'\\\\[4pt]u = x,\\; v = e^x\\\\[4pt]f\'(x) = 1 \\cdot e^x + x \\cdot e^x = (1+x)e^x',
   },
   {
     id: 'dbp2-3',
@@ -168,8 +148,6 @@ export const derivBasicPractice2: QuizQuestionData[] = [
       { label: 'D', value: '\\dfrac{x}{(x+1)^2}', isLatex: true },
     ],
     correctAnswer: '\\dfrac{1}{(x+1)^2}',
-    explanation: '',
-    explanationLatex: '\\left(\\dfrac{u}{v}\\right)\' = \\dfrac{u\'v - uv\'}{v^2}\\\\[4pt]= \\dfrac{1 \\cdot (x+1) - x \\cdot 1}{(x+1)^2} = \\dfrac{1}{(x+1)^2}',
   },
   {
     id: 'dbp2-4',
@@ -183,8 +161,6 @@ export const derivBasicPractice2: QuizQuestionData[] = [
       { label: 'D', value: '6(2x+1)^3', isLatex: true },
     ],
     correctAnswer: '6(2x+1)^2',
-    explanation: '',
-    explanationLatex: '\\text{复合函数：令 }u = 2x+1\\\\[4pt]\\text{外层：}u^3 \\rightarrow 3u^2\\\\[4pt]\\text{内层：}(2x+1)\' = 2\\\\[4pt]f\'(x) = 3(2x+1)^2 \\times 2 = 6(2x+1)^2',
   },
   {
     id: 'dbp2-5',
@@ -198,8 +174,6 @@ export const derivBasicPractice2: QuizQuestionData[] = [
       { label: 'D', value: 'e^x \\cdot \\ln x', isLatex: true },
     ],
     correctAnswer: '\\dfrac{(x-1)e^x}{x^2}',
-    explanation: '',
-    explanationLatex: '\\text{商的法则 + 基本公式}\\\\[4pt]\\dfrac{(e^x)\' \\cdot x - e^x \\cdot (x)\'}{x^2} = \\dfrac{xe^x - e^x}{x^2} = \\dfrac{(x-1)e^x}{x^2}',
   },
   {
     id: 'dbp2-6',
@@ -213,8 +187,6 @@ export const derivBasicPractice2: QuizQuestionData[] = [
       { label: 'D', value: '(1+x)e^{2x}', isLatex: true },
     ],
     correctAnswer: '(1+2x)e^{2x}',
-    explanation: '',
-    explanationLatex: '\\text{积的法则 + 链式法则}\\\\[4pt]f\'(x) = 1 \\cdot e^{2x} + x \\cdot (e^{2x})\'\\\\[4pt]= e^{2x} + x \\cdot 2e^{2x} = (1+2x)e^{2x}',
   },
 ];
 
@@ -232,8 +204,6 @@ export const derivBasicPractice3: QuizQuestionData[] = [
       { label: 'D', value: '(-\\infty, 0)', isLatex: true },
     ],
     correctAnswer: '(-\\infty, -1) \\cup (1, +\\infty)',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x+1)(x-1)\\\\[4pt]f\'(x) > 0 \\implies x < -1 \\text{ 或 } x > 1\\\\[4pt]\\text{递增区间：}(-\\infty, -1) \\cup (1, +\\infty)',
   },
   {
     id: 'dbp3-2',
@@ -247,8 +217,6 @@ export const derivBasicPractice3: QuizQuestionData[] = [
       { label: 'D', value: '(0, 4)', isLatex: true },
     ],
     correctAnswer: '(2, +\\infty)',
-    explanation: '',
-    explanationLatex: 'f\'(x) = -2x + 4\\\\[4pt]f\'(x) < 0 \\implies -2x + 4 < 0 \\implies x > 2\\\\[4pt]\\text{递减区间：}(2, +\\infty)',
   },
   {
     id: 'dbp3-3',
@@ -262,8 +230,6 @@ export const derivBasicPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{无法判断}', isLatex: true },
     ],
     correctAnswer: '\\text{递减}',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 3x^2 - 12\\\\[4pt]f\'(0) = 0 - 12 = -12 < 0\\\\[4pt]\\text{导数为负，函数在 }x = 0\\text{ 处递减}',
   },
   {
     id: 'dbp3-4',
@@ -277,8 +243,6 @@ export const derivBasicPractice3: QuizQuestionData[] = [
       { label: 'D', value: '\\text{是常数}', isLatex: true },
     ],
     correctAnswer: '\\text{单调递增}',
-    explanation: '',
-    explanationLatex: '\\text{导数与单调性的核心定理：}\\\\[4pt]f\'(x) > 0 \\implies \\text{函数单调递增}\\\\[4pt]f\'(x) < 0 \\implies \\text{函数单调递减}',
   },
   {
     id: 'dbp3-5',
@@ -292,8 +256,6 @@ export const derivBasicPractice3: QuizQuestionData[] = [
       { label: 'D', value: '(0, +\\infty)', isLatex: true },
     ],
     correctAnswer: '(-\\infty, -1)',
-    explanation: '',
-    explanationLatex: 'f\'(x) = e^x + xe^x = (1+x)e^x\\\\[4pt]\\text{因为 }e^x > 0\\text{（恒正）}\\\\[4pt]f\'(x) < 0 \\implies 1 + x < 0 \\implies x < -1\\\\[4pt]\\text{递减区间：}(-\\infty, -1)',
   },
   {
     id: 'dbp3-6',
@@ -307,8 +269,6 @@ export const derivBasicPractice3: QuizQuestionData[] = [
       { label: 'D', value: '(2, +\\infty)', isLatex: true },
     ],
     correctAnswer: '(1, +\\infty)',
-    explanation: '',
-    explanationLatex: 'f\'(x) = e^x + (x-2)e^x = (x-1)e^x\\\\[4pt]\\text{因为 }e^x > 0\\text{，符号看 }(x-1)\\\\[4pt]x - 1 > 0 \\implies x > 1\\\\[4pt]\\text{递增区间：}(1, +\\infty)',
   },
   {
     id: 'dbp3-7',
@@ -321,7 +281,6 @@ export const derivBasicPractice3: QuizQuestionData[] = [
       { label: 'D', value: '只看最高次项系数' },
     ],
     correctAnswer: '在每段区间取一个数代入 f\'(x) 算正负',
-    explanation: '在每段区间取一个简单的数（如 0、1、-2）代入 f\'(x)，算出正负最可靠，不容易出错',
   },
 ];
 
@@ -339,8 +298,6 @@ export const derivBasicPractice4: QuizQuestionData[] = [
       { label: 'D', value: '3', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 3x^2 - 3 = 3(x+1)(x-1)\\\\[4pt]\\text{令 }f\'(x) = 0 \\implies x = -1 \\text{ 或 } x = 1\\\\[4pt]x = -1\\text{ 处 }f\'\\text{ 从正变负 }\\rightarrow\\text{ 极大值}\\\\[4pt]f(-1) = (-1)^3 - 3(-1) = -1 + 3 = 2',
   },
   {
     id: 'dbp4-2',
@@ -354,8 +311,6 @@ export const derivBasicPractice4: QuizQuestionData[] = [
       { label: 'D', value: '-3', isLatex: true },
     ],
     correctAnswer: '-2',
-    explanation: '',
-    explanationLatex: 'f\'(x) = 3(x+1)(x-1)\\\\[4pt]x = 1\\text{ 处 }f\'\\text{ 从负变正 }\\rightarrow\\text{ 极小值}\\\\[4pt]f(1) = 1 - 3 = -2',
   },
   {
     id: 'dbp4-3',
@@ -369,8 +324,6 @@ export const derivBasicPractice4: QuizQuestionData[] = [
       { label: 'D', value: '4', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '\\text{比较端点值和极值点的值：}\\\\[4pt]f(-2) = -8+6 = -2\\\\[4pt]f(-1) = 2\\text{（极大值）}\\\\[4pt]f(1) = -2\\text{（极小值）}\\\\[4pt]f(2) = 8-6 = 2\\\\[4pt]\\text{最大值} = \\max\\{-2, 2, -2, 2\\} = 2',
   },
   {
     id: 'dbp4-4',
@@ -384,8 +337,6 @@ export const derivBasicPractice4: QuizQuestionData[] = [
       { label: 'D', value: '\\text{不一定，需要看函数值}', isLatex: true },
     ],
     correctAnswer: '\\text{不一定，需要看导数是否变号}',
-    explanation: '',
-    explanationLatex: '\\text{反例：}f(x) = x^3,\\; f\'(x) = 3x^2\\\\[4pt]f\'(0) = 0\\text{，但 }f\'(x)\\text{ 在 }x = 0\\text{ 两侧都是正}\\\\[4pt]\\text{导数不变号 }\\rightarrow\\text{ 不是极值点}\\\\[4pt]\\text{必须"变号"才是极值点}',
   },
   {
     id: 'dbp4-5',
@@ -399,8 +350,6 @@ export const derivBasicPractice4: QuizQuestionData[] = [
       { label: 'D', value: '0', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: 'f\'(x) = -2x + 4 = 0 \\implies x = 2\\\\[4pt]f(0) = 1,\\; f(2) = -4+8+1 = 5,\\; f(3) = -9+12+1 = 4\\\\[4pt]\\text{最小值} = \\min\\{1, 5, 4\\} = 1\\text{（在 }x = 0\\text{ 处取得）}',
   },
   {
     id: 'dbp4-6',
@@ -414,8 +363,6 @@ export const derivBasicPractice4: QuizQuestionData[] = [
       { label: 'D', value: '-\\dfrac{1}{e}', isLatex: true },
     ],
     correctAnswer: '-1',
-    explanation: '',
-    explanationLatex: 'f\'(x) = e^x + (x-1)e^x = xe^x\\\\[4pt]\\text{令 }f\'(x) = 0\\text{，因 }e^x > 0\\text{，所以 }x = 0\\\\[4pt]x = 0\\text{ 处 }f\'\\text{ 从负→正，极小值}\\\\[4pt]f(0) = (0-1) \\cdot e^0 = -1 \\times 1 = -1',
   },
   {
     id: 'dbp4-7',
@@ -428,8 +375,6 @@ export const derivBasicPractice4: QuizQuestionData[] = [
       { label: 'D', value: '\\text{极大值一定大于极小值}', isLatex: true },
     ],
     correctAnswer: '\\text{闭区间上最值可能在端点取得}',
-    explanation: '',
-    explanationLatex: '\\text{A错：极大值是局部最高，不是全局最高}\\\\[4pt]\\text{B错：闭区间最值可能在端点取得}\\\\[4pt]\\text{C对：端点值可能比极值更大/更小}\\\\[4pt]\\text{D错：极大值不一定大于极小值}',
   },
 ];
 
@@ -447,8 +392,6 @@ export const derivBasicPractice5: QuizQuestionData[] = [
       { label: 'D', value: '4', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: 'y\' = 2x\\\\[4pt]\\text{在 }x = 1\\text{ 处：}y\'(1) = 2 \\times 1 = 2',
   },
   {
     id: 'dbp5-2',
@@ -462,8 +405,6 @@ export const derivBasicPractice5: QuizQuestionData[] = [
       { label: 'D', value: 'y = x + 1', isLatex: true },
     ],
     correctAnswer: 'y = 2x - 1',
-    explanation: '',
-    explanationLatex: '\\text{斜率 }k = y\'(1) = 2\\\\[4pt]\\text{点斜式：}y - 1 = 2(x - 1)\\\\[4pt]y = 2x - 1',
   },
   {
     id: 'dbp5-3',
@@ -477,8 +418,6 @@ export const derivBasicPractice5: QuizQuestionData[] = [
       { label: 'D', value: 'y = 2x - 1', isLatex: true },
     ],
     correctAnswer: 'y = 3x - 2',
-    explanation: '',
-    explanationLatex: 'y\' = 3x^2,\\; y\'(1) = 3\\\\[4pt]y - 1 = 3(x - 1)\\\\[4pt]y = 3x - 2',
   },
   {
     id: 'dbp5-4',
@@ -492,8 +431,6 @@ export const derivBasicPractice5: QuizQuestionData[] = [
       { label: 'D', value: 'y = x - 1', isLatex: true },
     ],
     correctAnswer: 'y = x + 1',
-    explanation: '',
-    explanationLatex: 'y\' = e^x,\\; y\'(0) = e^0 = 1\\\\[4pt]\\text{切点 }(0, e^0) = (0, 1)\\\\[4pt]y - 1 = 1 \\cdot (x - 0) \\implies y = x + 1',
   },
   {
     id: 'dbp5-5',
@@ -507,8 +444,6 @@ export const derivBasicPractice5: QuizQuestionData[] = [
       { label: 'D', value: 'y = \\dfrac{1}{x}', isLatex: true },
     ],
     correctAnswer: 'y = x - 1',
-    explanation: '',
-    explanationLatex: 'y\' = \\dfrac{1}{x},\\; y\'(1) = 1\\\\[4pt]\\text{切点 }(1, \\ln 1) = (1, 0)\\\\[4pt]y - 0 = 1 \\cdot (x - 1) \\implies y = x - 1',
   },
   {
     id: 'dbp5-6',
@@ -522,8 +457,6 @@ export const derivBasicPractice5: QuizQuestionData[] = [
       { label: 'D', value: '两者斜率不同' },
     ],
     correctAnswer: '"在 A 处"：A 是切点；"过 A"：A 不一定是切点',
-    explanation: '',
-    explanationLatex: '\\text{"在 A 处的切线"：A 一定是切点，直接代入求斜率}\\\\[4pt]\\text{"过 A 的切线"：A 在切线上，但 A 不一定在曲线上}\\\\[4pt]\\text{需要设切点为 }(t, f(t))\\text{，再用 A 在切线上列方程}',
   },
   {
     id: 'dbp5-7',
@@ -537,7 +470,5 @@ export const derivBasicPractice5: QuizQuestionData[] = [
       { label: 'D', value: '3', isLatex: true },
     ],
     correctAnswer: '2',
-    explanation: '',
-    explanationLatex: '\\text{设切点 }(t, t^2)\\text{，斜率 }k = 2t\\\\[4pt]\\text{切线方程：}y = 2tx - t^2\\\\[4pt]\\text{过 }(0, -1)\\text{：}-1 = -t^2 \\implies t^2 = 1\\\\[4pt]t = \\pm 1\\text{，共 2 条切线}',
   },
 ];

@@ -15,8 +15,6 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '\\text{第四象限}', isLatex: true },
     ],
     correctAnswer: '\\text{第四象限}',
-    explanation: '',
-    explanationLatex: '|a-2| \\geq 0,\\;(b+3)^2 \\geq 0\\\\[4pt]\\text{两个非负数之和为 0 }\\rightarrow\\text{ 都为 0}\\\\[4pt]a - 2 = 0 \\Rightarrow a = 2\\\\[4pt]b + 3 = 0 \\Rightarrow b = -3\\\\[4pt](2, -3)\\text{：}x > 0,\\; y < 0 \\rightarrow\\text{ 第四象限}',
   },
   // Q2 对称 + 多步变换
   {
@@ -31,8 +29,6 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(-1, 4)', isLatex: true },
     ],
     correctAnswer: '(1, -4)',
-    explanation: '',
-    explanationLatex: 'A(-1, 4) \\xrightarrow{x\\text{ 轴对称}} B(-1, -4)\\\\[4pt]B(-1, -4) \\xrightarrow{y\\text{ 轴对称}} C(1, -4)\\\\[4pt]\\text{x 轴对称：y 变号；y 轴对称：x 变号}',
   },
   // Q3 描点 + 交点个数 + 因式分解
   {
@@ -47,8 +43,6 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '(4, 0)\\text{ 和 }(3, 0)', isLatex: true },
     ],
     correctAnswer: '(1, 0)\\text{ 和 }(3, 0)',
-    explanation: '',
-    explanationLatex: '\\text{令 }y = 0\\text{：}x^2 - 4x + 3 = 0\\\\[4pt](x-1)(x-3) = 0\\\\[4pt]x = 1\\text{ 或 }x = 3\\\\[4pt]\\text{交点 }(1, 0)\\text{ 和 }(3, 0)',
   },
   // Q4 描点 + 最值 + 区间
   {
@@ -63,8 +57,6 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '2', isLatex: true },
     ],
     correctAnswer: '1',
-    explanation: '',
-    explanationLatex: 'y = -x^2 + 2x = -(x^2 - 2x) = -(x-1)^2 + 1\\\\[4pt]\\text{开口向下，顶点 }(1, 1)\\\\[4pt]1 \\in [0, 3]\\text{，所以最大值为 }1',
   },
   // Q5 图像增减性 + 联动3.0.5
   {
@@ -79,8 +71,6 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'x < 0', isLatex: true },
     ],
     correctAnswer: 'x < 1',
-    explanation: '',
-    explanationLatex: 'y = x^2 - 2x = (x-1)^2 - 1\\\\[4pt]\\text{开口向上，对称轴 }x = 1\\\\[4pt]\\text{对称轴左侧下降 }\\rightarrow x < 1\\text{ 时为减函数}\\\\[4pt]\\text{对称轴右侧上升 }\\rightarrow x > 1\\text{ 时为增函数}',
   },
   // Q6 平移 + 逆向判断
   {
@@ -95,8 +85,6 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: 'y = (x+3)^2 + 2', isLatex: true },
     ],
     correctAnswer: 'y = (x-1)^2 + 2',
-    explanation: '',
-    explanationLatex: '\\text{逆向还原：左移 2 的逆 = 右移 2，上移 3 的逆 = 下移 3}\\\\[4pt]y = (x+1)^2 + 5 \\xrightarrow{\\text{右移 2}} y = (x+1-2)^2 + 5 = (x-1)^2 + 5\\\\[4pt]\\xrightarrow{\\text{下移 3}} y = (x-1)^2 + 5 - 3 = (x-1)^2 + 2',
   },
   // Q7 平移 + 定义域变化 + 联动3.0.5
   {
@@ -111,8 +99,6 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '2', isLatex: true },
     ],
     correctAnswer: '-1',
-    explanation: '',
-    explanationLatex: '\\text{过 }(a, 0)\\text{ 即 }y = 0\\text{：}\\\\[4pt]\\sqrt{a + 2} - 1 = 0\\\\[4pt]\\sqrt{a + 2} = 1 \\Rightarrow a + 2 = 1\\\\[4pt]a = -1',
   },
   // Q8 综合大题：平移 + 指数函数 + 定点 + 联动3.1
   {
@@ -127,7 +113,5 @@ export const graphPrereqQuizQuestions: QuizQuestionData[] = [
       { label: 'D', value: '1', isLatex: true },
     ],
     correctAnswer: '-1',
-    explanation: '',
-    explanationLatex: '\\text{右移 1：}y = 3^{x-1}\\\\[4pt]\\text{下移 2：}y = 3^{x-1} - 2\\\\[4pt]\\text{令 }x = 1\\text{：}y = 3^{1-1} - 2 = 3^0 - 2 = 1 - 2 = -1',
   },
 ];

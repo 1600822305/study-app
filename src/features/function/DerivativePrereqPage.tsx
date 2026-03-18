@@ -6,6 +6,7 @@ import { derivPrereqPractice1, derivPrereqPractice2, derivPrereqPractice3 } from
 import { derivPrereqQuizQuestions } from './data/deriv-prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
+import { DerivativePrereqAnswers, derivativePrereqExplanations } from './derivative-prereq-answers';
 
 export function DerivativePrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('deriv-prereq', derivPrereqProgressItems);
@@ -115,6 +116,7 @@ export function DerivativePrereqPage() {
               title="✏️ 即时练习：极限直觉（5题）"
               questions={derivPrereqPractice1}
               printOptionCols={2}
+              explanations={derivativePrereqExplanations}
             />
 
             {/* 实战例题 */}
@@ -261,6 +263,7 @@ export function DerivativePrereqPage() {
               title="✏️ 即时练习：平均变化率（5题）"
               questions={derivPrereqPractice2}
               printOptionCols={2}
+              explanations={derivativePrereqExplanations}
             />
 
             {/* 高考考什么 */}
@@ -525,6 +528,7 @@ export function DerivativePrereqPage() {
               title="✏️ 即时练习：从平均到瞬时（5题）"
               questions={derivPrereqPractice3}
               printOptionCols={2}
+              explanations={derivativePrereqExplanations}
             />
 
             {/* 高考考什么 */}
@@ -600,7 +604,7 @@ export function DerivativePrereqPage() {
       <section id="dp-quiz" className="mb-2 scroll-mt-4">
         <Collapsible title="四、综合自测（8题）— 全对可进入下一章，错2题以上回看对应节" defaultOpen storageKey="deriv-prereq:quiz">
           <div className="-mx-4 -mt-3 -mb-4">
-            <QuizPanel questions={derivPrereqQuizQuestions} module="deriv-prereq-quiz" />
+            <QuizPanel questions={derivPrereqQuizQuestions} module="deriv-prereq-quiz" explanations={derivativePrereqExplanations} />
           </div>
         </Collapsible>
       </section>
@@ -608,77 +612,7 @@ export function DerivativePrereqPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && (
-        <>
-          <PageBreak label="答案与解析" />
-          <section className="print-answers">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">📝 3.3.5 导数前置知识 — 答案与解析</h2>
-
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800 mb-2">即时练习答案</h3>
-              <div className="space-y-3">
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第一节：极限思想入门</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {derivPrereqPractice1.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第二节：平均变化率</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {derivPrereqPractice2.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700 mb-2">第三节：从平均到瞬时</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {derivPrereqPractice3.map((q, i) => {
-                      const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                      return (
-                        <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                          <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                          {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-gray-800 mb-2">自测题答案</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {derivPrereqQuizQuestions.map((q, i) => {
-                  const isLatex = q.options?.find(o => o.value === q.correctAnswer)?.isLatex;
-                  return (
-                    <div key={q.id} className="text-gray-700" style={{ breakInside: 'avoid' }}>
-                      <p><strong>{i + 1}. 答案：{isLatex ? <Math tex={q.correctAnswer} /> : q.correctAnswer}</strong></p>
-                      {q.explanationLatex && <p><Math tex={q.explanationLatex} /></p>}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {isPrinting && printOptions.showAnswers && <DerivativePrereqAnswers />}
 
       </LessonLayout>
     </div>
