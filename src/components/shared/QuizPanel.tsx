@@ -38,6 +38,8 @@ interface QuizPanelProps {
   shuffle?: boolean;
   /** 外部提供的解析内容，key 为题目 id，优先于 explanationLatex */
   explanations?: Record<string, ReactNode>;
+  /** 交互模式选项列数，默认 1 */
+  optionCols?: 1 | 2;
 }
 
 interface AnswerRecord {
@@ -61,7 +63,7 @@ interface QuizSession {
 
 // ── Component ──
 
-export function QuizPanel({ module, questions, title = '自测', description, shuffle = true, explanations }: QuizPanelProps) {
+export function QuizPanel({ module, questions, title = '自测', description, shuffle = true, explanations, optionCols = 1 }: QuizPanelProps) {
   const { isPrinting } = usePrintMode();
   const { recordAnswer } = useQuiz(module);
 
@@ -282,7 +284,8 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
             </h4>
             <div className="space-y-3">
               {wrongAnswers.map((wa) => {
-                const q = questionMap.get(wa.questionId)!;
+                const q = questionMap.get(wa.questionId);
+                if (!q) return null;
                 const qIsBlank = q.type === 'blank';
                 const userOpt = qIsBlank ? null : q.options?.find((o) => o.value === wa.selected);
                 const correctOpt = qIsBlank ? null : q.options?.find((o) => o.value === q.correctAnswer);
@@ -388,7 +391,7 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
 
         {/* Choice options */}
         {!isBlank && current.options && (
-          <div className="space-y-2">
+          <div className={optionCols === 2 ? 'grid grid-cols-2 gap-2' : 'space-y-2'}>
             {current.options.map((opt) => {
               let borderColor = 'border-gray-200 hover:border-blue-400';
               let bgColor = 'bg-white hover:bg-blue-50';

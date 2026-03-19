@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { setsPractice0, setsPractice1, setsPractice2, setsPractice3, setsPractice4, setsPractice5 } from './data/practice';
+import { setsPractice3, setsPractice5 } from './data/practice';
 import { setsQuizQuestions } from './data/quiz';
 import type { QuizQuestionData } from '@/types';
 
@@ -9,129 +9,25 @@ import type { QuizQuestionData } from '@/types';
 // ══════════════════════════════════════════════════════════
 
 export const setsExplanations: Record<string, ReactNode> = {
-  // ── 元素与集合 ──
-  'stp0-1': (
-    <>
-      <p className="mt-2">8 在集合里 → <MathTex tex="8 \in A" /></p>
-    </>
-  ),
-  'stp0-2': (
-    <>
-      <p className="mt-2">3 不大于 5，不满足条件 → <MathTex tex="3 \notin B" /></p>
-    </>
-  ),
-
-  // ── 集合基础 ──
-  'stp1-1': (
-    <>
-      <p className="mt-2">"比较高""好看""比较大"没有明确标准，不确定 → 不是集合</p>
-      <p className="mt-2">"大于5的自然数"标准明确 → 是集合</p>
-    </>
-  ),
-  'stp1-2': (
-    <>
-      <p className="mt-2">无序性：排列顺序不影响集合</p>
-      <p className="text-center mt-1"><MathTex tex="\{1,2,3\} = \{3,1,2\}" /></p>
-    </>
-  ),
-  'stp1-3': (
-    <>
-      <p className="mt-2">互异性：元素不能重复，1 出现两次 → 应写成 <MathTex tex="\{1, 2\}" /></p>
-    </>
-  ),
-  'stp1-4': (
-    <>
-      <p className="mt-2">互异性要求 <MathTex tex="a \neq b,\; a \neq c,\; b \neq c" /></p>
-    </>
-  ),
-  'stp1-5': (
-    <>
-      <p className="mt-2">"接近"没有明确标准 → 违反确定性 → 不能构成集合</p>
-    </>
-  ),
-
-  // ── 集合的表示 ──
-  'stp2-1': (
-    <>
-      <p className="mt-2">不超过 5 的正整数：1, 2, 3, 4, 5</p>
-    </>
-  ),
-  'stp2-2': (
-    <>
-      <p className="mt-2"><MathTex tex="x^2 = 1 \Rightarrow x = \pm 1" /></p>
-    </>
-  ),
-  'stp2-3': (
-    <>
-      <p className="mt-2">≤ → 方括号 [；&lt; → 小括号 )</p>
-    </>
-  ),
-  'stp2-4': (
-    <>
-      <p className="mt-2">&gt; 不含端点 → 小括号；<MathTex tex="\infty" /> 永远 → 小括号</p>
-    </>
-  ),
-  'stp2-5': (
-    <>
-      <p className="mt-2"><MathTex tex="(x+2)(x-2)=0 \Rightarrow x=-2 \text{ 或 } x=2" /></p>
-      <p className="mt-2">注意 D 是区间，不是列举法！</p>
-    </>
-  ),
-  'stp2-6': (
-    <>
-      <p className="mt-2">≤ 含端点 → ]；<MathTex tex="-\infty" /> → (</p>
-    </>
-  ),
-  'stp2-7': (
-    <>
-      <p className="mt-2">[ → 含左端点（≤），) → 不含右端点（&lt;）</p>
-      <p className="text-center mt-1"><MathTex tex="[2,5) \Rightarrow 2 \leq x < 5" /></p>
-    </>
-  ),
-  'stp2-8': (
-    <>
-      <p className="mt-2">偶数 = 2 的倍数：<MathTex tex="x = 2k,\; k \in \mathbb{Z}" /></p>
-    </>
-  ),
-
   // ── 常用数集 ──
   'stp3-1': (
     <>
-      <p className="mt-2"><MathTex tex="-3" /> 是整数 → <MathTex tex="-3 \in \mathbb{Z}" /></p>
+      <p className="mt-2">0 是自然数（<MathTex tex="0 \in \mathbb{N}" />），但不是正整数（<MathTex tex="0 \notin \mathbb{N}^*" />）</p>
+      <p className="mt-1">-1 是负数不属于 N，0.5 是小数不属于 Z</p>
     </>
   ),
   'stp3-2': (
     <>
-      <p className="mt-2"><MathTex tex="\sqrt{2}" /> 是无理数 → <MathTex tex="\sqrt{2} \notin \mathbb{Q}" /></p>
+      <p className="mt-2"><MathTex tex="\sqrt{2}" /> 是无理数，不属于 N、Z、Q，但属于 R（实数 = 有理 + 无理）</p>
     </>
   ),
   'stp3-3': (
     <>
-      <p className="mt-2"><MathTex tex="\pi" /> 是无理数，但属于实数集 → <MathTex tex="\pi \in \mathbb{R}" /></p>
+      <p className="mt-2">Q（有理数）包含所有整数和分数，范围比 Z 大，所以 Q ⊂ Z 是反的</p>
+      <p className="mt-1">正确关系：<MathTex tex="\mathbb{Z} \subset \mathbb{Q}" /></p>
     </>
   ),
 
-  // ── 子集关系 ──
-  'stp4-1': (
-    <>
-      <p className="mt-2"><MathTex tex="\{1,2\}" /> 的每个元素都在 <MathTex tex="\{1,2,3\}" /> 中 → 是子集</p>
-    </>
-  ),
-  'stp4-2': (
-    <>
-      <p className="mt-2">真子集要求不相等，两个集合相同 → 不是真子集</p>
-    </>
-  ),
-  'stp4-3': (
-    <>
-      <p className="mt-2"><MathTex tex="\varnothing" /> 是空集（0个元素），<MathTex tex="\{0\}" /> 有 1 个元素</p>
-    </>
-  ),
-  'stp4-4': (
-    <>
-      <p className="mt-2"><MathTex tex="2^2 = 4" /> 个子集：<MathTex tex="\varnothing,\; \{1\},\; \{2\},\; \{1,2\}" /></p>
-    </>
-  ),
 
   // ── 集合运算 ──
   'stp5-1': (
@@ -332,11 +228,7 @@ export function SetsAnswers() {
     <section className="mb-8 print-answers">
       <PageBreak label="答案与解析" />
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.2 集合 — 答案与解析</h2>
-      <AnswerSection title="一、元素与集合 — 即时练习" questions={setsPractice0} />
-      <AnswerSection title="二、集合的概念 — 即时练习" questions={setsPractice1} />
-      <AnswerSection title="三、集合的表示 — 即时练习" questions={setsPractice2} />
       <AnswerSection title="四、常用数集 — 即时练习" questions={setsPractice3} />
-      <AnswerSection title="五、集合间的关系 — 即时练习" questions={setsPractice4} />
       <AnswerSection title="六、集合的运算 — 即时练习" questions={setsPractice5} />
       <AnswerSection title="高考真题实战" questions={setsQuizQuestions} />
     </section>

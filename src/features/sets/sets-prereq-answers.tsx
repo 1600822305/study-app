@@ -38,14 +38,14 @@ export const setsPrereqExplanations: Record<string, ReactNode> = {
   ),
   'sp2-2': (
     <>
-      <p className="mt-2"><MathTex tex="(x+2)(x-2)=0" />，根 <MathTex tex="x=-2,2" /></p>
-      <p className="mt-2">≥ 0 取两边 → <MathTex tex="x \leq -2 \text{ 或 } x \geq 2" /></p>
+      <p className="mt-2"><MathTex tex="(x+5)(x-3)=0" />，根 <MathTex tex="x=-5,3" /></p>
+      <p className="mt-2">&gt; 0 取两边 → <MathTex tex="x<-5 \text{ 或 } x>3" /></p>
     </>
   ),
   'sp2-3': (
     <>
-      <p className="mt-2"><MathTex tex="(x+5)(x-2)=0" />，根 <MathTex tex="x=-5,2" /></p>
-      <p className="mt-2">&gt; 0 取两边 → <MathTex tex="x<-5 \text{ 或 } x>2" /></p>
+      <p className="mt-2"><MathTex tex="(x+2)(x-2)=0" />，根 <MathTex tex="x=-2,2" /></p>
+      <p className="mt-2">≥ 0 取两边 → <MathTex tex="x \leq -2 \text{ 或 } x \geq 2" /></p>
     </>
   ),
   'sp2-4': (
@@ -55,15 +55,25 @@ export const setsPrereqExplanations: Record<string, ReactNode> = {
     </>
   ),
 
+  'sp2-5': (
+    <>
+      <p className="mt-2">先乘 -1：<MathTex tex="x^2-4x-5<0" /></p>
+      <p className="mt-2"><MathTex tex="(x-5)(x+1)=0" />，根 <MathTex tex="x=-1,5" /></p>
+      <p className="mt-2">&lt; 0 取中间 → <MathTex tex="-1<x<5" /></p>
+    </>
+  ),
+
   // ── 第3节：数轴表示 ──
   'sp3-1': (
     <>
-      <p className="mt-2">≤ 包含等号 → 端点取到 → 实心圆 ●</p>
+      <p className="mt-2">≤ 包含等号 → -2 取到 → 实心 ●</p>
+      <p className="mt-2">&lt; 不含等号 → 5 取不到 → 空心 ○</p>
     </>
   ),
   'sp3-2': (
     <>
-      <p className="mt-2">&lt; 不含等号 → 两个端点都不取到 → 空心圆 ○</p>
+      <p className="mt-2">&gt; 不含等号 → 3 处空心 ○</p>
+      <p className="mt-2">x &gt; 3 表示比 3 大 → 向右涂色</p>
     </>
   ),
 
@@ -95,7 +105,7 @@ export const setsPrereqExplanations: Record<string, ReactNode> = {
   ),
   'spq2': (
     <>
-      <p className="mt-2"><MathTex tex="\Delta = 2^2 - 4(1)(-1) = 4 + 4 = 8" /></p>
+      <p className="text-center mt-2"><MathTex tex="(2x+1)(x-2)=0 \Rightarrow x=2 \text{ 或 } x=-\frac{1}{2}" /></p>
     </>
   ),
   'spq3': (
@@ -105,8 +115,8 @@ export const setsPrereqExplanations: Record<string, ReactNode> = {
   ),
   'spq4': (
     <>
-      <p className="mt-2"><MathTex tex="(x+3)(x-2)=0" />，大于取两边含等号</p>
-      <p className="text-center mt-1"><MathTex tex="x \leq -3 \text{ 或 } x \geq 2" /></p>
+      <p className="mt-2"><MathTex tex="(x+2)(x-2)=0" />，大于取两边含等号</p>
+      <p className="text-center mt-1"><MathTex tex="x \leq -2 \text{ 或 } x \geq 2" /></p>
     </>
   ),
   'spq5': (
@@ -126,51 +136,7 @@ export const setsPrereqExplanations: Record<string, ReactNode> = {
   ),
   'spq8': (
     <>
-      <p className="text-center mt-2"><MathTex tex="(2x+1)(x-2)=0 \Rightarrow x=2 \text{ 或 } x=-\frac{1}{2}" /></p>
-    </>
-  ),
-  'spq9': (
-    <>
-      <p className="text-center mt-2"><MathTex tex="(x-3)(x+2)=0 \Rightarrow x=3 \text{ 或 } x=-2" /></p>
-    </>
-  ),
-  'spq10': (
-    <>
-      <p className="mt-2"><MathTex tex="(x-2)(x-3)=0" />，小于取中间 → <MathTex tex="2 < x < 3" /></p>
-    </>
-  ),
-  'spq11': (
-    <>
-      <p className="mt-2"><MathTex tex="(x+2)(x-2)=0" />，大于取两边含等号</p>
-      <p className="text-center mt-1"><MathTex tex="x \leq -2 \text{ 或 } x \geq 2" /></p>
-    </>
-  ),
-  'spq12': (
-    <>
-      <p className="mt-2">&lt; 不含 → (；≤ 含 → ]。答案 <MathTex tex="(-3, 5]" /></p>
-    </>
-  ),
-  'spq13': (
-    <>
       <p className="mt-2">≤ 含等号 → 实心 ●；&lt; 不含 → 空心 ○</p>
-    </>
-  ),
-  'spq14': (
-    <>
-      <p className="text-center mt-2"><MathTex tex="x^2 = 9 \Rightarrow x = \pm 3" /></p>
-      <p className="mt-2">别漏负根！</p>
-    </>
-  ),
-  'spq15': (
-    <>
-      <p className="mt-2"><MathTex tex="\Delta = 9+4 = 13" /></p>
-      <p className="text-center mt-1"><MathTex tex="x = \frac{-3 \pm \sqrt{13}}{2}" /></p>
-    </>
-  ),
-  'spq16': (
-    <>
-      <p className="mt-2">大于取两边含等号，再转区间：</p>
-      <p className="text-center mt-1"><MathTex tex="(-\infty, -2] \cup [2, +\infty)" /></p>
     </>
   ),
 };

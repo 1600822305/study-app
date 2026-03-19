@@ -34,43 +34,101 @@ export const complexExplanations: Record<string, ReactNode> = {
       <p className="mt-2"><MathTex tex="z = 0 + 2i" />，<MathTex tex="a=0,\; b=2 \neq 0" /> → 纯虚数</p>
     </>
   ),
+  'cp2-3': (
+    <>
+      <p className="mt-2">纯虚数条件：实部 = 0 且虚部 ≠ 0</p>
+      <p className="text-center mt-1"><MathTex tex="m^2-1=0 \Rightarrow m=\pm 1" /></p>
+      <p className="mt-2">检查虚部：<MathTex tex="m-1 \neq 0 \Rightarrow m \neq 1" /></p>
+      <p className="mt-2">所以 <MathTex tex="m = -1" /></p>
+    </>
+  ),
+  'cp2-4': (
+    <>
+      <p className="mt-2"><MathTex tex="i^2 = -1" />，是实数</p>
+      <p className="mt-2">其余选项都含 <MathTex tex="i" />，虚部不为 0，是虚数</p>
+    </>
+  ),
+  'cp2-5': (
+    <>
+      <p className="mt-2"><MathTex tex="z = \bar{z} \Rightarrow a+bi = a-bi \Rightarrow 2bi = 0 \Rightarrow b = 0" /></p>
+      <p className="mt-2">虚部为 0，所以 <MathTex tex="z" /> 是实数</p>
+    </>
+  ),
 
   // ── 第3节：复数相等 ──
   'cp3-1': (
     <>
-      <p className="mt-2">复数 = 0 → 实部虚部都为 0：</p>
-      <p className="text-center mt-1"><MathTex tex="\begin{cases} 3x-6=0 \Rightarrow x=2 \\ 2y+4=0 \Rightarrow y=-2 \end{cases}" /></p>
+      <p className="mt-2">实部对实部，虚部对虚部：</p>
+      <p className="text-center mt-1"><MathTex tex="a+bi = 2+(-3)i \Rightarrow a=2,\; b=-3" /></p>
     </>
   ),
   'cp3-2': (
     <>
-      <p className="mt-2">实部对实部，虚部对虚部：</p>
-      <p className="text-center mt-1"><MathTex tex="a+bi = 2+(-3)i \Rightarrow a=2,\; b=-3" /></p>
+      <p className="mt-2">复数 = 0 → 实部虚部都为 0：</p>
+      <p className="text-center mt-1"><MathTex tex="3x-6=0 \Rightarrow x=2" /></p>
+      <p className="text-center mt-1"><MathTex tex="2y+4=0 \Rightarrow y=-2" /></p>
+    </>
+  ),
+  'cp3-3': (
+    <>
+      <p className="mt-2">实部和虚部都等于 0：</p>
+      <p className="text-center mt-1"><MathTex tex="x+1=0 \Rightarrow x=-1" /></p>
+      <p className="mt-2">验证虚部：<MathTex tex="x^2-1=(-1)^2-1=0" />，也为 0 ✓</p>
+      <p className="mt-2">若 <MathTex tex="x=1" />：实部 <MathTex tex="=2\neq 0" />，不满足</p>
+    </>
+  ),
+  'cp3-4': (
+    <>
+      <p className="mt-2">两边化成 <MathTex tex="a+bi" /> 形式再比较：</p>
+      <p className="mt-2">左边：<MathTex tex="(a^2-4)+(a+2)i" />，右边：<MathTex tex="0+bi" /></p>
+      <p className="mt-2">实部相等：<MathTex tex="a^2-4=0 \Rightarrow a=\pm 2" /></p>
+      <p className="mt-2">虚部相等：<MathTex tex="a+2=b" /></p>
+      <p className="mt-2">当 <MathTex tex="a=-2" /> 时 <MathTex tex="b=0" />，但题目要求 <MathTex tex="b\neq 0" />，排除</p>
+      <p className="mt-2">当 <MathTex tex="a=2" /> 时 <MathTex tex="b=4" />，所以 <MathTex tex="a+b=6" /></p>
+    </>
+  ),
+  'cp3-5': (
+    <>
+      <p className="mt-2">设 <MathTex tex="z=a+bi" />，则 <MathTex tex="\bar{z}=a-bi" /></p>
+      <p className="mt-2">代入：<MathTex tex="(a+bi)+2(a-bi)=3a-bi=3+i" /></p>
+      <p className="mt-2">实部：<MathTex tex="3a=3 \Rightarrow a=1" /></p>
+      <p className="mt-2">虚部：<MathTex tex="-b=1 \Rightarrow b=-1" /></p>
+      <p className="mt-2">所以 <MathTex tex="z=1-i" /></p>
     </>
   ),
 
   // ── 第4节：复数运算 ──
   'cp4-1': (
     <>
-      <p className="mt-2">实部加实部，虚部加虚部：</p>
-      <p className="text-center mt-1"><MathTex tex="(3+1)+(2-5)i = 4-3i" /></p>
+      <p className="mt-2">展开，遇 <MathTex tex="i^2" /> 换 <MathTex tex="-1" />：</p>
+      <p className="text-center mt-1"><MathTex tex="2+6i-i-3i^2 = 2+5i+3 = 5+5i" /></p>
     </>
   ),
   'cp4-2': (
     <>
-      <p className="mt-2">分母实数化：上下同乘共轭</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{(1+i)^2}{(1-i)(1+i)} = \frac{2i}{2} = i" /></p>
+      <p className="mt-2">上下同乘共轭 <MathTex tex="1-i" />：</p>
+      <p className="text-center mt-1"><MathTex tex="\frac{(3+i)(1-i)}{2} = \frac{4-2i}{2} = 2-i" /></p>
+      <p className="mt-2">虚部是 <MathTex tex="-1" />（不是 <MathTex tex="-i" />）</p>
     </>
   ),
   'cp4-3': (
     <>
-      <p className="mt-2">模的公式：</p>
-      <p className="text-center mt-1"><MathTex tex="|3+4i| = \sqrt{9+16} = \sqrt{25} = 5" /></p>
+      <p className="mt-2">代入：<MathTex tex="1+i+(-1)+(-i) = 0" /></p>
+      <p className="mt-2">连续4个 <MathTex tex="i" /> 的幂之和恒为 0</p>
     </>
   ),
   'cp4-4': (
     <>
-      <p className="mt-2"><MathTex tex="67 \div 4 = 16 \cdots\cdots 3 \Rightarrow i^{67} = i^3 = -i" /></p>
+      <p className="mt-2">分子 <MathTex tex="(1+i)^2 = 2i" />，所以 <MathTex tex="z = \frac{2i}{1-i}" /></p>
+      <p className="mt-2">上下同乘 <MathTex tex="1+i" />：<MathTex tex="z = \frac{2i(1+i)}{2} = -1+i" /></p>
+      <p className="mt-2"><MathTex tex="|z| = \sqrt{1+1} = \sqrt{2}" /></p>
+    </>
+  ),
+  'cp4-5': (
+    <>
+      <p className="mt-2">先算 <MathTex tex="z" />：<MathTex tex="(2+i)(1-i) = 2-2i+i-i^2 = 3-i" /></p>
+      <p className="mt-2"><MathTex tex="\bar{z} = 3+i" /></p>
+      <p className="mt-2"><MathTex tex="z+\bar{z} = (3-i)+(3+i) = 6" /></p>
     </>
   ),
 
@@ -91,99 +149,44 @@ export const complexExplanations: Record<string, ReactNode> = {
   // ── 高考真题 ──
   'q1': (
     <>
-      <p className="mt-2">分母实数化：上下同乘 <MathTex tex="(1+2i)" /></p>
-      <p className="text-center mt-1"><MathTex tex="\frac{(2+i)(1+2i)}{5} = \frac{5i}{5} = i" />，虚部为 1</p>
+      <p className="mt-2">凑因子：<MathTex tex="i(1-2i) = 2+i" />，所以</p>
+      <p className="text-center mt-1"><MathTex tex="\frac{2+i}{1-2i} = i" />，虚部为 <strong>1</strong></p>
     </>
   ),
   'q2': (
     <>
-      <p className="mt-2">上下同乘 <MathTex tex="(1+i)" />：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{(1+i)^2}{2} = \frac{2i}{2} = i" /></p>
+      <p className="mt-2">上下同乘 <MathTex tex="1-i" />：</p>
+      <p className="text-center mt-1"><MathTex tex="\frac{(1+3i)(1-i)}{2} = \frac{4+2i}{2} = 2+i" /></p>
+      <p className="mt-2">点 <MathTex tex="(2,1)" />，在第一象限</p>
     </>
   ),
   'q3': (
     <>
-      <p className="mt-2">分母实数化：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{(1+3i)(1-i)}{2} = \frac{4+2i}{2} = 2+i" />，点 (2,1) 在第一象限</p>
+      <p className="mt-2"><MathTex tex="i^3 = -i" />，展开：</p>
+      <p className="text-center mt-1"><MathTex tex="(1+i)(-i) = -i - i^2 = 1 - i" /></p>
     </>
   ),
   'q4': (
     <>
-      <p className="mt-2"><MathTex tex="i^3 = -i" />，展开：</p>
-      <p className="text-center mt-1"><MathTex tex="(1+i)(-i) = -i - i^2 = -i + 1 = 1 - i" /></p>
+      <p className="mt-2">模的速算：<MathTex tex="|z| = \frac{|2+i|}{|1+i|} = \frac{\sqrt{5}}{\sqrt{2}} = \frac{\sqrt{10}}{2}" /></p>
     </>
   ),
   'q5': (
     <>
-      <p className="mt-2"><MathTex tex="z = 3 + (-2)i" />，虚部是 <MathTex tex="-2" />，不是 <MathTex tex="-2i" /></p>
+      <p className="mt-2">先算 <MathTex tex="(1-i)^2 = -2i" />，再平方：</p>
+      <p className="text-center mt-1"><MathTex tex="(-2i)^2 = 4i^2 = -4" /></p>
     </>
   ),
   'q6': (
     <>
-      <p className="mt-2">先化简再求模：</p>
-      <p className="text-center mt-1"><MathTex tex="z = \frac{3-i}{2} \Rightarrow |z| = \sqrt{\frac{9}{4}+\frac{1}{4}} = \frac{\sqrt{10}}{2}" /></p>
+      <p className="mt-2">先解 <MathTex tex="z" />：<MathTex tex="1-z = \frac{1}{i} = -i" /></p>
+      <p className="mt-2">所以 <MathTex tex="z = 1+i" />，<MathTex tex="z+\bar{z} = 2" /></p>
     </>
   ),
   'q7': (
     <>
-      <p className="mt-2">先算 <MathTex tex="(1-i)^2" />，再平方：</p>
-      <p className="text-center mt-1"><MathTex tex="(1-i)^2 = -2i \Rightarrow (-2i)^2 = 4i^2 = -4" /></p>
-    </>
-  ),
-  'q8': (
-    <>
-      <p className="mt-2">分母实数化后看虚部系数：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{2(1-i)}{2} = 1-i" />，虚部为 <MathTex tex="-1" /></p>
-    </>
-  ),
-  'q9': (
-    <>
-      <p className="mt-2">先解出 <MathTex tex="z" />：</p>
-      <p className="text-center mt-1"><MathTex tex="1-z = \frac{1}{i} = -i \Rightarrow z = 1+i \Rightarrow z+\bar{z} = 2" /></p>
-    </>
-  ),
-  'q10': (
-    <>
-      <p className="mt-2">分母实数化：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{(2-i)(1+3i)}{10} = \frac{5+5i}{10} = \frac{1}{2}+\frac{1}{2}i" />，第一象限</p>
-    </>
-  ),
-  'q11': (
-    <>
-      <p className="mt-2">展开后令虚部为 0：</p>
-      <p className="text-center mt-1"><MathTex tex="(a+i)(1-ai) = 2a + (1-a^2)i = 2" /></p>
-      <p className="mt-2"><MathTex tex="1-a^2=0 \Rightarrow a=\pm 1" />；<MathTex tex="2a=2 \Rightarrow a=1" /></p>
-    </>
-  ),
-  'q12': (
-    <>
-      <p className="mt-2">纯虚数：实部 = 0 且虚部 ≠ 0</p>
-      <p className="text-center mt-1"><MathTex tex="m^2-1=0 \Rightarrow m=\pm 1" /></p>
-      <p className="mt-2"><MathTex tex="m=-1" /> 时虚部 = 0（不是纯虚数），故 <MathTex tex="m=1" /></p>
-    </>
-  ),
-  'q13': (
-    <>
-      <p className="mt-2">展开，<MathTex tex="i^2 \to -1" />：</p>
-      <p className="text-center mt-1"><MathTex tex="(2+3i)(1-i) = 2-2i+3i-3i^2 = 2+i+3 = 5+i" /></p>
-    </>
-  ),
-  'q14': (
-    <>
-      <p className="mt-2">重要公式 <MathTex tex="z \cdot \bar{z} = |z|^2" />：</p>
-      <p className="text-center mt-1"><MathTex tex="(1+2i)(1-2i) = 1+4 = 5" /></p>
-    </>
-  ),
-  'q15': (
-    <>
-      <p className="mt-2">每 4 个连续 <MathTex tex="i" /> 的幂之和为 0：</p>
-      <p className="text-center mt-1"><MathTex tex="i+i^2+i^3+i^4 = 0" />，共 506 组，总和 = 0</p>
-    </>
-  ),
-  'q16': (
-    <>
-      <p className="mt-2">展开后实部虚部分别相等：</p>
-      <p className="text-center mt-1"><MathTex tex="(x-y)+(x+y)i = 2 \Rightarrow x+y=0" /></p>
+      <p className="mt-2">展开：<MathTex tex="(a+i)(1-ai) = 2a + (1-a^2)i = 2" /></p>
+      <p className="mt-2">虚部 = 0：<MathTex tex="a = \pm 1" />；实部 = 2：<MathTex tex="a = 1" /></p>
     </>
   ),
 };

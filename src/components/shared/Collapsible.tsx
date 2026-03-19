@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 import { useUIState } from '@/hooks/useUIState';
@@ -36,6 +36,9 @@ export function Collapsible({
   const open = isPrinting ? true : (storageKey ? persistedOpen : localOpen);
   const setOpen = storageKey ? setPersistedOpen : setLocalOpen;
 
+  const hasRendered = useRef(open);
+  if (open) hasRendered.current = true;
+
   const styles = {
     default: 'border-gray-200 bg-white',
     answer: 'border-blue-200 bg-blue-50',
@@ -64,8 +67,11 @@ export function Collapsible({
           </div>
         )}
       </div>
-      {open && (
-        <div className="px-4 pb-2 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-2">
+      {hasRendered.current && (
+        <div
+          className="px-4 pb-2 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-2"
+          style={open ? undefined : { display: 'none' }}
+        >
           {children}
         </div>
       )}
