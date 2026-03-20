@@ -183,7 +183,11 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
 
               {/* 选择题选项 */}
               {q.type !== 'blank' && q.options && (
-                <div className="flex flex-wrap gap-x-5 gap-y-1.5 ml-4 mt-1.5 text-base">
+                <div className={`${
+                  q.printCols === 2 ? 'grid grid-cols-2 gap-x-4 gap-y-1' :
+                  q.printCols === 4 ? 'grid grid-cols-4 gap-x-4 gap-y-0.5' :
+                  'flex flex-wrap gap-x-5 gap-y-1.5'
+                } ml-4 mt-1.5 text-base`}>
                   {q.options.map((opt) => (
                     <div key={opt.value} className="flex items-center gap-1 text-gray-800 font-medium">
                       <span className="w-3.5 h-3.5 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-500 shrink-0" style={{ fontSize: '9px' }}>

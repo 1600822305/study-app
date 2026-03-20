@@ -1,30 +1,53 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { ineqPractice1, ineqPractice2 } from './data/practice';
 import { inequalityQuizQuestions } from './data/quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const inequalityExplanations: Record<string, ReactNode> = {
-  'iq1-1': (
+  // ── 基本不等式即时训练 ──
+  'iq-p1': (
     <>
-      <p className="mt-2">先移项：<MathTex tex="3x-5>7 \Rightarrow 3x>12" /></p>
-      <p className="mt-2">除以正数 3，不等号方向不变</p>
-      <p className="text-center mt-1"><MathTex tex="x>4" /></p>
+      <p className="mt-2">积定求和最小值，直接套 <MathTex tex="a+b \geq 2\sqrt{ab}" /></p>
+      <p className="mt-1"><MathTex tex="a+b \geq 2\sqrt{16} = 2 \times 4 = 8" /></p>
+      <p className="mt-1"><MathTex tex="a=b=4" /> 时取等，最小值为 <strong>8</strong></p>
     </>
   ),
-  'iq1-2': (
+  'iq-p2': (
     <>
-      <p className="mt-2">先移项：<MathTex tex="-2x+6\le 0 \Rightarrow -2x\le -6" /></p>
-      <p className="mt-2">除以负数 <MathTex tex="-2" />，不等号要反向</p>
-      <p className="text-center mt-1"><MathTex tex="x\ge 3" /></p>
+      <p className="mt-2">和定求积最大值，套 <MathTex tex="a+b \geq 2\sqrt{ab}" /></p>
+      <p className="mt-1"><MathTex tex="8 \geq 2\sqrt{ab}" />，两边平方得 <MathTex tex="64 \geq 4ab" />，即 <MathTex tex="ab \leq 16" /></p>
+      <p className="mt-1"><MathTex tex="a=b=4" /> 时取等，最大值为 <strong>16</strong></p>
     </>
   ),
-  'iq1-3': (
+  'iq-p3': (
     <>
-      <p className="mt-2">A：同乘正数，方向不变，所以一定成立</p>
-      <p className="mt-2">B：乘负数应该变号</p>
-      <p className="mt-2">C、D 都需要额外条件，不能保证</p>
-      <p className="text-center mt-1"><MathTex tex="a>b \Rightarrow 2a>2b" /></p>
+      <p className="mt-2"><MathTex tex="x \cdot \dfrac{9}{x} = 9" /> 是定值，积定求和最小值</p>
+      <p className="mt-1"><MathTex tex="x + \dfrac{9}{x} \geq 2\sqrt{9} = 6" /></p>
+      <p className="mt-1"><MathTex tex="x=3" /> 时取等，最小值为 <strong>6</strong></p>
+    </>
+  ),
+  'iq-p4': (
+    <>
+      <p className="mt-2">设 <MathTex tex="a=x,\;b=4-x" />，则 <MathTex tex="a+b=4" /> 是定值，和定求积最大值</p>
+      <p className="mt-1"><MathTex tex="4 \geq 2\sqrt{ab}" />，两边平方得 <MathTex tex="16 \geq 4ab" />，即 <MathTex tex="ab \leq 4" /></p>
+      <p className="mt-1"><MathTex tex="x=2" /> 时取等，最大值为 <strong>4</strong></p>
+    </>
+  ),
+  'iq-p5': (
+    <>
+      <p className="mt-2">配凑：把 <MathTex tex="x" /> 拆成 <MathTex tex="(x-2)+2" /></p>
+      <p className="mt-1">原式 <MathTex tex="= (x-2) + \dfrac{1}{x-2} + 2" /></p>
+      <p className="mt-1">现在 <MathTex tex="(x-2) \cdot \dfrac{1}{x-2} = 1" /> 是定值</p>
+      <p className="mt-1"><MathTex tex="(x-2)+\dfrac{1}{x-2} \geq 2\sqrt{1} = 2" />，所以原式 <MathTex tex="\geq 2+2=4" /></p>
+      <p className="mt-1"><MathTex tex="x=3" /> 时取等，最小值为 <strong>4</strong></p>
+    </>
+  ),
+  'iq-p6': (
+    <>
+      <p className="mt-2">乘1法：<MathTex tex="\dfrac{1}{a}+\dfrac{1}{b} = \left(\dfrac{1}{a}+\dfrac{1}{b}\right)(a+2b)" /></p>
+      <p className="mt-1">展开 <MathTex tex="= 1 + \dfrac{2b}{a} + \dfrac{a}{b} + 2 = 3 + \dfrac{2b}{a} + \dfrac{a}{b}" /></p>
+      <p className="mt-1"><MathTex tex="\dfrac{2b}{a} \cdot \dfrac{a}{b} = 2" /> 是定值，套公式得 <MathTex tex="\dfrac{2b}{a}+\dfrac{a}{b} \geq 2\sqrt{2}" /></p>
+      <p className="mt-1">所以原式 <MathTex tex="\geq 3+2\sqrt{2}" />，最小值为 <MathTex tex="3+2\sqrt{2}" /></p>
     </>
   ),
   'iq2-1': (
@@ -171,8 +194,6 @@ export function InequalityAnswers() {
       <PageBreak label="答案与解析" />
       <section className="mb-8 print-answers">
         <h2 className="text-xl font-bold text-gray-900 mb-4">📝 2.1 不等式 — 答案与解析</h2>
-        <AnswerSection title="一、不等式性质 + 一元一次不等式 — 即时练习" questions={ineqPractice1} />
-        <AnswerSection title="三、基本不等式 — 即时练习" questions={ineqPractice2} />
         <AnswerSection title="综合测试（高考真题 + 精华题）" questions={inequalityQuizQuestions} />
       </section>
     </>

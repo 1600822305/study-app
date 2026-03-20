@@ -71,7 +71,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
   // ── 打印模式：静态展示所有题目 ──
   if (isPrinting) {
     return (
-      <div className="print-practice bg-green-50 border border-green-200 rounded-xl p-2 my-2">
+      <div className="print-practice bg-green-50 border border-green-200 rounded-xl p-2 mt-0">
         <p className="font-bold text-green-800 mb-1">{title}</p>
         <div className="space-y-0">
           {questions.map((q, idx) => (
@@ -140,7 +140,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
   // ── 完成总结 ──
   if (finished) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-xl p-4 my-4">
+      <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-0">
         <p className="font-bold text-green-800 mb-3">{title}</p>
         <div className="bg-white rounded-lg border border-green-100 p-4 text-center">
           <p className="text-2xl font-bold text-green-700 mb-1">
@@ -162,7 +162,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
 
   // ── 单题视图 ──
   return (
-    <div className="bg-green-50 border border-green-200 rounded-xl p-4 my-4">
+    <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-0">
       {/* 标题 + 进度 */}
       <div className="flex items-center justify-between mb-3">
         <p className="font-bold text-green-800">{title}</p>

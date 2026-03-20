@@ -1,55 +1,9 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { ineqPrereqPractice1, ineqPrereqPractice2 } from './data/prereq-practice';
 import { inequalityPrereqQuizQuestions } from './data/prereq-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const inequalityPrereqExplanations: Record<string, ReactNode> = {
-  'ip1-1': (
-    <>
-      <p className="mt-2">负 × 负 = 正</p>
-      <p className="text-center mt-1"><MathTex tex="(-3)\times(-5)=15" /></p>
-    </>
-  ),
-  'ip1-2': (
-    <>
-      <p className="mt-2">负 ÷ 正 = 负</p>
-      <p className="text-center mt-1"><MathTex tex="(-8)\div 2=-4" /></p>
-    </>
-  ),
-  'ip1-3': (
-    <>
-      <p className="mt-2">先算前两个：<MathTex tex="(-2)\times 3=-6" /></p>
-      <p className="mt-2">再算：<MathTex tex="(-6)\times(-1)=6" /></p>
-      <p className="mt-2">2 个负号，偶数个，结果为正</p>
-    </>
-  ),
-  'ip1-4': (
-    <>
-      <p className="mt-2">有括号，表示整个 <MathTex tex="-3" /> 平方</p>
-      <p className="text-center mt-1"><MathTex tex="(-3)^2=(-3)\times(-3)=9" /></p>
-      <p className="mt-2">注意：<MathTex tex="-3^2=-9" />，和这题不同</p>
-    </>
-  ),
-  'ip2-1': (
-    <>
-      <p className="mt-2">移项：<MathTex tex="2x=7-3=4" /></p>
-      <p className="text-center mt-1"><MathTex tex="x=2" /></p>
-    </>
-  ),
-  'ip2-2': (
-    <>
-      <p className="mt-2">含 <MathTex tex="x" /> 的移左边，常数移右边</p>
-      <p className="text-center mt-1"><MathTex tex="3x-x=1+5\Rightarrow 2x=6\Rightarrow x=3" /></p>
-    </>
-  ),
-  'ip2-3': (
-    <>
-      <p className="mt-2">先移项：<MathTex tex="-2x=-4" /></p>
-      <p className="text-center mt-1"><MathTex tex="x=\dfrac{-4}{-2}=2" /></p>
-      <p className="mt-2">这是方程，除以负数等号不变</p>
-    </>
-  ),
   'ipq1': (
     <>
       <p className="mt-2">先算幂：<MathTex tex="(-2)^3=-8" /></p>
@@ -121,9 +75,7 @@ export function InequalityPrereqAnswers() {
     <section className="mb-8 print-answers">
       <PageBreak label="答案与解析" />
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 2.0 不等式前置知识 — 答案与解析</h2>
-      <AnswerSection title="一、正负数运算 — 即时练习" questions={ineqPrereqPractice1} />
-      <AnswerSection title="二、解一元一次方程 — 即时练习" questions={ineqPrereqPractice2} />
-      <AnswerSection title="选择题自测" questions={inequalityPrereqQuizQuestions} />
+      <AnswerSection title="自测" questions={inequalityPrereqQuizQuestions} />
     </section>
   );
 }

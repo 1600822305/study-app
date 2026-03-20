@@ -34,7 +34,7 @@ export function QuadraticPage() {
       <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-5">
         <p className="text-amber-900 font-bold mb-1">📌 前置知识</p>
         <p className="text-amber-800 leading-7">本章需要你会：乘法公式、因式分解、解一元二次方程。</p>
-        <p className="text-amber-700 leading-7">不确定自己会不会？→ 先去看 <a href="/math/quadratic-prereq" className="text-blue-600 underline font-bold">2.2 二次函数前置知识</a>，做完自测再回来。</p>
+        <p className="text-amber-700 leading-7">不确定自己会不会？→ 先去看 <a href="/math/sets-prereq" className="text-blue-600 underline font-bold">1.1.5 集合前置知识</a>，里面有因式分解和乘法公式的复习。</p>
       </div>
 
       {/* 知识地图 */}

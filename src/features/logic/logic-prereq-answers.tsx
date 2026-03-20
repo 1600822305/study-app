@@ -112,57 +112,14 @@ export const logicPrereqExplanations: Record<string, ReactNode> = {
   ),
 
   // ── 前置知识自测 ──
-  'lpq1': (
-    <>
-      <p className="mt-2"><MathTex tex="(1,4) \subset (0,5)" />，A 在 B 里面</p>
-    </>
-  ),
-  'lpq2': (
-    <>
-      <p className="mt-2">≤ 取中间，含端点</p>
-      <p className="text-center mt-1"><MathTex tex="(x-1)(x-4) \leq 0 \Rightarrow [1,4]" /></p>
-    </>
-  ),
-  'lpq3': (
-    <>
-      <p className="mt-2">&lt; 号夹中间</p>
-      <p className="text-center mt-1"><MathTex tex="-5 < x < 1" /></p>
-    </>
-  ),
-  'lpq4': (
-    <>
-      <p className="mt-2"><MathTex tex="x=1 \Rightarrow x^2=1" /> ✓</p>
-      <p className="mt-2"><MathTex tex="x^2=1 \Rightarrow x=\pm 1" />，反例 <MathTex tex="x=-1" /></p>
-    </>
-  ),
-  'lpq5': (
-    <>
-      <p className="mt-2"><MathTex tex="(5,+\infty) \subset (2,+\infty)" />，小→大能推出</p>
-    </>
-  ),
-  'lpq6': (
-    <>
-      <p className="mt-2"><MathTex tex="6 \notin (1,5)" /> → A 不被 B 包含</p>
-    </>
-  ),
-  'lpq7': (
-    <>
-      <p className="mt-2">&gt; 取两边，不含端点</p>
-      <p className="text-center mt-1"><MathTex tex="(x+3)(x-1)>0 \Rightarrow x<-3 \text{ 或 } x>1" /></p>
-    </>
-  ),
-  'lpq8': (
-    <>
-      <p className="mt-2">≥ 拆两边，含端点</p>
-      <p className="text-center mt-1"><MathTex tex="x \leq 1 \text{ 或 } x \geq 5" /></p>
-    </>
-  ),
-  'lpq9': (
-    <>
-      <p className="mt-2">两边平方展开消 <MathTex tex="x^2" /></p>
-      <p className="text-center mt-1"><MathTex tex="-16x < -80 \Rightarrow x > 5" /></p>
-    </>
-  ),
+  'lpq1': <p className="mt-2">A 的每个元素都在 B 中，A⊂B</p>,
+  'lpq2': <p className="mt-2">数轴上 (1,4) 完全在 (0,5) 里面</p>,
+  'lpq3': <p className="mt-2">&lt;0 取中间，(2,3)</p>,
+  'lpq4': <p className="mt-2">≥0 取两边，含端点</p>,
+  'lpq5': <p className="mt-2">&lt; 夹中间，-5&lt;x&lt;1</p>,
+  'lpq6': <p className="mt-2">&gt; 拆两边，x&lt;-1 或 x&gt;3</p>,
+  'lpq7': <p className="mt-2">小范围→大范围能推出</p>,
+  'lpq8': <p className="mt-2">x=1→x²=1 ✓，反过来有反例 x=-1</p>,
 };
 
 // ══════════════════════════════════════════════════════════
@@ -212,11 +169,6 @@ export function LogicPrereqAnswers() {
         <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.2.5 逻辑前置知识 — 答案与解析</h2>
         <AnswerSection title="一、集合包含关系 — 即时练习" questions={logicPrereqPractice1} />
         <AnswerSection title="二、解不等式 — 即时练习" questions={logicPrereqPractice2} />
-      </section>
-
-      <PageBreak />
-
-      <section className="mb-8 print-answers">
         <AnswerSection title="三、基本推理 — 即时练习" questions={logicPrereqPractice3} />
         <AnswerSection title="选择题自测" questions={logicPrereqQuizQuestions} />
       </section>

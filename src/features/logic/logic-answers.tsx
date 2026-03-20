@@ -13,19 +13,31 @@ export const logicExplanations: Record<string, ReactNode> = {
   'lp1-1': (
     <>
       <p className="mt-2">陈述句 + 能判断真假 = 命题</p>
-      <p className="mt-2">5 只能被 1 和 5 整除，确实是质数 → 真命题</p>
+      <p className="mt-2">2 能被 2 整除，确实是偶数 → 真命题</p>
     </>
   ),
   'lp1-2': (
+    <>
+      <p className="mt-2">3 {'>'} 5 是错的，但能判断真假（假）→ 假命题</p>
+      <p className="mt-2">假命题也是命题！</p>
+    </>
+  ),
+  'lp1-3': (
+    <>
+      <p className="mt-2">祈使句，不能判断真假 → 不是命题</p>
+      <p className="mt-2">疑问句、祈使句、感叹句都不是命题</p>
+    </>
+  ),
+  'lp1-4': (
     <>
       <p className="mt-2">x 是未知数，真假不确定 → 不是命题</p>
       <p className="mt-2">除非加量词（如 <MathTex tex="\forall x" /> 或 <MathTex tex="\exists x" />）</p>
     </>
   ),
-  'lp1-3': (
+  'lp1-5': (
     <>
-      <p className="mt-2">1+1=3 是错的，但能判断真假（假）→ 假命题</p>
-      <p className="mt-2">假命题也是命题！</p>
+      <p className="mt-2"><MathTex tex="\pi" /> 确实是无理数，能判断真假 → 真命题</p>
+      <p className="mt-2">陈述句 + 能判断真假 = 命题</p>
     </>
   ),
 
@@ -93,31 +105,30 @@ export const logicExplanations: Record<string, ReactNode> = {
       <p className="mt-2"><MathTex tex="A \cap B = \varnothing" /> → 既不充分也不必要</p>
     </>
   ),
+  'lp3-6': (
+    <>
+      <p className="mt-2"><MathTex tex="A=\{1\},\; B=\{1,-1\}" /></p>
+      <p className="mt-2"><MathTex tex="A \subset B" /> → p 充分不必要</p>
+    </>
+  ),
 
   // ── 第4节：量词命题的否定 ──
   'lp4-1': (
     <>
-      <p className="mt-2">① 量词取反 <MathTex tex="\forall \to \exists" /></p>
-      <p className="mt-2">② 条件取反 <MathTex tex="\geq \to <" /></p>
+      <p className="mt-2">① "所有" 变 "存在"</p>
+      <p className="mt-2">② "到齐" 变 "没到"</p>
     </>
   ),
   'lp4-2': (
     <>
-      <p className="mt-2">① "存在" → "所有"</p>
-      <p className="mt-2">② "不等于" → "等于"</p>
+      <p className="mt-2">① <MathTex tex="\forall" /> 变 <MathTex tex="\exists" /></p>
+      <p className="mt-2">② <MathTex tex="\geq" /> 变 <MathTex tex="<" /></p>
     </>
   ),
   'lp4-3': (
     <>
-      <p className="mt-2">① 量词取反 <MathTex tex="\exists \to \forall" /></p>
-      <p className="mt-2">② 条件取反 <MathTex tex="\leq \to >" /></p>
-    </>
-  ),
-  'lp4-4': (
-    <>
-      <p className="mt-2">① "所有" → "存在"（即"有人"）</p>
-      <p className="mt-2">② "到齐" → "没到"</p>
-      <p className="mt-2">否定只需"存在一个反例"，不是"全部取反"</p>
+      <p className="mt-2">① "存在" 变 "所有"</p>
+      <p className="mt-2">② "迟到" 变 "没迟到"</p>
     </>
   ),
 
@@ -147,73 +158,59 @@ export const logicExplanations: Record<string, ReactNode> = {
     </>
   ),
 
-  // ── 高考真题 ──
+  // ── 高考真题（9道） ──
   'lq1': (
     <>
-      <p className="mt-2"><MathTex tex="A=(1,+\infty),\; B=(-\infty,0)\cup(2,+\infty)" /></p>
-      <p className="mt-2">互不包含 → 既不充分也不必要</p>
+      <p className="mt-2">C "4是偶数" 是陈述句，能判断真假</p>
+      <p className="mt-2">A含未知数、B祈使句、D疑问句都不是命题</p>
     </>
   ),
   'lq2': (
-    <>
-      <p className="mt-2">否命题 = 条件和结论都取反</p>
-      <p className="mt-2">"若非p则非q"：<MathTex tex="x>0" /> 变 <MathTex tex="x \leq 0" />，<MathTex tex="x^2>0" /> 变 <MathTex tex="x^2 \leq 0" /></p>
-    </>
-  ),
-  'lq3': (
-    <>
-      <p className="mt-2"><MathTex tex="A=(-2,2),\; B: (x-2)(x+1)<0 \Rightarrow (-1,2)" /></p>
-      <p className="mt-2"><MathTex tex="B \subset A" /> → p 必要不充分</p>
-    </>
-  ),
-  'lq4': (
-    <>
-      <p className="mt-2">① <MathTex tex="\forall \to \exists" /> ② <MathTex tex="> \to \leq" /></p>
-    </>
-  ),
-  'lq5': (
-    <>
-      <p className="mt-2">① <MathTex tex="\exists \to \forall" /> ② <MathTex tex="> \to \leq" /></p>
-    </>
-  ),
-  'lq6': (
-    <>
-      <p className="mt-2">"或" → "且"，条件取反：<MathTex tex="= \to \neq" /></p>
-    </>
-  ),
-  'lq7': (
-    <>
-      <p className="mt-2">B：<MathTex tex="x=1 \Rightarrow x^2=1" /> ✓ 真命题</p>
-      <p className="mt-2">A：<MathTex tex="x^2=1 \Rightarrow x=\pm 1" />，假命题</p>
-    </>
-  ),
-  'lq8': (
-    <>
-      <p className="mt-2">"且" → "或"，<MathTex tex="> \to \leq" />，<MathTex tex="< \to \geq" /></p>
-    </>
-  ),
-  'lq9': (
-    <>
-      <p className="mt-2">p 充分 → <MathTex tex="A \subseteq B" /></p>
-      <p className="text-center mt-1"><MathTex tex="[1,5] \subseteq (a,+\infty) \Rightarrow a < 1" /></p>
-    </>
-  ),
-  'lq10': (
     <>
       <p className="mt-2">逆否命题 = "若非q则非p"</p>
       <p className="mt-2"><MathTex tex="x=1" /> 变 <MathTex tex="x \neq 1" />，<MathTex tex="x^2=1" /> 变 <MathTex tex="x^2 \neq 1" /></p>
     </>
   ),
-  'lq11': (
+  'lq3': (
     <>
-      <p className="mt-2">C "4是偶数" → 陈述句 + 能判断真假 = 命题</p>
-      <p className="mt-2">A 含未知数、B 祈使句、D 疑问句 → 都不是命题</p>
+      <p className="mt-2"><MathTex tex="A=(2,+\infty) \subset B=(1,+\infty)" /></p>
+      <p className="mt-2">A更小，所以p充分不必要</p>
     </>
   ),
-  'lq12': (
+  'lq4': (
     <>
-      <p className="mt-2">p 真 q 假：且 = 全真才真 → 假</p>
-      <p className="mt-2">或 = 一真就真 → 真</p>
+      <p className="mt-2"><MathTex tex="A=(-2,2),\; B=(-1,1)" /></p>
+      <p className="mt-2"><MathTex tex="B \subset A" />，B更小，所以p必要不充分</p>
+    </>
+  ),
+  'lq5': (
+    <>
+      <p className="mt-2">① <MathTex tex="\forall" /> 变 <MathTex tex="\exists" /></p>
+      <p className="mt-2">② <MathTex tex=">" /> 变 <MathTex tex="\leq" /></p>
+    </>
+  ),
+  'lq6': (
+    <>
+      <p className="mt-2">① <MathTex tex="\exists" /> 变 <MathTex tex="\forall" /></p>
+      <p className="mt-2">② <MathTex tex=">" /> 变 <MathTex tex="\leq" /></p>
+    </>
+  ),
+  'lq7': (
+    <>
+      <p className="mt-2">p真q假：且 = 全真才真</p>
+      <p className="mt-2">有一个假，所以p且q为假</p>
+    </>
+  ),
+  'lq8': (
+    <>
+      <p className="mt-2">"且" 变 "或"</p>
+      <p className="mt-2"><MathTex tex=">" /> 变 <MathTex tex="\leq" />，<MathTex tex="<" /> 变 <MathTex tex="\geq" /></p>
+    </>
+  ),
+  'lq9': (
+    <>
+      <p className="mt-2">p充分 = <MathTex tex="A \subseteq B" /></p>
+      <p className="mt-2"><MathTex tex="[1,5] \subseteq (a,+\infty)" /> 需要 <MathTex tex="a < 1" /></p>
     </>
   ),
 };

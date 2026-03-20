@@ -52,8 +52,7 @@ const phases: Phase[] = [
     modules: [
       { path: '/math/inequality-prereq', label: '2.0 不等式前置知识', time: '15-20分钟', desc: '正负数运算、解方程回顾', prereq: true },
       { path: '/math/inequality', label: '2.1 不等式', time: '3-4小时', desc: '一元二次不等式 + 均值不等式' },
-      { path: '/math/quadratic-prereq', label: '2.2 二次函数前置知识', time: '20分钟', desc: '抛物线、顶点、开口方向回顾', prereq: true },
-      { path: '/math/quadratic', label: '2.3 二次函数', time: '3-4小时', desc: '三种表达形式 + 图像与性质' },
+      { path: '/math/quadratic', label: '2.2 二次函数', time: '3-4小时', desc: '三种表达形式 + 图像与性质' },
     ],
   },
   {

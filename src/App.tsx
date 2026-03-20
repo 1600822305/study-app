@@ -19,7 +19,6 @@ const LogicPage = lazy(() => import('@/features/logic').then(m => ({ default: m.
 const LogicPrereqPage = lazy(() => import('@/features/logic').then(m => ({ default: m.LogicPrereqPage })));
 const InequalityPrereqPage = lazy(() => import('@/features/inequality').then(m => ({ default: m.InequalityPrereqPage })));
 const InequalityPage = lazy(() => import('@/features/inequality').then(m => ({ default: m.InequalityPage })));
-const QuadraticPrereqPage = lazy(() => import('@/features/quadratic').then(m => ({ default: m.QuadraticPrereqPage })));
 const QuadraticPage = lazy(() => import('@/features/quadratic').then(m => ({ default: m.QuadraticPage })));
 const FunctionReviewPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionReviewPage })));
 const FunctionPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionPrereqPage })));
@@ -84,7 +83,6 @@ function App() {
           <Route path="/math/stage1-exam" element={<Stage1ExamPage />} />
           <Route path="/math/inequality-prereq" element={<InequalityPrereqPage />} />
           <Route path="/math/inequality" element={<InequalityPage />} />
-          <Route path="/math/quadratic-prereq" element={<QuadraticPrereqPage />} />
           <Route path="/math/quadratic" element={<QuadraticPage />} />
           <Route path="/math/stage2-exam" element={<Stage2ExamPage />} />
           <Route path="/math/function-review" element={<FunctionReviewPage />} />

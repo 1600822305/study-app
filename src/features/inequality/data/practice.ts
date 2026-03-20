@@ -1,91 +1,83 @@
 import type { QuizQuestionData } from '@/types';
 
 // ══════════════════════════════════════
-//  2.1 不等式 - 即时练习
+//  2.1 不等式 - 基本不等式即时练习（6题）
 // ══════════════════════════════════════
 
-// ── 第1节：不等式的性质 + 一元一次不等式 ──
-export const ineqPractice1: QuizQuestionData[] = [
+export const amgmPractice: QuizQuestionData[] = [
+  // ── 基础题（2题）──
   {
-    id: 'iq1-1',
-    type: 'choice',
-    question: '',
-    questionLatex: '\\text{解不等式 } 3x - 5 > 7',
+    id: 'iq-p1',
+    question: '已知 a,b>0，ab=16，求 a+b 的最小值',
+    questionLatex: '\\text{已知 }a,b>0,\\;ab=16\\text{，求 }a+b\\text{ 的最小值}',
     options: [
-      { label: 'A', value: 'x > 4', isLatex: true },
-      { label: 'B', value: 'x > 2', isLatex: true },
-      { label: 'C', value: 'x < 4', isLatex: true },
-      { label: 'D', value: 'x > -4', isLatex: true },
+      { label: 'A', value: '4', isLatex: false },
+      { label: 'B', value: '8', isLatex: false },
+      { label: 'C', value: '16', isLatex: false },
+      { label: 'D', value: '32', isLatex: false },
     ],
-    correctAnswer: 'x > 4',
+    correctAnswer: '8',
   },
   {
-    id: 'iq1-2',
-    type: 'choice',
-    question: '',
-    questionLatex: '\\text{解不等式 } -2x + 6 \\leq 0',
+    id: 'iq-p2',
+    question: '已知 a,b>0，a+b=8，求 ab 的最大值',
+    questionLatex: '\\text{已知 }a,b>0,\\;a+b=8\\text{，求 }ab\\text{ 的最大值}',
     options: [
-      { label: 'A', value: 'x \\leq 3', isLatex: true },
-      { label: 'B', value: 'x \\geq 3', isLatex: true },
-      { label: 'C', value: 'x \\leq -3', isLatex: true },
-      { label: 'D', value: 'x \\geq -3', isLatex: true },
+      { label: 'A', value: '8', isLatex: false },
+      { label: 'B', value: '12', isLatex: false },
+      { label: 'C', value: '16', isLatex: false },
+      { label: 'D', value: '64', isLatex: false },
     ],
-    correctAnswer: 'x \\geq 3',
+    correctAnswer: '16',
+  },
+  // ── 正常难度（2题）──
+  {
+    id: 'iq-p3',
+    question: '已知 x>0，求 x+9/x 的最小值',
+    questionLatex: '\\text{已知 }x>0\\text{，求 }x+\\dfrac{9}{x}\\text{ 的最小值}',
+    options: [
+      { label: 'A', value: '3', isLatex: false },
+      { label: 'B', value: '6', isLatex: false },
+      { label: 'C', value: '9', isLatex: false },
+      { label: 'D', value: '18', isLatex: false },
+    ],
+    correctAnswer: '6',
   },
   {
-    id: 'iq1-3',
-    type: 'choice',
-    question: '已知 a > b，下列哪个一定成立？',
-    questionLatex: '\\text{已知 } a > b \\text{，下列哪个一定成立？}',
+    id: 'iq-p4',
+    question: '已知 0<x<4，求 x(4-x) 的最大值',
+    questionLatex: '\\text{已知 }0<x<4\\text{，求 }x(4-x)\\text{ 的最大值}',
     options: [
-      { label: 'A', value: '2a > 2b', isLatex: true },
-      { label: 'B', value: '-a > -b', isLatex: true },
-      { label: 'C', value: 'a^2 > b^2', isLatex: true },
-      { label: 'D', value: '\\frac{1}{a} < \\frac{1}{b}', isLatex: true },
+      { label: 'A', value: '2', isLatex: false },
+      { label: 'B', value: '4', isLatex: false },
+      { label: 'C', value: '8', isLatex: false },
+      { label: 'D', value: '16', isLatex: false },
     ],
-    correctAnswer: '2a > 2b',
+    correctAnswer: '4',
   },
-];
-
-// ── 第2节：基本不等式（高考风格） ──
-export const ineqPractice2: QuizQuestionData[] = [
+  // ── 高考难度（2题）──
   {
-    id: 'iq2-1',
-    type: 'choice',
-    question: '',
-    questionLatex: '\\text{对任意 } x \\neq 0 \\text{，} x + \\dfrac{4}{x} \\text{ 的最小值为}',
+    id: 'iq-p5',
+    question: '已知 x>2，求 x+1/(x-2) 的最小值',
+    questionLatex: '\\text{已知 }x>2\\text{，求 }x+\\dfrac{1}{x-2}\\text{ 的最小值}',
     options: [
-      { label: 'A', value: '4' },
-      { label: 'B', value: '-4' },
-      { label: 'C', value: '2' },
-      { label: 'D', value: '\\text{不存在}', isLatex: true },
+      { label: 'A', value: '3', isLatex: false },
+      { label: 'B', value: '4', isLatex: false },
+      { label: 'C', value: '2+2\\sqrt{2}', isLatex: true },
+      { label: 'D', value: '2\\sqrt{2}', isLatex: true },
     ],
-    correctAnswer: '\\text{不存在}',
+    correctAnswer: '4',
   },
   {
-    id: 'iq2-3',
-    type: 'choice',
-    question: '',
-    questionLatex: '\\text{已知 } x > 3 \\text{，则 } x + \\dfrac{4}{x-3} \\text{ 的最小值为}',
+    id: 'iq-p6',
+    question: '已知 a>0,b>0，a+2b=1，求 1/a+1/b 的最小值',
+    questionLatex: '\\text{已知 }a>0,b>0,\\;a+2b=1\\text{，求 }\\dfrac{1}{a}+\\dfrac{1}{b}\\text{ 的最小值}',
     options: [
-      { label: 'A', value: '4' },
-      { label: 'B', value: '5' },
-      { label: 'C', value: '7' },
-      { label: 'D', value: '8' },
+      { label: 'A', value: '3+2\\sqrt{2}', isLatex: true },
+      { label: 'B', value: '4', isLatex: false },
+      { label: 'C', value: '3+\\sqrt{2}', isLatex: true },
+      { label: 'D', value: '9', isLatex: false },
     ],
-    correctAnswer: '7',
-  },
-  {
-    id: 'iq2-4',
-    type: 'choice',
-    question: '',
-    questionLatex: '\\text{已知 } a > 0,\\, b > 0,\\, a + b = 1 \\text{，则 } \\dfrac{4}{a} + \\dfrac{1}{b} \\text{ 的最小值为}',
-    options: [
-      { label: 'A', value: '5' },
-      { label: 'B', value: '7' },
-      { label: 'C', value: '9' },
-      { label: 'D', value: '12' },
-    ],
-    correctAnswer: '9',
+    correctAnswer: '3+2\\sqrt{2}',
   },
 ];
