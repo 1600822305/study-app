@@ -1,6 +1,6 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { setsNarrations } from './data/narrations';
-import { setsPractice3, setsPractice5 } from './data/practice';
+import { setsPractice3 } from './data/practice';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 import { setsQuizQuestions } from './data/quiz';
@@ -749,10 +749,10 @@ export function SetsPage() {
                 </div>
 
                 <div className="bg-gray-50 rounded p-2 text-sm">
-                  <p className="font-bold mb-0.5">快速判断：A = &#123;1, 2&#125;，B = &#123;1, 2, 3&#125;，C = &#123;2, 1&#125;</p>
+                  <p className="font-bold mb-0.5">快速判断：A = <Math tex="\{1, 2\}" />，B = <Math tex="\{1, 2, 3\}" />，C = <Math tex="\{2, 1\}" /></p>
                   <p><Math tex="A \subseteq B" /> <strong className="text-green-600">✓</strong>　　<Math tex="A \subsetneq B" /> <strong className="text-green-600">✓</strong>　　<Math tex="A = C" /> <strong className="text-green-600">✓</strong>　　<Math tex="B \subseteq A" /> <strong className="text-red-500">✗</strong>（3 不在 A 里）</p>
-                  <p><Math tex="2 \in B" /> <strong className="text-green-600">✓</strong>　　<Math tex="\{2\} \in B" /> <strong className="text-red-500">✗</strong>（&#123;2&#125; 是集合不是元素）　　<Math tex="\{2\} \subseteq B" /> <strong className="text-green-600">✓</strong>　　<Math tex="A \subseteq C" /> <strong className="text-green-600">✓</strong>（A = C，互为子集）</p>
-                  <p className="text-gray-500 mt-0.5">注意第二个：∈ 左边必须是<strong>元素</strong>，不能放集合。&#123;2&#125; 是集合，要用 ⊆。</p>
+                  <p><Math tex="2 \in B" /> <strong className="text-green-600">✓</strong>　　<Math tex="\{2\} \in B" /> <strong className="text-red-500">✗</strong>（<Math tex="\{2\}" /> 是集合不是元素）　　<Math tex="\{2\} \subseteq B" /> <strong className="text-green-600">✓</strong>　　<Math tex="A \subseteq C" /> <strong className="text-green-600">✓</strong>（A = C，互为子集）</p>
+                  <p className="text-gray-500 mt-0.5">注意第二个：∈ 左边必须是<strong>元素</strong>，不能放集合。<Math tex="\{2\}" /> 是集合，要用 ⊆。</p>
                 </div>
 
                 <PageBreak label="空集" />
@@ -771,22 +771,22 @@ export function SetsPage() {
                       <tbody>
                         <tr>
                           <td className="border-b border-r border-gray-200 px-1 py-0.5"><Math tex="\{x \mid x^2+1=0\}" /></td>
-                          <td className="border-b border-gray-200 px-1 py-0.5">无实数解，是 ∅</td>
+                          <td className="border-b border-gray-200 px-1 py-0.5">无实数解，是 <Math tex="\varnothing" /></td>
                         </tr>
                         <tr>
                           <td className="border-b border-r border-gray-200 px-1 py-0.5"><Math tex="\{x \mid x > 5 \text{ 且 } x < 2\}" /></td>
-                          <td className="border-b border-gray-200 px-1 py-0.5">矛盾，不存在，是 ∅</td>
+                          <td className="border-b border-gray-200 px-1 py-0.5">矛盾，不存在，是 <Math tex="\varnothing" /></td>
                         </tr>
                         <tr>
                           <td className="border-r border-gray-200 px-1 py-0.5"><Math tex="\{x \in \mathbb{N} \mid 3 < x < 4\}" /></td>
-                          <td className="px-1 py-0.5">3 和 4 之间没有自然数，是 ∅</td>
+                          <td className="px-1 py-0.5">3 和 4 之间没有自然数，是 <Math tex="\varnothing" /></td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <div className="px-2 py-1 bg-amber-50">
-                    <p className="text-amber-700"><strong>⚠ 易混：</strong>∅ 是空的（0 个元素），&#123;0&#125; 里面有 1 个元素（数字 0）。它们<strong>不一样</strong>！</p>
-                    <p className="text-amber-700">同理，&#123;∅&#125; 也不是空集——里面有 1 个元素（空集本身）。</p>
+                    <p className="text-amber-700"><strong>⚠ 易混：</strong><Math tex="\varnothing" /> 是空的（0 个元素），<Math tex="\{0\}" /> 里面有 1 个元素（数字 0）。它们<strong>不一样</strong>！</p>
+                    <p className="text-amber-700">同理，<Math tex="\{\varnothing\}" /> 也不是空集——里面有 1 个元素（空集本身）。</p>
                   </div>
                 </div>
 
@@ -999,9 +999,9 @@ export function SetsPage() {
 
                 {/* ==================== 补集+交并混合教学（梯度递进） ==================== */}
 
-                {/* 第一步：有限集的交/并/补 */}
+                {/* 有限集的交/并/补 */}
                 <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-50 text-lg">第一步：有限集的交/并/补（逐个找）</div>
+                  <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-50 text-lg">有限集的交/并/补（逐个找）</div>
                   <div className="px-2 py-1 border-b border-gray-300">
                     <p>已知 <Math tex="U = \{1, 2, 3, 4, 5\}" />，<Math tex="A = \{1, 2, 3\}" />，<Math tex="B = \{2, 4, 5\}" /></p>
                   </div>
@@ -1025,24 +1025,11 @@ export function SetsPage() {
 
                 <PageBreak />
 
-                {/* 第二步：补集的端点规律 */}
+                {/* 补集的端点规律 */}
                 <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-red-700 border-b border-gray-400 bg-gray-50 text-lg">第二步：补集的端点规律（开变闭，闭变开）</div>
+                  <div className="px-2 py-1 font-bold text-red-700 border-b border-gray-400 bg-gray-50 text-lg">补集的端点规律（开变闭，闭变开）</div>
                   <div className="px-2 py-1 space-y-1">
-                    <p>补集就是"U 里<strong>不在 A</strong> 的部分"。我们用一个具体例子来推理：</p>
-
-                    <div className="bg-red-50 rounded px-2 py-1 space-y-1">
-                      <p><strong>例：</strong><Math tex="U = \mathbb{R}" />（全体实数），<Math tex="A = \{x \mid x > 2\}" /></p>
-                      <p>A 是"大于 2 的数"，那补集就是"<strong>不大于 2 的数</strong>"</p>
-                      <p>"不大于 2"就是 <strong>≤ 2</strong>，所以 <Math tex="\complement_U A = \{x \mid x \leq 2\}" /></p>
-                      <p className="mt-1"><strong>关键问题：端点 2 到底归谁？</strong></p>
-                      <p>A 说 x {'>'} 2，端点 2 是<strong>开的</strong>（○，2 不在 A 里）</p>
-                      <p>2 不在 A 里，那 2 就在补集里，所以补集端点 2 是<strong>闭的</strong>（●）</p>
-                      <p className="font-bold text-red-700">结论：A 开的端点，补集一定闭。A 闭的端点，补集一定开。</p>
-                      <p>因为<strong>每个数要么在 A 里，要么在补集里，不能同时在两边，也不能两边都不在</strong>。</p>
-                    </div>
-
-                    <p>这就是为什么<strong>开变闭，闭变开</strong>。下面是完整的对照表：</p>
+                    <p>补集就是"U 里<strong>不在 A</strong> 的部分"，端点<strong>开变闭，闭变开</strong>。下面是完整的对照表：</p>
                     <table className="w-full border-collapse text-center">
                       <thead>
                         <tr className="bg-gray-50">
@@ -1100,17 +1087,24 @@ export function SetsPage() {
                       <p>端点 -1：A 开（○），补集<strong>闭</strong>（●）</p>
                       <p>答案：<strong><Math tex="[-1, +\infty)" /></strong></p>
                     </div>
-                    <svg viewBox="0 0 200 50" className="w-1/2 shrink-0">
-                      <line x1="10" y1="15" x2="190" y2="15" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="10" y1="35" x2="190" y2="35" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="100" y1="9" x2="100" y2="41" stroke="#e5e7eb" strokeWidth="1" />
-                      <text x="100" y="48" fontSize="10" fill="#374151" textAnchor="middle">-1</text>
-                      <line x1="10" y1="15" x2="100" y2="15" stroke="#3b82f6" strokeWidth="3" />
-                      <circle cx="100" cy="15" r="3" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
-                      <text x="55" y="11" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
-                      <line x1="100" y1="35" x2="190" y2="35" stroke="#ef4444" strokeWidth="3" />
-                      <circle cx="100" cy="35" r="3" fill="#ef4444" />
-                      <text x="145" y="31" fontSize="9" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
+                    <svg viewBox="0 0 200 60" className="w-[40%] shrink-0">
+                      {/* Axis */}
+                      <line x1="10" y1="45" x2="190" y2="45" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,42 198,45 190,48" fill="#9ca3af" />
+                      <line x1="100" y1="42" x2="100" y2="48" stroke="#374151" strokeWidth="1" />
+                      <text x="100" y="58" fontSize="10" fill="#374151" textAnchor="middle">-1</text>
+                      
+                      {/* A (blue): L-ray left */}
+                      <polyline points="10,20 100,20 100,45" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                      <polygon points="15,17 7,20 15,23" fill="#3b82f6" />
+                      <circle cx="100" cy="45" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                      <text x="55" y="15" fontSize="10" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      
+                      {/* 补集 (red): on axis right */}
+                      <line x1="100" y1="45" x2="190" y2="45" stroke="#ef4444" strokeWidth="3" />
+                      <polygon points="190,41 198,45 190,49" fill="#ef4444" />
+                      <circle cx="100" cy="45" r="3.5" fill="#ef4444" />
+                      <text x="145" y="38" fontSize="10" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
                     </svg>
                   </div>
                   {/* 例2: x ≥ 5，闭 */}
@@ -1120,17 +1114,24 @@ export function SetsPage() {
                       <p>端点 5：A 闭（●），补集<strong>开</strong>（○）</p>
                       <p>答案：<strong><Math tex="(-\infty, 5)" /></strong></p>
                     </div>
-                    <svg viewBox="0 0 200 50" className="w-1/2 shrink-0">
-                      <line x1="10" y1="15" x2="190" y2="15" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="10" y1="35" x2="190" y2="35" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="100" y1="9" x2="100" y2="41" stroke="#e5e7eb" strokeWidth="1" />
-                      <text x="100" y="48" fontSize="10" fill="#374151" textAnchor="middle">5</text>
-                      <line x1="100" y1="15" x2="190" y2="15" stroke="#3b82f6" strokeWidth="3" />
-                      <circle cx="100" cy="15" r="3" fill="#3b82f6" />
-                      <text x="145" y="11" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
-                      <line x1="10" y1="35" x2="100" y2="35" stroke="#ef4444" strokeWidth="3" />
-                      <circle cx="100" cy="35" r="3" fill="white" stroke="#ef4444" strokeWidth="1.5" />
-                      <text x="55" y="31" fontSize="9" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
+                    <svg viewBox="0 0 200 60" className="w-[40%] shrink-0">
+                      {/* Axis */}
+                      <line x1="10" y1="45" x2="190" y2="45" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,42 198,45 190,48" fill="#9ca3af" />
+                      <line x1="100" y1="42" x2="100" y2="48" stroke="#374151" strokeWidth="1" />
+                      <text x="100" y="58" fontSize="10" fill="#374151" textAnchor="middle">5</text>
+                      
+                      {/* A (blue): L-ray right */}
+                      <polyline points="100,45 100,20 190,20" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                      <polygon points="185,17 193,20 185,23" fill="#3b82f6" />
+                      <circle cx="100" cy="45" r="3.5" fill="#3b82f6" />
+                      <text x="145" y="15" fontSize="10" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      
+                      {/* 补集 (red): on axis left */}
+                      <line x1="10" y1="45" x2="100" y2="45" stroke="#ef4444" strokeWidth="3" />
+                      <polygon points="10,41 2,45 10,49" fill="#ef4444" />
+                      <circle cx="100" cy="45" r="3.5" fill="white" stroke="#ef4444" strokeWidth="1.5" />
+                      <text x="55" y="38" fontSize="10" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
                     </svg>
                   </div>
                   {/* 例3: [-2, 3)，双端 */}
@@ -1141,247 +1142,330 @@ export function SetsPage() {
                       <p>端点 3：A 开（○），补集<strong>闭</strong>（●）</p>
                       <p>答案：<strong><Math tex="(-\infty, -2) \cup [3, +\infty)" /></strong></p>
                     </div>
-                    <svg viewBox="0 0 200 50" className="w-1/2 shrink-0">
-                      <line x1="10" y1="15" x2="190" y2="15" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="10" y1="35" x2="190" y2="35" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="60" y1="9" x2="60" y2="41" stroke="#e5e7eb" strokeWidth="1" />
-                      <line x1="140" y1="9" x2="140" y2="41" stroke="#e5e7eb" strokeWidth="1" />
-                      <text x="60" y="48" fontSize="10" fill="#374151" textAnchor="middle">-2</text>
-                      <text x="140" y="48" fontSize="10" fill="#374151" textAnchor="middle">3</text>
-                      <line x1="60" y1="15" x2="140" y2="15" stroke="#3b82f6" strokeWidth="3" />
-                      <circle cx="60" cy="15" r="3" fill="#3b82f6" />
-                      <circle cx="140" cy="15" r="3" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
-                      <text x="100" y="11" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
-                      <line x1="10" y1="35" x2="60" y2="35" stroke="#ef4444" strokeWidth="3" />
-                      <circle cx="60" cy="35" r="3" fill="white" stroke="#ef4444" strokeWidth="1.5" />
-                      <line x1="140" y1="35" x2="190" y2="35" stroke="#ef4444" strokeWidth="3" />
-                      <circle cx="140" cy="35" r="3" fill="#ef4444" />
-                      <text x="35" y="31" fontSize="9" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
-                      <text x="165" y="31" fontSize="9" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
+                    <svg viewBox="0 0 200 60" className="w-[40%] shrink-0">
+                      {/* Axis */}
+                      <line x1="10" y1="45" x2="190" y2="45" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,42 198,45 190,48" fill="#9ca3af" />
+                      <line x1="60" y1="42" x2="60" y2="48" stroke="#374151" strokeWidth="1" />
+                      <line x1="140" y1="42" x2="140" y2="48" stroke="#374151" strokeWidth="1" />
+                      <text x="60" y="58" fontSize="10" fill="#374151" textAnchor="middle">-2</text>
+                      <text x="140" y="58" fontSize="10" fill="#374151" textAnchor="middle">3</text>
+                      
+                      {/* A (blue): U-shape */}
+                      <polyline points="60,45 60,20 140,20 140,45" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                      <circle cx="60" cy="45" r="3.5" fill="#3b82f6" />
+                      <circle cx="140" cy="45" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                      <text x="100" y="15" fontSize="10" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      
+                      {/* 补集 (red): left ray */}
+                      <line x1="10" y1="45" x2="60" y2="45" stroke="#ef4444" strokeWidth="3" />
+                      <polygon points="10,41 2,45 10,49" fill="#ef4444" />
+                      <circle cx="60" cy="45" r="3.5" fill="white" stroke="#ef4444" strokeWidth="1.5" />
+                      <text x="35" y="38" fontSize="10" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
+                      
+                      {/* 补集 (red): right ray */}
+                      <line x1="140" y1="45" x2="190" y2="45" stroke="#ef4444" strokeWidth="3" />
+                      <polygon points="190,41 198,45 190,49" fill="#ef4444" />
+                      <circle cx="140" cy="45" r="3.5" fill="#ef4444" />
+                      <text x="165" y="38" fontSize="10" fill="#ef4444" fontWeight="bold" textAnchor="middle">补集</text>
                     </svg>
                   </div>
                 </div>
 
-                <PageBreak />
-
-                {/* 第三步：不等式集的交/并 */}
+                {/* 不等式集的交/并 */}
                 <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-green-700 border-b border-gray-400 bg-gray-50 text-lg">第三步：不等式集的交/并（画数轴！）</div>
-                  <div className="px-2 py-1 space-y-1">
+                  <div className="px-2 py-1 font-bold text-green-700 border-b border-gray-400 bg-gray-50 text-lg">不等式集的交/并（画数轴！）</div>
+                  <div className="px-2 py-1 space-y-1 border-b border-gray-300">
                     <p>不等式集不能逐个找，要<strong>画数轴</strong>：</p>
-                    <p><strong><Math tex="A \cap B" /></strong>（交集）：两条线<strong>重叠</strong>的部分</p>
-                    <p><strong><Math tex="A \cup B" /></strong>（并集）：两条线<strong>合起来</strong>覆盖的部分</p>
-                    <p>空心实心照搬原来的集合（1.1.5 的规则）。</p>
+                    <div className="flex gap-6">
+                      <p><strong><Math tex="A \cap B" /></strong>（交集）：两条线<strong>重叠</strong>的部分</p>
+                      <p><strong><Math tex="A \cup B" /></strong>（并集）：两条线<strong>合起来</strong>覆盖的部分</p>
+                    </div>
                   </div>
-                </div>
-
-                {/* 交并例1 */}
-                <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-green-700 border-b border-gray-400 bg-gray-50">交并例1：<Math tex="A = \{x \mid x < 4\}" />，<Math tex="B = \{x \mid x \geq -1\}" /></div>
+                  {/* 例1 */}
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p className="font-bold text-green-700">例1：<Math tex="A = \{x \mid x < 4\}" />，<Math tex="B = \{x \mid x \geq -1\}" /></p>
+                  </div>
                   <div className="flex items-start border-b border-gray-300">
                     <div className="flex-1 px-2 py-1 space-y-0.5">
-                      <p><strong>求 <Math tex="A \cap B" /></strong>（取重叠）</p>
-                      <p>重叠部分 -1 到 4</p>
-                      <p>答案：<strong><Math tex="A \cap B = [-1, 4)" /></strong></p>
+                      <p><strong><Math tex="A \cap B" /></strong> = 重叠 = <strong><Math tex="[-1, 4)" /></strong></p>
+                      <p><strong><Math tex="A \cup B" /></strong> = 合起来 = <strong><Math tex="\mathbb{R}" /></strong>（整条数轴）</p>
                     </div>
-                    <svg viewBox="0 0 220 75" className="w-1/2 shrink-0">
-                      {/* 数轴 */}
-                      <line x1="10" y1="60" x2="210" y2="60" stroke="#9ca3af" strokeWidth="1.5" />
-                      <polygon points="210,57 218,60 210,63" fill="#9ca3af" />
-                      <line x1="70" y1="57" x2="70" y2="63" stroke="#374151" strokeWidth="1" />
-                      <line x1="150" y1="57" x2="150" y2="63" stroke="#374151" strokeWidth="1" />
-                      <text x="70" y="72" fontSize="9" fill="#374151" textAnchor="middle">-1</text>
-                      <text x="150" y="72" fontSize="9" fill="#374151" textAnchor="middle">4</text>
-                      {/* A: x<4，L射线拐上第一层 */}
-                      <polyline points="10,40 150,40 150,60" fill="none" stroke="#3b82f6" strokeWidth="2" />
-                      <polygon points="10,37 2,40 10,43" fill="#3b82f6" />
-                      <circle cx="150" cy="60" r="3" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
-                      <text x="80" y="36" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
-                      {/* B: x≥-1，L射线拐上第二层（更高） */}
-                      <polyline points="70,60 70,18 210,18" fill="none" stroke="#f59e0b" strokeWidth="2" />
-                      <polygon points="210,15 218,18 210,21" fill="#f59e0b" />
-                      <circle cx="70" cy="60" r="3" fill="#f59e0b" />
-                      <text x="140" y="14" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B</text>
-                      {/* 交集高亮 */}
-                      <rect x="70" y="56" width="80" height="8" rx="2" fill="#10b981" opacity="0.25" />
-                      <line x1="70" y1="60" x2="150" y2="60" stroke="#10b981" strokeWidth="3" />
-                      <circle cx="70" cy="60" r="3.5" fill="#10b981" />
-                      <circle cx="150" cy="60" r="3.5" fill="white" stroke="#10b981" strokeWidth="1.5" />
-                      <text x="110" y="54" fontSize="8" fill="#10b981" fontWeight="bold" textAnchor="middle">交集</text>
+                    <svg viewBox="0 0 220 80" className="w-[40%] shrink-0">
+                      <line x1="10" y1="55" x2="210" y2="55" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="10,52 2,55 10,58" fill="#9ca3af" />
+                      <polygon points="210,52 218,55 210,58" fill="#9ca3af" />
+                      <line x1="70" y1="52" x2="70" y2="58" stroke="#374151" strokeWidth="1" />
+                      <line x1="150" y1="52" x2="150" y2="58" stroke="#374151" strokeWidth="1" />
+                      <text x="70" y="70" fontSize="9" fill="#374151" textAnchor="middle">-1</text>
+                      <text x="150" y="70" fontSize="9" fill="#374151" textAnchor="middle">4</text>
+                      <polyline points="10,38 150,38 150,55" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                      <polygon points="15,35 7,38 15,41" fill="#3b82f6" />
+                      <circle cx="150" cy="55" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                      <text x="80" y="33" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      <polyline points="70,55 70,18 210,18" fill="none" stroke="#f59e0b" strokeWidth="2" />
+                      <polygon points="205,15 213,18 205,21" fill="#f59e0b" />
+                      <circle cx="70" cy="55" r="3.5" fill="#f59e0b" />
+                      <text x="140" y="12" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B</text>
+                      <rect x="70" y="51" width="80" height="8" rx="2" fill="#10b981" opacity="0.3" />
+                      <line x1="70" y1="55" x2="150" y2="55" stroke="#10b981" strokeWidth="4" />
+                      <circle cx="70" cy="55" r="3.5" fill="#10b981" />
+                      <circle cx="150" cy="55" r="3.5" fill="white" stroke="#10b981" strokeWidth="1.5" />
+                      <text x="110" y="47" fontSize="8" fill="#10b981" fontWeight="bold" textAnchor="middle">交集</text>
                     </svg>
+                  </div>
+                  {/* 例2 */}
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p className="font-bold text-green-700">例2：<Math tex="A = (-2, 1]" />，<Math tex="B = [0, 3)" /></p>
                   </div>
                   <div className="flex items-start">
                     <div className="flex-1 px-2 py-1 space-y-0.5">
-                      <p><strong>求 <Math tex="A \cup B" /></strong>（取全部）</p>
-                      <p>两条线合起来覆盖整条数轴</p>
-                      <p>答案：<strong><Math tex="A \cup B = \mathbb{R}" /></strong></p>
+                      <p><strong><Math tex="A \cap B" /></strong> = 重叠 = <strong><Math tex="[0, 1]" /></strong></p>
+                      <p><strong><Math tex="A \cup B" /></strong> = 合起来 = <strong><Math tex="(-2, 3)" /></strong></p>
                     </div>
-                    <svg viewBox="0 0 220 30" className="w-1/2 shrink-0">
-                      <line x1="10" y1="15" x2="210" y2="15" stroke="#10b981" strokeWidth="3" />
-                      <text x="110" y="11" fontSize="9" fill="#10b981" fontWeight="bold" textAnchor="middle">全部覆盖 = 全体实数</text>
+                    <svg viewBox="0 0 220 80" className="w-[40%] shrink-0">
+                      <line x1="10" y1="55" x2="210" y2="55" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="210,52 218,55 210,58" fill="#9ca3af" />
+                      <line x1="40" y1="52" x2="40" y2="58" stroke="#374151" strokeWidth="1" />
+                      <line x1="90" y1="52" x2="90" y2="58" stroke="#374151" strokeWidth="1" />
+                      <line x1="120" y1="52" x2="120" y2="58" stroke="#374151" strokeWidth="1" />
+                      <line x1="170" y1="52" x2="170" y2="58" stroke="#374151" strokeWidth="1" />
+                      <text x="40" y="70" fontSize="9" fill="#374151" textAnchor="middle">-2</text>
+                      <text x="90" y="70" fontSize="9" fill="#374151" textAnchor="middle">0</text>
+                      <text x="120" y="70" fontSize="9" fill="#374151" textAnchor="middle">1</text>
+                      <text x="170" y="70" fontSize="9" fill="#374151" textAnchor="middle">3</text>
+                      <polyline points="40,55 40,38 120,38 120,55" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                      <circle cx="40" cy="55" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                      <circle cx="120" cy="55" r="3.5" fill="#3b82f6" />
+                      <text x="80" y="33" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      <polyline points="90,55 90,18 170,18 170,55" fill="none" stroke="#f59e0b" strokeWidth="2" />
+                      <circle cx="90" cy="55" r="3.5" fill="#f59e0b" />
+                      <circle cx="170" cy="55" r="3.5" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
+                      <text x="130" y="12" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B</text>
+                      <rect x="90" y="51" width="30" height="8" rx="2" fill="#10b981" opacity="0.3" />
+                      <line x1="90" y1="55" x2="120" y2="55" stroke="#10b981" strokeWidth="4" />
+                      <circle cx="90" cy="55" r="3.5" fill="#10b981" />
+                      <circle cx="120" cy="55" r="3.5" fill="#10b981" />
+                      <text x="105" y="47" fontSize="8" fill="#10b981" fontWeight="bold" textAnchor="middle">交集</text>
                     </svg>
                   </div>
                 </div>
 
-                {/* 交并例2 */}
+                {/* 混合运算 */}
                 <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-green-700 border-b border-gray-400 bg-gray-50">交并例2：<Math tex="A = (-2, 1]" />，<Math tex="B = [0, 3)" /></div>
-                  <div className="flex items-start border-b border-gray-300">
-                    <div className="flex-1 px-2 py-1 space-y-0.5">
-                      <p><strong>求 <Math tex="A \cap B" /></strong>（取重叠）</p>
-                      <p>重叠部分 0 到 1</p>
-                      <p>答案：<strong><Math tex="A \cap B = [0, 1]" /></strong></p>
+                  <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50 text-lg">补集 + 交并混合（高考最爱考！）</div>
+                  <div className="px-2 py-1 space-y-1 border-b border-gray-300">
+                    <p><strong>做题步骤：</strong>① 看清运算顺序：<strong>先算括号里面的</strong> ② 遇到补集：用<strong>端点规律</strong> ③ 遇到交/并：<strong>画数轴</strong></p>
+                  </div>
+                  {/* 例1：先补再交 */}
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p className="font-bold text-purple-700">例1：<Math tex="A \cap (\complement_U B)" />（先补再交）</p>
+                    <p className="text-gray-600"><Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid x \leq 1\}" />，<Math tex="B = \{x \mid x > -1\}" /></p>
+                  </div>
+                  <div className="px-2 py-1 flex items-center border-b border-gray-300">
+                    <div className="flex-1 space-y-0.5 pr-2">
+                      <p><strong>①</strong> B: <Math tex="x > -1" />，补集：<Math tex="\complement_U B = \{x \mid x \leq -1\}" /></p>
+                      <p><strong>②</strong> A ∩ 补B：重叠部分 = <strong><Math tex="(-\infty, -1]" /></strong></p>
                     </div>
-                    <svg viewBox="0 0 220 75" className="w-1/2 shrink-0">
-                      {/* 数轴 */}
-                      <line x1="10" y1="60" x2="210" y2="60" stroke="#9ca3af" strokeWidth="1.5" />
-                      <polygon points="210,57 218,60 210,63" fill="#9ca3af" />
+                    <svg viewBox="0 -10 200 85" className="w-[38%] shrink-0">
+                      <line x1="10" y1="60" x2="190" y2="60" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,57 198,60 190,63" fill="#9ca3af" />
+                      <line x1="100" y1="57" x2="100" y2="63" stroke="#374151" strokeWidth="1" />
+                      <line x1="160" y1="57" x2="160" y2="63" stroke="#374151" strokeWidth="1" />
+                      <text x="100" y="73" fontSize="9" fill="#374151" textAnchor="middle">-1</text>
+                      <text x="160" y="73" fontSize="9" fill="#374151" textAnchor="middle">1</text>
+                      <polyline points="100,60 100,8 190,8" fill="none" stroke="#f59e0b" strokeWidth="2" />
+                      <polygon points="185,5 193,8 185,11" fill="#f59e0b" />
+                      <circle cx="100" cy="60" r="3.5" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
+                      <text x="145" y="3" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B</text>
+                      <polyline points="10,25 160,25 160,60" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                      <polygon points="15,22 7,25 15,28" fill="#3b82f6" />
+                      <circle cx="160" cy="60" r="3.5" fill="#3b82f6" />
+                      <text x="145" y="19" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      <polyline points="10,42 100,42 100,60" fill="none" stroke="#ef4444" strokeWidth="2" />
+                      <polygon points="15,39 7,42 15,45" fill="#ef4444" />
+                      <circle cx="100" cy="60" r="3.5" fill="#ef4444" />
+                      <text x="80" y="36" fontSize="9" fill="#ef4444" fontWeight="bold" textAnchor="middle">补B</text>
+                      <rect x="10" y="56" width="90" height="8" rx="2" fill="#10b981" opacity="0.25" />
+                      <line x1="10" y1="60" x2="100" y2="60" stroke="#10b981" strokeWidth="3" />
+                      <circle cx="100" cy="60" r="3.5" fill="#10b981" />
+                      <text x="50" y="52" fontSize="8" fill="#10b981" fontWeight="bold" textAnchor="middle">交集</text>
+                    </svg>
+                  </div>
+                  {/* 例2：先交再补 */}
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p className="font-bold text-purple-700">例2：<Math tex="\complement_U(A \cap B)" />（先交再补）</p>
+                    <p className="text-gray-600"><Math tex="U = \mathbb{R}" />，<Math tex="A = (1, 4]" />，<Math tex="B = [2, 5)" /></p>
+                  </div>
+                  <div className="px-2 py-1 flex items-center border-b border-gray-300">
+                    <div className="flex-1 space-y-0.5 pr-2">
+                      <p><strong>①</strong> <Math tex="A \cap B" /> = [2, 4]</p>
+                      <p><strong>②</strong> 补集 = <strong className="text-red-600"><Math tex="(-\infty, 2) \cup (4, +\infty)" /></strong></p>
+                    </div>
+                    <svg viewBox="0 0 200 80" className="w-[38%] shrink-0">
+                      <line x1="10" y1="60" x2="190" y2="60" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,57 198,60 190,63" fill="#9ca3af" />
                       <line x1="40" y1="57" x2="40" y2="63" stroke="#374151" strokeWidth="1" />
-                      <line x1="90" y1="57" x2="90" y2="63" stroke="#374151" strokeWidth="1" />
-                      <line x1="120" y1="57" x2="120" y2="63" stroke="#374151" strokeWidth="1" />
+                      <line x1="80" y1="57" x2="80" y2="63" stroke="#374151" strokeWidth="1" />
+                      <line x1="140" y1="57" x2="140" y2="63" stroke="#374151" strokeWidth="1" />
                       <line x1="170" y1="57" x2="170" y2="63" stroke="#374151" strokeWidth="1" />
-                      <text x="40" y="72" fontSize="9" fill="#374151" textAnchor="middle">-2</text>
-                      <text x="90" y="72" fontSize="9" fill="#374151" textAnchor="middle">0</text>
-                      <text x="120" y="72" fontSize="9" fill="#374151" textAnchor="middle">1</text>
-                      <text x="170" y="72" fontSize="9" fill="#374151" textAnchor="middle">3</text>
-                      {/* A: (-2,1]，L射线拐上第一层 */}
-                      <polyline points="40,60 40,40 120,40 120,60" fill="none" stroke="#3b82f6" strokeWidth="2" />
-                      <circle cx="40" cy="60" r="3" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
-                      <circle cx="120" cy="60" r="3" fill="#3b82f6" />
-                      <text x="80" y="36" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
-                      {/* B: [0,3)，L射线拐上第二层（更高） */}
-                      <polyline points="90,60 90,18 170,18 170,60" fill="none" stroke="#f59e0b" strokeWidth="2" />
-                      <circle cx="90" cy="60" r="3" fill="#f59e0b" />
-                      <circle cx="170" cy="60" r="3" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
-                      <text x="130" y="14" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B</text>
-                      {/* 交集高亮 */}
-                      <rect x="90" y="56" width="30" height="8" rx="2" fill="#10b981" opacity="0.25" />
-                      <line x1="90" y1="60" x2="120" y2="60" stroke="#10b981" strokeWidth="3" />
-                      <circle cx="90" cy="60" r="3.5" fill="#10b981" />
-                      <circle cx="120" cy="60" r="3.5" fill="#10b981" />
-                      <text x="105" y="54" fontSize="8" fill="#10b981" fontWeight="bold" textAnchor="middle">交集</text>
+                      <text x="40" y="73" fontSize="8" fill="#374151" textAnchor="middle">1</text>
+                      <text x="80" y="73" fontSize="8" fill="#374151" textAnchor="middle">2</text>
+                      <text x="140" y="73" fontSize="8" fill="#374151" textAnchor="middle">4</text>
+                      <text x="170" y="73" fontSize="8" fill="#374151" textAnchor="middle">5</text>
+                      <polyline points="40,60 40,22 140,22 140,60" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                      <circle cx="40" cy="60" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                      <circle cx="140" cy="60" r="3.5" fill="#3b82f6" />
+                      <text x="90" y="16" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      <polyline points="80,60 80,40 170,40 170,60" fill="none" stroke="#f59e0b" strokeWidth="2" />
+                      <circle cx="80" cy="60" r="3.5" fill="#f59e0b" />
+                      <circle cx="170" cy="60" r="3.5" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
+                      <text x="125" y="34" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B</text>
+                      <rect x="80" y="56" width="60" height="8" rx="2" fill="#10b981" opacity="0.25" />
+                      <line x1="80" y1="60" x2="140" y2="60" stroke="#10b981" strokeWidth="3" />
+                      <circle cx="80" cy="60" r="3.5" fill="#10b981" />
+                      <circle cx="140" cy="60" r="3.5" fill="#10b981" />
+                      <text x="110" y="52" fontSize="8" fill="#10b981" fontWeight="bold" textAnchor="middle">交集</text>
                     </svg>
                   </div>
-                  <div className="flex items-start">
-                    <div className="flex-1 px-2 py-1 space-y-0.5">
-                      <p><strong>求 <Math tex="A \cup B" /></strong>（取全部）</p>
-                      <p>合起来从 -2 到 3</p>
-                      <p>答案：<strong><Math tex="A \cup B = (-2, 3)" /></strong></p>
-                    </div>
-                    <svg viewBox="0 0 220 40" className="w-1/2 shrink-0">
-                      <line x1="10" y1="15" x2="210" y2="15" stroke="#9ca3af" strokeWidth="1" />
-                      <line x1="40" y1="12" x2="40" y2="18" stroke="#374151" strokeWidth="1" />
-                      <line x1="170" y1="12" x2="170" y2="18" stroke="#374151" strokeWidth="1" />
-                      <text x="40" y="30" fontSize="9" fill="#374151" textAnchor="middle">-2</text>
-                      <text x="170" y="30" fontSize="9" fill="#374151" textAnchor="middle">3</text>
-                      <line x1="40" y1="15" x2="170" y2="15" stroke="#10b981" strokeWidth="3" />
-                      <circle cx="40" cy="15" r="3" fill="white" stroke="#10b981" strokeWidth="1.5" />
-                      <circle cx="170" cy="15" r="3" fill="white" stroke="#10b981" strokeWidth="1.5" />
-                      <text x="105" y="11" fontSize="9" fill="#10b981" fontWeight="bold" textAnchor="middle">并集</text>
-                    </svg>
-                  </div>
-                </div>
-
-                <PageBreak />
-
-                {/* 第四步：混合运算 */}
-                <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50 text-lg">第四步：补集 + 交并混合（高考最爱考！）</div>
-                  <div className="px-2 py-1 space-y-1">
-                    <p><strong>做题步骤：</strong></p>
-                    <p>① 看清运算顺序：<strong>先算括号里面的</strong></p>
-                    <p>② 遇到补集：用<strong>端点规律</strong>（开变闭，闭变开）</p>
-                    <p>③ 遇到交/并：<strong>画数轴</strong>，交取重叠，并取全部</p>
-                  </div>
-                </div>
-
-                {/* 混合例1：先补再交 */}
-                <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50">混合例1：<Math tex="A \cap (\complement_U B)" />（先补再交）</div>
+                  {/* 例3：有限集混合 */}
                   <div className="px-2 py-1 border-b border-gray-300">
-                    <p><Math tex="U = \mathbb{R}" />，<Math tex="A = \{x \mid x \leq 1\}" />，<Math tex="B = \{x \mid x > -1\}" /></p>
+                    <p className="font-bold text-purple-700">例3：有限集 <Math tex="(\complement_U A) \cap B" /></p>
+                    <p className="text-gray-600"><Math tex="U = \{1, 2, 3, 4, 5, 6\}" />，<Math tex="A = \{1, 3, 5\}" />，<Math tex="B = \{2, 3, 4\}" /></p>
                   </div>
-                  <div className="px-2 py-1 space-y-1">
-                    <p><strong>① 先算括号内的补集：</strong></p>
-                    <p className="ml-4">B 是 x {'>'} -1，端点反转：{'>'} 变 ≤</p>
-                    <p className="ml-4">所以 <Math tex="\complement_U B = \{x \mid x \leq -1\}" /></p>
-                    <p><strong>② 再画数轴求 A <Math tex="\cap" /> 补B（找重叠）：</strong></p>
-                    <svg viewBox="0 0 340 70" className="w-full">
-                      <line x1="20" y1="20" x2="320" y2="20" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="20" y1="45" x2="320" y2="45" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="120" y1="14" x2="120" y2="51" stroke="#e5e7eb" strokeWidth="1" />
-                      <line x1="220" y1="14" x2="220" y2="26" stroke="#e5e7eb" strokeWidth="1" />
-                      <text x="120" y="64" fontSize="11" fill="#374151" textAnchor="middle">-1</text>
-                      <text x="220" y="64" fontSize="11" fill="#374151" textAnchor="middle">1</text>
-                      <line x1="20" y1="20" x2="220" y2="20" stroke="#3b82f6" strokeWidth="3" />
-                      <circle cx="220" cy="20" r="3.5" fill="#3b82f6" />
-                      <text x="22" y="14" fontSize="10" fill="#3b82f6" fontWeight="bold">A : x ≤ 1</text>
-                      <line x1="20" y1="45" x2="120" y2="45" stroke="#ef4444" strokeWidth="3" />
-                      <circle cx="120" cy="45" r="3.5" fill="#ef4444" />
-                      <text x="22" y="39" fontSize="10" fill="#ef4444" fontWeight="bold">补B : x ≤ -1</text>
-                    </svg>
-                    <p>重叠部分：从 -∞ 到 -1（含 -1）</p>
-                    <p>答案：<strong><Math tex="A \cap (\complement_U B) = (-\infty, -1]" /></strong></p>
-                  </div>
-                </div>
-
-                {/* 混合例2：先交再补 */}
-                <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50">混合例2：<Math tex="\complement_U(A \cap B)" />（先交再补）</div>
-                  <div className="px-2 py-1 border-b border-gray-300">
-                    <p><Math tex="U = \mathbb{R}" />，<Math tex="A = (1, 4]" />，<Math tex="B = [2, 5)" /></p>
-                  </div>
-                  <div className="px-2 py-1 space-y-1">
-                    <p><strong>① 先算括号内 <Math tex="A \cap B" />（画数轴找重叠）：</strong></p>
-                    <svg viewBox="0 0 340 70" className="w-full">
-                      <line x1="20" y1="20" x2="320" y2="20" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="20" y1="45" x2="320" y2="45" stroke="#d1d5db" strokeWidth="1" />
-                      <line x1="70" y1="14" x2="70" y2="26" stroke="#e5e7eb" strokeWidth="1" />
-                      <line x1="130" y1="14" x2="130" y2="51" stroke="#e5e7eb" strokeWidth="1" />
-                      <line x1="250" y1="14" x2="250" y2="51" stroke="#e5e7eb" strokeWidth="1" />
-                      <line x1="310" y1="39" x2="310" y2="51" stroke="#e5e7eb" strokeWidth="1" />
-                      <text x="70" y="64" fontSize="11" fill="#374151" textAnchor="middle">1</text>
-                      <text x="130" y="64" fontSize="11" fill="#374151" textAnchor="middle">2</text>
-                      <text x="250" y="64" fontSize="11" fill="#374151" textAnchor="middle">4</text>
-                      <text x="310" y="64" fontSize="11" fill="#374151" textAnchor="middle">5</text>
-                      <line x1="70" y1="20" x2="250" y2="20" stroke="#3b82f6" strokeWidth="3" />
-                      <circle cx="70" cy="20" r="3.5" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
-                      <circle cx="250" cy="20" r="3.5" fill="#3b82f6" />
-                      <text x="160" y="14" fontSize="10" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A: (1, 4]</text>
-                      <line x1="130" y1="45" x2="310" y2="45" stroke="#f59e0b" strokeWidth="3" />
-                      <circle cx="130" cy="45" r="3.5" fill="#f59e0b" />
-                      <circle cx="310" cy="45" r="3.5" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
-                      <text x="220" y="39" fontSize="10" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B: [2, 5)</text>
-                    </svg>
-                    <p className="ml-4">重叠部分：2（含）到 4（含），即 <Math tex="A \cap B = [2, 4]" /></p>
-                    <p><strong>② 再求补集（端点反转）：</strong></p>
-                    <p className="ml-4">[ 变 )，] 变 (</p>
-                    <p className="ml-4">答案：<strong className="text-red-600"><Math tex="\complement_U(A \cap B) = (-\infty, 2) \cup (4, +\infty)" /></strong></p>
+                  <div className="px-2 py-1">
+                    <p><strong>①</strong> 补A = {'{'}2, 4, 6{'}'} <strong>②</strong> 补A ∩ B = <strong><Math tex="\{2, 4\}" /></strong></p>
                   </div>
                   <div className="px-2 py-1 border-t border-gray-300 bg-[#F5E6D3]">
-                    <p className="text-[#7A5C3E]"><strong>注意顺序：</strong>这题是先交再补，不是先补再交。<strong>永远先看括号里面的</strong>。</p>
+                    <p className="text-[#7A5C3E]"><strong>注意：</strong>永远<strong>先看括号里面的</strong>，先交再补 ≠ 先补再交</p>
                   </div>
                 </div>
 
-                {/* 混合例3：有限集混合 */}
+                {/* 专题：交集为空 */}
                 <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50">混合例3：有限集混合 <Math tex="(\complement_U A) \cap B" /></div>
-                  <div className="px-2 py-1 border-b border-gray-300">
-                    <p><Math tex="U = \{1, 2, 3, 4, 5, 6\}" />，<Math tex="A = \{1, 3, 5\}" />，<Math tex="B = \{2, 3, 4\}" /></p>
+                  <div className="px-2 py-1 font-bold text-orange-700 border-b border-gray-400 bg-gray-50 text-lg">专题：交集为空 <Math tex="A \cap B = \varnothing" />（高考常考！）</div>
+                  <div className="px-2 py-1 space-y-1 border-b border-gray-300">
+                    <p><strong>含义：</strong>A 和 B <strong>没有公共元素</strong>，在数轴上就是<strong>不重叠</strong>。</p>
+                    <div className="flex gap-6">
+                      <p><strong>有限集：</strong>逐个检查，没有相同元素</p>
+                      <p><strong>区间：</strong>画数轴，两段不重叠（可以刚好挨着）</p>
+                    </div>
                   </div>
-                  <div className="px-2 py-1 space-y-1">
-                    <p><strong>① 先求补集：</strong>U 里不在 A 的：<Math tex="\complement_U A = \{2, 4, 6\}" /></p>
-                    <p><strong>② 再求交集：</strong>补A 和 B 都有的：{'{'}2, 4, 6{'}'} 和 {'{'}2, 3, 4{'}'} 都有 2 和 4</p>
-                    <p>答案：<strong><Math tex="(\complement_U A) \cap B = \{2, 4\}" /></strong></p>
+                  {/* 例1 */}
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p className="font-bold text-orange-700">例1：<Math tex="A = [1, 3]" />，<Math tex="B = (a, +\infty)" />，若 <Math tex="A \cap B = \varnothing" />，求 a</p>
+                  </div>
+                  <div className="flex items-center px-2 py-1 border-b border-gray-300">
+                    <div className="flex-1 space-y-0.5">
+                      <p>A 是 [1, 3]，B 是 a 右边的射线</p>
+                      <p>要不重叠，B 必须完全在 A 右边，即 a ≥ 3</p>
+                      <p>答案：<strong><Math tex="a \geq 3" /></strong></p>
+                    </div>
+                    <svg viewBox="0 0 200 55" className="w-[35%] shrink-0">
+                      <line x1="10" y1="38" x2="190" y2="38" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,35 198,38 190,41" fill="#9ca3af" />
+                      <line x1="50" y1="35" x2="50" y2="41" stroke="#374151" strokeWidth="1" />
+                      <line x1="110" y1="35" x2="110" y2="41" stroke="#374151" strokeWidth="1" />
+                      <text x="50" y="50" fontSize="9" fill="#374151" textAnchor="middle">1</text>
+                      <text x="110" y="50" fontSize="9" fill="#374151" textAnchor="middle">3</text>
+                      <line x1="50" y1="38" x2="110" y2="38" stroke="#3b82f6" strokeWidth="4" />
+                      <circle cx="50" cy="38" r="3" fill="#3b82f6" />
+                      <circle cx="110" cy="38" r="3" fill="#3b82f6" />
+                      <text x="80" y="31" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      <line x1="110" y1="18" x2="190" y2="18" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4,2" />
+                      <polygon points="185,15 193,18 185,21" fill="#f59e0b" />
+                      <circle cx="110" cy="18" r="3" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
+                      <text x="150" y="12" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B（临界）</text>
+                    </svg>
+                  </div>
+                  {/* 例2 */}
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p className="font-bold text-orange-700">例2：<Math tex="A = (-\infty, 2)" />，<Math tex="B = [a, a+3]" />，若 <Math tex="A \cap B = \varnothing" />，求 a</p>
+                  </div>
+                  <div className="flex items-center px-2 py-1">
+                    <div className="flex-1 space-y-0.5">
+                      <p>A 是 2 左边（不含 2），B 是长度为 3 的闭区间</p>
+                      <p>要不重叠，B 的左端点 a 至少要 ≥ 2</p>
+                      <p>答案：<strong><Math tex="a \geq 2" /></strong></p>
+                    </div>
+                    <svg viewBox="0 0 200 55" className="w-[35%] shrink-0">
+                      <line x1="10" y1="38" x2="190" y2="38" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,35 198,38 190,41" fill="#9ca3af" />
+                      <line x1="80" y1="35" x2="80" y2="41" stroke="#374151" strokeWidth="1" />
+                      <text x="80" y="50" fontSize="9" fill="#374151" textAnchor="middle">2</text>
+                      <line x1="10" y1="38" x2="80" y2="38" stroke="#3b82f6" strokeWidth="4" />
+                      <polygon points="10,35 2,38 10,41" fill="#3b82f6" />
+                      <circle cx="80" cy="38" r="3" fill="white" stroke="#3b82f6" strokeWidth="1.5" />
+                      <text x="45" y="31" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      <line x1="80" y1="18" x2="140" y2="18" stroke="#f59e0b" strokeWidth="3" strokeDasharray="4,2" />
+                      <circle cx="80" cy="18" r="3" fill="#f59e0b" />
+                      <circle cx="140" cy="18" r="3" fill="#f59e0b" />
+                      <text x="110" y="12" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B（临界）</text>
+                    </svg>
+                  </div>
+                </div>
+
+                {/* 交集非空例题 */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-green-700 border-b border-gray-400 bg-gray-50">反过来：<Math tex="A \cap B \neq \varnothing" />（交集非空）</div>
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p><Math tex="A = [1, 3]" />，<Math tex="B = (a, +\infty)" />，若 <Math tex="A \cap B \neq \varnothing" />，求 a</p>
+                  </div>
+                  <div className="px-2 py-1">
+                    <p><strong>分析：</strong>要有重叠，B 的左端点必须在 A 的右端点<strong>左边</strong>，即 <Math tex="a < 3" /></p>
+                    <p>临界情况：<Math tex="a = 3" /> 时，B 从 3 右边开始，和 A 刚好不碰，交集为空</p>
+                    <p>答案：<strong><Math tex="a < 3" /></strong>（和交集为空的 <Math tex="a \geq 3" /> 正好<strong>相反</strong>）</p>
                   </div>
                 </div>
 
                 <PageBreak />
 
-                {/* ==================== 容斥原理 ==================== */}
-                {/* 容斥公式 + Venn图 */}
+                {/* 专题：子集与交并的联系 */}
                 <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-teal-700 border-b border-gray-400 bg-gray-50">容斥原理 — 解决"重复计数"问题</div>
+                  <div className="px-2 py-1 font-bold text-cyan-700 border-b border-gray-400 bg-gray-50 text-lg">专题：子集与交并的联系</div>
+                  <div className="px-2 py-1 space-y-1 border-b border-gray-300">
+                    <p>若 <Math tex="A \subseteq B" />（A 是 B 的子集，A 在 B 里面），则：</p>
+                    <div className="flex gap-8 ml-4">
+                      <p><Math tex="A \cap B = A" />（交集取小的）</p>
+                      <p><Math tex="A \cup B = B" />（并集取大的）</p>
+                    </div>
+                    <p className="text-gray-600">理解：小碗在大碗里，两碗重叠部分就是小碗，合起来就是大碗。</p>
+                  </div>
+                  {/* 例题 */}
+                  <div className="px-2 py-1 border-b border-gray-300">
+                    <p className="font-bold text-cyan-700">例：<Math tex="A = [1, 2]" />，<Math tex="B = (-\infty, a)" />，若 <Math tex="A \cap B = A" />，求 a</p>
+                  </div>
+                  <div className="flex items-center px-2 py-1">
+                    <div className="flex-1 space-y-0.5">
+                      <p><strong>转化：</strong><Math tex="A \cap B = A" /> 说明 <Math tex="A \subseteq B" /></p>
+                      <p>A 整个在 B 里面，A 的右端点 2 必须在 B 内，需要 a {'>'} 2</p>
+                      <p>答案：<strong><Math tex="a > 2" /></strong></p>
+                    </div>
+                    <svg viewBox="0 0 200 55" className="w-[35%] shrink-0">
+                      <line x1="10" y1="38" x2="190" y2="38" stroke="#9ca3af" strokeWidth="1.5" />
+                      <polygon points="190,35 198,38 190,41" fill="#9ca3af" />
+                      <line x1="60" y1="35" x2="60" y2="41" stroke="#374151" strokeWidth="1" />
+                      <line x1="100" y1="35" x2="100" y2="41" stroke="#374151" strokeWidth="1" />
+                      <text x="60" y="50" fontSize="9" fill="#374151" textAnchor="middle">1</text>
+                      <text x="100" y="50" fontSize="9" fill="#374151" textAnchor="middle">2</text>
+                      <line x1="60" y1="38" x2="100" y2="38" stroke="#3b82f6" strokeWidth="4" />
+                      <circle cx="60" cy="38" r="3" fill="#3b82f6" />
+                      <circle cx="100" cy="38" r="3" fill="#3b82f6" />
+                      <text x="80" y="31" fontSize="9" fill="#3b82f6" fontWeight="bold" textAnchor="middle">A</text>
+                      <line x1="10" y1="18" x2="120" y2="18" stroke="#f59e0b" strokeWidth="2" />
+                      <polygon points="10,15 2,18 10,21" fill="#f59e0b" />
+                      <circle cx="120" cy="18" r="3" fill="white" stroke="#f59e0b" strokeWidth="1.5" />
+                      <text x="65" y="12" fontSize="9" fill="#f59e0b" fontWeight="bold" textAnchor="middle">B（a在2右边）</text>
+                    </svg>
+                  </div>
+                  <div className="px-2 py-1 border-t border-gray-300 bg-cyan-50">
+                    <p className="text-cyan-700"><strong>技巧：</strong>看到 <Math tex="A \cap B = A" /> 或 <Math tex="A \cup B = B" />，立刻转化为 <Math tex="A \subseteq B" /></p>
+                  </div>
+                </div>
+
+                {/* ==================== 容斥原理 ==================== */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-teal-700 border-b border-gray-400 bg-gray-50 text-lg">容斥原理 — 解决"重复计数"问题</div>
                   <div className="px-2 py-1 flex items-center gap-3 border-b border-gray-300">
                     <div className="flex-1 space-y-0.5">
                       <p>两个集合有重叠时，直接加会多算重叠部分，所以要减掉一次：</p>
@@ -1396,36 +1480,27 @@ export function SetsPage() {
                       <text x="130" y="54" fontSize="10" fontWeight="bold" fill="#ca8a04" textAnchor="middle">只B</text>
                     </svg>
                   </div>
-                  <div className="grid grid-cols-2 text-sm">
+                  <div className="grid grid-cols-2 text-sm border-b border-gray-300">
                     <div className="border-r border-gray-300 px-2 py-1"><strong>只A</strong> = |A| - |A∩B|</div>
                     <div className="px-2 py-1"><strong>只B</strong> = |B| - |A∩B|</div>
                     <div className="border-r border-t border-gray-300 px-2 py-1"><strong>至少一个</strong> = |A|+|B|-|A∩B|</div>
                     <div className="border-t border-gray-300 px-2 py-1"><strong>都没有</strong> = 总数 - |A∪B|</div>
                   </div>
-                </div>
-
-                {/* 容斥例1 */}
-                <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-teal-700 border-b border-gray-400 bg-gray-50">容斥例1</div>
+                  {/* 例1 */}
                   <div className="px-2 py-1 border-b border-gray-300">
-                    <p>全班 50 人，数学组 30 人，物理组 25 人，两个都参加 15 人</p>
+                    <p className="font-bold text-teal-700">例1：全班 50 人，数学组 30 人，物理组 25 人，两个都参加 15 人</p>
                   </div>
-                  <div className="px-2 py-1 space-y-0.5">
+                  <div className="px-2 py-1 space-y-0.5 border-b border-gray-300">
                     <p>至少参加一个：<Math tex="|A \cup B| = 30 + 25 - 15 = 40" /> 人</p>
                     <p>两个都没参加：50 - 40 = <strong>10 人</strong></p>
                   </div>
-                </div>
-
-                {/* 容斥例2 */}
-                <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-teal-700 border-b border-gray-400 bg-gray-50">容斥例2</div>
+                  {/* 例2 */}
                   <div className="px-2 py-1 border-b border-gray-300">
-                    <p>某校 200 人，语文及格 160 人，数学及格 140 人，两科都及格 120 人</p>
+                    <p className="font-bold text-teal-700">例2：某校 200 人，语文及格 160 人，数学及格 140 人，两科都及格 120 人</p>
                   </div>
                   <div className="px-2 py-1 space-y-0.5">
-                    <p>至少一科及格：<Math tex="160 + 140 - 120 = 180" /> 人</p>
-                    <p>两科都不及格：200 - 180 = <strong className="text-red-600">20 人</strong></p>
-                    <p>只语文及格：160 - 120 = <strong>40 人</strong>　只数学及格：140 - 120 = <strong>20 人</strong></p>
+                    <p>至少一科及格：<Math tex="160 + 140 - 120 = 180" /> 人，两科都不及格：200 - 180 = <strong className="text-red-600">20 人</strong></p>
+                    <p>只语文及格：160 - 120 = <strong>40 人</strong>，只数学及格：140 - 120 = <strong>20 人</strong></p>
                   </div>
                 </div>
 
@@ -1477,17 +1552,11 @@ export function SetsPage() {
                   </div>
                 </div>
 
-                <PracticeCard questions={setsPractice5} explanations={setsExplanations} />
+                <PageBreak />
 
-                <CalloutCard variant="warning" title="集合运算三大易错点">
-                  <p><strong>① 补集必须有全集：</strong>没说 U 是什么就没法求补集</p>
-                  <p><strong>② 端点开闭要看清：</strong><Math tex="[1,3) \cap (2,5] = (2,3)" /> — 两边都不含的就是开</p>
-                  <p><strong>③ 混合运算先算括号：</strong>看清是先补再交，还是先交再补，顺序不同结果不同</p>
-                </CalloutCard>
-
-                {/* ===== 大题1：有限集（2个小问覆盖3种题型）===== */}
+                {/* ===== 大题1：有限集（3个小问覆盖3种题型）===== */}
                 <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-50">大题1（有限集）：一道题变两种考法</div>
+                  <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-50">大题1（有限集）：一道题变三种考法</div>
                   <div className="px-2 py-1 border-b border-gray-300">
                     <p>已知 <Math tex="A = \{x \mid x^2 - 5x + 6 = 0\}" />，<Math tex="B = \{x \mid ax - 2 = 0\}" /></p>
                   </div>
@@ -1523,9 +1592,9 @@ export function SetsPage() {
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '22px', fontSize: '11px', fontWeight: 'bold', color: '#374151' }}>B ⊆ A，方程 <Math tex="ax-2=0" /></div>
                         </foreignObject>
                         {/* 左：a=0 */}
-                        <rect x="40" y="38" width="160" height="44" rx="4" fill="#fef2f2" stroke="#dc2626" strokeWidth="1" />
-                        <foreignObject x="40" y="38" width="160" height="44">
-                          <div style={{ textAlign: 'center', fontSize: '10px', padding: '2px 4px' }}>
+                        <rect x="40" y="38" width="160" height="52" rx="4" fill="#fef2f2" stroke="#dc2626" strokeWidth="1" />
+                        <foreignObject x="40" y="38" width="160" height="52">
+                          <div style={{ textAlign: 'center', fontSize: '10px', padding: '4px' }}>
                             <div style={{ fontWeight: 'bold', color: '#dc2626', fontSize: '12px' }}>a = 0</div>
                             <div style={{ color: '#374151' }}>方程变成 -2=0，矛盾，无解</div>
                             <div style={{ color: '#374151' }}>B = ∅，∅ ⊆ A 自动成立</div>
@@ -1746,264 +1815,162 @@ export function SetsPage() {
 
           {/* Section 7: 解题核心技巧 */}
           <section className="mb-0">
-            <Collapsible title="七、解题核心技巧" defaultOpen storageKey="sets:techniques" headerExtra={<SpeakButton text={setsNarrations.techniques} />}>
-              <div className="space-y-0 text-lg text-gray-800">
-                <div className="bg-blue-50 border border-blue-200 rounded p-2">
-                  <p className="font-bold text-blue-800 mb-2">技巧一：数轴法（最常用）<span className="ml-2 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
-                  <p className="text-blue-700">遇到不等式集合，画数轴，看重叠（交集）/ 合起来（并集）/ 剩下的（补集）</p>
+            <Collapsible title="七、解题技巧速查" defaultOpen storageKey="sets:techniques" headerExtra={<SpeakButton text={setsNarrations.techniques} />}>
+              <div className="space-y-2 text-lg text-gray-800">
+
+                {/* 五大核心技巧表格 */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-50 text-lg">高考集合五大核心技巧</div>
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50">
+                        <th className="border-b border-r border-gray-300 px-2 py-1.5 text-left w-28">技巧</th>
+                        <th className="border-b border-r border-gray-300 px-2 py-1.5 text-left">适用场景</th>
+                        <th className="border-b border-gray-300 px-2 py-1.5 text-left">操作要点</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-blue-700">① 数轴法</td>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5">区间集合的交、并、补</td>
+                        <td className="border-b border-gray-300 px-2 py-1.5">画数轴，标端点，看重叠/合并/剩余</td>
+                      </tr>
+                      <tr>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-green-700">② 先解方程</td>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5"><Math tex="\{x \mid f(x)=0\}" /> 型</td>
+                        <td className="border-b border-gray-300 px-2 py-1.5">解出具体元素，化成列举法</td>
+                      </tr>
+                      <tr>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-orange-700">③ 空集讨论</td>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5">含参数的 A⊆B 问题</td>
+                        <td className="border-b border-gray-300 px-2 py-1.5">先讨论 A=∅，再讨论 A≠∅</td>
+                      </tr>
+                      <tr>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-purple-700">④ 等价转换</td>
+                        <td className="border-b border-r border-gray-300 px-2 py-1.5">A∩B=A 或 A∪B=B</td>
+                        <td className="border-b border-gray-300 px-2 py-1.5">立刻转化为 A⊆B，再画数轴</td>
+                      </tr>
+                      <tr>
+                        <td className="border-r border-gray-300 px-2 py-1.5 font-bold text-red-700">⑤ 端点规则</td>
+                        <td className="border-r border-gray-300 px-2 py-1.5">补集、交并集端点判断</td>
+                        <td className="px-2 py-1.5">补集开闭互换；交集取严，并集取松</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div className="bg-blue-50 border border-blue-200 rounded p-2">
-                  <p className="font-bold text-blue-800 mb-2">技巧二：方程型先解方程 <span className="ml-1 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
-                  <p className="text-blue-700"><Math tex="\{x \mid x^2 - 3x + 2 = 0\}" /> 先解出 x=1, x=2，得 <Math tex="\{1, 2\}" /></p>
-                </div>
-                <div className="bg-blue-50 border border-blue-200 rounded p-2">
-                  <p className="font-bold text-blue-800 mb-2">技巧三：子集问题别忘空集 <span className="ml-1 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
-                  <p className="text-blue-700">"若 A ⊆ B" 要分两种情况：A = ∅ 和 A ≠ ∅</p>
-                </div>
-                <div className="bg-blue-50 border border-blue-200 rounded p-2">
-                  <p className="font-bold text-blue-800 mb-2">技巧四：含参数问题的等价转换 <span className="ml-1 text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded">高考必用</span></p>
-                  <div className="text-blue-700 space-y-1">
-                    <p>"<Math tex="A \cap B = \varnothing" />" 意思是 A 和 B 在数轴上完全分开</p>
-                    <p>"<Math tex="A \subseteq B" />" 意思是 A 的范围在 B 的范围里面（A 可以是空集）</p>
-                    <p>"<Math tex="A \cap B = A" />" 等价于 <Math tex="A \subseteq B" /></p>
-                    <p>"<Math tex="A \cup B = B" />" 等价于 <Math tex="A \subseteq B" /></p>
+
+                {/* 等价转换公式 */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50">等价转换公式（必记！）</div>
+                  <div className="px-2 py-1.5 flex flex-wrap gap-x-6 gap-y-1">
+                    <p><Math tex="A \cap B = A \;\Leftrightarrow\; A \subseteq B" /></p>
+                    <p><Math tex="A \cup B = B \;\Leftrightarrow\; A \subseteq B" /></p>
+                    <p><Math tex="A \cap B = \varnothing \;\Leftrightarrow" /> A、B 不重叠</p>
                   </div>
                 </div>
 
-                <Collapsible title="技巧五：集合相等 A=B，元素一一对应（拓展提高）" storageKey="sets:technique-equal">
-                  <div className="space-y-1 text-lg text-gray-800">
-                    <div className="bg-blue-50 border border-blue-200 rounded p-2">
-                      <p className="font-bold text-blue-800">核心思路</p>
-                      <p className="text-blue-700">A = B 就是两边元素<strong>完全相同</strong>，逐个对应找参数，最后<strong>验证互异性</strong></p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded p-2 space-y-2">
-                      <p className="font-bold text-gray-800">例：<Math tex="A = \{1,\; -a,\; \tfrac{b}{a}\}" />，<Math tex="B = \{0,\; a^2,\; b-a\}" />，若 A = B，求 <Math tex="a^{2025} + b^{2025}" /></p>
-                      <div className="pl-3 border-l-2 border-blue-300 space-y-2 text-sm">
-                        <div>
-                          <p className="text-blue-600 font-bold">第①步：找突破口 — 0 在哪？</p>
-                          <p className="text-gray-700 mt-1">0 ∈ B 且 A = B，所以 0 ∈ A，A 中谁 = 0？</p>
-                          <p className="text-gray-700">1 ≠ 0　-a = 0 则 a = 0 但 b/a 无意义 ✗　<strong>b/a = 0 则 b = 0</strong>（a ≠ 0）</p>
-                        </div>
-                        <div>
-                          <p className="text-blue-600 font-bold">第②步：b = 0 代入</p>
-                          <p className="text-gray-700 mt-1">A = &#123;1, -a, 0&#125;　B = &#123;0, <Math tex="a^2" />, -a&#125;</p>
-                          <p className="text-gray-700">-a 在两边都有 ✓，剩下 &#123;1, 0&#125; = &#123;0, <Math tex="a^2" />&#125;，所以 <Math tex="a^2 = 1" /></p>
-                        </div>
-                        <div>
-                          <p className="text-blue-600 font-bold">第③步：解 <Math tex="a^2 = 1" /> 并验证互异性</p>
-                          <p className="text-gray-700 mt-1">a = 1：A = &#123;1, -1, 0&#125;，全部不重复 ✓</p>
-                          <p className="text-gray-700">a = -1：A = &#123;1, <strong className="text-red-600">1</strong>, 0&#125;，1 重复了 ✗</p>
-                        </div>
-                        <p className="text-gray-800 font-bold mt-1">答案：a = 1, b = 0，所以 <Math tex="1^{2025} + 0^{2025} = \boxed{1}" /></p>
-                      </div>
-                    </div>
-
-                    <div className="bg-[#F5E6D3] rounded p-2 text-sm space-y-1">
-                      <p className="font-bold text-[#7A5C3E]">做题套路（三步走）：</p>
-                      <p className="text-[#9A7B5B]">① 找突破口（通常是 0 或特殊值在哪边）</p>
-                      <p className="text-[#9A7B5B]">② 代入求参数（元素一一对应）</p>
-                      <p className="text-[#9A7B5B]">③ <strong>验证互异性</strong>（多解时排除不满足的）</p>
-                    </div>
-                  </div>
-                </Collapsible>
-
-                <Collapsible title="进阶挑战：含参集合 + 分类讨论（拓展 · 高考选择题不考这么难）" storageKey="sets:technique-advanced">
-                  <div className="space-y-1 text-lg text-gray-800">
-                    <div className="bg-red-50 border border-red-200 rounded p-2">
-                      <p className="font-bold text-red-800">为什么难？</p>
-                      <p className="text-red-700">方程的解的<strong>个数不确定</strong>，集合的元素个数不确定，必须<strong>分类讨论</strong></p>
-                    </div>
-
-                    <div className="bg-gray-50 rounded p-2 space-y-2">
-                      <p className="font-bold text-gray-800">例：集合 <Math tex="M = \{x \mid (x-a)(x^2 - ax + a - 1) = 0\}" />，各元素之和为 3，求 a</p>
-                      <div className="pl-3 border-l-2 border-blue-300 space-y-1 text-sm">
-                        <div>
-                          <p className="text-blue-600 font-bold">第①步：因式分解，找出所有根</p>
-                          <p className="text-gray-700 mt-1"><Math tex="x^2 - ax + a - 1 = (x-1)(x-a+1)" /></p>
-                          <p className="text-gray-700">所以方程变为 <Math tex="(x-a)(x-1)(x-a+1) = 0" /></p>
-                          <p className="text-gray-700">三个根：<Math tex="x = a,\; x = 1,\; x = a-1" /></p>
-                        </div>
-                        <div>
-                          <p className="text-blue-600 font-bold">第②步：分类讨论（根据根是否重复）</p>
-
-                          <div className="bg-white rounded p-2 border mt-1 space-y-1">
-                            <div>
-                              <p className="font-bold text-purple-700">情况一：三个根互不相同（a ≠ 1 且 a ≠ 2）</p>
-                              <p className="text-gray-700">M = &#123;a, 1, a-1&#125;，元素和 = a + 1 + (a-1) = 2a = 3</p>
-                              <p className="text-gray-700">所以 <strong>a = 3/2</strong>　验证：M = &#123;3/2, 1, 1/2&#125;，全不重复 ✓</p>
-                            </div>
-                            <div>
-                              <p className="font-bold text-purple-700">情况二：a = 1（则 a 和 1 重合）</p>
-                              <p className="text-gray-700">M = &#123;1, 0&#125;，元素和 = 1 ✗</p>
-                            </div>
-                            <div>
-                              <p className="font-bold text-purple-700">情况三：a = 2（则 1 和 a-1=1 重合）</p>
-                              <p className="text-gray-700">M = &#123;2, 1&#125;，元素和 = 3 ✓，所以 <strong>a = 2</strong></p>
-                            </div>
-                          </div>
-                        </div>
-                        <p className="text-gray-800 font-bold">答案：<Math tex="a = \dfrac{3}{2}" /> 或 <Math tex="a = 2" /></p>
-                      </div>
-                    </div>
-
-                    <div className="bg-[#F5E6D3] rounded p-2 text-sm space-y-1">
-                      <p className="font-bold text-[#7A5C3E]">为什么 99% 的人错？</p>
-                      <p className="text-[#9A7B5B]">大多数人只算出 a = 3/2 就结束了，<strong>忘了讨论根重合的情况</strong>！</p>
-                      <p className="text-[#9A7B5B]"><strong>含参集合必须分类讨论：先假设所有根不同解出来，再逐一检查根重合的可能！</strong></p>
-                    </div>
-                  </div>
-                </Collapsible>
-
-                {/* 考前提醒 */}
-                <div className="bg-amber-50 border border-amber-200 rounded p-2 space-y-2">
-                  <p className="font-bold text-amber-800">集合大题常见丢分点</p>
-                  <div className="space-y-1 text-amber-700">
-                    <p><strong>① 忘讨论空集：</strong>含参数时，解出的集合可能是 ∅，必须单独检验</p>
-                    <p><strong>② 忘检查互异性：</strong>方程有重根时，集合元素不能重复</p>
-                    <p><strong>③ 端点开闭搞反：</strong>补集端点反转（开↔闭），交并集端点取严/松</p>
-                    <p><strong>④ 全集没看清：</strong>补集必须有全集 U，题目没给就不能做补集</p>
+                {/* 常见丢分点 */}
+                <div className="border border-red-300 rounded overflow-hidden bg-red-50">
+                  <div className="px-2 py-1 font-bold text-red-700 border-b border-red-300 bg-red-100">高考常见丢分点</div>
+                  <div className="px-2 py-1.5 grid grid-cols-2 gap-x-4 gap-y-1 text-red-700">
+                    <p><strong>①</strong> 忘讨论空集（A=∅ 也满足 A⊆B）</p>
+                    <p><strong>②</strong> 忘检查互异性（集合元素不能重复）</p>
+                    <p><strong>③</strong> 端点开闭搞反（补集要反转！）</p>
+                    <p><strong>④</strong> 没看清全集（补集必须有 U）</p>
                   </div>
                 </div>
+
               </div>
             </Collapsible>
           </section>
 
-          {/* Section 8: 知识总结卡片 */}
+          {/* Section 8: 知识速查表 */}
           <section className="mb-0">
             <h2 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
               <span className="w-8 h-8 rounded bg-purple-500 text-white flex items-center justify-center text-sm font-bold">
                 8
               </span>
-              知识总结卡片
+              集合知识速查表
               <SpeakButton text={setsNarrations.summary} />
             </h2>
-            <div className="bg-[#C7EDCC] text-gray-800 rounded p-2 space-y-1">
-              {/* 概念基础 */}
-              <div>
-                <p className="text-green-800 text-xs font-bold mb-2 uppercase tracking-wider">概念基础</p>
-                <div className="grid grid-cols-3 gap-1.5">
-                  <div className="bg-white/60 rounded p-2">
-                    <p className="text-green-700 text-xs mb-1">集合</p>
-                    <p>一堆<strong className="text-blue-600">确定的</strong>东西</p>
+            <div className="space-y-2">
+              {/* 核心公式表 */}
+              <div className="border border-gray-400 rounded overflow-hidden">
+                <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50 text-lg">核心公式速查</div>
+                <table className="w-full border-collapse">
+                  <tbody>
+                    <tr>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-blue-700 w-24">交集</td>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5"><Math tex="A \cap B" /> = 两边都有</td>
+                      <td className="border-b border-gray-300 px-2 py-1.5">数轴：看<strong>重叠</strong>部分</td>
+                    </tr>
+                    <tr>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-green-700">并集</td>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5"><Math tex="A \cup B" /> = 合起来</td>
+                      <td className="border-b border-gray-300 px-2 py-1.5">数轴：<strong>合并</strong>全部覆盖</td>
+                    </tr>
+                    <tr>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-red-700">补集</td>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5"><Math tex="\complement_U A" /> = U 去掉 A</td>
+                      <td className="border-b border-gray-300 px-2 py-1.5">端点：<strong>开闭互换</strong></td>
+                    </tr>
+                    <tr>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5 font-bold text-purple-700">子集</td>
+                      <td className="border-b border-r border-gray-300 px-2 py-1.5"><Math tex="A \subseteq B" /> = A 在 B 里面</td>
+                      <td className="border-b border-gray-300 px-2 py-1.5">端点：A 的端点<strong>不能超出</strong> B</td>
+                    </tr>
+                    <tr>
+                      <td className="border-r border-gray-300 px-2 py-1.5 font-bold text-orange-700">容斥</td>
+                      <td className="border-r border-gray-300 px-2 py-1.5"><Math tex="|A \cup B| = |A| + |B| - |A \cap B|" /></td>
+                      <td className="px-2 py-1.5">重叠部分只算一次</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* 等价转换 + 子集公式 */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-cyan-700 border-b border-gray-400 bg-gray-50">等价转换（三句话同义）</div>
+                  <div className="px-2 py-1.5 space-y-1">
+                    <p><Math tex="A \subseteq B" /></p>
+                    <p><Math tex="A \cap B = A" /></p>
+                    <p><Math tex="A \cup B = B" /></p>
                   </div>
-                  <div className="bg-white/60 rounded p-2">
-                    <p className="text-green-700 text-xs mb-1">三大性质</p>
-                    <p>确定性 · 互异性 · 无序性</p>
-                  </div>
-                  <div className="bg-white/60 rounded p-2">
-                    <p className="text-green-700 text-xs mb-1">表示方法</p>
-                    <p>列举法 · 描述法 · Venn图 · 区间</p>
+                </div>
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-teal-700 border-b border-gray-400 bg-gray-50">子集个数公式（n 个元素）</div>
+                  <div className="px-2 py-1.5 space-y-1">
+                    <p>子集：<Math tex="2^n" />　真子集：<Math tex="2^n - 1" /></p>
+                    <p>非空子集：<Math tex="2^n - 1" />　非空真子集：<Math tex="2^n - 2" /></p>
                   </div>
                 </div>
               </div>
 
-              {/* 区间 + 数集 */}
-              <div>
-                <p className="text-green-800 text-xs font-bold mb-2 uppercase tracking-wider">区间 & 数集</p>
-                <div className="grid grid-cols-2 gap-1.5">
-                  <div className="bg-white/60 rounded p-2">
-                    <p className="text-green-700 text-xs mb-1">区间表示法</p>
-                    <p><strong className="text-blue-600">( )</strong> 不含端点 · <strong className="text-green-700">[ ]</strong> 含端点 · <strong className="text-amber-600">∞ 永远用 ( )</strong></p>
-                  </div>
-                  <div className="bg-white/60 rounded p-2">
-                    <p className="text-green-700 text-xs mb-1">常见数集</p>
+              {/* 数集 + 区间 */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-50">常见数集包含关系</div>
+                  <div className="px-2 py-1.5">
                     <p><Math tex="\mathbb{N}^* \subset \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}" /></p>
-                    <p className="text-xs text-green-700 mt-1">正 ⊂ 自 ⊂ 整 ⊂ 有 ⊂ 实</p>
+                    <p className="text-gray-600 mt-1">正整数 ⊂ 自然数 ⊂ 整数 ⊂ 有理数 ⊂ 实数</p>
+                  </div>
+                </div>
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-green-700 border-b border-gray-400 bg-gray-50">区间端点符号</div>
+                  <div className="px-2 py-1.5">
+                    <p><strong>[ ]</strong> 含端点（实心）　<strong>( )</strong> 不含端点（空心）</p>
+                    <p className="text-orange-600 mt-1"><strong>∞ 永远用 ( )</strong>，因为无穷大取不到</p>
                   </div>
                 </div>
               </div>
 
-              {/* 集合关系 */}
-              <div>
-                <p className="text-green-800 text-xs font-bold mb-2 uppercase tracking-wider">集合关系</p>
-                <div className="grid grid-cols-2 gap-1.5">
-                  <div className="bg-white/60 rounded p-2 space-y-1">
-                    <p><Math tex="A \subseteq B" /> 子集：全在里面（<strong className="text-green-700">允许</strong>相等）</p>
-                    <p><Math tex="A \subsetneq B" /> 真子集：全在里面（<strong className="text-red-600">不能</strong>相等）</p>
-                  </div>
-                  <div className="bg-white/60 rounded p-2 space-y-1">
-                    <p className="text-green-700 text-xs mb-1">子集个数公式</p>
-                    <p>子集 <Math tex="2^n" /> · 真子集 <Math tex="2^n\!-\!1" /></p>
-                    <p>非空 <Math tex="2^n\!-\!1" /> · 非空真 <Math tex="2^n\!-\!2" /></p>
-                  </div>
-                </div>
-                <div className="bg-white/60 rounded p-2 mt-3">
-                  <p className="text-green-700 text-xs mb-1">空集铁律（必记！）</p>
-                  <p><Math tex="\varnothing \subseteq A" />（任何集合）　<Math tex="\varnothing \subsetneq A" />（A 非空时）　<strong className="text-amber-600">∅ ≠ &#123;0&#125;</strong></p>
-                </div>
-              </div>
-
-              {/* 集合运算 */}
-              <div>
-                <p className="text-green-800 text-xs font-bold mb-2 uppercase tracking-wider">集合运算</p>
-                <div className="grid grid-cols-3 gap-1.5">
-                  <div className="bg-white/60 rounded p-2">
-                    <p><Math tex="A \cap B" /> 交集</p>
-                    <p className="text-xs text-green-700 mt-1">两个都有的</p>
-                  </div>
-                  <div className="bg-white/60 rounded p-2">
-                    <p><Math tex="A \cup B" /> 并集</p>
-                    <p className="text-xs text-green-700 mt-1">合起来（去重）</p>
-                  </div>
-                  <div className="bg-white/60 rounded p-2">
-                    <p><Math tex="\complement_U A" /> 补集</p>
-                    <p className="text-xs text-green-700 mt-1">U 去掉 A 剩的</p>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-1.5 mt-2">
-                  <div className="bg-white/60 rounded p-2">
-                    <p className="text-green-700 text-xs mb-1">补集端点规律</p>
-                    <p><strong className="text-green-700">开变闭，闭变开</strong>（{'<'} ↔ ≥，≤ ↔ {'>'}）</p>
-                  </div>
-                  <div className="bg-white/60 rounded p-2">
-                    <p className="text-green-700 text-xs mb-1">容斥原理</p>
-                    <p><Math tex="|A \cup B| = |A| + |B| - |A \cap B|" /></p>
-                  </div>
-                </div>
-              </div>
-
-              {/* 等价转换 + 解题 */}
-              <div>
-                <p className="text-green-800 text-xs font-bold mb-2 uppercase tracking-wider">等价转换 & 解题</p>
-                <div className="grid grid-cols-2 gap-1.5">
-                  <div className="bg-white/60 rounded p-2 space-y-1">
-                    <p><Math tex="A \cap B = A \;\Leftrightarrow\; A \subseteq B" /></p>
-                    <p><Math tex="A \cup B = B \;\Leftrightarrow\; A \subseteq B" /></p>
-                    <p><Math tex="A \cap (\complement_U A) = \varnothing" /></p>
-                    <p><Math tex="A \cup (\complement_U A) = U" /></p>
-                  </div>
-                  <div className="bg-white/60 rounded p-2 space-y-1">
-                    <p className="text-green-700 text-xs mb-1">核心解题方法</p>
-                    <p>① <strong className="text-blue-600">画数轴</strong>（不等式集合必画）</p>
-                    <p>② A⊆B / A∩B=∅，<strong className="text-blue-600">看端点</strong></p>
-                    <p>③ 含参集合，注意<strong className="text-blue-600">互异性</strong>两两不等</p>
-                    <p>④ 含参集合，别忘<strong className="text-blue-600">讨论空集</strong></p>
-                  </div>
-                </div>
-              </div>
-
-              {/* 记忆口诀 */}
-              <div className="bg-white/60 rounded p-2">
-                <p className="text-green-800 font-bold text-xs mb-2">💡 一句话记忆口诀</p>
-                <div className="grid grid-cols-2 gap-1.5 text-xs">
-                  <p><strong className="text-green-800">交集</strong>：两边都要，范围<strong>缩小</strong></p>
-                  <p><strong className="text-green-800">并集</strong>：有一个就行，范围<strong>扩大</strong></p>
-                  <p><strong className="text-green-800">补集</strong>：反过来，端点<strong>开闭互换</strong></p>
-                  <p><strong className="text-green-800">子集</strong>：小的在大的里面，<strong>端点不能超</strong></p>
-                </div>
-              </div>
-
-              {/* 陷阱清单 */}
-              <div className="border-t border-green-300 pt-3">
-                <p className="text-amber-700 font-bold text-xs mb-2">⚠ 高考陷阱清单</p>
-                <div className="grid grid-cols-3 gap-2 text-xs text-amber-700">
-                  <p>① 0 是自然数</p>
-                  <p>② 子集别忘空集</p>
-                  <p>③ 互异性不能重复</p>
-                  <p>④ 描述法看清 x 还是 (x,y)</p>
-                  <p>⑤ ∅ 和 &#123;0&#125; 不一样</p>
-                  <p>⑥ 补集必须有全集 U</p>
+              {/* 空集铁律 */}
+              <div className="border border-orange-300 rounded overflow-hidden bg-orange-50">
+                <div className="px-2 py-1 font-bold text-orange-700 border-b border-orange-300 bg-orange-100">空集铁律（必记！）</div>
+                <div className="px-2 py-1.5 flex gap-6 text-orange-700">
+                  <p><Math tex="\varnothing \subseteq A" />（空集是任何集合的子集）</p>
+                  <p><Math tex="\varnothing \neq \{0\}" />（空集 ≠ 含0的集合）</p>
                 </div>
               </div>
             </div>
@@ -2019,7 +1986,7 @@ export function SetsPage() {
               </span>
               高考真题实战
             </h2>
-            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="22道选择题，覆盖高考集合全部题型" explanations={setsExplanations} />
+            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="12道精选题，覆盖高考集合全部题型" explanations={setsExplanations} />
           </section>
 
       {isPrinting && printOptions.showAnswers && <SetsAnswers />}

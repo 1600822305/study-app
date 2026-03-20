@@ -196,31 +196,3 @@ export const setsPractice3: QuizQuestionData[] = [
     correctAnswer: 'Q ⊂ Z',
   },
 ];
-
-// 第5节：集合运算
-export const setsPractice5: QuizQuestionData[] = [
-  {
-    id: 'stp5-1',
-    type: 'blank',
-    question: '',
-    questionLatex: 'A = \\{1,3,5,7\\}\\text{，}B = \\{3,5,8\\}\\text{，}A \\cap B = \\text{?}',
-    correctAnswer: '{3,5}',
-    acceptableAnswers: ['{3, 5}', '{5,3}', '{5, 3}'],
-  },
-  {
-    id: 'stp5-2',
-    type: 'blank',
-    question: '',
-    questionLatex: 'U = \\{1,2,3,4,5\\}\\text{，}A = \\{2,4\\}\\text{，}\\complement_U A = \\text{?}',
-    correctAnswer: '{1,3,5}',
-    acceptableAnswers: ['{1, 3, 5}', '{3,1,5}', '{5,3,1}'],
-  },
-  {
-    id: 'stp5-3',
-    type: 'blank',
-    question: '',
-    questionLatex: 'A = \\{x \\mid -1 \\leq x < 3\\}\\text{，}B = \\{x \\mid 2 < x \\leq 5\\}\\text{，}A \\cap B = \\text{?}',
-    correctAnswer: '(2,3)',
-    acceptableAnswers: ['(2, 3)'],
-  },
-];
