@@ -8,4 +8,6 @@ export { SubtitlePanel } from './SubtitlePanel';
 export { PageHeader, PracticeCard, CalloutCard, LessonLayout, BigQuestionCard } from './lesson';
 export { ExportButton, PageBreak } from './export';
 export { ExamPaper } from './ExamPaper';
+export { Geo3dSvg } from './Geo3dSvg';
+export { DebugGeo3dSvg, Geo3dDebugToggle } from './Geo3dDebug';
 // AIChatPanel 已废弃，使用 ChatPanel (features/chat/ChatPanel.tsx)

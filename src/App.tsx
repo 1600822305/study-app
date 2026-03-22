@@ -40,6 +40,13 @@ const SolveTrianglePage = lazy(() => import('@/features/trig').then(m => ({ defa
 const PrintTestPage = lazy(() => import('@/features/trig').then(m => ({ default: m.PrintTestPage })));
 const SequencePrereqPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequencePrereqPage })));
 const SequenceBasicPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceBasicPage })));
+const SequenceRecurPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceRecurPage })));
+const SequenceSumPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceSumPage })));
+const SequenceAdvPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceAdvPage })));
+const Geo3dPrereqPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dPrereqPage })));
+const Geo3dRelationPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dRelationPage })));
+const Geo3dVectorPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dVectorPage })));
+const Geo3dSolidPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dSolidPage })));
 const SettingsPage = lazy(() => import('@/features/settings/SettingsPage').then(m => ({ default: m.SettingsPage })));
 const TTSSettingsPage = lazy(() => import('@/features/settings/TTSSettingsPage').then(m => ({ default: m.TTSSettingsPage })));
 const AISettingsPage = lazy(() => import('@/features/settings/AISettingsPage').then(m => ({ default: m.AISettingsPage })));
@@ -108,6 +115,13 @@ function App() {
           <Route path="/math/stage5-exam" element={<Stage5ExamPage />} />
           <Route path="/math/sequence-prereq" element={<SequencePrereqPage />} />
           <Route path="/math/sequence-basic" element={<SequenceBasicPage />} />
+          <Route path="/math/sequence-recur" element={<SequenceRecurPage />} />
+          <Route path="/math/sequence-sum" element={<SequenceSumPage />} />
+          <Route path="/math/sequence-adv" element={<SequenceAdvPage />} />
+          <Route path="/math/geo3d-prereq" element={<Geo3dPrereqPage />} />
+          <Route path="/math/geo3d-relation" element={<Geo3dRelationPage />} />
+          <Route path="/math/geo3d-vector" element={<Geo3dVectorPage />} />
+          <Route path="/math/geo3d-solid" element={<Geo3dSolidPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/tts" element={<TTSSettingsPage />} />
           <Route path="/settings/ai" element={<AISettingsPage />} />

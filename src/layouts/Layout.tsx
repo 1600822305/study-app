@@ -103,8 +103,20 @@ const navItems: NavItem[] = [
         items: [
           { path: '/math/sequence-prereq', label: '6.0 数列前置知识' },
           { path: '/math/sequence-basic', label: '6.1 等差与等比数列' },
-          { path: '/math/sequence-sum', label: '6.2 数列求和与递推' },
+          { path: '/math/sequence-recur', label: '6.2 递推数列求通项' },
+          { path: '/math/sequence-sum', label: '6.3 数列求和方法' },
+          { path: '/math/sequence-adv', label: '6.4 数列压轴扩展' },
           { path: '/math/stage6-exam', label: '📝 阶段考试' },
+        ],
+      },
+      {
+        groupLabel: '第七阶段：立体几何',
+        items: [
+          { path: '/math/geo3d-prereq', label: '7.0 立体几何前置知识' },
+          { path: '/math/geo3d-relation', label: '7.1 点线面位置关系' },
+          { path: '/math/geo3d-vector', label: '7.2 空间向量法' },
+          { path: '/math/geo3d-solid', label: '7.3 空间几何体' },
+          { path: '/math/stage7-exam', label: '📝 阶段考试' },
         ],
       },
     ],
