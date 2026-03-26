@@ -1,5 +1,4 @@
-import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
-import { geo3dVectorNarrations } from './data/7.2/7.2-vector-narrations';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
 import { useProgress } from '@/hooks';
 
 const progressItems = [
@@ -14,7 +13,6 @@ export function Geo3dVectorPrereqPage() {
       <PageHeader
         stage="第七阶段 · 立体几何"
         title="7.1.5 空间向量前置知识"
-        narration={geo3dVectorNarrations.basics}
         subtitle="从平面向量到空间向量——只多了一个 z 分量"
         tags={[
           { label: '难度 ★☆☆☆☆', color: 'green' },
@@ -32,7 +30,7 @@ export function Geo3dVectorPrereqPage() {
       {/* Section 1: 空间向量基础 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="vector-basics" className="mb-3 scroll-mt-4">
-        <Collapsible title="一、空间向量基础（快速回顾）" defaultOpen storageKey="geo3d-vp:basics" headerExtra={<SpeakButton text={geo3dVectorNarrations.basics} />}>
+        <Collapsible title="一、空间向量基础（快速回顾）" defaultOpen storageKey="geo3d-vp:basics">
           <div className="space-y-0 text-lg text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">

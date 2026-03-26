@@ -15,7 +15,7 @@ export function LessonLayout({ progressItems, onToggle, children }: LessonLayout
   return (
     <div className="flex flex-col lg:flex-row gap-6 print:block">
       <div className="flex-1 min-w-0" {...(printOptions.answersOnly ? { 'data-answers-only': true } : {})}>{children}</div>
-      <div className="lg:w-72 shrink-0 print:hidden">
+      <div className="lg:w-44 shrink-0 print:hidden">
         <div className="lg:sticky lg:top-6">
           <ProgressTracker items={progressItems} onToggle={onToggle} />
         </div>

@@ -11,12 +11,12 @@ const ExamOverviewPage = lazy(() => import('@/features/overview').then(m => ({ d
 const ScoreGradingPage = lazy(() => import('@/features/overview').then(m => ({ default: m.ScoreGradingPage })));
 const CoverPage = lazy(() => import('@/features/book').then(m => ({ default: m.CoverPage })));
 const TableOfContentsPage = lazy(() => import('@/features/book').then(m => ({ default: m.TableOfContentsPage })));
-const PrereqPage = lazy(() => import('@/features/prereq').then(m => ({ default: m.PrereqPage })));
-const ComplexPage = lazy(() => import('@/features/complex').then(m => ({ default: m.ComplexPage })));
-const SetsPage = lazy(() => import('@/features/sets').then(m => ({ default: m.SetsPage })));
-const SetsPrereqPage = lazy(() => import('@/features/sets').then(m => ({ default: m.SetsPrereqPage })));
-const LogicPage = lazy(() => import('@/features/logic').then(m => ({ default: m.LogicPage })));
-const LogicPrereqPage = lazy(() => import('@/features/logic').then(m => ({ default: m.LogicPrereqPage })));
+const PrereqPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.PrereqPage })));
+const ComplexPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.ComplexPage })));
+const SetsPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.SetsPage })));
+const SetsPrereqPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.SetsPrereqPage })));
+const LogicPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.LogicPage })));
+const LogicPrereqPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.LogicPrereqPage })));
 const InequalityPrereqPage = lazy(() => import('@/features/inequality').then(m => ({ default: m.InequalityPrereqPage })));
 const InequalityPage = lazy(() => import('@/features/inequality').then(m => ({ default: m.InequalityPage })));
 const QuadraticPage = lazy(() => import('@/features/quadratic').then(m => ({ default: m.QuadraticPage })));
@@ -43,11 +43,21 @@ const SequenceBasicPage = lazy(() => import('@/features/sequence').then(m => ({ 
 const SequenceRecurPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceRecurPage })));
 const SequenceSumPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceSumPage })));
 const SequenceAdvPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceAdvPage })));
+const GeoBasicsPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.GeoBasicsPage })));
 const Geo3dPrereqPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dPrereqPage })));
 const Geo3dRelationPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dRelationPage })));
 const Geo3dVectorPrereqPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dVectorPrereqPage })));
 const Geo3dVectorPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dVectorPage })));
 const Geo3dSolidPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dSolidPage })));
+const LinePage = lazy(() => import('@/features/analytic').then(m => ({ default: m.LinePage })));
+const CirclePage = lazy(() => import('@/features/analytic').then(m => ({ default: m.CirclePage })));
+const ConicBasicPage = lazy(() => import('@/features/analytic').then(m => ({ default: m.ConicBasicPage })));
+const ConicLinePage = lazy(() => import('@/features/analytic').then(m => ({ default: m.ConicLinePage })));
+const CountingPage = lazy(() => import('@/features/probability').then(m => ({ default: m.CountingPage })));
+const ProbabilityPage = lazy(() => import('@/features/probability').then(m => ({ default: m.ProbabilityPage })));
+const StatisticsPage = lazy(() => import('@/features/probability').then(m => ({ default: m.StatisticsPage })));
+const DerivativeCompPage = lazy(() => import('@/features/derivative').then(m => ({ default: m.DerivativeCompPage })));
+const DerivativeHardPage = lazy(() => import('@/features/derivative').then(m => ({ default: m.DerivativeHardPage })));
 const SettingsPage = lazy(() => import('@/features/settings/SettingsPage').then(m => ({ default: m.SettingsPage })));
 const TTSSettingsPage = lazy(() => import('@/features/settings/TTSSettingsPage').then(m => ({ default: m.TTSSettingsPage })));
 const AISettingsPage = lazy(() => import('@/features/settings/AISettingsPage').then(m => ({ default: m.AISettingsPage })));
@@ -119,11 +129,21 @@ function App() {
           <Route path="/math/sequence-recur" element={<SequenceRecurPage />} />
           <Route path="/math/sequence-sum" element={<SequenceSumPage />} />
           <Route path="/math/sequence-adv" element={<SequenceAdvPage />} />
+          <Route path="/math/geo-basics" element={<GeoBasicsPage />} />
           <Route path="/math/geo3d-prereq" element={<Geo3dPrereqPage />} />
           <Route path="/math/geo3d-relation" element={<Geo3dRelationPage />} />
           <Route path="/math/geo3d-vector-prereq" element={<Geo3dVectorPrereqPage />} />
           <Route path="/math/geo3d-vector" element={<Geo3dVectorPage />} />
           <Route path="/math/geo3d-solid" element={<Geo3dSolidPage />} />
+          <Route path="/math/line" element={<LinePage />} />
+          <Route path="/math/circle" element={<CirclePage />} />
+          <Route path="/math/conic-basic" element={<ConicBasicPage />} />
+          <Route path="/math/conic-line" element={<ConicLinePage />} />
+          <Route path="/math/counting" element={<CountingPage />} />
+          <Route path="/math/probability" element={<ProbabilityPage />} />
+          <Route path="/math/statistics" element={<StatisticsPage />} />
+          <Route path="/math/derivative-comp" element={<DerivativeCompPage />} />
+          <Route path="/math/derivative-hard" element={<DerivativeHardPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/tts" element={<TTSSettingsPage />} />
           <Route path="/settings/ai" element={<AISettingsPage />} />

@@ -1,6 +1,6 @@
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { Coordinates, Point } from 'mafs';
-import { DebugMafs, DText, DebugToggle } from '../trig/MafsDebug';
+import { DebugMafs, DText, DebugToggle } from '@/features/trig/MafsDebug';
 import { complexNarrations } from './data/1.1/1.1-narrations';
 import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/1.1/1.1-practice';
 import { useProgress, usePrintMode } from '@/hooks';

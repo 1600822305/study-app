@@ -1,6 +1,5 @@
-import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, Geo3dDebugToggle } from '@/components/shared';
-import { geo3dRelationNarrations } from './data/7.1/7.1-relation-narrations';
-import { skewLinesDiagram, perpLinesDiagram, intersectingLinesDiagram, axiom4Diagram, cuboidParallelDiagram, cuboidIntersectDiagram, cuboidSkewDiagram, cuboidPerpDiagram, triangularPrismDiagram, lineInPlaneDiagram, lineParallelPlaneDiagram, lineIntersectPlaneDiagram, linePerpPlaneDiagram, cuboidPlainDiagram, cuboidLineInPlaneDiagram, cuboidLpParallelDiagram, cuboidLpParallelPropDiagram, cuboidLpIntersectDiagram, cuboidLpPerpDetDiagram, cuboidExProof1Diagram, cuboidExProof2Diagram, cuboidExPpProof1Diagram, cuboidExPpProof2Diagram, cuboidPpDetExDiagram, cuboidPpPropExDiagram, cuboidPpPerpDetExDiagram, cuboidPpPerpPropExDiagram, lpParallelDetDiagram, lpParallelPropDiagram, ppParallelDetDiagram, ppParallelPropDiagram, lpPerpDetDiagram, lpPerpPropDiagram, lpPerpProp1Diagram, lpPerpProp2Diagram, lpPerpProp3Diagram, ppPerpDetDiagram, ppPerpPropDiagram } from './data/7.1/7.1-relation-diagrams';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, Geo3dDebugToggle } from '@/components/shared';
+import { skewLinesDiagram, perpLinesDiagram, intersectingLinesDiagram, axiom4Diagram, cuboidParallelDiagram, cuboidIntersectDiagram, cuboidSkewDiagram, cuboidPerpDiagram, triangularPrismDiagram, lineInPlaneDiagram, lineParallelPlaneDiagram, lineIntersectPlaneDiagram, linePerpPlaneDiagram, cuboidPlainDiagram, cuboidLineInPlaneDiagram, cuboidLpParallelDiagram, cuboidLpParallelPropDiagram, cuboidLpIntersectDiagram, cuboidLpPerpDetDiagram, cuboidExProof1Diagram, cuboidExProof2Diagram, cuboidExProof3Diagram, cuboidExProof4Diagram, cuboidExProof5Diagram, cuboidExPpProof1Diagram, cuboidExPpProof2Diagram, cuboidExPpProof3Diagram, cuboidExPpProof4Diagram, cuboidPpDetExDiagram, cuboidPpPropExDiagram, cuboidPpPerpDetExDiagram, cuboidPpPerpPropExDiagram, lpParallelDetDiagram, lpParallelPropDiagram, ppParallelDetDiagram, ppParallelPropDiagram, lpPerpDetDiagram, lpPerpPropDiagram, lpPerpProp1Diagram, lpPerpProp2Diagram, lpPerpProp3Diagram, ppPerpDetDiagram, ppPerpPropDiagram } from './data/7.1/7.1-relation-diagrams';
 import { geo3dRelationProgressItems } from './data/7.1/7.1-relation-progress';
 import { useProgress } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
@@ -13,7 +12,6 @@ export function Geo3dRelationPage() {
       <PageHeader
         stage="第七阶段 · 立体几何"
         title="7.1 点线面位置关系"
-        narration={geo3dRelationNarrations.intro}
         subtitle="从线线关系出发，一步步升级到线面、面面"
         tags={[
           { label: '难度 ★★★☆☆', color: 'amber' },
@@ -44,7 +42,7 @@ export function Geo3dRelationPage() {
       {/* Section 1: 符号速学 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="symbols" className="mb-3 scroll-mt-4">
-        <Collapsible title="一、符号速学（2分钟搞定）" defaultOpen storageKey="geo3d-relation:symbols" headerExtra={<SpeakButton text={geo3dRelationNarrations.symbols} />}>
+        <Collapsible title="一、符号速学（2分钟搞定）" defaultOpen storageKey="geo3d-relation:symbols">
           <div className="space-y-0 text-lg text-gray-800">
 
             <div className="border border-gray-300 rounded overflow-hidden">
@@ -130,7 +128,7 @@ export function Geo3dRelationPage() {
       {/* Section 2a: 线与线 — 三种基本关系 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="line-line" className="mb-3 scroll-mt-4">
-        <Collapsible title="二、线与线" defaultOpen storageKey="geo3d-relation:line-line" headerExtra={<SpeakButton text={geo3dRelationNarrations.lineLine} />}>
+        <Collapsible title="二、线与线" defaultOpen storageKey="geo3d-relation:line-line">
           <div className="space-y-0 text-lg text-gray-800">
 
             <div className="bg-gray-50 border border-gray-200 rounded p-2">
@@ -321,7 +319,7 @@ export function Geo3dRelationPage() {
       {/* Section 3: 线与面的关系 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="line-plane" className="mb-3 scroll-mt-4">
-        <Collapsible title="三、线与面" defaultOpen storageKey="geo3d-relation:line-plane" headerExtra={<SpeakButton text={geo3dRelationNarrations.linePlane} />}>
+        <Collapsible title="三、线与面" defaultOpen storageKey="geo3d-relation:line-plane">
           <div className="space-y-0 text-lg text-gray-800">
 
             {/* 在面内 */}
@@ -618,8 +616,11 @@ export function Geo3dRelationPage() {
                 <div className="flex items-start gap-3">
                   <div className="flex-1">
                     <p>如图，长方体 <MathTex tex="ABCD\text{-}A_1B_1C_1D_1" /> 中：</p>
-                    <p className="mt-1 font-bold">（1）证明：<MathTex tex="AB \parallel" /> 面 <MathTex tex="DCC_1D_1" /></p>
-                    <p className="mt-1 font-bold">（2）证明：<MathTex tex="AA_1 \perp BD" /></p>
+                    <p className="mt-1 font-bold">（1）证明：<MathTex tex="AB \parallel" /> 面 <MathTex tex="DCC_1D_1" />（定理①）</p>
+                    <p className="mt-1 font-bold">（2）已知 <MathTex tex="AB \parallel" /> 面 <MathTex tex="A_1B_1C_1D_1" />，面 <MathTex tex="ABB_1A_1" /> 与面 <MathTex tex="A_1B_1C_1D_1" /> 交于 <MathTex tex="A_1B_1" />，求与 AB 平行的线（定理②）</p>
+                    <p className="mt-1 font-bold">（3）证明：<MathTex tex="AA_1 \perp" /> 面 ABCD（垂直判定）</p>
+                    <p className="mt-1 font-bold">（4）证明：<MathTex tex="AA_1 \perp BD" />（性质1）</p>
+                    <p className="mt-1 font-bold">（5）已知 <MathTex tex="AA_1 \perp" /> 面 ABCD，<MathTex tex="BB_1 \perp" /> 面 ABCD，证 <MathTex tex="AA_1 \parallel BB_1" />（性质4）</p>
                   </div>
                   <div className="w-[200px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidPlainDiagram} width={190} height={150} /></div>
                 </div>
@@ -627,23 +628,56 @@ export function Geo3dRelationPage() {
                 <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
                   <div className="flex-1 space-y-0">
                     <p className="font-bold">（1）证 <MathTex tex="AB \parallel" /> 面 <MathTex tex="DCC_1D_1" />：</p>
-                    <p className="ml-4">思路：用<strong>线面平行判定定理</strong>，找面内一条线与 AB 平行</p>
+                    <p className="ml-4">思路：用<strong>定理① 线面平行判定</strong>，找面内一条线与 AB 平行</p>
                     <p className="ml-4">① 长方体中 <MathTex tex="AB \parallel DC" />（对边平行）</p>
                     <p className="ml-4">② <MathTex tex="DC \subset" /> 面 <MathTex tex="DCC_1D_1" />，<MathTex tex="AB \not\subset" /> 面 <MathTex tex="DCC_1D_1" /></p>
-                    <p className="ml-4">③ 由判定定理得 <MathTex tex="AB \parallel" /> 面 <MathTex tex="DCC_1D_1" /></p>
+                    <p className="ml-4">③ 由定理①得 <MathTex tex="AB \parallel" /> 面 <MathTex tex="DCC_1D_1" /></p>
                   </div>
                   <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExProof1Diagram} width={180} height={150} /></div>
                 </div>
 
                 <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
                   <div className="flex-1 space-y-0">
-                    <p className="font-bold">（2）证 <MathTex tex="AA_1 \perp BD" />：</p>
-                    <p className="ml-4">思路：用<strong>线面垂直性质1</strong></p>
-                    <p className="ml-4">① <MathTex tex="AA_1 \perp" /> 面 ABCD（长方体侧棱垂直底面）</p>
+                    <p className="font-bold">（2）由定理② 线面平行性质：</p>
+                    <p className="ml-4">① <MathTex tex="AB \parallel" /> 面 <MathTex tex="A_1B_1C_1D_1" />（已知）</p>
+                    <p className="ml-4">② 面 <MathTex tex="ABB_1A_1" /> 经过 AB，且与面 <MathTex tex="A_1B_1C_1D_1" /> 交于 <MathTex tex="A_1B_1" /></p>
+                    <p className="ml-4">③ 由定理②得 <MathTex tex="AB \parallel A_1B_1" />（线面平行降级到线线平行）</p>
+                  </div>
+                  <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExProof3Diagram} width={180} height={150} /></div>
+                </div>
+
+                <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
+                  <div className="flex-1 space-y-0">
+                    <p className="font-bold">（3）证 <MathTex tex="AA_1 \perp" /> 面 ABCD：</p>
+                    <p className="ml-4">思路：用<strong>垂直判定定理</strong>，证 <MathTex tex="AA_1" /> 垂直于面内两条相交线</p>
+                    <p className="ml-4">① <MathTex tex="AA_1 \perp AB" />（长方体相邻棱垂直）</p>
+                    <p className="ml-4">② <MathTex tex="AA_1 \perp AD" />（长方体相邻棱垂直）</p>
+                    <p className="ml-4">③ <MathTex tex="AB, AD \subset" /> 面 ABCD，且 <MathTex tex="AB \cap AD = A" /></p>
+                    <p className="ml-4">④ 由判定定理得 <MathTex tex="AA_1 \perp" /> 面 ABCD</p>
+                  </div>
+                  <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExProof4Diagram} width={180} height={150} /></div>
+                </div>
+
+                <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
+                  <div className="flex-1 space-y-0">
+                    <p className="font-bold">（4）证 <MathTex tex="AA_1 \perp BD" />：</p>
+                    <p className="ml-4">思路：用<strong>性质1</strong></p>
+                    <p className="ml-4">① <MathTex tex="AA_1 \perp" /> 面 ABCD（由第 3 问已证）</p>
                     <p className="ml-4">② <MathTex tex="BD \subset" /> 面 ABCD</p>
                     <p className="ml-4">③ 由性质1得 <MathTex tex="AA_1 \perp BD" /></p>
                   </div>
                   <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExProof2Diagram} width={180} height={150} /></div>
+                </div>
+
+                <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
+                  <div className="flex-1 space-y-0">
+                    <p className="font-bold">（5）证 <MathTex tex="AA_1 \parallel BB_1" />：</p>
+                    <p className="ml-4">思路：用<strong>性质4</strong>（垂直于同一面的两条线平行）</p>
+                    <p className="ml-4">① <MathTex tex="AA_1 \perp" /> 面 ABCD（已知）</p>
+                    <p className="ml-4">② <MathTex tex="BB_1 \perp" /> 面 ABCD（已知）</p>
+                    <p className="ml-4">③ 由性质4得 <MathTex tex="AA_1 \parallel BB_1" /></p>
+                  </div>
+                  <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExProof5Diagram} width={180} height={150} /></div>
                 </div>
               </div>
             </div>
@@ -658,7 +692,7 @@ export function Geo3dRelationPage() {
       {/* Section 4: 面与面的关系 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="plane-plane" className="mb-3 scroll-mt-4">
-        <Collapsible title="四、面与面" defaultOpen storageKey="geo3d-relation:plane-plane" headerExtra={<SpeakButton text={geo3dRelationNarrations.planePlane} />}>
+        <Collapsible title="四、面与面" defaultOpen storageKey="geo3d-relation:plane-plane">
           <div className="space-y-0 text-lg text-gray-800">
 
             {/* 定理⑤ 面面平行判定 */}
@@ -685,6 +719,11 @@ export function Geo3dRelationPage() {
                     <p className="mt-1">4. 满足面面平行判定定理，故：<strong>面 <MathTex tex="ABCD" /> <MathTex tex="\parallel" /> 面 <MathTex tex="A_1B_1C_1D_1" /></strong></p>
                   </div>
                   <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidPpDetExDiagram} width={180} height={150} /></div>
+                </div>
+                <div className="bg-yellow-50 border border-yellow-200 rounded p-2 mt-1">
+                  <p className="font-bold text-yellow-800">易错点</p>
+                  <p className="mt-1">必须是<strong>两条相交的线</strong>，不能是两条平行线！两条平行线都平行于另一个面，不能保证面面平行</p>
+                  <p className="mt-1">例如：AB <MathTex tex="\parallel" /> DC，即使它们都平行于面 <MathTex tex="A_1B_1C_1D_1" />，也不能直接用定理⑤</p>
                 </div>
               </div>
             </div>
@@ -714,13 +753,19 @@ export function Geo3dRelationPage() {
                   </div>
                   <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidPpPropExDiagram} width={180} height={150} /></div>
                 </div>
+                <div className="bg-blue-50 border border-blue-200 rounded p-2 mt-1">
+                  <p className="font-bold">这个定理很实用</p>
+                  <p className="mt-1">当你已知两个面平行，想找一组平行线时，只要用第三个面去“切”一刀，切出来的两条交线就是平行的</p>
+                  <p className="mt-1">高考中常用来找中位线、截面等问题中的平行关系</p>
+                </div>
               </div>
             </div>
 
+            <div className="break-before-page"></div>
             {/* 定理⑦ 面面垂直判定 */}
             <div className="border border-purple-300 rounded overflow-hidden">
               <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">定理⑦：面面垂直判定（线面垂直 升级到 面面垂直）</div>
-              <div className="px-3 py-2 space-y-0">
+              <div className="px-3 py-1.5 space-y-0">
                 <div className="flex items-start gap-3">
                   <div className="flex-1">
                     <p>一个面里面有条线垂直于另一个面，那这两个面就垂直</p>
@@ -731,7 +776,7 @@ export function Geo3dRelationPage() {
                   </div>
                   <div className="w-[200px] shrink-0 flex justify-center"><DebugGeo3dSvg data={ppPerpDetDiagram} width={180} height={140} /></div>
                 </div>
-                <div className="flex items-start gap-3 mt-2">
+                <div className="flex items-start gap-3 mt-1">
                   <div className="flex-1">
                     <p className="font-bold">在长方体中：</p>
                     <p className="mt-1">1. <MathTex tex="AA_1 \perp" /> 面 <MathTex tex="A_1B_1C_1D_1" />（线面垂直）</p>
@@ -746,7 +791,7 @@ export function Geo3dRelationPage() {
             {/* 定理⑧ 面面垂直性质 */}
             <div className="border border-amber-300 rounded overflow-hidden">
               <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">定理⑧：面面垂直性质（面面垂直 降级到 线面垂直）</div>
-              <div className="px-3 py-2 space-y-0">
+              <div className="px-3 py-1.5 space-y-0">
                 <div className="flex items-start gap-3">
                   <div className="flex-1">
                     <p>两个面垂直，在一个面内画一条垂直于交线的线，那条线就垂直于另一个面</p>
@@ -757,7 +802,7 @@ export function Geo3dRelationPage() {
                   </div>
                   <div className="w-[200px] shrink-0 flex justify-center"><DebugGeo3dSvg data={ppPerpPropDiagram} width={180} height={140} /></div>
                 </div>
-                <div className="flex items-start gap-3 mt-2">
+                <div className="flex items-start gap-3 mt-1">
                   <div className="flex-1">
                     <p className="font-bold">在长方体中：</p>
                     <p className="mt-1">1. 已知：面 <MathTex tex="ABB_1A_1 \perp" /> 面 <MathTex tex="A_1B_1C_1D_1" />，交线 <MathTex tex="l = A_1B_1" /></p>
@@ -788,7 +833,7 @@ export function Geo3dRelationPage() {
                   <tbody>
                     <tr className="border-b border-gray-200">
                       <td className="py-1 pr-2 font-bold text-blue-700">⑤ 平行判定</td>
-                      <td className="py-1 pr-2">面内两相交线都 ∥ 另一面</td>
+                      <td className="py-1 pr-2">面内两相交线都 <MathTex tex="\parallel" /> 另一面</td>
                       <td className="py-1 pr-2">面面平行</td>
                     </tr>
                     <tr className="border-b border-gray-200">
@@ -798,12 +843,12 @@ export function Geo3dRelationPage() {
                     </tr>
                     <tr className="border-b border-gray-200">
                       <td className="py-1 pr-2 font-bold text-purple-700">⑦ 垂直判定</td>
-                      <td className="py-1 pr-2">面内一线 ⊥ 另一面</td>
+                      <td className="py-1 pr-2">面内一线 <MathTex tex="\perp" /> 另一面</td>
                       <td className="py-1 pr-2">面面垂直</td>
                     </tr>
                     <tr>
                       <td className="py-1 pr-2 font-bold text-amber-700">⑧ 垂直性质</td>
-                      <td className="py-1 pr-2">面面 ⊥ + 面内线 ⊥ 交线</td>
+                      <td className="py-1 pr-2">面面 <MathTex tex="\perp" /> + 面内线 <MathTex tex="\perp" /> 交线</td>
                       <td className="py-1 pr-2">线面垂直</td>
                     </tr>
                   </tbody>
@@ -818,8 +863,10 @@ export function Geo3dRelationPage() {
                 <div className="flex items-start gap-3">
                   <div className="flex-1">
                     <p>如图，长方体 <MathTex tex="ABCD\text{-}A_1B_1C_1D_1" /> 中：</p>
-                    <p className="mt-1 font-bold">（1）证明：面 ABCD <MathTex tex="\parallel" /> 面 <MathTex tex="A_1B_1C_1D_1" /></p>
-                    <p className="mt-1 font-bold">（2）证明：面 <MathTex tex="ABB_1A_1" /> <MathTex tex="\perp" /> 面 ABCD</p>
+                    <p className="mt-1 font-bold">（1）证明：面 ABCD <MathTex tex="\parallel" /> 面 <MathTex tex="A_1B_1C_1D_1" />（定理⑤）</p>
+                    <p className="mt-1 font-bold">（2）已知面 ABCD <MathTex tex="\parallel" /> 面 <MathTex tex="A_1B_1C_1D_1" />，面 <MathTex tex="ABB_1A_1" /> 分别与两面交于 AB 和 <MathTex tex="A_1B_1" />，求 AB 与 <MathTex tex="A_1B_1" /> 的关系（定理⑥）</p>
+                    <p className="mt-1 font-bold">（3）证明：面 <MathTex tex="ABB_1A_1" /> <MathTex tex="\perp" /> 面 ABCD（定理⑦）</p>
+                    <p className="mt-1 font-bold">（4）已知面 <MathTex tex="ABB_1A_1" /> <MathTex tex="\perp" /> 面 <MathTex tex="A_1B_1C_1D_1" />，交线为 <MathTex tex="A_1B_1" />，<MathTex tex="AA_1 \perp A_1B_1" />，证 <MathTex tex="AA_1 \perp" /> 面 <MathTex tex="A_1B_1C_1D_1" />（定理⑧）</p>
                   </div>
                   <div className="w-[200px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidPlainDiagram} width={190} height={150} /></div>
                 </div>
@@ -838,13 +885,34 @@ export function Geo3dRelationPage() {
 
                 <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
                   <div className="flex-1 space-y-0">
-                    <p className="font-bold">（2）证 面 <MathTex tex="ABB_1A_1" /> <MathTex tex="\perp" /> 面 ABCD：</p>
+                    <p className="font-bold">（2）由定理⑥ 面面平行性质：</p>
+                    <p className="ml-4">① 面 ABCD <MathTex tex="\parallel" /> 面 <MathTex tex="A_1B_1C_1D_1" />（已知）</p>
+                    <p className="ml-4">② 面 <MathTex tex="ABB_1A_1" /> 与面 ABCD 交于 AB，与面 <MathTex tex="A_1B_1C_1D_1" /> 交于 <MathTex tex="A_1B_1" /></p>
+                    <p className="ml-4">③ 由定理⑥得 <MathTex tex="AB \parallel A_1B_1" />（面面平行降级到线线平行）</p>
+                  </div>
+                  <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExPpProof2Diagram} width={180} height={150} /></div>
+                </div>
+
+                <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
+                  <div className="flex-1 space-y-0">
+                    <p className="font-bold">（3）证 面 <MathTex tex="ABB_1A_1" /> <MathTex tex="\perp" /> 面 ABCD：</p>
                     <p className="ml-4">思路：用<strong>定理⑦</strong>，找面内一条线垂直于另一面</p>
                     <p className="ml-4">① <MathTex tex="AA_1 \perp" /> 面 ABCD（长方体侧棱垂直底面）</p>
                     <p className="ml-4">② <MathTex tex="AA_1 \subset" /> 面 <MathTex tex="ABB_1A_1" /></p>
                     <p className="ml-4">③ 由定理⑦得 面 <MathTex tex="ABB_1A_1" /> <MathTex tex="\perp" /> 面 ABCD</p>
                   </div>
-                  <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExPpProof2Diagram} width={180} height={150} /></div>
+                  <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExPpProof3Diagram} width={180} height={150} /></div>
+                </div>
+
+                <div className="flex items-start gap-3 border-t border-gray-200 pt-1">
+                  <div className="flex-1 space-y-0">
+                    <p className="font-bold">（4）证 <MathTex tex="AA_1 \perp" /> 面 <MathTex tex="A_1B_1C_1D_1" />：</p>
+                    <p className="ml-4">思路：用<strong>定理⑧</strong>（面面垂直降级到线面垂直）</p>
+                    <p className="ml-4">① 面 <MathTex tex="ABB_1A_1 \perp" /> 面 <MathTex tex="A_1B_1C_1D_1" />，交线 <MathTex tex="l = A_1B_1" /></p>
+                    <p className="ml-4">② <MathTex tex="AA_1 \subset" /> 面 <MathTex tex="ABB_1A_1" />，且 <MathTex tex="AA_1 \perp A_1B_1" />（即 <MathTex tex="AA_1 \perp l" />）</p>
+                    <p className="ml-4">③ 由定理⑧得 <MathTex tex="AA_1 \perp" /> 面 <MathTex tex="A_1B_1C_1D_1" /></p>
+                  </div>
+                  <div className="w-[190px] shrink-0 flex justify-center"><DebugGeo3dSvg data={cuboidExPpProof4Diagram} width={180} height={150} /></div>
                 </div>
               </div>
             </div>
@@ -853,122 +921,199 @@ export function Geo3dRelationPage() {
         </Collapsible>
       </section>
 
-      <PageBreak label="7.1 八大定理关系图 + 证明套路" />
+      <PageBreak label="7.1 八大定理关系图" />
 
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 5: 八大定理关系图 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="theorem-map" className="mb-3 scroll-mt-4">
-        <Collapsible title="五、八大定理关系图" defaultOpen storageKey="geo3d-relation:theorem-map" headerExtra={<SpeakButton text={geo3dRelationNarrations.theoremMap} />}>
+        <Collapsible title="五、八大定理关系图" defaultOpen storageKey="geo3d-relation:theorem-map">
           <div className="space-y-0 text-lg text-gray-800">
 
+            {/* 定理转化关系 */}
             <div className="border border-gray-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">一张图看懂全部</div>
-              <div className="px-3 py-3">
-                <div className="grid grid-cols-2 gap-4">
-                  {/* 平行列 */}
-                  <div className="space-y-2">
-                    <p className="font-bold text-blue-700 text-center text-lg">平行升级链</p>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="bg-blue-50 border border-blue-300 rounded px-3 py-1 text-center font-bold">线线平行</div>
-                      <div className="text-blue-800 font-bold text-center">由 ① 升级</div>
-                      <div className="bg-blue-50 border border-blue-300 rounded px-3 py-1 text-center font-bold">线面平行</div>
-                      <div className="text-blue-800 font-bold text-center">由 ⑤ 升级</div>
-                      <div className="bg-blue-50 border border-blue-300 rounded px-3 py-1 text-center font-bold">面面平行</div>
-                    </div>
-                    <p className="text-center mt-1">反向降级：</p>
-                    <p className="text-center">② 线面平行 降级到 线线平行</p>
-                    <p className="text-center">⑥ 面面平行 降级到 线线平行</p>
-                  </div>
-                  {/* 垂直列 */}
-                  <div className="space-y-2">
-                    <p className="font-bold text-purple-700 text-center text-lg">垂直升级链</p>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="bg-purple-50 border border-purple-300 rounded px-3 py-1 text-center font-bold">线线垂直</div>
-                      <div className="text-purple-800 font-bold text-center">由 ③ 升级</div>
-                      <div className="bg-purple-50 border border-purple-300 rounded px-3 py-1 text-center font-bold">线面垂直</div>
-                      <div className="text-purple-800 font-bold text-center">由 ⑦ 升级</div>
-                      <div className="bg-purple-50 border border-purple-300 rounded px-3 py-1 text-center font-bold">面面垂直</div>
-                    </div>
-                    <p className="text-center mt-1">反向降级：</p>
-                    <p className="text-center">④ 线面垂直 得到 线线平行</p>
-                    <p className="text-center">⑧ 面面垂直 降级到 线面垂直</p>
-                  </div>
-                </div>
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">定理转化关系（低维到高维 = 判定，高维到低维 = 性质）</div>
+              <div className="px-3 py-2">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b-2 border-gray-300">
+                      <th className="py-1 pr-2">定理</th>
+                      <th className="py-1 pr-2">已知（从哪来）</th>
+                      <th className="py-1 pr-2">得到（到哪去）</th>
+                      <th className="py-1 pr-2 w-16">类型</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-blue-100 bg-blue-50">
+                      <td className="py-1.5 pr-2 font-bold" colSpan={4}>平行系列</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 pr-2 font-bold">①</td>
+                      <td className="py-1 pr-2"><strong>线线平行</strong> + 一线在面内</td>
+                      <td className="py-1 pr-2"><strong>线面平行</strong></td>
+                      <td className="py-1 pr-2 text-blue-700 font-bold">判定</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 pr-2 font-bold">②</td>
+                      <td className="py-1 pr-2"><strong>线面平行</strong> + 过线作截面</td>
+                      <td className="py-1 pr-2"><strong>线线平行</strong></td>
+                      <td className="py-1 pr-2 text-green-700 font-bold">性质</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 pr-2 font-bold">⑤</td>
+                      <td className="py-1 pr-2">面内两条相交线都 <strong>线面平行</strong></td>
+                      <td className="py-1 pr-2"><strong>面面平行</strong></td>
+                      <td className="py-1 pr-2 text-blue-700 font-bold">判定</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 pr-2 font-bold">⑥</td>
+                      <td className="py-1 pr-2"><strong>面面平行</strong> + 第三面截</td>
+                      <td className="py-1 pr-2"><strong>线线平行</strong></td>
+                      <td className="py-1 pr-2 text-green-700 font-bold">性质</td>
+                    </tr>
+                    <tr className="border-b border-purple-100 bg-purple-50">
+                      <td className="py-1.5 pr-2 font-bold" colSpan={4}>垂直系列</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 pr-2 font-bold">③</td>
+                      <td className="py-1 pr-2"><strong>线线垂直</strong>（垂直面内两条相交线）</td>
+                      <td className="py-1 pr-2"><strong>线面垂直</strong></td>
+                      <td className="py-1 pr-2 text-blue-700 font-bold">判定</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 pr-2 font-bold">④</td>
+                      <td className="py-1 pr-2"><strong>线面垂直</strong></td>
+                      <td className="py-1 pr-2"><strong>线线垂直</strong> / 两垂线平行</td>
+                      <td className="py-1 pr-2 text-green-700 font-bold">性质</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 pr-2 font-bold">⑦</td>
+                      <td className="py-1 pr-2">面内一线 <strong>线面垂直</strong> 于另一面</td>
+                      <td className="py-1 pr-2"><strong>面面垂直</strong></td>
+                      <td className="py-1 pr-2 text-blue-700 font-bold">判定</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1 pr-2 font-bold">⑧</td>
+                      <td className="py-1 pr-2"><strong>面面垂直</strong> + 面内线垂直交线</td>
+                      <td className="py-1 pr-2"><strong>线面垂直</strong></td>
+                      <td className="py-1 pr-2 text-green-700 font-bold">性质</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
-            <div className="bg-red-50 border border-red-200 rounded p-3">
-              <p className="font-bold text-red-700 text-lg">记忆口诀</p>
-              <p className="mt-1"><strong>平行升级</strong>：线线 到 线面 到 面面（①⑤），反向用②⑥降级</p>
-              <p className="mt-1"><strong>垂直升级</strong>：线线 到 线面 到 面面（③⑦），反向用④⑧降级</p>
-              <p className="mt-1"><strong>做题时</strong>：先判断要证的是哪个级别，然后沿着升级链找方向</p>
+            {/* 快速判断练习 */}
+            <div className="border border-orange-300 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-orange-800 border-b border-orange-300 bg-orange-100 text-lg">快速判断：该用哪个定理？</div>
+              <div className="px-3 py-2 space-y-1">
+                <p>读题目，判断应该用哪个定理，写出编号：</p>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（1）</strong>已知 <MathTex tex="a \parallel b" />，<MathTex tex="b \subset \alpha" />，<MathTex tex="a \not\subset \alpha" />，证 <MathTex tex="a \parallel \alpha" /></p>
+                  <p className="ml-4">已知线线平行，由定理①（线面平行判定）得 <MathTex tex="a \parallel \alpha" /></p>
+                </div>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（2）</strong>已知 <MathTex tex="a \parallel \alpha" />，<MathTex tex="a \subset \beta" />，<MathTex tex="\alpha \cap \beta = b" />，求 a 与 b 的关系</p>
+                  <p className="ml-4">已知线面平行，由定理②（线面平行性质）得 <MathTex tex="a \parallel b" /></p>
+                </div>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（3）</strong>已知 <MathTex tex="l \perp a" />，<MathTex tex="l \perp b" />，<MathTex tex="a \cap b = P" />，<MathTex tex="a, b \subset \alpha" />，证 <MathTex tex="l \perp \alpha" /></p>
+                  <p className="ml-4">已知 l 垂直面内两条相交线，由定理③（线面垂直判定）得 <MathTex tex="l \perp \alpha" /></p>
+                </div>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（4）</strong>已知 <MathTex tex="l \perp \alpha" />，<MathTex tex="a \subset \alpha" />，求 l 与 a 的关系</p>
+                  <p className="ml-4">已知线面垂直，由定理④（线面垂直性质）得 <MathTex tex="l \perp a" /></p>
+                </div>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（5）</strong>已知 <MathTex tex="a \parallel \alpha" />，<MathTex tex="b \parallel \alpha" />，<MathTex tex="a \cap b = P" />，<MathTex tex="a, b \subset \beta" />，证 <MathTex tex="\alpha \parallel \beta" /></p>
+                  <p className="ml-4">已知面内两相交线都平行于另一面，由定理⑤（面面平行判定）得 <MathTex tex="\alpha \parallel \beta" /></p>
+                </div>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（6）</strong>已知 <MathTex tex="\alpha \parallel \beta" />，<MathTex tex="\gamma \cap \alpha = a" />，<MathTex tex="\gamma \cap \beta = b" />，求 a 与 b 的关系</p>
+                  <p className="ml-4">已知面面平行，由定理⑥（面面平行性质）得 <MathTex tex="a \parallel b" /></p>
+                </div>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（7）</strong>已知 <MathTex tex="l \perp \beta" />，<MathTex tex="l \subset \alpha" />，证 <MathTex tex="\alpha \perp \beta" /></p>
+                  <p className="ml-4">已知面内一线垂直另一面，由定理⑦（面面垂直判定）得 <MathTex tex="\alpha \perp \beta" /></p>
+                </div>
+                <div className="border-t border-gray-200 pt-1">
+                  <p><strong>（8）</strong>已知 <MathTex tex="\alpha \perp \beta" />，<MathTex tex="\alpha \cap \beta = l" />，<MathTex tex="a \subset \alpha" />，<MathTex tex="a \perp l" />，证 <MathTex tex="a \perp \beta" /></p>
+                  <p className="ml-4">已知面面垂直且面内线垂直交线，由定理⑧（面面垂直性质）得 <MathTex tex="a \perp \beta" /></p>
+                </div>
+              </div>
             </div>
 
           </div>
         </Collapsible>
       </section>
 
+      <PageBreak label="7.1 高考证明套路" />
+
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 6: 证明套路 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="proof-strategy" className="mb-3 scroll-mt-4">
-        <Collapsible title="六、高考证明套路" defaultOpen storageKey="geo3d-relation:proof-strategy" headerExtra={<SpeakButton text={geo3dRelationNarrations.proofStrategy} />}>
+        <Collapsible title="六、高考证明套路" defaultOpen storageKey="geo3d-relation:proof-strategy">
           <div className="space-y-0 text-lg text-gray-800">
 
+            {/* 平行证明 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">证明平行的套路</div>
-              <div className="px-3 py-2 space-y-0">
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">证明平行（3 类问题）</div>
+              <div className="px-3 py-2 space-y-2">
+
                 <div className="bg-blue-50 rounded p-2 border border-blue-200">
-                  <p className="font-bold">证线面平行（最常考）</p>
-                  <p className="mt-1">1. 在平面内找一条直线</p>
-                  <p className="mt-1">2. 证这条线和要证的线<strong>平行</strong>（找中点连线、平行四边形对边）</p>
-                  <p className="mt-1">3. 由定理①搞定</p>
+                  <p className="font-bold">证线线平行（基础，为证线面平行做准备）</p>
+                  <p className="mt-1"><strong>方法1</strong>：三角形中位线（题目给中点就用这个）</p>
+                  <p className="mt-1"><strong>方法2</strong>：平行四边形对边（构造平行四边形）</p>
+                  <p className="mt-1"><strong>方法3</strong>：定理② 线面平行性质（已知线面平行，截面得线线平行）</p>
+                  <p className="mt-1"><strong>方法4</strong>：定理⑥ 面面平行性质（已知面面平行，第三面截得线线平行）</p>
                 </div>
-                <div className="bg-blue-50 rounded p-2 mt-2 border border-blue-200">
+
+                <div className="bg-blue-50 rounded p-2 border border-blue-200">
+                  <p className="font-bold">证线面平行（高考最常考）</p>
+                  <p className="mt-1"><strong>方法1（主力）</strong>：先证线线平行，再由定理①升级到线面平行</p>
+                  <p className="mt-1 ml-4">在平面内找一条线，证它与目标线平行（中位线 / 平行四边形）</p>
+                  <p className="mt-1"><strong>方法2</strong>：已知面面平行，则一面内的线自然平行于另一面</p>
+                </div>
+
+                <div className="bg-blue-50 rounded p-2 border border-blue-200">
                   <p className="font-bold">证面面平行</p>
-                  <p className="mt-1">1. 在一个面内找<strong>两条相交的线</strong></p>
-                  <p className="mt-1">2. 分别证它们平行于另一个面</p>
-                  <p className="mt-1">3. 由定理⑤搞定</p>
+                  <p className="mt-1"><strong>方法1（主力）</strong>：定理⑤，面内两条相交线都平行于另一面</p>
+                  <p className="mt-1"><strong>方法2</strong>：两面都垂直于同一条线（用得少）</p>
                 </div>
+
               </div>
             </div>
 
+            {/* 垂直证明 */}
             <div className="border border-purple-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">证明垂直的套路</div>
-              <div className="px-3 py-2 space-y-0">
-                <div className="bg-purple-50 rounded p-2 border border-purple-200">
-                  <p className="font-bold">证线面垂直（最常考）</p>
-                  <p className="mt-1">1. 在平面内找<strong>两条相交的线</strong></p>
-                  <p className="mt-1">2. 分别证要证的线垂直于这两条线</p>
-                  <p className="mt-1">3. 由定理③搞定</p>
-                </div>
-                <div className="bg-purple-50 rounded p-2 mt-2 border border-purple-200">
-                  <p className="font-bold">证面面垂直</p>
-                  <p className="mt-1">1. 先证<strong>线面垂直</strong>（找到一条线垂直于一个面）</p>
-                  <p className="mt-1">2. 确认这条线在另一个面内</p>
-                  <p className="mt-1">3. 由定理⑦搞定</p>
-                </div>
-              </div>
-            </div>
+              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">证明垂直（3 类问题）</div>
+              <div className="px-3 py-2 space-y-2">
 
-            <div className="bg-red-50 border border-red-200 rounded p-3">
-              <p className="font-bold text-red-700 text-lg">高考答题模板（直接抄）</p>
-              <p className="mt-2 font-bold">证线面平行：</p>
-              <div className="bg-white rounded p-2 mt-1 border border-gray-200">
-                <p>∵ <MathTex tex="b \subset \beta" />，<MathTex tex="a \not\subset \beta" />，<MathTex tex="a \parallel b" /></p>
-                <p className="mt-1">∴ 由线面平行判定定理得 <MathTex tex="a \parallel \beta" /></p>
-              </div>
-              <p className="mt-2 font-bold">证线面垂直：</p>
-              <div className="bg-white rounded p-2 mt-1 border border-gray-200">
-                <p>∵ <MathTex tex="m \subset \beta" />，<MathTex tex="n \subset \beta" />，<MathTex tex="m \cap n = O" /></p>
-                <p className="mt-1">又 <MathTex tex="l \perp m" />，<MathTex tex="l \perp n" /></p>
-                <p className="mt-1">∴ 由线面垂直判定定理得 <MathTex tex="l \perp \beta" /></p>
-              </div>
-              <p className="mt-2 font-bold">证面面垂直：</p>
-              <div className="bg-white rounded p-2 mt-1 border border-gray-200">
-                <p>∵ <MathTex tex="l \perp \beta" />，<MathTex tex="l \subset \gamma" /></p>
-                <p className="mt-1">∴ 由面面垂直判定定理得 <MathTex tex="\beta \perp \gamma" /></p>
+                <div className="bg-purple-50 rounded p-2 border border-purple-200">
+                  <p className="font-bold">证线线垂直</p>
+                  <p className="mt-1"><strong>方法1（主力）</strong>：先证线面垂直，再由定理④得线线垂直</p>
+                  <p className="mt-1 ml-4">即 <MathTex tex="l \perp \alpha" /> 且 <MathTex tex="a \subset \alpha" />，则 <MathTex tex="l \perp a" /></p>
+                  <p className="mt-1"><strong>方法2</strong>：等腰三角形三线合一（底边中线即底边高）</p>
+                  <p className="mt-1"><strong>方法3</strong>：勾股定理逆定理（算出三边验证）</p>
+                </div>
+
+                <div className="bg-purple-50 rounded p-2 border border-purple-200">
+                  <p className="font-bold">证线面垂直（高考最常考）</p>
+                  <p className="mt-1"><strong>方法1（主力）</strong>：定理③，垂直面内两条相交线</p>
+                  <p className="mt-1 ml-4">找面内两条相交线，分别证目标线垂直于它们</p>
+                  <p className="mt-1"><strong>方法2</strong>：定理⑧，面面垂直性质（已知面面垂直时用）</p>
+                  <p className="mt-1 ml-4">面面垂直 + 面内线垂直交线，得线面垂直</p>
+                  <p className="mt-1"><strong>方法3</strong>：已知另一条线面垂直 + 两线平行（转换直线）</p>
+                </div>
+
+                <div className="bg-purple-50 rounded p-2 border border-purple-200">
+                  <p className="font-bold">证面面垂直</p>
+                  <p className="mt-1"><strong>方法1（主力）</strong>：定理⑦，先证线面垂直，再升级到面面垂直</p>
+                  <p className="mt-1 ml-4">找一条线垂直于一个面，且这条线在另一个面内</p>
+                  <p className="mt-1"><strong>方法2</strong>：转换平面（已知某面垂直，平行面也垂直，用得少）</p>
+                </div>
+
               </div>
             </div>
 

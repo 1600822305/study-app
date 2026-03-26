@@ -275,19 +275,44 @@ export const cuboidExPpProof1Diagram = makeCuboid(
   [[4, 5, '#2563eb'], [4, 7, '#2563eb'], [0, 1, '#2563eb'], [0, 3, '#2563eb']],
   [{ verts: FACE_ABCD, color: '#93c5fd', opacity: 0.15 }, { verts: FACE_AbBcCdDd, color: '#93c5fd', opacity: 0.15 }],
 );
-// 面面实战例题(2): 面ABB₁A₁ 紫色着色, AA₁ 绿色, 面ABCD 绿色着色
+// 面面实战例题(2): AB(4→5) A₁B₁(0→1) 蓝色, 面ABB₁A₁琥珀着色, 面ABCD+面A₁B₁C₁D₁蓝色着色 — 定理⑥
 export const cuboidExPpProof2Diagram = makeCuboid(
+  [[4, 5, '#2563eb'], [0, 1, '#2563eb']],
+  [{ verts: [4, 5, 1, 0], color: '#fde68a', opacity: 0.2 }, { verts: FACE_ABCD, color: '#93c5fd', opacity: 0.15 }, { verts: FACE_AbBcCdDd, color: '#93c5fd', opacity: 0.15 }],
+);
+// 面面实战例题(3): AA₁(0→4) 绿色, 面ABB₁A₁紫色着色, 面ABCD绿色着色 — 定理⑦
+export const cuboidExPpProof3Diagram = makeCuboid(
   [[0, 4, '#16a34a']],
   [{ verts: [4, 5, 1, 0], color: '#c4b5fd', opacity: 0.15 }, { verts: FACE_ABCD, color: '#bbf7d0', opacity: 0.15 }],
 );
-// 线面实战例题(1): AB(4→5)蓝色, DC(7→6)蓝色, 面DCC₁D₁着色
+// 面面实战例题(4): AA₁(0→4) 紫色, A₁B₁(0→1) 绿色(交线), 面ABB₁A₁蓝色着色, 面A₁B₁C₁D₁绿色着色 — 定理⑧
+export const cuboidExPpProof4Diagram = makeCuboid(
+  [[0, 4, '#9333ea'], [0, 1, '#16a34a']],
+  [{ verts: [4, 5, 1, 0], color: '#93c5fd', opacity: 0.15 }, { verts: FACE_AbBcCdDd, color: '#bbf7d0', opacity: 0.15 }],
+);
+// 线面实战例题(1): AB(4→5)蓝色, DC(7→6)蓝色, 面DCC₁D₁着色 — 定理①线面平行判定
 export const cuboidExProof1Diagram = makeCuboid(
   [[4, 5, '#2563eb'], [7, 6, '#2563eb']],
   [{ verts: [7, 6, 2, 3], color: '#93c5fd' }],
 );
-// 实战例题(2): AA₁(0→4)绿色, BD(5→7)橙色, 面ABCD着色
+// 线面实战例题(2): AB(4→5)蓝色, A₁B₁(0→1)蓝色, 面ABB₁A₁琥珀着色, 面A₁B₁C₁D₁蓝色着色 — 定理②线面平行性质
+export const cuboidExProof3Diagram = makeCuboid(
+  [[4, 5, '#2563eb'], [0, 1, '#2563eb']],
+  [{ verts: [4, 5, 1, 0], color: '#fde68a', opacity: 0.2 }, { verts: FACE_AbBcCdDd, color: '#93c5fd', opacity: 0.15 }],
+);
+// 线面实战例题(3): AA₁(0→4)紫色, AB(4→5)紫色, AD(4→7)紫色, 面ABCD紫色着色 — 垂直判定
+export const cuboidExProof4Diagram = makeCuboid(
+  [[0, 4, '#9333ea'], [4, 5, '#9333ea'], [4, 7, '#9333ea']],
+  [{ verts: FACE_ABCD, color: '#c4b5fd', opacity: 0.2 }],
+);
+// 线面实战例题(4): AA₁(0→4)绿色, BD(5→7)橙色, 面ABCD着色 — 性质1
 export const cuboidExProof2Diagram = makeCuboid(
   [[0, 4, '#16a34a'], [5, 7, '#ea580c']],
+  [{ verts: FACE_ABCD, color: '#bbf7d0', opacity: 0.15 }],
+);
+// 线面实战例题(5): AA₁(0→4)红色, BB₁(1→5)红色, 面ABCD绿色着色 — 性质4
+export const cuboidExProof5Diagram = makeCuboid(
+  [[0, 4, '#dc2626'], [1, 5, '#dc2626']],
   [{ verts: FACE_ABCD, color: '#bbf7d0', opacity: 0.15 }],
 );
 // 线面垂直判定: AA'(0→4) 紫色, AB(4→5) 紫色, AD(4→7) 紫色, 面 ABCD 紫色着色

@@ -1,6 +1,5 @@
-import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, Geo3dDebugToggle } from '@/components/shared';
-import { cuboidCoordSystemDiagram, rightHandSystemDiagram, normalVectorDiagram, normalVectorMethodDiagram, normalVectorExampleDiagram, parallelCubeOriginal, parallelCubeDiagram, parallelLinePlaneDiagram, parallelPlanesDiagram, pureCubeDiagram, perpCubeDiagram, perpLinePlaneDiagram, perpPlanesDiagram, angleLineLineDiagram, angleLinePlaneDiagram, angleDihedralDiagram, distancePointToBaseDiagram, distancePointToPlaneBDC1Diagram } from './data/7.2/7.2-vector-diagrams';
-import { geo3dVectorNarrations } from './data/7.2/7.2-vector-narrations';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, Geo3dDebugToggle } from '@/components/shared';
+import { cuboidCoordSystemDiagram, rightHandSystemDiagram, normalVectorDiagram, normalVectorMethodDiagram, normalVectorExampleDiagram, parallelCubeOriginal, parallelCubeDiagram, parallelLineLineDiagram, parallelLinePlaneDiagram, parallelPlanesDiagram, pureCubeDiagram, perpLinePlaneDiagram, perpPlanesDiagram, angleLineLineDiagram, angleLinePlaneDiagram, angleDihedralDiagram, distancePointToBaseDiagram, distancePointToPlaneBDC1Diagram } from './data/7.2/7.2-vector-diagrams';
 import { geo3dVectorProgressItems } from './data/7.2/7.2-vector-progress';
 import { geo3dVectorEssayQuestions } from './data/7.2/7.2-vector-questions';
 import { practicePyramidDiagram, practicePyramidMidDiagram, practiceCubeMidDiagram, practicePrismDiagram } from './data/7.2/7.2-practice-diagrams';
@@ -18,7 +17,6 @@ export function Geo3dVectorPage() {
       <PageHeader
         stage="第七阶段 · 立体几何"
         title="7.2 空间向量法"
-        narration={geo3dVectorNarrations.intro}
         subtitle="用向量求角度、距离——立体几何解答题的万能钥匙"
         tags={[
           { label: '难度 ★★★☆☆', color: 'amber' },
@@ -52,7 +50,7 @@ export function Geo3dVectorPage() {
       {/* Section 1: 为什么学向量法 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="why-vector" className="mb-3 scroll-mt-4">
-        <Collapsible title="一、为什么学向量法" defaultOpen storageKey="geo3d-vector:why" headerExtra={<SpeakButton text={geo3dVectorNarrations.whyVector} />}>
+        <Collapsible title="一、为什么学向量法" defaultOpen storageKey="geo3d-vector:why">
           <div className="space-y-2 text-lg text-gray-800">
 
             <div className="border border-gray-300 rounded overflow-hidden">
@@ -161,7 +159,7 @@ export function Geo3dVectorPage() {
       {/* Section 2: 建系与坐标 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="coordinate-system" className="mb-3 scroll-mt-4">
-        <Collapsible title="二、建系与坐标（最关键的一步）" defaultOpen storageKey="geo3d-vector:coordinate" headerExtra={<SpeakButton text={geo3dVectorNarrations.coordinate} />}>
+        <Collapsible title="二、建系与坐标（最关键的一步）" defaultOpen storageKey="geo3d-vector:coordinate">
           <div className="space-y-2 text-lg text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
@@ -245,7 +243,7 @@ export function Geo3dVectorPage() {
       {/* Section 3: 法向量 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="normal-vector" className="mb-3 scroll-mt-4">
-        <Collapsible title="三、法向量（求角度的关键工具）" defaultOpen storageKey="geo3d-vector:normal" headerExtra={<SpeakButton text={geo3dVectorNarrations.normal} />}>
+        <Collapsible title="三、法向量（求角度的关键工具）" defaultOpen storageKey="geo3d-vector:normal">
           <div className="space-y-2 text-lg text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
@@ -329,7 +327,7 @@ export function Geo3dVectorPage() {
       {/* Section 4: 公式速查 */}
       {/* ════════════════════════════════════════════════════════ */}
       <section id="five-formulas" className="mb-3 scroll-mt-4">
-        <Collapsible title="四、向量法核心（公式速查）" defaultOpen storageKey="geo3d-vector:formulas" headerExtra={<SpeakButton text={geo3dVectorNarrations.formulas} />}>
+        <Collapsible title="四、向量法核心（公式速查）" defaultOpen storageKey="geo3d-vector:formulas">
           <div className="space-y-0.5 text-lg text-gray-800">
 
             {/* 🎯 核心思路 */}
@@ -521,7 +519,7 @@ export function Geo3dVectorPage() {
               <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">完整解答</div>
               <div className="px-3 py-2 space-y-1 text-lg text-gray-800">
 
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3">
                   <div className="flex-1">
                     <p className="font-bold">建系 + 写坐标</p>
                     <p>以 A 为原点，AB 为 x 轴，AD 为 y 轴，<MathTex tex="AA_1" /> 为 z 轴</p>
@@ -529,16 +527,23 @@ export function Geo3dVectorPage() {
                     <p><MathTex tex="A_1(0,0,2)" />，<MathTex tex="B_1(2,0,2)" />，<MathTex tex="C_1(2,2,2)" />，<MathTex tex="D_1(0,2,2)" /></p>
                     <p><MathTex tex="E(1, 0, 0)" />（AB 中点），<MathTex tex="F(1, 2, 0)" />（CD 中点）</p>
                   </div>
-                  <div className="w-[200px] shrink-0 flex justify-center">
-                    <DebugGeo3dSvg data={parallelCubeDiagram} width={195} height={180} />
+                  <div className="w-[210px] shrink-0 flex justify-center">
+                    <DebugGeo3dSvg data={parallelCubeDiagram} width={200} height={190} />
                   </div>
                 </div>
 
-                <p className="font-bold mt-3">(1) 证明 EF ∥ AD</p>
-                <p><MathTex tex="\overrightarrow{EF} = F - E = (1, 2, 0) - (1, 0, 0) = (0, 2, 0)" /></p>
-                <p><MathTex tex="\overrightarrow{AD} = D - A = (0, 2, 0) - (0, 0, 0) = (0, 2, 0)" /></p>
-                <p>直接观察：<MathTex tex="\overrightarrow{EF} = (0,2,0) = 1 \cdot (0,2,0) = 1 \cdot \overrightarrow{AD}" />，成比例 ✓</p>
-                <p>所以 <strong>EF ∥ AD</strong></p>
+                <div className="flex items-start gap-3 mt-3">
+                  <div className="flex-1">
+                    <p className="font-bold">(1) 证明 EF ∥ AD</p>
+                    <p><MathTex tex="\overrightarrow{EF} = F - E = (1, 2, 0) - (1, 0, 0) = (0, 2, 0)" /></p>
+                    <p><MathTex tex="\overrightarrow{AD} = D - A = (0, 2, 0) - (0, 0, 0) = (0, 2, 0)" /></p>
+                    <p>直接观察：<MathTex tex="\overrightarrow{EF} = (0,2,0) = 1 \cdot (0,2,0) = 1 \cdot \overrightarrow{AD}" />，成比例 ✓</p>
+                    <p>所以 <strong>EF ∥ AD</strong></p>
+                  </div>
+                  <div className="w-[160px] shrink-0 flex justify-center">
+                    <DebugGeo3dSvg data={parallelLineLineDiagram} width={155} height={145} />
+                  </div>
+                </div>
 
                 <div className="flex items-start gap-3 mt-3">
                   <div className="flex-1">
@@ -561,8 +566,8 @@ export function Geo3dVectorPage() {
                 <div className="flex items-start gap-3 mt-3">
                   <div className="flex-1">
                     <p className="font-bold">(3) 证明 面 A₁B₁C₁D₁ ∥ 面 ABCD</p>
-                    <p>底面 ABCD 法向量：<MathTex tex="\vec{n_1} = (0, 0, 1)" /></p>
-                    <p>顶面 <MathTex tex="A_1B_1C_1D_1" /> 法向量：<MathTex tex="\vec{n_2} = (0, 0, 1)" /></p>
+                    <p>底面 ABCD 法向量：<MathTex tex="\vec{n_1} = (0, 0, 1)" />（由 AB、AD 求出）</p>
+                    <p>顶面 <MathTex tex="A_1B_1C_1D_1" /> 法向量：<MathTex tex="\vec{n_2} = (0, 0, 1)" />（由 A₁B₁、A₁D₁ 求出）</p>
                     <p><MathTex tex="\vec{n_1} = 1 \cdot \vec{n_2}" />，成比例</p>
                     <p>所以 <strong>面 A₁B₁C₁D₁ ∥ 面 ABCD</strong></p>
                   </div>
@@ -587,40 +592,48 @@ export function Geo3dVectorPage() {
 
             {/* 线 ⊥ 线 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">线 ⊥ 线：方向向量点积为 0</div>
-              <div className="px-3 py-2">
+              <div className="px-2 py-0.5 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">线 ⊥ 线：方向向量点积为 0</div>
+              <div className="px-3 py-1">
                 <p><strong>核心：</strong>两条直线垂直 ⇔ 它们的方向向量垂直</p>
                 <p><strong>判定方法：</strong><MathTex tex="\vec{a} \cdot \vec{b} = 0" /></p>
                 <p className="mt-2"><strong>为什么？</strong></p>
                 <p className="ml-4">点积为 0 意味着两个向量夹角为 90°，方向向量代表直线的走向，所以直线垂直</p>
+                <p className="mt-2"><strong>注意：</strong>异面直线也能用！向量法不要求两线共面，只看方向向量</p>
                 <p className="mt-2"><strong>答题格式：</strong></p>
-                <p className="ml-4"><MathTex tex="\vec{a} \cdot \vec{b} = x_1x_2 + y_1y_2 + z_1z_2 = 0" />，所以直线 ⊥ 直线</p>
+                <p className="ml-4">设直线 a 的方向向量 <MathTex tex="\vec{a} = (x_1, y_1, z_1)" />，直线 b 的方向向量 <MathTex tex="\vec{b} = (x_2, y_2, z_2)" /></p>
+                <p className="ml-4"><MathTex tex="\vec{a} \cdot \vec{b} = x_1x_2 + y_1y_2 + z_1z_2 = 0" />，所以直线 a ⊥ 直线 b</p>
               </div>
             </div>
 
             {/* 线 ⊥ 面 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">线 ⊥ 面：方向向量 ∥ 法向量</div>
-              <div className="px-3 py-2">
+              <div className="px-2 py-0.5 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">线 ⊥ 面：方向向量 ∥ 法向量</div>
+              <div className="px-3 py-1">
                 <p><strong>核心：</strong>直线垂直于平面 ⇔ 方向向量与该平面的法向量平行</p>
                 <p><strong>判定方法：</strong><MathTex tex="\vec{a} = \lambda\vec{n}" />（<MathTex tex="\lambda" /> 为非零常数）</p>
                 <p className="mt-2"><strong>为什么？</strong></p>
                 <p className="ml-4">法向量本身就垂直于平面，如果直线的方向向量与法向量平行，直线走向就和法向量一样，所以直线垂直于平面</p>
+                <p className="mt-2"><strong>易错点：</strong>这里是"成比例"不是"点积 = 0"！和线线垂直、面面垂直不同</p>
+                <p className="ml-4">检查方法：三个分量的比值相同，即 <MathTex tex="\dfrac{x_1}{x_2} = \dfrac{y_1}{y_2} = \dfrac{z_1}{z_2}" /></p>
                 <p className="mt-2"><strong>答题格式：</strong></p>
-                <p className="ml-4"><MathTex tex="\vec{a} = \lambda\vec{n}" />，成比例，所以直线 ⊥ 平面</p>
+                <p className="ml-4">设直线方向向量 <MathTex tex="\vec{a} = (x_1, y_1, z_1)" />，平面法向量 <MathTex tex="\vec{n} = (x_2, y_2, z_2)" /></p>
+                <p className="ml-4">因为 <MathTex tex="\vec{a} = \lambda\vec{n}" />（成比例），所以直线 ⊥ 平面</p>
               </div>
             </div>
 
             {/* 面 ⊥ 面 */}
             <div className="border border-purple-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">面 ⊥ 面：法向量点积为 0</div>
-              <div className="px-3 py-2">
+              <div className="px-2 py-0.5 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">面 ⊥ 面：法向量点积为 0</div>
+              <div className="px-3 py-1">
                 <p><strong>核心：</strong>两个平面垂直 ⇔ 它们的法向量垂直</p>
                 <p><strong>判定方法：</strong><MathTex tex="\vec{n_1} \cdot \vec{n_2} = 0" /></p>
                 <p className="mt-2"><strong>为什么？</strong></p>
                 <p className="ml-4">法向量代表平面的"朝向"，两个法向量垂直，说明两个平面的朝向相差 90°，所以平面垂直</p>
+                <p className="mt-2"><strong>和线线垂直对比：</strong>完全一样的套路，都是点积 = 0，只是用的向量不同</p>
+                <p className="ml-4">线线垂直：方向向量点积 = 0；面面垂直：法向量点积 = 0</p>
                 <p className="mt-2"><strong>答题格式：</strong></p>
-                <p className="ml-4"><MathTex tex="\vec{n_1} \cdot \vec{n_2} = x_1x_2 + y_1y_2 + z_1z_2 = 0" />，所以面 ⊥ 面</p>
+                <p className="ml-4">设平面 <MathTex tex="\alpha" /> 法向量 <MathTex tex="\vec{n_1} = (x_1, y_1, z_1)" />，平面 <MathTex tex="\beta" /> 法向量 <MathTex tex="\vec{n_2} = (x_2, y_2, z_2)" /></p>
+                <p className="ml-4"><MathTex tex="\vec{n_1} \cdot \vec{n_2} = x_1x_2 + y_1y_2 + z_1z_2 = 0" />，所以 <MathTex tex="\alpha \perp \beta" /></p>
               </div>
             </div>
 
@@ -657,17 +670,10 @@ export function Geo3dVectorPage() {
               <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">完整解答</div>
               <div className="px-3 py-2 space-y-1 text-lg text-gray-800">
 
-                <div className="flex items-start gap-4">
-                  <div className="flex-1">
-                    <p className="font-bold">建系 + 写坐标</p>
-                    <p>以 A 为原点，AB 为 x 轴，AD 为 y 轴，<MathTex tex="AA_1" /> 为 z 轴</p>
-                    <p className="mt-1"><MathTex tex="A(0,0,0)" />，<MathTex tex="B(2,0,0)" />，<MathTex tex="C(2,2,0)" />，<MathTex tex="D(0,2,0)" /></p>
-                    <p><MathTex tex="A_1(0,0,2)" />，<MathTex tex="B_1(2,0,2)" />，<MathTex tex="C_1(2,2,2)" />，<MathTex tex="D_1(0,2,2)" /></p>
-                  </div>
-                  <div className="w-[200px] shrink-0 flex justify-center">
-                    <DebugGeo3dSvg data={perpCubeDiagram} width={195} height={180} />
-                  </div>
-                </div>
+                <p className="font-bold">建系 + 写坐标</p>
+                <p>以 A 为原点，AB 为 x 轴，AD 为 y 轴，<MathTex tex="AA_1" /> 为 z 轴</p>
+                <p className="mt-1"><MathTex tex="A(0,0,0)" />，<MathTex tex="B(2,0,0)" />，<MathTex tex="C(2,2,0)" />，<MathTex tex="D(0,2,0)" /></p>
+                <p><MathTex tex="A_1(0,0,2)" />，<MathTex tex="B_1(2,0,2)" />，<MathTex tex="C_1(2,2,2)" />，<MathTex tex="D_1(0,2,2)" /></p>
 
                 <p className="font-bold mt-2">(1) 证明 AC ⊥ BD</p>
                 <p><MathTex tex="\overrightarrow{AC} = (2, 2, 0)" />，<MathTex tex="\overrightarrow{BD} = (-2, 2, 0)" /></p>
@@ -694,9 +700,13 @@ export function Geo3dVectorPage() {
                 <div className="flex items-start gap-3 mt-3">
                   <div className="flex-1">
                     <p className="font-bold">(3) 证明 面 ACC₁A₁ ⊥ 面 BDD₁B₁</p>
-                    <p>面 ACC₁A₁ 法向量：<MathTex tex="\vec{n_1} = (1, -1, 0)" /></p>
-                    <p className="ml-4">（面内向量 <MathTex tex="\overrightarrow{AC} = (2,2,0)" />、<MathTex tex="\overrightarrow{AA_1} = (0,0,2)" />，求垂直于两者的向量）</p>
-                    <p>面 BDD₁B₁ 法向量：<MathTex tex="\vec{n_2} = (1, 1, 0)" /></p>
+                    <p>求面 ACC₁A₁ 的法向量：</p>
+                    <p className="ml-4">面内向量：<MathTex tex="\overrightarrow{AC} = (2,2,0)" />，<MathTex tex="\overrightarrow{AA_1} = (0,0,2)" /></p>
+                    <p className="ml-4">设 <MathTex tex="\vec{n_1} = (x, y, z)" /></p>
+                    <p className="ml-4"><MathTex tex="\vec{n_1} \cdot \overrightarrow{AC} = 2x + 2y + 0z = 0" /></p>
+                    <p className="ml-4"><MathTex tex="\vec{n_1} \cdot \overrightarrow{AA_1} = 0x + 0y + 2z = 0" /></p>
+                    <p className="ml-4">令 <MathTex tex="x = 1" />，得 <MathTex tex="y = -1" />，<MathTex tex="z = 0" />，即 <MathTex tex="\vec{n_1} = (1, -1, 0)" /></p>
+                    <p>面 BDD₁B₁ 的法向量：<MathTex tex="\vec{n_2} = (1, 1, 0)" />（由 BD、BB₁ 求出）</p>
                     <p><MathTex tex="\vec{n_1} \cdot \vec{n_2} = 1 \times 1 + (-1) \times 1 + 0 \times 0 = 0" /></p>
                     <p>所以 <strong>面 ACC₁A₁ ⊥ 面 BDD₁B₁</strong></p>
                   </div>
@@ -719,12 +729,12 @@ export function Geo3dVectorPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       <section id="angle-detail" className="mb-3 scroll-mt-4">
         <Collapsible title="七、求角度（详解 + 例题）" defaultOpen storageKey="geo3d-vector:angle">
-          <div className="text-lg text-gray-800">
+          <div className="text-lg text-gray-800 space-y-0">
 
             {/* 线线夹角 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">线线夹角</div>
-              <div className="px-3 py-2">
+              <div className="px-2 py-0.5 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">线线夹角</div>
+              <div className="px-3 py-1">
                 <p><strong>核心：</strong>两条直线的夹角 = 两个方向向量的夹角</p>
                 <p><strong>公式：</strong><MathTex tex="\cos\theta = \dfrac{|\vec{a} \cdot \vec{b}|}{|\vec{a}| \cdot |\vec{b}|}" /></p>
                 <p className="mt-2"><strong>为什么取绝对值？</strong></p>
@@ -736,8 +746,8 @@ export function Geo3dVectorPage() {
 
             {/* 线面夹角 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">线面夹角</div>
-              <div className="px-3 py-2">
+              <div className="px-2 py-0.5 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">线面夹角</div>
+              <div className="px-3 py-1">
                 <p><strong>核心：</strong>直线与平面的夹角 = 方向向量与法向量夹角的余角</p>
                 <p><strong>公式：</strong><MathTex tex="\sin\theta = \dfrac{|\vec{a} \cdot \vec{n}|}{|\vec{a}| \cdot |\vec{n}|}" /></p>
                 <p className="mt-2"><strong>为什么是 sin 不是 cos？</strong></p>
@@ -750,8 +760,8 @@ export function Geo3dVectorPage() {
 
             {/* 二面角 */}
             <div className="border border-purple-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">二面角</div>
-              <div className="px-3 py-2">
+              <div className="px-2 py-0.5 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">二面角</div>
+              <div className="px-3 py-1">
                 <p><strong>核心：</strong>二面角 = 两个平面法向量的夹角，或其补角</p>
                 <p><strong>公式：</strong><MathTex tex="\cos\theta = \dfrac{|\vec{n_1} \cdot \vec{n_2}|}{|\vec{n_1}| \cdot |\vec{n_2}|}" /></p>
                 <p className="mt-2"><strong>为什么取绝对值？</strong></p>
@@ -766,7 +776,7 @@ export function Geo3dVectorPage() {
             </div>
 
             {/* 记忆总结 */}
-            <div className="bg-yellow-50 border border-yellow-300 rounded p-2 mt-2">
+            <div className="bg-yellow-50 border border-yellow-300 rounded p-2">
               <p className="font-bold text-yellow-800">记忆总结</p>
               <p><strong>线线夹角：</strong>cos，取绝对值（结果 ≤ 90°）</p>
               <p><strong>线面夹角：</strong>sin，取绝对值（余角关系）</p>

@@ -314,6 +314,46 @@ export const parallelCubeDiagram: DiagramData = (() => {
   };
 })();
 
+// 证平行例题(1)：EF ∥ AD 示意图（高亮 EF 和 AD）
+export const parallelLineLineDiagram: DiagramData = (() => {
+  const len = 60;
+  return {
+    vertices: [
+      [0, 0, 0], [len, 0, 0], [len, len, 0], [0, len, 0],           // 0-3: A B C D
+      [0, 0, len], [len, 0, len], [len, len, len], [0, len, len],   // 4-7: A₁ B₁ C₁ D₁
+      [len/2, 0, 0], [len/2, len, 0],                               // 8-9: E F
+    ],
+    edges: [
+      { from: 0, to: 1, color: '#334155', strokeWidth: 1.5 },
+      { from: 1, to: 2, color: '#334155', strokeWidth: 1.5 },
+      { from: 2, to: 3, color: '#334155', strokeWidth: 1.5 },
+      { from: 3, to: 0, color: '#ef4444', strokeWidth: 2.5 },  // AD 红色高亮
+      { from: 4, to: 5, color: '#334155', strokeWidth: 1.5 },
+      { from: 5, to: 6, color: '#334155', strokeWidth: 1.5 },
+      { from: 6, to: 7, color: '#334155', strokeWidth: 1.5 },
+      { from: 7, to: 4, color: '#334155', strokeWidth: 1.5 },
+      { from: 0, to: 4, color: '#334155', strokeWidth: 1.5 },
+      { from: 1, to: 5, color: '#334155', strokeWidth: 1.5 },
+      { from: 2, to: 6, color: '#334155', strokeWidth: 1.5 },
+      { from: 3, to: 7, color: '#334155', strokeWidth: 1.5 },
+      { from: 8, to: 9, color: '#9333ea', strokeWidth: 2.5 },  // EF 紫色高亮
+    ],
+    polygons: [],
+    freeLabels: [
+      { pos: [0, 0, 0], text: 'A', offset: [-11, -5] },
+      { pos: [len, 0, 0], text: 'B', offset: [6, 8] },
+      { pos: [len, len, 0], text: 'C', offset: [1, 10] },
+      { pos: [0, len, 0], text: 'D', offset: [-13, 0] },
+      { pos: [0, 0, len], text: 'A₁', offset: [-10, -8] },
+      { pos: [len, 0, len], text: 'B₁', offset: [10, -8] },
+      { pos: [len, len, len], text: 'C₁', offset: [-6, -10] },
+      { pos: [0, len, len], text: 'D₁', offset: [-14, -2] },
+      { pos: [len/2, 0, 0], text: 'E', offset: [-4, -9], color: '#9333ea' },
+      { pos: [len/2, len, 0], text: 'F', offset: [0, 14], color: '#9333ea' },
+    ],
+  };
+})();
+
 // 证平行例题(2)：EF ∥ 面 ADD₁A₁ 示意图
 export const parallelLinePlaneDiagram: DiagramData = (() => {
   const len = 60;
@@ -478,6 +518,44 @@ export const perpCubeDiagram: DiagramData = (() => {
       { pos: xExt, text: 'x', offset: [8, 4], color: '#ef4444' },
       { pos: yExt, text: 'y', offset: [-10, 9], color: '#16a34a' },
       { pos: zExt, text: 'z', offset: [-12, 0], color: '#2563eb' },
+    ],
+  };
+})();
+
+// 证垂直例题(1)：AC ⊥ BD（高亮 AC 蓝色、BD 红色，无坐标轴）
+export const perpLineLineDiagram: DiagramData = (() => {
+  const len = 60;
+  return {
+    vertices: [
+      [0, 0, 0], [len, 0, 0], [len, len, 0], [0, len, 0],           // 0-3: A B C D
+      [0, 0, len], [len, 0, len], [len, len, len], [0, len, len],   // 4-7: A₁ B₁ C₁ D₁
+    ],
+    edges: [
+      { from: 0, to: 1, color: '#334155', strokeWidth: 1.5 },
+      { from: 1, to: 2, color: '#334155', strokeWidth: 1.5 },
+      { from: 2, to: 3, color: '#334155', strokeWidth: 1.5 },
+      { from: 3, to: 0, color: '#334155', strokeWidth: 1.5 },
+      { from: 4, to: 5, color: '#334155', strokeWidth: 1.5 },
+      { from: 5, to: 6, color: '#334155', strokeWidth: 1.5 },
+      { from: 6, to: 7, color: '#334155', strokeWidth: 1.5 },
+      { from: 7, to: 4, color: '#334155', strokeWidth: 1.5 },
+      { from: 0, to: 4, color: '#334155', strokeWidth: 1.5 },
+      { from: 1, to: 5, color: '#334155', strokeWidth: 1.5 },
+      { from: 2, to: 6, color: '#334155', strokeWidth: 1.5 },
+      { from: 3, to: 7, color: '#334155', strokeWidth: 1.5 },
+      { from: 0, to: 2, color: '#2563eb', strokeWidth: 2.5 },  // AC 蓝色
+      { from: 1, to: 3, color: '#dc2626', strokeWidth: 2.5 },  // BD 红色
+    ],
+    polygons: [],
+    freeLabels: [
+      { pos: [0, 0, 0], text: 'A', offset: [-11, -5] },
+      { pos: [len, 0, 0], text: 'B', offset: [6, 8] },
+      { pos: [len, len, 0], text: 'C', offset: [1, 10] },
+      { pos: [0, len, 0], text: 'D', offset: [-13, 0] },
+      { pos: [0, 0, len], text: 'A₁', offset: [-10, -8] },
+      { pos: [len, 0, len], text: 'B₁', offset: [10, -8] },
+      { pos: [len, len, len], text: 'C₁', offset: [-6, -10] },
+      { pos: [0, len, len], text: 'D₁', offset: [-14, -2] },
     ],
   };
 })();

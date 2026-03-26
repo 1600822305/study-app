@@ -112,12 +112,40 @@ const navItems: NavItem[] = [
       {
         groupLabel: '第七阶段：立体几何',
         items: [
-          { path: '/math/geo3d-prereq', label: '7.0 立体几何前置知识' },
+          { path: '/math/geo-basics', label: '7.0 初中几何基础' },
+          { path: '/math/geo3d-prereq', label: '7.0.5 立体几何前置知识' },
           { path: '/math/geo3d-relation', label: '7.1 点线面位置关系' },
           { path: '/math/geo3d-vector-prereq', label: '7.1.5 空间向量前置知识' },
           { path: '/math/geo3d-vector', label: '7.2 空间向量法' },
           { path: '/math/geo3d-solid', label: '7.3 空间几何体' },
           { path: '/math/stage7-exam', label: '📝 阶段考试' },
+        ],
+      },
+      {
+        groupLabel: '第八阶段：解析几何',
+        items: [
+          { path: '/math/line', label: '8.0 直线' },
+          { path: '/math/circle', label: '8.1 圆' },
+          { path: '/math/conic-basic', label: '8.2 圆锥曲线基础' },
+          { path: '/math/conic-line', label: '8.3 直线与圆锥曲线' },
+          { path: '/math/stage8-exam', label: '📝 阶段考试' },
+        ],
+      },
+      {
+        groupLabel: '第九阶段：概率统计',
+        items: [
+          { path: '/math/counting', label: '9.0 计数原理' },
+          { path: '/math/probability', label: '9.1 概率基础' },
+          { path: '/math/statistics', label: '9.2 统计与随机变量' },
+          { path: '/math/stage9-exam', label: '📝 阶段考试' },
+        ],
+      },
+      {
+        groupLabel: '第十阶段：导数进阶',
+        items: [
+          { path: '/math/derivative-comp', label: '10.0 导数综合' },
+          { path: '/math/derivative-hard', label: '10.1 导数压轴' },
+          { path: '/math/stage10-exam', label: '📝 阶段考试' },
         ],
       },
     ],

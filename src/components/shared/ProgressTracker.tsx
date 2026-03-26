@@ -13,35 +13,35 @@ export function ProgressTracker({ items, onToggle }: ProgressTrackerProps) {
   const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="font-bold text-gray-800">学习进度</h3>
-        <span className="text-sm font-medium text-blue-600">
-          {completed}/{total} ({percent}%)
+    <div className="bg-white rounded-xl border border-gray-200 p-3 shadow-sm">
+      <div className="flex items-center gap-2 mb-2">
+        <h3 className="font-bold text-gray-800 text-sm">学习进度</h3>
+        <span className="text-xs font-medium text-blue-600">
+          {completed}/{total}
         </span>
       </div>
 
-      <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+      <div className="w-full bg-gray-200 rounded-full h-1.5 mb-2">
         <div
-          className="bg-blue-500 h-2.5 rounded-full transition-all duration-500"
+          className="bg-blue-500 h-1.5 rounded-full transition-all duration-500"
           style={{ width: `${percent}%` }}
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-0.5">
         {items.map((item) => (
           <button
             key={item.id}
             onClick={() => onToggle(item.id)}
-            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors text-left cursor-pointer"
+            className="w-full flex items-start gap-1.5 px-1 py-1 rounded hover:bg-gray-50 transition-colors text-left cursor-pointer"
           >
             {item.checked ? (
-              <CheckCircle className="text-green-500 shrink-0" size={20} />
+              <CheckCircle className="text-green-500 shrink-0 mt-0.5" size={14} />
             ) : (
-              <Circle className="text-gray-300 shrink-0" size={20} />
+              <Circle className="text-gray-300 shrink-0 mt-0.5" size={14} />
             )}
             <span
-              className={`text-sm ${item.checked ? 'text-gray-400 line-through' : 'text-gray-700'}`}
+              className={`text-xs leading-tight ${item.checked ? 'text-gray-400 line-through' : 'text-gray-600'}`}
             >
               {item.label}
             </span>
