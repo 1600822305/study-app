@@ -1,12 +1,12 @@
 import { Mafs, Coordinates, Plot, Point, Text as MafsText } from 'mafs';
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
-import { quadraticNarrations } from './data/narrations';
-import { quadPractice1, quadPractice2 } from './data/practice';
+import { quadraticNarrations } from './data/2.2/2.2-narrations';
+import { quadPractice1, quadPractice2 } from './data/2.2/2.2-practice';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { quadraticQuizQuestions } from './data/quiz';
-import { quadraticProgressItems } from './data/progress';
-import { QuadraticAnswers, quadraticExplanations } from './quadratic-answers';
+import { quadraticQuizQuestions } from './data/2.2/2.2-quiz';
+import { quadraticProgressItems } from './data/2.2/2.2-progress';
+import { QuadraticAnswers, quadraticExplanations } from './2.2-quadratic-answers';
 
 export function QuadraticPage() {
   const { items, toggle } = useProgress('quadratic', quadraticProgressItems);

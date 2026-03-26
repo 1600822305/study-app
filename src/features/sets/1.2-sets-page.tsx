@@ -1,11 +1,11 @@
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
-import { setsNarrations } from './data/narrations';
-import { setsPractice3 } from './data/practice';
+import { setsNarrations } from './data/1.2/1.2-narrations';
+import { setsPractice3 } from './data/1.2/1.2-practice';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { setsQuizQuestions } from './data/quiz';
-import { setsProgressItems } from './data/progress';
-import { SetsAnswers, setsExplanations } from './sets-answers';
+import { setsQuizQuestions } from './data/1.2/1.2-quiz';
+import { setsProgressItems } from './data/1.2/1.2-progress';
+import { SetsAnswers, setsExplanations } from './1.2-sets-answers';
 
 export function SetsPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('sets', setsProgressItems);

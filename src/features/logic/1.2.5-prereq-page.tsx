@@ -1,9 +1,9 @@
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
-import { logicPrereqNarrations } from './data/prereq-narrations';
-import { logicPrereqPractice1, logicPrereqPractice2, logicPrereqPractice3 } from './data/practice';
-import { logicPrereqProgressItems } from './data/prereq-progress';
-import { logicPrereqQuizQuestions } from './data/prereq-quiz';
-import { LogicPrereqAnswers, logicPrereqExplanations } from './logic-prereq-answers';
+import { logicPrereqNarrations } from './data/1.2.5/1.2.5-prereq-narrations';
+import { logicPrereqPractice1, logicPrereqPractice2, logicPrereqPractice3 } from './data/1.3/1.3-practice';
+import { logicPrereqProgressItems } from './data/1.2.5/1.2.5-prereq-progress';
+import { logicPrereqQuizQuestions } from './data/1.2.5/1.2.5-prereq-quiz';
+import { LogicPrereqAnswers, logicPrereqExplanations } from './1.2.5-prereq-answers';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 

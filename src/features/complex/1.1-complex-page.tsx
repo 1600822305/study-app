@@ -1,13 +1,13 @@
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { Coordinates, Point } from 'mafs';
 import { DebugMafs, DText, DebugToggle } from '../trig/MafsDebug';
-import { complexNarrations } from './data/narrations';
-import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/practice';
+import { complexNarrations } from './data/1.1/1.1-narrations';
+import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/1.1/1.1-practice';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { complexQuizQuestions } from './data/quiz';
-import { complexProgressItems } from './data/progress';
-import { ComplexAnswers, complexExplanations } from './complex-answers';
+import { complexQuizQuestions } from './data/1.1/1.1-quiz';
+import { complexProgressItems } from './data/1.1/1.1-progress';
+import { ComplexAnswers, complexExplanations } from './1.1-complex-answers';
 
 export function ComplexPage() {
   const { items, toggle } = useProgress('complex', complexProgressItems);

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { inequalityPrereqQuizQuestions } from './data/prereq-quiz';
+import { inequalityPrereqQuizQuestions } from './data/2.0/2.0-prereq-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const inequalityPrereqExplanations: Record<string, ReactNode> = {

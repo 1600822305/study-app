@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { prereqPractice1, prereqPractice2, prereqPractice4, prereqPractice5, prereqPractice6, prereqPractice7 } from './data/practice';
-import { prereqSelfTest } from './data/selftest';
+import { prereqPractice1, prereqPractice2, prereqPractice4, prereqPractice5, prereqPractice6, prereqPractice7 } from './data/1.0/1.0-practice';
+import { prereqSelfTest } from './data/1.0/1.0-selftest';
 import type { QuizQuestionData } from '@/types';
 
 // ══════════════════════════════════════════════════════════

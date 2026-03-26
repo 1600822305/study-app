@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { inequalityQuizQuestions } from './data/quiz';
+import { inequalityQuizQuestions } from './data/2.1/2.1-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const inequalityExplanations: Record<string, ReactNode> = {

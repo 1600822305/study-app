@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { quadPractice1, quadPractice2 } from './data/practice';
-import { quadraticQuizQuestions } from './data/quiz';
+import { quadPractice1, quadPractice2 } from './data/2.2/2.2-practice';
+import { quadraticQuizQuestions } from './data/2.2/2.2-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const quadraticExplanations: Record<string, ReactNode> = {

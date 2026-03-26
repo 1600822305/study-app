@@ -1,11 +1,11 @@
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard } from '@/components/shared';
-import { inequalityNarrations } from './data/narrations';
+import { inequalityNarrations } from './data/2.1/2.1-narrations';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { inequalityQuizQuestions } from './data/quiz';
-import { inequalityProgressItems } from './data/progress';
-import { InequalityAnswers, inequalityExplanations } from './inequality-answers';
-import { amgmPractice } from './data/practice';
+import { inequalityQuizQuestions } from './data/2.1/2.1-quiz';
+import { inequalityProgressItems } from './data/2.1/2.1-progress';
+import { InequalityAnswers, inequalityExplanations } from './2.1-inequality-answers';
+import { amgmPractice } from './data/2.1/2.1-practice';
 
 export function InequalityPage() {
   const { items, toggle } = useProgress('inequality', inequalityProgressItems);

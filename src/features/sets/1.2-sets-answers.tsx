@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { setsPractice3 } from './data/practice';
-import { setsQuizQuestions } from './data/quiz';
+import { setsPractice3 } from './data/1.2/1.2-practice';
+import { setsQuizQuestions } from './data/1.2/1.2-quiz';
 import type { QuizQuestionData } from '@/types';
 
 // ══════════════════════════════════════════════════════════

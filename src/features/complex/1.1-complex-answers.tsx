@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/practice';
-import { complexQuizQuestions } from './data/quiz';
+import { complexPractice1, complexPractice2, complexPractice3, complexPractice4, complexPractice5 } from './data/1.1/1.1-practice';
+import { complexQuizQuestions } from './data/1.1/1.1-quiz';
 import type { QuizQuestionData } from '@/types';
 
 // ══════════════════════════════════════════════════════════

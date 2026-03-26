@@ -1,6 +1,6 @@
 import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
-import { inequalityPrereqNarrations } from './data/prereq-narrations';
-import { inequalityPrereqProgressItems } from './data/prereq-progress';
+import { inequalityPrereqNarrations } from './data/2.0/2.0-prereq-narrations';
+import { inequalityPrereqProgressItems } from './data/2.0/2.0-prereq-progress';
 import { useProgress, usePrintMode } from '@/hooks';
 
 export function InequalityPrereqPage() {

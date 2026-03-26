@@ -1,11 +1,11 @@
 import { Math, QuizPanel, Collapsible, SpeakButton, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
-import { logicNarrations } from './data/narrations';
-import { logicPractice1, logicPractice2, logicPractice3, logicPractice4, logicPractice5 } from './data/practice';
+import { logicNarrations } from './data/1.3/1.3-narrations';
+import { logicPractice1, logicPractice2, logicPractice3, logicPractice4, logicPractice5 } from './data/1.3/1.3-practice';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { logicQuizQuestions } from './data/quiz';
-import { logicProgressItems } from './data/progress';
-import { LogicAnswers, logicExplanations } from './logic-answers';
+import { logicQuizQuestions } from './data/1.3/1.3-quiz';
+import { logicProgressItems } from './data/1.3/1.3-progress';
+import { LogicAnswers, logicExplanations } from './1.3-logic-answers';
 
 export function LogicPage() {
   const { items, toggle } = useProgress('logic', logicProgressItems);
