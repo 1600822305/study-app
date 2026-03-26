@@ -1,7 +1,7 @@
 import { Mafs, Coordinates, Plot, Point, Text as MafsText } from 'mafs';
 import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
-import { functionReviewNarrations } from './data/review-narrations';
-import { functionReviewProgressItems } from './data/review-progress';
+import { functionReviewNarrations } from './data/3.0/3.0-review-narrations';
+import { functionReviewProgressItems } from './data/3.0/3.0-review-progress';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 

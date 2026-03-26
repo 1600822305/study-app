@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { derivPrereqPractice1, derivPrereqPractice2, derivPrereqPractice3 } from './data/deriv-prereq-practice';
-import { derivPrereqQuizQuestions } from './data/deriv-prereq-quiz';
+import { derivPrereqPractice1, derivPrereqPractice2, derivPrereqPractice3 } from './data/3.3.5/3.3.5-deriv-prereq-practice';
+import { derivPrereqQuizQuestions } from './data/3.3.5/3.3.5-deriv-prereq-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const derivativePrereqExplanations: Record<string, ReactNode> = {

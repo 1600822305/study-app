@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { graphPrereqPractice1, graphPrereqPractice2, graphPrereqPractice3 } from './data/graph-prereq-practice';
-import { graphPrereqQuizQuestions } from './data/graph-prereq-quiz';
+import { graphPrereqPractice1, graphPrereqPractice2, graphPrereqPractice3 } from './data/3.2.5/3.2.5-graph-prereq-practice';
+import { graphPrereqQuizQuestions } from './data/3.2.5/3.2.5-graph-prereq-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const functionGraphPrereqExplanations: Record<string, ReactNode> = {

@@ -1,12 +1,12 @@
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { Mafs, Coordinates, Plot, Point, Text as MafsText } from 'mafs';
-import { graphPrereqNarrations } from './data/graph-prereq-narrations';
-import { graphPrereqProgressItems } from './data/graph-prereq-progress';
-import { graphPrereqPractice1, graphPrereqPractice2, graphPrereqPractice3 } from './data/graph-prereq-practice';
-import { graphPrereqQuizQuestions } from './data/graph-prereq-quiz';
+import { graphPrereqNarrations } from './data/3.2.5/3.2.5-graph-prereq-narrations';
+import { graphPrereqProgressItems } from './data/3.2.5/3.2.5-graph-prereq-progress';
+import { graphPrereqPractice1, graphPrereqPractice2, graphPrereqPractice3 } from './data/3.2.5/3.2.5-graph-prereq-practice';
+import { graphPrereqQuizQuestions } from './data/3.2.5/3.2.5-graph-prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { FunctionGraphPrereqAnswers, functionGraphPrereqExplanations } from './function-graph-prereq-answers';
+import { FunctionGraphPrereqAnswers, functionGraphPrereqExplanations } from './3.2.5-graph-prereq-answers';
 
 export function FunctionGraphPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('graph-prereq', graphPrereqProgressItems);

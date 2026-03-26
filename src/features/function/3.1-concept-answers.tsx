@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { conceptPractice } from './data/concept-practice';
-import { conceptQuizQuestions } from './data/concept-quiz';
+import { conceptPractice } from './data/3.1/3.1-concept-practice';
+import { conceptQuizQuestions } from './data/3.1/3.1-concept-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const functionConceptExplanations: Record<string, ReactNode> = {

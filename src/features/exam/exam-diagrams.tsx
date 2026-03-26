@@ -6,7 +6,7 @@
  */
 import type { ReactNode } from 'react';
 import { Mafs, Line, Plot, Text as MafsText } from 'mafs';
-import { arcDomain } from '../trig/solve-diagrams/shared';
+import { arcDomain } from '../trig/data/5.3/solve-diagrams/shared';
 
 const BLK = '#000';
 const GRAY = '#555';

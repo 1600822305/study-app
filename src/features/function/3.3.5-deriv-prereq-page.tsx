@@ -1,12 +1,12 @@
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { Mafs, Coordinates, Plot, Point, Line, Text as MafsText } from 'mafs';
-import { derivPrereqNarrations } from './data/deriv-prereq-narrations';
-import { derivPrereqProgressItems } from './data/deriv-prereq-progress';
-import { derivPrereqPractice1, derivPrereqPractice2, derivPrereqPractice3 } from './data/deriv-prereq-practice';
-import { derivPrereqQuizQuestions } from './data/deriv-prereq-quiz';
+import { derivPrereqNarrations } from './data/3.3.5/3.3.5-deriv-prereq-narrations';
+import { derivPrereqProgressItems } from './data/3.3.5/3.3.5-deriv-prereq-progress';
+import { derivPrereqPractice1, derivPrereqPractice2, derivPrereqPractice3 } from './data/3.3.5/3.3.5-deriv-prereq-practice';
+import { derivPrereqQuizQuestions } from './data/3.3.5/3.3.5-deriv-prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { DerivativePrereqAnswers, derivativePrereqExplanations } from './derivative-prereq-answers';
+import { DerivativePrereqAnswers, derivativePrereqExplanations } from './3.3.5-deriv-prereq-answers';
 
 export function DerivativePrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('deriv-prereq', derivPrereqProgressItems);

@@ -1,11 +1,11 @@
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
-import { elemPrereqNarrations } from './data/elem-prereq-narrations';
-import { elemPrereqProgressItems } from './data/elem-prereq-progress';
-import { elemPrereqPractice1, elemPrereqPractice2, elemPrereqPractice3 } from './data/elem-prereq-practice';
-import { elemPrereqQuizQuestions } from './data/elem-prereq-quiz';
+import { elemPrereqNarrations } from './data/3.1.5/3.1.5-elem-prereq-narrations';
+import { elemPrereqProgressItems } from './data/3.1.5/3.1.5-elem-prereq-progress';
+import { elemPrereqPractice1, elemPrereqPractice2, elemPrereqPractice3 } from './data/3.1.5/3.1.5-elem-prereq-practice';
+import { elemPrereqQuizQuestions } from './data/3.1.5/3.1.5-elem-prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { ElementaryFuncPrereqAnswers, elementaryFuncPrereqExplanations } from './elementary-func-prereq-answers';
+import { ElementaryFuncPrereqAnswers, elementaryFuncPrereqExplanations } from './3.1.5-elem-prereq-answers';
 
 export function ElementaryFuncPrereqPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('elem-func-prereq', elemPrereqProgressItems);

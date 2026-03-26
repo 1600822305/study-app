@@ -1,12 +1,12 @@
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { Mafs, Coordinates, Plot, Point, Line, Text as MafsText } from 'mafs';
-import { graphNarrations } from './data/graph-narrations';
-import { graphProgressItems } from './data/graph-progress';
-import { graphPractice1, graphPractice2, graphPractice3, graphPractice4 } from './data/graph-practice';
-import { graphQuizQuestions } from './data/graph-quiz';
+import { graphNarrations } from './data/3.3/3.3-graph-narrations';
+import { graphProgressItems } from './data/3.3/3.3-graph-progress';
+import { graphPractice1, graphPractice2, graphPractice3, graphPractice4 } from './data/3.3/3.3-graph-practice';
+import { graphQuizQuestions } from './data/3.3/3.3-graph-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { FunctionGraphAnswers, functionGraphExplanations } from './function-graph-answers';
+import { FunctionGraphAnswers, functionGraphExplanations } from './3.3-graph-answers';
 
 const NativeMath = globalThis.Math;
 

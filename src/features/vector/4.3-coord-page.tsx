@@ -1,6 +1,6 @@
 import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
-import { vectorCoordNarrations } from './data/coord-narrations';
-import { vectorCoordProgressItems } from './data/coord-progress';
+import { vectorCoordNarrations } from './data/4.3/4.3-coord-narrations';
+import { vectorCoordProgressItems } from './data/4.3/4.3-coord-progress';
 import { useProgress } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 

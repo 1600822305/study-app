@@ -1,12 +1,12 @@
 import { Mafs, Coordinates, Plot, Point, Text as MafsText, Vector } from 'mafs';
 import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, QuizPanel } from '@/components/shared';
-import { functionConceptNarrations } from './data/concept-narrations';
-import { functionConceptProgressItems } from './data/concept-progress';
+import { functionConceptNarrations } from './data/3.1/3.1-concept-narrations';
+import { functionConceptProgressItems } from './data/3.1/3.1-concept-progress';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { conceptPractice } from './data/concept-practice';
-import { conceptQuizQuestions } from './data/concept-quiz';
-import { FunctionConceptAnswers, functionConceptExplanations } from './function-concept-answers';
+import { conceptPractice } from './data/3.1/3.1-concept-practice';
+import { conceptQuizQuestions } from './data/3.1/3.1-concept-quiz';
+import { FunctionConceptAnswers, functionConceptExplanations } from './3.1-concept-answers';
 
 export function FunctionConceptPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('function-concept', functionConceptProgressItems);

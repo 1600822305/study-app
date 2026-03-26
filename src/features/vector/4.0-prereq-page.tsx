@@ -1,6 +1,6 @@
 import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
-import { vectorPrereqNarrations } from './data/prereq-narrations';
-import { vectorPrereqProgressItems } from './data/prereq-progress';
+import { vectorPrereqNarrations } from './data/4.0/4.0-prereq-narrations';
+import { vectorPrereqProgressItems } from './data/4.0/4.0-prereq-progress';
 import { useProgress } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 

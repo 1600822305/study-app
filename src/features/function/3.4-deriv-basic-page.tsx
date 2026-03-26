@@ -1,11 +1,11 @@
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak, BigQuestionCard } from '@/components/shared';
-import { derivBasicNarrations } from './data/deriv-basic-narrations';
-import { derivBasicProgressItems } from './data/deriv-basic-progress';
-import { derivBasicPractice1, derivBasicPractice2, derivBasicPractice3, derivBasicPractice4, derivBasicPractice5 } from './data/deriv-basic-practice';
-import { derivBasicQuizQuestions } from './data/deriv-basic-quiz';
+import { derivBasicNarrations } from './data/3.4/3.4-deriv-basic-narrations';
+import { derivBasicProgressItems } from './data/3.4/3.4-deriv-basic-progress';
+import { derivBasicPractice1, derivBasicPractice2, derivBasicPractice3, derivBasicPractice4, derivBasicPractice5 } from './data/3.4/3.4-deriv-basic-practice';
+import { derivBasicQuizQuestions } from './data/3.4/3.4-deriv-basic-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { DerivativeBasicAnswers, derivativeBasicExplanations } from './derivative-basic-answers';
+import { DerivativeBasicAnswers, derivativeBasicExplanations } from './3.4-deriv-basic-answers';
 
 export function DerivativeBasicPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('deriv-basic', derivBasicProgressItems);

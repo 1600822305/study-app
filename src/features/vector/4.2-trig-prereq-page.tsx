@@ -1,6 +1,6 @@
 import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
-import { vectorTrigPrereqNarrations } from './data/trig-prereq-narrations';
-import { vectorTrigPrereqProgressItems } from './data/trig-prereq-progress';
+import { vectorTrigPrereqNarrations } from './data/4.2/4.2-trig-prereq-narrations';
+import { vectorTrigPrereqProgressItems } from './data/4.2/4.2-trig-prereq-progress';
 import { useProgress } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
 

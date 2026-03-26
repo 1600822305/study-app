@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { elemPrereqPractice1, elemPrereqPractice2, elemPrereqPractice3 } from './data/elem-prereq-practice';
-import { elemPrereqQuizQuestions } from './data/elem-prereq-quiz';
+import { elemPrereqPractice1, elemPrereqPractice2, elemPrereqPractice3 } from './data/3.1.5/3.1.5-elem-prereq-practice';
+import { elemPrereqQuizQuestions } from './data/3.1.5/3.1.5-elem-prereq-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const elementaryFuncPrereqExplanations: Record<string, ReactNode> = {

@@ -1,12 +1,12 @@
 import { Mafs, Coordinates, Plot, Point } from 'mafs';
 import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
-import { elemFuncNarrations } from './data/elem-func-narrations';
-import { elemFuncProgressItems } from './data/elem-func-progress';
-import { elemFuncPractice1, elemFuncPractice2, elemFuncPractice3, elemFuncPractice4 } from './data/elem-func-practice';
-import { elemFuncQuizQuestions } from './data/elem-func-quiz';
+import { elemFuncNarrations } from './data/3.2/3.2-elem-func-narrations';
+import { elemFuncProgressItems } from './data/3.2/3.2-elem-func-progress';
+import { elemFuncPractice1, elemFuncPractice2, elemFuncPractice3, elemFuncPractice4 } from './data/3.2/3.2-elem-func-practice';
+import { elemFuncQuizQuestions } from './data/3.2/3.2-elem-func-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
-import { ElementaryFuncAnswers, elementaryFuncExplanations } from './elementary-func-answers';
+import { ElementaryFuncAnswers, elementaryFuncExplanations } from './3.2-elem-func-answers';
 
 export function ElementaryFuncPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('elem-func', elemFuncProgressItems);

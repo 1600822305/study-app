@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { graphPractice1, graphPractice2, graphPractice3, graphPractice4 } from './data/graph-practice';
-import { graphQuizQuestions } from './data/graph-quiz';
+import { graphPractice1, graphPractice2, graphPractice3, graphPractice4 } from './data/3.3/3.3-graph-practice';
+import { graphQuizQuestions } from './data/3.3/3.3-graph-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const functionGraphExplanations: Record<string, ReactNode> = {

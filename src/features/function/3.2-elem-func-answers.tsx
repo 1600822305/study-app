@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { elemFuncPractice1, elemFuncPractice2, elemFuncPractice3, elemFuncPractice4 } from './data/elem-func-practice';
-import { elemFuncQuizQuestions } from './data/elem-func-quiz';
+import { elemFuncPractice1, elemFuncPractice2, elemFuncPractice3, elemFuncPractice4 } from './data/3.2/3.2-elem-func-practice';
+import { elemFuncQuizQuestions } from './data/3.2/3.2-elem-func-quiz';
 import type { QuizQuestionData } from '@/types';
 
 export const elementaryFuncExplanations: Record<string, ReactNode> = {
