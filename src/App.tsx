@@ -45,6 +45,7 @@ const SequenceSumPage = lazy(() => import('@/features/sequence').then(m => ({ de
 const SequenceAdvPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceAdvPage })));
 const Geo3dPrereqPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dPrereqPage })));
 const Geo3dRelationPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dRelationPage })));
+const Geo3dVectorPrereqPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dVectorPrereqPage })));
 const Geo3dVectorPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dVectorPage })));
 const Geo3dSolidPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dSolidPage })));
 const SettingsPage = lazy(() => import('@/features/settings/SettingsPage').then(m => ({ default: m.SettingsPage })));
@@ -120,6 +121,7 @@ function App() {
           <Route path="/math/sequence-adv" element={<SequenceAdvPage />} />
           <Route path="/math/geo3d-prereq" element={<Geo3dPrereqPage />} />
           <Route path="/math/geo3d-relation" element={<Geo3dRelationPage />} />
+          <Route path="/math/geo3d-vector-prereq" element={<Geo3dVectorPrereqPage />} />
           <Route path="/math/geo3d-vector" element={<Geo3dVectorPage />} />
           <Route path="/math/geo3d-solid" element={<Geo3dSolidPage />} />
           <Route path="/settings" element={<SettingsPage />} />

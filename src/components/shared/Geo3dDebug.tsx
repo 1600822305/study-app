@@ -34,34 +34,52 @@ export function Geo3dDebugToggle() {
   );
 }
 
-/* ── 投影函数（与 Geo3dSvg 一致） ── */
-function project(p: Point3D): [number, number] {
+/* ── 标准斜二测投影（与 Geo3dSvg 一致） ── */
+function projectOblique(p: Point3D): [number, number] {
   const [x, y, z] = p;
   const cos45 = Math.SQRT2 / 2;
   const scale_y = 0.5;
   return [x - y * cos45 * scale_y, -(z - y * cos45 * scale_y)];
 }
 
+/* ── 3D 旋转投影（自由视角） ── */
+function project3D(p: Point3D, rotY: number, rotX: number): [number, number] {
+  const [x, y, z] = p;
+  const radY = (rotY * Math.PI) / 180;
+  const radX = (rotX * Math.PI) / 180;
+  const x1 = x * Math.cos(radY) - y * Math.sin(radY);
+  const y1 = x * Math.sin(radY) + y * Math.cos(radY);
+  const z2 = y1 * Math.sin(radX) + z * Math.cos(radX);
+  return [x1, -z2];
+}
+
 /* ── 调试面板 ── */
-function DebugPanel({ data, strokeColor, onClose }: {
+function DebugPanel({ data, strokeColor, onClose, initialRotation }: {
   data: DiagramData;
   strokeColor: string;
   onClose: () => void;
+  initialRotation?: { rotY: number; rotX: number };
 }) {
   const [labelOffsets, setLabelOffsets] = useState<[number, number][]>(
     data.freeLabels.map(fl => [...(fl.offset ?? [0, 0])] as [number, number])
   );
+  // 如果传入了 rotation，默认用 3D 模式并显示该角度
+  const [useOblique, setUseOblique] = useState(!initialRotation);
+  const [rotY, setRotY] = useState(initialRotation?.rotY ?? 45);
+  const [rotX, setRotX] = useState(initialRotation?.rotX ?? 30);
   const svgRef = useRef<SVGSVGElement>(null);
   const dragRef = useRef<{ idx: number; startSvg: [number, number]; startOffset: [number, number] } | null>(null);
+  const rotateRef = useRef<{ startX: number; startY: number; startRotY: number; startRotX: number } | null>(null);
 
-  const projected = data.vertices.map(v => project(v));
+  const doProject = (p: Point3D) => useOblique ? projectOblique(p) : project3D(p, rotY, rotX);
+  const projected = data.vertices.map(v => doProject(v));
 
   // 计算 viewBox（与 Geo3dSvg 一致）
   const allX: number[] = [];
   const allY: number[] = [];
   projected.forEach(([px, py]) => { allX.push(px); allY.push(py); });
   data.freeLabels.forEach((fl, i) => {
-    const [px, py] = project(fl.pos);
+    const [px, py] = doProject(fl.pos);
     const [ox, oy] = labelOffsets[i];
     allX.push(px + ox); allY.push(py + oy);
   });
@@ -116,7 +134,12 @@ function DebugPanel({ data, strokeColor, onClose }: {
 
   // 生成可复制的代码
   const generateCopyText = () => {
-    const lines: string[] = ['freeLabels: ['];
+    const lines: string[] = [
+      `// 图: ${data.name || '未命名'}`,
+      `// 视角: rotY=${Math.round(rotY)}°, rotX=${Math.round(rotX)}°`,
+      '',
+      'freeLabels: ['
+    ];
     data.freeLabels.forEach((fl, i) => {
       const [ox, oy] = labelOffsets[i];
       const parts = [`pos: [${fl.pos.join(', ')}]`, `text: '${fl.text}'`, `offset: [${ox}, ${oy}]`];
@@ -144,11 +167,45 @@ function DebugPanel({ data, strokeColor, onClose }: {
       {/* 顶栏 */}
       <div className="flex justify-between items-center px-4 py-2 border-b">
         <h3 className="font-bold text-lg">📐 Geo3D 调试</h3>
+        <div className="flex items-center gap-4 text-sm">
+          <button 
+            onClick={() => setUseOblique(true)} 
+            className={`text-xs px-2 py-0.5 rounded ${useOblique ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+          >标准斜二测</button>
+          <button 
+            onClick={() => setUseOblique(false)} 
+            className={`text-xs px-2 py-0.5 rounded ${!useOblique ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+          >3D旋转</button>
+          {!useOblique && (
+            <span className="font-mono text-gray-500">Y:{Math.round(rotY)}° X:{Math.round(rotX)}° 拖拽旋转</span>
+          )}
+        </div>
         <button onClick={onClose} className="bg-red-500 text-white px-3 py-1 rounded text-sm font-bold">✕ 关闭</button>
       </div>
 
       {/* SVG 区域 */}
-      <div className="flex-1 flex items-center justify-center bg-gray-50 overflow-hidden">
+      <div 
+        className={`flex-1 flex items-center justify-center bg-gray-50 overflow-hidden ${!useOblique ? 'cursor-grab active:cursor-grabbing' : ''}`}
+        onMouseDown={(e) => {
+          if (useOblique) return;  // 标准模式不拖拽旋转
+          if ((e.target as HTMLElement).closest('circle[style*="cursor: grab"]')) return;
+          rotateRef.current = { startX: e.clientX, startY: e.clientY, startRotY: rotY, startRotX: rotX };
+          const onMove = (ev: MouseEvent) => {
+            if (!rotateRef.current) return;
+            const dx = ev.clientX - rotateRef.current.startX;
+            const dy = ev.clientY - rotateRef.current.startY;
+            setRotY(rotateRef.current.startRotY + dx * 0.5);
+            setRotX(Math.max(-90, Math.min(90, rotateRef.current.startRotX - dy * 0.5)));
+          };
+          const onUp = () => {
+            rotateRef.current = null;
+            window.removeEventListener('mousemove', onMove);
+            window.removeEventListener('mouseup', onUp);
+          };
+          window.addEventListener('mousemove', onMove);
+          window.addEventListener('mouseup', onUp);
+        }}
+      >
         <svg ref={svgRef} width={svgW} height={svgH} viewBox={viewBox} xmlns="http://www.w3.org/2000/svg">
           {/* 填充多边形 */}
           {data.polygons.map((p, i) => {
@@ -180,7 +237,7 @@ function DebugPanel({ data, strokeColor, onClose }: {
 
           {/* freeLabels：可拖拽 */}
           {data.freeLabels.map((fl, i) => {
-            const [px, py] = project(fl.pos);
+            const [px, py] = doProject(fl.pos);
             const [ox, oy] = labelOffsets[i];
             const labelColor = fl.color ?? strokeColor;
             const dotColor = typeof fl.dot === 'string' ? fl.dot : (fl.dot ? labelColor : undefined);
@@ -241,14 +298,15 @@ interface DebugGeo3dSvgProps {
   height?: number;
   strokeColor?: string;
   className?: string;
+  rotation?: { rotY: number; rotX: number };
 }
 
-export function DebugGeo3dSvg({ data, width = 160, height = 140, strokeColor = '#334155', className }: DebugGeo3dSvgProps) {
+export function DebugGeo3dSvg({ data, width = 160, height = 140, strokeColor = '#334155', className, rotation }: DebugGeo3dSvgProps) {
   const globalOn = useGeo3dDebug();
   const [debug, setDebug] = useState(false);
 
   if (debug) {
-    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} />;
+    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initialRotation={rotation} />;
   }
 
   return (
@@ -261,7 +319,7 @@ export function DebugGeo3dSvg({ data, width = 160, height = 140, strokeColor = '
           🛠
         </button>
       )}
-      <Geo3dSvg data={data} width={width} height={height} strokeColor={strokeColor} className={className} />
+      <Geo3dSvg data={data} width={width} height={height} strokeColor={strokeColor} className={className} rotation={rotation} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
-export { Geo3dPrereqPage } from './Geo3dPrereqPage';
-export { Geo3dRelationPage } from './Geo3dRelationPage';
-export { Geo3dVectorPage } from './Geo3dVectorPage';
-export { Geo3dSolidPage } from './Geo3dSolidPage';
+export { Geo3dPrereqPage } from './7.0-prereq-page';
+export { Geo3dRelationPage } from './7.1-relation-page';
+export { Geo3dVectorPrereqPage } from './7.2-vector-prereq-page';
+export { Geo3dVectorPage } from './7.2-vector-page';
+export { Geo3dSolidPage } from './7.3-solid-page';

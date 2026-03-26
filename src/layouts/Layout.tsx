@@ -114,6 +114,7 @@ const navItems: NavItem[] = [
         items: [
           { path: '/math/geo3d-prereq', label: '7.0 立体几何前置知识' },
           { path: '/math/geo3d-relation', label: '7.1 点线面位置关系' },
+          { path: '/math/geo3d-vector-prereq', label: '7.1.5 空间向量前置知识' },
           { path: '/math/geo3d-vector', label: '7.2 空间向量法' },
           { path: '/math/geo3d-solid', label: '7.3 空间几何体' },
           { path: '/math/stage7-exam', label: '📝 阶段考试' },

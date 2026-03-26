@@ -4,6 +4,8 @@
  * 输出纯 SVG，打印友好，零外部依赖
  */
 
+import { Math as MathTex } from './Math';
+
 export type Point3D = [number, number, number];
 type Point2D = [number, number];
 
@@ -13,12 +15,14 @@ export interface Edge {
   hidden?: boolean;
   color?: string;
   strokeWidth?: number;
+  arrow?: boolean;
 }
 
 interface ProjectedEdge {
   x1: number;
   y1: number;
   x2: number;
+  arrow?: boolean;
   y2: number;
   hidden: boolean;
   color?: string;
@@ -50,6 +54,7 @@ export interface Polygon3D {
 export interface FreeLabel {
   pos: Point3D;
   text: string;
+  tex?: string;
   offset?: [number, number];
   fontSize?: number;
   color?: string;
@@ -57,6 +62,7 @@ export interface FreeLabel {
 }
 
 export interface DiagramData {
+  name?: string;  // 图的名称，用于调试时识别
   vertices: Point3D[];
   edges: Edge[];
   polygons: Polygon3D[];
@@ -64,9 +70,26 @@ export interface DiagramData {
 }
 
 // ─── Projection ────────────────────────────────────────────
+export type Rotation3D = { rotY: number; rotX: number };
+
 // 斜二测画法: x→水平, z→竖直, y→45°方向取半
-function project(p: Point3D): Point2D {
+function project(p: Point3D, rotation?: Rotation3D): Point2D {
   const [x, y, z] = p;
+  
+  if (rotation) {
+    // 3D 旋转投影
+    const radY = (rotation.rotY * Math.PI) / 180;
+    const radX = (rotation.rotX * Math.PI) / 180;
+    // 绕 Y 轴旋转（水平）
+    const x1 = x * Math.cos(radY) - y * Math.sin(radY);
+    const y1 = x * Math.sin(radY) + y * Math.cos(radY);
+    const z1 = z;
+    // 绕 X 轴旋转（俯仰）
+    const z2 = y1 * Math.sin(radX) + z1 * Math.cos(radX);
+    return [x1, -z2];
+  }
+  
+  // 默认斜二测
   const cos45 = Math.SQRT2 / 2;
   const scale_y = 0.5;
   const px = x - y * cos45 * scale_y;
@@ -275,6 +298,7 @@ interface Geo3dSvgProps {
   height?: number;
   strokeColor?: string;
   className?: string;
+  rotation?: Rotation3D;  // 可选视角旋转，如 { rotY: -135, rotX: 27 }
 }
 
 export function Geo3dSvg({
@@ -284,6 +308,7 @@ export function Geo3dSvg({
   height = 140,
   strokeColor = '#334155',
   className,
+  rotation,
 }: Geo3dSvgProps) {
   let vertices: Point3D[] = [];
   let edges: Edge[] = [];
@@ -321,7 +346,7 @@ export function Geo3dSvg({
   }
 
   // Project all vertices
-  const projected = vertices.map(v => project(v));
+  const projected = vertices.map(v => project(v, rotation));
 
   // Calculate bounding box
   const allX: number[] = [];
@@ -332,7 +357,7 @@ export function Geo3dSvg({
     allY.push(e.cy - e.ry, e.cy + e.ry);
   });
   freeLabels.forEach(fl => {
-    const [px, py] = project(fl.pos);
+    const [px, py] = project(fl.pos, rotation);
     const [ox, oy] = fl.offset ?? [0, 0];
     allX.push(px + ox); allY.push(py + oy);
   });
@@ -357,6 +382,7 @@ export function Geo3dSvg({
     hidden: !!e.hidden,
     color: e.color,
     strokeWidth: e.strokeWidth,
+    arrow: e.arrow,
   }));
 
   return (
@@ -367,6 +393,15 @@ export function Geo3dSvg({
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
+      {/* Arrow markers */}
+      <defs>
+        {projectedEdges.filter(e => e.arrow && e.color).map((e, i) => (
+          <marker key={`am-${i}`} id={`arrow-${e.color!.replace('#','')}`} markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <path d={`M0,0 L8,3 L0,6`} fill={e.color} />
+          </marker>
+        ))}
+      </defs>
+
       {/* Filled polygons (planes) */}
       {polygons.map((p, i) => {
         const pts = p.points.map(idx => projected[idx]);
@@ -421,6 +456,7 @@ export function Geo3dSvg({
           x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2}
           stroke={e.color ?? strokeColor}
           strokeWidth={e.strokeWidth ?? 1.5}
+          markerEnd={e.arrow && e.color ? `url(#arrow-${e.color.replace('#','')})` : undefined}
         />
       ))}
 
@@ -476,25 +512,33 @@ export function Geo3dSvg({
 
       {/* Free-positioned labels */}
       {freeLabels.map((fl, i) => {
-        const [px, py] = project(fl.pos);
+        const [px, py] = project(fl.pos, rotation);
         const [ox, oy] = fl.offset ?? [0, 0];
         const labelColor = fl.color ?? strokeColor;
         const dotColor = typeof fl.dot === 'string' ? fl.dot : (fl.dot ? labelColor : undefined);
         return (
           <g key={`fl-${i}`}>
             {dotColor && <circle cx={px} cy={py} r={3.5} fill={dotColor} />}
-            <text
-              x={px + ox}
-              y={py + oy}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              fontSize={fl.fontSize ?? 20}
-              fontFamily="KaTeX_Math, serif"
-              fontStyle="italic"
-              fill={labelColor}
-            >
-              {fl.text}
-            </text>
+            {fl.tex ? (
+              <foreignObject x={px + ox - 30} y={py + oy - 12} width={60} height={24} style={{ overflow: 'visible' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: labelColor, fontSize: fl.fontSize ?? 16 }}>
+                  <MathTex tex={fl.tex} />
+                </div>
+              </foreignObject>
+            ) : (
+              <text
+                x={px + ox}
+                y={py + oy}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontSize={fl.fontSize ?? 20}
+                fontFamily="KaTeX_Math, serif"
+                fontStyle="italic"
+                fill={labelColor}
+              >
+                {fl.text}
+              </text>
+            )}
           </g>
         );
       })}
