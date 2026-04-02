@@ -29,6 +29,8 @@ export interface QuizOption {
 /** 题目类型 */
 export type QuizQuestionType = 'choice' | 'blank';
 
+import type { ReactNode } from 'react';
+
 /** 题目数据（选择题 / 填空题通用） */
 export interface QuizQuestionData {
   id: string;
@@ -36,6 +38,8 @@ export interface QuizQuestionData {
   type?: QuizQuestionType;
   question: string;
   questionLatex?: string;
+  /** 混合渲染（JSX），优先于 questionLatex / question */
+  questionNode?: ReactNode;
   /** 选择题选项（type='choice' 时必填） */
   options?: QuizOption[];
   /** 标准答案 */
@@ -51,6 +55,8 @@ export interface QuizQuestionData {
   pageBreak?: boolean;
   /** 打印模式下此题选项列数（覆盖 PracticeCard 的 printOptionCols） */
   printCols?: 1 | 2 | 4;
+  /** 交互模式下此题选项列数（覆盖 PracticeCard 的 optionCols） */
+  cols?: 1 | 2 | 4;
 }
 
 /** 学习进度条目 */

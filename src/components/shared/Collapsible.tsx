@@ -70,7 +70,9 @@ export function Collapsible({
       {hasRendered.current && (
         <div
           className="px-4 pb-2 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-2"
-          style={open ? undefined : { display: 'none' }}
+          style={open
+            ? (isPrinting ? undefined : { contentVisibility: 'auto', containIntrinsicSize: 'auto 500px' } as React.CSSProperties)
+            : { display: 'none' }}
         >
           {children}
         </div>

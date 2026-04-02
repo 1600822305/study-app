@@ -1,12 +1,22 @@
-import { useState, useCallback, type ReactNode } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef, type ReactNode } from 'react';
 import { ChevronRight, RotateCcw, CheckCircle, XCircle, Send } from 'lucide-react';
 
 import { Math as MathTex } from '../Math';
 import { usePrintMode } from '@/hooks/usePrintMode';
+import { storage } from '@/lib/storage';
 
 import type { QuizQuestionData } from '@/types';
 
 // ── Helpers ──
+
+/** 渲染题目文字：questionNode > questionLatex > $...$内联公式解析 > 纯文本 */
+function renderQ(q: QuizQuestionData) {
+  if (q.questionNode) return q.questionNode;
+  if (q.questionLatex) return <MathTex tex={q.questionLatex} />;
+  const parts = q.question.split(/\$([^$]+)\$/g);
+  if (parts.length === 1) return q.question;
+  return <>{parts.map((p, i) => i % 2 === 1 ? <MathTex key={i} tex={p} /> : p)}</>;
+}
 
 function checkBlankAnswer(input: string, q: QuizQuestionData): boolean {
   const trimmed = input.trim();
@@ -20,18 +30,50 @@ function checkBlankAnswer(input: string, q: QuizQuestionData): boolean {
 interface PracticeCardProps {
   title?: string;
   questions: QuizQuestionData[];
+  /** 模块标识，提供后开启 IndexedDB 记忆功能 */
+  module?: string;
+  /** 是否打乱题目顺序，默认 true */
+  shuffle?: boolean;
   /** 打印模式下选项列数，默认 1 */
   printOptionCols?: 1 | 2 | 4;
   /** 交互模式下选项列数，默认 1（纵向堆叠） */
   optionCols?: 1 | 2 | 4;
   /** 外部提供的解析内容，key 为题目 id，优先于 explanationLatex */
   explanations?: Record<string, ReactNode>;
+  /** 打印模式下隐藏填空题的答题线，默认 false */
+  hideBlankLine?: boolean;
+}
+
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 // ── Component ──
 
-export function PracticeCard({ title = '✏️ 即时练习', questions, printOptionCols = 1, optionCols = 1, explanations }: PracticeCardProps) {
+interface PracticeSession {
+  currentIdx: number;
+  selected: string | null;
+  answered: boolean;
+  results: boolean[];
+  finished: boolean;
+}
+
+export function PracticeCard({ title = '✏️ 即时练习', questions, module: mod, shuffle = true, printOptionCols = 1, optionCols = 1, explanations, hideBlankLine = false }: PracticeCardProps) {
   const { isPrinting } = usePrintMode();
+  const sessionKey = mod ? `practice:${mod}:session` : null;
+  const restoredRef = useRef(false);
+
+  const [shuffleSeed, setShuffleSeed] = useState(0);
+  const activeQuestions = useMemo(
+    () => (shuffle ? shuffleArray(questions) : questions),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [shuffleSeed, shuffle],
+  );
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [blankInput, setBlankInput] = useState('');
@@ -39,8 +81,31 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
   const [results, setResults] = useState<boolean[]>([]);
   const [finished, setFinished] = useState(false);
 
-  const total = questions.length;
-  const current = questions[currentIdx];
+  // 在挂载时从 IndexedDB 恢复 session
+  useEffect(() => {
+    if (!sessionKey) { restoredRef.current = true; return; }
+    storage.ui.getJSON<PracticeSession | null>(sessionKey, null).then((saved) => {
+      if (saved && saved.results.length > 0) {
+        setCurrentIdx(saved.currentIdx);
+        setSelected(saved.selected);
+        setAnswered(saved.answered);
+        setResults(saved.results);
+        setFinished(saved.finished);
+      }
+      restoredRef.current = true;
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionKey]);
+
+  // 状态变化时持久化
+  useEffect(() => {
+    if (!sessionKey || !restoredRef.current) return;
+    const session: PracticeSession = { currentIdx, selected, answered, results, finished };
+    storage.ui.setJSON(sessionKey, session);
+  }, [sessionKey, currentIdx, selected, answered, results, finished]);
+
+  const total = activeQuestions.length;
+  const current = activeQuestions[currentIdx];
   const isBlank = current?.type === 'blank';
   const correctCount = results.filter(Boolean).length;
 
@@ -72,13 +137,13 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
   if (isPrinting) {
     return (
       <div className="print-practice bg-green-50 border border-green-200 rounded-xl p-2 mt-0">
-        <p className="font-bold text-green-800 mb-1">{title}</p>
+        {title && <p className="font-bold text-green-800 mb-1">{title}</p>}
         <div className="space-y-0">
           {questions.map((q, idx) => (
             <div key={idx} className="bg-white rounded-lg border border-green-100 p-2" style={{ breakInside: 'avoid' }}>
               <p className="text-gray-800 font-medium mb-1">
                 <span className="text-green-600 mr-2">{idx + 1}.</span>
-                {q.questionLatex ? <MathTex tex={q.questionLatex} /> : q.question}
+                {renderQ(q)}
               </p>
 
               {/* 选择题选项 */}
@@ -101,12 +166,13 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
               )}
 
               {/* 填空题：留出答题线 */}
-              {q.type === 'blank' && (
+              {q.type === 'blank' && !hideBlankLine && (
                 <div className="ml-4 mt-1">
                   <span className="text-gray-400">答：</span>
                   <span className="inline-block w-40 border-b-2 border-gray-300 ml-1">&nbsp;</span>
                 </div>
               )}
+
             </div>
           ))}
         </div>
@@ -127,6 +193,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
   };
 
   const handleReset = () => {
+    setShuffleSeed((s) => s + 1);
     setCurrentIdx(0);
     setSelected(null);
     setBlankInput('');
@@ -141,7 +208,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
   if (finished) {
     return (
       <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-0">
-        <p className="font-bold text-green-800 mb-3">{title}</p>
+        {title && <p className="font-bold text-green-800 mb-3">{title}</p>}
         <div className="bg-white rounded-lg border border-green-100 p-4 text-center">
           <p className="text-2xl font-bold text-green-700 mb-1">
             {correctCount === total ? '🎉 全部正确！' : `${correctCount}/${total} 题正确`}
@@ -165,7 +232,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
     <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-0">
       {/* 标题 + 进度 */}
       <div className="flex items-center justify-between mb-3">
-        <p className="font-bold text-green-800">{title}</p>
+        {title && <p className="font-bold text-green-800">{title}</p>}
         <span className="text-xs text-green-600 font-medium">{currentIdx + 1} / {total}</span>
       </div>
 
@@ -181,12 +248,12 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
       <div className="bg-white rounded-lg border border-green-100 p-4">
         {/* 题目文字 */}
         <p className="text-gray-800 font-medium mb-3">
-          {current.questionLatex ? <MathTex tex={current.questionLatex} /> : current.question}
+          {renderQ(current)}
         </p>
 
         {/* 选择题选项 */}
         {!isBlank && current.options && (
-          <div className={optionCols === 4 ? 'grid grid-cols-4 gap-1.5' : optionCols === 2 ? 'grid grid-cols-2 gap-1.5' : 'space-y-2'}>
+          <div className={(() => { const c = current.cols ?? optionCols; return c === 4 ? 'grid grid-cols-4 gap-1.5' : c === 2 ? 'grid grid-cols-2 gap-1.5' : 'space-y-2'; })()}>
             {current.options.map((opt) => {
               let cls = 'border-gray-200 bg-white text-gray-700 hover:border-green-400 hover:bg-green-50';
               if (answered) {
@@ -203,17 +270,17 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, printOp
                   key={opt.value}
                   onClick={() => handleSelect(opt.value)}
                   disabled={answered}
-                  className={`w-full text-left px-4 py-2.5 rounded-lg border-2 transition-all flex items-center gap-3 ${cls}`}
+                  className={`w-full text-left px-2.5 py-1.5 rounded-lg border-2 transition-all flex items-center gap-2 text-sm ${cls}`}
                 >
-                  <span className="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
+                  <span className="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
                     {opt.label}
                   </span>
-                  <span>{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>
+                  <span className="leading-tight">{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>
                   {answered && opt.value === current.correctAnswer && (
-                    <CheckCircle className="ml-auto text-green-500 shrink-0" size={16} />
+                    <CheckCircle className="ml-auto text-green-500 shrink-0" size={14} />
                   )}
                   {answered && opt.value === selected && !isCorrect && opt.value !== current.correctAnswer && (
-                    <XCircle className="ml-auto text-red-500 shrink-0" size={16} />
+                    <XCircle className="ml-auto text-red-500 shrink-0" size={14} />
                   )}
                 </button>
               );

@@ -126,8 +126,8 @@ const navItems: NavItem[] = [
         items: [
           { path: '/math/line', label: '8.0 直线' },
           { path: '/math/circle', label: '8.1 圆' },
-          { path: '/math/conic-basic', label: '8.2 圆锥曲线基础' },
-          { path: '/math/conic-line', label: '8.3 直线与圆锥曲线' },
+          { path: '/math/conic-basic', label: '8.2 椭圆' },
+          { path: '/math/conic-line', label: '8.3 双曲线' },
           { path: '/math/stage8-exam', label: '📝 阶段考试' },
         ],
       },

@@ -8,8 +8,9 @@
  *   4. 每个图出现 🛠 按钮，点击进入全屏调试
  *   5. 拖拽标签调整 offset，拖拽顶点调整坐标，复制数据
  */
-import { useState, useRef, useCallback, useSyncExternalStore } from 'react';
+import { useState, useRef, useCallback, useSyncExternalStore, memo } from 'react';
 import { Geo2dSvg, type Diagram2DData, type Point2D } from './Geo2dSvg';
+import { Math as MathTex } from './Math';
 
 /* ── 全局调试开关 ── */
 let _debug2d = false;
@@ -25,27 +26,50 @@ export function Geo2dDebugToggle() {
   return (
     <button
       onClick={_toggle2d}
-      className={`fixed bottom-4 right-28 z-50 px-3 py-2 rounded-full shadow-lg text-sm font-bold print:hidden transition-all ${
-        on ? 'bg-teal-500 text-white hover:bg-teal-600' : 'bg-gray-200 text-gray-500 hover:bg-gray-300 opacity-50 hover:opacity-100'
+      className={`fixed bottom-4 right-28 z-50 text-[11px] font-mono px-3 py-1.5 rounded-md shadow-md print:hidden transition-all border ${
+        on
+          ? 'bg-teal-500 text-white border-teal-400 hover:bg-teal-600'
+          : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-700 opacity-60 hover:opacity-100'
       }`}
     >
-      {on ? '📏 2D ON' : '📏'}
+      📏 {on ? 'ON' : '2D'}
     </button>
   );
 }
 
 /* ── 调试面板 ── */
-function DebugPanel({ data, strokeColor, onClose }: {
+function DebugPanel({ data, strokeColor, onClose, initW, initH }: {
   data: Diagram2DData;
   strokeColor: string;
   onClose: () => void;
+  initW: number;
+  initH: number;
 }) {
+  // coordinateSystem 坐标转换
+  const cs = data.coordinateSystem;
+  const toPixel = (p: Point2D): Point2D =>
+    cs ? [cs.origin[0] + p[0] * cs.scale[0], cs.origin[1] + p[1] * cs.scale[1]] : p;
+  const fromPixel = (p: Point2D): Point2D =>
+    cs ? [Math.round(((p[0] - cs.origin[0]) / cs.scale[0]) * 1000) / 1000, Math.round(((p[1] - cs.origin[1]) / cs.scale[1]) * 1000) / 1000] : p;
+  const scaleLen = (r: number) => cs ? Math.abs(r * cs.scale[0]) : r;
+
   const [vertices, setVertices] = useState<Point2D[]>(
-    data.vertices.map(v => [...v] as Point2D)
+    data.vertices.map(v => toPixel([...v] as Point2D))
   );
   const [labelOffsets, setLabelOffsets] = useState<[number, number][]>(
     data.freeLabels.map(fl => [...(fl.offset ?? [0, 0])] as [number, number])
   );
+  const [labelFontSizes, setLabelFontSizes] = useState<number[]>(
+    data.freeLabels.map(fl => fl.fontSize ?? 12)
+  );
+  const [previewW, setPreviewW] = useState(initW);
+  const [previewH, setPreviewH] = useState(initH);
+  const [xOff, setXOff] = useState(0);
+  const [yOff, setYOff] = useState(0);
+  const [activeLabelIdx, setActiveLabelIdx] = useState<number | null>(null);
+  // 转换 freeLabels.pos 到像素
+  const labelPositions = data.freeLabels.map(fl => toPixel(fl.pos));
+
   const svgRef = useRef<SVGSVGElement>(null);
   const dragRef = useRef<{
     type: 'label' | 'vertex';
@@ -58,14 +82,17 @@ function DebugPanel({ data, strokeColor, onClose }: {
   const allX: number[] = [];
   const allY: number[] = [];
   vertices.forEach(([x, y]) => { allX.push(x); allY.push(y); });
-  data.freeLabels.forEach((fl, i) => {
+  data.freeLabels.forEach((_fl, i) => {
     const [ox, oy] = labelOffsets[i];
-    allX.push(fl.pos[0] + ox);
-    allY.push(fl.pos[1] + oy);
+    const lp = labelPositions[i];
+    allX.push(lp[0] + ox);
+    allY.push(lp[1] + oy);
   });
   (data.circles ?? []).forEach(c => {
-    allX.push(c.center[0] - c.radius, c.center[0] + c.radius);
-    allY.push(c.center[1] - c.radius, c.center[1] + c.radius);
+    const cp = toPixel(c.center);
+    const r = scaleLen(c.radius);
+    allX.push(cp[0] - r, cp[0] + r);
+    allY.push(cp[1] - r, cp[1] + r);
   });
 
   if (allX.length === 0) return null;
@@ -99,22 +126,23 @@ function DebugPanel({ data, strokeColor, onClose }: {
       const cur = screenToSvg(ev.clientX, ev.clientY);
       const dx = cur[0] - dragRef.current.startSvg[0];
       const dy = cur[1] - dragRef.current.startSvg[1];
+      const { type, idx, startValue } = dragRef.current;
 
-      if (dragRef.current.type === 'label') {
+      if (type === 'label') {
         setLabelOffsets(prev => {
           const next = [...prev];
-          next[dragRef.current!.idx] = [
-            Math.round(dragRef.current!.startValue[0] + dx),
-            Math.round(dragRef.current!.startValue[1] + dy),
+          next[idx] = [
+            Math.round(startValue[0] + dx),
+            Math.round(startValue[1] + dy),
           ];
           return next;
         });
       } else {
         setVertices(prev => {
           const next = [...prev];
-          next[dragRef.current!.idx] = [
-            Math.round(dragRef.current!.startValue[0] + dx),
-            Math.round(dragRef.current!.startValue[1] + dy),
+          next[idx] = [
+            Math.round(startValue[0] + dx),
+            Math.round(startValue[1] + dy),
           ];
           return next;
         });
@@ -130,24 +158,34 @@ function DebugPanel({ data, strokeColor, onClose }: {
   }, [screenToSvg, labelOffsets, vertices]);
 
   // 用当前拖拽的顶点构建临时 data
+  // vertices 已是像素坐标，去掉 coordinateSystem 避免 Geo2dSvg 再转一次
   const liveData: Diagram2DData = {
     ...data,
+    coordinateSystem: undefined,
+    axes: undefined,
     vertices,
     freeLabels: data.freeLabels.map((fl, i) => ({
       ...fl,
-      // 如果 freeLabel 引用了顶点坐标，用更新后的
+      pos: toPixel(fl.pos) as Point2D,
       offset: labelOffsets[i],
+      fontSize: labelFontSizes[i],
     })),
+    circles: (data.circles ?? []).map(c => ({ ...c, center: toPixel(c.center) as Point2D, radius: scaleLen(c.radius) })),
+    arcs: (data.arcs ?? []).map(a => ({ ...a, center: toPixel(a.center) as Point2D, radius: scaleLen(a.radius) })),
+    ellipses: (data.ellipses ?? []).map(e => ({ ...e, center: toPixel(e.center) as Point2D, rx: scaleLen(e.rx), ry: cs ? Math.abs(e.ry * cs.scale[1]) : e.ry })),
+    dimensions: (data.dimensions ?? []).map(d => ({ ...d, from: toPixel(d.from) as Point2D, to: toPixel(d.to) as Point2D })),
   };
 
   const generateCopyText = () => {
     const lines: string[] = [
       `// 图: ${data.name || '未命名'}`,
+      `// 输出尺寸: width=${previewW} height=${previewH}  xOff=${xOff} yOff=${yOff}`,
       '',
       'vertices: [',
     ];
     vertices.forEach((v, i) => {
-      lines.push(`  [${v[0]}, ${v[1]}],  // ${i}`);
+      const out = cs ? fromPixel(v) : v;
+      lines.push(`  [${out[0]}, ${out[1]}],  // ${i}`);
     });
     lines.push('],');
     lines.push('');
@@ -156,7 +194,7 @@ function DebugPanel({ data, strokeColor, onClose }: {
       const [ox, oy] = labelOffsets[i];
       const parts = [`pos: [${fl.pos.join(', ')}]`, `text: '${fl.text}'`, `offset: [${ox}, ${oy}]`];
       if (fl.tex) parts.push(`tex: '${fl.tex}'`);
-      if (fl.fontSize) parts.push(`fontSize: ${fl.fontSize}`);
+      parts.push(`fontSize: ${labelFontSizes[i]}`);
       if (fl.color) parts.push(`color: '${fl.color}'`);
       if (fl.dot !== undefined && fl.dot !== false) parts.push(`dot: ${typeof fl.dot === 'string' ? `'${fl.dot}'` : fl.dot}`);
       lines.push(`  { ${parts.join(', ')} },`);
@@ -169,23 +207,100 @@ function DebugPanel({ data, strokeColor, onClose }: {
   const svgH = Math.min(500, window.innerHeight - 300);
 
   // 角弧、tick、直角用 liveData 的 vertices
-  const { edges, polygons, angleArcs = [], tickMarks = [], rightAngles = [], circles = [], arcs = [] } = liveData;
+  const { edges, polygons, angleArcs = [], tickMarks = [], rightAngles = [] } = liveData;
 
   return (
-    <div className="fixed inset-0 z-50 bg-white flex flex-col print:hidden">
+    <div className="fixed inset-0 z-[100] bg-white flex flex-col print:hidden">
       {/* 顶栏 */}
-      <div className="flex justify-between items-center px-4 py-2 border-b">
-        <h3 className="font-bold text-lg">📏 Geo2D 调试</h3>
-        <div className="flex items-center gap-4 text-sm">
-          <span className="font-mono text-gray-500">拖拽顶点/标签调整坐标</span>
+      <div className="h-10 shrink-0 flex items-center justify-between px-4 border-b border-slate-700 bg-slate-900">
+        <div className="flex items-center gap-2.5">
+          <span className="text-slate-300 text-xs font-mono font-semibold tracking-wide">Geo2D</span>
+          {data.name && (
+            <span className="text-[11px] font-mono bg-slate-700 text-slate-200 px-2 py-0.5 rounded">
+              {data.name}
+            </span>
+          )}
         </div>
-        <button onClick={onClose} className="bg-red-500 text-white px-3 py-1 rounded text-sm font-bold">✕ 关闭</button>
+        <span className="text-[11px] text-slate-500 hidden sm:block">拖拽顶点坐标 / 右侧点击标签激活后拖拽</span>
+        <button
+          onClick={onClose}
+          className="text-slate-400 hover:text-white text-xs px-3 py-1 rounded border border-slate-700 hover:border-slate-500 hover:bg-slate-700 transition-colors"
+        >
+          关闭
+        </button>
       </div>
 
       {/* SVG 区域 */}
-      <div className="flex-1 flex items-center justify-center bg-gray-50 overflow-hidden">
+      <div className="flex-1 flex items-center justify-center bg-white overflow-hidden relative">
+        {/* 尺寸预览浮层 - 左上角 */}
+        <div className="absolute top-2 left-2 z-10 bg-white border border-slate-200 rounded-lg shadow-md p-2 text-xs" style={{ minWidth: 200 }}>
+          <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-1.5">输出尺寸预览</p>
+          <div className="grid grid-cols-2 gap-x-2 gap-y-1 mb-2">
+            {([['X偏移', xOff, setXOff], ['Y偏移', yOff, setYOff], ['宽W', previewW, setPreviewW], ['高H', previewH, setPreviewH]] as const).map(([label, val, setter]) => (
+              <div key={label} className="flex items-center gap-1">
+                <label className="text-slate-400 w-10 shrink-0">{label}</label>
+                <input type="number" value={val} min={-200} max={600}
+                  onChange={e => (setter as (v: number) => void)(Number(e.target.value))}
+                  className="w-14 border border-slate-200 rounded px-1 py-0.5 font-mono text-xs text-slate-700" />
+              </div>
+            ))}
+          </div>
+          <div className="border border-dashed border-slate-300 inline-block overflow-hidden" style={{ width: previewW, height: previewH }}>
+            <div style={{ position: 'relative', left: -xOff, top: -yOff }}>
+              <Geo2dSvg data={liveData} width={previewW + xOff} height={previewH + yOff} strokeColor={strokeColor} />
+            </div>
+          </div>
+        </div>
+        {/* 标签面板浮层 - 右上角 */}
+        <div className="absolute top-2 right-2 z-10 bg-white border border-slate-200 rounded-lg shadow-md p-2 text-xs" style={{ minWidth: 180 }}>
+          <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-1.5">标签 <span className="normal-case text-slate-300">点击激活可拖</span></p>
+          <div className="space-y-1">
+            {data.freeLabels.map((fl, i) => {
+              const [ox, oy] = labelOffsets[i];
+              const isActive = activeLabelIdx === i;
+              return (
+                <div key={i}
+                  onClick={() => setActiveLabelIdx(isActive ? null : i)}
+                  className={`flex items-center gap-1.5 rounded px-1.5 py-1 cursor-pointer transition-colors ${
+                    isActive ? 'bg-blue-50 ring-1 ring-blue-300' : 'hover:bg-slate-50'
+                  }`}
+                >
+                  <span className={`w-4 h-4 rounded text-[10px] font-bold flex items-center justify-center shrink-0 ${
+                    isActive ? 'bg-blue-500 text-white' : 'bg-blue-50 text-blue-500'
+                  }`}>{i}</span>
+                  <span className={`flex-1 truncate font-mono text-[11px] ${
+                    isActive ? 'text-blue-700 font-semibold' : 'text-slate-600'
+                  }`}>{fl.tex ?? fl.text ?? '?'}</span>
+                  <span className="text-[10px] font-mono text-slate-400">[{ox},{oy}]</span>
+                  <div className="flex items-center gap-0.5" onClick={e => e.stopPropagation()}>
+                    <button onClick={() => setLabelFontSizes(prev => { const n = [...prev]; n[i] = Math.max(6, n[i] - 1); return n; })}
+                      className="w-4 h-4 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-[10px] font-bold flex items-center justify-center">−</button>
+                    <span className="w-5 text-center font-mono text-[10px] text-slate-700">{labelFontSizes[i]}</span>
+                    <button onClick={() => setLabelFontSizes(prev => { const n = [...prev]; n[i] = n[i] + 1; return n; })}
+                      className="w-4 h-4 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-[10px] font-bold flex items-center justify-center">+</button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <svg ref={svgRef} width={svgW} height={svgH} viewBox={viewBox} xmlns="http://www.w3.org/2000/svg">
 
+          {/* 箭头 marker */}
+          <defs>
+            {Array.from(new Set(edges.filter(e => e.arrow).map(e => e.color ?? strokeColor))).map(color => (
+              <marker
+                key={`dbg-arrow-${color}`}
+                id={`dbg-arrow-${color.replace('#', '')}`}
+                viewBox="0 0 10 6"
+                refX="10" refY="3"
+                markerWidth="8" markerHeight="6"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 3 L 0 6 Z" fill={color} />
+              </marker>
+            ))}
+          </defs>
           {/* 网格（辅助） */}
           <defs>
             <pattern id="grid2d" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -194,18 +309,77 @@ function DebugPanel({ data, strokeColor, onClose }: {
           </defs>
           <rect x={xMin} y={yMin} width={vbW} height={vbH} fill="url(#grid2d)" />
 
+          {/* 坐标轴（有 coordinateSystem + axes 时绘制） */}
+          {cs && data.axes && (() => {
+            const ax = data.axes;
+            const axColor = ax.color ?? '#334155';
+            const step = ax.step ?? 1;
+            const showNumbers = ax.showNumbers !== false;
+            const [ox, oy] = cs.origin;
+            const [sx, sy] = cs.scale;
+            const xMinPx = ox + ax.xRange[0] * sx - 8;
+            const xMaxPx = ox + ax.xRange[1] * sx + 8;
+            const yMinPx2 = oy + ax.yRange[1] * sy - 8;
+            const yMaxPx = oy + ax.yRange[0] * sy + 8;
+            const xTicks: number[] = [];
+            for (let v = Math.ceil(ax.xRange[0] / step) * step; v <= ax.xRange[1]; v += step) {
+              if (Math.abs(v) > 0.001) xTicks.push(v);
+            }
+            const yTicks: number[] = [];
+            for (let v = Math.ceil(ax.yRange[0] / step) * step; v <= ax.yRange[1]; v += step) {
+              if (Math.abs(v) > 0.001) yTicks.push(v);
+            }
+            return (
+              <g className="debug-axes" opacity={0.5}>
+                <line x1={xMinPx} y1={oy} x2={xMaxPx} y2={oy} stroke={axColor} strokeWidth={1} />
+                <line x1={ox} y1={yMaxPx} x2={ox} y2={yMinPx2} stroke={axColor} strokeWidth={1} />
+                {xTicks.map(v => {
+                  const px = ox + v * sx;
+                  return <g key={`dxt-${v}`}><line x1={px} y1={oy - 3} x2={px} y2={oy + 3} stroke={axColor} strokeWidth={0.8} />
+                    {showNumbers && <text x={px} y={oy + 12} textAnchor="middle" fontSize={8} fill={axColor}>{v}</text>}</g>;
+                })}
+                {yTicks.map(v => {
+                  const py = oy + v * sy;
+                  return <g key={`dyt-${v}`}><line x1={ox - 3} y1={py} x2={ox + 3} y2={py} stroke={axColor} strokeWidth={0.8} />
+                    {showNumbers && <text x={ox - 6} y={py + 3} textAnchor="end" fontSize={8} fill={axColor}>{v}</text>}</g>;
+                })}
+                <text x={xMaxPx + 2} y={oy + 12} fontSize={9} fill={axColor} fontStyle="italic">x</text>
+                <text x={ox + 6} y={yMinPx2 - 2} fontSize={9} fill={axColor} fontStyle="italic">y</text>
+                <text x={ox - 8} y={oy + 12} fontSize={8} fill={axColor} fontStyle="italic">O</text>
+              </g>
+            );
+          })()}
+
+          {/* 椭圆 */}
+          {(data.ellipses ?? []).map((e, i) => {
+            const cp = toPixel(e.center);
+            const rx = scaleLen(e.rx);
+            const ry = cs ? Math.abs(e.ry * cs.scale[1]) : e.ry;
+            return (
+              <ellipse key={`el-${i}`} cx={cp[0]} cy={cp[1]} rx={rx} ry={ry}
+                fill={e.fill ?? 'none'} fillOpacity={e.fillOpacity ?? 1}
+                stroke={e.color ?? strokeColor} strokeWidth={e.strokeWidth ?? 2}
+                strokeDasharray={e.dashed ? '5 4' : undefined} />
+            );
+          })}
+
           {/* 圆 */}
-          {circles.map((c, i) => (
-            <circle key={`ci-${i}`} cx={c.center[0]} cy={c.center[1]} r={c.radius}
-              fill={c.fill ?? 'none'} fillOpacity={c.fillOpacity ?? 1}
-              stroke={c.color ?? strokeColor} strokeWidth={c.strokeWidth ?? 2}
-              strokeDasharray={c.dashed ? '5 4' : undefined} />
-          ))}
+          {(data.circles ?? []).map((c, i) => {
+            const cp = toPixel(c.center);
+            const r = scaleLen(c.radius);
+            return (
+              <circle key={`ci-${i}`} cx={cp[0]} cy={cp[1]} r={r}
+                fill={c.fill ?? 'none'} fillOpacity={c.fillOpacity ?? 1}
+                stroke={c.color ?? strokeColor} strokeWidth={c.strokeWidth ?? 2}
+                strokeDasharray={c.dashed ? '5 4' : undefined} />
+            );
+          })}
 
           {/* 弧/扇形 */}
-          {arcs.map((a, i) => {
-            const [cx, cy] = a.center;
-            const r = a.radius;
+          {(data.arcs ?? []).map((a, i) => {
+            const cp = toPixel(a.center);
+            const [cx, cy] = cp;
+            const r = scaleLen(a.radius);
             const startRad = -(a.startAngle * Math.PI) / 180;
             const endRad = -(a.endAngle * Math.PI) / 180;
             const x1 = cx + r * Math.cos(startRad);
@@ -234,10 +408,14 @@ function DebugPanel({ data, strokeColor, onClose }: {
           {edges.map((e, i) => {
             const [x1, y1] = vertices[e.from];
             const [x2, y2] = vertices[e.to];
+            const color = e.color ?? strokeColor;
+            const mid = `dbg-arrow-${color.replace('#', '')}`;
             return (
               <line key={`e-${i}`} x1={x1} y1={y1} x2={x2} y2={y2}
-                stroke={e.color ?? strokeColor} strokeWidth={e.strokeWidth ?? 2}
-                strokeDasharray={e.dashed ? '5 4' : undefined} />
+                stroke={color} strokeWidth={e.strokeWidth ?? 2}
+                strokeDasharray={e.dashed ? '5 4' : undefined}
+                markerEnd={(e.arrow === 'end' || e.arrow === 'both') ? `url(#${mid})` : undefined}
+                markerStart={(e.arrow === 'start' || e.arrow === 'both') ? `url(#${mid})` : undefined} />
             );
           })}
 
@@ -316,21 +494,39 @@ function DebugPanel({ data, strokeColor, onClose }: {
             );
           })}
 
-          {/* 顶点 + 索引 + 拖拽手柄 */}
-          {vertices.map(([px, py], i) => (
-            <g key={`vd-${i}`}>
-              <circle cx={px} cy={py} r={3} fill={strokeColor} />
-              <text x={px + 4} y={py - 8} fontSize={9} fill="#ef4444" fontFamily="monospace" fontWeight="bold">{i}</text>
-              {/* 拖拽手柄 */}
-              <circle cx={px} cy={py} r={8} fill="rgba(239,68,68,0.1)" stroke="#ef4444"
-                strokeWidth={1.5} strokeDasharray="3 2" style={{ cursor: 'grab' }}
-                onMouseDown={(e) => handleMouseDown('vertex', i, e)} />
-            </g>
+          {/* 标注线 */}
+          {(data.dimensions ?? []).map((dim, i) => {
+            const [fx, fy] = toPixel(dim.from);
+            const [tx, ty] = toPixel(dim.to);
+            const color = dim.color ?? '#6b7280';
+            const mx = (fx + tx) / 2;
+            const my = (fy + ty) / 2;
+            const off = dim.offset ?? 0;
+            const dx = tx - fx, dy = ty - fy;
+            const len = Math.sqrt(dx * dx + dy * dy);
+            const nx = len > 0 ? (-dy / len) * off : 0;
+            const ny = len > 0 ? (dx / len) * off : 0;
+            return (
+              <g key={`dim-${i}`}>
+                <line x1={fx + nx} y1={fy + ny} x2={tx + nx} y2={ty + ny} stroke={color} strokeWidth={1.2} strokeDasharray="4 3" />
+                <line x1={fx} y1={fy} x2={fx + nx} y2={fy + ny} stroke={color} strokeWidth={0.8} />
+                <line x1={tx} y1={ty} x2={tx + nx} y2={ty + ny} stroke={color} strokeWidth={0.8} />
+                {dim.label && <text x={mx + nx} y={my + ny} textAnchor="middle" dominantBaseline="middle" fontSize={13} fill={color} fontFamily="KaTeX_Math, serif" fontStyle="italic">{dim.label}</text>}
+              </g>
+            );
+          })}
+
+          {/* 自由路径 */}
+          {(data.paths ?? []).map((p, i) => (
+            <path key={`fp-${i}`} d={p.d} fill={p.fill ?? 'none'} fillOpacity={p.fillOpacity ?? 1}
+              stroke={p.color ?? strokeColor} strokeWidth={p.strokeWidth ?? 2}
+              strokeDasharray={p.dashed ? '5 4' : undefined} />
           ))}
 
-          {/* freeLabels + 拖拽手柄 */}
+          {/* 非激活标签（底层） */}
           {data.freeLabels.map((fl, i) => {
-            const [px, py] = fl.pos;
+            if (i === activeLabelIdx) return null;
+            const [px, py] = labelPositions[i];
             const [ox, oy] = labelOffsets[i];
             const labelColor = fl.color ?? strokeColor;
             const dotColor = typeof fl.dot === 'string' ? fl.dot : (fl.dot ? labelColor : undefined);
@@ -339,43 +535,101 @@ function DebugPanel({ data, strokeColor, onClose }: {
                 <line x1={px} y1={py} x2={px + ox} y2={py + oy} stroke="#94a3b8" strokeWidth={0.5} strokeDasharray="2 2" />
                 {dotColor && <circle cx={px} cy={py} r={3.5} fill={dotColor} />}
                 {fl.tex ? (
-                  <text x={px + ox} y={py + oy} textAnchor="middle" dominantBaseline="middle"
-                    fontSize={fl.fontSize ?? 18} fontFamily="KaTeX_Math, serif" fontStyle="italic" fontWeight="bold"
-                    fill={labelColor}>{fl.tex}</text>
+                  <foreignObject x={px + ox - 60} y={py + oy - 15} width={120} height={30} style={{ overflow: 'visible' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', fontSize: labelFontSizes[i] ?? 16, color: labelColor, whiteSpace: 'nowrap' }}>
+                      <MathTex tex={fl.tex} />
+                    </div>
+                  </foreignObject>
                 ) : (
                   <text x={px + ox} y={py + oy} textAnchor="middle" dominantBaseline="middle"
                     fontSize={fl.fontSize ?? 18} fontFamily="serif" fontStyle="italic" fontWeight="bold"
                     fill={labelColor}>{fl.text}</text>
                 )}
-                <circle cx={px + ox} cy={py + oy} r={8} fill="rgba(59,130,246,0.1)" stroke="#3b82f6"
-                  strokeWidth={1.5} strokeDasharray="3 2" style={{ cursor: 'grab' }}
-                  onMouseDown={(e) => handleMouseDown('label', i, e)} />
+                <circle cx={px + ox} cy={py + oy} r={8} fill="rgba(59,130,246,0.08)" stroke="#3b82f6"
+                  strokeWidth={1} strokeDasharray="3 2" style={{ cursor: 'default', pointerEvents: 'none' }} />
                 <text x={px + ox + 12} y={py + oy + 4} fontSize={7} fill="#6b7280" fontFamily="monospace">
                   [{ox},{oy}]
                 </text>
               </g>
             );
           })}
+
+          {/* 顶点手柄（中层） */}
+          {vertices.map(([px, py], i) => (
+            <g key={`vd-${i}`}>
+              <circle cx={px} cy={py} r={3} fill={strokeColor} />
+              <text x={px + 4} y={py - 8} fontSize={9} fill="#ef4444" fontFamily="monospace" fontWeight="bold">{i}</text>
+              <circle cx={px} cy={py} r={8} fill="rgba(239,68,68,0.1)" stroke="#ef4444"
+                strokeWidth={1.5} strokeDasharray="3 2" style={{ cursor: 'grab' }}
+                onMouseDown={(e) => handleMouseDown('vertex', i, e)} />
+            </g>
+          ))}
+
+          {/* 激活标签（最顶层，始终可拖） */}
+          {activeLabelIdx !== null && (() => {
+            const i = activeLabelIdx;
+            const fl = data.freeLabels[i];
+            const [px, py] = labelPositions[i];
+            const [ox, oy] = labelOffsets[i];
+            const labelColor = fl.color ?? strokeColor;
+            const dotColor = typeof fl.dot === 'string' ? fl.dot : (fl.dot ? labelColor : undefined);
+            return (
+              <g key={`fl-active-${i}`}>
+                <line x1={px} y1={py} x2={px + ox} y2={py + oy} stroke="#3b82f6" strokeWidth={1} strokeDasharray="2 2" />
+                {dotColor && <circle cx={px} cy={py} r={3.5} fill={dotColor} />}
+                {fl.tex ? (
+                  <foreignObject x={px + ox - 60} y={py + oy - 15} width={120} height={30} style={{ overflow: 'visible' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', fontSize: labelFontSizes[i] ?? 16, color: labelColor, whiteSpace: 'nowrap' }}>
+                      <MathTex tex={fl.tex} />
+                    </div>
+                  </foreignObject>
+                ) : (
+                  <text x={px + ox} y={py + oy} textAnchor="middle" dominantBaseline="middle"
+                    fontSize={fl.fontSize ?? 18} fontFamily="serif" fontStyle="italic" fontWeight="bold"
+                    fill={labelColor}>{fl.text}</text>
+                )}
+                <circle cx={px + ox} cy={py + oy} r={10} fill="rgba(59,130,246,0.2)" stroke="#3b82f6"
+                  strokeWidth={2} style={{ cursor: 'grab' }}
+                  onMouseDown={(e) => handleMouseDown('label', i, e)} />
+                <text x={px + ox + 13} y={py + oy + 4} fontSize={7} fill="#3b82f6" fontFamily="monospace" fontWeight="bold">
+                  [{ox},{oy}]
+                </text>
+              </g>
+            );
+          })()}
         </svg>
       </div>
 
       {/* 底部面板 */}
-      <div className="border-t flex" style={{ height: '25vh' }}>
-        <div className="flex-1 bg-gray-900 text-green-400 font-mono text-xs p-3 overflow-auto">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-gray-500">vertices + freeLabels 坐标</span>
-            <button onClick={() => navigator.clipboard.writeText(generateCopyText())}
-              className="bg-green-700 text-white px-2 py-0.5 rounded text-xs hover:bg-green-600">📋 复制</button>
+      <div className="border-t border-slate-200 flex shrink-0" style={{ height: '28vh', minHeight: 160 }}>
+        {/* 左：代码输出 */}
+        <div className="flex-1 bg-slate-950 text-emerald-400 font-mono text-xs p-3 overflow-auto flex flex-col gap-2">
+          <div className="flex items-center justify-between shrink-0">
+            <span className="text-[10px] uppercase tracking-widest text-slate-500">output</span>
+            <button
+              onClick={() => navigator.clipboard.writeText(generateCopyText())}
+              className="text-[10px] px-2.5 py-1 rounded border border-emerald-800 bg-emerald-950 text-emerald-400 hover:bg-emerald-900 hover:text-emerald-300 transition-colors"
+            >
+              复制
+            </button>
           </div>
-          <pre className="whitespace-pre-wrap select-all">{generateCopyText()}</pre>
+          <pre className="whitespace-pre-wrap select-all leading-relaxed">{generateCopyText()}</pre>
         </div>
-        <div className="w-72 border-l bg-gray-50 p-3 text-xs overflow-auto">
-          <p className="font-bold text-gray-700 mb-2">顶点坐标（红色数字 = 索引，可拖拽）</p>
-          {vertices.map((v, i) => (
-            <p key={i} className="text-gray-600 font-mono">
-              <span className="text-red-500 font-bold">{i}</span>: [{v[0]}, {v[1]}]
-            </p>
-          ))}
+        {/* 右：控制面板 */}
+        <div className="w-60 border-l border-slate-100 bg-white flex flex-col overflow-hidden text-xs">
+          {/* 顶点 */}
+          <div className="px-3 pt-3 pb-2 border-b border-slate-100 shrink-0">
+            <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-2">顶点</p>
+            <div className="space-y-0.5">
+              {vertices.map((v, i) => (
+                <div key={i} className="flex items-center gap-2 font-mono">
+                  <span className="w-4 h-4 rounded text-[10px] font-bold bg-red-50 text-red-500 flex items-center justify-center shrink-0">{i}</span>
+                  <span className="text-slate-500">[{v[0]}, {v[1]}]</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* 字号（保留在底部面板供备用） */}
         </div>
       </div>
     </div>
@@ -387,20 +641,22 @@ interface DebugGeo2dSvgProps {
   data: Diagram2DData;
   width?: number;
   height?: number;
+  xOff?: number;
+  yOff?: number;
   strokeColor?: string;
   className?: string;
 }
 
-export function DebugGeo2dSvg({ data, width = 160, height = 140, strokeColor = '#334155', className }: DebugGeo2dSvgProps) {
+export const DebugGeo2dSvg = memo(function DebugGeo2dSvg({ data, width = 160, height = 140, xOff = 0, yOff = 0, strokeColor = '#334155', className }: DebugGeo2dSvgProps) {
   const globalOn = useGeo2dDebug();
   const [debug, setDebug] = useState(false);
 
   if (debug) {
-    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} />;
+    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initW={width} initH={height} />;
   }
 
   return (
-    <div className="relative inline-block">
+    <div className={`relative inline-block${globalOn ? ' outline outline-1 outline-dashed outline-teal-400' : ''}`}>
       {globalOn && (
         <button
           onClick={() => setDebug(true)}
@@ -409,7 +665,7 @@ export function DebugGeo2dSvg({ data, width = 160, height = 140, strokeColor = '
           🛠
         </button>
       )}
-      <Geo2dSvg data={data} width={width} height={height} strokeColor={strokeColor} className={className} />
+      <Geo2dSvg data={data} width={width} height={height} xOff={xOff} yOff={yOff} strokeColor={strokeColor} className={className} />
     </div>
   );
-}
+});
