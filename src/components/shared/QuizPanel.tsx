@@ -95,7 +95,7 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
     storage.ui.getJSON<QuizSession | null>(sessionKey, null).then((saved) => {
       if (saved && saved.answers.length > 0) {
         if (saved.order?.length === questions.length) setOrder(saved.order);
-        setCurrentIdx(saved.currentIdx);
+        setCurrentIdx(Math.min(saved.currentIdx, questions.length - 1));
         setAnswers(saved.answers);
         setSelected(saved.selected);
         setBlankInput(saved.blankInput ?? '');
@@ -190,7 +190,7 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
                 } ml-4 mt-1.5 text-base`}>
                   {q.options.map((opt) => (
                     <div key={opt.value} className="flex items-center gap-1 text-gray-800 font-medium">
-                      <span className="w-3.5 h-3.5 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-500 shrink-0" style={{ fontSize: '9px' }}>
+                      <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center font-bold text-gray-800 shrink-0" style={{ fontSize: '11px' }}>
                         {opt.label}
                       </span>
                       <span>{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>
@@ -423,7 +423,7 @@ export function QuizPanel({ module, questions, title = '自测', description, sh
                   className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all duration-200 cursor-pointer flex items-center gap-3 ${borderColor} ${bgColor}`}
                   disabled={answered}
                 >
-                  <span className="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-bold text-gray-500 shrink-0">
+                  <span className="w-7 h-7 rounded-full border-2 border-gray-300 flex items-center justify-center text-sm font-bold text-gray-800 shrink-0">
                     {opt.label}
                   </span>
                   <span className={textColor}>

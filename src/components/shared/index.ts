@@ -8,8 +8,11 @@ export { SubtitlePanel } from './SubtitlePanel';
 export { PageHeader, PracticeCard, CalloutCard, LessonLayout, BigQuestionCard } from './lesson';
 export { ExportButton, PageBreak } from './export';
 export { ExamPaper } from './ExamPaper';
-export { Geo2dSvg } from './Geo2dSvg';
-export { DebugGeo2dSvg, Geo2dDebugToggle, useGeo2dDebug } from './Geo2dDebug';
+export { Geo2dSvg } from './geo2d/Geo2dSvg';
+export { DebugGeo2dSvg, Geo2dDebugToggle, useGeo2dDebug } from './geo2d/Geo2dDebug';
 export { Geo3dSvg } from './Geo3dSvg';
 export { DebugGeo3dSvg, Geo3dDebugToggle, useGeo3dDebug } from './Geo3dDebug';
+export { GeoDebugToggle } from './GeoDebugToggle';
+export { TreeDiagram, DebugTreeDiagram, HTreeDiagram } from './TreeDiagram';
+export type { TreeNodeData, TreeNodeVariant, TreeLayoutConfig } from './TreeDiagram';
 // AIChatPanel 已废弃，使用 ChatPanel (features/chat/ChatPanel.tsx)

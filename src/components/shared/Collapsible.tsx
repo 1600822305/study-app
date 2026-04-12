@@ -15,6 +15,8 @@ interface CollapsibleProps {
   storageKey?: string;
   /** Extra element rendered after the title (e.g. SpeakButton) */
   headerExtra?: React.ReactNode;
+  /** Extra class for the title <span> */
+  titleClassName?: string;
 }
 
 export function Collapsible({
@@ -24,6 +26,7 @@ export function Collapsible({
   variant = 'default',
   storageKey,
   headerExtra,
+  titleClassName,
 }: CollapsibleProps) {
   const [localOpen, setLocalOpen] = useState(defaultOpen);
   const [persistedOpen, setPersistedOpen] = useUIState(
@@ -59,7 +62,7 @@ export function Collapsible({
           className="flex-1 flex items-center gap-2 text-left font-medium cursor-pointer hover:opacity-80 transition-opacity"
         >
           {open ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
-          <span className={titleStyles[variant]}>{title}</span>
+          <span className={`${titleStyles[variant]} ${titleClassName || ''}`}>{title}</span>
         </button>
         {headerExtra && (
           <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
@@ -69,10 +72,8 @@ export function Collapsible({
       </div>
       {hasRendered.current && (
         <div
-          className="px-4 pb-2 text-gray-700 text-sm leading-relaxed border-t border-gray-100 pt-2"
-          style={open
-            ? (isPrinting ? undefined : { contentVisibility: 'auto', containIntrinsicSize: 'auto 500px' } as React.CSSProperties)
-            : { display: 'none' }}
+          className="px-4 pb-2 text-gray-700 leading-relaxed border-t border-gray-100 pt-2"
+          style={open ? undefined : { display: 'none' }}
         >
           {children}
         </div>

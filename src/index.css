@@ -329,7 +329,15 @@ math-field::part(virtual-keyboard-toggle) {
   .border { border-width: 1px !important; }
 
   /* ═══════════════════════════════════════
-     9. KaTeX 公式
+     9. SVG 图表 — 按比例缩小
+     屏幕 18px → 打印 11pt(≈14.67px)，缩放比 ≈ 0.82
+     ═══════════════════════════════════════ */
+  .geo-diagram {
+    zoom: 0.9;
+  }
+
+  /* ═══════════════════════════════════════
+     10. KaTeX 公式
      ═══════════════════════════════════════ */
   .katex {
     font-size: 1.1em !important;
@@ -652,6 +660,11 @@ html.print-preview-mode .grid button {
 /* 渐变 → 纯色 */
 html.print-preview-mode .bg-gradient-to-r {
   background: #eff6ff !important;
+}
+
+/* SVG 图表缩小 */
+html.print-preview-mode .geo-diagram {
+  zoom: 0.9;
 }
 
 /* KaTeX */

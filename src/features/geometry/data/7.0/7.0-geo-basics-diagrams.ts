@@ -4,9 +4,9 @@ import type { Diagram2DData } from '@/components/shared/Geo2dSvg';
 export const basicTriangleDiagram: Diagram2DData = {
   name: '认识三角形',
   vertices: [
-    [70, 10],   // 0: A (顶)
-    [10, 95],   // 1: B (左下)
-    [130, 95],  // 2: C (右下)
+    [60, 18],   // 0: A (顶)
+    [20, 82],   // 1: B (左下)
+    [105, 82],  // 2: C (右下)
   ],
   edges: [
     { from: 0, to: 1 },
@@ -15,9 +15,9 @@ export const basicTriangleDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [70, 10], text: 'A', offset: [0, -12], dot: true },
-    { pos: [10, 95], text: 'B', offset: [-12, 8], dot: true },
-    { pos: [130, 95], text: 'C', offset: [12, 8], dot: true },
+    { pos: [60, 18], text: 'A', offset: [0, -12], dot: true },
+    { pos: [20, 82], text: 'B', offset: [-6, 12], dot: true },
+    { pos: [105, 82], text: 'C', offset: [8, 8], dot: true },
   ],
   angleArcs: [
     { vertex: 0, from: 1, to: 2, radius: 14, color: '#6b7280' },
@@ -30,10 +30,10 @@ export const basicTriangleDiagram: Diagram2DData = {
 export const triangleHeightDiagram: Diagram2DData = {
   name: '三角形的高',
   vertices: [
-    [65, 10],   // 0: A (顶)
-    [10, 95],   // 1: B (左下)
-    [120, 95],  // 2: C (右下)
-    [65, 95],   // 3: H (高的垂足)
+    [59, 9],    // 0: A (顶)
+    [9, 86],    // 1: B (左下)
+    [108, 86],  // 2: C (右下)
+    [59, 86],   // 3: H (高的垂足)
   ],
   edges: [
     { from: 0, to: 1 },
@@ -43,11 +43,11 @@ export const triangleHeightDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [65, 95], text: '底', offset: [0, 15], fontSize: 14, color: '#334155' },
-    { pos: [65, 52], text: '', tex: 'h', offset: [12, 0], fontSize: 14, color: '#3b82f6' },
+    { pos: [59, 86], text: '底', offset: [0, 14], fontSize: 13, color: '#334155' },
+    { pos: [59, 47], text: '', tex: 'h', offset: [11, 0], fontSize: 13, color: '#3b82f6' },
   ],
   rightAngles: [
-    { vertex: 3, from: 0, to: 2, size: 10, color: '#3b82f6' },
+    { vertex: 3, from: 0, to: 2, size: 9, color: '#3b82f6' },
   ],
 };
 
@@ -55,9 +55,9 @@ export const triangleHeightDiagram: Diagram2DData = {
 export const rightTriangleAreaDiagram: Diagram2DData = {
   name: '直角三角形面积',
   vertices: [
-    [15, 85],   // 0: 直角顶点 (左下)
-    [15, 15],   // 1: 上
-    [105, 85],  // 2: 右
+    [24, 69],   // 0: 直角顶点 (左下)
+    [24, 12],   // 1: 上
+    [97, 69],   // 2: 右
   ],
   edges: [
     { from: 0, to: 1, color: '#dc2626' },
@@ -68,11 +68,11 @@ export const rightTriangleAreaDiagram: Diagram2DData = {
     { points: [0, 1, 2], fill: '#fef2f2', opacity: 0.6 },
   ],
   freeLabels: [
-    { pos: [15, 50], text: '', tex: 'a', offset: [-14, 0], fontSize: 16, color: '#dc2626' },
-    { pos: [60, 85], text: '', tex: 'b', offset: [0, 14], fontSize: 16, color: '#dc2626' },
+    { pos: [24, 41], text: '', tex: 'a', offset: [-12, 0], fontSize: 13, color: '#dc2626' },
+    { pos: [61, 69], text: '', tex: 'b', offset: [0, 12], fontSize: 13, color: '#dc2626' },
   ],
   rightAngles: [
-    { vertex: 0, from: 1, to: 2, size: 12, color: '#dc2626' },
+    { vertex: 0, from: 1, to: 2, size: 10, color: '#dc2626' },
   ],
 };
 
@@ -80,9 +80,9 @@ export const rightTriangleAreaDiagram: Diagram2DData = {
 export const pythagorasDiagram: Diagram2DData = {
   name: '勾股定理',
   vertices: [
-    [15, 85],   // 0: 直角顶点 (左下)
-    [15, 15],   // 1: 上
-    [105, 85],  // 2: 右
+    [30, 85],   // 0: 直角顶点 (左下)
+    [30, 15],   // 1: 上
+    [120, 85],  // 2: 右
   ],
   edges: [
     { from: 0, to: 1, color: '#3b82f6' },
@@ -91,9 +91,9 @@ export const pythagorasDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [15, 50], text: 'a', offset: [-12, 0], fontSize: 15, color: '#3b82f6' },
-    { pos: [60, 85], text: 'b', offset: [0, 14], fontSize: 15, color: '#16a34a' },
-    { pos: [60, 50], text: 'c', offset: [12, -5], fontSize: 15, color: '#dc2626' },
+    { pos: [30, 50], text: 'a', offset: [-14, 0], fontSize: 15, color: '#3b82f6' },
+    { pos: [75, 85], text: 'b', offset: [0, 14], fontSize: 15, color: '#16a34a' },
+    { pos: [75, 50], text: 'c', offset: [12, -5], fontSize: 15, color: '#dc2626' },
   ],
   rightAngles: [
     { vertex: 0, from: 1, to: 2, size: 12 },
@@ -220,13 +220,13 @@ export const equilateralDiagram: Diagram2DData = {
 export const midlineDiagram: Diagram2DData = {
   name: '中位线定理',
   vertices: [
-    [100, 8],   // 0: A (顶)
-    [20, 120],  // 1: B (左下)
-    [140, 120], // 2: C (右下)
-    [60, 64],   // 3: D (AB 中点)
-    [120, 64],  // 4: E (AC 中点)
-    [80, 120],  // 5: F (BC 中点)
-    [180, 64],  // 6: G (DE 延长，EG = DE)
+    [72, 22],   // 0: A (顶)
+    [22, 89],   // 1: B (左下)
+    [96, 89],   // 2: C (右下)
+    [47, 55],   // 3: D (AB 中点)
+    [84, 55],   // 4: E (AC 中点)
+    [59, 89],   // 5: F (BC 中点)
+    [121, 55],  // 6: G (DE 延长，EG = DE)
   ],
   edges: [
     /* 蓝色：原三角形 ABC */
@@ -243,13 +243,13 @@ export const midlineDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [100, 8], text: 'A', offset: [0, -12], dot: true },
-    { pos: [20, 120], text: 'B', offset: [-12, 8], dot: true },
-    { pos: [140, 120], text: 'C', offset: [12, 8], dot: true },
-    { pos: [60, 64], text: 'D', offset: [-14, -4], dot: '#2563eb', color: '#2563eb' },
-    { pos: [120, 64], text: 'E', offset: [0, -12], dot: '#2563eb', color: '#2563eb' },
-    { pos: [80, 120], text: 'F', offset: [0, 14], dot: '#dc2626', color: '#dc2626' },
-    { pos: [180, 64], text: 'G', offset: [12, -4], dot: '#dc2626', color: '#dc2626' },
+    { pos: [72, 22], text: 'A', offset: [0, -10], fontSize: 12, dot: true },
+    { pos: [22, 89], text: 'B', offset: [-10, 7], fontSize: 12, dot: true },
+    { pos: [96, 89], text: 'C', offset: [8, 7], fontSize: 12, dot: true },
+    { pos: [47, 55], text: 'D', offset: [-12, -3], fontSize: 12, color: '#2563eb', dot: '#2563eb' },
+    { pos: [84, 55], text: 'E', offset: [0, -10], fontSize: 12, color: '#2563eb', dot: '#2563eb' },
+    { pos: [59, 89], text: 'F', offset: [0, 10], fontSize: 12, color: '#dc2626', dot: '#dc2626' },
+    { pos: [121, 55], text: 'G', offset: [8, -3], fontSize: 12, color: '#dc2626', dot: '#dc2626' },
   ],
   tickMarks: [
     { from: 3, to: 4, count: 1, color: '#2563eb' },  // DE = EG
@@ -261,11 +261,11 @@ export const midlineDiagram: Diagram2DData = {
 export const similarTriangleDiagram: Diagram2DData = {
   name: '相似三角形',
   vertices: [
-    [80, 10],   // 0: A (顶)
-    [20, 100],  // 1: B (左下)
-    [140, 100], // 2: C (右下)
-    [44, 64],   // 3: D (AB 上)
-    [116, 64],  // 4: E (AC 上)
+    [65, 17],   // 0: A (顶)
+    [20, 85],   // 1: B (左下)
+    [110, 85],  // 2: C (右下)
+    [38, 58],   // 3: D (AB 上)
+    [92, 58],   // 4: E (AC 上)
   ],
   edges: [
     { from: 0, to: 1 },
@@ -275,11 +275,11 @@ export const similarTriangleDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [80, 10], text: 'A', offset: [0, -12], dot: true },
-    { pos: [20, 100], text: 'B', offset: [-12, 8], dot: true },
-    { pos: [140, 100], text: 'C', offset: [12, 8], dot: true },
-    { pos: [44, 64], text: 'D', offset: [-14, -4], dot: '#dc2626', color: '#dc2626' },
-    { pos: [116, 64], text: 'E', offset: [14, -4], dot: '#dc2626', color: '#dc2626' },
+    { pos: [65, 17], text: 'A', offset: [0, -10], fontSize: 12, dot: true },
+    { pos: [20, 85], text: 'B', offset: [-10, 7], fontSize: 12, dot: true },
+    { pos: [110, 85], text: 'C', offset: [8, 7], fontSize: 12, dot: true },
+    { pos: [38, 58], text: 'D', offset: [-12, -3], fontSize: 12, dot: '#dc2626', color: '#dc2626' },
+    { pos: [92, 58], text: 'E', offset: [10, -3], fontSize: 12, dot: '#dc2626', color: '#dc2626' },
   ],
 };
 
@@ -291,12 +291,12 @@ export const similarTriangleDiagram: Diagram2DData = {
 export const parallelogramDiagram: Diagram2DData = {
   name: '平行四边形',
   vertices: [
-    [15, 85],   // 0: A (左下)
-    [130, 85],  // 1: B (右下)
-    [155, 20],  // 2: C (右上)
-    [40, 20],   // 3: D (左上)
-    [85, 52],   // 4: O (对角线交点)
-    [40, 85],   // 5: H (高的垂足，D向AB作垂线)
+    [25, 85],   // 0: A (左下)
+    [140, 85],  // 1: B (右下)
+    [165, 20],  // 2: C (右上)
+    [50, 20],   // 3: D (左上)
+    [95, 52],   // 4: O (对角线交点)
+    [50, 85],   // 5: H (高的垂足，D向AB作垂线)
   ],
   edges: [
     { from: 0, to: 1 },               // AB（底边）
@@ -311,14 +311,14 @@ export const parallelogramDiagram: Diagram2DData = {
     { points: [0, 1, 2, 3], fill: '#fef9c3', opacity: 0.4 },
   ],
   freeLabels: [
-    { pos: [15, 85], text: 'A', offset: [-12, 8], dot: true },
-    { pos: [130, 85], text: 'B', offset: [12, 8], dot: true },
-    { pos: [155, 20], text: 'C', offset: [10, -10], dot: true },
-    { pos: [40, 20], text: 'D', offset: [-10, -10], dot: true },
-    { pos: [85, 52], text: 'O', offset: [8, -8], dot: true, color: '#9ca3af' },
-    { pos: [40, 85], text: 'H', offset: [0, 12], dot: '#dc2626', color: '#dc2626', fontSize: 12 },
-    { pos: [72, 85], text: '底', offset: [0, 16], fontSize: 16, color: '#334155' },
-    { pos: [40, 52], text: '', tex: 'h', offset: [10, 0], fontSize: 16, color: '#dc2626' },
+    { pos: [25, 85], text: 'A', offset: [-12, 8], fontSize: 12, dot: true },
+    { pos: [140, 85], text: 'B', offset: [12, 8], fontSize: 12, dot: true },
+    { pos: [165, 20], text: 'C', offset: [10, -10], fontSize: 12, dot: true },
+    { pos: [50, 20], text: 'D', offset: [-10, -10], fontSize: 12, dot: true },
+    { pos: [95, 52], text: 'O', offset: [8, -8], fontSize: 12, color: '#9ca3af', dot: true },
+    { pos: [50, 85], text: 'H', offset: [0, 12], fontSize: 12, color: '#dc2626', dot: '#dc2626' },
+    { pos: [82, 85], text: '底', offset: [0, 16], fontSize: 16, color: '#334155' },
+    { pos: [50, 52], text: '', tex: 'h', offset: [10, 0], fontSize: 16, color: '#dc2626' },
   ],
   tickMarks: [
     { from: 0, to: 1, count: 2, color: '#16a34a' },  // AB = CD
@@ -335,10 +335,10 @@ export const parallelogramDiagram: Diagram2DData = {
 export const parallelogramJudgeDiagram: Diagram2DData = {
   name: '平行四边形判定',
   vertices: [
-    [30, 15],   // 0: A
-    [5, 70],    // 1: B
-    [100, 70],  // 2: C
-    [125, 15],  // 3: D
+    [35, 18],   // 0: A
+    [15, 62],   // 1: B
+    [95, 62],   // 2: C
+    [115, 18],  // 3: D
   ],
   edges: [
     { from: 0, to: 1, color: '#9ca3af' },
@@ -348,11 +348,11 @@ export const parallelogramJudgeDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [30, 15], text: 'A', offset: [-4, -12], dot: true },
-    { pos: [5, 70], text: 'B', offset: [-12, 8], dot: true },
-    { pos: [100, 70], text: 'C', offset: [12, 8], dot: true },
-    { pos: [125, 15], text: 'D', offset: [4, -12], dot: true },
-    { pos: [65, 42], text: '∥ 且 =', offset: [0, 0], fontSize: 12, color: '#dc2626' },
+    { pos: [35, 18], text: 'A', offset: [-4, -10], fontSize: 12, dot: true },
+    { pos: [15, 62], text: 'B', offset: [-10, 7], fontSize: 12, dot: true },
+    { pos: [95, 62], text: 'C', offset: [8, 7], fontSize: 12, dot: true },
+    { pos: [115, 18], text: 'D', offset: [4, -10], fontSize: 12, dot: true },
+    { pos: [65, 40], text: '∥ 且 =', offset: [0, 0], fontSize: 11, color: '#dc2626' },
   ],
   tickMarks: [
     { from: 1, to: 2, count: 1, color: '#dc2626' },
@@ -364,10 +364,10 @@ export const parallelogramJudgeDiagram: Diagram2DData = {
 export const rectangleDiagram: Diagram2DData = {
   name: '矩形',
   vertices: [
-    [15, 15],   // 0: A (左上)
-    [15, 85],   // 1: B (左下)
-    [135, 85],  // 2: C (右下)
-    [135, 15],  // 3: D (右上)
+    [18, 18],   // 0: A (左上)
+    [18, 72],   // 1: B (左下)
+    [112, 72],  // 2: C (右下)
+    [112, 18],  // 3: D (右上)
   ],
   edges: [
     { from: 0, to: 1 },
@@ -381,19 +381,19 @@ export const rectangleDiagram: Diagram2DData = {
     { points: [0, 1, 2, 3], fill: '#eff6ff', opacity: 0.4 },
   ],
   freeLabels: [
-    { pos: [15, 15], text: 'A', offset: [-12, -8], dot: true },
-    { pos: [15, 85], text: 'B', offset: [-12, 8], dot: true },
-    { pos: [135, 85], text: 'C', offset: [12, 8], dot: true },
-    { pos: [135, 15], text: 'D', offset: [12, -8], dot: true },
-    { pos: [75, 85], text: '', tex: 'a', offset: [0, 14], fontSize: 15, color: '#dc2626' },
-    { pos: [135, 50], text: '', tex: 'b', offset: [14, 0], fontSize: 15, color: '#2563eb' },
-    { pos: [75, 50], text: '', tex: 'd', offset: [8, -8], fontSize: 14, color: '#3b82f6' },
+    { pos: [18, 18], text: 'A', offset: [-10, -8], fontSize: 12, dot: true },
+    { pos: [18, 72], text: 'B', offset: [-10, 7], fontSize: 12, dot: true },
+    { pos: [112, 72], text: 'C', offset: [8, 7], fontSize: 12, dot: true },
+    { pos: [112, 18], text: 'D', offset: [8, -8], fontSize: 12, dot: true },
+    { pos: [65, 72], text: '', tex: 'a', offset: [0, 12], fontSize: 14, color: '#dc2626' },
+    { pos: [112, 45], text: '', tex: 'b', offset: [12, 0], fontSize: 14, color: '#2563eb' },
+    { pos: [65, 45], text: '', tex: 'd', offset: [7, -7], fontSize: 13, color: '#3b82f6' },
   ],
   rightAngles: [
-    { vertex: 0, from: 3, to: 1, size: 10 },
-    { vertex: 1, from: 0, to: 2, size: 10 },
-    { vertex: 2, from: 1, to: 3, size: 10 },
-    { vertex: 3, from: 2, to: 0, size: 10 },
+    { vertex: 0, from: 3, to: 1, size: 8 },
+    { vertex: 1, from: 0, to: 2, size: 8 },
+    { vertex: 2, from: 1, to: 3, size: 8 },
+    { vertex: 3, from: 2, to: 0, size: 8 },
   ],
 };
 
@@ -401,10 +401,10 @@ export const rectangleDiagram: Diagram2DData = {
 export const squareDiagram: Diagram2DData = {
   name: '正方形',
   vertices: [
-    [15, 15],   // 0: A
-    [15, 85],   // 1: B
-    [85, 85],   // 2: C
-    [85, 15],   // 3: D
+    [25, 20],   // 0: A
+    [25, 90],   // 1: B
+    [95, 90],   // 2: C
+    [95, 20],   // 3: D
   ],
   edges: [
     { from: 0, to: 1 },
@@ -417,9 +417,9 @@ export const squareDiagram: Diagram2DData = {
     { points: [0, 1, 2, 3], fill: '#f0fdf4', opacity: 0.4 },
   ],
   freeLabels: [
-    { pos: [50, 85], text: '', tex: 'a', offset: [0, 14], fontSize: 15, color: '#16a34a' },
-    { pos: [15, 50], text: '', tex: 'a', offset: [-14, 0], fontSize: 15, color: '#16a34a' },
-    { pos: [50, 50], text: '', tex: 'd', offset: [8, -8], fontSize: 14, color: '#3b82f6' },
+    { pos: [60, 90], text: '', tex: 'a', offset: [0, 12], fontSize: 14, color: '#16a34a' },
+    { pos: [25, 55], text: '', tex: 'a', offset: [-14, 0], fontSize: 14, color: '#16a34a' },
+    { pos: [60, 55], text: '', tex: 'd', offset: [8, -8], fontSize: 13, color: '#3b82f6' },
   ],
   tickMarks: [
     { from: 0, to: 1, count: 1, color: '#16a34a' },
@@ -436,11 +436,11 @@ export const squareDiagram: Diagram2DData = {
 export const rhombusDiagram: Diagram2DData = {
   name: '菱形',
   vertices: [
-    [70, 8],    // 0: A (上)
-    [15, 55],   // 1: B (左)
-    [70, 102],  // 2: C (下)
-    [125, 55],  // 3: D (右)
-    [70, 55],   // 4: O (对角线交点)
+    [62, 18],   // 0: A (上)
+    [20, 56],   // 1: B (左)
+    [62, 94],   // 2: C (下)
+    [104, 56],  // 3: D (右)
+    [62, 56],   // 4: O (对角线交点)
   ],
   edges: [
     { from: 0, to: 1 },
@@ -454,12 +454,12 @@ export const rhombusDiagram: Diagram2DData = {
     { points: [0, 1, 2, 3], fill: '#faf5ff', opacity: 0.4 },
   ],
   freeLabels: [
-    { pos: [70, 8], text: 'A', offset: [0, -12], dot: true },
-    { pos: [15, 55], text: 'B', offset: [-14, 0], dot: true },
-    { pos: [70, 102], text: 'C', offset: [0, 14], dot: true },
-    { pos: [125, 55], text: 'D', offset: [14, 0], dot: true },
-    { pos: [70, 30], text: '', tex: 'd_1', offset: [-12, 5], fontSize: 13, color: '#7c3aed' },
-    { pos: [100, 55], text: '', tex: 'd_2', offset: [-18, 20], fontSize: 13, color: '#7c3aed' },
+    { pos: [62, 18], text: 'A', offset: [0, -10], fontSize: 12, dot: true },
+    { pos: [20, 56], text: 'B', offset: [-12, 0], fontSize: 12, dot: true },
+    { pos: [62, 94], text: 'C', offset: [0, 10], fontSize: 12, dot: true },
+    { pos: [104, 56], text: 'D', offset: [10, 0], fontSize: 12, dot: true },
+    { pos: [62, 36], text: '', tex: 'd_1', offset: [-12, 4], fontSize: 12, color: '#7c3aed' },
+    { pos: [85, 56], text: '', tex: 'd_2', offset: [-14, 16], fontSize: 12, color: '#7c3aed' },
   ],
   tickMarks: [
     { from: 0, to: 1, count: 1, color: '#7c3aed' },
@@ -468,7 +468,7 @@ export const rhombusDiagram: Diagram2DData = {
     { from: 3, to: 0, count: 1, color: '#7c3aed' },
   ],
   rightAngles: [
-    { vertex: 4, from: 0, to: 1, size: 8, color: '#7c3aed' },
+    { vertex: 4, from: 0, to: 1, size: 7, color: '#7c3aed' },
   ],
 };
 
@@ -476,11 +476,11 @@ export const rhombusDiagram: Diagram2DData = {
 export const trapezoidDiagram: Diagram2DData = {
   name: '梯形',
   vertices: [
-    [40, 15],   // 0: A (左上)
-    [10, 85],   // 1: B (左下)
-    [140, 85],  // 2: C (右下)
-    [110, 15],  // 3: D (右上)
-    [40, 85],   // 4: H (高的垂足)
+    [46, 19],   // 0: A (左上)
+    [19, 82],   // 1: B (左下)
+    [136, 82],  // 2: C (右下)
+    [109, 19],  // 3: D (右上)
+    [46, 82],   // 4: H (高的垂足)
   ],
   edges: [
     { from: 0, to: 1 },
@@ -493,17 +493,17 @@ export const trapezoidDiagram: Diagram2DData = {
     { points: [0, 1, 2, 3], fill: '#fff7ed', opacity: 0.4 },
   ],
   freeLabels: [
-    { pos: [40, 15], text: 'A', offset: [-12, -8], dot: true },
-    { pos: [10, 85], text: 'B', offset: [-12, 8], dot: true },
-    { pos: [140, 85], text: 'C', offset: [12, 8], dot: true },
-    { pos: [110, 15], text: 'D', offset: [12, -8], dot: true },
-    { pos: [40, 85], text: 'H', offset: [0, 14], dot: '#3b82f6', color: '#3b82f6', fontSize: 13 },
-    { pos: [75, 15], text: '上底', offset: [0, -12], fontSize: 15, color: '#ea580c' },
-    { pos: [75, 85], text: '下底', offset: [0, 16], fontSize: 15, color: '#ea580c' },
-    { pos: [40, 50], text: '', tex: 'h', offset: [12, 0], fontSize: 15, color: '#3b82f6' },
+    { pos: [46, 19], text: 'A', offset: [-10, -8], fontSize: 12, dot: true },
+    { pos: [19, 82], text: 'B', offset: [-10, 7], fontSize: 12, dot: true },
+    { pos: [136, 82], text: 'C', offset: [8, 7], fontSize: 12, dot: true },
+    { pos: [109, 19], text: 'D', offset: [8, -8], fontSize: 12, dot: true },
+    { pos: [46, 82], text: 'H', offset: [0, 12], fontSize: 12, dot: '#3b82f6', color: '#3b82f6' },
+    { pos: [78, 19], text: '上底', offset: [0, -10], fontSize: 13, color: '#ea580c' },
+    { pos: [78, 82], text: '下底', offset: [0, 14], fontSize: 13, color: '#ea580c' },
+    { pos: [46, 50], text: '', tex: 'h', offset: [10, 0], fontSize: 14, color: '#3b82f6' },
   ],
   rightAngles: [
-    { vertex: 4, from: 0, to: 2, size: 8, color: '#3b82f6' },
+    { vertex: 4, from: 0, to: 2, size: 7, color: '#3b82f6' },
   ],
 };
 
@@ -511,10 +511,10 @@ export const trapezoidDiagram: Diagram2DData = {
 export const rightTrapezoidDiagram: Diagram2DData = {
   name: '直角梯形',
   vertices: [
-    [15, 15],   // 0: A (左上)
-    [15, 85],   // 1: B (左下)
-    [130, 85],  // 2: C (右下)
-    [90, 15],   // 3: D (右上)
+    [22, 18],   // 0: A (左上)
+    [22, 75],   // 1: B (左下)
+    [115, 75],  // 2: C (右下)
+    [82, 18],   // 3: D (右上)
   ],
   edges: [
     { from: 0, to: 1, color: '#dc2626', strokeWidth: 2.5 },  // AB = 高
@@ -526,15 +526,15 @@ export const rightTrapezoidDiagram: Diagram2DData = {
     { points: [0, 1, 2, 3], fill: '#fef2f2', opacity: 0.4 },
   ],
   freeLabels: [
-    { pos: [15, 15], text: 'A', offset: [-12, -8], dot: true },
-    { pos: [15, 85], text: 'B', offset: [-12, 8], dot: true },
-    { pos: [130, 85], text: 'C', offset: [12, 8], dot: true },
-    { pos: [90, 15], text: 'D', offset: [12, -8], dot: true },
-    { pos: [15, 50], text: '', tex: 'h', offset: [-14, 0], fontSize: 15, color: '#dc2626' },
+    { pos: [22, 18], text: 'A', offset: [-10, -8], fontSize: 12, dot: true },
+    { pos: [22, 75], text: 'B', offset: [-10, 7], fontSize: 12, dot: true },
+    { pos: [115, 75], text: 'C', offset: [8, 7], fontSize: 12, dot: true },
+    { pos: [82, 18], text: 'D', offset: [8, -8], fontSize: 12, dot: true },
+    { pos: [22, 46], text: '', tex: 'h', offset: [-14, 0], fontSize: 14, color: '#dc2626' },
   ],
   rightAngles: [
-    { vertex: 0, from: 3, to: 1, size: 10 },
-    { vertex: 1, from: 0, to: 2, size: 10 },
+    { vertex: 0, from: 3, to: 1, size: 8 },
+    { vertex: 1, from: 0, to: 2, size: 8 },
   ],
 };
 
@@ -574,11 +574,11 @@ export const quadRelationDiagram: Diagram2DData = {
 export const circleBasicDiagram: Diagram2DData = {
   name: '圆的基本概念',
   vertices: [
-    [80, 80],   // 0: 圆心 O
-    [80, 30],   // 1: 圆上点 A（上）
-    [80, 130],  // 2: 圆上点 B（下，直径另一端）
-    [125, 55],  // 3: 圆上点 C（右上，弦端点）
-    [125, 105], // 4: 圆上点 D（右下，弦端点）
+    [70, 80],   // 0: 圆心 O
+    [70, 30],   // 1: 圆上点 A（上）
+    [70, 130],  // 2: 圆上点 B（下，直径另一端）
+    [115, 55],  // 3: 圆上点 C（右上，弦端点）
+    [115, 105], // 4: 圆上点 D（右下，弦端点）
   ],
   edges: [
     { from: 0, to: 1, color: '#dc2626', strokeWidth: 2.5 },  // 半径 r
@@ -587,17 +587,17 @@ export const circleBasicDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [80, 80], text: 'O', offset: [-16, 4], dot: true, fontSize: 16 },
-    { pos: [80, 55], text: '', tex: 'r', offset: [-14, 0], fontSize: 16, color: '#dc2626' },
-    { pos: [80, 105], text: '', tex: 'd', offset: [14, 0], fontSize: 14, color: '#3b82f6' },
-    { pos: [125, 80], text: '弦', offset: [16, 0], fontSize: 15, color: '#16a34a' },
-    { pos: [80, 30], text: 'A', offset: [0, -12], dot: true },
-    { pos: [80, 130], text: 'B', offset: [0, 14], dot: true },
-    { pos: [125, 55], text: 'C', offset: [12, -6], dot: true },
-    { pos: [125, 105], text: 'D', offset: [12, 6], dot: true },
+    { pos: [70, 80], text: 'O', offset: [-16, 4], fontSize: 16, dot: true },
+    { pos: [70, 55], text: '', tex: 'r', offset: [-14, 0], fontSize: 16, color: '#dc2626' },
+    { pos: [70, 105], text: '', tex: 'd', offset: [14, 0], fontSize: 14, color: '#3b82f6' },
+    { pos: [115, 80], text: '弦', offset: [16, 0], fontSize: 15, color: '#16a34a' },
+    { pos: [70, 30], text: 'A', offset: [0, -12], fontSize: 12, dot: true },
+    { pos: [70, 130], text: 'B', offset: [0, 14], fontSize: 12, dot: true },
+    { pos: [115, 55], text: 'C', offset: [12, -6], fontSize: 12, dot: true },
+    { pos: [115, 105], text: 'D', offset: [12, 6], fontSize: 12, dot: true },
   ],
   circles: [
-    { center: [80, 80], radius: 50, color: '#334155' },
+    { center: [70, 80], radius: 50, color: '#334155' },
   ],
 };
 
@@ -605,19 +605,19 @@ export const circleBasicDiagram: Diagram2DData = {
 export const circleAreaDiagram: Diagram2DData = {
   name: '圆的周长和面积',
   vertices: [
-    [80, 80],   // 0: 圆心 O
-    [130, 80],  // 1: 圆上点（右，半径端点）
+    [50, 50],   // 0: 圆心 O
+    [85, 50],   // 1: 圆上点（右，半径端点）
   ],
   edges: [
     { from: 0, to: 1, color: '#dc2626', strokeWidth: 2.5 },  // 半径 r
   ],
   polygons: [],
   freeLabels: [
-    { pos: [80, 80], text: 'O', offset: [-14, 6], dot: true, fontSize: 16 },
-    { pos: [105, 80], text: '', tex: 'r', offset: [0, -12], fontSize: 16, color: '#dc2626' },
+    { pos: [50, 50], text: 'O', offset: [-12, 5], fontSize: 14, dot: true },
+    { pos: [68, 50], text: '', tex: 'r', offset: [0, -10], fontSize: 14, color: '#dc2626' },
   ],
   circles: [
-    { center: [80, 80], radius: 50, color: '#334155', fill: '#eff6ff', fillOpacity: 0.4 },
+    { center: [50, 50], radius: 35, color: '#334155', fill: '#eff6ff', fillOpacity: 0.4 },
   ],
 };
 
@@ -625,9 +625,9 @@ export const circleAreaDiagram: Diagram2DData = {
 export const sectorDiagram: Diagram2DData = {
   name: '扇形',
   vertices: [
-    [70, 100],  // 0: 圆心 O
-    [130, 100], // 1: 弧端点 A（右，0°方向）
-    [100, 48],  // 2: 弧端点 B（右上，约60°方向）
+    [30, 70],   // 0: 圆心 O
+    [90, 70],   // 1: 弧端点 A（右，0°方向）
+    [60, 18],   // 2: 弧端点 B（右上，约60°方向）
   ],
   edges: [
     { from: 0, to: 1, color: '#dc2626', strokeWidth: 2 },  // OA (半径 r)
@@ -635,18 +635,18 @@ export const sectorDiagram: Diagram2DData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [70, 100], text: 'O', offset: [-14, 8], dot: true, fontSize: 16 },
-    { pos: [130, 100], text: 'A', offset: [12, 6], dot: true, fontSize: 15 },
-    { pos: [100, 48], text: 'B', offset: [8, -10], dot: true, fontSize: 15 },
-    { pos: [100, 100], text: '', tex: 'r', offset: [0, 14], fontSize: 16, color: '#dc2626' },
-    { pos: [125, 68], text: '', tex: 'l', offset: [12, 0], fontSize: 16, color: '#7c3aed' },
-    { pos: [85, 82], text: '', tex: 'n°', offset: [13, 4], fontSize: 13, color: '#ea580c' },
+    { pos: [30, 70], text: 'O', offset: [-12, 7], fontSize: 14, dot: true },
+    { pos: [90, 70], text: 'A', offset: [8, 6], fontSize: 12, dot: true },
+    { pos: [60, 18], text: 'B', offset: [6, -10], fontSize: 12, dot: true },
+    { pos: [60, 70], text: '', tex: 'r', offset: [0, 12], fontSize: 14, color: '#dc2626' },
+    { pos: [85, 38], text: '', tex: 'l', offset: [10, 0], fontSize: 14, color: '#7c3aed' },
+    { pos: [45, 52], text: '', tex: 'n°', offset: [11, 3], fontSize: 12, color: '#ea580c' },
   ],
   arcs: [
-    { center: [70, 100], radius: 60, startAngle: 0, endAngle: 60, fill: '#faf5ff', fillOpacity: 0.5, color: '#7c3aed', strokeWidth: 3 },
+    { center: [30, 70], radius: 60, startAngle: 0, endAngle: 60, fill: '#faf5ff', fillOpacity: 0.5, color: '#7c3aed', strokeWidth: 3 },
   ],
   angleArcs: [
-    { vertex: 0, from: 1, to: 2, radius: 18, color: '#ea580c' },
+    { vertex: 0, from: 1, to: 2, radius: 16, color: '#ea580c' },
   ],
 };
 

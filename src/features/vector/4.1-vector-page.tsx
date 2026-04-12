@@ -1,4 +1,4 @@
-import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, ExportButton, PageBreak } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, CalloutCard, ExportButton } from '@/components/shared';
 import { vectorNarrations } from './data/4.1/4.1-narrations';
 import { vectorProgressItems } from './data/4.1/4.1-progress';
 import { useProgress } from '@/hooks';
@@ -25,7 +25,7 @@ export function VectorPage() {
         <ExportButton title="4.1 平面向量" />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-3 mb-3">
+      <div className="bg-white rounded-xl border border-gray-200 p-3 mb-0">
         <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
         <div className="text-gray-600 space-y-1">
           <button onClick={() => scrollToId('vec-def')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、什么是向量 & 怎么表示</button>
@@ -35,39 +35,19 @@ export function VectorPage() {
         </div>
       </div>
 
-      {/* 速通路线图 */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-3 mb-3">
-        <p className="font-bold text-blue-900 text-lg mb-1">速通路线图：向量就记住 3 件事</p>
-        <p className="text-blue-700 text-sm mb-3">向量 = 方向 + 大小，运算就是"箭头拼接"，掌握这些就够了！</p>
-        <div className="grid grid-cols-3 gap-2 text-sm">
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">① 向量是什么</p>
-            <p className="text-gray-500 mt-1">有方向有大小的量，用带箭头的线段表示</p>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">② 加减法</p>
-            <p className="text-gray-500 mt-1">加法 = 首尾相接，减法 = 加相反向量</p>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">③ 数乘</p>
-            <p className="text-gray-500 mt-1">正数不变向，负数反转，倍数改长度</p>
-          </div>
-        </div>
-      </div>
-
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
 
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 1: 什么是向量 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="vec-def" className="mb-3 scroll-mt-4">
+      <section id="vec-def" className="scroll-mt-4">
         <Collapsible title="一、什么是向量 & 怎么表示" defaultOpen storageKey="vector:def" headerExtra={<SpeakButton text={vectorNarrations.definition} />}>
           <p className="text-blue-600 mb-3">🎯 学完你能：理解向量的本质，掌握向量的画法和记法。</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 定义 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">核心定义</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">核心定义</p>
               <div className="bg-white rounded-lg p-2 border border-blue-100">
                 <p className="text-xl text-center"><strong>向量</strong> = <strong>方向</strong> + <strong>大小</strong></p>
                 <p className="text-center text-gray-500 mt-1">既有大小又有方向的量，就叫向量</p>
@@ -105,12 +85,12 @@ export function VectorPage() {
             <div className="grid grid-cols-2 gap-1">
               <div className="bg-gray-50 rounded-lg p-2">
                 <p className="font-bold text-gray-800 mb-1">记法1：字母+箭头</p>
-                <p className="text-lg text-center my-1"><Math tex="\vec{AB}" /></p>
+                <p className="text-[0.9rem] text-center my-1"><Math tex="\vec{AB}" /></p>
                 <p className="text-gray-600">A是起点，B是终点，上面加箭头</p>
               </div>
               <div className="bg-gray-50 rounded-lg p-2">
                 <p className="font-bold text-gray-800 mb-1">记法2：小写字母</p>
-                <p className="text-lg text-center my-1"><Math tex="\vec{a}" /></p>
+                <p className="text-[0.9rem] text-center my-1"><Math tex="\vec{a}" /></p>
                 <p className="text-gray-600">用单个小写字母加箭头表示</p>
               </div>
             </div>
@@ -135,7 +115,7 @@ export function VectorPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 2: 特殊向量与关系 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="vec-special" className="mb-3 scroll-mt-4">
+      <section id="vec-special" className="scroll-mt-4">
         <Collapsible title="二、特殊向量与向量间关系" defaultOpen storageKey="vector:special" headerExtra={<SpeakButton text={vectorNarrations.specialVectors} />}>
           <div className="space-y-2 text-gray-700">
 
@@ -254,12 +234,10 @@ export function VectorPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 3: 向量的加减法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="vec-add" className="mb-3 scroll-mt-4">
+      <section id="vec-add" className="scroll-mt-4">
         <Collapsible title="三、向量的加减法" defaultOpen storageKey="vector:add" headerExtra={<SpeakButton text={vectorNarrations.addition} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：用三角形法则求向量的和，理解减法就是加相反向量。</p>
           <div className="space-y-0.5 text-gray-700">
@@ -401,19 +379,17 @@ export function VectorPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 4: 数乘向量 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="vec-scalar" className="mb-3 scroll-mt-4">
+      <section id="vec-scalar" className="scroll-mt-4">
         <Collapsible title="四、数乘向量" defaultOpen storageKey="vector:scalar" headerExtra={<SpeakButton text={vectorNarrations.scalarMultiply} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：理解"数字 × 向量"的含义，判断结果的方向和长度。</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 什么是数乘 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">什么是数乘？</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">什么是数乘？</p>
               <p>就是用一个<strong>数字</strong>去乘一个<strong>向量</strong>，写作 <Math tex="\lambda \vec{a}" />（读作"lambda 乘以向量a"）</p>
               <p className="mt-1">这里 <Math tex="\lambda" />（lambda）就是一个<strong>普通的实数</strong>，比如 2、-1、0.5 都行</p>
               <div className="bg-white rounded-lg p-2 border border-blue-100 mt-1">

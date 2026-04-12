@@ -57,9 +57,8 @@ const navItems: NavItem[] = [
       {
         groupLabel: '第二阶段：计算工具',
         items: [
-          { path: '/math/inequality-prereq', label: '2.0 不等式前置知识' },
           { path: '/math/inequality', label: '2.1 不等式' },
-          { path: '/math/quadratic', label: '2.2 二次函数' },
+          { path: '/math/absolute-value', label: '2.2 绝对值' },
           { path: '/math/stage2-exam', label: '📝 阶段考试' },
         ],
       },
@@ -67,9 +66,9 @@ const navItems: NavItem[] = [
         groupLabel: '第三阶段：函数思维',
         items: [
           { path: '/math/function-review', label: '3.0 初中函数回顾' },
-          { path: '/math/function-prereq', label: '3.0.5 区间与定义域基础' },
           { path: '/math/function-concept', label: '3.1 函数的概念与性质' },
-          { path: '/math/elementary-func-prereq', label: '3.1.5 初等函数前置知识' },
+          { path: '/math/quadratic', label: '3.1.5 二次函数' },
+          { path: '/math/elementary-func-prereq', label: '3.1.8 初等函数前置知识' },
           { path: '/math/elementary-func', label: '3.2 基本初等函数' },
           { path: '/math/function-graph-prereq', label: '3.2.5 图像与零点前置知识' },
           { path: '/math/function-graph', label: '3.3 函数图像与零点' },
@@ -113,7 +112,7 @@ const navItems: NavItem[] = [
         groupLabel: '第七阶段：立体几何',
         items: [
           { path: '/math/geo-basics', label: '7.0 初中几何基础' },
-          { path: '/math/geo3d-prereq', label: '7.0.5 立体几何前置知识' },
+
           { path: '/math/geo3d-relation', label: '7.1 点线面位置关系' },
           { path: '/math/geo3d-vector-prereq', label: '7.1.5 空间向量前置知识' },
           { path: '/math/geo3d-vector', label: '7.2 空间向量法' },

@@ -1,5 +1,3 @@
-import { Flame } from 'lucide-react';
-
 import { SpeakButton } from '../SpeakButton';
 
 interface Tag {
@@ -31,23 +29,16 @@ interface PageHeaderProps {
 }
 
 export function PageHeader({
-  stage,
-  variant = 'lesson',
+  stage: _stage,
+  variant: _variant = 'lesson',
   title,
   narration,
   subtitle,
   tags,
 }: PageHeaderProps) {
-  const isPrereq = variant === 'prereq';
-
   return (
-    <div className="mb-8">
-      {stage && (
-      <div className={`flex items-center gap-2 text-sm mb-2 ${isPrereq ? 'text-amber-600' : 'text-blue-600'}`}>
-        {isPrereq ? <span>📚</span> : <Flame size={16} />}
-        <span>{stage}</span>
-      </div>
-      )}
+    <div className="mb-2">
+      {/* stage 已全局隐藏 */}
       <div className="flex items-center gap-2">
         <h1 className="text-3xl font-black text-gray-900 mb-2">{title}</h1>
         {narration && <SpeakButton text={narration} />}

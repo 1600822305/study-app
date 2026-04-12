@@ -3,7 +3,6 @@ import { usePrintMode } from '@/hooks';
 import {
   stage2ExamQuestions,
   stage2InequalityQuestions,
-  stage2QuadraticQuestions,
   stage2EssayQuestions,
 } from './data/stage2-exam';
 import { Stage2ExamAnswers, stage2Explanations } from './stage2-exam-answers';
@@ -17,7 +16,7 @@ export function Stage2ExamPage() {
       <>
         <ExamPaper
           title="第二阶段测试卷：计算工具"
-          subtitle="（不等式 · 二次函数）"
+          subtitle="（不等式）"
           timeLimit={40}
           hideBuiltinAnswers
           sections={[
@@ -25,11 +24,6 @@ export function Stage2ExamPage() {
               title: '不等式',
               scorePerQuestion: 4,
               questions: stage2InequalityQuestions,
-            },
-            {
-              title: '二次函数',
-              scorePerQuestion: 4,
-              questions: stage2QuadraticQuestions,
             },
             {
               variant: 'essay',
@@ -49,10 +43,9 @@ export function Stage2ExamPage() {
       <PageHeader
         stage="第二阶段 · 计算工具"
         title="📝 阶段考试"
-        subtitle={`不等式（8题）+ 二次函数（7题），共 ${stage2ExamQuestions.length} 题`}
+        subtitle={`不等式，共 ${stage2ExamQuestions.length} 题`}
         tags={[
           { label: '不等式', color: 'amber' },
-          { label: '二次函数', color: 'green' },
         ]}
       />
 

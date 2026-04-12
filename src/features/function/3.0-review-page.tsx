@@ -1,9 +1,10 @@
-import { Mafs, Coordinates, Plot, Point, Text as MafsText } from 'mafs';
-import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
-import { functionReviewNarrations } from './data/3.0/3.0-review-narrations';
+import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard } from '@/components/shared';
+import { DebugGeo2dSvg, Geo2dDebugToggle } from '@/components/shared/geo2d';
 import { functionReviewProgressItems } from './data/3.0/3.0-review-progress';
+import { proportionalGraph, linearGraph, inverseGraph, quadraticGraph } from './data/3.0/3.0-review-diagrams';
+import { proportionalFill, linearFill, inverseFill, quadraticFill } from './data/3.0/3.0-review-practice';
 import { useProgress, usePrintMode } from '@/hooks';
-import { scrollToId } from '@/lib/scroll';
+
 
 export function FunctionReviewPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('function-review', functionReviewProgressItems);
@@ -15,7 +16,6 @@ export function FunctionReviewPage() {
         stage="前置准备"
         variant="prereq"
         title="3.0 初中函数回顾"
-        narration={functionReviewNarrations.intro}
         subtitle="高中函数的基础：先把初中四种函数彻底搞清楚"
         tags={[
           { label: '约40分钟', color: 'amber' },
@@ -23,25 +23,17 @@ export function FunctionReviewPage() {
         ]}
       />
 
-      <div className="flex justify-end mb-2 print:hidden">
+      <div className="flex justify-end mb-2 print:hidden gap-2">
+        <Geo2dDebugToggle />
         <ExportButton title="3.0 初中函数回顾" />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-2 mb-1">
-        <p className="font-bold text-gray-800 mb-1">📋 知识地图</p>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-gray-600">
-          <button onClick={() => scrollToId('fr-what')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors col-span-2">〇、函数到底是什么（一句话搞定）</button>
-          <button onClick={() => scrollToId('fr-proportional')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、正比例函数 y = kx</button>
-          <button onClick={() => scrollToId('fr-linear')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、一次函数 y = kx + b</button>
-          <button onClick={() => scrollToId('fr-inverse')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、反比例函数 y = k/x</button>
-          <button onClick={() => scrollToId('fr-quadratic')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、二次函数 y = ax² + bx + c</button>
-        </div>
-      </div>
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
+        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:pt-1 [&_.rounded-xl>div:last-child]:pb-1">
 
       {/* ═══ 函数是什么 ═══ */}
-      <section id="fr-what" className="mb-1 scroll-mt-4">
+      <section id="fr-what" className="mb-0 scroll-mt-4">
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
           <p className="text-blue-700"><strong className="text-blue-800">函数是什么？一句话：</strong>给一个 <Math tex="x" /> 的值，就能算出<strong>唯一</strong>一个 <Math tex="y" /> 的值。下面四种函数都满足这个规则。</p>
         </div>
@@ -50,116 +42,99 @@ export function FunctionReviewPage() {
       {/* ═══════════════════════════════════════════════════════ */}
       {/* Section 1: 正比例函数 */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section id="fr-proportional" className="mb-2 scroll-mt-4">
-        <Collapsible title="一、正比例函数" defaultOpen storageKey="func-review:proportional" headerExtra={<SpeakButton text={functionReviewNarrations.proportional} />}>
-          <div className="space-y-1.5 text-gray-700">
+      <section id="fr-proportional" className="mb-0 scroll-mt-4">
+        <Collapsible title="一、正比例函数" defaultOpen storageKey="func-review:proportional">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* Step 1: 生活场景引入 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="leading-7"><strong className="text-amber-800">🍎 场景：买苹果</strong> — 苹果<strong>每斤 3 元</strong>。买 <Math tex="x" /> 斤，花 <Math tex="y" /> 元。你能算出下面的表格吗？</p>
-            </div>
-
-            {/* Step 1 + Step 2: 左右各半 */}
-            <div className="grid gap-2" style={{ gridTemplateColumns: '3fr 2fr' }}>
-              <div className="bg-white rounded-xl border border-gray-200 p-2 flex flex-col">
-                <p className="font-bold text-gray-800 mb-1">📊 Step 1：列表算一算</p>
-                <table className="w-full text-base border-collapse">
-                  <thead>
-                    <tr className="bg-orange-50">
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center text-orange-700"><Math tex="y" /> 元</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">3</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">6</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">9</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">12</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center font-bold text-orange-700"><Math tex="x" /> 斤</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">1</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">2</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">3</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">4</td>
-                    </tr>
-                    <tr className="bg-green-50">
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center font-bold text-green-700"><Math tex="\dfrac{y}{x}" /></td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">3</td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">3</td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">3</td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">3</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="flex-1 flex items-center mt-1">
-                  <p className="text-green-700 font-bold text-lg">💡 <Math tex="\dfrac{y}{x}" /> 永远 = 3！<strong>比值不变</strong></p>
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">正比例函数</div>
+              <div className="px-3 py-2 border-b border-gray-300">
+                <p>一般地，形如 <Math tex="y = kx" />（<Math tex="k" /> 是常数，<Math tex="k \neq 0" />）的函数，叫做<strong>正比例函数</strong>，其中 <Math tex="k" /> 叫做<strong>比例系数</strong>。</p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr] border-b border-gray-300">
+                <div className="px-3 py-2 space-y-1">
+                  <p>✅ <Math tex="y = 2x" />，是正比例函数，<Math tex="k = 2" /></p>
+                  <p>✅ <Math tex="y = -3x" />，是正比例函数，<Math tex="k = -3" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p>❌ <Math tex="y = 2x + 1" />，不是，多了常数项 <Math tex="+1" /></p>
+                  <p>❌ <Math tex="y = x^2" />，不是，<Math tex="x" /> 的指数不是 1</p>
                 </div>
               </div>
-
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-2">
-                <p className="font-bold text-orange-800 mb-0.5">✨ Step 2：从表格到公式</p>
-                <div className="leading-7">
-                  <p><Math tex="\dfrac{y}{x} = 3" /> 永远成立 → 两边乘 <Math tex="x" />：</p>
-                  <p className="text-center text-lg font-bold text-orange-800 my-1"><Math tex="y = 3x" /></p>
-                  <p>把 3 换成常数 <Math tex="k" />：</p>
-                  <p className="text-center text-xl font-bold text-orange-800 my-1"><Math tex="y = kx" />（<Math tex="k \neq 0" />）</p>
-                  <p><Math tex="k" /> = <strong>比例系数</strong>（每份多少）</p>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-300 bg-gray-50">图像：k 决定了什么？</div>
+              <div className="flex">
+                <div className="flex-shrink-0 flex items-center justify-center p-2 border-r border-gray-300">
+                  <DebugGeo2dSvg data={proportionalGraph} width={180} height={180} />
+                </div>
+                <div className="px-3 py-2 space-y-1 flex-1">
+                  <p><strong>图像特征：</strong>正比例函数的图像一定是<strong>过原点的直线</strong></p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="k" /> 的正负决定方向：</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="k > 0" />，直线经过<strong>一、三象限</strong>，从左下到右上</p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#ef4444' }}></span><Math tex="k < 0" />，直线经过<strong>二、四象限</strong>，从左上到右下</p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="|k|" /> 的大小决定陡度：</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="k=2" /> 比 <span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#22c55e' }}></span><Math tex="k=0.5" /> 更<strong>陡</strong>，因为 <Math tex="|2| > |0.5|" /></p>
                 </div>
               </div>
             </div>
 
-            {/* Step 4: 描点画图 + 看图说话 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📈 Step 3：把表格变成图</p>
-              <div className="flex gap-3 items-start">
-                <div className="flex-1 leading-7">
-                  <p>把表格里的每对 <Math tex="(x, y)" /> 当成一个<strong>点</strong>，标在坐标系上：</p>
-                  <p className="mt-1">• (1, 3)、(2, 6)、(3, 9)……</p>
-                  <p>• 把这些点<strong>连起来</strong> → 一条<strong>直线</strong>！</p>
-                  <p>• 这条直线<strong>一定过原点</strong> (0,0)（买0斤花0元）</p>
-                  <p className="mt-1 text-green-700 font-bold">✅ 结论：正比例函数的图像 = 过原点的直线</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">性质总结</div>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1 text-center"></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="k > 0" /></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="k < 0" /></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">经过象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">一、三象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">二、四象限</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">增减性</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>增大</strong></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>减小</strong></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">图像方向</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">从左下到右上</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">从左上到右下</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="px-3 py-2 border-t border-gray-300">
+                <p><strong>共同特征：</strong>图像一定过原点 <Math tex="(0, 0)" />，是一条直线，<Math tex="|k|" /> 越大直线越陡</p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">实战例题</div>
+              <div className="px-3 py-1 border-b border-gray-300 bg-blue-50">
+                <p><strong>判断正比例函数的三个条件：</strong>① 形如 <Math tex="y = kx" />，即<strong>只有一次项</strong>，没有常数项；② <Math tex="x" /> 的指数必须是 <strong>1</strong>；③ 系数 <Math tex="k \neq 0" /></p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例1.</strong> 当 <Math tex="k" /> 为何值时，函数 <Math tex="y = (k - 2)x^{k^2 - 3} + k^2 - 4" /> 是正比例函数？</p>
+                  <p className="border-t border-gray-200 pt-1">常数项为 0，即 <Math tex="k^2 - 4 = 0" />，解得 <Math tex="k = 2" /> 或 <Math tex="k = -2" /></p>
+                  <p>指数为 1，即 <Math tex="k^2 - 3 = 1" />，解得 <Math tex="k = 2" /> 或 <Math tex="k = -2" /></p>
+                  <p>系数不为 0，即 <Math tex="k - 2 \neq 0" />，所以 <Math tex="k \neq 2" /></p>
+                  <p>因此 <Math tex="k = -2" />，此时 <Math tex="y = -4x" /></p>
                 </div>
-                <div style={{ width: 200, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-0.5, 4.5], y: [-1, 10] }} height={180}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => 3 * x} color="#3b82f6" weight={3} />
-                    <Point x={0} y={0} color="#3b82f6" />
-                    <Point x={1} y={3} color="#f59e0b" />
-                    <Point x={2} y={6} color="#f59e0b" />
-                    <Point x={3} y={9} color="#f59e0b" />
-                    <MafsText x={1.6} y={3.8} size={13}>(1,3)</MafsText>
-                    <MafsText x={2.6} y={6.8} size={13}>(2,6)</MafsText>
-                    <MafsText x={3.5} y={9.7} size={13}>(3,9)</MafsText>
-                  </Mafs>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例2.</strong> 正比例函数 <Math tex="y = kx" /> 中，当 <Math tex="x" /> 从 1 增加到 3 时，<Math tex="y" /> 增加了 6，求 <Math tex="k" /> 的值，并判断 <Math tex="y" /> 随 <Math tex="x" /> 的增减性</p>
+                  <p className="border-t border-gray-200 pt-1">当 <Math tex="x = 1" /> 时 <Math tex="y = k" />，当 <Math tex="x = 3" /> 时 <Math tex="y = 3k" /></p>
+                  <p><Math tex="y" /> 增加了 6，即 <Math tex="3k - k = 2k = 6" />，解得 <Math tex="k = 3" /></p>
+                  <p>因为 <Math tex="k = 3 > 0" />，所以 <Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>增大</strong></p>
                 </div>
               </div>
             </div>
 
-            {/* Step 5: k 的作用 */}
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">🔑 Step 4：<Math tex="k" /> 决定了什么？（看图对比）</p>
-              <div className="flex gap-3 items-start">
-                <div style={{ width: 220, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-4, 4], y: [-4, 4] }} height={180}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => 2 * x} color="#3b82f6" weight={3} />
-                    <Plot.OfX y={(x) => 0.5 * x} color="#22c55e" weight={3} />
-                    <Plot.OfX y={(x) => -x} color="#ef4444" weight={3} />
-                    <MafsText x={1.2} y={3.5} size={14}>k=2 陡</MafsText>
-                    <MafsText x={3} y={2} size={14}>k=0.5 平</MafsText>
-                    <MafsText x={2.5} y={-1.8} size={14}>k=-1</MafsText>
-                  </Mafs>
-                </div>
-                <div className="flex-1 leading-8">
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-blue-500 mr-1 align-middle"></span> <strong className="text-blue-600">蓝线 k=2</strong>：很陡，涨得快（每斤2元）</p>
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-1 align-middle"></span> <strong className="text-green-600">绿线 k=0.5</strong>：很平，涨得慢（每斤5毛）</p>
-                  <p className="text-green-700 mt-0.5">→ <Math tex="|k|" /> 越大 = 线越<strong>陡</strong></p>
-                  <p className="mt-1"><span className="inline-block w-3 h-3 rounded-full bg-red-500 mr-1 align-middle"></span> <strong className="text-red-600">红线 k=-1</strong>：往<strong>右下走</strong>！</p>
-                  <p className="text-red-700 mt-0.5">→ <Math tex="k" /> 为负 = 线<strong>下降</strong></p>
-                  <p className="mt-1 text-amber-700">⚠️ 三条线都<strong>过原点</strong>（正比例标志）</p>
-                </div>
-              </div>
-            </div>
-
+            <PracticeCard questions={proportionalFill} title="" hideBlankLine />
 
           </div>
         </Collapsible>
@@ -170,142 +145,104 @@ export function FunctionReviewPage() {
       {/* ═══════════════════════════════════════════════════════ */}
       {/* Section 2: 一次函数 */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section id="fr-linear" className="mb-2 scroll-mt-4">
-        <Collapsible title="二、一次函数" defaultOpen storageKey="func-review:linear" headerExtra={<SpeakButton text={functionReviewNarrations.linear} />}>
-          <div className="space-y-1.5 text-gray-700">
+      <section id="fr-linear" className="mb-0 scroll-mt-4">
+        <Collapsible title="二、一次函数" defaultOpen storageKey="func-review:linear">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* Step 1: 生活场景 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="leading-7"><strong className="text-amber-800">🚕 场景：打出租车</strong> — <strong>起步价 5 元</strong>，之后<strong>每公里 2 元</strong>。坐 <Math tex="x" /> 公里，花 <Math tex="y" /> 元。</p>
-            </div>
-
-            {/* Step 1 + Step 2: 左右 3:2 */}
-            <div className="grid gap-2" style={{ gridTemplateColumns: '3fr 2fr' }}>
-              <div className="bg-white rounded-xl border border-gray-200 p-2 flex flex-col">
-                <p className="font-bold text-gray-800 mb-1">📊 Step 1：列表算一算</p>
-                <table className="w-full text-base border-collapse">
-                  <thead>
-                    <tr className="bg-orange-50">
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center text-orange-700"><Math tex="x" /> 公里</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">0</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">1</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">2</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">3</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center font-bold text-orange-700"><Math tex="y" /> 元</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center font-bold text-amber-600">5</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">7</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">9</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">11</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="flex-1 flex items-center mt-1">
-                  <p className="text-green-700 font-bold text-lg">💡 没坐也要 <strong>5 元</strong>！每多 1 公里 +2 元</p>
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">一次函数</div>
+              <div className="px-3 py-2 border-b border-gray-300">
+                <p>一般地，形如 <Math tex="y = kx + b" />（<Math tex="k, b" /> 是常数，<Math tex="k \neq 0" />）的函数，叫做<strong>一次函数</strong>，其中 <Math tex="k" /> 叫做<strong>斜率</strong>，<Math tex="b" /> 叫做<strong>截距</strong>（y 轴截距）</p>
+                <p>当 <Math tex="b = 0" /> 时，<Math tex="y = kx + 0 = kx" />，就变成了正比例函数。所以<strong>正比例函数是一次函数的特殊情况</strong></p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr] border-b border-gray-300">
+                <div className="px-3 py-2 space-y-1">
+                  <p>✅ <Math tex="y = 3x + 2" />，是一次函数，<Math tex="k = 3, b = 2" /></p>
+                  <p>✅ <Math tex="y = -x + 5" />，是一次函数，<Math tex="k = -1, b = 5" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p>❌ <Math tex="y = x^2 + 1" />，不是，<Math tex="x" /> 的指数不是 1</p>
+                  <p>❌ <Math tex="y = \tfrac{2}{x} + 3" />，不是，<Math tex="x" /> 在分母里</p>
                 </div>
               </div>
-
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-2">
-                <p className="font-bold text-orange-800 mb-0.5">✨ Step 2：写公式</p>
-                <div className="leading-7">
-                  <p>起步价 5 + 每公里 2 × 公里数：</p>
-                  <p className="text-center text-lg font-bold text-orange-800 my-1"><Math tex="y = 2x + 5" /></p>
-                  <p>换成通用形式：</p>
-                  <p className="text-center text-xl font-bold text-orange-800 my-1"><Math tex="y = kx + b" /></p>
-                  <p><Math tex="k" /> = 每份多少，<Math tex="b" /> = 起步价</p>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-300 bg-gray-50">图像：k 和 b 各决定了什么？</div>
+              <div className="flex">
+                <div className="flex-shrink-0 flex items-center justify-center p-2 border-r border-gray-300">
+                  <DebugGeo2dSvg data={linearGraph} width={180} height={180} />
+                </div>
+                <div className="px-3 py-2 space-y-1 flex-1">
+                  <p><strong>图像特征：</strong>一次函数的图像是一条<strong>直线</strong>，一定过点 <Math tex="(0, b)" /></p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="k" /> 决定方向（和正比例一样）：</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="k > 0" />，从左下到右上，<Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>增大</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#ef4444' }}></span><Math tex="k < 0" />，从左上到右下，<Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>减小</strong></p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="b" /> 决定直线与 y 轴的交点：</strong></p>
+                  <p><Math tex="b > 0" />，交点在 y 轴<strong>上方</strong>；<Math tex="b < 0" />，交点在 y 轴<strong>下方</strong>；<Math tex="b = 0" />，过原点</p>
                 </div>
               </div>
             </div>
 
-            {/* Step 3: 与正比例对比 */}
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">🔑 Step 3：和正比例函数有啥区别？</p>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="leading-7">
-                  <p className="font-bold text-blue-700">🍎 买苹果（正比例）</p>
-                  <p><Math tex="y = 2x" /></p>
-                  <p>没买 = <strong>0 元</strong>（过原点）</p>
-                  <p><Math tex="b = 0" /></p>
-                </div>
-                <div className="leading-7">
-                  <p className="font-bold text-amber-700">🚕 打出租（一次函数）</p>
-                  <p><Math tex="y = 2x + 5" /></p>
-                  <p>没坐 = <strong>5 元</strong>（不过原点）</p>
-                  <p><Math tex="b = 5" />（起步价）</p>
-                </div>
-              </div>
-              <p className="text-purple-700 font-bold mt-1">👉 一次函数 = 正比例函数 + 一个<strong>起步价 <Math tex="b" /></strong>。当 <Math tex="b = 0" /> 时，就变回正比例！</p>
-            </div>
-
-            {/* Step 4: 描点画图 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📈 Step 4：画图看 <Math tex="b" /> 在哪</p>
-              <div className="flex gap-3 items-start">
-                <div className="flex-1 leading-7">
-                  <p>同样把表格的点标上去：</p>
-                  <p>• (0,<strong>5</strong>)、(1,7)、(2,9)、(3,11)</p>
-                  <p>• 连起来还是<strong>直线</strong>！</p>
-                  <p>• 但这次<strong>不过原点</strong>，而是从 <Math tex="y = 5" /> 开始</p>
-                  <p className="mt-1">⭐ <strong>黄点 (0,5)</strong> 就是 <Math tex="b" /> 的位置</p>
-                  <p className="text-green-700 font-bold">✅ <Math tex="b" /> = 线和 y 轴的交点（叫"截距"）</p>
-                </div>
-                <div style={{ width: 220, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-0.5, 4], y: [-0.5, 12.5] }} height={200}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => 2 * x + 5} color="#3b82f6" weight={3} />
-                    <Point x={0} y={5} color="#f59e0b" />
-                    <Point x={1} y={7} color="#f59e0b" />
-                    <Point x={3} y={11} color="#f59e0b" />
-                    <MafsText x={0.6} y={4} size={14}>b=5</MafsText>
-                    <MafsText x={1.6} y={7.8} size={13}>(1,7)</MafsText>
-                    <MafsText x={3.2} y={10} size={13}>(3,11)</MafsText>
-                  </Mafs>
-                </div>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">性质总结：图像经过哪些象限？</div>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1 text-center">k ╲ b</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="b > 0" /></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="b = 0" /></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="b < 0" /></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold text-center"><Math tex="k > 0" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">一、二、三象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">一、三象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">一、三、四象限</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold text-center"><Math tex="k < 0" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">一、二、四象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">二、四象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">二、三、四象限</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="px-3 py-2 border-t border-gray-300">
+                <p><strong>记忆方法：</strong><Math tex="k" /> 决定直线倾斜方向，<Math tex="b" /> 决定直线上下平移。<Math tex="b = 0" /> 那列就是正比例函数</p>
               </div>
             </div>
 
-            {/* Step 5: k和b各自的作用 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 Step 5：<Math tex="k" /> 和 <Math tex="b" /> 各管什么？</p>
-              <div className="flex gap-3 items-start">
-                <div style={{ width: 200, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-3, 4], y: [-3, 7] }} height={160}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => x + 2} color="#3b82f6" weight={3} />
-                    <Plot.OfX y={(x) => x - 1} color="#22c55e" weight={3} />
-                    <Plot.OfX y={(x) => -x + 3} color="#ef4444" weight={3} />
-                    <Point x={0} y={2} color="#3b82f6" />
-                    <Point x={0} y={-1} color="#22c55e" />
-                    <Point x={0} y={3} color="#ef4444" />
-                    <MafsText x={2.5} y={5} size={12}>b=2</MafsText>
-                    <MafsText x={2.5} y={1.2} size={12}>b=-1</MafsText>
-                    <MafsText x={-2} y={5.5} size={12}>{'k<0'}</MafsText>
-                  </Mafs>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">实战例题</div>
+              <div className="px-3 py-1 border-b border-gray-300 bg-blue-50">
+                <p><strong>待定系数法求一次函数：</strong>将已知的点坐标代入 <Math tex="y = kx + b" />，列方程组解出 <Math tex="k" /> 和 <Math tex="b" /></p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例1.</strong> 已知一次函数的图像经过 <Math tex="(1, 3)" /> 和 <Math tex="(3, 7)" />，求函数表达式，并判断图像经过哪些象限</p>
+                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>两点代入 <Math tex="y = kx + b" />，列方程组解 <Math tex="k" /> 和 <Math tex="b" /></p>
+                  <p><strong>第一步</strong>：设 <Math tex="y = kx + b" />，将两个点分别代入</p>
+                  <p>代入 <Math tex="(1, 3)" />，得 <Math tex="k + b = 3" /></p>
+                  <p>代入 <Math tex="(3, 7)" />，得 <Math tex="3k + b = 7" /></p>
+                  <p><strong>第二步</strong>：两式相减，得 <Math tex="2k = 4" />，解得 <Math tex="k = 2" /></p>
+                  <p><strong>第三步</strong>：将 <Math tex="k = 2" /> 代入第一个方程，得 <Math tex="b = 1" /></p>
+                  <p>所以 <Math tex="y = 2x + 1" />。因为 <Math tex="k > 0, b > 0" /></p>
+                  <p>查表知经过<strong>一、二、三象限</strong></p>
                 </div>
-                <div className="flex-1 leading-8">
-                  <p className="font-bold text-gray-800 mb-0.5"><Math tex="b" /> 管<strong>上下位置</strong>：</p>
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-blue-500 mr-1 align-middle"></span> <Math tex="b=2" />：线从 y=2 出发</p>
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-green-500 mr-1 align-middle"></span> <Math tex="b=-1" />：线从 y=-1 出发</p>
-                  <p className="font-bold text-gray-800 mt-1 mb-0.5"><Math tex="k" /> 管<strong>方向和陡度</strong>：</p>
-                  <p>蓝+绿 <Math tex="k=1" />：往右上走</p>
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-red-500 mr-1 align-middle"></span> 红 <Math tex="k=-1" />：往右下走</p>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例2.</strong> 一次函数 <Math tex="y = 2x - 1" /> 和 <Math tex="y = -x + 5" /> 的图像交于点 P，求点 P 的坐标</p>
+                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>交点就是两条直线上同一个点，这个点的 <Math tex="x" /> 和 <Math tex="y" /> 同时满足两个方程</p>
+                  <p><strong>第一步</strong>：令两个函数的 <Math tex="y" /> 相等，得 <Math tex="2x - 1 = -x + 5" /></p>
+                  <p><strong>第二步</strong>：移项合并，得 <Math tex="3x = 6" />，解得 <Math tex="x = 2" /></p>
+                  <p><strong>第三步</strong>：将 <Math tex="x = 2" /> 代入任意一个函数，得 <Math tex="y = 2 \times 2 - 1 = 3" /></p>
+                  <p>因此交点 <Math tex="P(2, 3)" /></p>
                 </div>
               </div>
             </div>
 
-            {/* 速记卡 */}
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">📝 一次函数速记口诀</p>
-              <div className="grid grid-cols-2 gap-x-4 leading-8">
-                <p>🔹 <Math tex="k" /> 正<strong>上坡</strong>，<Math tex="k" /> 负<strong>下坡</strong></p>
-                <p>🔹 <Math tex="|k|" /> 大线<strong>陡</strong>，<Math tex="|k|" /> 小线<strong>平</strong></p>
-                <p>🔹 <Math tex="b" /> 正线<strong>往上挪</strong>，<Math tex="b" /> 负线<strong>往下挪</strong></p>
-                <p>🔹 <Math tex="b = 0" /> 过原点 → 变回<strong>正比例</strong></p>
-              </div>
-            </div>
+            <PracticeCard questions={linearFill} title="" hideBlankLine />
 
           </div>
         </Collapsible>
@@ -316,141 +253,98 @@ export function FunctionReviewPage() {
       {/* ═══════════════════════════════════════════════════════ */}
       {/* Section 3: 反比例函数 */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section id="fr-inverse" className="mb-2 scroll-mt-4">
-        <Collapsible title="三、反比例函数" defaultOpen storageKey="func-review:inverse" headerExtra={<SpeakButton text={functionReviewNarrations.inverse} />}>
-          <div className="space-y-1.5 text-gray-700">
+      <section id="fr-inverse" className="mb-0 scroll-mt-4">
+        <Collapsible title="三、反比例函数" defaultOpen storageKey="func-review:inverse">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* Step 1: 生活场景 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="leading-7"><strong className="text-amber-800">🍬 场景：分糖</strong> — 有 <strong>12 块糖</strong>，分给 <Math tex="x" /> 个人，每人分到 <Math tex="y" /> 块。人越多，每人分得越<strong>少</strong>！</p>
-            </div>
-
-            {/* Step 1 + Step 2: 左右 3:2 */}
-            <div className="grid gap-2" style={{ gridTemplateColumns: '3fr 2fr' }}>
-              <div className="bg-white rounded-xl border border-gray-200 p-2 flex flex-col">
-                <p className="font-bold text-gray-800 mb-1">📊 Step 1：列表算一算</p>
-                <table className="w-full text-base border-collapse">
-                  <thead>
-                    <tr className="bg-orange-50">
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center text-orange-700"><Math tex="x" /> 人</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">1</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">2</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">3</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">4</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">6</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center font-bold text-orange-700"><Math tex="y" /> 块</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">12</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">6</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">4</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">3</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">2</td>
-                    </tr>
-                    <tr className="bg-green-50">
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center font-bold text-green-700"><Math tex="x \times y" /></td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">12</td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">12</td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">12</td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">12</td>
-                      <td className="border border-green-200 px-1.5 py-0.5 text-center text-green-700">12</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="flex-1 flex items-center mt-1">
-                  <p className="text-green-700 font-bold text-lg">💡 <Math tex="x \times y" /> 永远 = 12！<strong>乘积不变</strong></p>
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">反比例函数</div>
+              <div className="px-3 py-2 border-b border-gray-300">
+                <p>一般地，形如 <Math tex="y = \tfrac{k}{x}" />（<Math tex="k" /> 是常数，<Math tex="k \neq 0" />）的函数，叫做<strong>反比例函数</strong></p>
+                <p>也可以写成 <Math tex="xy = k" />，即<strong>横坐标乘以纵坐标永远等于 k</strong></p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr] border-b border-gray-300">
+                <div className="px-3 py-2 space-y-1">
+                  <p>✅ <Math tex="y = \tfrac{3}{x}" />，是反比例函数，<Math tex="k = 3" /></p>
+                  <p>✅ <Math tex="y = -\tfrac{2}{x}" />，是反比例函数，<Math tex="k = -2" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p>❌ <Math tex="y = \tfrac{2}{x} + 1" />，不是，多了常数项 <Math tex="+1" /></p>
+                  <p>❌ <Math tex="y = 2x" />，不是，<Math tex="x" /> 不在分母里</p>
                 </div>
               </div>
-
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-2">
-                <p className="font-bold text-orange-800 mb-0.5">✨ Step 2：写公式</p>
-                <div className="leading-7">
-                  <p><Math tex="x \times y = 12" /> → 两边除以 <Math tex="x" />：</p>
-                  <p className="text-center text-lg font-bold text-orange-800 my-1"><Math tex="y = \dfrac{12}{x}" /></p>
-                  <p>换成通用形式：</p>
-                  <p className="text-center text-xl font-bold text-orange-800 my-1"><Math tex="y = \dfrac{k}{x}" /></p>
-                  <p><Math tex="k" /> = <strong>总量</strong>（糖的总数）</p>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-300 bg-gray-50">图像：k 决定了什么？</div>
+              <div className="flex">
+                <div className="flex-shrink-0 flex items-center justify-center p-2 border-r border-gray-300">
+                  <DebugGeo2dSvg data={inverseGraph} width={180} height={180} />
+                </div>
+                <div className="px-3 py-2 space-y-1 flex-1">
+                  <p><strong>图像特征：</strong>反比例函数的图像是<strong>双曲线</strong>，有两支，关于原点对称</p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="k" /> 的正负决定位置：</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="k > 0" />，两支分别在<strong>一、三象限</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#ef4444' }}></span><Math tex="k < 0" />，两支分别在<strong>二、四象限</strong></p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="|k|" /> 的大小决定远近：</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="k=6" /> 比 <span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#22c55e' }}></span><Math tex="k=2" /> 离原点更<strong>远</strong>，因为 <Math tex="|6| > |2|" /></p>
                 </div>
               </div>
             </div>
 
-            {/* Step 3: 与前面两种对比 */}
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">🔑 Step 3：和前面有啥不同？</p>
-              <div className="grid grid-cols-3 gap-2 leading-7">
-                <div>
-                  <p className="font-bold text-blue-700">🍎 正比例</p>
-                  <p><Math tex="x" /> 大 → <Math tex="y" /> 也大</p>
-                  <p>比值不变 <Math tex="\dfrac{y}{x}=k" /></p>
-                </div>
-                <div>
-                  <p className="font-bold text-amber-700">🚕 一次函数</p>
-                  <p><Math tex="x" /> 大 → <Math tex="y" /> 也大</p>
-                  <p>多了起步价 <Math tex="b" /></p>
-                </div>
-                <div>
-                  <p className="font-bold text-red-700">🍬 反比例</p>
-                  <p><Math tex="x" /> 大 → <Math tex="y" /> 反而<strong>小</strong></p>
-                  <p>乘积不变 <Math tex="xy=k" /></p>
-                </div>
-              </div>
-              <p className="text-purple-700 font-bold mt-1">👉 "反"就是<strong>反着来</strong>：一个变大，另一个就变小！</p>
-            </div>
-
-            {/* Step 4: 描点画图 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📈 Step 4：画图看形状</p>
-              <div className="flex gap-3 items-start">
-                <div className="flex-1 leading-7">
-                  <p>把表格的点标上去：</p>
-                  <p>• (1,12)、(2,6)、(3,4)、(4,3)、(6,2)</p>
-                  <p>• 连起来不是直线，而是一条<strong>弯曲的线</strong>！</p>
-                  <p>• 这条曲线叫<strong>双曲线</strong></p>
-                  <p className="mt-1">⚠️ 两个特别的地方：</p>
-                  <p>• <Math tex="x" /> 不能等于 0（0 个人没法分糖）</p>
-                  <p>• 曲线<strong>永远不碰坐标轴</strong>，只会无限接近</p>
-                </div>
-                <div style={{ width: 220, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-0.5, 7.5], y: [-0.5, 8] }} height={200}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => x > 0.3 ? 12 / x : NaN} color="#3b82f6" weight={3} />
-                    <Point x={2} y={6} color="#f59e0b" />
-                    <Point x={3} y={4} color="#f59e0b" />
-                    <Point x={4} y={3} color="#f59e0b" />
-                    <Point x={6} y={2} color="#f59e0b" />
-                    <MafsText x={2.8} y={6.8} size={14}>(2,6)</MafsText>
-                    <MafsText x={4.6} y={3.8} size={14}>(4,3)</MafsText>
-                    <MafsText x={6.2} y={2.8} size={14}>(6,2)</MafsText>
-                  </Mafs>
-                </div>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">性质总结</div>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1 text-center"></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="k > 0" /></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="k < 0" /></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">经过象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">一、三象限</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">二、四象限</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">增减性</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">在每个象限内，<Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>减小</strong></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">在每个象限内，<Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>增大</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="px-3 py-2 border-t border-gray-300">
+                <p><strong>共同特征：</strong>图像关于原点对称，以两条坐标轴为渐近线，<Math tex="|k|" /> 越大曲线离原点越远</p>
+                <p><strong>注意：</strong>增减性只能在<strong>同一个象限</strong>内讨论，不能跨象限比较</p>
               </div>
             </div>
 
-            {/* Step 5: k的正负 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 Step 5：<Math tex="k" /> 的正负决定位置</p>
-              <div className="flex gap-3 items-start">
-                <div style={{ width: 200, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-5, 5], y: [-5, 5] }} height={160}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => x > 0.2 ? 3 / x : NaN} color="#3b82f6" weight={3} />
-                    <Plot.OfX y={(x) => x < -0.2 ? 3 / x : NaN} color="#3b82f6" weight={3} />
-                    <Plot.OfX y={(x) => x > 0.2 ? -3 / x : NaN} color="#ef4444" weight={3} />
-                    <Plot.OfX y={(x) => x < -0.2 ? -3 / x : NaN} color="#ef4444" weight={3} />
-                    <MafsText x={2} y={3} size={13}>k=3</MafsText>
-                    <MafsText x={2} y={-3} size={13}>k=-3</MafsText>
-                  </Mafs>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">实战例题</div>
+              <div className="px-3 py-1 border-b border-gray-300 bg-blue-50">
+                <p><strong>反比例函数核心性质：</strong>对于图像上任意一点 <Math tex="(x, y)" />，都有 <Math tex="xy = k" />。所以<strong>已知一个点就能求出 k</strong></p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例1.</strong> 已知 <Math tex="y" /> 与 <Math tex="x" /> 成反比例，且当 <Math tex="x = 3" /> 时 <Math tex="y = -4" />，求函数表达式，并求当 <Math tex="x = -6" /> 时 <Math tex="y" /> 的值</p>
+                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>先用已知点求 <Math tex="k" />，写出表达式，再代入求值</p>
+                  <p><strong>第一步</strong>：<Math tex="y" /> 与 <Math tex="x" /> 成反比例，设 <Math tex="y = \tfrac{k}{x}" />，将 <Math tex="(3, -4)" /> 代入，得 <Math tex="k = 3 \times (-4) = -12" /></p>
+                  <p><strong>第二步</strong>：所以函数表达式为 <Math tex="y = \tfrac{-12}{x}" />，因为 <Math tex="k < 0" />，图像在<strong>二、四象限</strong></p>
+                  <p><strong>第三步</strong>：当 <Math tex="x = -6" /> 时，<Math tex="y = \tfrac{-12}{-6} = 2" /></p>
                 </div>
-                <div className="flex-1 leading-8">
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-blue-500 mr-1 align-middle"></span> <strong className="text-blue-600">蓝色 k=3</strong>：曲线在<strong>右上 + 左下</strong>（一三象限）</p>
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-red-500 mr-1 align-middle"></span> <strong className="text-red-600">红色 k=-3</strong>：曲线在<strong>右下 + 左上</strong>（二四象限）</p>
-                  <p className="mt-1 text-green-700 font-bold">✅ <Math tex="k > 0" /> → 一三象限</p>
-                  <p className="text-red-700 font-bold">✅ <Math tex="k < 0" /> → 二四象限</p>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例2.</strong> 反比例函数 <Math tex="y = \tfrac{k}{x}" /> 的图像经过 <Math tex="A(2, 3)" /> 和 <Math tex="B(a, -2)" /> 两点，求 <Math tex="k" /> 的值和 <Math tex="a" /> 的值，并判断图像经过哪些象限</p>
+                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>用点 <Math tex="A" /> 求出 <Math tex="k" />，再用 <Math tex="k" /> 求出 <Math tex="a" />，最后根据 <Math tex="k" /> 的正负判断象限</p>
+                  <p><strong>第一步</strong>：将 <Math tex="A(2, 3)" /> 代入，得 <Math tex="k = 2 \times 3 = 6" /></p>
+                  <p><strong>第二步</strong>：将 <Math tex="B(a, -2)" /> 代入 <Math tex="y = \tfrac{6}{x}" />，得 <Math tex="-2 = \tfrac{6}{a}" />，解得 <Math tex="a = -3" /></p>
+                  <p><strong>第三步</strong>：因为 <Math tex="k = 6 > 0" />，图像在<strong>一、三象限</strong>，在每个象限内 <Math tex="y" /> 随 <Math tex="x" /> 增大而<strong>减小</strong></p>
+                  <p>验证：<Math tex="A(2, 3)" /> 在第一象限，<Math tex="B(-3, -2)" /> 在第三象限</p>
                 </div>
               </div>
             </div>
+
+            <PracticeCard questions={inverseFill} title="" hideBlankLine />
 
           </div>
         </Collapsible>
@@ -461,168 +355,110 @@ export function FunctionReviewPage() {
       {/* ═══════════════════════════════════════════════════════ */}
       {/* Section 4: 二次函数 */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section id="fr-quadratic" className="mb-2 scroll-mt-4">
-        <Collapsible title="四、二次函数" defaultOpen storageKey="func-review:quadratic" headerExtra={<SpeakButton text={functionReviewNarrations.quadratic} />}>
-          <div className="space-y-1.5 text-gray-700">
+      <section id="fr-quadratic" className="mb-0 scroll-mt-4">
+        <Collapsible title="四、二次函数" defaultOpen storageKey="func-review:quadratic">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* Step 1: 生活场景 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="leading-7"><strong className="text-amber-800">🏀 场景：扔球</strong> — 把球往上扔，球先<strong>升高</strong>，到最高点后<strong>落下</strong>。高度随时间变化画出来，就是一条<strong>弧线</strong>！</p>
-            </div>
-
-            {/* Step 1 + Step 2: 左右 3:2 */}
-            <div className="grid gap-2" style={{ gridTemplateColumns: '3fr 2fr' }}>
-              <div className="bg-white rounded-xl border border-gray-200 p-2 flex flex-col">
-                <p className="font-bold text-gray-800 mb-1">📊 Step 1：最简单的二次函数 <Math tex="y = x^2" /></p>
-                <table className="w-full text-base border-collapse">
-                  <thead>
-                    <tr className="bg-orange-50">
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center text-orange-700"><Math tex="x" /></th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">-3</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">-2</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">-1</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">0</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">1</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">2</th>
-                      <th className="border border-orange-200 px-1.5 py-0.5 text-center">3</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center font-bold text-orange-700"><Math tex="y" /></td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">9</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">4</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">1</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center font-bold text-amber-600">0</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">1</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">4</td>
-                      <td className="border border-gray-200 px-1.5 py-0.5 text-center">9</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="flex-1 flex items-center mt-1">
-                  <p className="text-green-700 font-bold text-lg">💡 左右的 <Math tex="y" /> 值<strong>完全对称</strong>！最低点在 x=0</p>
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">二次函数</div>
+              <div className="px-3 py-2 border-b border-gray-300">
+                <p>一般地，形如 <Math tex="y = ax^2 + bx + c" />（<Math tex="a, b, c" /> 是常数，<Math tex="a \neq 0" />）的函数，叫做<strong>二次函数</strong></p>
+                <p>最简单的形式是 <Math tex="y = ax^2" />，图像是过原点的<strong>抛物线</strong>，对称轴为 <Math tex="y" /> 轴</p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr] border-b border-gray-300">
+                <div className="px-3 py-2 space-y-1">
+                  <p>✅ <Math tex="y = 3x^2 - 2x + 1" />，是二次函数，<Math tex="a = 3" /></p>
+                  <p>✅ <Math tex="y = -x^2" />，是二次函数，<Math tex="a = -1" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p>❌ <Math tex="y = 2x + 1" />，不是，<Math tex="x" /> 的最高次数是 1</p>
+                  <p>❌ <Math tex="y = \tfrac{1}{x^2}" />，不是，<Math tex="x^2" /> 在分母里</p>
                 </div>
               </div>
-
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-2">
-                <p className="font-bold text-orange-800 mb-0.5">✨ Step 2：通用公式</p>
-                <div className="leading-7">
-                  <p>最简单：<Math tex="y = x^2" /></p>
-                  <p>加系数：<Math tex="y = ax^2" /></p>
-                  <p>最通用：</p>
-                  <p className="text-center text-xl font-bold text-orange-800 my-1"><Math tex="y = ax^2 + bx + c" /></p>
-                  <p><Math tex="a" /> 管开口方向</p>
-                  <p><Math tex="c" /> 管上下位置</p>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-300 bg-gray-50">图像：a 决定了什么？</div>
+              <div className="flex">
+                <div className="flex-shrink-0 flex items-center justify-center p-2 border-r border-gray-300">
+                  <DebugGeo2dSvg data={quadraticGraph} width={180} height={180} />
+                </div>
+                <div className="px-3 py-2 space-y-1 flex-1">
+                  <p><strong>图像特征：</strong>二次函数的图像是<strong>抛物线</strong>，关于对称轴左右对称</p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="a" /> 的正负决定开口方向：</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="a > 0" />，开口<strong>向上</strong>，顶点是最低点</p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#ef4444' }}></span><Math tex="a < 0" />，开口<strong>向下</strong>，顶点是最高点</p>
+                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="|a|" /> 的大小决定开口宽窄：</strong></p>
+                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#22c55e' }}></span><Math tex="a=2" /> 比 <span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="a=1" /> 开口更<strong>窄</strong>，因为 <Math tex="|2| > |1|" /></p>
                 </div>
               </div>
             </div>
 
-            {/* Step 3: 画图 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📈 Step 3：画图看形状 — 抛物线</p>
-              <div className="flex gap-3 items-start">
-                <div className="flex-1 leading-7">
-                  <p>把表格的点标上去、连起来：</p>
-                  <p>• 不是直线，也不是双曲线</p>
-                  <p>• 而是一条<strong>U形弧线</strong>，叫<strong>抛物线</strong></p>
-                  <p className="mt-1">三个关键词：</p>
-                  <p>⭐ <strong>顶点</strong>：最低（或最高）的那个点</p>
-                  <p>⭐ <strong>对称轴</strong>：左右完全对称的那条竖线</p>
-                  <p>⭐ <strong>开口方向</strong>：朝上还是朝下</p>
-                </div>
-                <div style={{ width: 200, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-3.5, 3.5], y: [-1, 10] }} height={180}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => x * x} color="#3b82f6" weight={3} />
-                    <Point x={0} y={0} color="#ef4444" />
-                    <Point x={-1} y={1} color="#f59e0b" />
-                    <Point x={1} y={1} color="#f59e0b" />
-                    <Point x={-2} y={4} color="#f59e0b" />
-                    <Point x={2} y={4} color="#f59e0b" />
-                    <MafsText x={0.8} y={0.8} size={13}>顶点</MafsText>
-                    <MafsText x={-2.8} y={4.8} size={12}>(-2,4)</MafsText>
-                    <MafsText x={2.8} y={4.8} size={12}>(2,4)</MafsText>
-                  </Mafs>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 4: a 的作用 */}
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">� Step 4：<Math tex="a" /> 决定了什么？</p>
-              <div className="flex gap-3 items-start">
-                <div style={{ width: 200, flexShrink: 0 }}>
-                  <Mafs viewBox={{ x: [-3, 3], y: [-5, 5] }} height={160}>
-                    <Coordinates.Cartesian xAxis={{ lines: false }} yAxis={{ lines: false }} />
-                    <Plot.OfX y={(x) => x * x} color="#3b82f6" weight={3} />
-                    <Plot.OfX y={(x) => -(x * x)} color="#ef4444" weight={3} />
-                    <Point x={0} y={0} color="#f59e0b" />
-                    <MafsText x={1.5} y={3.5} size={13}>a=1</MafsText>
-                    <MafsText x={1.5} y={-3.5} size={13}>a=-1</MafsText>
-                  </Mafs>
-                </div>
-                <div className="flex-1 leading-8">
-                  <p><span className="inline-block w-3 h-3 rounded-full bg-blue-500 mr-1 align-middle"></span> <strong className="text-blue-600">蓝色 a=1</strong>：开口<strong>朝上</strong>（像碗 🥣）</p>
-                  <p className="text-blue-700">→ 顶点是<strong>最低点</strong></p>
-                  <p className="mt-1"><span className="inline-block w-3 h-3 rounded-full bg-red-500 mr-1 align-middle"></span> <strong className="text-red-600">红色 a=-1</strong>：开口<strong>朝下</strong>（像山 ⛰️）</p>
-                  <p className="text-red-700">→ 顶点是<strong>最高点</strong>（扔球的最高点！）</p>
-                  <p className="mt-1 text-purple-700 font-bold">✅ <Math tex="a > 0" /> 朝上，<Math tex="a < 0" /> 朝下</p>
-                  <p className="text-purple-700 font-bold">✅ <Math tex="|a|" /> 越大，开口越<strong>窄</strong></p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 5: 四种函数总对比速查表 */}
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">🎯 Step 5：四种函数速查对比</p>
-              <table className="w-full text-base border-collapse">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">性质总结</div>
+              <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-indigo-100">
-                    <th className="border border-indigo-200 px-2 py-1 text-left text-indigo-700">类型</th>
-                    <th className="border border-indigo-200 px-2 py-1 text-center text-indigo-700">公式</th>
-                    <th className="border border-indigo-200 px-2 py-1 text-center text-indigo-700">图像</th>
-                    <th className="border border-indigo-200 px-2 py-1 text-center text-indigo-700">关键参数</th>
-                    <th className="border border-indigo-200 px-2 py-1 text-center text-indigo-700">生活场景</th>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1 text-center"></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="a > 0" /></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="a < 0" /></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">正比例</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = kx" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">过原点直线</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="k" /> 定方向和陡度</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">🍎 买苹果</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">一次</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = kx + b" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">斜线（不过原点）</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="b" /> 是截距</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">🚕 打出租</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">开口方向</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">向上</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">向下</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">反比例</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = \dfrac{k}{x}" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">双曲线</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="xy = k" /> 恒成立</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">🍬 分糖</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">顶点</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">最低点</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">最高点</td>
                   </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">二次</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = ax^2+bx+c" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">抛物线</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="a" /> 定开口方向</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">🏀 扔球</td>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">增减性</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">对称轴左侧减，右侧增</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">对称轴左侧增，右侧减</td>
                   </tr>
                 </tbody>
               </table>
+              <div className="px-3 py-2 border-t border-gray-300 space-y-1">
+                <p><strong>对称轴公式：</strong><Math tex="x = -\tfrac{b}{2a}" />，<strong>顶点纵坐标：</strong>将对称轴的 <Math tex="x" /> 代回函数即可</p>
+                <p><strong>与 <Math tex="x" /> 轴交点个数：</strong>令 <Math tex="y = 0" />，用判别式 <Math tex="\Delta = b^2 - 4ac" /> 判断</p>
+                <p><Math tex="\Delta > 0" />：<strong>两个</strong>交点；<Math tex="\Delta = 0" />：<strong>一个</strong>交点（顶点恰好在 <Math tex="x" /> 轴上）；<Math tex="\Delta < 0" />：<strong>没有</strong>交点</p>
+                <p><strong>交点公式：</strong><Math tex="x = \tfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}" /></p>
+              </div>
             </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">实战例题</div>
+              <div className="px-3 py-1 border-b border-gray-300 bg-blue-50">
+                <p><strong>二次函数三个核心问题：</strong>① 对称轴在哪（<Math tex="x = -\tfrac{b}{2a}" />）② 顶点坐标 ③ 与 <Math tex="x" /> 轴的交点（令 <Math tex="y = 0" /> 解方程）</p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例1.</strong> 求二次函数 <Math tex="y = x^2 - 4x + 3" /> 的对称轴和顶点坐标</p>
+                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>用公式求对称轴，再代入求顶点纵坐标</p>
+                  <p><strong>第一步</strong>：<Math tex="a = 1, b = -4, c = 3" />，对称轴 <Math tex="x = -\tfrac{-4}{2 \times 1} = 2" /></p>
+                  <p><strong>第二步</strong>：将 <Math tex="x = 2" /> 代入，得 <Math tex="y = 4 - 8 + 3 = -1" /></p>
+                  <p><strong>第三步</strong>：因为 <Math tex="a = 1 > 0" />，开口向上，顶点 <Math tex="(2, -1)" /> 是<strong>最低点</strong></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例2.</strong> 求二次函数 <Math tex="y = x^2 - 2x - 3" /> 的图像与 <Math tex="x" /> 轴交点坐标</p>
+                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>令 <Math tex="y = 0" />，解一元二次方程</p>
+                  <p><strong>第一步</strong>：令 <Math tex="y = 0" />，得 <Math tex="x^2 - 2x - 3 = 0" /></p>
+                  <p><strong>第二步</strong>：分解因式 <Math tex="(x - 3)(x + 1) = 0" />，解得 <Math tex="x = 3" /> 或 <Math tex="x = -1" /></p>
+                  <p><strong>第三步</strong>：因此与 <Math tex="x" /> 轴的交点为 <Math tex="(-1, 0)" /> 和 <Math tex="(3, 0)" /></p>
+                </div>
+              </div>
+            </div>
+
+            <PracticeCard questions={quadraticFill} title="" hideBlankLine />
 
           </div>
         </Collapsible>
       </section>
 
+        </div>
       </LessonLayout>
     </div>
   );

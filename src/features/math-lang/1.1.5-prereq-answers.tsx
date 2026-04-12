@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Math as MathTex, PageBreak } from '@/components/shared';
+import { Math as MathTex } from '@/components/shared';
 import { setsPrereqPractice1, setsPrereqPractice2, setsPrereqPractice3, setsPrereqPractice4 } from './data/1.2/1.2-practice';
 import { setsPrereqQuizQuestions } from './data/1.1.5/1.1.5-prereq-quiz';
 import type { QuizQuestionData } from '@/types';
@@ -183,7 +183,6 @@ function AnswerSection({ title, questions }: { title: string; questions: QuizQue
 export function SetsPrereqAnswers() {
   return (
     <section className="mb-8 print-answers">
-      <PageBreak label="答案与解析" />
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.1.5 集合前置知识 — 答案与解析</h2>
       <AnswerSection title="一、解方程 — 即时练习" questions={setsPrereqPractice1} />
       <AnswerSection title="二、解不等式 — 即时练习" questions={setsPrereqPractice2} />

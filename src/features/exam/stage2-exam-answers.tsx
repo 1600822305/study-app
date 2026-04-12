@@ -2,7 +2,6 @@ import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
 import {
   stage2InequalityQuestions,
-  stage2QuadraticQuestions,
 } from './data/stage2-exam';
 import type { QuizQuestionData } from '@/types';
 
@@ -67,50 +66,6 @@ export const stage2Explanations: Record<string, ReactNode> = {
     </>
   ),
 
-  // ── 二、二次函数 ──
-  's2e-q1': (
-    <>
-      <p className="mt-1"><MathTex tex="f(x)=(x-2)^2-1" /></p>
-      <p className="mt-1">顶点 <MathTex tex="(2,-1)" /></p>
-    </>
-  ),
-  's2e-q2': (
-    <>
-      <p className="mt-1">开口向下：<MathTex tex="a<0" /></p>
-      <p className="mt-1">对称轴 <MathTex tex="x=-\dfrac{b}{2a}=1\Rightarrow b=-2a" /></p>
-      <p className="mt-1"><MathTex tex="a<0\Rightarrow b=-2a>0" /></p>
-    </>
-  ),
-  's2e-q3': (
-    <>
-      <p className="mt-1">韦达定理：<MathTex tex="x_1+x_2=-\dfrac{b}{a}=-\dfrac{-3}{2}=\dfrac{3}{2}" /></p>
-    </>
-  ),
-  's2e-q4': (
-    <>
-      <p className="mt-1">韦达定理：<MathTex tex="x_1+x_2=3,\;x_1x_2=1" /></p>
-      <p className="mt-1"><MathTex tex="x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=9-2=7" /></p>
-    </>
-  ),
-  's2e-q5': (
-    <>
-      <p className="mt-1"><MathTex tex="f(x)=-(x-1)^2+4" />，顶点 <MathTex tex="(1,4)" /></p>
-      <p className="mt-1"><MathTex tex="x=1\in[0,3]" />，最大值 <MathTex tex="f(1)=4" /></p>
-    </>
-  ),
-  's2e-q6': (
-    <>
-      <p className="mt-1">两不等实根：<MathTex tex="\Delta>0" /></p>
-      <p className="mt-1"><MathTex tex="\Delta=4-4k>0\Rightarrow k<1" /></p>
-    </>
-  ),
-  's2e-q7': (
-    <>
-      <p className="mt-1">韦达定理：<MathTex tex="b=-(x_1+x_2)=-(-1+3)=-2" /></p>
-      <p className="mt-1"><MathTex tex="c=x_1\cdot x_2=(-1)\times3=-3" /></p>
-      <p className="mt-1"><MathTex tex="b+c=-2+(-3)=-5" /></p>
-    </>
-  ),
 };
 
 // ══════════════════════════════════════════════════════════
@@ -148,18 +103,17 @@ export function Stage2ExamAnswers() {
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 第二阶段考试 — 答案与解析</h2>
 
       <AnswerSection title="一、不等式" questions={stage2InequalityQuestions} />
-      <AnswerSection title="二、二次函数" questions={stage2QuadraticQuestions} startNum={9} />
 
       <PageBreak label="解答题答案" />
 
-      {/* ═══════════ 三、综合题（4 题）═══════════ */}
+      {/* ═══════════ 二、综合题（2 题）═══════════ */}
       <div className="mb-5">
-        <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">三、综合题</p>
+        <p className="font-bold text-gray-800 mb-2 border-b border-gray-200 pb-1">二、综合题</p>
 
         <div className="columns-2 gap-6 text-gray-700 [&_.katex]:text-[1.15em]" style={{ columnRule: '1px solid #e5e7eb' }}>
 
           <div className="mb-4 pb-3 border-b border-gray-200">
-            <p className="font-bold text-gray-900 mb-2">16.（15 分）</p>
+            <p className="font-bold text-gray-900 mb-2">9.（15 分）</p>
             <p className="font-bold mt-2">（1）求 <MathTex tex="ab" /> 的最大值</p>
             <p className="mt-1.5"><MathTex tex="2a+b\geq2\sqrt{2ab}=1" /></p>
             <p className="mt-1.5"><MathTex tex="\sqrt{2ab}\leq\dfrac{1}{2}\Rightarrow ab\leq\dfrac{1}{8}" /></p>
@@ -172,20 +126,7 @@ export function Stage2ExamAnswers() {
           </div>
 
           <div className="mb-4 pb-3 border-b border-gray-200">
-            <p className="font-bold text-gray-900 mb-2">17.（15 分）</p>
-            <p className="font-bold mt-2">（1）两个正实根</p>
-            <p className="mt-1.5">韦达定理：<MathTex tex="x_1+x_2=2a>0,\;x_1x_2=a+2>0" /></p>
-            <p className="mt-1.5"><MathTex tex="\Delta=4a^2-4(a+2)\geq0\Rightarrow a^2-a-2\geq0" /></p>
-            <p className="mt-1.5"><MathTex tex="(a-2)(a+1)\geq0\Rightarrow a\leq-1" /> 或 <MathTex tex="a\geq2" /></p>
-            <p className="mt-1.5">与 <MathTex tex="a>0" /> 取交集：<MathTex tex="a\geq2" /></p>
-
-            <p className="font-bold mt-3">（2）恒成立</p>
-            <p className="mt-1.5"><MathTex tex="\Delta\leq0\Rightarrow a^2-a-2\leq0" /></p>
-            <p className="mt-1.5"><MathTex tex="-1\leq a\leq2" /></p>
-          </div>
-
-          <div className="mb-4 pb-3 border-b border-gray-200">
-            <p className="font-bold text-gray-900 mb-2">18.（15 分）</p>
+            <p className="font-bold text-gray-900 mb-2">10.（15 分）</p>
             <p className="font-bold mt-2">（1）求 <MathTex tex="b,c" /></p>
             <p className="mt-1.5"><MathTex tex="x=-1,\;x=3" /> 是 <MathTex tex="x^2+bx+c=0" /> 的两根</p>
             <p className="mt-1.5">韦达：<MathTex tex="-1+3=-b\Rightarrow b=-2" /></p>
@@ -196,18 +137,6 @@ export function Stage2ExamAnswers() {
             <p className="mt-1.5"><MathTex tex="(3x-1)(x+1)<0\Rightarrow-1<x<\dfrac{1}{3}" /></p>
           </div>
 
-          <div className="mb-4 pb-3 border-b border-gray-200">
-            <p className="font-bold text-gray-900 mb-2">19.（15 分）</p>
-            <p className="font-bold mt-2">（1）求两根</p>
-            <p className="mt-1.5"><MathTex tex="-x^2+4x-3=0\Rightarrow x^2-4x+3=0" /></p>
-            <p className="mt-1.5"><MathTex tex="(x-1)(x-3)=0\Rightarrow x_1=1,\;x_2=3" /></p>
-
-            <p className="font-bold mt-3">（2）<MathTex tex="[0,3]" /> 上最值</p>
-            <p className="mt-1.5"><MathTex tex="f(x)=-(x-2)^2+1" />，对称轴 <MathTex tex="x=2\in[0,3]" /></p>
-            <p className="mt-1.5">最大值：<MathTex tex="f(2)=1" /></p>
-            <p className="mt-1.5"><MathTex tex="f(0)=-3,\;f(3)=0" /></p>
-            <p className="mt-1.5">最小值：<MathTex tex="f(0)=-3" /></p>
-          </div>
 
         </div>
       </div>

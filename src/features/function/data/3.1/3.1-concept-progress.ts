@@ -1,4 +1,5 @@
 export const functionConceptProgressItems = [
+  { id: 'fc0', label: '掌握区间表示法（五种区间、ℝ、∪）' },
   { id: 'fc1', label: '理解高中函数的严格定义（集合语言）' },
   { id: 'fc2', label: '掌握函数三要素：定义域、对应法则、值域' },
   { id: 'fc3', label: '会求常见函数的定义域（分母≠0、根号≥0）' },

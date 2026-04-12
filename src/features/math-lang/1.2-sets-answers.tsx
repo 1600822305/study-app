@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { setsPractice3 } from './data/1.2/1.2-practice';
 import { setsQuizQuestions } from './data/1.2/1.2-quiz';
 import type { QuizQuestionData } from '@/types';
 
@@ -9,26 +8,6 @@ import type { QuizQuestionData } from '@/types';
 // ══════════════════════════════════════════════════════════
 
 export const setsExplanations: Record<string, ReactNode> = {
-  // ── 常用数集 ──
-  'stp3-1': (
-    <>
-      <p className="mt-2">0 是自然数（<MathTex tex="0 \in \mathbb{N}" />），但不是正整数（<MathTex tex="0 \notin \mathbb{N}^*" />）</p>
-      <p className="mt-1">-1 是负数不属于 N，0.5 是小数不属于 Z</p>
-    </>
-  ),
-  'stp3-2': (
-    <>
-      <p className="mt-2"><MathTex tex="\sqrt{2}" /> 是无理数，不属于 N、Z、Q，但属于 R（实数 = 有理 + 无理）</p>
-    </>
-  ),
-  'stp3-3': (
-    <>
-      <p className="mt-2">Q（有理数）包含所有整数和分数，范围比 Z 大，所以 Q ⊂ Z 是反的</p>
-      <p className="mt-1">正确关系：<MathTex tex="\mathbb{Z} \subset \mathbb{Q}" /></p>
-    </>
-  ),
-
-
   // ── 高考真题（精选12道）──
   // 1. 交集（有限集∩区间）
   'sq1': (
@@ -160,7 +139,6 @@ export function SetsAnswers() {
     <section className="mb-8 print-answers">
       <PageBreak label="答案与解析" />
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.2 集合 — 答案与解析</h2>
-      <AnswerSection title="四、常用数集 — 即时练习" questions={setsPractice3} />
       <AnswerSection title="高考真题实战" questions={setsQuizQuestions} />
     </section>
   );

@@ -42,13 +42,13 @@ export function SequencePrereqPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 1: 基础运算复习 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="seq-ops" className="mb-6 scroll-mt-4">
+      <section id="seq-ops" className="scroll-mt-4">
         <Collapsible title="一、基础运算复习" defaultOpen storageKey="seq-prereq:ops" headerExtra={<SpeakButton text={sequencePrereqNarrations.basicOps} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 通分 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-blue-300 bg-blue-100 text-lg">通分——让分母变成一样的</div>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-blue-300 bg-blue-100 text-[0.9rem]">通分——让分母变成一样的</div>
               <div className="px-3 py-2 space-y-1">
                 <p>通分就是把不同分母的分数，变成同一个分母，方便加减</p>
 
@@ -92,8 +92,8 @@ export function SequencePrereqPage() {
 
             {/* 通分小练习 */}
             <div className="border border-gray-300 rounded overflow-hidden" style={{ breakInside: 'avoid' }}>
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">动手算一算</div>
-              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-lg">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">动手算一算</div>
+              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-[0.9rem]">
                 <p>① <MathTex tex="\frac{1}{3} - \frac{1}{4} =" /></p>
                 <p>④ <MathTex tex="\frac{1}{n+1} - \frac{1}{n+2} =" /></p>
                 <p>② <MathTex tex="\frac{1}{n} - \frac{1}{n+3} =" /></p>
@@ -105,7 +105,7 @@ export function SequencePrereqPage() {
 
             {/* 提公因式 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">提公因式——把相同的部分提到外面</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">提公因式——把相同的部分提到外面</div>
               <div className="px-3 py-2 space-y-0">
                 <p>如果几个项都有一个共同的因子，就把它提出来，括号里放剩下的部分</p>
                 <div className="border-t border-gray-200 pt-1 mt-1">
@@ -144,7 +144,7 @@ export function SequencePrereqPage() {
 
             {/* 指数运算 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">指数运算速查</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">指数运算速查</div>
               <div className="px-3 py-2 space-y-1">
                 <p>等比数列的通项公式 <MathTex tex="a_n = a_1 \cdot q^{n-1}" /> 离不开指数运算</p>
 
@@ -186,7 +186,7 @@ export function SequencePrereqPage() {
 
             {/* 字母代换 */}
             <div className="border border-purple-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">字母代换——把 <MathTex tex="n" /> 换成 <MathTex tex="n+1" /> 或 <MathTex tex="n-1" /></div>
+              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-[0.9rem]">字母代换——把 <MathTex tex="n" /> 换成 <MathTex tex="n+1" /> 或 <MathTex tex="n-1" /></div>
               <div className="px-3 py-2 space-y-0">
                 <p>数列里经常需要把公式中的 <MathTex tex="n" /> 替换成 <MathTex tex="n+1" /> 或 <MathTex tex="n-1" /></p>
                 <p className="font-bold text-purple-700 mt-1">例：已知 <MathTex tex="S_n = 2n^2 + n" />，求 <MathTex tex="S_{n-1}" /></p>
@@ -200,18 +200,16 @@ export function SequencePrereqPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 2: 什么是数列 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="seq-what" className="mb-6 scroll-mt-4">
+      <section id="seq-what" className="scroll-mt-4">
         <Collapsible title="二、什么是数列" defaultOpen storageKey="seq-prereq:what" headerExtra={<SpeakButton text={sequencePrereqNarrations.whatIsSequence} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 定义 + 例子 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-blue-300 bg-blue-100 text-lg">数列 = 按顺序排列的一列数</div>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-blue-300 bg-blue-100 text-[0.9rem]">数列 = 按顺序排列的一列数</div>
               <div className="px-3 py-2 space-y-1">
                 <div className="grid grid-cols-3 gap-3">
                   <div>
@@ -232,7 +230,7 @@ export function SequencePrereqPage() {
 
             {/* 关键术语 */}
             <div className="border border-gray-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">关键术语（只有 3 个）</div>
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">关键术语（只有 3 个）</div>
               <div className="px-3 py-2 space-y-1">
                 <div>
                   <p><strong className="text-blue-700">项</strong>：数列里的每一个数叫做一个"项"</p>
@@ -249,7 +247,7 @@ export function SequencePrereqPage() {
 
             {/* 本质 = 函数 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">数列的本质 = 定义域为正整数的函数</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">数列的本质 = 定义域为正整数的函数</div>
               <div className="px-3 py-2 space-y-1">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-blue-50 rounded-lg px-4 py-2 border border-blue-200 text-center">
@@ -268,7 +266,7 @@ export function SequencePrereqPage() {
 
             {/* 表示方法 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">数列的 3 种表示方法</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">数列的 3 种表示方法</div>
               <div className="px-3 py-2 space-y-1">
                 <p><strong>① 列举法</strong>：直接写出来。例：1, 3, 5, 7, 9, ...</p>
                 <div className="border-t border-gray-200 pt-1">
@@ -282,7 +280,7 @@ export function SequencePrereqPage() {
 
             {/* 补充：有限 vs 无穷 + 常数列 + 首项 */}
             <div className="border border-gray-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">补充几个小概念</div>
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">补充几个小概念</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
@@ -306,8 +304,8 @@ export function SequencePrereqPage() {
 
             {/* 数列概念练习 */}
             <div className="border border-gray-300 rounded overflow-hidden" style={{ breakInside: 'avoid' }}>
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">动手算一算</div>
-              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-lg">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">动手算一算</div>
+              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-[0.9rem]">
                 <p>① <MathTex tex="a_n = 3n + 1" />，<MathTex tex="a_4 =" /></p>
                 <p>④ 数列 1, 4, 9, 16, ... 的 <MathTex tex="a_n =" /></p>
                 <p>② <MathTex tex="a_n = n^2 - n" />，<MathTex tex="a_5 =" /></p>
@@ -321,18 +319,16 @@ export function SequencePrereqPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 3: 通项公式 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="seq-general" className="mb-6 scroll-mt-4">
+      <section id="seq-general" className="scroll-mt-4">
         <Collapsible title={'三、通项公式——数列的\u201c万能钥匙\u201d'} defaultOpen storageKey="seq-prereq:general" headerExtra={<SpeakButton text={sequencePrereqNarrations.generalTerm} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 定义 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-blue-300 bg-blue-100 text-lg">通项公式 = 一个关于 <MathTex tex="n" /> 的公式，代入 <MathTex tex="n" /> 就能算出第 <MathTex tex="n" /> 项</div>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-blue-300 bg-blue-100 text-[0.9rem]">通项公式 = 一个关于 <MathTex tex="n" /> 的公式，代入 <MathTex tex="n" /> 就能算出第 <MathTex tex="n" /> 项</div>
               <div className="px-3 py-2 space-y-1">
                 <p className="text-center text-xl"><MathTex tex="a_n = f(n)" /></p>
                 <p>就像一台机器：你往里面塞一个编号 <MathTex tex="n" />，它就吐出一个数 <MathTex tex="a_n" /></p>
@@ -341,7 +337,7 @@ export function SequencePrereqPage() {
 
             {/* 实战演练 */}
             <div className="border border-gray-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">实战演练：用通项公式算具体的项</div>
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">实战演练：用通项公式算具体的项</div>
               <div className="px-3 py-2 space-y-1">
                 <p className="font-bold text-blue-700">例 1：<MathTex tex="a_n = 2n" />（偶数列）</p>
                 <div className="overflow-x-auto">
@@ -411,42 +407,35 @@ export function SequencePrereqPage() {
               </div>
             </div>
 
+            <PageBreak label="猜通项公式" />
+
             {/* 反过来猜公式 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">反过来：从前几项猜通项公式（观察、猜测、验证）</div>
-              <div className="px-3 py-2 space-y-1">
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">反过来：从前几项猜通项公式（观察、猜测、验证）</div>
+              <div className="px-3 py-1 space-y-0">
                 <div>
                   <p><strong>数列：2, 4, 6, 8, 10, ...</strong></p>
                   <p className="ml-4">每项都是 <MathTex tex="n" /> 的 2 倍，猜 <MathTex tex="a_n = 2n" />。验证：<MathTex tex="2 \times 1 = 2\;\checkmark,\; 2 \times 2 = 4\;\checkmark,\; 2 \times 3 = 6\;\checkmark" /></p>
                 </div>
-                <div className="border-t border-gray-200 pt-1">
+                <div className="border-t border-gray-200">
                   <p><strong>数列：1, 4, 9, 16, 25, ...</strong></p>
                   <p className="ml-4">这不就是 <MathTex tex="1^2, 2^2, 3^2, 4^2, 5^2" /> 吗？猜 <MathTex tex="a_n = n^2" /></p>
                 </div>
-                <div className="border-t border-gray-200 pt-1">
+                <div className="border-t border-gray-200">
                   <p><strong>数列：2, 5, 10, 17, 26, ...</strong></p>
                   <p className="ml-4"><MathTex tex="1+1,\; 4+1,\; 9+1,\; 16+1,\; 25+1" />，猜 <MathTex tex="a_n = n^2 + 1" />。技巧：先看和什么常见数列接近，再看差多少</p>
                 </div>
-                <div className="border-t border-gray-200 pt-1">
+                <div className="border-t border-gray-200">
                   <p><strong>数列：1, 2, 4, 8, 16, ...</strong></p>
                   <p className="ml-4">每项都是前一项的 2 倍，猜 <MathTex tex="a_n = 2^{n-1}" />。验证：<MathTex tex="2^0 = 1\;\checkmark,\; 2^1 = 2\;\checkmark,\; 2^2 = 4\;\checkmark" /></p>
                 </div>
               </div>
             </div>
 
-            {/* 注意 */}
-            <div className="border border-gray-300 rounded overflow-hidden" style={{ breakInside: 'avoid' }}>
-              <div className="px-2 py-1 font-bold text-red-700 border-b border-gray-300 bg-gray-100 text-lg">注意</div>
-              <div className="px-3 py-2 space-y-1">
-                <p>不是所有数列都有简洁的通项公式！但高考考的数列都有。</p>
-                <p>猜出公式后<strong>一定要验证</strong>前几项是否对得上。</p>
-              </div>
-            </div>
-
             {/* 通项公式练习 */}
             <div className="border border-gray-300 rounded overflow-hidden" style={{ breakInside: 'avoid' }}>
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">动手算一算</div>
-              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-lg">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">动手算一算</div>
+              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-[0.9rem]">
                 <p>① <MathTex tex="a_n = 5n - 3" />，<MathTex tex="a_6 =" /></p>
                 <p>④ 数列 3, 6, 9, 12, ... 的 <MathTex tex="a_n =" /></p>
                 <p>② <MathTex tex="a_n = 2^n" />，<MathTex tex="a_8 =" /></p>
@@ -462,18 +451,16 @@ export function SequencePrereqPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 4: 递推公式 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="seq-recursion" className="mb-3 scroll-mt-4">
+      <section id="seq-recursion" className="scroll-mt-4">
         <Collapsible title={'四、递推公式——\u201c下一项怎么来的\u201d'} defaultOpen storageKey="seq-prereq:recursion" headerExtra={<SpeakButton text={sequencePrereqNarrations.recursion} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 定义 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">递推公式 = 告诉你"相邻两项的关系"</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">递推公式 = 告诉你"相邻两项的关系"</div>
               <div className="px-3 py-2 space-y-0">
                 <p>通项公式：知道 <MathTex tex="n" /> 就能直接算出 <MathTex tex="a_n" />，像<strong>导航直达</strong></p>
                 <p>递推公式：知道前一项才能算下一项，像<strong>一步一步走路</strong></p>
@@ -483,7 +470,7 @@ export function SequencePrereqPage() {
 
             {/* 两种常见递推 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">最常见的两种递推</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">最常见的两种递推</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
@@ -504,7 +491,7 @@ export function SequencePrereqPage() {
 
             {/* 实战推项 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">实战：用递推公式一步步推</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">实战：用递推公式一步步推</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold">已知 <MathTex tex="a_{n+1} = a_n + 5,\; a_1 = 3" />，求前 5 项</p>
                 <div className="grid grid-cols-2 gap-2 mt-1">
@@ -524,7 +511,7 @@ export function SequencePrereqPage() {
 
             {/* 对比表 */}
             <div className="border border-gray-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">递推公式 vs 通项公式</div>
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">递推公式 vs 通项公式</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="overflow-x-auto">
                   <table className="w-full text-center">
@@ -567,18 +554,16 @@ export function SequencePrereqPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 5: 求和符号 Σ */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="seq-sigma" className="mb-3 scroll-mt-4">
+      <section id="seq-sigma" className="scroll-mt-4">
         <Collapsible title="五、求和符号 Σ" defaultOpen storageKey="seq-prereq:sigma" headerExtra={<SpeakButton text={sequencePrereqNarrations.sigma} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 定义 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">Σ 就是"批量加法"</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">Σ 就是"批量加法"</div>
               <div className="px-3 py-2 space-y-0">
                 <p>Σ 是希腊字母，读作"西格玛"（Sigma），代表 Sum（求和）</p>
                 <p className="text-center text-xl mt-1"><MathTex tex="\sum_{i=1}^{n} a_i = a_1 + a_2 + a_3 + \cdots + a_n" /></p>
@@ -601,7 +586,7 @@ export function SequencePrereqPage() {
 
             {/* 例子 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">看几个例子就明白了</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">看几个例子就明白了</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
@@ -631,7 +616,7 @@ export function SequencePrereqPage() {
 
             {/* 运算规则 + Sn */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">Σ 的运算规则</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">Σ 的运算规则</div>
               <div className="px-3 py-2 space-y-0">
                 <p><strong>① 提公因子：</strong><MathTex tex="\displaystyle\sum_{i=1}^{n} c \cdot a_i = c \cdot \sum_{i=1}^{n} a_i" />（每项都乘 c，提到外面）</p>
                 <p className="mt-1"><strong>② 拆项：</strong><MathTex tex="\displaystyle\sum_{i=1}^{n} (a_i + b_i) = \sum_{i=1}^{n} a_i + \sum_{i=1}^{n} b_i" />（加法可以拆成两个 Σ）</p>
@@ -640,7 +625,7 @@ export function SequencePrereqPage() {
 
             {/* Sn = Σ */}
             <div className="border border-gray-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">用 Σ 表示前 n 项和</div>
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">用 Σ 表示前 n 项和</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="text-center text-xl"><MathTex tex="S_n = \sum_{i=1}^{n} a_i" /></p>
                 <p className="mt-1"><MathTex tex="S_n" /> 就是 Σ 的简写，前面学的"前 n 项和"换了个写法而已</p>

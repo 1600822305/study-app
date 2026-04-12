@@ -70,23 +70,26 @@ export interface DiagramData {
 }
 
 // ─── Projection ────────────────────────────────────────────
-export type Rotation3D = { rotY: number; rotX: number };
+// JSXGraph-style parallel projection: azimuth (水平旋转) + elevation (俯仰)
+// 角度单位: 度。参考 JSXGraph view3d.js getRotationFromAngles()
+export type Rotation3D = { az: number; el: number };
 
-// 斜二测画法: x→水平, z→竖直, y→45°方向取半
 function project(p: Point3D, rotation?: Rotation3D): Point2D {
   const [x, y, z] = p;
   
   if (rotation) {
-    // 3D 旋转投影
-    const radY = (rotation.rotY * Math.PI) / 180;
-    const radX = (rotation.rotX * Math.PI) / 180;
-    // 绕 Y 轴旋转（水平）
-    const x1 = x * Math.cos(radY) - y * Math.sin(radY);
-    const y1 = x * Math.sin(radY) + y * Math.cos(radY);
-    const z1 = z;
-    // 绕 X 轴旋转（俯仰）
-    const z2 = y1 * Math.sin(radX) + z1 * Math.cos(radX);
-    return [x1, -z2];
+    // JSXGraph parallel projection
+    const az = (rotation.az * Math.PI) / 180;
+    const el = (rotation.el * Math.PI) / 180;
+    const cosAz = Math.cos(az);
+    const sinAz = Math.sin(az);
+    const sinEl = Math.sin(el);
+    const cosEl = Math.cos(el);
+    
+    const px = -cosAz * x + sinAz * y;
+    // SVG y轴向下，取反 JSXGraph 的 screen Y
+    const py = sinEl * sinAz * x + sinEl * cosAz * y - cosEl * z;
+    return [px, py];
   }
   
   // 默认斜二测
@@ -298,7 +301,7 @@ interface Geo3dSvgProps {
   height?: number;
   strokeColor?: string;
   className?: string;
-  rotation?: Rotation3D;  // 可选视角旋转，如 { rotY: -135, rotX: 27 }
+  rotation?: Rotation3D;  // 可选视角旋转，如 { az: 63, el: 46 }
 }
 
 export function Geo3dSvg({
@@ -390,7 +393,7 @@ export function Geo3dSvg({
       width={width}
       height={height}
       viewBox={viewBox}
-      className={className}
+      className={`geo-diagram${className ? ' ' + className : ''}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Arrow markers */}

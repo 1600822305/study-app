@@ -1,1 +1,1 @@
-export { QuadraticPage } from './2.2-quadratic-page';
+export { QuadraticPage } from './3.1.5-quadratic-page';

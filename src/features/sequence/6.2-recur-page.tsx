@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
+import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
 import { sequenceRecurNarrations } from './data/6.2/6.2-recur-narrations';
 import { sequenceRecurProgressItems } from './data/6.2/6.2-recur-progress';
 import { useProgress } from '@/hooks';
@@ -40,13 +40,13 @@ export function SequenceRecurPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 1: Sₙ 与 aₙ 的关系 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="sn-an" className="mb-3 scroll-mt-4">
+      <section id="sn-an" className="scroll-mt-4">
         <Collapsible title="一、Sₙ 与 aₙ 的关系" defaultOpen storageKey="seq-recur:sn-an" headerExtra={<SpeakButton text={sequenceRecurNarrations.snAn} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 核心公式 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">核心公式（必背）</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">核心公式（必背）</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="text-center text-xl"><MathTex tex="a_n = \begin{cases} S_1 & n = 1 \\[4pt] S_n - S_{n-1} & n \geq 2 \end{cases}" /></p>
                 <p className="mt-1">意思：第 <MathTex tex="n" /> 项 = 前 <MathTex tex="n" /> 项的和 - 前 <MathTex tex="n-1" /> 项的和（把前面的都减掉，剩下第 <MathTex tex="n" /> 项）</p>
@@ -55,7 +55,7 @@ export function SequenceRecurPage() {
 
             {/* 为什么分两段 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">为什么要分 n=1 和 n≥2？</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">为什么要分 n=1 和 n≥2？</div>
               <div className="px-3 py-2 space-y-0">
                 <p>当 <MathTex tex="n = 1" /> 时，<MathTex tex="S_{n-1} = S_0" />，而 <MathTex tex="S_0" /> 没有定义（前 0 项和是什么？）</p>
                 <p className="mt-1">所以 <MathTex tex="n = 1" /> 只能用 <MathTex tex="a_1 = S_1" /> 直接算</p>
@@ -65,7 +65,7 @@ export function SequenceRecurPage() {
 
             {/* 例1 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">实战例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">实战例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">例 1：已知 <MathTex tex="S_n = 2n^2 + 3n" />，求 <MathTex tex="a_n" /></p>
 
@@ -99,8 +99,8 @@ export function SequenceRecurPage() {
 
             {/* 练习 */}
             <div className="border border-gray-300 rounded overflow-hidden" style={{ breakInside: 'avoid' }}>
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">动手算一算</div>
-              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-lg">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">动手算一算</div>
+              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-[0.9rem]">
                 <p>① <MathTex tex="S_n = n^2" />，求 <MathTex tex="a_n" /></p>
                 <p>③ <MathTex tex="S_n = 3^n + 1" />，求 <MathTex tex="a_n" /></p>
                 <p>② <MathTex tex="S_n = 3n^2 - n" />，求 <MathTex tex="a_n" /></p>
@@ -112,18 +112,16 @@ export function SequenceRecurPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 2: 累加法与累乘法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="accumulate" className="mb-3 scroll-mt-4">
+      <section id="accumulate" className="scroll-mt-4">
         <Collapsible title="二、累加法与累乘法" defaultOpen storageKey="seq-recur:accumulate" headerExtra={<SpeakButton text={sequenceRecurNarrations.accumulate} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 累加法 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">累加法：适用于 aₙ₊₁ - aₙ = f(n)</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">累加法：适用于 aₙ₊₁ - aₙ = f(n)</div>
               <div className="px-3 py-2 space-y-0">
                 <p>当递推公式是<strong>"下一项 - 这一项 = 关于 n 的式子"</strong>时，用累加法</p>
                 <p className="mt-1">核心思路：把所有相邻项的差写出来，全部加起来</p>
@@ -140,7 +138,7 @@ export function SequenceRecurPage() {
 
             {/* 累加法例题 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">累加法例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">累加法例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">已知 <MathTex tex="a_{n+1} = a_n + 2n,\; a_1 = 1" />，求 <MathTex tex="a_n" /></p>
                 <p className="mt-1">写出每一步的差：</p>
@@ -155,7 +153,7 @@ export function SequenceRecurPage() {
 
             {/* 累乘法 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">累乘法：适用于 aₙ₊₁ / aₙ = g(n)</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">累乘法：适用于 aₙ₊₁ / aₙ = g(n)</div>
               <div className="px-3 py-2 space-y-0">
                 <p>当递推公式是<strong>"下一项 / 这一项 = 关于 n 的式子"</strong>时，用累乘法</p>
                 <p className="mt-1">核心思路：把所有相邻项的比写出来，全部乘起来</p>
@@ -168,7 +166,7 @@ export function SequenceRecurPage() {
 
             {/* 累乘法例题 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">累乘法例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">累乘法例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-green-700">已知 <MathTex tex="a_{n+1} = \dfrac{n+1}{n} \cdot a_n,\; a_1 = 1" />，求 <MathTex tex="a_n" /></p>
                 <p className="mt-1">写出每一步的比：</p>
@@ -182,18 +180,16 @@ export function SequenceRecurPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 3: 构造法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="construct" className="mb-3 scroll-mt-4">
+      <section id="construct" className="scroll-mt-4">
         <Collapsible title="三、构造法（高考最高频）" defaultOpen storageKey="seq-recur:construct" headerExtra={<SpeakButton text={sequenceRecurNarrations.construct} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 适用情况 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">适用情况：aₙ₊₁ = paₙ + q</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">适用情况：aₙ₊₁ = paₙ + q</div>
               <div className="px-3 py-2 space-y-0">
                 <p>这是高考最爱考的递推类型！形如：</p>
                 <p className="text-center text-xl mt-1"><MathTex tex="a_{n+1} = p \cdot a_n + q \quad (p \neq 0,\; p \neq 1)" /></p>
@@ -203,7 +199,7 @@ export function SequenceRecurPage() {
 
             {/* 方法步骤 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">三步构造法</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">三步构造法</div>
               <div className="px-3 py-2 space-y-0">
                 <p><strong>第 1 步</strong>：两边加一个常数 <MathTex tex="c" />，使右边能提公因式</p>
                 <p className="ml-4"><MathTex tex="a_{n+1} + c = p(a_n + c)" /></p>
@@ -218,7 +214,7 @@ export function SequenceRecurPage() {
 
             {/* 完整例题 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">完整例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">完整例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">已知 <MathTex tex="a_{n+1} = 2a_n + 3,\; a_1 = 1" />，求 <MathTex tex="a_n" /></p>
 
@@ -237,7 +233,7 @@ export function SequenceRecurPage() {
 
             {/* 再来一题 */}
             <div className="border border-purple-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">再练一题</div>
+              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-[0.9rem]">再练一题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-purple-700">已知 <MathTex tex="a_{n+1} = 3a_n - 4,\; a_1 = 3" />，求 <MathTex tex="a_n" /></p>
 
@@ -251,8 +247,8 @@ export function SequenceRecurPage() {
 
             {/* 练习 */}
             <div className="border border-gray-300 rounded overflow-hidden" style={{ breakInside: 'avoid' }}>
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">动手算一算</div>
-              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-lg">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">动手算一算</div>
+              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-[0.9rem]">
                 <p>① <MathTex tex="a_{n+1} = 2a_n + 1,\; a_1 = 2" /></p>
                 <p>③ <MathTex tex="a_{n+1} = 3a_n + 2,\; a_1 = 1" /></p>
                 <p>② <MathTex tex="a_{n+1} = 2a_n - 1,\; a_1 = 3" /></p>
@@ -267,12 +263,12 @@ export function SequenceRecurPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 4: 方法选择总结 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="summary" className="mb-3 scroll-mt-4">
+      <section id="summary" className="scroll-mt-4">
         <Collapsible title="四、方法选择总结" defaultOpen storageKey="seq-recur:summary">
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">看到什么条件 → 用什么方法</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">看到什么条件 → 用什么方法</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="overflow-x-auto">
                   <table className="w-full text-center">
@@ -306,7 +302,7 @@ export function SequenceRecurPage() {
             </div>
 
             <div className="border border-red-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-lg">高考提醒</div>
+              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-[0.9rem]">高考提醒</div>
               <div className="px-3 py-2 space-y-0">
                 <p>数列解答题通常第一问就是"求通项公式"</p>
                 <p className="mt-1">最常考的是<strong>构造法</strong>和<strong> Sₙ 与 aₙ 的关系</strong>，这两个必须熟练</p>

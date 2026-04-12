@@ -1,8 +1,8 @@
-import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
 import { vectorCoordNarrations } from './data/4.3/4.3-coord-narrations';
 import { vectorCoordProgressItems } from './data/4.3/4.3-coord-progress';
 import { useProgress } from '@/hooks';
-import { scrollToId } from '@/lib/scroll';
+
 
 export function VectorCoordPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('vector-coord', vectorCoordProgressItems);
@@ -25,54 +25,22 @@ export function VectorCoordPage() {
 <ExportButton title="4.3 坐标运算与数量积" />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-3 mb-3">
-        <p className="font-bold text-gray-800 mb-2">📋 知识地图</p>
-        <div className="text-gray-600 space-y-1">
-          <button onClick={() => scrollToId('coord-repr')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、向量的坐标表示</button>
-          <button onClick={() => scrollToId('coord-ops')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、坐标运算</button>
-          <button onClick={() => scrollToId('coord-mag')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、模与距离</button>
-          <button onClick={() => scrollToId('coord-mid')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、中点公式</button>
-          <button onClick={() => scrollToId('coord-dot')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、数量积（点乘）</button>
-          <button onClick={() => scrollToId('coord-perp')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、垂直与平行判定</button>
-        </div>
-      </div>
-
-      {/* 速通路线图 */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-3 mb-3">
-        <p className="font-bold text-blue-900 text-lg mb-1">速通路线图：坐标运算就3步</p>
-        <p className="text-blue-700 text-sm mb-3">向量用坐标表示后，所有运算都变成了简单的数字计算！</p>
-        <div className="grid grid-cols-3 gap-2 text-sm">
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">① 坐标表示</p>
-            <p className="text-gray-500 mt-1">向量 = (x, y)，一对数字搞定</p>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">② 加减数乘</p>
-            <p className="text-gray-500 mt-1">对应坐标直接算</p>
-          </div>
-          <div className="bg-white rounded-xl p-3 border border-blue-100">
-            <p className="font-bold text-gray-800">③ 模和距离</p>
-            <p className="text-gray-500 mt-1">勾股定理求长度</p>
-          </div>
-        </div>
-      </div>
-
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
 
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 1: 坐标表示 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="coord-repr" className="mb-3 scroll-mt-4">
+      <section id="coord-repr" className="scroll-mt-4">
         <Collapsible title="一、向量的坐标表示" defaultOpen storageKey="vector-coord:repr" headerExtra={<SpeakButton text={vectorCoordNarrations.coordRepresent} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：把向量写成坐标形式 (x, y)。</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 核心概念 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">什么是向量的坐标？</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">什么是向量的坐标？</p>
               <p>在平面直角坐标系中，向量可以用一对数字 <Math tex="(x, y)" /> 来表示</p>
               <div className="bg-white rounded-lg p-2 border border-blue-100 mt-1">
-                <p className="text-center text-lg"><Math tex="\vec{a} = (x, y)" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\vec{a} = (x, y)" /></p>
                 <p className="text-center text-gray-500 mt-1">x 是水平方向的分量，y 是竖直方向的分量</p>
               </div>
               <p className="text-blue-700 mt-1 text-sm">就像GPS定位一样：告诉你往右走多少、往上走多少，就能确定方向和距离。</p>
@@ -86,7 +54,7 @@ export function VectorCoordPage() {
                 <p className="text-center mt-1">
                   起点 <Math tex="A(x_1, y_1)" />，终点 <Math tex="B(x_2, y_2)" />
                 </p>
-                <p className="text-center mt-1 text-lg">
+                <p className="text-center mt-1 text-[0.9rem]">
                   <Math tex="\vec{AB} = (x_2 - x_1,\; y_2 - y_1)" />
                 </p>
               </div>
@@ -118,27 +86,27 @@ export function VectorCoordPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 2: 坐标运算 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="coord-ops" className="mb-3 scroll-mt-4">
+      <section id="coord-ops" className="scroll-mt-4">
         <Collapsible title="二、坐标运算" defaultOpen storageKey="vector-coord:ops" headerExtra={<SpeakButton text={vectorCoordNarrations.coordOps} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：用坐标做向量的加减法和数乘。</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 公式总结 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">三大运算公式</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">三大运算公式</p>
               <p className="text-blue-700 mb-1">设 <Math tex="\vec{a} = (x_1, y_1)" />，<Math tex="\vec{b} = (x_2, y_2)" />，则：</p>
               <div className="space-y-1">
                 <div className="bg-white rounded-lg p-2 border border-blue-100">
                   <p className="font-bold text-gray-700 mb-0.5">加法：对应坐标相加</p>
-                  <p className="text-center text-lg"><Math tex="\vec{a} + \vec{b} = (x_1 + x_2,\; y_1 + y_2)" /></p>
+                  <p className="text-center text-[0.9rem]"><Math tex="\vec{a} + \vec{b} = (x_1 + x_2,\; y_1 + y_2)" /></p>
                 </div>
                 <div className="bg-white rounded-lg p-2 border border-blue-100">
                   <p className="font-bold text-gray-700 mb-0.5">减法：对应坐标相减</p>
-                  <p className="text-center text-lg"><Math tex="\vec{a} - \vec{b} = (x_1 - x_2,\; y_1 - y_2)" /></p>
+                  <p className="text-center text-[0.9rem]"><Math tex="\vec{a} - \vec{b} = (x_1 - x_2,\; y_1 - y_2)" /></p>
                 </div>
                 <div className="bg-white rounded-lg p-2 border border-blue-100">
                   <p className="font-bold text-gray-700 mb-0.5">数乘：每个坐标都乘</p>
-                  <p className="text-center text-lg"><Math tex="\lambda\vec{a} = (\lambda x_1,\; \lambda y_1)" /></p>
+                  <p className="text-center text-[0.9rem]"><Math tex="\lambda\vec{a} = (\lambda x_1,\; \lambda y_1)" /></p>
                 </div>
               </div>
             </div>
@@ -188,22 +156,20 @@ export function VectorCoordPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 3: 模与距离 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="coord-mag" className="mb-3 scroll-mt-4">
+      <section id="coord-mag" className="scroll-mt-4">
         <Collapsible title="三、模与距离" defaultOpen storageKey="vector-coord:mag" headerExtra={<SpeakButton text={vectorCoordNarrations.magnitude} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：用坐标求向量的长度和两点间距离。</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 模的公式 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">向量的模（长度）</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">向量的模（长度）</p>
               <p className="text-blue-700 mb-1">其实就是<strong>勾股定理</strong>！x 是横边，y 是竖边，模是斜边：</p>
               <div className="bg-white rounded-lg p-2 border border-blue-100">
-                <p className="text-center text-lg"><Math tex="|\vec{a}| = \sqrt{x^2 + y^2}" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="|\vec{a}| = \sqrt{x^2 + y^2}" /></p>
               </div>
             </div>
 
@@ -213,7 +179,7 @@ export function VectorCoordPage() {
               <p>知道了模的公式，两点间距离也就会了：</p>
               <div className="bg-white rounded-lg p-2 border border-gray-200 mt-1">
                 <p className="text-center"><Math tex="A(x_1, y_1)" /> 到 <Math tex="B(x_2, y_2)" /> 的距离：</p>
-                <p className="text-center text-lg mt-1"><Math tex="|AB| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}" /></p>
+                <p className="text-center text-[0.9rem] mt-1"><Math tex="|AB| = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}" /></p>
               </div>
               <p className="text-gray-500 mt-1 text-sm">本质就是先求 <Math tex="\vec{AB}" /> 的坐标，再求它的模。</p>
             </div>
@@ -223,7 +189,7 @@ export function VectorCoordPage() {
               <p className="font-bold text-gray-800 mb-1">求单位向量</p>
               <p>方向不变、长度变成1的向量，就是单位向量：</p>
               <div className="bg-white rounded-lg p-2 border border-gray-200 mt-1">
-                <p className="text-center text-lg"><Math tex="\vec{a}_0 = \frac{\vec{a}}{|\vec{a}|} = \left(\frac{x}{|\vec{a}|},\; \frac{y}{|\vec{a}|}\right)" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\vec{a}_0 = \frac{\vec{a}}{|\vec{a}|} = \left(\frac{x}{|\vec{a}|},\; \frac{y}{|\vec{a}|}\right)" /></p>
               </div>
               <p className="text-gray-500 mt-1 text-sm">每个坐标都除以模，长度就缩成1了。</p>
             </div>
@@ -261,22 +227,20 @@ export function VectorCoordPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 4: 中点公式 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="coord-mid" className="mb-3 scroll-mt-4">
+      <section id="coord-mid" className="scroll-mt-4">
         <Collapsible title="四、中点公式" defaultOpen storageKey="vector-coord:mid" headerExtra={<SpeakButton text={vectorCoordNarrations.coordRepresent} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：求线段中点坐标，理解向量的中点关系。</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 中点公式 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">中点坐标公式</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">中点坐标公式</p>
               <p className="text-blue-700 mb-1"><Math tex="A(x_1, y_1)" /> 和 <Math tex="B(x_2, y_2)" /> 的中点 <Math tex="M" />：</p>
               <div className="bg-white rounded-lg p-2 border border-blue-100">
-                <p className="text-center text-lg"><Math tex="M = \left(\frac{x_1+x_2}{2},\; \frac{y_1+y_2}{2}\right)" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="M = \left(\frac{x_1+x_2}{2},\; \frac{y_1+y_2}{2}\right)" /></p>
               </div>
               <p className="text-blue-700 mt-1 text-sm">就是两个坐标取平均值，非常好记。</p>
             </div>
@@ -286,7 +250,7 @@ export function VectorCoordPage() {
               <p className="font-bold text-gray-800 mb-1">用向量理解中点</p>
               <p>如果 M 是 AB 的中点，那么：</p>
               <div className="bg-white rounded-lg p-2 border border-gray-200 mt-1">
-                <p className="text-center text-lg"><Math tex="\vec{OM} = \frac{1}{2}(\vec{OA} + \vec{OB})" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\vec{OM} = \frac{1}{2}(\vec{OA} + \vec{OB})" /></p>
               </div>
               <p className="text-gray-500 mt-1 text-sm">中点的位置向量 = 两个端点位置向量的平均值。</p>
             </div>
@@ -330,26 +294,24 @@ export function VectorCoordPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 5: 数量积（点乘） */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="coord-dot" className="mb-3 scroll-mt-4">
+      <section id="coord-dot" className="scroll-mt-4">
         <Collapsible title="五、数量积（点乘）" defaultOpen storageKey="vector-coord:dot" headerExtra={<SpeakButton text={vectorCoordNarrations.coordOps} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：计算两个向量的数量积，用数量积求夹角。</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 什么是数量积 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">什么是数量积？</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">什么是数量积？</p>
               <p>两个向量"乘"出一个<strong>数字</strong>（不是向量！），也叫<strong>点乘</strong>或<strong>内积</strong></p>
               <div className="bg-white rounded-lg p-2 border border-blue-100 mt-1 space-y-1">
                 <p className="font-bold text-gray-700">几何形式：</p>
-                <p className="text-center text-lg"><Math tex="\vec{a} \cdot \vec{b} = |\vec{a}||\vec{b}|\cos\theta" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\vec{a} \cdot \vec{b} = |\vec{a}||\vec{b}|\cos\theta" /></p>
                 <p className="text-center text-gray-500 text-sm">θ 是两个向量的夹角（0° ≤ θ ≤ 180°）</p>
                 <p className="font-bold text-gray-700 mt-1">坐标形式（做题用这个）：</p>
-                <p className="text-center text-lg"><Math tex="\vec{a} \cdot \vec{b} = x_1 x_2 + y_1 y_2" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\vec{a} \cdot \vec{b} = x_1 x_2 + y_1 y_2" /></p>
                 <p className="text-center text-gray-500 text-sm">对应坐标相乘再相加，比加减法还简单</p>
               </div>
             </div>
@@ -359,7 +321,7 @@ export function VectorCoordPage() {
               <p className="font-bold text-gray-800 mb-1">用数量积求夹角</p>
               <p>把两个公式联立，解出 cosθ：</p>
               <div className="bg-white rounded-lg p-2 border border-gray-200 mt-1">
-                <p className="text-center text-lg"><Math tex="\cos\theta = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|} = \frac{x_1 x_2 + y_1 y_2}{\sqrt{x_1^2+y_1^2} \cdot \sqrt{x_2^2+y_2^2}}" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\cos\theta = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}||\vec{b}|} = \frac{x_1 x_2 + y_1 y_2}{\sqrt{x_1^2+y_1^2} \cdot \sqrt{x_2^2+y_2^2}}" /></p>
               </div>
               <p className="text-gray-500 mt-1 text-sm">步骤：① 算点乘 → ② 算两个模 → ③ 除一下 → ④ 反查角度</p>
             </div>
@@ -400,30 +362,28 @@ export function VectorCoordPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 6: 垂直与平行判定 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="coord-perp" className="mb-3 scroll-mt-4">
+      <section id="coord-perp" className="scroll-mt-4">
         <Collapsible title="六、垂直与平行判定" defaultOpen storageKey="vector-coord:perp" headerExtra={<SpeakButton text={vectorCoordNarrations.magnitude} />}>
           <p className="text-blue-600 mb-2">🎯 学完你能：用坐标判断两个向量是否垂直或平行。高考最爱考！</p>
           <div className="space-y-0.5 text-gray-700">
 
             {/* 垂直 */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-blue-800 mb-1">垂直判定</p>
+              <p className="font-bold text-[0.9rem] text-blue-800 mb-1">垂直判定</p>
               <div className="bg-white rounded-lg p-2 border border-blue-100">
-                <p className="text-center text-lg"><Math tex="\vec{a} \perp \vec{b} \;\Leftrightarrow\; \vec{a} \cdot \vec{b} = 0 \;\Leftrightarrow\; x_1 x_2 + y_1 y_2 = 0" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\vec{a} \perp \vec{b} \;\Leftrightarrow\; \vec{a} \cdot \vec{b} = 0 \;\Leftrightarrow\; x_1 x_2 + y_1 y_2 = 0" /></p>
               </div>
               <p className="text-blue-700 mt-1">记住：<strong>点乘为零 = 垂直</strong>，这是高考最常考的一句话</p>
             </div>
 
             {/* 平行 */}
             <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-lg text-green-800 mb-1">平行判定</p>
+              <p className="font-bold text-[0.9rem] text-green-800 mb-1">平行判定</p>
               <div className="bg-white rounded-lg p-2 border border-green-100">
-                <p className="text-center text-lg"><Math tex="\vec{a} \parallel \vec{b} \;\Leftrightarrow\; x_1 y_2 - x_2 y_1 = 0" /></p>
+                <p className="text-center text-[0.9rem]"><Math tex="\vec{a} \parallel \vec{b} \;\Leftrightarrow\; x_1 y_2 - x_2 y_1 = 0" /></p>
               </div>
               <p className="text-green-700 mt-1">记住：<strong>交叉相乘相减为零 = 平行</strong>（像打"×"一样交叉乘）</p>
             </div>

@@ -25,15 +25,19 @@ export const axiom4Diagram: DiagramData = {
 
 // ─── 线线关系 ─────────────────────────────────────────────────
 export const perpLinesDiagram: DiagramData = {
-  // 垂直直线: two lines meeting at 90°
+  name: '线线垂直',
+  // 垂直直线: two lines meeting at 90°, with right angle mark
   vertices: [
     [-30, 0, 15], [30, 0, 15],    // a (horizontal): 0, 1
     [0, 0, -5], [0, 0, 40],       // b (vertical): 2, 3
-    [0, 0, 15],                     // intersection O: 4
+    [0, 0, 15],                    // intersection O: 4
+    [7, 0, 15], [7, 0, 22], [0, 0, 22],  // right angle mark: 5, 6, 7
   ],
   edges: [
     { from: 0, to: 1 },
     { from: 2, to: 3 },
+    { from: 5, to: 6 },
+    { from: 6, to: 7 },
   ],
   polygons: [],
   freeLabels: [
@@ -136,21 +140,22 @@ function makeCuboid(edgeHighlights: [number, number, string][], faceHighlights?:
 }
 
 // 平行: AB∥DC 蓝色, AB∥A'B' 绿色, AA'∥BB'∥CC'∥DD' 红色
-export const cuboidParallelDiagram = makeCuboid([
+export const cuboidParallelDiagram = { ...makeCuboid([
   [4, 5, '#2563eb'], [6, 7, '#2563eb'],   // AB∥DC（对边）
   [0, 1, '#16a34a'],                        // A'B'（与AB上下对应）
   [0, 4, '#dc2626'], [1, 5, '#dc2626'], [2, 6, '#dc2626'], [3, 7, '#dc2626'], // 四条竖直边
-]);
+]), name: '长方体-线线平行' };
 // 相交: AB(4→5)∩BC(5→6) 交于B, AB(4→5)∩BB'(1→5) 交于B
-export const cuboidIntersectDiagram = makeCuboid([[4, 5, '#16a34a'], [5, 6, '#16a34a'], [1, 5, '#2563eb']]);
+export const cuboidIntersectDiagram = { ...makeCuboid([[4, 5, '#16a34a'], [5, 6, '#16a34a'], [1, 5, '#2563eb']]), name: '长方体-线线相交' };
 // 异面: AA'(0→4) 和 BC(5→6) 紫色高亮
-export const cuboidSkewDiagram = makeCuboid([[0, 4, '#9333ea'], [5, 6, '#9333ea']]);
+export const cuboidSkewDiagram = { ...makeCuboid([[0, 4, '#9333ea'], [5, 6, '#9333ea']]), name: '长方体-线线异面' };
 // 垂直: AB(4→5) 和 AA'(0→4) 红色高亮
-export const cuboidPerpDiagram = makeCuboid([[4, 5, '#dc2626'], [0, 4, '#dc2626']]);
+export const cuboidPerpDiagram = { ...makeCuboid([[4, 5, '#dc2626'], [0, 4, '#dc2626']]), name: '长方体-线线垂直' };
 
 // ─── 线面基本关系抽象图 ────────────────────────────────────
 
 export const lineInPlaneDiagram: DiagramData = {
+  name: '线面关系-在面内',
   // 线在面内: line a lying on plane α
   vertices: [
     [-60, -25, 0], [60, -25, 0], [70, 30, 0], [-50, 30, 0], // plane: 0-3
@@ -168,6 +173,7 @@ export const lineInPlaneDiagram: DiagramData = {
 };
 
 export const lineParallelPlaneDiagram: DiagramData = {
+  name: '线面关系-线面平行',
   // 线面平行: line a floating above plane α
   vertices: [
     [-50, -20, 0], [50, -20, 0], [60, 25, 0], [-40, 25, 0], // plane: 0-3
@@ -185,6 +191,7 @@ export const lineParallelPlaneDiagram: DiagramData = {
 };
 
 export const lineIntersectPlaneDiagram: DiagramData = {
+  name: '线面关系-线面相交',
   // 线面相交: line a piercing through plane α at point P
   // 面上方实线，面下方虚线（标准画法）
   vertices: [
@@ -207,6 +214,7 @@ export const lineIntersectPlaneDiagram: DiagramData = {
 };
 
 export const linePerpPlaneDiagram: DiagramData = {
+  name: '线面关系-线面垂直',
   // 线面垂直定义: line a perpendicular to plane β
   vertices: [
     [-60, -25, 0], [60, -25, 0], [70, 30, 0], [-50, 30, 0], // plane: 0-3
@@ -227,106 +235,66 @@ export const linePerpPlaneDiagram: DiagramData = {
 };
 
 // 纯长方体（无高亮，参考图用）
-export const cuboidPlainDiagram = makeCuboid([], []);
+export const cuboidPlainDiagram = { ...makeCuboid([], []), name: '长方体-参考图' };
 
 // ─── 线面关系 — 带高亮边/面的长方体 ────────────────────────────
 // 在面内: AB(4→5) 蓝色, 面 ABCD 蓝色着色
-export const cuboidLineInPlaneDiagram = makeCuboid(
+export const cuboidLineInPlaneDiagram = { ...makeCuboid(
   [[4, 5, '#2563eb']],
   [{ verts: FACE_ABCD, color: '#93c5fd' }],
-);
+), name: '长方体-线在面内' };
 // 线面平行: AB(4→5) 蓝色, 面 A'B'C'D' 蓝色着色
-export const cuboidLpParallelDiagram = makeCuboid(
+export const cuboidLpParallelDiagram = { ...makeCuboid(
   [[4, 5, '#2563eb']],
   [{ verts: FACE_AbBcCdDd, color: '#93c5fd' }],
-);
+), name: '长方体-线面平行' };
+// 定理①例题: 同上，独立图，供定理①章节单独调试
+export const cuboidLpParallelDetExDiagram = { ...makeCuboid(
+  [[4, 5, '#2563eb']],
+  [{ verts: FACE_AbBcCdDd, color: '#93c5fd' }],
+), name: '长方体-线面平行判定例题' };
 // 定理②: AA'(0→4) 紫色(垂线n), A'B'(0→1) 蓝色(直线a), 面 ABCD 着色
-export const cuboidLpParallelPropDiagram = makeCuboid(
+export const cuboidLpParallelPropDiagram = { ...makeCuboid(
   [[0, 4, '#9333ea'], [0, 1, '#2563eb']],
   [{ verts: FACE_ABCD, color: '#93c5fd' }],
-);
+), name: '长方体-线面平行性质' };
 // 线面相交: AA'(0→4) 橙色, 面 ABCD 琥珀着色
-export const cuboidLpIntersectDiagram = makeCuboid(
+export const cuboidLpIntersectDiagram = { ...makeCuboid(
   [[0, 4, '#d97706']],
   [{ verts: FACE_ABCD, color: '#fcd34d' }],
-);
+), name: '长方体-线面相交' };
 // 定理⑤ 长方体例子: AB(4→5) AD(4→7) 蓝色高亮, 面A₁B₁C₁D₁ 绿色着色
-export const cuboidPpDetExDiagram = makeCuboid(
+export const cuboidPpDetExDiagram = { ...makeCuboid(
   [[4, 5, '#2563eb'], [4, 7, '#2563eb']],
   [{ verts: FACE_AbBcCdDd, color: '#86efac', opacity: 0.2 }],
-);
+), name: '长方体-面面平行判定例题' };
 // 定理⑥ 长方体例子: AB(4→5) A₁B₁(0→1) 蓝色高亮, 面ABB₁A₁ 琥珀着色
-export const cuboidPpPropExDiagram = makeCuboid(
+export const cuboidPpPropExDiagram = { ...makeCuboid(
   [[4, 5, '#2563eb'], [0, 1, '#2563eb']],
   [{ verts: [4, 5, 1, 0], color: '#fde68a', opacity: 0.2 }],
-);
+), name: '长方体-面面平行性质例题' };
 // 定理⑦ 长方体例子: AA₁(0→4) 紫色高亮, 面ABB₁A₁ 绿色着色, 面A₁B₁C₁D₁ 蓝色着色
-export const cuboidPpPerpDetExDiagram = makeCuboid(
+export const cuboidPpPerpDetExDiagram = { ...makeCuboid(
   [[0, 4, '#9333ea']],
   [{ verts: [4, 5, 1, 0], color: '#86efac', opacity: 0.2 }, { verts: FACE_AbBcCdDd, color: '#93c5fd', opacity: 0.15 }],
-);
+), name: '长方体-面面垂直判定例题' };
 // 定理⑧ 长方体例子: AA₁(0→4) 紫色高亮, A₁B₁(0→1) 绿色高亮(交线l), 面ABB₁A₁ 蓝色着色, 面A₁B₁C₁D₁ 绿色着色
-export const cuboidPpPerpPropExDiagram = makeCuboid(
+export const cuboidPpPerpPropExDiagram = { ...makeCuboid(
   [[0, 4, '#9333ea'], [0, 1, '#16a34a']],
   [{ verts: [4, 5, 1, 0], color: '#93c5fd', opacity: 0.15 }, { verts: FACE_AbBcCdDd, color: '#bbf7d0', opacity: 0.15 }],
-);
-// 面面实战例题(1): 面ABCD + 面A₁B₁C₁D₁ 蓝色着色, AB/AD 高亮
-export const cuboidExPpProof1Diagram = makeCuboid(
-  [[4, 5, '#2563eb'], [4, 7, '#2563eb'], [0, 1, '#2563eb'], [0, 3, '#2563eb']],
-  [{ verts: FACE_ABCD, color: '#93c5fd', opacity: 0.15 }, { verts: FACE_AbBcCdDd, color: '#93c5fd', opacity: 0.15 }],
-);
-// 面面实战例题(2): AB(4→5) A₁B₁(0→1) 蓝色, 面ABB₁A₁琥珀着色, 面ABCD+面A₁B₁C₁D₁蓝色着色 — 定理⑥
-export const cuboidExPpProof2Diagram = makeCuboid(
-  [[4, 5, '#2563eb'], [0, 1, '#2563eb']],
-  [{ verts: [4, 5, 1, 0], color: '#fde68a', opacity: 0.2 }, { verts: FACE_ABCD, color: '#93c5fd', opacity: 0.15 }, { verts: FACE_AbBcCdDd, color: '#93c5fd', opacity: 0.15 }],
-);
-// 面面实战例题(3): AA₁(0→4) 绿色, 面ABB₁A₁紫色着色, 面ABCD绿色着色 — 定理⑦
-export const cuboidExPpProof3Diagram = makeCuboid(
-  [[0, 4, '#16a34a']],
-  [{ verts: [4, 5, 1, 0], color: '#c4b5fd', opacity: 0.15 }, { verts: FACE_ABCD, color: '#bbf7d0', opacity: 0.15 }],
-);
-// 面面实战例题(4): AA₁(0→4) 紫色, A₁B₁(0→1) 绿色(交线), 面ABB₁A₁蓝色着色, 面A₁B₁C₁D₁绿色着色 — 定理⑧
-export const cuboidExPpProof4Diagram = makeCuboid(
-  [[0, 4, '#9333ea'], [0, 1, '#16a34a']],
-  [{ verts: [4, 5, 1, 0], color: '#93c5fd', opacity: 0.15 }, { verts: FACE_AbBcCdDd, color: '#bbf7d0', opacity: 0.15 }],
-);
-// 线面实战例题(1): AB(4→5)蓝色, DC(7→6)蓝色, 面DCC₁D₁着色 — 定理①线面平行判定
-export const cuboidExProof1Diagram = makeCuboid(
-  [[4, 5, '#2563eb'], [7, 6, '#2563eb']],
-  [{ verts: [7, 6, 2, 3], color: '#93c5fd' }],
-);
-// 线面实战例题(2): AB(4→5)蓝色, A₁B₁(0→1)蓝色, 面ABB₁A₁琥珀着色, 面A₁B₁C₁D₁蓝色着色 — 定理②线面平行性质
-export const cuboidExProof3Diagram = makeCuboid(
-  [[4, 5, '#2563eb'], [0, 1, '#2563eb']],
-  [{ verts: [4, 5, 1, 0], color: '#fde68a', opacity: 0.2 }, { verts: FACE_AbBcCdDd, color: '#93c5fd', opacity: 0.15 }],
-);
-// 线面实战例题(3): AA₁(0→4)紫色, AB(4→5)紫色, AD(4→7)紫色, 面ABCD紫色着色 — 垂直判定
-export const cuboidExProof4Diagram = makeCuboid(
-  [[0, 4, '#9333ea'], [4, 5, '#9333ea'], [4, 7, '#9333ea']],
-  [{ verts: FACE_ABCD, color: '#c4b5fd', opacity: 0.2 }],
-);
-// 线面实战例题(4): AA₁(0→4)绿色, BD(5→7)橙色, 面ABCD着色 — 性质1
-export const cuboidExProof2Diagram = makeCuboid(
-  [[0, 4, '#16a34a'], [5, 7, '#ea580c']],
-  [{ verts: FACE_ABCD, color: '#bbf7d0', opacity: 0.15 }],
-);
-// 线面实战例题(5): AA₁(0→4)红色, BB₁(1→5)红色, 面ABCD绿色着色 — 性质4
-export const cuboidExProof5Diagram = makeCuboid(
-  [[0, 4, '#dc2626'], [1, 5, '#dc2626']],
-  [{ verts: FACE_ABCD, color: '#bbf7d0', opacity: 0.15 }],
-);
+), name: '长方体-面面垂直性质例题' };
 // 线面垂直判定: AA'(0→4) 紫色, AB(4→5) 紫色, AD(4→7) 紫色, 面 ABCD 紫色着色
-export const cuboidLpPerpDetDiagram = makeCuboid(
+export const cuboidLpPerpDetDiagram = { ...makeCuboid(
   [[0, 4, '#9333ea'], [4, 5, '#9333ea'], [7, 4, '#9333ea']],
   [{ verts: FACE_ABCD, color: '#c4b5fd' }],
-);
+), name: '长方体-线面垂直判定' };
 
 // ─── 异面直线（7.0 也复用） ──────────────────────────────────
 export const skewLinesDiagram: DiagramData = {
   // 异面直线: a水平在左上, b沿纵深在右下, 投影后延长也不交
   vertices: [
-    [-35, 5, 35], [15, 5, 35],      // a (horizontal, upper-left): 0, 1
-    [10, -20, 0], [10, 30, 0],      // b (depth direction, lower-right): 2, 3
+    [-25, 4, 25], [10, 4, 25],      // a (horizontal, upper-left): 0, 1
+    [7, -15, 0], [7, 22, 0],       // b (depth direction, lower-right): 2, 3
   ],
   edges: [
     { from: 0, to: 1 },
@@ -334,14 +302,15 @@ export const skewLinesDiagram: DiagramData = {
   ],
   polygons: [],
   freeLabels: [
-    { pos: [15, 5, 35], text: 'a', offset: [14, 0], fontSize: 28 },
-    { pos: [10, 30, 0], text: 'b', offset: [18, -1], fontSize: 28 },
+    { pos: [10, 4, 25], text: 'a', offset: [10, 0], fontSize: 18 },
+    { pos: [7, 22, 0], text: 'b', offset: [12, -1], fontSize: 18 },
   ],
 };
 
 // ─── 八大定理抽象图 ──────────────────────────────────────────
 
 export const lpParallelDetDiagram: DiagramData = {
+  name: '定理①-线面平行判定',
   // 线面平行判定: a∥b, b⊂α, a⊄α → a∥α
   vertices: [
     [-50, -25, 0], [50, -25, 0], [60, 30, 0], [-40, 30, 0],
@@ -363,6 +332,7 @@ export const lpParallelDetDiagram: DiagramData = {
 };
 
 export const lpParallelPropDiagram: DiagramData = {
+  name: '定理②-线面平行性质',
   // 定理②: a ⊥ n, n ⊥ β → a ∥ β
   // β 是水平面，n 是β的垂线（竖直），a 在β外且垂直于 n
   vertices: [
@@ -393,6 +363,7 @@ export const lpParallelPropDiagram: DiagramData = {
 };
 
 export const ppParallelDetDiagram: DiagramData = {
+  name: '定理⑥-面面平行判定',
   // 面面平行判定: a⊂β, b⊂β, a∩b=P, a∥γ, b∥γ → β∥γ
   vertices: [
     // β (上面, z=30) — 平行四边形
@@ -432,6 +403,7 @@ export const ppParallelDetDiagram: DiagramData = {
 };
 
 export const ppParallelPropDiagram: DiagramData = {
+  name: '定理⑦-面面平行性质',
   // 面面平行性质: β∥γ, δ∩β=a, δ∩γ=b → a∥b
   vertices: [
     // β (上面, z=28) — 平行四边形
@@ -471,6 +443,7 @@ export const ppParallelPropDiagram: DiagramData = {
 };
 
 export const lpPerpDetDiagram: DiagramData = {
+  name: '线面垂直判定定理',
   // 线面垂直判定: l⊥m, l⊥n, m∩n=O, m,n⊂β → l⊥β
   // 简洁画法: 面 β, l 从 O 竖直向上, m/n 在面上交于 O
   vertices: [
@@ -507,6 +480,7 @@ export const lpPerpDetDiagram: DiagramData = {
 };
 
 export const lpPerpPropDiagram: DiagramData = {
+  name: '线面垂直性质4',
   // 线面垂直性质: a⊥β, b⊥β → a∥b
   // 大平面 β, 两条平行的竖直线 a/b 插在面上
   vertices: [
@@ -538,6 +512,7 @@ export const lpPerpPropDiagram: DiagramData = {
 // 性质1: l⊥β → l⊥a (a⊂β)
 // 面 β, 竖直线 l, 面内线 a, 显示 l⊥a
 export const lpPerpProp1Diagram: DiagramData = {
+  name: '线面垂直性质1',
   vertices: [
     // β (水平面)
     [-55, -30, 0], [55, -30, 0], [65, 35, 0], [-45, 35, 0],   // 0-3
@@ -568,6 +543,7 @@ export const lpPerpProp1Diagram: DiagramData = {
 // 性质2: 过一点有且只有一条垂线
 // 面 β, 点 P 在面上方, 一条垂线从 P 到面
 export const lpPerpProp2Diagram: DiagramData = {
+  name: '线面垂直性质2',
   vertices: [
     // β (水平面)
     [-55, -30, 0], [55, -30, 0], [65, 35, 0], [-45, 35, 0],   // 0-3
@@ -593,6 +569,7 @@ export const lpPerpProp2Diagram: DiagramData = {
 // 性质3: a∥b, a⊥β → b⊥β
 // 面 β, 线 a 垂直于面(已知,紫色), 线 b 平行于 a(结论,蓝色)
 export const lpPerpProp3Diagram: DiagramData = {
+  name: '线面垂直性质3',
   vertices: [
     // β (水平面)
     [-55, -30, 0], [55, -30, 0], [65, 35, 0], [-45, 35, 0],   // 0-3
@@ -619,6 +596,7 @@ export const lpPerpProp3Diagram: DiagramData = {
 };
 
 export const ppPerpDetDiagram: DiagramData = {
+  name: '定理⑧-面面垂直判定',
   // 面面垂直判定: l⊥β, l⊂γ → β⊥γ
   vertices: [
     // β (水平地面, z=0) — 平行四边形
@@ -651,6 +629,7 @@ export const ppPerpDetDiagram: DiagramData = {
 };
 
 export const ppPerpPropDiagram: DiagramData = {
+  name: '定理⑨-面面垂直性质',
   // 面面垂直性质: β⊥γ, β∩γ=l, a⊂β, a⊥l → a⊥γ
   vertices: [
     // γ (水平地面, z=0) — 平行四边形

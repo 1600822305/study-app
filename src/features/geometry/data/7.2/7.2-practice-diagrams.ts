@@ -14,6 +14,7 @@ export const practicePyramidDiagram: DiagramData = (() => {
   const C: Point3D = [s, s, 0];
   const D: Point3D = [0, s, 0];
   return {
+    name: '训练题1：四棱锥P-ABCD',
     vertices: [A, B, C, D, P],
     edges: [
       // 底面（全部实线，底面可见）
@@ -49,6 +50,7 @@ export const practicePyramidMidDiagram: DiagramData = (() => {
   const D: Point3D = [0, s, 0];
   const E: Point3D = [s / 2, s / 2, h / 2]; // PC 中点
   return {
+    name: '训练题2：四棱锥+E中点',
     vertices: [A, B, C, D, P, E],
     edges: [
       // 底面
@@ -81,6 +83,7 @@ export const practiceCubeMidDiagram: DiagramData = (() => {
   const len = 55;
   const E: Point3D = [0, len, len / 2]; // DD₁ 中点
   return {
+    name: '训练题3：正方体+E中点',
     vertices: [
       [0, 0, 0], [len, 0, 0], [len, len, 0], [0, len, 0],           // 0-3: A B C D
       [0, 0, len], [len, 0, len], [len, len, len], [0, len, len],   // 4-7: A₁ B₁ C₁ D₁
@@ -136,6 +139,7 @@ export const practicePrismDiagram: DiagramData = (() => {
   const E: Point3D = [len, 0, h / 2];     // AA₁ 中点
   const F: Point3D = [0, len, h / 2];     // CC₁ 中点
   return {
+    name: '训练题4：三棱柱+E+F中点',
     vertices: [B, A, C, B1, A1, C1, E, F], // 0-5: B A C B₁ A₁ C₁, 6: E, 7: F
     edges: [
       // 底面

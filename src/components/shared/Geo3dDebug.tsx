@@ -10,13 +10,14 @@
  */
 import { useState, useRef, useCallback, useSyncExternalStore } from 'react';
 import { Geo3dSvg, type DiagramData, type Point3D } from './Geo3dSvg';
+import { Math as MathTex } from './Math';
 
 /* ── 全局调试开关 ── */
 let _debug = false;
 const _listeners = new Set<() => void>();
 function _subscribe(cb: () => void) { _listeners.add(cb); return () => _listeners.delete(cb); }
 function _getSnapshot() { return _debug; }
-function _toggle() { _debug = !_debug; _listeners.forEach(l => l()); }
+export function _toggle3d() { _debug = !_debug; _listeners.forEach(l => l()); }
 
 export function useGeo3dDebug() { return useSyncExternalStore(_subscribe, _getSnapshot); }
 
@@ -24,12 +25,14 @@ export function Geo3dDebugToggle() {
   const on = useGeo3dDebug();
   return (
     <button
-      onClick={_toggle}
-      className={`fixed bottom-4 right-16 z-50 px-3 py-2 rounded-full shadow-lg text-sm font-bold print:hidden transition-all ${
-        on ? 'bg-orange-500 text-white hover:bg-orange-600' : 'bg-gray-200 text-gray-500 hover:bg-gray-300 opacity-50 hover:opacity-100'
+      onClick={_toggle3d}
+      className={`fixed bottom-4 right-16 z-50 text-[11px] font-mono px-3 py-1.5 rounded-md shadow-md print:hidden transition-all border ${
+        on
+          ? 'bg-orange-500 text-white border-orange-400 hover:bg-orange-600'
+          : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-700 opacity-60 hover:opacity-100'
       }`}
     >
-      {on ? '📐 3D ON' : '📐'}
+      📐 {on ? 'ON' : '3D'}
     </button>
   );
 }
@@ -42,37 +45,69 @@ function projectOblique(p: Point3D): [number, number] {
   return [x - y * cos45 * scale_y, -(z - y * cos45 * scale_y)];
 }
 
-/* ── 3D 旋转投影（自由视角） ── */
-function project3D(p: Point3D, rotY: number, rotX: number): [number, number] {
+/* ── JSXGraph-style parallel projection (azimuth + elevation) ── */
+function projectParallel(p: Point3D, az: number, el: number): [number, number] {
   const [x, y, z] = p;
-  const radY = (rotY * Math.PI) / 180;
-  const radX = (rotX * Math.PI) / 180;
-  const x1 = x * Math.cos(radY) - y * Math.sin(radY);
-  const y1 = x * Math.sin(radY) + y * Math.cos(radY);
-  const z2 = y1 * Math.sin(radX) + z * Math.cos(radX);
-  return [x1, -z2];
+  const azRad = (az * Math.PI) / 180;
+  const elRad = (el * Math.PI) / 180;
+  const cosAz = Math.cos(azRad);
+  const sinAz = Math.sin(azRad);
+  const sinEl = Math.sin(elRad);
+  const cosEl = Math.cos(elRad);
+  const px = -cosAz * x + sinAz * y;
+  const py = sinEl * sinAz * x + sinEl * cosAz * y - cosEl * z;
+  return [px, py];
+}
+
+/* ── 2D屏幕位移 → 3D坐标变化（保持y不变） ── */
+function screenDeltaTo3d_oblique(dpx: number, dpy: number): [number, number, number] {
+  // oblique: px = x - y*cos45*0.5, py = -(z - y*cos45*0.5)
+  // y fixed => dpx = dx, dpy = -dz
+  return [dpx, 0, -dpy];
+}
+function screenDeltaTo3d_parallel(dpx: number, dpy: number, az: number, el: number): [number, number, number] {
+  const azRad = (az * Math.PI) / 180;
+  const elRad = (el * Math.PI) / 180;
+  const cosAz = Math.cos(azRad);
+  const sinAz = Math.sin(azRad);
+  const sinEl = Math.sin(elRad);
+  const cosEl = Math.cos(elRad);
+  // px = -cosAz*x + sinAz*y, py = sinEl*sinAz*x + sinEl*cosAz*y - cosEl*z
+  // y fixed => dpx = -cosAz*dx, dpy = sinEl*sinAz*dx - cosEl*dz
+  const dx = Math.abs(cosAz) > 0.01 ? -dpx / cosAz : 0;
+  const dz = Math.abs(cosEl) > 0.01 ? (sinEl * sinAz * dx - dpy) / cosEl : 0;
+  return [dx, 0, dz];
 }
 
 /* ── 调试面板 ── */
-function DebugPanel({ data, strokeColor, onClose, initialRotation }: {
+function DebugPanel({ data, strokeColor, onClose, initialRotation, initW, initH }: {
   data: DiagramData;
   strokeColor: string;
   onClose: () => void;
-  initialRotation?: { rotY: number; rotX: number };
+  initialRotation?: { az: number; el: number };
+  initW: number;
+  initH: number;
 }) {
+  const [vertices, setVertices] = useState<Point3D[]>(
+    data.vertices.map(v => [...v] as Point3D)
+  );
   const [labelOffsets, setLabelOffsets] = useState<[number, number][]>(
     data.freeLabels.map(fl => [...(fl.offset ?? [0, 0])] as [number, number])
   );
+  const [activeLabelIdx, setActiveLabelIdx] = useState<number | null>(null);
+  const [showRings, setShowRings] = useState(false);
   // 如果传入了 rotation，默认用 3D 模式并显示该角度
   const [useOblique, setUseOblique] = useState(!initialRotation);
-  const [rotY, setRotY] = useState(initialRotation?.rotY ?? 45);
-  const [rotX, setRotX] = useState(initialRotation?.rotX ?? 30);
+  const [az, setAz] = useState(initialRotation?.az ?? 63);
+  const [el, setEl] = useState(initialRotation?.el ?? 46);
+  const [previewW, setPreviewW] = useState(initW);
+  const [previewH, setPreviewH] = useState(initH);
   const svgRef = useRef<SVGSVGElement>(null);
-  const dragRef = useRef<{ idx: number; startSvg: [number, number]; startOffset: [number, number] } | null>(null);
-  const rotateRef = useRef<{ startX: number; startY: number; startRotY: number; startRotX: number } | null>(null);
+  const dragRef = useRef<{ type: 'label' | 'vertex'; idx: number; startSvg: [number, number]; startValue: [number, number] | Point3D } | null>(null);
+  const rotateRef = useRef<{ startX: number; startY: number; startAz: number; startEl: number } | null>(null);
 
-  const doProject = (p: Point3D) => useOblique ? projectOblique(p) : project3D(p, rotY, rotX);
-  const projected = data.vertices.map(v => doProject(v));
+  const doProject = (p: Point3D) => useOblique ? projectOblique(p) : projectParallel(p, az, el);
+  const projected = vertices.map(v => doProject(v));
 
   // 计算 viewBox（与 Geo3dSvg 一致）
   const allX: number[] = [];
@@ -103,22 +138,23 @@ function DebugPanel({ data, strokeColor, onClose, initialRotation }: {
   }, []);
 
   // 拖拽标签
-  const handleMouseDown = useCallback((idx: number, e: React.MouseEvent) => {
+  const handleLabelMouseDown = useCallback((idx: number, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     const svgPt = screenToSvg(e.clientX, e.clientY);
-    dragRef.current = { idx, startSvg: svgPt, startOffset: [...labelOffsets[idx]] as [number, number] };
+    dragRef.current = { type: 'label', idx, startSvg: svgPt, startValue: [...labelOffsets[idx]] as [number, number] };
 
     const onMove = (ev: MouseEvent) => {
-      if (!dragRef.current) return;
+      if (!dragRef.current || dragRef.current.type !== 'label') return;
       const cur = screenToSvg(ev.clientX, ev.clientY);
       const dx = cur[0] - dragRef.current.startSvg[0];
       const dy = cur[1] - dragRef.current.startSvg[1];
+      const drag = dragRef.current;
       setLabelOffsets(prev => {
         const next = [...prev];
-        next[dragRef.current!.idx] = [
-          Math.round(dragRef.current!.startOffset[0] + dx),
-          Math.round(dragRef.current!.startOffset[1] + dy),
+        next[drag.idx] = [
+          Math.round((drag.startValue as [number, number])[0] + dx),
+          Math.round((drag.startValue as [number, number])[1] + dy),
         ];
         return next;
       });
@@ -132,17 +168,68 @@ function DebugPanel({ data, strokeColor, onClose, initialRotation }: {
     window.addEventListener('mouseup', onUp);
   }, [screenToSvg, labelOffsets]);
 
+  // 拖拽顶点
+  const handleVertexMouseDown = useCallback((idx: number, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const svgPt = screenToSvg(e.clientX, e.clientY);
+    dragRef.current = { type: 'vertex', idx, startSvg: svgPt, startValue: [...vertices[idx]] as Point3D };
+
+    const onMove = (ev: MouseEvent) => {
+      if (!dragRef.current || dragRef.current.type !== 'vertex') return;
+      const cur = screenToSvg(ev.clientX, ev.clientY);
+      const dpx = cur[0] - dragRef.current.startSvg[0];
+      const dpy = cur[1] - dragRef.current.startSvg[1];
+      const [d3x, , d3z] = useOblique
+        ? screenDeltaTo3d_oblique(dpx, dpy)
+        : screenDeltaTo3d_parallel(dpx, dpy, az, el);
+      const start = dragRef.current.startValue as Point3D;
+      setVertices(prev => {
+        const next = [...prev];
+        next[dragRef.current!.idx] = [
+          Math.round(start[0] + d3x),
+          start[1],
+          Math.round(start[2] + d3z),
+        ];
+        return next;
+      });
+    };
+    const onUp = () => {
+      dragRef.current = null;
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, [screenToSvg, vertices, useOblique, az, el]);
+
+  // 构建 liveData（用拖拽后的顶点）
+  const liveData: DiagramData = {
+    ...data,
+    vertices,
+    freeLabels: data.freeLabels.map((fl, i) => ({ ...fl, offset: labelOffsets[i] })),
+  };
+
   // 生成可复制的代码
   const generateCopyText = () => {
     const lines: string[] = [
+      `基于最新数据更新图表参数：`,
       `// 图: ${data.name || '未命名'}`,
-      `// 视角: rotY=${Math.round(rotY)}°, rotX=${Math.round(rotX)}°`,
+      useOblique ? `// 视角: 斜二测` : `// 视角: az=${Math.round(az)}°, el=${Math.round(el)}°`,
+      `// 输出尺寸: width=${previewW} height=${previewH}`,
       '',
-      'freeLabels: ['
+      'vertices: [',
     ];
+    vertices.forEach((v, i) => {
+      lines.push(`  [${v[0]}, ${v[1]}, ${v[2]}],  // ${i}`);
+    });
+    lines.push('],');
+    lines.push('');
+    lines.push('freeLabels: [');
     data.freeLabels.forEach((fl, i) => {
       const [ox, oy] = labelOffsets[i];
       const parts = [`pos: [${fl.pos.join(', ')}]`, `text: '${fl.text}'`, `offset: [${ox}, ${oy}]`];
+      if (fl.tex) parts.push(`tex: '${fl.tex}'`);
       if (fl.fontSize) parts.push(`fontSize: ${fl.fontSize}`);
       if (fl.color) parts.push(`color: '${fl.color}'`);
       if (fl.dot !== undefined && fl.dot !== false) parts.push(`dot: ${typeof fl.dot === 'string' ? `'${fl.dot}'` : fl.dot}`);
@@ -152,50 +239,81 @@ function DebugPanel({ data, strokeColor, onClose, initialRotation }: {
     return lines.join('\n');
   };
 
-  // 投影后的边
+  // 投影后的边（用 mutable vertices）
   const projEdges = data.edges.map(e => ({
     x1: projected[e.from][0], y1: projected[e.from][1],
     x2: projected[e.to][0], y2: projected[e.to][1],
     hidden: !!e.hidden, color: e.color, strokeWidth: e.strokeWidth,
+    arrow: e.arrow,
   }));
 
   const svgW = Math.min(800, window.innerWidth - 40);
   const svgH = Math.min(500, window.innerHeight - 300);
 
   return (
-    <div className="fixed inset-0 z-50 bg-white flex flex-col print:hidden">
+    <div className="fixed inset-0 z-[100] bg-white flex flex-col print:hidden">
       {/* 顶栏 */}
-      <div className="flex justify-between items-center px-4 py-2 border-b">
-        <h3 className="font-bold text-lg">📐 Geo3D 调试</h3>
-        <div className="flex items-center gap-4 text-sm">
-          <button 
-            onClick={() => setUseOblique(true)} 
-            className={`text-xs px-2 py-0.5 rounded ${useOblique ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
-          >标准斜二测</button>
-          <button 
-            onClick={() => setUseOblique(false)} 
-            className={`text-xs px-2 py-0.5 rounded ${!useOblique ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
-          >3D旋转</button>
-          {!useOblique && (
-            <span className="font-mono text-gray-500">Y:{Math.round(rotY)}° X:{Math.round(rotX)}° 拖拽旋转</span>
+      <div className="h-10 shrink-0 flex items-center justify-between px-4 border-b border-slate-700 bg-slate-900">
+        <div className="flex items-center gap-2.5">
+          <span className="text-slate-300 text-xs font-mono font-semibold tracking-wide">Geo3D</span>
+          {data.name && (
+            <span className="text-[11px] font-mono bg-slate-700 text-slate-200 px-2 py-0.5 rounded">
+              {data.name}
+            </span>
           )}
         </div>
-        <button onClick={onClose} className="bg-red-500 text-white px-3 py-1 rounded text-sm font-bold">✕ 关闭</button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setUseOblique(true)}
+            className={`text-[11px] px-2.5 py-1 rounded border transition-colors ${
+              useOblique
+                ? 'bg-blue-600 text-white border-blue-500'
+                : 'bg-slate-800 text-slate-400 border-slate-600 hover:border-slate-400 hover:text-slate-200'
+            }`}
+          >斜二测</button>
+          <button
+            onClick={() => setUseOblique(false)}
+            className={`text-[11px] px-2.5 py-1 rounded border transition-colors ${
+              !useOblique
+                ? 'bg-blue-600 text-white border-blue-500'
+                : 'bg-slate-800 text-slate-400 border-slate-600 hover:border-slate-400 hover:text-slate-200'
+            }`}
+          >3D旋转</button>
+          {!useOblique && (
+            <span className="text-[11px] font-mono text-slate-500">az:{Math.round(az)}° el:{Math.round(el)}°</span>
+          )}
+          <button
+            onClick={() => setShowRings(r => !r)}
+            className={`text-[10px] font-mono px-2 py-0.5 rounded border transition-colors ${
+              showRings
+                ? 'border-teal-500 bg-teal-600 text-white hover:bg-teal-500'
+                : 'border-slate-600 bg-slate-800 text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            {showRings ? '⭕ 环' : '○ 环'}
+          </button>
+        </div>
+        <button
+          onClick={onClose}
+          className="text-slate-400 hover:text-white text-xs px-3 py-1 rounded border border-slate-700 hover:border-slate-500 hover:bg-slate-700 transition-colors"
+        >
+          关闭
+        </button>
       </div>
 
       {/* SVG 区域 */}
       <div 
-        className={`flex-1 flex items-center justify-center bg-gray-50 overflow-hidden ${!useOblique ? 'cursor-grab active:cursor-grabbing' : ''}`}
+        className={`flex-1 flex items-center justify-center bg-white overflow-hidden relative ${!useOblique ? 'cursor-grab active:cursor-grabbing' : ''}`}
         onMouseDown={(e) => {
           if (useOblique) return;  // 标准模式不拖拽旋转
           if ((e.target as HTMLElement).closest('circle[style*="cursor: grab"]')) return;
-          rotateRef.current = { startX: e.clientX, startY: e.clientY, startRotY: rotY, startRotX: rotX };
+          rotateRef.current = { startX: e.clientX, startY: e.clientY, startAz: az, startEl: el };
           const onMove = (ev: MouseEvent) => {
             if (!rotateRef.current) return;
             const dx = ev.clientX - rotateRef.current.startX;
             const dy = ev.clientY - rotateRef.current.startY;
-            setRotY(rotateRef.current.startRotY + dx * 0.5);
-            setRotX(Math.max(-90, Math.min(90, rotateRef.current.startRotX - dy * 0.5)));
+            setAz(rotateRef.current.startAz + dx * 0.5);
+            setEl(Math.max(0, Math.min(90, rotateRef.current.startEl - dy * 0.5)));
           };
           const onUp = () => {
             rotateRef.current = null;
@@ -206,6 +324,49 @@ function DebugPanel({ data, strokeColor, onClose, initialRotation }: {
           window.addEventListener('mouseup', onUp);
         }}
       >
+        {/* 尺寸预览浮层 - 左上角 */}
+        <div className="absolute top-2 left-2 z-10 bg-white border border-slate-200 rounded-lg shadow-md p-2 text-xs" style={{ minWidth: 200 }}>
+          <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-1.5">输出尺寸预览</p>
+          <div className="grid grid-cols-2 gap-x-2 gap-y-1 mb-2">
+            {([['宽W', previewW, setPreviewW], ['高H', previewH, setPreviewH]] as const).map(([label, val, setter]) => (
+              <div key={label} className="flex items-center gap-1">
+                <label className="text-slate-400 w-10 shrink-0">{label}</label>
+                <input type="number" value={val} min={40} max={600}
+                  onChange={e => (setter as (v: number) => void)(Number(e.target.value))}
+                  className="w-14 border border-slate-200 rounded px-1 py-0.5 font-mono text-xs text-slate-700" />
+              </div>
+            ))}
+          </div>
+          <div className="border border-dashed border-slate-300 inline-block overflow-hidden" style={{ width: previewW, height: previewH }}>
+            <Geo3dSvg data={liveData} width={previewW} height={previewH} strokeColor={strokeColor} rotation={useOblique ? undefined : { az, el }} />
+          </div>
+        </div>
+        {/* 标签面板浮层 - 右上角 */}
+        <div className="absolute top-2 right-2 z-10 bg-white border border-slate-200 rounded-lg shadow-md p-2 text-xs" style={{ minWidth: 180 }}>
+          <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-1.5">标签 <span className="normal-case text-slate-300">点击激活可拖</span></p>
+          <div className="space-y-1">
+            {data.freeLabels.map((fl, i) => {
+              const [ox, oy] = labelOffsets[i];
+              const isActive = activeLabelIdx === i;
+              return (
+                <div key={i}
+                  onClick={() => setActiveLabelIdx(isActive ? null : i)}
+                  className={`flex items-center gap-1.5 rounded px-1.5 py-1 cursor-pointer transition-colors ${
+                    isActive ? 'bg-blue-50 ring-1 ring-blue-300' : 'hover:bg-slate-50'
+                  }`}
+                >
+                  <span className={`w-4 h-4 rounded text-[10px] font-bold flex items-center justify-center shrink-0 ${
+                    isActive ? 'bg-blue-500 text-white' : 'bg-blue-50 text-blue-500'
+                  }`}>{i}</span>
+                  <span className={`flex-1 truncate font-mono text-[11px] ${
+                    isActive ? 'text-blue-700 font-semibold' : 'text-slate-600'
+                  }`}>{fl.tex ?? fl.text ?? '?'}</span>
+                  <span className="text-[10px] font-mono text-slate-400">[{ox},{oy}]</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
         <svg ref={svgRef} width={svgW} height={svgH} viewBox={viewBox} xmlns="http://www.w3.org/2000/svg">
           {/* 填充多边形 */}
           {data.polygons.map((p, i) => {
@@ -227,64 +388,113 @@ function DebugPanel({ data, strokeColor, onClose, initialRotation }: {
               stroke={e.color ?? strokeColor} strokeWidth={e.strokeWidth ?? 1.5} />
           ))}
 
-          {/* 顶点 + 索引 */}
-          {projected.map(([px, py], i) => (
-            <g key={`vd-${i}`}>
-              <circle cx={px} cy={py} r={3} fill={strokeColor} />
-              <text x={px + 2} y={py - 6} fontSize={9} fill="#ef4444" fontFamily="monospace" fontWeight="bold">{i}</text>
-            </g>
-          ))}
-
-          {/* freeLabels：可拖拽 */}
+          {/* 非激活标签（底层，不拦截鼠标） */}
           {data.freeLabels.map((fl, i) => {
+            if (i === activeLabelIdx) return null;
             const [px, py] = doProject(fl.pos);
             const [ox, oy] = labelOffsets[i];
             const labelColor = fl.color ?? strokeColor;
             const dotColor = typeof fl.dot === 'string' ? fl.dot : (fl.dot ? labelColor : undefined);
             return (
-              <g key={`fl-${i}`}>
-                {/* 锚点到标签的引导线 */}
+              <g key={`fl-${i}`} style={{ pointerEvents: 'none' }}>
                 <line x1={px} y1={py} x2={px + ox} y2={py + oy} stroke="#94a3b8" strokeWidth={0.5} strokeDasharray="2 2" />
                 {dotColor && <circle cx={px} cy={py} r={3.5} fill={dotColor} />}
-                <text x={px + ox} y={py + oy} textAnchor="middle" dominantBaseline="middle"
-                  fontSize={fl.fontSize ?? 20} fontFamily="serif" fontStyle="italic" fontWeight="bold"
-                  fill={labelColor}>{fl.text}</text>
-                {/* 拖拽手柄 */}
-                <circle cx={px + ox} cy={py + oy} r={8} fill="rgba(59,130,246,0.1)" stroke="#3b82f6"
-                  strokeWidth={1.5} strokeDasharray="3 2" style={{ cursor: 'grab' }}
-                  onMouseDown={(e) => handleMouseDown(i, e)} />
-                {/* offset 数值 */}
-                <text x={px + ox + 12} y={py + oy + 4} fontSize={7} fill="#6b7280" fontFamily="monospace">
+                {fl.tex ? (
+                  <foreignObject x={px + ox - 60} y={py + oy - 15} width={120} height={30} style={{ overflow: 'visible', pointerEvents: 'none' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', fontSize: fl.fontSize ?? 16, color: labelColor, whiteSpace: 'nowrap', pointerEvents: 'none' }}>
+                      <MathTex tex={fl.tex} />
+                    </div>
+                  </foreignObject>
+                ) : (
+                  <text x={px + ox} y={py + oy} textAnchor="middle" dominantBaseline="middle"
+                    fontSize={fl.fontSize ?? 20} fontFamily="serif" fontStyle="italic" fontWeight="bold"
+                    fill={labelColor}>{fl.text}</text>
+                )}
+                {showRings && <>
+                  <circle cx={px + ox} cy={py + oy} r={8} fill="rgba(59,130,246,0.08)" stroke="#3b82f6"
+                    strokeWidth={1} strokeDasharray="3 2" />
+                  <text x={px + ox + 12} y={py + oy + 4} fontSize={7} fill="#6b7280" fontFamily="monospace">
+                    [{ox},{oy}]
+                  </text>
+                </>}
+              </g>
+            );
+          })}
+
+          {/* 顶点手柄（中层，可拖拽） */}
+          {projected.map(([px, py], i) => (
+            <g key={`vd-${i}`}>
+              <circle cx={px} cy={py} r={3} fill={strokeColor} />
+              {showRings && <text x={px + 4} y={py - 8} fontSize={9} fill="#ef4444" fontFamily="monospace" fontWeight="bold">{i}</text>}
+              <circle cx={px} cy={py} r={8} fill={showRings ? 'rgba(239,68,68,0.1)' : 'transparent'} stroke={showRings ? '#ef4444' : 'transparent'}
+                strokeWidth={1.5} strokeDasharray="3 2" style={{ cursor: 'grab' }}
+                onMouseDown={(e) => handleVertexMouseDown(i, e)} />
+            </g>
+          ))}
+
+          {/* 激活标签（最顶层，始终可拖） */}
+          {activeLabelIdx !== null && (() => {
+            const i = activeLabelIdx;
+            const fl = data.freeLabels[i];
+            const [px, py] = doProject(fl.pos);
+            const [ox, oy] = labelOffsets[i];
+            const labelColor = fl.color ?? strokeColor;
+            const dotColor = typeof fl.dot === 'string' ? fl.dot : (fl.dot ? labelColor : undefined);
+            return (
+              <g key={`fl-active-${i}`}>
+                <line x1={px} y1={py} x2={px + ox} y2={py + oy} stroke="#3b82f6" strokeWidth={1} strokeDasharray="2 2" />
+                {dotColor && <circle cx={px} cy={py} r={3.5} fill={dotColor} />}
+                {fl.tex ? (
+                  <foreignObject x={px + ox - 60} y={py + oy - 15} width={120} height={30} style={{ overflow: 'visible' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', fontSize: fl.fontSize ?? 16, color: labelColor, whiteSpace: 'nowrap' }}>
+                      <MathTex tex={fl.tex} />
+                    </div>
+                  </foreignObject>
+                ) : (
+                  <text x={px + ox} y={py + oy} textAnchor="middle" dominantBaseline="middle"
+                    fontSize={fl.fontSize ?? 20} fontFamily="serif" fontStyle="italic" fontWeight="bold"
+                    fill={labelColor}>{fl.text}</text>
+                )}
+                <circle cx={px + ox} cy={py + oy} r={10} fill="rgba(59,130,246,0.2)" stroke="#3b82f6"
+                  strokeWidth={2} style={{ cursor: 'grab' }}
+                  onMouseDown={(e) => handleLabelMouseDown(i, e)} />
+                <text x={px + ox + 13} y={py + oy + 4} fontSize={7} fill="#3b82f6" fontFamily="monospace" fontWeight="bold">
                   [{ox},{oy}]
                 </text>
               </g>
             );
-          })}
+          })()}
         </svg>
       </div>
 
       {/* 底部面板 */}
-      <div className="border-t flex" style={{ height: '25vh' }}>
+      <div className="border-t border-slate-200 flex shrink-0" style={{ height: '28vh', minHeight: 160 }}>
         {/* 左：代码输出 */}
-        <div className="flex-1 bg-gray-900 text-green-400 font-mono text-xs p-3 overflow-auto">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-gray-500">freeLabels 坐标（拖拽标签调整 offset）</span>
-            <button onClick={() => navigator.clipboard.writeText(generateCopyText())}
-              className="bg-green-700 text-white px-2 py-0.5 rounded text-xs hover:bg-green-600">📋 复制</button>
+        <div className="flex-1 bg-slate-950 text-emerald-400 font-mono text-xs p-3 overflow-auto flex flex-col gap-2">
+          <div className="flex items-center justify-between shrink-0">
+            <span className="text-[10px] uppercase tracking-widest text-slate-500">output</span>
+            <button
+              onClick={() => navigator.clipboard.writeText(generateCopyText())}
+              className="text-[10px] px-2.5 py-1 rounded border border-emerald-800 bg-emerald-950 text-emerald-400 hover:bg-emerald-900 hover:text-emerald-300 transition-colors"
+            >
+              复制
+            </button>
           </div>
-          <pre className="whitespace-pre-wrap select-all">{generateCopyText()}</pre>
+          <pre className="whitespace-pre-wrap select-all leading-relaxed">{generateCopyText()}</pre>
         </div>
-        {/* 右：顶点参考 */}
-        <div className="w-72 border-l bg-gray-50 p-3 text-xs overflow-auto">
-          <p className="font-bold text-gray-700 mb-2">顶点坐标（红色数字 = 索引）</p>
-          {data.vertices.map((v, i) => {
-            const [px, py] = projected[i];
-            return (
-              <p key={i} className="text-gray-600 font-mono">
-                <span className="text-red-500 font-bold">{i}</span>: [{v.join(', ')}] → ({px.toFixed(1)}, {py.toFixed(1)})
-              </p>
-            );
-          })}
+        {/* 右：顶点 */}
+        <div className="w-60 border-l border-slate-100 bg-white flex flex-col overflow-hidden text-xs">
+          <div className="px-3 pt-3 pb-2 border-b border-slate-100 shrink-0">
+            <p className="text-[10px] uppercase tracking-widest text-slate-400 mb-2">顶点 <span className="normal-case text-slate-300">拖拽调整 x,z（y 不变）</span></p>
+            <div className="space-y-0.5 overflow-auto">
+              {vertices.map((v, i) => (
+                <div key={i} className="flex items-center gap-2 font-mono">
+                  <span className="w-4 h-4 rounded text-[10px] font-bold bg-red-50 text-red-500 flex items-center justify-center shrink-0">{i}</span>
+                  <span className="text-slate-500">[{v[0]}, {v[1]}, {v[2]}]</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -298,7 +508,7 @@ interface DebugGeo3dSvgProps {
   height?: number;
   strokeColor?: string;
   className?: string;
-  rotation?: { rotY: number; rotX: number };
+  rotation?: { az: number; el: number };
 }
 
 export function DebugGeo3dSvg({ data, width = 160, height = 140, strokeColor = '#334155', className, rotation }: DebugGeo3dSvgProps) {
@@ -306,11 +516,11 @@ export function DebugGeo3dSvg({ data, width = 160, height = 140, strokeColor = '
   const [debug, setDebug] = useState(false);
 
   if (debug) {
-    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initialRotation={rotation} />;
+    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initialRotation={rotation} initW={width} initH={height} />;
   }
 
   return (
-    <div className="relative inline-block">
+    <div className={`relative inline-block${globalOn ? ' outline outline-1 outline-dashed outline-teal-400' : ''}`}>
       {globalOn && (
         <button
           onClick={() => setDebug(true)}

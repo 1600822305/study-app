@@ -189,6 +189,28 @@ export const complexExplanations: Record<string, ReactNode> = {
       <p className="mt-2">虚部 = 0：<MathTex tex="a = \pm 1" />；实部 = 2：<MathTex tex="a = 1" /></p>
     </>
   ),
+  'q8': (
+    <>
+      <p className="mt-2">实部减实部，虚部减虚部：</p>
+      <p className="text-center mt-1"><MathTex tex="(3+2i)-(1-3i) = (3-1)+(2+3)i = 2+5i" /></p>
+      <p className="mt-2">实部为 <strong>2</strong></p>
+    </>
+  ),
+  'q9': (
+    <>
+      <p className="mt-2">纯虚数条件：实部 = 0 且虚部 ≠ 0</p>
+      <p className="mt-2">实部 = 0：<MathTex tex="m^2-1=0 \Rightarrow m=\pm 1" /></p>
+      <p className="mt-2">虚部 ≠ 0：<MathTex tex="m+1 \neq 0 \Rightarrow m \neq -1" /></p>
+      <p className="mt-2">取交集，得 <MathTex tex="m = 1" /></p>
+    </>
+  ),
+  'q10': (
+    <>
+      <p className="mt-2">关于虚轴（y 轴）对称：实部取反，虚部不变</p>
+      <p className="mt-2">公式：<MathTex tex="-\bar{z}" />，其中 <MathTex tex="\bar{z} = 1+2i" /></p>
+      <p className="mt-2">所以对称复数为 <MathTex tex="-(1+2i) = -1+2i" />，对应点 <MathTex tex="(-1,\,2)" /></p>
+    </>
+  ),
 };
 
 // ══════════════════════════════════════════════════════════

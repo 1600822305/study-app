@@ -93,4 +93,43 @@ export const complexQuizQuestions: QuizQuestionData[] = [
     ],
     correctAnswer: '1',
   },
+  // ⑧ 加减法 → 求实部
+  {
+    id: 'q8',
+    question: '（2019·湖南模拟）计算',
+    questionLatex: '(3+2i) - (1-3i) \\text{ 的实部为}',
+    options: [
+      { label: 'A', value: '1', isLatex: true },
+      { label: 'B', value: '2', isLatex: true },
+      { label: 'C', value: '3', isLatex: true },
+      { label: 'D', value: '5', isLatex: true },
+    ],
+    correctAnswer: '2',
+  },
+  // ⑨ 纯虚数 → 求参数
+  {
+    id: 'q9',
+    question: '（2021·湖南模拟）已知复数',
+    questionLatex: 'z = (m^2-1)+(m+1)i\\;（m \\in \\mathbb{R}）\\text{ 是纯虚数，则 } m =',
+    options: [
+      { label: 'A', value: '-1', isLatex: true },
+      { label: 'B', value: '0', isLatex: true },
+      { label: 'C', value: '1', isLatex: true },
+      { label: 'D', value: '\\pm 1', isLatex: true },
+    ],
+    correctAnswer: '1',
+  },
+  // ⑩ 复平面对称 → 关于虚轴
+  {
+    id: 'q10',
+    question: '（2022·湖南模拟）复数',
+    questionLatex: 'z = 1-2i \\text{ 关于虚轴对称的复数是}',
+    options: [
+      { label: 'A', value: '1+2i', isLatex: true },
+      { label: 'B', value: '-1+2i', isLatex: true },
+      { label: 'C', value: '-1-2i', isLatex: true },
+      { label: 'D', value: '2-i', isLatex: true },
+    ],
+    correctAnswer: '-1+2i',
+  },
 ];

@@ -32,9 +32,15 @@ const tocData = [
     title: '计算工具',
     path: null,
     items: [
-      { label: '2.0', title: '不等式前置知识', path: '/math/inequality-prereq' },
       { label: '2.1', title: '不等式', path: '/math/inequality' },
-      { label: '2.2', title: '二次函数', path: '/math/quadratic' },
+    ],
+  },
+  {
+    label: '第三阶段',
+    title: '函数思维',
+    path: null,
+    items: [
+      { label: '3.1.5', title: '二次函数', path: '/math/quadratic' },
     ],
   },
 ];

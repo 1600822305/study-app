@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
+import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
 import { sequenceAdvNarrations } from './data/6.4/6.4-adv-narrations';
 import { sequenceAdvProgressItems } from './data/6.4/6.4-adv-progress';
 import { useProgress } from '@/hooks';
@@ -40,12 +40,12 @@ export function SequenceAdvPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 1: 放缩法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="scaling" className="mb-3 scroll-mt-4">
+      <section id="scaling" className="scroll-mt-4">
         <Collapsible title="一、放缩法（最核心）" defaultOpen storageKey="seq-adv:scaling" headerExtra={<SpeakButton text={sequenceAdvNarrations.scaling} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">放缩法 = 把不好算的变成好算的</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">放缩法 = 把不好算的变成好算的</div>
               <div className="px-3 py-2 space-y-0">
                 <p>核心思想：要证 <MathTex tex="A \leq B" />，找一个中间量 <MathTex tex="C" />，使得 <MathTex tex="A \leq C \leq B" /></p>
                 <p className="mt-1">在数列中，最常见的用法：把<strong>不能求和</strong>的通项，放缩成<strong>能裂项</strong>的形式</p>
@@ -53,7 +53,7 @@ export function SequenceAdvPage() {
             </div>
 
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">经典放缩公式（必背）</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">经典放缩公式（必背）</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-1 gap-1">
                   <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
@@ -76,7 +76,7 @@ export function SequenceAdvPage() {
             </div>
 
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">完整例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">完整例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">证明：<MathTex tex="\dfrac{1}{1^2} + \dfrac{1}{2^2} + \dfrac{1}{3^2} + \cdots + \dfrac{1}{n^2} < 2" /></p>
 
@@ -99,17 +99,15 @@ export function SequenceAdvPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 2: 数学归纳法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="induction" className="mb-3 scroll-mt-4">
+      <section id="induction" className="scroll-mt-4">
         <Collapsible title="二、数学归纳法" defaultOpen storageKey="seq-adv:induction" headerExtra={<SpeakButton text={sequenceAdvNarrations.induction} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">两步走（缺一步都不给分）</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">两步走（缺一步都不给分）</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
@@ -126,7 +124,7 @@ export function SequenceAdvPage() {
             </div>
 
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">完整例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">完整例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">用数学归纳法证明：<MathTex tex="1 + 2 + 3 + \cdots + n = \dfrac{n(n+1)}{2}" /></p>
 
@@ -147,7 +145,7 @@ export function SequenceAdvPage() {
             </div>
 
             <div className="border border-red-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-lg">易错提醒</div>
+              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-[0.9rem]">易错提醒</div>
               <div className="px-3 py-2 space-y-0">
                 <p>① 第 2 步中<strong>必须用到归纳假设</strong>，不然证明无效</p>
                 <p>② 结尾<strong>必须写结论</strong>："由数学归纳法，命题对所有正整数 n 成立"</p>
@@ -159,17 +157,15 @@ export function SequenceAdvPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 3: 压轴综合题 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="comprehensive" className="mb-3 scroll-mt-4">
+      <section id="comprehensive" className="scroll-mt-4">
         <Collapsible title="三、压轴综合题实战" defaultOpen storageKey="seq-adv:comprehensive" headerExtra={<SpeakButton text={sequenceAdvNarrations.snAnAdv} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">高考压轴题的典型结构</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">高考压轴题的典型结构</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-3 gap-2">
                   <div className="bg-blue-50 rounded-lg p-2 border border-blue-200 text-center">
@@ -192,7 +188,7 @@ export function SequenceAdvPage() {
             </div>
 
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">综合例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">综合例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold">已知数列 <MathTex tex="\{a_n\}" /> 满足 <MathTex tex="a_1 = 1" />，<MathTex tex="a_{n+1} = 2a_n + 1" /></p>
 
@@ -225,12 +221,12 @@ export function SequenceAdvPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 4: 应试策略 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="summary" className="mb-3 scroll-mt-4">
+      <section id="summary" className="scroll-mt-4">
         <Collapsible title="四、应试策略" defaultOpen storageKey="seq-adv:summary">
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">数列大题得分策略</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">数列大题得分策略</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="overflow-x-auto">
                   <table className="w-full text-center">
@@ -272,7 +268,7 @@ export function SequenceAdvPage() {
             </div>
 
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">放缩法的通用套路</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">放缩法的通用套路</div>
               <div className="px-3 py-2 space-y-0">
                 <p>① 先观察通项的<strong>分母结构</strong>，看能不能放缩成裂项形式</p>
                 <p className="mt-1">② 常用放缩方向：</p>
@@ -284,7 +280,7 @@ export function SequenceAdvPage() {
             </div>
 
             <div className="border border-red-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-lg">考场建议</div>
+              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-[0.9rem]">考场建议</div>
               <div className="px-3 py-2 space-y-0">
                 <p>数列大题如果出三问，前两问一定要做对（10-12 分）</p>
                 <p className="mt-1">第三问如果 2 分钟没思路就跳过，去检查前面的题</p>

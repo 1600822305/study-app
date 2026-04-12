@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { prereqPractice1, prereqPractice2, prereqPractice4, prereqPractice5, prereqPractice6, prereqPractice7 } from './data/1.0/1.0-practice';
+import { prereqPractice2, prereqPractice4, prereqPractice5, prereqPractice6 } from './data/1.0/1.0-practice';
 import { prereqSelfTest } from './data/1.0/1.0-selftest';
 import type { QuizQuestionData } from '@/types';
 
@@ -82,98 +82,106 @@ export const prereqExplanations: Record<string, ReactNode> = {
     </>
   ),
 
-  // ── 第4节：分数运算 ──
+  // ── 第4节：分数运算（混合前置知识） ──
   'pp4-1': (
     <>
-      <p className="mt-2">通分（公倍数 6）：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{1}{3}+\frac{1}{6} = \frac{2}{6}+\frac{1}{6} = \frac{3}{6} = \frac{1}{2}" /></p>
+      <p className="mt-2">同分母，分子直接加减（注意负号）：</p>
+      <p className="text-center mt-1"><MathTex tex="-\dfrac{2}{5} + \dfrac{4}{5} = \dfrac{-2+4}{5} = \dfrac{2}{5}" /></p>
     </>
   ),
   'pp4-2': (
     <>
-      <p className="mt-2">分子乘分子，分母乘分母：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{2}{5} \times \frac{3}{4} = \frac{2\times 3}{5\times 4} = \frac{6}{20} = \frac{3}{10}" /></p>
+      <p className="mt-2">先算平方数，再做分数运算：</p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{4^2-3^2}{4^2+3^2} = \dfrac{16-9}{16+9} = \dfrac{7}{25}" /></p>
     </>
   ),
   'pp4-3': (
     <>
-      <p className="mt-2">除以分数 = 乘以倒数：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{2}{3} \div \frac{1}{4} = \frac{2}{3} \times \frac{4}{1} = \frac{8}{3}" /></p>
+      <p className="mt-2">分子分母分别开方：</p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{\sqrt{9}}{\sqrt{16}} = \dfrac{3}{4}" /></p>
     </>
   ),
   'pp4-4': (
     <>
-      <p className="mt-2">通分（公倍数 6）：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{5}{6}-\frac{1}{3} = \frac{5}{6}-\frac{2}{6} = \frac{3}{6} = \frac{1}{2}" /></p>
+      <p className="mt-2">负数平方结果为正：</p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{(-2)^2}{(-3)^2} = \dfrac{4}{9}" /></p>
+    </>
+  ),
+  'pp4-5': (
+    <>
+      <p className="mt-2">先乘除后加减，先算乘法部分：</p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{1}{3} \times \dfrac{3}{4} = \dfrac{1}{4}" /></p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{1}{2} - \dfrac{1}{4} = \dfrac{1}{4}" /></p>
     </>
   ),
 
-  // ── 第5节：多项式展开 ──
+  // ── 第5节：多项式展开（混合前置知识） ──
   'pp5-1': (
     <>
-      <p className="mt-2">分配律：实数分别乘括号里的每一项。</p>
-      <p className="text-center mt-1"><MathTex tex="3(2-i)=6-3i" /></p>
+      <p className="mt-2">平方差公式，结合常用平方数：</p>
+      <p className="text-center mt-1"><MathTex tex="(5+3)(5-3)=5^2-3^2=25-9=16" /></p>
     </>
   ),
   'pp5-2': (
     <>
-      <p className="mt-2">FOIL 展开，最后把 <MathTex tex="i^2" /> 换成 <MathTex tex="-1" />。</p>
-      <p className="text-center mt-1"><MathTex tex="(2+i)(3-i)=6-2i+3i-i^2=6+i+1=7+i" /></p>
+      <p className="mt-2">完全平方公式，把 <MathTex tex="i^2=-1" /> 代入：</p>
+      <p className="text-center mt-1"><MathTex tex="(2-i)^2=4-4i+i^2=4-4i-1=3-4i" /></p>
     </>
   ),
   'pp5-3': (
     <>
-      <p className="mt-2">完全平方公式：</p>
-      <p className="text-center mt-1"><MathTex tex="(1+i)^2=1+2i+i^2=1+2i-1=2i" /></p>
+      <p className="mt-2">平方差公式，<MathTex tex="\sqrt{3}" /> 当作 <MathTex tex="a" />：</p>
+      <p className="text-center mt-1"><MathTex tex="(\sqrt{3}+1)(\sqrt{3}-1)=(\sqrt{3})^2-1^2=3-1=2" /></p>
     </>
   ),
   'pp5-4': (
     <>
-      <p className="mt-2">平方差公式：</p>
-      <p className="text-center mt-1"><MathTex tex="(3+2i)(3-2i)=3^2-(2i)^2=9-4i^2=9+4=13" /></p>
+      <p className="mt-2">分配律，注意负号：</p>
+      <p className="text-center mt-1"><MathTex tex="-2(3-2i)=-6+4i" /></p>
     </>
   ),
   'pp5-5': (
     <>
-      <p className="mt-2">FOIL 展开：</p>
-      <p className="text-center mt-1"><MathTex tex="(2+i)(1+i) = 2+2i+i+i^2 = 2+3i-1 = 1+3i" /></p>
+      <p className="mt-2">各自展开再合并：</p>
+      <p className="text-center mt-1"><MathTex tex="(1+i)^2=2i,\quad (1-i)^2=-2i" /></p>
+      <p className="text-center mt-1"><MathTex tex="2i+(-2i)=0" /></p>
     </>
   ),
 
-  // ── 第6节：负数运算 ──
+  // ── 第6节：负数与 i 的幂次（混合前置知识） ──
   'pp6-1': (
     <>
-      <p className="mt-2"><MathTex tex="-3-(-7) = -3+7 = 4" />（减负得正）</p>
+      <p className="mt-2">负数括号平方变正，分别算再相加：</p>
+      <p className="text-center mt-1"><MathTex tex="(-4)^2+(-3)^2=16+9=25" /></p>
     </>
   ),
   'pp6-2': (
     <>
-      <p className="mt-2"><MathTex tex="-2i^2 = -2\times(-1) = 2" />（负负得正）</p>
+      <p className="mt-2">把 <MathTex tex="i^2=-1" /> 代入分子分母：</p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{-1+1}{-1-1}=\dfrac{0}{-2}=0" /></p>
     </>
   ),
   'pp6-3': (
     <>
-      <p className="mt-2"><MathTex tex="2-i^2 = 2-(-1) = 2+1 = 3" /></p>
+      <p className="mt-2">先展开平方，再乘 <MathTex tex="i" />：</p>
+      <p className="text-center mt-1"><MathTex tex="(1+i)^2=2i" /></p>
+      <p className="text-center mt-1"><MathTex tex="2i\times i=2i^2=2\times(-1)=-2" /></p>
     </>
   ),
   'pp6-4': (
     <>
-      <p className="mt-2"><MathTex tex="53 \div 4 = 13 \cdots\cdots 1 \Rightarrow i^{53} = i^1 = i" /></p>
+      <p className="mt-2"><MathTex tex="47\div4" /> 余 3，所以：</p>
+      <p className="text-center mt-1"><MathTex tex="i^{47}=i^3=-i" /></p>
     </>
   ),
   'pp6-5': (
     <>
-      <p className="mt-2"><MathTex tex="2025 \div 4 \text{ 余 } 1,\quad 2024 \div 4 \text{ 余 } 0" /></p>
-      <p className="mt-2"><MathTex tex="i^{2025}=i,\quad i^{2024}=1,\quad \Rightarrow i^{2025}+i^{2024}=1+i" /></p>
-    </>
-  ),
-  'pp6-6': (
-    <>
-      <p className="mt-2"><MathTex tex="14 \div 4 = 3 \cdots\cdots 2 \Rightarrow i^{14}=i^2=-1" /></p>
+      <p className="mt-2">分别算分子和分母：</p>
+      <p className="text-center mt-1"><MathTex tex="(-2)^3=-8,\quad i^2=-1" /></p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{-8}{-1}=8" /></p>
     </>
   ),
 
-  // ── 第7节：i 的幂次 ──
   // ── 自测清单 ──
   'prereq-1': (
     <>
@@ -193,13 +201,13 @@ export const prereqExplanations: Record<string, ReactNode> = {
   'prereq-4': (
     <>
       <p className="mt-2">分数乘法：分子乘分子，分母乘分母</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{2}{3} \times \frac{5}{4} = \frac{10}{12} = \frac{5}{6}" /></p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{2}{3} \times \dfrac{5}{4} = \dfrac{10}{12} = \dfrac{5}{6}" /></p>
     </>
   ),
   'prereq-5': (
     <>
       <p className="mt-2">通分（公倍数 12）：</p>
-      <p className="text-center mt-1"><MathTex tex="\frac{5}{6} - \frac{1}{4} = \frac{10}{12} - \frac{3}{12} = \frac{7}{12}" /></p>
+      <p className="text-center mt-1"><MathTex tex="\dfrac{5}{6} - \dfrac{1}{4} = \dfrac{10}{12} - \dfrac{3}{12} = \dfrac{7}{12}" /></p>
     </>
   ),
   'prereq-6': (
@@ -250,7 +258,7 @@ function AnswerLabel({ q }: { q: QuizQuestionData }) {
     const tex = q.acceptableAnswers?.[0] ?? q.correctAnswer;
     const isSimpleFraction = /^-?\d+\/\d+$/.test(q.correctAnswer);
     const displayTex = isSimpleFraction
-      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\frac{$1}{$2}')
+      ? q.correctAnswer.replace(/(-?\d+)\/(\d+)/, '\\dfrac{$1}{$2}')
       : tex;
     return <>答案：{/[\\^_{}]/.test(displayTex) ? <MathTex tex={displayTex} /> : displayTex}</>;
   }
@@ -285,12 +293,10 @@ export function PrereqAnswers() {
     <section className="mb-8 print-answers">
       <PageBreak label="答案与解析" />
       <h2 className="text-xl font-bold text-gray-900 mb-4">📝 1.0 复数前置知识 — 答案与解析</h2>
-      <AnswerSection title="一、数的分类 — 即时练习" questions={prereqPractice1} />
       <AnswerSection title="二、平方与平方根（含常用平方数）— 即时练习" questions={prereqPractice2} />
       <AnswerSection title="四、分数运算 — 即时练习" questions={prereqPractice4} />
       <AnswerSection title="五、多项式展开 — 即时练习" questions={prereqPractice5} />
-      <AnswerSection title="六、负数运算 — 即时练习" questions={prereqPractice6} />
-      <AnswerSection title="七、除以4求余数 — 即时练习" questions={prereqPractice7} />
+      <AnswerSection title="六、负数与 i 的幂次 — 即时练习" questions={prereqPractice6} />
       <AnswerSection title="自测清单" questions={prereqSelfTest} />
     </section>
   );

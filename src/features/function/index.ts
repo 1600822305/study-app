@@ -1,7 +1,6 @@
 export { FunctionReviewPage } from './3.0-review-page';
-export { FunctionPrereqPage } from './3.0.5-prereq-page';
 export { FunctionConceptPage } from './3.1-concept-page';
-export { ElementaryFuncPrereqPage } from './3.1.5-elem-prereq-page';
+export { ElementaryFuncPrereqPage } from './3.1.8-elem-prereq-page';
 export { ElementaryFuncPage } from './3.2-elem-func-page';
 export { FunctionGraphPrereqPage } from './3.2.5-graph-prereq-page';
 export { FunctionGraphPage } from './3.3-graph-page';

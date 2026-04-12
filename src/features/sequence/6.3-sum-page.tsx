@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
+import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton } from '@/components/shared';
 import { sequenceSumNarrations } from './data/6.3/6.3-sum-narrations';
 import { sequenceSumProgressItems } from './data/6.3/6.3-sum-progress';
 import { useProgress } from '@/hooks';
@@ -40,13 +40,13 @@ export function SequenceSumPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 1: 错位相减法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="dislocation" className="mb-3 scroll-mt-4">
+      <section id="dislocation" className="scroll-mt-4">
         <Collapsible title="一、错位相减法（最高频）" defaultOpen storageKey="seq-sum:dislocation" headerExtra={<SpeakButton text={sequenceSumNarrations.dislocation} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 适用情况 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">什么时候用？</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">什么时候用？</div>
               <div className="px-3 py-2 space-y-0">
                 <p>当要求和的通项是<strong>"等差 × 等比"</strong>的形式时：</p>
                 <p className="text-center text-xl mt-1"><MathTex tex="c_n = a_n \cdot b_n" /></p>
@@ -57,7 +57,7 @@ export function SequenceSumPage() {
 
             {/* 方法步骤 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">三步走</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">三步走</div>
               <div className="px-3 py-2 space-y-0">
                 <p><strong>第 1 步</strong>：写出 <MathTex tex="S_n" /></p>
                 <p><strong>第 2 步</strong>：两边乘以等比部分的公比 <MathTex tex="q" />，得到 <MathTex tex="qS_n" /></p>
@@ -67,7 +67,7 @@ export function SequenceSumPage() {
 
             {/* 完整例题 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">完整例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">完整例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">求 <MathTex tex="T_n = 1 \cdot 2 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n" /></p>
 
@@ -93,7 +93,7 @@ export function SequenceSumPage() {
 
             {/* 再练一题 */}
             <div className="border border-purple-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-lg">再练一题</div>
+              <div className="px-2 py-1 font-bold text-purple-800 border-b border-purple-300 bg-purple-100 text-[0.9rem]">再练一题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-purple-700">求 <MathTex tex="T_n = 1 + 2 \cdot \dfrac{1}{2} + 3 \cdot \dfrac{1}{4} + \cdots + n \cdot \left(\dfrac{1}{2}\right)^{n-1}" /></p>
 
@@ -108,7 +108,7 @@ export function SequenceSumPage() {
 
             {/* 易错 */}
             <div className="border border-red-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-lg">易错提醒</div>
+              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-[0.9rem]">易错提醒</div>
               <div className="px-3 py-2 space-y-0">
                 <p>① 相减时<strong>对齐</strong>：①的第 2 项对②的第 1 项，错开一位</p>
                 <p>② 最后一项<strong>单独拎出来</strong>，不要漏掉</p>
@@ -120,18 +120,16 @@ export function SequenceSumPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 2: 裂项相消法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="split" className="mb-3 scroll-mt-4">
+      <section id="split" className="scroll-mt-4">
         <Collapsible title="二、裂项相消法" defaultOpen storageKey="seq-sum:split" headerExtra={<SpeakButton text={sequenceSumNarrations.split} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 适用情况 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">什么时候用？</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">什么时候用？</div>
               <div className="px-3 py-2 space-y-0">
                 <p>当通项是<strong>分数</strong>，且分母可以拆成两个相邻因式之积时：</p>
                 <p className="text-center text-xl mt-1"><MathTex tex="\frac{1}{n(n+1)},\quad \frac{1}{(2n-1)(2n+1)},\quad \frac{1}{\sqrt{n} + \sqrt{n+1}}" /></p>
@@ -140,7 +138,7 @@ export function SequenceSumPage() {
 
             {/* 核心裂项公式 */}
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">核心裂项公式（必背）</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">核心裂项公式（必背）</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-1 gap-1">
                   <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
@@ -159,7 +157,7 @@ export function SequenceSumPage() {
 
             {/* 完整例题 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">完整例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">完整例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">例 1：求 <MathTex tex="S_n = \dfrac{1}{1 \times 2} + \dfrac{1}{2 \times 3} + \dfrac{1}{3 \times 4} + \cdots + \dfrac{1}{n(n+1)}" /></p>
 
@@ -182,7 +180,7 @@ export function SequenceSumPage() {
 
             {/* 消掉过程 */}
             <div className="border border-gray-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">为什么叫"相消"？</div>
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">为什么叫"相消"？</div>
               <div className="px-3 py-2 space-y-0">
                 <p>拆开后，每一项的"后半部分"和下一项的"前半部分"是<strong>相同的</strong>，正负抵消：</p>
                 <p className="mt-1"><MathTex tex="\frac{1}{1} \cancel{- \frac{1}{2}} + \cancel{\frac{1}{2}} \cancel{- \frac{1}{3}} + \cancel{\frac{1}{3}} \cancel{- \frac{1}{4}} + \cancel{\frac{1}{4}} - \frac{1}{5}" /></p>
@@ -194,18 +192,16 @@ export function SequenceSumPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 3: 分组求和法 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="group" className="mb-3 scroll-mt-4">
+      <section id="group" className="scroll-mt-4">
         <Collapsible title="三、分组求和法" defaultOpen storageKey="seq-sum:group" headerExtra={<SpeakButton text={sequenceSumNarrations.group} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 适用情况 */}
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">什么时候用？</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">什么时候用？</div>
               <div className="px-3 py-2 space-y-0">
                 <p>当通项可以<strong>拆成几个独立部分之和</strong>，每部分分别能求和时：</p>
                 <p className="text-center text-xl mt-1"><MathTex tex="c_n = f(n) + g(n)" /></p>
@@ -215,7 +211,7 @@ export function SequenceSumPage() {
 
             {/* 完整例题 */}
             <div className="border border-amber-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-lg">完整例题</div>
+              <div className="px-2 py-1 font-bold text-amber-800 border-b border-amber-300 bg-amber-100 text-[0.9rem]">完整例题</div>
               <div className="px-3 py-2 space-y-0">
                 <p className="font-bold text-blue-700">例 1：求 <MathTex tex="S_n = \sum_{k=1}^{n} (2k + 3^k)" /></p>
 
@@ -242,8 +238,8 @@ export function SequenceSumPage() {
 
             {/* 练习 */}
             <div className="border border-gray-300 rounded overflow-hidden" style={{ breakInside: 'avoid' }}>
-              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-lg">动手算一算</div>
-              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-lg">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-300 bg-gray-100 text-[0.9rem]">动手算一算</div>
+              <div className="px-3 py-2 grid grid-cols-2 gap-1 text-[0.9rem]">
                 <p>① <MathTex tex="\sum_{k=1}^{n} (3k - 1 + 2^k)" /></p>
                 <p>③ <MathTex tex="\sum_{k=1}^{n} k \cdot 3^k" /></p>
                 <p>② <MathTex tex="\sum_{k=1}^{n} \dfrac{1}{k(k+2)}" /></p>
@@ -258,12 +254,12 @@ export function SequenceSumPage() {
       {/* ════════════════════════════════════════════════════════ */}
       {/* Section 4: 方法选择总结 */}
       {/* ════════════════════════════════════════════════════════ */}
-      <section id="summary" className="mb-3 scroll-mt-4">
+      <section id="summary" className="scroll-mt-4">
         <Collapsible title="四、方法选择总结" defaultOpen storageKey="seq-sum:summary">
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <div className="border border-blue-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-lg">看通项形式 → 选方法</div>
+              <div className="px-2 py-1 font-bold text-blue-800 border-b border-blue-300 bg-blue-100 text-[0.9rem]">看通项形式 → 选方法</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="overflow-x-auto">
                   <table className="w-full text-center">
@@ -307,7 +303,7 @@ export function SequenceSumPage() {
             </div>
 
             <div className="border border-green-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-lg">高考数列大题标准流程</div>
+              <div className="px-2 py-1 font-bold text-green-800 border-b border-green-300 bg-green-100 text-[0.9rem]">高考数列大题标准流程</div>
               <div className="px-3 py-2 space-y-0">
                 <div className="grid grid-cols-3 gap-2">
                   <div className="bg-blue-50 rounded-lg p-2 border border-blue-200 text-center">
@@ -330,7 +326,7 @@ export function SequenceSumPage() {
             </div>
 
             <div className="border border-red-300 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-lg">高考提醒</div>
+              <div className="px-2 py-1 font-bold text-red-800 border-b border-red-300 bg-red-100 text-[0.9rem]">高考提醒</div>
               <div className="px-3 py-2 space-y-0">
                 <p>错位相减法计算量大，<strong>一定要细心对齐</strong>，建议打草稿</p>
                 <p className="mt-1">裂项相消的关键是<strong>记住裂项公式</strong>，消掉过程写清楚</p>

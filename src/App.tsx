@@ -17,11 +17,10 @@ const SetsPage = lazy(() => import('@/features/math-lang').then(m => ({ default:
 const SetsPrereqPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.SetsPrereqPage })));
 const LogicPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.LogicPage })));
 const LogicPrereqPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.LogicPrereqPage })));
-const InequalityPrereqPage = lazy(() => import('@/features/inequality').then(m => ({ default: m.InequalityPrereqPage })));
 const InequalityPage = lazy(() => import('@/features/inequality').then(m => ({ default: m.InequalityPage })));
+const AbsoluteValuePage = lazy(() => import('@/features/inequality').then(m => ({ default: m.AbsoluteValuePage })));
 const QuadraticPage = lazy(() => import('@/features/quadratic').then(m => ({ default: m.QuadraticPage })));
 const FunctionReviewPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionReviewPage })));
-const FunctionPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionPrereqPage })));
 const FunctionConceptPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionConceptPage })));
 const ElementaryFuncPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPrereqPage })));
 const ElementaryFuncPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPage })));
@@ -44,7 +43,7 @@ const SequenceRecurPage = lazy(() => import('@/features/sequence').then(m => ({ 
 const SequenceSumPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceSumPage })));
 const SequenceAdvPage = lazy(() => import('@/features/sequence').then(m => ({ default: m.SequenceAdvPage })));
 const GeoBasicsPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.GeoBasicsPage })));
-const Geo3dPrereqPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dPrereqPage })));
+
 const Geo3dRelationPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dRelationPage })));
 const Geo3dVectorPrereqPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dVectorPrereqPage })));
 const Geo3dVectorPage = lazy(() => import('@/features/geometry').then(m => ({ default: m.Geo3dVectorPage })));
@@ -99,13 +98,12 @@ function App() {
           <Route path="/math/logic-prereq" element={<LogicPrereqPage />} />
           <Route path="/math/logic" element={<LogicPage />} />
           <Route path="/math/stage1-exam" element={<Stage1ExamPage />} />
-          <Route path="/math/inequality-prereq" element={<InequalityPrereqPage />} />
           <Route path="/math/inequality" element={<InequalityPage />} />
-          <Route path="/math/quadratic" element={<QuadraticPage />} />
+          <Route path="/math/absolute-value" element={<AbsoluteValuePage />} />
           <Route path="/math/stage2-exam" element={<Stage2ExamPage />} />
           <Route path="/math/function-review" element={<FunctionReviewPage />} />
-          <Route path="/math/function-prereq" element={<FunctionPrereqPage />} />
           <Route path="/math/function-concept" element={<FunctionConceptPage />} />
+          <Route path="/math/quadratic" element={<QuadraticPage />} />
           <Route path="/math/elementary-func-prereq" element={<ElementaryFuncPrereqPage />} />
           <Route path="/math/elementary-func" element={<ElementaryFuncPage />} />
           <Route path="/math/function-graph-prereq" element={<FunctionGraphPrereqPage />} />
@@ -130,7 +128,7 @@ function App() {
           <Route path="/math/sequence-sum" element={<SequenceSumPage />} />
           <Route path="/math/sequence-adv" element={<SequenceAdvPage />} />
           <Route path="/math/geo-basics" element={<GeoBasicsPage />} />
-          <Route path="/math/geo3d-prereq" element={<Geo3dPrereqPage />} />
+
           <Route path="/math/geo3d-relation" element={<Geo3dRelationPage />} />
           <Route path="/math/geo3d-vector-prereq" element={<Geo3dVectorPrereqPage />} />
           <Route path="/math/geo3d-vector" element={<Geo3dVectorPage />} />

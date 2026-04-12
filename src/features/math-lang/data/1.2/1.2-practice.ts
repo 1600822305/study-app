@@ -31,6 +31,34 @@ export const setsPrereqPractice1: QuizQuestionData[] = [
   },
 ];
 
+// ── 第1节补充：方法零+方法一（填第1页底部） ──
+export const setsPrereqPractice1a: QuizQuestionData[] = [
+  {
+    id: 'sp1a-1',
+    type: 'blank',
+    question: '',
+    questionLatex: '3x^2 = 27 \\text{，} x = \\text{?}',
+    correctAnswer: '±3',
+    acceptableAnswers: ['x=±3', '3或-3', '-3或3', '±3', 'x=3或x=-3'],
+  },
+  {
+    id: 'sp1a-2',
+    type: 'blank',
+    question: '',
+    questionLatex: '(x+1)^2 = 7 \\text{，} x = \\text{?}',
+    correctAnswer: '-1±√7',
+    acceptableAnswers: ['-1+√7或-1-√7', '-1-√7或-1+√7', 'x=-1±√7', '-1±根号7'],
+  },
+  {
+    id: 'sp1a-3',
+    type: 'blank',
+    question: '',
+    questionLatex: 'x^2 + 4x - 5 = 0 \\text{（用配方法），} x = \\text{?}',
+    correctAnswer: '1或-5',
+    acceptableAnswers: ['x=1或x=-5', '-5或1', '1 或 -5', '-5 或 1', '1,-5', '-5,1'],
+  },
+];
+
 // ── 第2节：解不等式 ──
 export const setsPrereqPractice2: QuizQuestionData[] = [
   {
@@ -39,13 +67,13 @@ export const setsPrereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: 'x^2 - 5x + 6 < 0 \\text{ 的解集是？}',
     options: [
-      { label: 'A', value: '2 < x < 3', isLatex: false },
-      { label: 'B', value: 'x < 2 或 x > 3', isLatex: false },
-      { label: 'C', value: '2 ≤ x ≤ 3', isLatex: false },
-      { label: 'D', value: 'x ≤ 2 或 x ≥ 3', isLatex: false },
+      { label: 'A', value: '2 < x < 3', isLatex: true },
+      { label: 'B', value: 'x < 2 \\text{ 或 } x > 3', isLatex: true },
+      { label: 'C', value: '2 \\leq x \\leq 3', isLatex: true },
+      { label: 'D', value: 'x \\leq 2 \\text{ 或 } x \\geq 3', isLatex: true },
     ],
     correctAnswer: '2 < x < 3',
-    printCols: 2,
+    printCols: 4,
   },
   {
     id: 'sp2-2',
@@ -53,13 +81,13 @@ export const setsPrereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: 'x^2 + 2x - 15 > 0 \\text{ 的解集是？}',
     options: [
-      { label: 'A', value: '-5 < x < 3', isLatex: false },
-      { label: 'B', value: 'x < -5 或 x > 3', isLatex: false },
-      { label: 'C', value: 'x ≤ -5 或 x ≥ 3', isLatex: false },
-      { label: 'D', value: '-3 < x < 5', isLatex: false },
+      { label: 'A', value: '-5 < x < 3', isLatex: true },
+      { label: 'B', value: 'x < -5 \\text{ 或 } x > 3', isLatex: true },
+      { label: 'C', value: 'x \\leq -5 \\text{ 或 } x \\geq 3', isLatex: true },
+      { label: 'D', value: '-3 < x < 5', isLatex: true },
     ],
-    correctAnswer: 'x < -5 或 x > 3',
-    printCols: 2,
+    correctAnswer: 'x < -5 \\text{ 或 } x > 3',
+    printCols: 4,
   },
   {
     id: 'sp2-3',
@@ -67,13 +95,13 @@ export const setsPrereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: 'x^2 - 4 \\geq 0 \\text{ 的解集是？}',
     options: [
-      { label: 'A', value: 'x ≤ -2 或 x ≥ 2', isLatex: false },
-      { label: 'B', value: '-2 ≤ x ≤ 2', isLatex: false },
-      { label: 'C', value: 'x < -2 或 x > 2', isLatex: false },
-      { label: 'D', value: '-2 < x < 2', isLatex: false },
+      { label: 'A', value: 'x \\leq -2 \\text{ 或 } x \\geq 2', isLatex: true },
+      { label: 'B', value: '-2 \\leq x \\leq 2', isLatex: true },
+      { label: 'C', value: 'x < -2 \\text{ 或 } x > 2', isLatex: true },
+      { label: 'D', value: '-2 < x < 2', isLatex: true },
     ],
-    correctAnswer: 'x ≤ -2 或 x ≥ 2',
-    printCols: 2,
+    correctAnswer: 'x \\leq -2 \\text{ 或 } x \\geq 2',
+    printCols: 4,
   },
   {
     id: 'sp2-4',
@@ -81,13 +109,13 @@ export const setsPrereqPractice2: QuizQuestionData[] = [
     question: '',
     questionLatex: 'x^2 - 2x - 8 \\leq 0 \\text{ 的解集是？}',
     options: [
-      { label: 'A', value: '-2 ≤ x ≤ 4', isLatex: false },
-      { label: 'B', value: 'x ≤ -2 或 x ≥ 4', isLatex: false },
-      { label: 'C', value: '-2 < x < 4', isLatex: false },
-      { label: 'D', value: 'x < -2 或 x > 4', isLatex: false },
+      { label: 'A', value: '-2 \\leq x \\leq 4', isLatex: true },
+      { label: 'B', value: 'x \\leq -2 \\text{ 或 } x \\geq 4', isLatex: true },
+      { label: 'C', value: '-2 < x < 4', isLatex: true },
+      { label: 'D', value: 'x < -2 \\text{ 或 } x > 4', isLatex: true },
     ],
-    correctAnswer: '-2 ≤ x ≤ 4',
-    printCols: 2,
+    correctAnswer: '-2 \\leq x \\leq 4',
+    printCols: 4,
   },
 ];
 
@@ -151,48 +179,3 @@ export const setsPrereqPractice4: QuizQuestionData[] = [
   },
 ];
 
-// ── SetsPage 即时练习 ──
-
-
-
-
-// 第3节：常用数集
-export const setsPractice3: QuizQuestionData[] = [
-  {
-    id: 'stp3-1',
-    type: 'choice',
-    question: '下列说法正确的是？',
-    options: [
-      { label: 'A', value: '0 ∈ N*' },
-      { label: 'B', value: '0 ∈ N' },
-      { label: 'C', value: '-1 ∈ N' },
-      { label: 'D', value: '0.5 ∈ Z' },
-    ],
-    correctAnswer: '0 ∈ N',
-  },
-  {
-    id: 'stp3-2',
-    type: 'choice',
-    question: '',
-    questionLatex: '\\sqrt{2} \\text{ 属于下列哪个数集？}',
-    options: [
-      { label: 'A', value: 'N' },
-      { label: 'B', value: 'Z' },
-      { label: 'C', value: 'Q' },
-      { label: 'D', value: 'R' },
-    ],
-    correctAnswer: 'R',
-  },
-  {
-    id: 'stp3-3',
-    type: 'choice',
-    question: '下列包含关系错误的是？',
-    options: [
-      { label: 'A', value: 'N* ⊂ N' },
-      { label: 'B', value: 'Z ⊂ Q' },
-      { label: 'C', value: 'Q ⊂ Z' },
-      { label: 'D', value: 'Q ⊂ R' },
-    ],
-    correctAnswer: 'Q ⊂ Z',
-  },
-];

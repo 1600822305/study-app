@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, DebugGeo2dSvg, Geo2dDebugToggle, useGeo2dDebug, PracticeCard, PageBreak } from '@/components/shared';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, DebugGeo2dSvg, GeoDebugToggle, useGeo2dDebug, PracticeCard, PageBreak } from '@/components/shared';
 import { circleAnswers } from './8.1-circle-answers';
 import { circleProgressItems } from './data/8.1/8.1-circle-progress';
 import { circlePointPractice, circleEq2Practice, circleEx3Practice, circleEx4Practice, circleTangentOnPointPractice, circleTangentSummaryPractice, circleMidchordPractice, circleGeneralFormPractice, circleCirclePractice, circleCommonChordPractice, circleTangentCountPractice, circleSymPractice, circlePointSymPractice, circleParamPractice } from './data/8.1/8.1-circle-questions';
@@ -1509,7 +1509,7 @@ export function CirclePage() {
       </section>
 
       </LessonLayout>
-      <Geo2dDebugToggle />
+      <GeoDebugToggle />
     </div>
   );
 }

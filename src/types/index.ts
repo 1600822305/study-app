@@ -57,6 +57,8 @@ export interface QuizQuestionData {
   printCols?: 1 | 2 | 4;
   /** 交互模式下此题选项列数（覆盖 PracticeCard 的 optionCols） */
   cols?: 1 | 2 | 4;
+  /** 多选题（选择题专用），correctAnswer 存逗号分隔的选项 label，如 "A,C" */
+  multiSelect?: boolean;
 }
 
 /** 学习进度条目 */

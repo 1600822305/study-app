@@ -1,9 +1,9 @@
 import { Mafs, Coordinates, Point, Line, Plot } from 'mafs';
 import { DebugMafs, DText, DebugToggle } from '@/features/trig/MafsDebug';
 
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
 import { setsPrereqNarrations } from './data/1.1.5/1.1.5-prereq-narrations';
-import { setsPrereqPractice1, setsPrereqPractice2 } from './data/1.2/1.2-practice';
+import { setsPrereqPractice1, setsPrereqPractice1a, setsPrereqPractice2 } from './data/1.2/1.2-practice';
 import { setsPrereqProgressItems } from './data/1.1.5/1.1.5-prereq-progress';
 import { setsPrereqQuizQuestions } from './data/1.1.5/1.1.5-prereq-quiz';
 import { SetsPrereqAnswers, setsPrereqExplanations } from './1.1.5-prereq-answers';
@@ -16,7 +16,7 @@ export function SetsPrereqPage() {
   const { isPrinting, printOptions } = usePrintMode();
 
   return (
-    <div>
+    <div style={{ zoom: 0.9 }}>
       <PageHeader
         stage="前置准备"
         variant="prereq"
@@ -35,11 +35,11 @@ export function SetsPrereqPage() {
 
       <div className="bg-gray-50 rounded p-3 mb-3 text-gray-800 print:p-1 print:mb-0.5">
         <p className="font-bold text-gray-800 mb-1 print:mb-0.5">📋 知识地图</p>
-        <div className="grid grid-cols-2 gap-1 print:gap-y-0.5">
-          <button onClick={() => scrollToId('sp-equation')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、解一元二次方程（开平方 + 因式分解 + 公式法）</button>
-          <button onClick={() => scrollToId('sp-inequality')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解一元二次不等式（大于取两边，小于取中间）</button>
-          <button onClick={() => scrollToId('sp-numberline')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、解集的表示（数轴 + 区间）</button>
-          <button onClick={() => scrollToId('sp-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、选择题自测（16题）</button>
+        <div className="grid grid-cols-4 gap-1 print:gap-y-0.5">
+          <button onClick={() => scrollToId('sp-equation')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、解一元二次方程</button>
+          <button onClick={() => scrollToId('sp-inequality')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、解一元二次不等式</button>
+          <button onClick={() => scrollToId('sp-numberline')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、解集的表示</button>
+          <button onClick={() => scrollToId('sp-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、选择题自测</button>
         </div>
       </div>
 
@@ -48,7 +48,7 @@ export function SetsPrereqPage() {
       {/* Section 1: Solving Quadratic Equations */}
       <section id="sp-equation" className="mb-0 scroll-mt-4">
         <Collapsible title="一、解一元二次方程" defaultOpen storageKey="sets-prereq:equation" headerExtra={<SpeakButton text={setsPrereqNarrations.equation} />}>
-          <div className="space-y-0 text-lg text-gray-800">
+          <div className="space-y-0 text-[15px] text-gray-800">
 
             {/* 什么是一元二次方程 */}
             <div className="bg-blue-50 border border-blue-200 rounded p-2">
@@ -120,26 +120,27 @@ export function SetsPrereqPage() {
                   <p className="font-bold">步骤</p>
                   <p><strong>①</strong> 常数项移到右边</p>
                   <p><strong>②</strong> x 前面系数 ÷ 2，平方，两边都加上</p>
-                  <p><strong>③</strong> 左边变完全平方</p>
-                  <p><strong>④</strong> 开平方解出 x</p>
+                  <p><strong>③</strong> 左边变完全平方　<strong>④</strong> 开平方解出 x</p>
                   <div className="bg-gray-50 rounded p-1.5 mt-1">
-                    <p className="text-gray-800">验证：<Math tex="x^2 + 6x" />，<Math tex="6÷2=3" />，<Math tex="3^2=9" /></p>
-                    <p className="text-gray-800">∴ <Math tex="x^2+6x+9 = (x+3)^2" /> ✓</p>
+                    <p className="text-gray-800">把 <Math tex="ax^2+bx+c" /> 中的 <Math tex="b" /> 看成整体（含符号）</p>
+                    <p className="text-gray-800">如 <Math tex="-4x" />，则 <Math tex="b=-4" />，加 <Math tex="\left(\dfrac{-4}{2}\right)^2=4" /></p>
                   </div>
                 </div>
                 <div className="p-1.5 space-y-0.5 text-[15px]">
-                  <p className="font-bold">例1：<Math tex="x^2 + 6x + 5 = 0" /></p>
-                  <p><Math tex="x^2+6x = -5" />，两边加 9，得 <Math tex="(x+3)^2 = 4" /></p>
-                  <p><Math tex="x+3 = \pm 2" />，∴ <Math tex="x = -1" /> 或 <Math tex="x = -5" /></p>
-                  <p className="font-bold mt-1">例2：<Math tex="x^2 - 4x + 1 = 0" /></p>
-                  <p><Math tex="x^2-4x = -1" />，两边加 4，得 <Math tex="(x-2)^2 = 3" /></p>
-                  <p><Math tex="x = 2 \pm \sqrt{3}" /></p>
+                  <p className="font-bold">例：<Math tex="x^2 + 6x + 5 = 0" /></p>
+                  <p>常数项移右边：<Math tex="x^2+6x = -5" /></p>
+                  <p>一次项系数 <Math tex="6 \div 2 = 3" />，平方得 <Math tex="9" />，两边各加 9：</p>
+                  <p><Math tex="x^2+6x+9 = -5+9" />，即 <Math tex="(x+3)^2 = 4" /></p>
+                  <p>两边开根号：<Math tex="x+3 = \pm 2" /></p>
+                  <p>∴ <Math tex="x = -3+2 = -1" /> 或 <Math tex="x = -3-2 = -5" /></p>
+                  <p>答：<Math tex="x = -1" /> 或 <Math tex="x = -5" /></p>
                 </div>
               </div>
             </div>
 
-            <PageBreak label="方法二" />
+            <PracticeCard questions={setsPrereqPractice1a} explanations={setsPrereqExplanations} title="" />
 
+            <PageBreak label="方法二" />
             {/* 方法二：因式分解法 */}
             <div className="border border-gray-400 overflow-hidden">
               <div className="px-2 py-1 font-bold text-green-700 border-b border-gray-400">方法二：因式分解法（最常用，优先试）</div>
@@ -157,7 +158,7 @@ export function SetsPrereqPage() {
                 </div>
                 <div className="p-1.5 space-y-0.5 border-b border-gray-300 text-[15px]">
                   <p className="font-bold">例2（平方差）：<Math tex="x^2 - 4 = 0" /></p>
-                  <p><Math tex="x^2" /> 是平方，<Math tex="4 = 2^2" /> 也是平方</p>
+                  <p>两项都是完全平方：<Math tex="x^2" /> 和 <Math tex="4 = 2^2" />，符合平方差</p>
                   <p>套公式 <Math tex="a^2 - b^2 = (a+b)(a-b)" />：</p>
                   <p className="pl-2"><Math tex="(x+2)(x-2) = 0" /></p>
                   <p>∴ <Math tex="x = -2" /> 或 <Math tex="x = 2" /></p>
@@ -173,8 +174,8 @@ export function SetsPrereqPage() {
                 </div>
                 <div className="p-1.5 space-y-0.5 text-[15px]">
                   <p className="font-bold">例4（完全平方）：<Math tex="x^2 + 6x + 9 = 0" /></p>
-                  <p><Math tex="x^2" /> 是平方，<Math tex="9 = 3^2" /> 是平方</p>
-                  <p>中间项 <Math tex="6x = 2 \times x \times 3" />，符合！</p>
+                  <p>首尾完全平方：<Math tex="x^2" /> 和 <Math tex="9=3^2" />，中间项 <Math tex="6x=2\times x\times 3" /></p>
+                  <p>套公式 <Math tex="(a+b)^2 = a^2+2ab+b^2" />：</p>
                   <p>∴ <Math tex="(x+3)^2 = 0" /></p>
                   <p>∴ <Math tex="x = -3" />（重根，两个根一样）</p>
                 </div>
@@ -221,31 +222,11 @@ export function SetsPrereqPage() {
                   <p>④ <Math tex="x = \dfrac{10}{4} = \dfrac{5}{2}" /> 或 <Math tex="x = \dfrac{-4}{4} = -1" /></p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 border-t border-gray-300 text-[15px]">
-                <div className="p-1.5 space-y-0.5 border-r border-gray-300">
-                  <p className="font-bold text-green-800">b 是偶数时的简化公式</p>
-                  <p>令 <Math tex="b' = \dfrac{b}{2}" />，则：</p>
-                  <Math tex="x = \dfrac{-b' \pm \sqrt{b'^2 - ac}}{a}" display />
-                  <p>省去分子分母都除以 2 的步骤</p>
-                </div>
-                <div className="p-1.5 space-y-0.5">
-                  <p className="font-bold text-gray-600">公式推导（看懂就不用死背）</p>
-                  <p>从 <Math tex="ax^2 + bx + c = 0" /> 出发：</p>
-                  <p>① 除以 <Math tex="a" />：<Math tex="x^2 + \tfrac{b}{a}x = -\tfrac{c}{a}" /></p>
-                  <p>② 配方：<Math tex="\left(x + \tfrac{b}{2a}\right)^2 = \tfrac{b^2 - 4ac}{4a^2}" /></p>
-                  <p>③ 开根移项：<Math tex="x = \tfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}" /></p>
-                </div>
-              </div>
             </div>
 
 
             <PracticeCard questions={setsPrereqPractice1} explanations={setsPrereqExplanations} />
 
-            <CalloutCard variant="warning" title="易错点" compact>
-              <p className="text-base">开平方别忘 <strong>±</strong>，配方法加的数 = （一次项系数 ÷ 2）²，两边都要加</p>
-              <p className="text-base">因式分解找两数注意<strong>符号</strong>：乘积和加和都要带正负</p>
-              <p className="text-base">公式法 <Math tex="a,b,c" /> <strong>连着符号读</strong>，<Math tex="c" /> 前是减号则 <Math tex="c" /> 是负数</p>
-            </CalloutCard>
           </div>
         </Collapsible>
       </section>
@@ -253,143 +234,101 @@ export function SetsPrereqPage() {
         {/* Section 2: Quadratic Inequalities */}
         <section id="sp-inequality" className="mb-0 scroll-mt-4">
           <Collapsible title="二、解一元二次不等式（集合最核心的前置技能！）" defaultOpen storageKey="sets-prereq:inequality" headerExtra={<SpeakButton text={setsPrereqNarrations.inequality} />}>
-            <p className="text-blue-600 mb-1">学完你能：用"三步走"方法独立解一元二次不等式，写出集合描述法的解集。</p>
-            <div className="space-y-1 text-lg text-gray-800">
+            <div className="space-y-1 text-[15px] text-gray-800">
 
             {/* 二次函数前置 */}
-            <div className="bg-blue-50 border border-blue-200 rounded p-2">
-              <p className="font-bold text-blue-800 mb-1">先搞清楚：二次函数的图像长什么样？</p>
-              <p className="text-blue-700 mb-1">不等式的解法靠的是<strong>二次函数的图像</strong>，所以要先知道图像的基本规律。</p>
-              <div className="space-y-1.5">
-                <div className="bg-white rounded p-2 border border-blue-100">
-                  <p className="font-bold text-gray-800 mb-0.5">二次函数：<Math tex="y = ax^2 + bx + c" /></p>
-                  <p className="text-gray-800">图像是一条<strong>抛物线</strong>（U 形曲线），开口方向由 a 决定：</p>
+            <div className="border border-gray-300 rounded p-2 space-y-1">
+              <p className="font-bold text-blue-800">先搞清楚：二次函数的图像长什么样？</p>
+              <p className="font-bold text-gray-800">二次函数 <Math tex="y = ax^2 + bx + c" /> 图像是抛物线，开口由 a 决定：</p>
+              <div className="grid grid-cols-2 gap-1.5">
+                <div className="border border-gray-200 rounded p-1.5 text-center">
+                  <p className="font-bold text-blue-600">a {'>'} 0 ⇒ 开口朝上 ∪</p>
+                  <p className="text-gray-800 text-sm">像碗，<strong>底部最低</strong>，两边 y {'>'} 0</p>
                 </div>
-                <div className="grid grid-cols-2 gap-1.5">
-                  <div className="bg-white rounded p-2 border border-blue-100 text-center">
-                    <p className="font-bold text-blue-600 mb-0.5">a {'>'} 0 ⇒ 开口朝上 ∪</p>
-                    <div className="text-3xl leading-none">∪</div>
-                    <p className="text-gray-800 mt-0.5">像碗一样，<strong>底部是最低点</strong></p>
-                    <p className="text-gray-800">两边往上走，两边 y {'>'} 0</p>
-                  </div>
-                  <div className="bg-white rounded p-2 border border-blue-100 text-center">
-                    <p className="font-bold text-red-500 mb-0.5">a {'<'} 0 ⇒ 开口朝下 ∩</p>
-                    <div className="text-3xl leading-none">∩</div>
-                    <p className="text-gray-800 mt-0.5">像山丘，<strong>顶部是最高点</strong></p>
-                    <p className="text-gray-800">两边往下走，两边 y {'<'} 0</p>
-                  </div>
-                </div>
-                <div className="bg-white rounded p-2 border border-blue-100">
-                  <p className="font-bold text-gray-800 mb-1">抛物线和 x 轴的交点 = 方程 <Math tex="ax^2+bx+c=0" /> 的根</p>
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="text-center">
-                      <div className="bg-gray-50 rounded overflow-hidden">
-                        <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={100}>
-                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
-                          <Plot.OfX y={(x: number) => x * x - 1} color="#6366f1" />
-                          <Point x={-1} y={0} color="#ef4444" />
-                          <Point x={1} y={0} color="#ef4444" />
-                        </Mafs>
-                      </div>
-                      <p className="text-xs font-bold text-green-600 mt-1">Δ {'>'} 0</p>
-                      <p className="text-xs text-gray-800">两个交点，两个根</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="bg-gray-50 rounded overflow-hidden">
-                        <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={100}>
-                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
-                          <Plot.OfX y={(x: number) => x * x} color="#6366f1" />
-                          <Point x={0} y={0} color="#f59e0b" />
-                        </Mafs>
-                      </div>
-                      <p className="text-xs font-bold text-amber-500 mt-1">Δ = 0</p>
-                      <p className="text-xs text-gray-800">一个交点，重根</p>
-                    </div>
-                    <div className="text-center">
-                      <div className="bg-gray-50 rounded overflow-hidden">
-                        <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={100}>
-                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
-                          <Plot.OfX y={(x: number) => x * x + 1} color="#6366f1" />
-                        </Mafs>
-                      </div>
-                      <p className="text-xs font-bold text-red-500 mt-1">Δ {'<'} 0</p>
-                      <p className="text-xs text-gray-800">没交点，无实数根</p>
-                    </div>
-                  </div>
+                <div className="border border-gray-200 rounded p-1.5 text-center">
+                  <p className="font-bold text-red-500">a {'<'} 0 ⇒ 开口朝下 ∩</p>
+                  <p className="text-gray-800 text-sm">像山丘，<strong>顶部最高</strong>，两边 y {'<'} 0</p>
                 </div>
               </div>
-              <p className="text-blue-600 mt-1 font-bold">下面的口诀假设 a {'>'} 0（开口朝上）。如果 a {'<'} 0，先两边乘 -1 变成 a {'>'} 0 再用口诀。</p>
+              <p className="font-bold text-gray-800">抛物线与 x 轴的交点 = 方程 <Math tex="ax^2+bx+c=0" /> 的根</p>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="text-center">
+                  <div className="bg-white rounded overflow-hidden">
+                    <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={90}>
+                      <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
+                      <Plot.OfX y={(x: number) => x * x - 1} color="#6366f1" />
+                      <Point x={-1} y={0} color="#ef4444" />
+                      <Point x={1} y={0} color="#ef4444" />
+                    </Mafs>
+                  </div>
+                  <p className="text-xs font-bold text-green-600">Δ {'>'} 0，两个根</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-white rounded overflow-hidden">
+                    <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={90}>
+                      <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
+                      <Plot.OfX y={(x: number) => x * x} color="#6366f1" />
+                      <Point x={0} y={0} color="#f59e0b" />
+                    </Mafs>
+                  </div>
+                  <p className="text-xs font-bold text-amber-500">Δ = 0，重根</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-white rounded overflow-hidden">
+                    <Mafs viewBox={{ x: [-3, 3], y: [-1, 4], padding: 0 }} preserveAspectRatio={false} height={90}>
+                      <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
+                      <Plot.OfX y={(x: number) => x * x + 1} color="#6366f1" />
+                    </Mafs>
+                  </div>
+                  <p className="text-xs font-bold text-red-500">Δ {'<'} 0，无实根</p>
+                </div>
+              </div>
+              <p className="text-blue-600 font-bold">下面口诀假设 a {'>'} 0。若 a {'<'} 0，先两边乘 -1 变成 a {'>'} 0 再用口诀。</p>
             </div>
 
-            <CalloutCard variant="warning" title="核心方法：三步走" icon={null}>
-              <p>1. 化成标准形式 <Math tex="ax^2 + bx + c > 0" /></p>
-              <p>2. 解对应方程，找到两个根 <Math tex="x_1 < x_2" /></p>
-              <p>3. 用口诀写答案</p>
-            </CalloutCard>
+            <div className="border border-amber-300 rounded px-2 py-1">
+              <p className="font-bold text-amber-700 mb-0.5">核心方法：三步走</p>
+              <p>1. 化成标准形式 <Math tex="ax^2 + bx + c > 0" />　2. 解方程得两根 <Math tex="x_1 < x_2" />　3. 用口诀写答案</p>
+            </div>
 
             <div className="border border-orange-300 overflow-hidden">
-              <div className="bg-orange-50 px-2 py-1 text-center border-b border-orange-300">
+              <div className="bg-orange-50 px-2 py-1 text-center">
                 <p className="text-orange-600 font-bold">口诀（必记！）大于取两边，小于取中间</p>
               </div>
-              <table className="w-full text-gray-800">
-                <thead>
-                  <tr className="bg-orange-50 text-sm">
-                    <th className="border-b border-r border-orange-200 px-2 py-1 text-left">不等式</th>
-                    <th className="border-b border-r border-orange-200 px-2 py-1 text-left">解集</th>
-                    <th className="border-b border-orange-200 px-2 py-1 text-left">口诀</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border-b border-r border-orange-200 px-2 py-1"><Math tex="ax^2+bx+c > 0" /></td>
-                    <td className="border-b border-r border-orange-200 px-2 py-1"><Math tex="x < x_1 \text{ 或 } x > x_2" /></td>
-                    <td className="border-b border-orange-200 px-2 py-1">取两边</td>
-                  </tr>
-                  <tr>
-                    <td className="border-b border-r border-orange-200 px-2 py-1"><Math tex="ax^2+bx+c < 0" /></td>
-                    <td className="border-b border-r border-orange-200 px-2 py-1"><Math tex="x_1 < x < x_2" /></td>
-                    <td className="border-b border-orange-200 px-2 py-1">取中间</td>
-                  </tr>
-                  <tr>
-                    <td className="border-b border-r border-orange-200 px-2 py-1"><Math tex="ax^2+bx+c \geq 0" /></td>
-                    <td className="border-b border-r border-orange-200 px-2 py-1"><Math tex="x \leq x_1 \text{ 或 } x \geq x_2" /></td>
-                    <td className="border-b border-orange-200 px-2 py-1">含等号</td>
-                  </tr>
-                  <tr>
-                    <td className="border-r border-orange-200 px-2 py-1"><Math tex="ax^2+bx+c \leq 0" /></td>
-                    <td className="border-r border-orange-200 px-2 py-1"><Math tex="x_1 \leq x \leq x_2" /></td>
-                    <td className="px-2 py-1">含等号</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
 
             {/* 抛物线图解 — Mafs */}
             <div>
-              <p className="font-bold mb-1">图解：为什么口诀是对的？</p>
-              <p className="text-gray-800 mb-1">
-                <Math tex="y = x^2 - 3x - 4 = (x+1)(x-4)" /> 的图像（a {'>'} 0，开口朝上）：
-              </p>
-              <div className="bg-gray-50 rounded overflow-hidden">
-                <DebugMafs viewBox={{ x: [-3.5, 6.5], y: [-6, 4] }} height={200}>
-                  <Coordinates.Cartesian xAxis={{ lines: false, labels: (n) => ([-1, 0, 4].includes(n) ? String(n) : '') }} yAxis={{ lines: false, labels: () => '' }} />
-                  <Plot.OfX y={(x: number) => x < -1 ? x * x - 3 * x - 4 : NaN} color="#16a34a" />
-                  <Plot.OfX y={(x: number) => x >= -1 && x <= 4 ? x * x - 3 * x - 4 : NaN} color="#ef4444" />
-                  <Plot.OfX y={(x: number) => x > 4 ? x * x - 3 * x - 4 : NaN} color="#16a34a" />
-                  <Point x={-1} y={0} color="#ef4444" />
-                  <Point x={4} y={0} color="#ef4444" />
-                  <DText x={-1.30} y={1.40} size={15} color="#1f2937">x₁=-1</DText>
-                  <DText x={4.30} y={1.30} size={18} color="#1f2937">x₂=4</DText>
-                  <DText x={-3.35} y={3.10} size={14} color="#16a34a">← 取两边</DText>
-                  <DText x={1.50} y={-3.50} size={14} color="#ef4444">取中间</DText>
-                  <DText x={6.75} y={3.05} size={14} color="#16a34a">取两边 →</DText>
-                </DebugMafs>
+              <p className="font-bold mb-0.5">图解：为什么口诀是对的？</p>
+              <div className="flex gap-2 items-start">
+                <div className="flex-1 space-y-0.5 text-gray-800">
+                  <p><Math tex="y = (x+1)(x-4)" />（a {'>'} 0，朝上）</p>
+                  <p>两根 <Math tex="x_1 = -1,\; x_2 = 4" />，标在数轴上</p>
+                  <p>数轴被分成<strong>三段</strong>：</p>
+                  <p>　<strong>两边</strong>：<Math tex="x_1" /> 左边 + <Math tex="x_2" /> 右边</p>
+                  <p>　即 <Math tex="x < -1" /> 或 <Math tex="x > 4" /></p>
+                  <p>　<strong>中间</strong>：两根之间</p>
+                  <p>　即 <Math tex="-1 < x < 4" /></p>
+                </div>
+                <div className="flex-shrink-0 bg-gray-50 rounded overflow-hidden" style={{ width: 280, height: 170 }}>
+                  <DebugMafs viewBox={{ x: [-3.5, 6.5], y: [-6, 4] }} height={170}>
+                    <Coordinates.Cartesian xAxis={{ lines: false, labels: (n) => ([-1, 0, 4].includes(n) ? String(n) : '') }} yAxis={{ lines: false, labels: () => '' }} />
+                    <Plot.OfX y={(x: number) => x < -1 ? x * x - 3 * x - 4 : NaN} color="#16a34a" />
+                    <Plot.OfX y={(x: number) => x >= -1 && x <= 4 ? x * x - 3 * x - 4 : NaN} color="#ef4444" />
+                    <Plot.OfX y={(x: number) => x > 4 ? x * x - 3 * x - 4 : NaN} color="#16a34a" />
+                    <Point x={-1} y={0} color="#ef4444" />
+                    <Point x={4} y={0} color="#ef4444" />
+                    <DText x={-2.59} y={1.05} size={15} color="#1f2937">x₁=-1</DText>
+                    <DText x={5.83} y={0.89} size={18} color="#1f2937">x₂=4</DText>
+                    <DText x={-3.35} y={3.10} size={14} color="#16a34a">← 取两边</DText>
+                    <DText x={1.56} y={-3.79} size={14} color="#ef4444">取中间</DText>
+                    <DText x={6.75} y={3.05} size={14} color="#16a34a">取两边 →</DText>
+                  </DebugMafs>
+                </div>
               </div>
-              <div className="mt-1.5 space-y-0.5 text-gray-800">
-                <p>🔴 两个根 <Math tex="x_1 = -1, x_2 = 4" /> 是抛物线和 x 轴的交点</p>
-                <p>🟢 <strong>两边</strong>（x {'<'} -1 和 x {'>'} 4）：抛物线在 x 轴<strong>上面</strong>，y {'>'} 0</p>
-                <p>🔴 <strong>中间</strong>（-1 {'<'} x {'<'} 4）：抛物线在 x 轴<strong>下面</strong>，y {'<'} 0</p>
-                <p className="text-gray-800 mt-0.5">所以"大于取两边"就是取 y {'>'} 0 的部分，"小于取中间"就是取 y {'<'} 0 的部分。</p>
+              <div className="mt-0.5 space-y-0.5 text-gray-800">
+                <p><strong>大于取两边</strong> → <Math tex="x < x_1" /> 或 <Math tex="x > x_2" />　｜　<strong>小于取中间</strong> → <Math tex="x_1 < x < x_2" /></p>
+                <p>遇到 <Math tex="\geq" /> 或 <Math tex="\leq" /> 时，解集<strong>包含端点</strong>（把 {'<'} 换成 ≤，{'>'} 换成 ≥）</p>
               </div>
             </div>
 
@@ -435,8 +374,7 @@ export function SetsPrereqPage() {
               </div>
             </div>
 
-            <PageBreak label="即时练习" />
-            <PracticeCard questions={setsPrereqPractice2} explanations={setsPrereqExplanations} optionCols={2} printOptionCols={2} />
+            <PracticeCard questions={setsPrereqPractice2} explanations={setsPrereqExplanations} title="" optionCols={4} printOptionCols={4} />
 
           </div>
         </Collapsible>
@@ -446,7 +384,7 @@ export function SetsPrereqPage() {
       <section id="sp-numberline" className="mb-0 scroll-mt-4">
         <Collapsible title="三、解集的表示（数轴 + 区间）" defaultOpen storageKey="sets-prereq:numberline" headerExtra={<SpeakButton text={setsPrereqNarrations.numberLine} />}>
           <p className="text-blue-600 mb-1">学完你能：用数轴和区间两种方式表示解集，分清 ○/● 和 ()/[]。</p>
-          <div className="space-y-1 text-lg text-gray-800">
+          <div className="space-y-1 text-[15px] text-gray-800">
 
             {/* 数轴四种画法 */}
             <div className="border border-gray-300 overflow-hidden">
@@ -514,38 +452,45 @@ export function SetsPrereqPage() {
               </div>
             </div>
 
-            {/* 区间对照表 */}
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-base">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-200 px-2 py-1 text-left">不等式</th>
-                    <th className="border border-gray-200 px-2 py-1 text-left">数轴</th>
-                    <th className="border border-gray-200 px-2 py-1 text-left">区间写法</th>
-                    <th className="border border-gray-200 px-2 py-1 text-left">说明</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[
-                    ['a < x < b', '○——○', '(a, b)', '开区间'],
-                    ['a \\leq x \\leq b', '●——●', '[a, b]', '闭区间'],
-                    ['a \\leq x < b', '●——○', '[a, b)', '左闭右开'],
-                    ['a < x \\leq b', '○——●', '(a, b]', '左开右闭'],
-                    ['x > a', '○ →→', '(a, +\\infty)', '∞ 永远 ( )'],
-                    ['x \\geq a', '● →→', '[a, +\\infty)', ''],
-                    ['x < b', '←← ○', '(-\\infty, b)', ''],
-                    ['x \\leq b', '←← ●', '(-\\infty, b]', ''],
-                    ['\\text{全体实数}', '←←→→', '(-\\infty, +\\infty)', ''],
-                  ].map(([ineq, axis, interval, note], idx) => (
-                    <tr key={idx} className="hover:bg-blue-50">
-                      <td className="border border-gray-200 px-2 py-1"><Math tex={ineq} /></td>
-                      <td className="border border-gray-200 px-2 py-1 font-mono text-sm">{axis}</td>
-                      <td className="border border-gray-200 px-2 py-1"><Math tex={interval} /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-gray-800">{note}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            {/* 区间对照表 — 两列 */}
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { title: '有限区间', rows: [
+                  ['a < x < b', '○——○', '(a, b)', '开区间'],
+                  ['a \\leq x \\leq b', '●——●', '[a, b]', '闭区间'],
+                  ['a \\leq x < b', '●——○', '[a, b)', '左闭右开'],
+                  ['a < x \\leq b', '○——●', '(a, b]', '左开右闭'],
+                ]},
+                { title: '无穷区间（∞ 永远用圆括号）', rows: [
+                  ['x > a', '○ →→', '(a, +\\infty)', ''],
+                  ['x \\geq a', '● →→', '[a, +\\infty)', ''],
+                  ['x < b', '←← ○', '(-\\infty, b)', ''],
+                  ['x \\leq b', '←← ●', '(-\\infty, b]', ''],
+                  ['\\text{全体实数}', '←←→→', '(-\\infty, +\\infty)', ''],
+                ]},
+              ].map((group, gi) => (
+                <div key={gi}>
+                  <p className="font-bold text-gray-700 mb-0.5">{group.title}</p>
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50 text-sm">
+                        <th className="border border-gray-200 px-1.5 py-0.5 text-left">不等式</th>
+                        <th className="border border-gray-200 px-1.5 py-0.5 text-left">数轴</th>
+                        <th className="border border-gray-200 px-1.5 py-0.5 text-left">区间</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.rows.map(([ineq, axis, interval, note], idx) => (
+                        <tr key={idx}>
+                          <td className="border border-gray-200 px-1.5 py-0.5"><Math tex={ineq} /></td>
+                          <td className="border border-gray-200 px-1.5 py-0.5 font-mono text-sm">{axis}</td>
+                          <td className="border border-gray-200 px-1.5 py-0.5"><Math tex={interval} />{note && <span className="text-gray-500 text-xs ml-1">{note}</span>}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
             </div>
 
           </div>
@@ -560,7 +505,7 @@ export function SetsPrereqPage() {
           </span>
           选择题自测
         </h2>
-        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="前置知识自测" description="8道选择题，覆盖解方程、解不等式、区间表示、数轴画法" explanations={setsPrereqExplanations} optionCols={2} />
+        <QuizPanel module="sets-prereq" questions={setsPrereqQuizQuestions} title="" description="" explanations={setsPrereqExplanations} optionCols={2} />
       </section>
 
       {isPrinting && printOptions.showAnswers && <SetsPrereqAnswers />}

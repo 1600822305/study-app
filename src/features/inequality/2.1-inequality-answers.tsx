@@ -1,161 +1,111 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { inequalityQuizQuestions } from './data/2.1/2.1-quiz';
+import { amgmBasicFill, amgmTransformFill, amgmReverseFill, amgmNonHomoFill, amgmHomoFill } from './data/2.1/2.1-practice';
 import type { QuizQuestionData } from '@/types';
 
+// ══════════════════════════════════════════════
+// 解析内容（唯一数据源）— 交互 + 打印共用
+// ══════════════════════════════════════════════
+
 export const inequalityExplanations: Record<string, ReactNode> = {
-  // ── 基本不等式即时训练 ──
-  'iq-p1': (
+  // ── 超基础填空（3题）──
+  'iq-bf1': (
     <>
-      <p className="mt-2">积定求和最小值，直接套 <MathTex tex="a+b \geq 2\sqrt{ab}" /></p>
-      <p className="mt-1"><MathTex tex="a+b \geq 2\sqrt{16} = 2 \times 4 = 8" /></p>
-      <p className="mt-1"><MathTex tex="a=b=4" /> 时取等，最小值为 <strong>8</strong></p>
+      <p className="mt-2">积定求和，<MathTex tex="a+b \geq 2\sqrt{ab} = 2\sqrt{9} = 6" /></p>
+      <p className="mt-1">最小值为 <strong>6</strong></p>
     </>
   ),
-  'iq-p2': (
+  'iq-bf2': (
     <>
-      <p className="mt-2">和定求积最大值，套 <MathTex tex="a+b \geq 2\sqrt{ab}" /></p>
-      <p className="mt-1"><MathTex tex="8 \geq 2\sqrt{ab}" />，两边平方得 <MathTex tex="64 \geq 4ab" />，即 <MathTex tex="ab \leq 16" /></p>
-      <p className="mt-1"><MathTex tex="a=b=4" /> 时取等，最大值为 <strong>16</strong></p>
+      <p className="mt-2">和定求积，<MathTex tex="10 \geq 2\sqrt{ab}" />，两边平方得 <MathTex tex="ab \leq 25" /></p>
+      <p className="mt-1">最大值为 <strong>25</strong></p>
     </>
   ),
-  'iq-p3': (
+  'iq-bf3': (
     <>
-      <p className="mt-2"><MathTex tex="x \cdot \dfrac{9}{x} = 9" /> 是定值，积定求和最小值</p>
-      <p className="mt-1"><MathTex tex="x + \dfrac{9}{x} \geq 2\sqrt{9} = 6" /></p>
-      <p className="mt-1"><MathTex tex="x=3" /> 时取等，最小值为 <strong>6</strong></p>
+      <p className="mt-2"><MathTex tex="x \cdot \dfrac{4}{x} = 4" /> 是定值，<MathTex tex="x+\dfrac{4}{x} \geq 2\sqrt{4} = 4" /></p>
+      <p className="mt-1">最小值为 <strong>4</strong></p>
     </>
   ),
-  'iq-p4': (
+  // ── 小变形填空（3题）──
+  'iq-tf1': (
     <>
-      <p className="mt-2">设 <MathTex tex="a=x,\;b=4-x" />，则 <MathTex tex="a+b=4" /> 是定值，和定求积最大值</p>
-      <p className="mt-1"><MathTex tex="4 \geq 2\sqrt{ab}" />，两边平方得 <MathTex tex="16 \geq 4ab" />，即 <MathTex tex="ab \leq 4" /></p>
-      <p className="mt-1"><MathTex tex="x=2" /> 时取等，最大值为 <strong>4</strong></p>
+      <p className="mt-2"><MathTex tex="a^2+b^2 \geq 2ab" />，代入得 <MathTex tex="9 \geq 2ab" />，即 <MathTex tex="ab \leq \dfrac{9}{2}" /></p>
+      <p className="mt-1">最大值为 <MathTex tex="\dfrac{9}{2}" /></p>
     </>
   ),
-  'iq-p5': (
+  'iq-tf2': (
     <>
-      <p className="mt-2">配凑：把 <MathTex tex="x" /> 拆成 <MathTex tex="(x-2)+2" /></p>
-      <p className="mt-1">原式 <MathTex tex="= (x-2) + \dfrac{1}{x-2} + 2" /></p>
-      <p className="mt-1">现在 <MathTex tex="(x-2) \cdot \dfrac{1}{x-2} = 1" /> 是定值</p>
-      <p className="mt-1"><MathTex tex="(x-2)+\dfrac{1}{x-2} \geq 2\sqrt{1} = 2" />，所以原式 <MathTex tex="\geq 2+2=4" /></p>
-      <p className="mt-1"><MathTex tex="x=3" /> 时取等，最小值为 <strong>4</strong></p>
+      <p className="mt-2"><MathTex tex="\dfrac{1}{a} \cdot \dfrac{4}{b} = \dfrac{4}{ab} = \dfrac{4}{9}" /> 是定值</p>
+      <p className="mt-1"><MathTex tex="\dfrac{1}{a}+\dfrac{4}{b} \geq 2\sqrt{\dfrac{4}{9}} = \dfrac{4}{3}" />，最小值为 <MathTex tex="\dfrac{4}{3}" /></p>
     </>
   ),
-  'iq-p6': (
+  'iq-tf3': (
     <>
-      <p className="mt-2">乘1法：<MathTex tex="\dfrac{1}{a}+\dfrac{1}{b} = \left(\dfrac{1}{a}+\dfrac{1}{b}\right)(a+2b)" /></p>
-      <p className="mt-1">展开 <MathTex tex="= 1 + \dfrac{2b}{a} + \dfrac{a}{b} + 2 = 3 + \dfrac{2b}{a} + \dfrac{a}{b}" /></p>
-      <p className="mt-1"><MathTex tex="\dfrac{2b}{a} \cdot \dfrac{a}{b} = 2" /> 是定值，套公式得 <MathTex tex="\dfrac{2b}{a}+\dfrac{a}{b} \geq 2\sqrt{2}" /></p>
-      <p className="mt-1">所以原式 <MathTex tex="\geq 3+2\sqrt{2}" />，最小值为 <MathTex tex="3+2\sqrt{2}" /></p>
+      <p className="mt-2">展开 <MathTex tex="(a+2)(b+2) = ab+2a+2b+4 = 1+2(a+b)+4" /></p>
+      <p className="mt-1"><MathTex tex="a+b \geq 2\sqrt{ab} = 2" />，所以原式 <MathTex tex="\geq 1+4+4 = 9" /></p>
+      <p className="mt-1">最小值为 <strong>9</strong></p>
     </>
   ),
-  'iq2-1': (
+  // ── 逆向思维填空（2题）──
+  'iq-rf1': (
     <>
-      <p className="mt-2">题目只说 <MathTex tex="x\ne 0" />，没说 <MathTex tex="x>0" /></p>
-      <p className="mt-2">所以不一定能直接用基本不等式</p>
-      <p className="mt-2">当 <MathTex tex="x\to 0^-" /> 时，原式会趋向负无穷</p>
-      <p className="mt-2">结论：最小值不存在</p>
+      <p className="mt-2"><MathTex tex="(a+2)+(b+3) \geq 2\sqrt{(a+2)(b+3)} = 2\sqrt{25} = 10" /></p>
+      <p className="mt-1"><MathTex tex="a+b+5 \geq 10" />，所以 <MathTex tex="a+b \geq 5" />，最小值为 <strong>5</strong></p>
     </>
   ),
-  'iq2-3': (
+  'iq-rf2': (
     <>
-      <p className="mt-2">先凑形：<MathTex tex="x=(x-3)+3" /></p>
-      <p className="text-center mt-1"><MathTex tex="x+\dfrac{4}{x-3}=(x-3)+\dfrac{4}{x-3}+3" /></p>
-      <p className="mt-2">因为 <MathTex tex="x>3" />，所以 <MathTex tex="x-3>0" />，可用基本不等式</p>
-      <p className="text-center mt-1"><MathTex tex="(x-3)+\dfrac{4}{x-3}\ge 2\sqrt4=4" /></p>
-      <p className="mt-2">所以原式最小值是 <MathTex tex="7" /></p>
+      <p className="mt-2"><MathTex tex="(a+3)+(b+1) \geq 2\sqrt{(a+3)(b+1)} = 2\sqrt{9} = 6" /></p>
+      <p className="mt-1"><MathTex tex="a+b+4 \geq 6" />，所以 <MathTex tex="a+b \geq 2" />，最小值为 <strong>2</strong></p>
     </>
   ),
-  'iq2-4': (
+  // ── 非齐次式填空（2题）──
+  'iq-nhf1': (
     <>
-      <p className="mt-2">利用 <MathTex tex="a+b=1" /> 做“1 的代换”</p>
-      <p className="text-center mt-1"><MathTex tex="\left(\dfrac{4}{a}+\dfrac{1}{b}\right)(a+b)=5+\dfrac{4b}{a}+\dfrac{a}{b}" /></p>
-      <p className="mt-2">后两项乘积固定为 4，用基本不等式</p>
-      <p className="text-center mt-1"><MathTex tex="\dfrac{4b}{a}+\dfrac{a}{b}\ge 2\sqrt4=4" /></p>
-      <p className="mt-2">所以最小值是 <MathTex tex="9" /></p>
+      <p className="mt-2"><MathTex tex="x \cdot \dfrac{4}{x} = 4" /> 是定值，<MathTex tex="x+\dfrac{4}{x} \geq 2\sqrt{4} = 4" /></p>
+      <p className="mt-1">最小值为 <strong>4</strong></p>
     </>
   ),
-  'iqz1': (
+  'iq-nhf2': (
     <>
-      <p className="mt-2">同向不等式可以相加</p>
-      <p className="text-center mt-1"><MathTex tex="a>b,\ c>d \Rightarrow a+c>b+d" /></p>
-      <p className="mt-2">所以选 C</p>
+      <p className="mt-2">凑配：<MathTex tex="2x = 2(x-1)+2" /></p>
+      <p className="mt-1">原式 <MathTex tex="= 2(x-1)+\dfrac{1}{x-1}+2" />，套公式得 <MathTex tex="2(x-1)+\dfrac{1}{x-1} \geq 2\sqrt{2}" /></p>
+      <p className="mt-1">最小值为 <MathTex tex="2\sqrt{2}+2" /></p>
     </>
   ),
-  'iqz2': (
+  // ── 齐次式 & 齐次化填空（4题）──
+  'iq-hf1': (
     <>
-      <p className="mt-2"><MathTex tex="a<0<b" /> 且 <MathTex tex="|a|>|b|" /></p>
-      <p className="mt-2">说明负数部分更“强”，相加仍为负</p>
-      <p className="text-center mt-1"><MathTex tex="a+b<0" /></p>
+      <p className="mt-2"><MathTex tex="\dfrac{a}{b} \cdot \dfrac{4b}{a} = 4" /> 是定值，<MathTex tex="\dfrac{a}{b}+\dfrac{4b}{a} \geq 2\sqrt{4} = 4" /></p>
+      <p className="mt-1">最小值为 <strong>4</strong></p>
     </>
   ),
-  'iqz3': (
+  'iq-hf2': (
     <>
-      <p className="mt-2">去分母乘 6：<MathTex tex="3(x+1)-2(x-2)\le 6" /></p>
-      <p className="text-center mt-1"><MathTex tex="x+7\le 6 \Rightarrow x\le -1" /></p>
+      <p className="mt-2">齐次化：<MathTex tex="\dfrac{2a+b}{ab} = \dfrac{2}{b}+\dfrac{1}{a}" />，代入 <MathTex tex="a+b=1" /></p>
+      <p className="mt-1"><MathTex tex="= 3+\dfrac{2a}{b}+\dfrac{b}{a} \geq 3+2\sqrt{2}" /></p>
+      <p className="mt-1">最小值为 <MathTex tex="3+2\sqrt{2}" /></p>
     </>
   ),
-  'iqz4': (
+  'iq-hf3': (
     <>
-      <p className="text-center mt-1"><MathTex tex="x+\dfrac{1}{2x}\ge 2\sqrt{x\cdot\dfrac{1}{2x}}=\sqrt2" /></p>
-      <p className="mt-2">所以最小值是 <MathTex tex="\sqrt2" /></p>
+      <p className="mt-2">齐次化：代入 <MathTex tex="a+b=3" />，<MathTex tex="\dfrac{1}{a}+\dfrac{1}{b} = \dfrac{2}{3}+\dfrac{a}{3b}+\dfrac{b}{3a}" /></p>
+      <p className="mt-1"><MathTex tex="\dfrac{a}{3b}+\dfrac{b}{3a} \geq \dfrac{2}{3}" />，所以原式 <MathTex tex="\geq \dfrac{4}{3}" /></p>
+      <p className="mt-1">最小值为 <MathTex tex="\dfrac{4}{3}" /></p>
     </>
   ),
-  'iqz5': (
+  'iq-hf4': (
     <>
-      <p className="mt-2">把条件 <MathTex tex="\dfrac1a+\dfrac4b=1" /> 乘进 <MathTex tex="a+b" /></p>
-      <p className="text-center mt-1"><MathTex tex="a+b=5+\dfrac{4a}{b}+\dfrac{b}{a}" /></p>
-      <p className="mt-2">后两项用基本不等式，最小得到 4</p>
-      <p className="mt-2">所以 <MathTex tex="a+b\ge 9" /></p>
-    </>
-  ),
-  'iqz7': (
-    <>
-      <p className="mt-2">设长宽为 <MathTex tex="a,b" />，则 <MathTex tex="ab=36" /></p>
-      <p className="mt-2">周长 <MathTex tex="=2(a+b)" /></p>
-      <p className="text-center mt-1"><MathTex tex="a+b\ge 2\sqrt{ab}=12" /></p>
-      <p className="mt-2">所以周长最小值是 <MathTex tex="24" /></p>
-    </>
-  ),
-  'iqz8': (
-    <>
-      <p className="mt-2">零点是 <MathTex tex="x=\dfrac12" /> 和 <MathTex tex="x=3" /></p>
-      <p className="mt-2">大于零取中间</p>
-      <p className="text-center mt-1"><MathTex tex="\left(\dfrac12,3\right)" /></p>
-    </>
-  ),
-  'iqz9': (
-    <>
-      <p className="mt-2">恒大于零：开口向上且无实根</p>
-      <p className="text-center mt-1"><MathTex tex="\Delta=4-4a<0 \Rightarrow a>1" /></p>
-      <p className="mt-2">注意严格大于 0，所以不能取等号</p>
-    </>
-  ),
-  'iqz10': (
-    <>
-      <p className="mt-2">先解集合 A</p>
-      <p className="text-center mt-1"><MathTex tex="(x+1)(x-3)\le 0 \Rightarrow A=[-1,3]" /></p>
-      <p className="mt-2">再与 <MathTex tex="B=[0,+\infty)" /> 取交集</p>
-      <p className="text-center mt-1"><MathTex tex="A\cap B=[0,3]" /></p>
-    </>
-  ),
-  'iqz11': (
-    <>
-      <p className="mt-2">先把 <MathTex tex="a+b=2" /> 变成 “1 的代换”</p>
-      <p className="text-center mt-1"><MathTex tex="\dfrac{\left(\frac1a+\frac4b\right)(a+b)}{2}=\dfrac{5+\frac{4a}{b}+\frac{b}{a}}{2}" /></p>
-      <p className="mt-2">后两项最小是 4</p>
-      <p className="text-center mt-1"><MathTex tex="\dfrac{5+4}{2}=\dfrac92" /></p>
-    </>
-  ),
-  'iqz12': (
-    <>
-      <p className="mt-2">因为 <MathTex tex="a\ne b" />，所以平方和严格大于二倍积</p>
-      <p className="text-center mt-1"><MathTex tex="a^2+b^2>2ab" /></p>
-      <p className="mt-2">其余选项都和已知矛盾</p>
+      <p className="mt-2"><MathTex tex="(x-2)+(8-x) = 6" /> 是定值，<MathTex tex="6 \geq 2\sqrt{(x-2)(8-x)}" /></p>
+      <p className="mt-1">两边平方得 <MathTex tex="(x-2)(8-x) \leq 9" />，最大值为 <strong>9</strong></p>
     </>
   ),
 };
+
+// ══════════════════════════════════════════════
+// 打印答案组件
+// ══════════════════════════════════════════════
 
 function AnswerLabel({ q }: { q: QuizQuestionData }) {
   if (q.type === 'blank') {
@@ -194,7 +144,11 @@ export function InequalityAnswers() {
       <PageBreak label="答案与解析" />
       <section className="mb-8 print-answers">
         <h2 className="text-xl font-bold text-gray-900 mb-4">📝 2.1 不等式 — 答案与解析</h2>
-        <AnswerSection title="综合测试（高考真题 + 精华题）" questions={inequalityQuizQuestions} />
+        <AnswerSection title="超基础填空" questions={amgmBasicFill} />
+        <AnswerSection title="小变形填空" questions={amgmTransformFill} />
+        <AnswerSection title="逆向思维填空" questions={amgmReverseFill} />
+        <AnswerSection title="非齐次式填空" questions={amgmNonHomoFill} />
+        <AnswerSection title="齐次式 & 齐次化填空" questions={amgmHomoFill} />
       </section>
     </>
   );
