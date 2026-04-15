@@ -40,7 +40,7 @@ const tocData = [
     title: '函数思维',
     path: null,
     items: [
-      { label: '3.1.5', title: '二次函数', path: '/math/quadratic' },
+      { label: '3.0.5', title: '二次函数', path: '/math/quadratic' },
     ],
   },
 ];

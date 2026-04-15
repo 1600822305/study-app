@@ -234,7 +234,7 @@ export const graphPrereqPractice3: QuizQuestionData[] = [
   {
     id: 'gpp3-6',
     question: '',
-    questionLatex: '\\text{将 }y = 2^x\\text{ 向左平移 1 个单位后，新函数过定点 }(0, a)\\text{，则 }a = ?\\text{（联动 3.1.5）}',
+    questionLatex: '\\text{将 }y = 2^x\\text{ 向左平移 1 个单位后，新函数过定点 }(0, a)\\text{，则 }a = ?\\text{（联动 3.0.5）}',
     type: 'choice',
     options: [
       { label: 'A', value: '1', isLatex: true },

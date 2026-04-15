@@ -1,8 +1,8 @@
 import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard } from '@/components/shared';
 import { DebugGeo2dSvg, Geo2dDebugToggle } from '@/components/shared/geo2d';
 import { functionReviewProgressItems } from './data/3.0/3.0-review-progress';
-import { proportionalGraph, linearGraph, inverseGraph, quadraticGraph } from './data/3.0/3.0-review-diagrams';
-import { proportionalFill, linearFill, inverseFill, quadraticFill } from './data/3.0/3.0-review-practice';
+import { proportionalGraph, linearGraph, inverseGraph } from './data/3.0/3.0-review-diagrams';
+import { proportionalFill, linearFill, inverseFill } from './data/3.0/3.0-review-practice';
 import { useProgress, usePrintMode } from '@/hooks';
 
 
@@ -35,7 +35,7 @@ export function FunctionReviewPage() {
       {/* ═══ 函数是什么 ═══ */}
       <section id="fr-what" className="mb-0 scroll-mt-4">
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
-          <p className="text-blue-700"><strong className="text-blue-800">函数是什么？一句话：</strong>给一个 <Math tex="x" /> 的值，就能算出<strong>唯一</strong>一个 <Math tex="y" /> 的值。下面四种函数都满足这个规则。</p>
+          <p className="text-blue-700"><strong className="text-blue-800">函数是什么？一句话：</strong>给一个 <Math tex="x" /> 的值，就能算出<strong>唯一</strong>一个 <Math tex="y" /> 的值。下面三种函数都满足这个规则。</p>
         </div>
       </section>
 
@@ -350,113 +350,6 @@ export function FunctionReviewPage() {
         </Collapsible>
       </section>
 
-      <PageBreak label="二次函数" />
-
-      {/* ═══════════════════════════════════════════════════════ */}
-      {/* Section 4: 二次函数 */}
-      {/* ═══════════════════════════════════════════════════════ */}
-      <section id="fr-quadratic" className="mb-0 scroll-mt-4">
-        <Collapsible title="四、二次函数" defaultOpen storageKey="func-review:quadratic">
-          <div className="space-y-0 text-[0.9rem] text-gray-800">
-
-            <div className="border border-gray-400 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">二次函数</div>
-              <div className="px-3 py-2 border-b border-gray-300">
-                <p>一般地，形如 <Math tex="y = ax^2 + bx + c" />（<Math tex="a, b, c" /> 是常数，<Math tex="a \neq 0" />）的函数，叫做<strong>二次函数</strong></p>
-                <p>最简单的形式是 <Math tex="y = ax^2" />，图像是过原点的<strong>抛物线</strong>，对称轴为 <Math tex="y" /> 轴</p>
-              </div>
-              <div className="grid grid-cols-[1fr_auto_1fr] border-b border-gray-300">
-                <div className="px-3 py-2 space-y-1">
-                  <p>✅ <Math tex="y = 3x^2 - 2x + 1" />，是二次函数，<Math tex="a = 3" /></p>
-                  <p>✅ <Math tex="y = -x^2" />，是二次函数，<Math tex="a = -1" /></p>
-                </div>
-                <div className="w-px bg-gray-300"></div>
-                <div className="px-3 py-2 space-y-1">
-                  <p>❌ <Math tex="y = 2x + 1" />，不是，<Math tex="x" /> 的最高次数是 1</p>
-                  <p>❌ <Math tex="y = \tfrac{1}{x^2}" />，不是，<Math tex="x^2" /> 在分母里</p>
-                </div>
-              </div>
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-300 bg-gray-50">图像：a 决定了什么？</div>
-              <div className="flex">
-                <div className="flex-shrink-0 flex items-center justify-center p-2 border-r border-gray-300">
-                  <DebugGeo2dSvg data={quadraticGraph} width={180} height={180} />
-                </div>
-                <div className="px-3 py-2 space-y-1 flex-1">
-                  <p><strong>图像特征：</strong>二次函数的图像是<strong>抛物线</strong>，关于对称轴左右对称</p>
-                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="a" /> 的正负决定开口方向：</strong></p>
-                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="a > 0" />，开口<strong>向上</strong>，顶点是最低点</p>
-                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#ef4444' }}></span><Math tex="a < 0" />，开口<strong>向下</strong>，顶点是最高点</p>
-                  <p className="border-t border-gray-200 pt-1"><strong><Math tex="|a|" /> 的大小决定开口宽窄：</strong></p>
-                  <p><span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#22c55e' }}></span><Math tex="a=2" /> 比 <span className="inline-block w-3 h-3 rounded-full mr-1 align-middle" style={{ background: '#3b82f6' }}></span><Math tex="a=1" /> 开口更<strong>窄</strong>，因为 <Math tex="|2| > |1|" /></p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">性质总结</div>
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-300 px-2 py-1 text-center"></th>
-                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="a > 0" /></th>
-                    <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="a < 0" /></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-300 px-2 py-1 font-bold">开口方向</td>
-                    <td className="border border-gray-300 px-2 py-1 text-center">向上</td>
-                    <td className="border border-gray-300 px-2 py-1 text-center">向下</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-2 py-1 font-bold">顶点</td>
-                    <td className="border border-gray-300 px-2 py-1 text-center">最低点</td>
-                    <td className="border border-gray-300 px-2 py-1 text-center">最高点</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-300 px-2 py-1 font-bold">增减性</td>
-                    <td className="border border-gray-300 px-2 py-1 text-center">对称轴左侧减，右侧增</td>
-                    <td className="border border-gray-300 px-2 py-1 text-center">对称轴左侧增，右侧减</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div className="px-3 py-2 border-t border-gray-300 space-y-1">
-                <p><strong>对称轴公式：</strong><Math tex="x = -\tfrac{b}{2a}" />，<strong>顶点纵坐标：</strong>将对称轴的 <Math tex="x" /> 代回函数即可</p>
-                <p><strong>与 <Math tex="x" /> 轴交点个数：</strong>令 <Math tex="y = 0" />，用判别式 <Math tex="\Delta = b^2 - 4ac" /> 判断</p>
-                <p><Math tex="\Delta > 0" />：<strong>两个</strong>交点；<Math tex="\Delta = 0" />：<strong>一个</strong>交点（顶点恰好在 <Math tex="x" /> 轴上）；<Math tex="\Delta < 0" />：<strong>没有</strong>交点</p>
-                <p><strong>交点公式：</strong><Math tex="x = \tfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}" /></p>
-              </div>
-            </div>
-
-            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">实战例题</div>
-              <div className="px-3 py-1 border-b border-gray-300 bg-blue-50">
-                <p><strong>二次函数三个核心问题：</strong>① 对称轴在哪（<Math tex="x = -\tfrac{b}{2a}" />）② 顶点坐标 ③ 与 <Math tex="x" /> 轴的交点（令 <Math tex="y = 0" /> 解方程）</p>
-              </div>
-              <div className="grid grid-cols-[1fr_auto_1fr]">
-                <div className="px-3 py-2 space-y-1">
-                  <p><strong>例1.</strong> 求二次函数 <Math tex="y = x^2 - 4x + 3" /> 的对称轴和顶点坐标</p>
-                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>用公式求对称轴，再代入求顶点纵坐标</p>
-                  <p><strong>第一步</strong>：<Math tex="a = 1, b = -4, c = 3" />，对称轴 <Math tex="x = -\tfrac{-4}{2 \times 1} = 2" /></p>
-                  <p><strong>第二步</strong>：将 <Math tex="x = 2" /> 代入，得 <Math tex="y = 4 - 8 + 3 = -1" /></p>
-                  <p><strong>第三步</strong>：因为 <Math tex="a = 1 > 0" />，开口向上，顶点 <Math tex="(2, -1)" /> 是<strong>最低点</strong></p>
-                </div>
-                <div className="w-px bg-gray-300"></div>
-                <div className="px-3 py-2 space-y-1">
-                  <p><strong>例2.</strong> 求二次函数 <Math tex="y = x^2 - 2x - 3" /> 的图像与 <Math tex="x" /> 轴交点坐标</p>
-                  <p className="border-t border-gray-200 pt-1"><strong>思路：</strong>令 <Math tex="y = 0" />，解一元二次方程</p>
-                  <p><strong>第一步</strong>：令 <Math tex="y = 0" />，得 <Math tex="x^2 - 2x - 3 = 0" /></p>
-                  <p><strong>第二步</strong>：分解因式 <Math tex="(x - 3)(x + 1) = 0" />，解得 <Math tex="x = 3" /> 或 <Math tex="x = -1" /></p>
-                  <p><strong>第三步</strong>：因此与 <Math tex="x" /> 轴的交点为 <Math tex="(-1, 0)" /> 和 <Math tex="(3, 0)" /></p>
-                </div>
-              </div>
-            </div>
-
-            <PracticeCard questions={quadraticFill} title="" hideBlankLine />
-
-          </div>
-        </Collapsible>
-      </section>
 
         </div>
       </LessonLayout>

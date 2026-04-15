@@ -1,7 +1,7 @@
 import { Coordinates, Plot, Line, Point } from 'mafs';
 import { DebugMafs, DebugToggle } from '@/features/trig/MafsDebug';
 import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
-import { quadraticProgressItems } from './data/3.1.5/3.1.5-progress';
+import { quadraticProgressItems } from './data/3.0.5/3.0.5-progress';
 import { useProgress, usePrintMode } from '@/hooks';
 
 export function QuadraticPage() {
@@ -12,7 +12,7 @@ export function QuadraticPage() {
     <div>
       <PageHeader
         stage="第三阶段 · 函数思维"
-        title="3.1.5 二次函数"
+        title="3.0.5 二次函数"
         subtitle="高中数学的基石"
         tags={[
           { label: '约3-4小时', color: 'amber' },
@@ -22,7 +22,7 @@ export function QuadraticPage() {
 
       <div className="flex justify-end mb-2 print:hidden gap-2">
         <DebugToggle />
-        <ExportButton title="3.1.5 二次函数" />
+        <ExportButton title="3.0.5 二次函数" />
       </div>
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
@@ -467,8 +467,6 @@ export function QuadraticPage() {
         </Collapsible>
       </section>
 
-      <PageBreak />
-
       {/* ═══════════════════════════════════════════════════════ */}
       {/* Section 8: 绝对值二次函数 */}
       {/* ═══════════════════════════════════════════════════════ */}
@@ -519,23 +517,109 @@ export function QuadraticPage() {
               </div>
             </div>
 
-            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+            <PageBreak />
+
+            <div className="border border-gray-400 rounded overflow-hidden">
               <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">举例</div>
-              <div className="px-3 py-2 space-y-1">
-                <p>求 <Math tex="y = |x^2 - 2x - 3|" /> 在 <Math tex="[-2, 2]" /> 上的最大值和最小值</p>
-                <p>原函数 <Math tex="f(x) = x^2 - 2x - 3" />，零点 <Math tex="x = -1" /> 和 <Math tex="x = 3" /></p>
-                <p>在 <Math tex="[-2, 2]" /> 内，<Math tex="x = 3" /> 不在区间内，<Math tex="x = -1" /> 在区间内</p>
-                <p>代入各关键点：</p>
-                <p>左端点：<Math tex="|f(-2)| = |4 + 4 - 3| = 5" /></p>
-                <p>零点：<Math tex="|f(-1)| = 0" /></p>
-                <p>原顶点（<Math tex="x = 1" />）：<Math tex="|f(1)| = |1 - 2 - 3| = 4" /></p>
-                <p>右端点：<Math tex="|f(2)| = |4 - 4 - 3| = 3" /></p>
-                <p>所以最大值为 <Math tex="5" />（在 <Math tex="x = -2" /> 取到），最小值为 <Math tex="0" />（在 <Math tex="x = -1" /> 取到）</p>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例1.</strong> 求 <Math tex="y = |x^2 - 2x - 3|" /> 在 <Math tex="[-2, 2]" /> 上的最大值和最小值</p>
+                  <p>原函数 <Math tex="f(x) = x^2 - 2x - 3" />，零点 <Math tex="x = -1" /> 和 <Math tex="x = 3" /></p>
+                  <p>在 <Math tex="[-2, 2]" /> 内，<Math tex="x = 3" /> 不在区间内，<Math tex="x = -1" /> 在区间内</p>
+                  <p>代入各关键点：</p>
+                  <p>左端点：<Math tex="|f(-2)| = |4 + 4 - 3| = 5" /></p>
+                  <p>零点：<Math tex="|f(-1)| = 0" /></p>
+                  <p>原顶点（<Math tex="x = 1" />）：<Math tex="|f(1)| = |1 - 2 - 3| = 4" /></p>
+                  <p>右端点：<Math tex="|f(2)| = |4 - 4 - 3| = 3" /></p>
+                  <p>最大值 <Math tex="5" />（<Math tex="x = -2" />），最小值 <Math tex="0" />（<Math tex="x = -1" />）</p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-2 space-y-1">
+                  <p><strong>例2.</strong> 求 <Math tex="y = |-x^2 + 2x + 3|" /> 在 <Math tex="[0, 4]" /> 上的最大值和最小值</p>
+                  <p>原函数 <Math tex="g(x) = -x^2 + 2x + 3" />，零点 <Math tex="x = -1" /> 和 <Math tex="x = 3" /></p>
+                  <p>在 <Math tex="[0, 4]" /> 内，<Math tex="x = -1" /> 不在区间内，<Math tex="x = 3" /> 在区间内</p>
+                  <p>代入各关键点：</p>
+                  <p>左端点：<Math tex="|g(0)| = |0 + 0 + 3| = 3" /></p>
+                  <p>原顶点（<Math tex="x = 1" />）：<Math tex="|g(1)| = |-1 + 2 + 3| = 4" /></p>
+                  <p>零点：<Math tex="|g(3)| = 0" /></p>
+                  <p>右端点：<Math tex="|g(4)| = |-16 + 8 + 3| = 5" /></p>
+                  <p>最大值 <Math tex="5" />（<Math tex="x = 4" />），最小值 <Math tex="0" />（<Math tex="x = 3" />）</p>
+                </div>
               </div>
             </div>
 
           </div>
         </Collapsible>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* 总结速查表 */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      <section id="qd-summary" className="mb-0 scroll-mt-4">
+        <div className="border border-gray-400 rounded overflow-hidden">
+          <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">二次函数速查表</div>
+          <table className="w-full border-collapse text-[0.85rem]">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="border border-gray-300 px-2 py-1 text-left w-[120px]">项目</th>
+                <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="a > 0" />（开口向上）</th>
+                <th className="border border-gray-300 px-2 py-1 text-center"><Math tex="a < 0" />（开口向下）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border border-gray-300 px-2 py-1 font-bold">一般式</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = ax^2 + bx + c" /></td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="border border-gray-300 px-2 py-1 font-bold">顶点式</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = a(x - h)^2 + k" />，顶点 <Math tex="(h, k)" /></td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-2 py-1 font-bold">交点式</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = a(x - x_1)(x - x_2)" />（<Math tex="\Delta \geq 0" /> 时）</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="border border-gray-300 px-2 py-1 font-bold">对称轴</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="x = -\dfrac{b}{2a}" /></td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-2 py-1 font-bold">顶点坐标</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="\left(-\dfrac{b}{2a},\; c - \dfrac{b^2}{4a}\right)" /></td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="border border-gray-300 px-2 py-1 font-bold">单调性</td>
+                <td className="border border-gray-300 px-2 py-1 text-center">对称轴左侧<strong>递减</strong>，右侧<strong>递增</strong></td>
+                <td className="border border-gray-300 px-2 py-1 text-center">对称轴左侧<strong>递增</strong>，右侧<strong>递减</strong></td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-2 py-1 font-bold">最值</td>
+                <td className="border border-gray-300 px-2 py-1 text-center">最小值 <Math tex="k" />，无最大值</td>
+                <td className="border border-gray-300 px-2 py-1 text-center">最大值 <Math tex="k" />，无最小值</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="border border-gray-300 px-2 py-1 font-bold">判别式</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="\Delta = b^2 - 4ac" />：<Math tex="> 0" /> 两根，<Math tex="= 0" /> 一根，<Math tex="< 0" /> 无实根</td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-2 py-1 font-bold">求根公式</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="x = \dfrac{-b \pm \sqrt{\Delta}}{2a}" /></td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="border border-gray-300 px-2 py-1 font-bold">韦达定理</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="x_1 + x_2 = -\dfrac{b}{a}" />，<Math tex="x_1 \cdot x_2 = \dfrac{c}{a}" /></td>
+              </tr>
+              <tr>
+                <td className="border border-gray-300 px-2 py-1 font-bold">闭区间最值</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center">比较对称轴与区间的位置，代入端点和顶点</td>
+              </tr>
+              <tr className="bg-gray-50">
+                <td className="border border-gray-300 px-2 py-1 font-bold">绝对值</td>
+                <td colSpan={2} className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = |f(x)|" />：x 轴下方翻折上去，零点处 <Math tex="y = 0" />，单调区间翻倍</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
         </div>

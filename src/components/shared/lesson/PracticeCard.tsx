@@ -163,7 +163,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
   // ── 打印模式：静态展示所有题目 ──
   if (isPrinting) {
     return (
-      <div className="print-practice bg-green-50 border border-green-200 rounded-xl p-2 mt-0">
+      <div className="print-practice bg-green-50 border border-green-200 rounded-xl px-2 py-0 mt-0">
         {title && <p className="font-bold text-green-800 mb-1">{title}</p>}
         <div className={columns === 2 ? 'grid grid-cols-2 gap-2' : 'space-y-0'}>
           {questions.map((q, idx) => (

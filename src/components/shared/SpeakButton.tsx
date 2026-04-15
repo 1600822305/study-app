@@ -22,7 +22,7 @@ export function SpeakButton({ text, className = '', size = 18 }: SpeakButtonProp
       type="button"
       onClick={() => toggle(text)}
       title={isPlaying ? '停止朗读' : '朗读'}
-      className={`inline-flex items-center justify-center p-1.5 rounded-lg text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer transition-colors ${className}`}
+      className={`inline-flex items-center justify-center p-0.5 rounded text-gray-500 hover:text-blue-600 hover:bg-blue-50 cursor-pointer transition-colors ${className}`}
     >
       {isPlaying ? (
         <VolumeX size={size} />

@@ -22,6 +22,7 @@ const AbsoluteValuePage = lazy(() => import('@/features/inequality').then(m => (
 const QuadraticPage = lazy(() => import('@/features/quadratic').then(m => ({ default: m.QuadraticPage })));
 const FunctionReviewPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionReviewPage })));
 const FunctionConceptPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionConceptPage })));
+const PiecewisePage = lazy(() => import('@/features/function').then(m => ({ default: m.PiecewisePage })));
 const ElementaryFuncPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPrereqPage })));
 const ElementaryFuncPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPage })));
 const FunctionGraphPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionGraphPrereqPage })));
@@ -103,6 +104,7 @@ function App() {
           <Route path="/math/stage2-exam" element={<Stage2ExamPage />} />
           <Route path="/math/function-review" element={<FunctionReviewPage />} />
           <Route path="/math/function-concept" element={<FunctionConceptPage />} />
+          <Route path="/math/piecewise" element={<PiecewisePage />} />
           <Route path="/math/quadratic" element={<QuadraticPage />} />
           <Route path="/math/elementary-func-prereq" element={<ElementaryFuncPrereqPage />} />
           <Route path="/math/elementary-func" element={<ElementaryFuncPage />} />

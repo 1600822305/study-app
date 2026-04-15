@@ -66,8 +66,9 @@ const navItems: NavItem[] = [
         groupLabel: '第三阶段：函数思维',
         items: [
           { path: '/math/function-review', label: '3.0 初中函数回顾' },
+          { path: '/math/quadratic', label: '3.0.5 二次函数' },
           { path: '/math/function-concept', label: '3.1 函数的概念与性质' },
-          { path: '/math/quadratic', label: '3.1.5 二次函数' },
+          { path: '/math/piecewise', label: '3.1.3 分段函数' },
           { path: '/math/elementary-func-prereq', label: '3.1.8 初等函数前置知识' },
           { path: '/math/elementary-func', label: '3.2 基本初等函数' },
           { path: '/math/function-graph-prereq', label: '3.2.5 图像与零点前置知识' },

@@ -1,5 +1,4 @@
-import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, DebugGeo2dSvg, Geo2dDebugToggle } from '@/components/shared';
-import { functionConceptNarrations } from './data/3.1/3.1-concept-narrations';
+import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, DebugGeo2dSvg, Geo2dDebugToggle } from '@/components/shared';
 import { functionConceptProgressItems } from './data/3.1/3.1-concept-progress';
 import { parabolaRangeDiagram, inverseRangeDiagram, monotonicIncDiagram, monotonicDecDiagram, monotonicMixDiagram, notMonotonicDiagram, monotonicWaveDiagram, parityEvenDiagram, parityOddDiagram } from './data/3.1/3.1-concept-diagrams';
 import { useProgress, usePrintMode } from '@/hooks';
@@ -16,7 +15,7 @@ export function FunctionConceptPage() {
       <PageHeader
         stage="第三阶段 · 函数思维"
         title="3.1 函数的概念与性质"
-        narration={functionConceptNarrations.intro}
+
         subtitle="高考数学的灵魂：函数定义 ➡ 三要素 ➡ 单调性 ➡ 奇偶性"
         tags={[
           { label: '难度 ★★★☆☆', color: 'amber' },
@@ -37,7 +36,7 @@ export function FunctionConceptPage() {
       {/* Section 0: 区间表示法 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="fc-intervals" className="mb-0 scroll-mt-4">
-        <Collapsible title="零、区间表示法（定义域/值域/单调区间必备）" defaultOpen storageKey="func-concept:intervals" headerExtra={<SpeakButton text={functionConceptNarrations.intervals} />}>
+        <Collapsible title="零、区间表示法（定义域/值域/单调区间必备）" defaultOpen storageKey="func-concept:intervals">
           <div className="space-y-0 text-[0.9rem] text-gray-800">
             {/* 五种区间速查表 */}
             <div className="bg-white rounded-xl border border-gray-200 p-2">
@@ -108,7 +107,7 @@ export function FunctionConceptPage() {
       {/* Section 1: 函数的定义 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="fc-definition" className="mb-0 scroll-mt-4">
-        <Collapsible title="一、函数的定义（从初中升级到高中）" defaultOpen storageKey="func-concept:definition" headerExtra={<SpeakButton text={functionConceptNarrations.definition} />}>
+        <Collapsible title="一、函数的定义（从初中升级到高中）" defaultOpen storageKey="func-concept:definition">
           <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 回顾初中 */}
@@ -187,7 +186,7 @@ export function FunctionConceptPage() {
       {/* Section 2: 函数三要素与求定义域 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="fc-three-elements" className="mb-0 scroll-mt-4">
-        <Collapsible title="二、函数三要素与求定义域" defaultOpen storageKey="func-concept:three-elements" headerExtra={<SpeakButton text={functionConceptNarrations.threeElements} />}>
+        <Collapsible title="二、函数三要素与求定义域" defaultOpen storageKey="func-concept:three-elements">
           <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             {/* 三要素 */}
@@ -343,7 +342,7 @@ export function FunctionConceptPage() {
       {/* Section 3: 函数的表示法 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="fc-representation" className="mb-0 scroll-mt-4">
-        <Collapsible title="三、求解析式四类方法" defaultOpen storageKey="func-concept:representation" headerExtra={<SpeakButton text={functionConceptNarrations.representation} />}>
+        <Collapsible title="三、求解析式四类方法" defaultOpen storageKey="func-concept:representation">
           <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <table className="w-full border-collapse border border-gray-400">
@@ -461,7 +460,7 @@ export function FunctionConceptPage() {
       {/* Section 4: 求值域 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="fc-range" className="mb-0 scroll-mt-4">
-        <Collapsible title="四、求值域的基本方法" defaultOpen storageKey="func-concept:range" headerExtra={<SpeakButton text={functionConceptNarrations.range} />}>
+        <Collapsible title="四、求值域的基本方法" defaultOpen storageKey="func-concept:range">
           <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <p className="leading-7">定义域是 <Math tex="x" /> 的取值集合，<strong>值域</strong>是 <Math tex="f(x)" /> 的取值集合</p>
@@ -812,7 +811,7 @@ export function FunctionConceptPage() {
       {/* Section 5: 单调性 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="fc-monotonicity" className="mb-0 scroll-mt-4">
-        <Collapsible title="五、单调性（增函数与减函数）" defaultOpen storageKey="func-concept:monotonicity" headerExtra={<SpeakButton text={functionConceptNarrations.monotonicity} />}>
+        <Collapsible title="五、单调性（增函数与减函数）" defaultOpen storageKey="func-concept:monotonicity">
           <div className="space-y-0 text-[0.9rem] text-gray-800">
 
             <p className="leading-7">函数单调性，用直白的话来说就是：当 <Math tex="x" /> 变大或变小的时候，<Math tex="y" /> 会跟着怎么变？</p>
@@ -1201,7 +1200,7 @@ export function FunctionConceptPage() {
       {/* Section 6: 奇偶性 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="fc-parity" className="mb-0 scroll-mt-4">
-        <Collapsible title="六、奇偶性（对称之美）" defaultOpen storageKey="func-concept:parity" headerExtra={<SpeakButton text={functionConceptNarrations.parity} />}>
+        <Collapsible title="六、奇偶性（对称之美）" defaultOpen storageKey="func-concept:parity">
           <div className="space-y-2 text-[0.9rem] text-gray-800">
 
             <div className="grid grid-cols-2 gap-4">

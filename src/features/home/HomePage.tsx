@@ -64,8 +64,9 @@ const phases: Phase[] = [
     icon: <TrendingUp size={20} />,
     modules: [
       { path: '/math/function-review', label: '3.0 初中函数回顾', time: '30分钟', desc: '一次/反比例函数核心概念', prereq: true },
+      { path: '/math/quadratic', label: '3.0.5 二次函数', time: '3-4小时', desc: '三种表达形式 + 图像与性质' },
       { path: '/math/function-concept', label: '3.1 函数的概念与性质', time: '3-4小时', desc: '定义域、值域、单调性、奇偶性' },
-      { path: '/math/quadratic', label: '3.1.5 二次函数', time: '3-4小时', desc: '三种表达形式 + 图像与性质' },
+      { path: '/math/piecewise', label: '3.1.3 分段函数', time: '1-2小时', desc: '求值、定义域、单调性与求参' },
       { path: '/math/elementary-func-prereq', label: '3.1.8 初等函数前置知识', time: '20分钟', desc: '指数、对数运算基础', prereq: true },
       { path: '/math/elementary-func', label: '3.2 基本初等函数', time: '4-5小时', desc: '指数/对数/幂函数全攻略' },
       { path: '/math/function-graph-prereq', label: '3.2.5 图像与零点前置知识', time: '15分钟', desc: '函数图像变换基础', prereq: true },
