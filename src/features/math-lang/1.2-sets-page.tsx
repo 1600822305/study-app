@@ -1,4 +1,4 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, ExportButton, PageBreak, HTreeDiagram } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, PracticeCard, PrintQuestions, PageHeader, LessonLayout, ExportButton, PageBreak, HTreeDiagram } from '@/components/shared';
 import { setsNarrations } from './data/1.2/1.2-narrations';
 import { useProgress, usePrintMode } from '@/hooks';
 import { scrollToId } from '@/lib/scroll';
@@ -6,7 +6,7 @@ import { setsQuizQuestions } from './data/1.2/1.2-quiz';
 import { setsProgressItems } from './data/1.2/1.2-progress';
 import { SetsAnswers, setsExplanations } from './1.2-sets-answers';
 import { DebugGeo2dSvg } from '@/components/shared/geo2d/Geo2dDebug';
-import { GeoDebugToggle } from '@/components/shared/GeoDebugToggle';
+import { UnifiedDebugToggle } from '@/components/shared';
 import {
   vennSubset, vennIntersection, vennUnion, vennComplement, vennDisjoint, vennProperSubset,
   NumberLineOpenSvg, NumberLineClosedSvg, NumberLineInfiniteSvg,
@@ -1273,8 +1273,9 @@ export function SetsPage() {
           </section>
 
           {/* 等价转化表 */}
-          <div className="border border-gray-400 rounded overflow-hidden mt-2">
-            <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-50">集合等价转化表（必记！）</div>
+          <section className="mb-0 scroll-mt-4">
+          <div className="border border-gray-400 rounded overflow-hidden bg-white mt-2">
+            <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-100">集合等价转化表（必记！）</div>
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-50">
@@ -1332,22 +1333,24 @@ export function SetsPage() {
               </tbody>
             </table>
           </div>
+          </section>
 
-          {/* Section 7: Quiz */}
+          {/* Section 7: 高考真题实战 */}
           <PageBreak />
           <section id="sets-quiz" className="mb-0 scroll-mt-4">
-            <h2 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
-              <span className="w-8 h-8 rounded bg-green-500 text-white flex items-center justify-center text-sm font-bold">
-                9
-              </span>
-              高考真题实战
-            </h2>
-            <QuizPanel module="sets" questions={setsQuizQuestions} title="集合真题实战" description="12道精选题，覆盖高考集合全部题型" explanations={setsExplanations} />
+            <Collapsible title="七、高考真题实战" defaultOpen storageKey="sets:quiz">
+              <div className="text-base print:hidden">
+                <PracticeCard title="" questions={setsQuizQuestions} explanations={setsExplanations} optionCols={4} printOptionCols={4} />
+              </div>
+              <div className="text-base hidden print:block">
+                <PrintQuestions questions={setsQuizQuestions} printOptionCols={4} />
+              </div>
+            </Collapsible>
           </section>
 
       {isPrinting && printOptions.showAnswers && <SetsAnswers />}
       </LessonLayout>
-      <GeoDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

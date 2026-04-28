@@ -1,5 +1,5 @@
-import { Math, PageHeader, LessonLayout, ExportButton, Collapsible, PageBreak } from '@/components/shared';
-import { DebugGeo2dSvg, Geo2dDebugToggle } from '@/components/shared/geo2d';
+import { Math, PageHeader, LessonLayout, ExportButton, Collapsible, PageBreak, UnifiedDebugToggle } from '@/components/shared';
+import { DebugGeo2dSvg } from '@/components/shared/geo2d';
 import { useProgress, usePrintMode } from '@/hooks';
 import { absoluteValueProgressItems } from './data/2.2/2.2-progress';
 import { absoluteValueNumberLine, boundaryPointsNumberLine, absGraphTransform } from './data/2.2/2.2-diagrams';
@@ -22,7 +22,7 @@ export function AbsoluteValuePage() {
       />
 
       <div className="flex justify-end mb-2 print:hidden gap-2">
-        <Geo2dDebugToggle />
+        <UnifiedDebugToggle />
         <ExportButton title="2.2 绝对值" />
       </div>
 

@@ -1,4 +1,4 @@
-import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, DebugGeo2dSvg, Geo2dDebugToggle } from '@/components/shared';
+import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, DebugGeo2dSvg, UnifiedDebugToggle } from '@/components/shared';
 import { functionConceptProgressItems } from './data/3.1/3.1-concept-progress';
 import { parabolaRangeDiagram, inverseRangeDiagram, monotonicIncDiagram, monotonicDecDiagram, monotonicMixDiagram, notMonotonicDiagram, monotonicWaveDiagram, parityEvenDiagram, parityOddDiagram } from './data/3.1/3.1-concept-diagrams';
 import { useProgress, usePrintMode } from '@/hooks';
@@ -30,7 +30,7 @@ export function FunctionConceptPage() {
 
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
-        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:pt-1 [&_.rounded-xl>div:last-child]:pb-1">
+        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:px-0 [&_.rounded-xl>div:last-child]:pt-0 [&_.rounded-xl>div:last-child]:pb-0">
 
       {/* ═══════════════════════════════════════════════════════ */}
       {/* Section 0: 区间表示法 */}
@@ -556,7 +556,6 @@ export function FunctionConceptPage() {
                     <div className="flex-shrink-0">
                       {/* 图: 数形结合法-抛物线 y=(x-1)²+2 在 [0,3] */}
                       <DebugGeo2dSvg width={160} height={130} data={parabolaRangeDiagram} />
-                      <Geo2dDebugToggle />
                     </div>
                   </div>
                 </div>
@@ -574,7 +573,6 @@ export function FunctionConceptPage() {
                         <div className="flex-shrink-0">
                           {/* 图: 数形结合法-反比例 y=2/x 在 [1,4] */}
                           <DebugGeo2dSvg width={140} height={110} data={inverseRangeDiagram} />
-                          <Geo2dDebugToggle />
                         </div>
                       </div>
                     </div>
@@ -1333,7 +1331,7 @@ export function FunctionConceptPage() {
       {isPrinting && printOptions.showAnswers && <FunctionConceptAnswers />}
         </div>
       </LessonLayout>
-      <Geo2dDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

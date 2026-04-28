@@ -163,11 +163,40 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
   // ── 打印模式：静态展示所有题目 ──
   if (isPrinting) {
     return (
-      <div className="print-practice bg-green-50 border border-green-200 rounded-xl px-2 py-0 mt-0">
+      <div className="print-practice bg-green-50 border border-green-200 rounded-xl px-2 py-0 mt-0" style={{ breakInside: 'auto' }}>
         {title && <p className="font-bold text-green-800 mb-1">{title}</p>}
         <div className={columns === 2 ? 'grid grid-cols-2 gap-2' : 'space-y-0'}>
           {questions.map((q, idx) => (
-            renderItem ? <div key={idx}>{renderItem(q, idx)}</div> : (
+            renderItem ? (
+            <div key={idx} style={{ breakInside: 'avoid' }}>
+              {renderItem(q, idx)}
+              {/* 选择题选项 */}
+              {q.type !== 'blank' && q.options && (
+                <div className={`${
+                  q.printCols === 4 ? 'grid grid-cols-4 gap-x-4 gap-y-0.5' :
+                  q.printCols === 2 ? 'grid grid-cols-2 gap-1' :
+                  printOptionCols === 4 ? 'grid grid-cols-4 gap-x-4 gap-y-0.5' :
+                  printOptionCols === 2 ? 'grid grid-cols-2 gap-1' : 'space-y-1'
+                } ml-4`}>
+                  {q.options.map((opt) => (
+                    <div key={opt.value} className="flex items-center gap-2 text-gray-700">
+                      <span className="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold text-gray-500 shrink-0">
+                        {opt.label}
+                      </span>
+                      <span>{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/* 填空题：留出答题线 */}
+              {q.type === 'blank' && !hideBlankLine && (
+                <div className="ml-4 mt-1">
+                  <span className="text-gray-400">答：</span>
+                  <span className="inline-block w-40 border-b-2 border-gray-300 ml-1">&nbsp;</span>
+                </div>
+              )}
+            </div>
+            ) : (
             <div key={idx} className="bg-white rounded-lg border border-green-100 p-2" style={{ breakInside: 'avoid' }}>
               <p className="text-gray-800 font-medium mb-1">
                 <span className="text-green-600 mr-2">{idx + 1}.</span>
@@ -238,10 +267,10 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
   // ── 完成总结 ──
   if (finished) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-0">
-        {title && <p className="font-bold text-green-800 mb-3">{title}</p>}
-        <div className="bg-white rounded-lg border border-green-100 p-4 text-center">
-          <p className="text-2xl font-bold text-green-700 mb-1">
+      <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 mt-0 shadow-sm">
+        {title && <p className="font-bold text-stone-800 mb-3">{title}</p>}
+        <div className="bg-stone-100 rounded-lg border border-stone-200 p-4 text-center">
+          <p className="text-2xl font-bold text-emerald-600 mb-1">
             {correctCount === total ? '🎉 全部正确！' : `${correctCount}/${total} 题正确`}
           </p>
           <p className="text-sm text-gray-500 mb-3">
@@ -249,7 +278,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
           </p>
           <button
             onClick={handleReset}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg text-sm font-bold hover:bg-green-600 transition-colors inline-flex items-center gap-1"
+            className="px-4 py-2 bg-sky-600 text-white rounded-lg text-sm font-bold hover:bg-sky-700 transition-colors inline-flex items-center gap-1"
           >
             <RotateCcw size={14} /> 再做一次
           </button>
@@ -260,23 +289,23 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
 
   // ── 单题视图 ──
   return (
-    <div className="bg-green-50 border border-green-200 rounded-xl p-4 mt-0">
+    <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 mt-0 shadow-sm">
       {/* 标题 + 进度 */}
-      <div className="flex items-center justify-between mb-3">
-        {title && <p className="font-bold text-green-800">{title}</p>}
-        <span className="text-xs text-green-600 font-medium">{currentIdx + 1} / {total}</span>
+      <div className="flex items-center justify-between mb-2">
+        {title && <p className="font-bold text-stone-800">{title}</p>}
+        <span className="text-xs text-stone-500 font-medium tabular-nums">{currentIdx + 1} / {total}</span>
       </div>
 
       {/* 进度条 */}
-      <div className="w-full h-1.5 bg-green-100 rounded-full overflow-hidden mb-3">
+      <div className="w-full h-1 bg-stone-200 rounded-full overflow-hidden mb-3">
         <div
-          className="h-full bg-green-500 rounded-full transition-all duration-500"
+          className="h-full bg-sky-500 rounded-full transition-all duration-500"
           style={{ width: `${((currentIdx + (answered ? 1 : 0)) / total) * 100}%` }}
         />
       </div>
 
       {/* 题目卡片 */}
-      <div className="bg-white rounded-lg border border-green-100 p-4">
+      <div className="bg-stone-100 rounded-lg border border-stone-200 p-4">
         {/* 题目文字 */}
         <p className="text-gray-800 font-medium mb-3">
           {renderQ(current)}
@@ -292,16 +321,16 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
               const isOptSelected = isMulti
                 ? selectedMulti.includes(opt.value)
                 : opt.value === selected;
-              let cls = 'border-gray-200 bg-white text-gray-700 hover:border-green-400 hover:bg-green-50';
+              let cls = 'border-stone-200 bg-white text-stone-700 hover:border-sky-400 hover:bg-sky-50';
               if (isMulti && !answered && isOptSelected) {
-                cls = 'border-green-400 bg-green-50 text-green-800';
+                cls = 'border-sky-500 bg-sky-50 text-sky-700';
               } else if (answered) {
                 if (isOptCorrect) {
-                  cls = 'border-green-500 bg-green-50 text-green-800';
+                  cls = 'border-emerald-500 bg-emerald-50 text-emerald-700';
                 } else if (isOptSelected && !isOptCorrect) {
                   cls = 'border-red-400 bg-red-50 text-red-700';
                 } else {
-                  cls = 'border-gray-100 bg-gray-50 text-gray-400';
+                  cls = 'border-stone-100 bg-white text-stone-400';
                 }
               }
               return (
@@ -316,7 +345,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
                   </span>
                   <span className="leading-tight">{opt.isLatex ? <MathTex tex={opt.value} /> : opt.value}</span>
                   {answered && isOptCorrect && (
-                    <CheckCircle className="ml-auto text-green-500 shrink-0" size={14} />
+                    <CheckCircle className="ml-auto text-emerald-500 shrink-0" size={14} />
                   )}
                   {answered && isOptSelected && !isOptCorrect && (
                     <XCircle className="ml-auto text-red-500 shrink-0" size={14} />
@@ -331,7 +360,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
         {isMulti && !answered && selectedMulti.length > 0 && (
           <button
             onClick={handleMultiSubmit}
-            className="w-full mt-2 py-2 rounded-lg bg-green-500 text-white font-bold hover:bg-green-600 transition-colors flex items-center justify-center gap-1 text-sm"
+            className="w-full mt-2 py-2 rounded-lg bg-sky-600 text-white font-bold hover:bg-sky-700 transition-colors flex items-center justify-center gap-1 text-sm"
           >
             <Send size={14} /> 确认提交
           </button>
@@ -346,11 +375,11 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
               onChange={(e) => setBlankInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleBlankSubmit()}
               placeholder="输入答案…"
-              className="flex-1 px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-green-400"
+              className="flex-1 px-4 py-2.5 border-2 border-stone-200 bg-white rounded-lg focus:outline-none focus:border-sky-400"
             />
             <button
               onClick={handleBlankSubmit}
-              className="px-4 py-2.5 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600 transition-colors flex items-center gap-1"
+              className="px-4 py-2.5 bg-sky-600 text-white rounded-lg font-bold hover:bg-sky-700 transition-colors flex items-center gap-1"
             >
               <Send size={14} /> 提交
             </button>
@@ -359,8 +388,8 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
 
         {/* 反馈 */}
         {answered && (
-          <div className={`mt-3 p-3 rounded-lg ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
-            <p className={`font-bold text-sm mb-1 ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+          <div className={`mt-3 p-3 rounded-lg ${isCorrect ? 'bg-emerald-50 border border-emerald-200' : 'bg-red-50 border border-red-200'}`}>
+            <p className={`font-bold text-sm mb-1 ${isCorrect ? 'text-emerald-700' : 'text-red-700'}`}>
               {isCorrect ? '✓ 正确！' : <>✗ 错了　正确答案：{isMulti ? current.correctAnswer.split(',').join('、') : (current.options?.find(o => o.value === current.correctAnswer)?.label ?? current.correctAnswer)}</>}
             </p>
             {explanations?.[current.id] ? (
@@ -384,7 +413,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
         {answered && (
           <button
             onClick={handleNext}
-            className="w-full mt-3 py-2.5 rounded-lg bg-green-500 text-white font-bold hover:bg-green-600 transition-colors flex items-center justify-center gap-1"
+            className="w-full mt-3 py-2.5 rounded-lg bg-sky-600 text-white font-bold hover:bg-sky-700 transition-colors flex items-center justify-center gap-1"
           >
             {currentIdx < total - 1 ? (
               <>下一题 <ChevronRight size={16} /></>

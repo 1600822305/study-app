@@ -19,16 +19,18 @@ const LogicPage = lazy(() => import('@/features/math-lang').then(m => ({ default
 const LogicPrereqPage = lazy(() => import('@/features/math-lang').then(m => ({ default: m.LogicPrereqPage })));
 const InequalityPage = lazy(() => import('@/features/inequality').then(m => ({ default: m.InequalityPage })));
 const AbsoluteValuePage = lazy(() => import('@/features/inequality').then(m => ({ default: m.AbsoluteValuePage })));
-const QuadraticPage = lazy(() => import('@/features/quadratic').then(m => ({ default: m.QuadraticPage })));
+const QuadraticPage = lazy(() => import('@/features/function').then(m => ({ default: m.QuadraticPage })));
 const FunctionReviewPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionReviewPage })));
 const FunctionConceptPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionConceptPage })));
 const PiecewisePage = lazy(() => import('@/features/function').then(m => ({ default: m.PiecewisePage })));
 const ElementaryFuncPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPrereqPage })));
 const ElementaryFuncPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPage })));
-const FunctionGraphPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionGraphPrereqPage })));
+const LogComparePage = lazy(() => import('@/features/function').then(m => ({ default: m.LogComparePage })));
 const FunctionGraphPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionGraphPage })));
 const DerivativePrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativePrereqPage })));
 const DerivativeBasicPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeBasicPage })));
+const DerivativeApplicationPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeApplicationPage })));
+const DerivativeApplication2Page = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeApplication2Page })));
 const VectorPrereqPage = lazy(() => import('@/features/vector').then(m => ({ default: m.VectorPrereqPage })));
 const VectorPage = lazy(() => import('@/features/vector').then(m => ({ default: m.VectorPage })));
 const VectorTrigPrereqPage = lazy(() => import('@/features/vector').then(m => ({ default: m.VectorTrigPrereqPage })));
@@ -108,10 +110,12 @@ function App() {
           <Route path="/math/quadratic" element={<QuadraticPage />} />
           <Route path="/math/elementary-func-prereq" element={<ElementaryFuncPrereqPage />} />
           <Route path="/math/elementary-func" element={<ElementaryFuncPage />} />
-          <Route path="/math/function-graph-prereq" element={<FunctionGraphPrereqPage />} />
+          <Route path="/math/log-compare" element={<LogComparePage />} />
           <Route path="/math/function-graph" element={<FunctionGraphPage />} />
           <Route path="/math/derivative-prereq" element={<DerivativePrereqPage />} />
           <Route path="/math/derivative-basic" element={<DerivativeBasicPage />} />
+          <Route path="/math/derivative-application" element={<DerivativeApplicationPage />} />
+          <Route path="/math/derivative-application-2" element={<DerivativeApplication2Page />} />
           <Route path="/math/stage3-exam" element={<Stage3ExamPage />} />
           <Route path="/math/vector-prereq" element={<VectorPrereqPage />} />
           <Route path="/math/vector" element={<VectorPage />} />

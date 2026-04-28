@@ -1,5 +1,5 @@
-import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard } from '@/components/shared';
-import { DebugGeo2dSvg, Geo2dDebugToggle } from '@/components/shared/geo2d';
+import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, UnifiedDebugToggle } from '@/components/shared';
+import { DebugGeo2dSvg } from '@/components/shared/geo2d';
 import { functionReviewProgressItems } from './data/3.0/3.0-review-progress';
 import { proportionalGraph, linearGraph, inverseGraph } from './data/3.0/3.0-review-diagrams';
 import { proportionalFill, linearFill, inverseFill } from './data/3.0/3.0-review-practice';
@@ -24,13 +24,13 @@ export function FunctionReviewPage() {
       />
 
       <div className="flex justify-end mb-2 print:hidden gap-2">
-        <Geo2dDebugToggle />
+        <UnifiedDebugToggle />
         <ExportButton title="3.0 初中函数回顾" />
       </div>
 
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
-        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:pt-1 [&_.rounded-xl>div:last-child]:pb-1">
+        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:px-0 [&_.rounded-xl>div:last-child]:pt-0 [&_.rounded-xl>div:last-child]:pb-0">
 
       {/* ═══ 函数是什么 ═══ */}
       <section id="fr-what" className="mb-0 scroll-mt-4">

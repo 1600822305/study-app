@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, DebugGeo2dSvg, GeoDebugToggle } from '@/components/shared';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, DebugGeo2dSvg, UnifiedDebugToggle } from '@/components/shared';
 import { lineProgressItems } from './data/8.0/8.0-line-progress';
 import { inclinationAngleDiagram, slopeMeaningDiagram, slopeDirectionsDiagram, slopeInterceptDiagram, interceptMeaningDiagram, parallelPerpDiagram, lineAngleDiagram, symmetryPointDiagram, symmetryPointPointDiagram, lineSymPointDiagram, interceptCase1Diagram, interceptCase2Diagram, triangleABCDiagram, pointSymMinDiagram, threeLinesDiagram, lineSymIntersectDiagram, lineSymParallelDiagram, lineSymEx5Diagram, lineSymEx6Diagram, fixedPointAreaDiagram, symmetryEx6Diagram } from './data/8.0/8.0-line-diagrams';
 import { lineRelationPractice, angleSymPractice, lineSymPractice, lineSymIntersectPractice, lineSymParallelPractice } from './data/8.0/8.0-line-questions';
@@ -1012,7 +1012,7 @@ export function LinePage() {
       </section>
 
       </LessonLayout>
-      <GeoDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

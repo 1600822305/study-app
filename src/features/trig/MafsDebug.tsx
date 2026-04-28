@@ -13,11 +13,11 @@ import { createContext, useContext, useState, useRef, useCallback, useEffect, us
 import { Mafs, useMovablePoint, Text as MafsText, LaTeX as MafsLaTeX } from 'mafs';
 
 /* ── 全局调试开关 ── */
-let _debugGlobal = true;
+let _debugGlobal = false;
 const _listeners = new Set<() => void>();
 function _subscribe(cb: () => void) { _listeners.add(cb); return () => _listeners.delete(cb); }
 function _getSnapshot() { return _debugGlobal; }
-function _toggle() { _debugGlobal = !_debugGlobal; _listeners.forEach(l => l()); }
+export function _toggleMafs() { _debugGlobal = !_debugGlobal; _listeners.forEach(l => l()); }
 
 export function useDebugEnabled() { return useSyncExternalStore(_subscribe, _getSnapshot); }
 
@@ -25,7 +25,7 @@ export function DebugToggle() {
   const on = useDebugEnabled();
   return (
     <button
-      onClick={_toggle}
+      onClick={_toggleMafs}
       className={`fixed bottom-4 right-4 z-50 px-3 py-2 rounded-full shadow-lg text-sm font-bold print:hidden transition-all ${
         on ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-gray-200 text-gray-500 hover:bg-gray-300 opacity-50 hover:opacity-100'
       }`}

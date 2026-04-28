@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, DebugGeo2dSvg, GeoDebugToggle, PageBreak } from '@/components/shared';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, DebugGeo2dSvg, UnifiedDebugToggle, PageBreak } from '@/components/shared';
 import { conicProgressItems } from './data/8.2/8.2-conic-progress';
 import { ellipseDiagram, ellipseTableX, ellipseTableY, ellipsePythagorDiagram, ellipseEx2Diagram, ellipseEx4Diagram, ellipseEx7Diagram, ellipseS3Diagram } from './data/8.2/8.2-conic-diagrams';
 import { useProgress } from '@/hooks';
@@ -513,7 +513,7 @@ export function ConicBasicPage() {
       </section>
 
       </LessonLayout>
-      <GeoDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

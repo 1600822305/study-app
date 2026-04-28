@@ -69,10 +69,12 @@ const phases: Phase[] = [
       { path: '/math/piecewise', label: '3.1.3 分段函数', time: '1-2小时', desc: '求值、定义域、单调性与求参' },
       { path: '/math/elementary-func-prereq', label: '3.1.8 初等函数前置知识', time: '20分钟', desc: '指数、对数运算基础', prereq: true },
       { path: '/math/elementary-func', label: '3.2 基本初等函数', time: '4-5小时', desc: '指数/对数/幂函数全攻略' },
-      { path: '/math/function-graph-prereq', label: '3.2.5 图像与零点前置知识', time: '15分钟', desc: '函数图像变换基础', prereq: true },
+      { path: '/math/log-compare', label: '3.2.5 对数比大小', time: '2小时', desc: '估值定位 + 换底硬算，系统掌握所有方法' },
       { path: '/math/function-graph', label: '3.3 函数图像与零点', time: '3-4小时', desc: '图像变换 + 零点存在性定理' },
       { path: '/math/derivative-prereq', label: '3.3.5 导数前置知识', time: '20分钟', desc: '极限思想、瞬时变化率', prereq: true },
       { path: '/math/derivative-basic', label: '3.4 导数基础', time: '4-5小时', desc: '求导公式 + 单调性判断' },
+      { path: '/math/derivative-application', label: '3.5 导数应用（上）', time: '2-3小时', desc: '切线方程：在某点 / 过某点 / 已知切线求参 / 公切线' },
+      { path: '/math/derivative-application-2', label: '3.6 导数应用（下）', time: '2-3小时', desc: '单调性、极值与最值（含参讨论）' },
     ],
   },
 ];

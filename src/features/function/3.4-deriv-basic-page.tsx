@@ -1,1284 +1,1071 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak, BigQuestionCard } from '@/components/shared';
-import { derivBasicNarrations } from './data/3.4/3.4-deriv-basic-narrations';
+import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PracticeCard, PrintQuestions, UnifiedDebugToggle, PageBreak } from '@/components/shared';
+import { Coordinates, Plot } from 'mafs';
+import { DebugMafs } from '@/features/trig/MafsDebug';
 import { derivBasicProgressItems } from './data/3.4/3.4-deriv-basic-progress';
-import { derivBasicPractice1, derivBasicPractice2, derivBasicPractice3, derivBasicPractice4, derivBasicPractice5 } from './data/3.4/3.4-deriv-basic-practice';
-import { derivBasicQuizQuestions } from './data/3.4/3.4-deriv-basic-quiz';
-import { useProgress, usePrintMode } from '@/hooks';
-import { scrollToId } from '@/lib/scroll';
-import { DerivativeBasicAnswers, derivativeBasicExplanations } from './3.4-deriv-basic-answers';
+import { derivBasicPractice1, derivLimitFormsPractice, derivRulesPractice1, derivRulesWarmup, derivRulesPractice2, derivRulesWarmup2, derivRulesPractice3, derivRulesWarmup3, derivRulesPractice4, derivRulesWarmup4 } from './data/3.4/3.4-deriv-basic-practice';
+import { useProgress } from '@/hooks';
+import { derivativeBasicExplanations } from './3.4-deriv-basic-answers';
+
+const NativeMath = globalThis.Math;
 
 export function DerivativeBasicPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('deriv-basic', derivBasicProgressItems);
-  const { isPrinting, printOptions } = usePrintMode();
 
   return (
-    <div className="overflow-x-hidden">
-      <PageHeader
-        stage="第三阶段 · 函数思维"
-        title="3.4 导数基础"
-        narration={derivBasicNarrations.intro}
-        subtitle="求导公式 · 求导法则 · 单调性 · 极值最值 · 切线方程"
-        tags={[
-          { label: '难度 ★★★★☆', color: 'red' },
-          { label: '解答题14-17分', color: 'red' },
-          { label: '约8-10小时', color: 'purple' },
-        ]}
-      />
-
-      <div className="flex justify-end mb-2 print:hidden">
-        <ExportButton title="3.4 导数基础" />
+    <div>
+      <div className="[&_h1]:!mb-0 [&_.flex.flex-wrap]:!mt-1">
+        <PageHeader
+          stage="第三阶段 · 函数思维"
+          title="3.4 导数基础"
+          tags={[
+            { label: '难度 ★★★★☆', color: 'red' },
+            { label: '大题必考', color: 'amber' },
+            { label: '约 4-5 小时', color: 'blue' },
+          ]}
+        />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-2 mb-1">
-        <p className="font-bold text-gray-800 mb-1">📋 知识地图</p>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-gray-600">
-          <button onClick={() => scrollToId('db-formulas')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、基本导数公式（7个必背公式）</button>
-          <button onClick={() => scrollToId('db-extrema')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、极值与最值</button>
-          <button onClick={() => scrollToId('db-rules')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、求导法则（加减乘除 + 链式法则）</button>
-          <button onClick={() => scrollToId('db-tangent')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、切线方程</button>
-          <button onClick={() => scrollToId('db-monotone')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、导数与单调性</button>
-          <button onClick={() => scrollToId('db-quiz')} className="text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">六、高考真题实战（7+1题）</button>
+      <LessonLayout
+        progressItems={progressItems}
+        onToggle={toggleProgress}
+        sidebarTop={<ExportButton title="3.4 导数基础" />}
+      >
+        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-0.5 [&_.rounded-xl>div:last-child]:px-0 [&_.rounded-xl>div:last-child]:pt-0 [&_.rounded-xl>div:last-child]:pb-0 [&_.rounded-xl_button>span]:font-bold [&_.rounded-xl_button>span]:text-gray-900">
+
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 0: 导数定义变形识别（承接 3.3.5） */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="db-limit-forms" className="mb-0 scroll-mt-4">
+            <Collapsible title="零、导数定义变形识别（承接 3.3.5）" defaultOpen storageKey="deriv-basic:limit-forms">
+              <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
+
+                {/* ── 原定义 vs 变形式 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="grid grid-cols-[1fr_1fr] font-bold text-gray-800 border-b border-gray-400 bg-gray-100">
+                    <div className="px-2 py-1 border-r border-gray-400">📖 原定义</div>
+                    <div className="px-2 py-1">🔁 等价变形（换字母、换倍数都行）</div>
+                  </div>
+                  <div className="grid grid-cols-[1fr_1fr]">
+                    <div className="px-2 py-2 space-y-1 border-r border-gray-300 flex items-center justify-center">
+                      <div>
+                        <p><Math tex="f'(x_0)=\lim\limits_{\Delta x\to 0}\dfrac{f(x_0+\Delta x)-f(x_0)}{\Delta x}" /></p>
+                        <p className="text-gray-700 mt-1">字母 <Math tex="\Delta x" /> 不重要，重要的是：<strong>分母 = 加到 <Math tex="x_0" /> 的那个增量</strong>。</p>
+                        <p className="text-gray-700 mt-1">增量叫什么字母、多大、带不带负号都不重要，<br /><strong>只要分子分母完全一致</strong>（且趋近 0），结果就是 <Math tex="f'(x_0)" />。</p>
+                      </div>
+                    </div>
+                    <div className="px-2 py-2 space-y-1">
+                      <p>换成 <Math tex="m" />：<Math tex="\lim\limits_{m\to 0}\dfrac{f(x_0+m)-f(x_0)}{m}=f'(x_0)" /></p>
+                      <hr className="border-gray-300" />
+                      <p>换成 <Math tex="a" />：<Math tex="\lim\limits_{a\to 0}\dfrac{f(x_0+a)-f(x_0)}{a}=f'(x_0)" /></p>
+                      <hr className="border-gray-300" />
+                      <p>换成 <Math tex="-3a" />：<Math tex="\lim\limits_{a\to 0}\dfrac{f(x_0-3a)-f(x_0)}{-3a}=f'(x_0)" /></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 高考陷阱：分母倍数不匹配 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">⚠️ 高考陷阱：分子增量 与 分母倍数 不一致（含负号），要"凑"</div>
+                  <div className="px-2 py-2 space-y-1">
+                    <p><strong>典型题</strong>：求 <Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0-2h)-f(x_0)}{h}" />。分子增量 <Math tex="-2h" /> 与分母 <Math tex="h" /> <strong>不匹配</strong>（符号、倍数都不对）！</p>
+                    <p className="pl-2"><strong>技巧：分子分母同乘 <Math tex="-2" /></strong>，凑出"分母 = 增量"：</p>
+                    <p className="pl-4"><Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0-2h)-f(x_0)}{h}=\lim\limits_{h\to 0}\dfrac{-2\bigl[f(x_0-2h)-f(x_0)\bigr]}{-2h}" /><span className="text-gray-900 text-[0.85em]">（分子分母同乘 <Math tex="-2" />）</span></p>
+                    <hr className="border-gray-300" />
+                    <p className="pl-4"><Math tex="=-2\cdot\lim\limits_{h\to 0}\dfrac{f(x_0-2h)-f(x_0)}{-2h}=-2\cdot f'(x_0)=-2f'(x_0)" /><span className="text-gray-900 text-[0.85em]">（分子 <Math tex="-2" /> 提到外面；里面分母 <Math tex="-2h" /> 就是增量，套定义得 <Math tex="f'(x_0)" />）</span></p>
+                  </div>
+                </div>
+
+                {/* ── 另一种陷阱：分子两侧变化 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="grid grid-cols-[62fr_38fr] font-bold text-gray-800 border-b border-gray-400 bg-gray-100">
+                    <div className="px-2 py-1 border-r border-gray-400">⚠️ 更坑：分子两侧都变化</div>
+                    <div className="px-2 py-1">📎 换元证明（块 B）</div>
+                  </div>
+                  <div className="grid grid-cols-[62fr_38fr]">
+                    <div className="px-2 py-2 space-y-1 border-r border-gray-300">
+                      <p><strong>典型题</strong>：求 <Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0+h)-f(x_0-h)}{h}" /></p>
+                      <p className="pl-2">分子 <Math tex="f(x_0+h)-f(x_0-h)" /> 不是标准形式（标准形式要有 <Math tex="-f(x_0)" />）。</p>
+                      <hr className="border-gray-300" />
+                      <p className="pl-2"><strong>第一步，凑中间：</strong>分子里<strong>同时加减 <Math tex="f(x_0)" /></strong>（加减一个相同的量，值不变）：</p>
+                      <p className="pl-4"><Math tex="f(x_0+h)-f(x_0-h)=f(x_0+h)\,\underbrace{-f(x_0)+f(x_0)}_{\text{凑进来}}\,-f(x_0-h)" /></p>
+                      <hr className="border-gray-300" />
+                      <p className="pl-2"><strong>第二步，重新分组</strong>，拆成两块标准形式：</p>
+                      <p className="pl-4"><Math tex="=\underbrace{\bigl[f(x_0+h)-f(x_0)\bigr]}_{\text{块 A}}+\underbrace{\bigl[f(x_0)-f(x_0-h)\bigr]}_{\text{块 B}}" /></p>
+                      <hr className="border-gray-300" />
+                      <p className="pl-2"><strong>第三步，除以 <Math tex="h" /> 取极限</strong>（两块都是标准定义）：</p>
+                      <p className="pl-4">块 A：<Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0+h)-f(x_0)}{h}=f'(x_0)" /></p>
+                      <p className="pl-4">块 B：<Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0)-f(x_0-h)}{h}=f'(x_0)" /><span className="text-gray-900 text-[0.85em]">（证明见右 →）</span></p>
+                      <hr className="border-gray-300" />
+                      <p className="pl-2"><strong>第四步，相加：</strong></p>
+                      <p className="pl-4"><Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0+h)-f(x_0-h)}{h}=f'(x_0)+f'(x_0)=2f'(x_0)" /></p>
+                      <hr className="border-gray-300" />
+                      <p className="font-bold text-gray-900"><strong>口诀</strong>："<strong>凑中间，加减零，拆两段，套定义</strong>"。</p>
+                    </div>
+                    <div className="px-2 py-2 space-y-1 text-[0.85rem]">
+                      <p>用<strong>换元</strong>：令 <Math tex="u=-h" /></p>
+                      <p>（即 <Math tex="h=-u" />；当 <Math tex="h\to 0" /> 时 <Math tex="u\to 0" />）</p>
+                      <p className="text-gray-900 text-[0.8rem]">👉 <Math tex="u=-h" /> 是连续关系，<Math tex="h" /> 越靠近 0，<Math tex="u" /> 也越靠近 0（只是方向相反），所以<strong>同步趋近</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p>把块 B 中的 <Math tex="h" /> 全部替换为 <Math tex="-u" />：</p>
+                      <p className="pl-2"><Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0)-f(x_0-h)}{h}" /></p>
+                      <p className="pl-2"><Math tex="=\lim\limits_{u\to 0}\dfrac{f(x_0)-f(x_0+u)}{-u}" /></p>
+                      <p className="pl-2"><Math tex="=\lim\limits_{u\to 0}\dfrac{-\bigl[f(x_0+u)-f(x_0)\bigr]}{-u}" /><span className="text-gray-900 text-[0.85em]">（分子提负号）</span></p>
+                      <p className="pl-2"><Math tex="=\lim\limits_{u\to 0}\dfrac{f(x_0+u)-f(x_0)}{u}" /><span className="text-gray-900 text-[0.85em]">（分子分母负号抵消）</span></p>
+                      <p className="pl-2"><Math tex="=f'(x_0)" /><span className="text-gray-900 text-[0.85em]">（符合 <Math tex="f'(x_0)" /> 定义的形状）</span></p>
+                      <hr className="border-gray-300" />
+                      <div className="border border-amber-400 rounded bg-amber-50 px-2 py-1.5 space-y-0.5">
+                        <p className="font-bold text-amber-900">✏️ 练一练（两大套路混合）</p>
+                        <p className="text-gray-900">求：<Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0+h)-f(x_0-2h)}{h}=?" /></p>
+                        <p className="text-gray-900 text-[0.8rem]"><strong>提示</strong>：凑 <Math tex="f(x_0)" /> 拆两块；后块分子分母<strong>同乘 <Math tex="-2" /></strong> 凑标准形式，再相加。<strong>换元时选 <Math tex="u=-h" /> 最干净</strong></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 万能速算公式 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🚀 万能秒杀公式：选填秒出，大题仍建议写过程</div>
+                  <div className="grid grid-cols-[52fr_48fr]">
+                    <div className="px-2 py-2 space-y-1 border-r border-gray-300">
+                      <p className="font-bold">公式 1（单项倍数）</p>
+                      <p className="pl-2"><Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0+kh)-f(x_0)}{h}=k\cdot f'(x_0)" /></p>
+                      <p className="text-gray-900">分子是"<Math tex="f(\text{某点})-f(x_0)" />"的形式。系数 = 增量里 <Math tex="h" /> 前的倍数。</p>
+                      <hr className="border-gray-300" />
+                      <p className="text-gray-900 text-[0.8rem]">例：<Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0-3h)-f(x_0)}{h}=-3f'(x_0)" /></p>
+                    </div>
+                    <div className="px-2 py-2 space-y-1">
+                      <p className="font-bold">公式 2（两端都动，通用）⭐</p>
+                      <p className="pl-2"><Math tex="\lim\limits_{h\to 0}\dfrac{f(x_0+\alpha h)-f(x_0+\beta h)}{h}=(\alpha-\beta)\cdot f'(x_0)" /></p>
+                      <p className="text-gray-900"><strong>通用结论</strong>：任何"分子两端都带 <Math tex="h" /> 倍数"的题，都能直接套。</p>
+                      <hr className="border-gray-300" />
+                      <p className="text-gray-900 text-[0.8rem]">例：<Math tex="\lim\dfrac{f(x_0+h)-f(x_0-h)}{h}=(1-(-1))f'(x_0)=2f'(x_0)" /></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivLimitFormsPractice} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivLimitFormsPractice} printOptionCols={2} />
+                </div>
+
+              </div>
+            </Collapsible>
+          </section>
+
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 1: 基本求导公式 */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="db-formulas" className="mb-0 scroll-mt-4">
+            <Collapsible title="一、基本求导公式" defaultOpen storageKey="deriv-basic:formulas">
+              <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
+
+                {/* ── 7 大必背公式 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 8 个必背基本求导公式</div>
+                  <div>
+                    <table className="w-full border-collapse text-center [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="border border-gray-300 px-2 py-0.5 w-[18%]">函数 <Math tex="f(x)" /></th>
+                          <th className="border border-gray-300 px-2 py-0.5 w-[22%]">导数 <Math tex="f'(x)" /></th>
+                          <th className="border border-gray-300 px-2 py-0.5">记忆口诀 / 备注</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="C" /><span className="text-gray-700">（常数）</span></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="0" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>常数归零</strong>：导数是 <Math tex="0" />，不是常数自身（<Math tex="\pi" />、<Math tex="e" /> 也算常数）。</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="x^n" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="nx^{n-1}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left">指数<strong>复制下来</strong>当系数，原指数<strong>减一</strong>。<Math tex="n" /> 可正可负可分数。</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="e^x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="e^x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left">最干净：导数就是<strong>自己</strong>。</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="a^x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="a^x\ln a" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left">比 <Math tex="e^x" /> 多<strong>乘</strong>一个 <Math tex="\ln a" />。</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\ln x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\dfrac{1}{x}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left">最干净：导数是 <Math tex="\dfrac{1}{x}" />。</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\log_a x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\dfrac{1}{x\ln a}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left">比 <Math tex="\ln x" /> 多<strong>除</strong>一个 <Math tex="\ln a" />。</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\sin x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\cos x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left"><Math tex="\sin" /> 变 <Math tex="\cos" />，<strong>不变号</strong>。</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\cos x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="-\sin x" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-left"><Math tex="\cos" /> 变 <Math tex="\sin" />，<strong>加负号</strong>。</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* ── 详解：e^x（图像重合）── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解 <Math tex="f(x)=e^x" />：导数就是自己（图像完全重合）</div>
+                  <div className="grid grid-cols-[64fr_36fr]">
+                    <div className="px-2 py-2 space-y-1 border-r border-gray-300">
+                      <p><strong>公式</strong>：<Math tex="(e^x)'=e^x" />　<strong>💡 口诀</strong>：最干净——<strong>导数就是自己</strong>。</p>
+                      <p><strong>🔑 关键</strong>：<Math tex="e^x" /> 是<strong>唯一满足 <Math tex="f'(x)=f(x)" /> 的函数</strong>（常数倍除外）。</p>
+                      <hr className="border-gray-300" />
+                      <p className="text-gray-700 text-[0.85em]"><strong>计算思路</strong>：先求导得 <Math tex="f'(x)=e^x" />，再把具体数字代入 <Math tex="f'(x)" /> 中的 <Math tex="x" />。</p>
+                      <p><strong>例 1</strong>：<Math tex="f'(0)=e^x\big|_{x=0}=e^0=1" />（<Math tex="e^x" /> 在 <Math tex="x=0" /> 处切线斜率为 1）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 2</strong>：<Math tex="f'(\ln 2)=e^x\big|_{x=\ln 2}=e^{\ln 2}=2" /></p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 3</strong>：<Math tex="f'(1)=e^x\big|_{x=1}=e^1=e\approx 2.718" /></p>
+                    </div>
+                    <div className="px-2 py-2 flex flex-col items-center justify-center">
+                      <div style={{ width: 260 }}>
+                        <DebugMafs viewBox={{ x: [-2, 2], y: [-1.5, 7] }} height={95} preserveAspectRatio={false}>
+                          <Coordinates.Cartesian xAxis={{ lines: false, labels: (n) => [-1, 1].includes(n) ? String(n) : '' }} yAxis={{ lines: false, labels: (n) => [1, 3, 5, 7].includes(n) ? String(n) : '' }} />
+                          <Plot.OfX y={(x: number) => NativeMath.exp(x)} color="#3b82f6" weight={4} />
+                          <Plot.OfX y={(x: number) => NativeMath.exp(x)} color="#ef4444" weight={1.5} opacity={0.7} />
+                        </DebugMafs>
+                      </div>
+                      <p className="text-center text-gray-700 mt-1">🔵 <Math tex="f(x)=e^x" /> 和 🔴 <Math tex="f'(x)=e^x" /></p>
+                      <p className="text-center font-bold text-gray-900 mt-0.5">两条曲线<span className="text-red-700">完全重合</span>！</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 详解：ln x → 1/x ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解 <Math tex="f(x)=\ln x" />：一个缓慢上升，一个急速下降（定义域 <Math tex="x>0" />）</div>
+                  <div className="grid grid-cols-[64fr_36fr]">
+                    <div className="px-2 py-2 space-y-1 border-r border-gray-300">
+                      <p><strong>公式</strong>：<Math tex="(\ln x)'=\dfrac{1}{x}" />　<strong>💡 口诀</strong>：<Math tex="\ln x" /> 的导数是 <Math tex="\dfrac{1}{x}" />——最干净。</p>
+                      <p><strong>🔑 定义域</strong>：<Math tex="\ln x" /> 只在 <Math tex="x>0" /> 有定义，所以 <Math tex="f'(x)=\dfrac{1}{x}" /> 也只在 <Math tex="x>0" /> 讨论。</p>
+                      <p className="text-red-700"><strong>⚠️ 注意</strong>：遇到 <Math tex="\ln|x|" /> 才能讨论 <Math tex="x<0" />，本节先不涉及。</p>
+                      <hr className="border-gray-300" />
+                      <p className="text-gray-700 text-[0.85em]"><strong>计算思路</strong>：先求导得 <Math tex="f'(x)=\dfrac{1}{x}" />，再把具体数字代入 <Math tex="x" />。</p>
+                      <p><strong>例 1</strong>：<Math tex="f'(1)=\dfrac{1}{x}\big|_{x=1}=1" />（切线斜率为 1）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 2</strong>：<Math tex="f'(2)=\dfrac{1}{x}\big|_{x=2}=\dfrac{1}{2}" />（越往右斜率越小）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 3</strong>：<Math tex="f'(e)=\dfrac{1}{x}\big|_{x=e}=\dfrac{1}{e}\approx 0.368" /></p>
+                    </div>
+                    <div className="px-2 py-2 flex flex-col items-center justify-center">
+                      <div style={{ width: 260 }}>
+                        <DebugMafs viewBox={{ x: [0, 5], y: [-2, 4] }} height={130} preserveAspectRatio={false}>
+                          <Coordinates.Cartesian xAxis={{ lines: false, labels: (n) => [1, 2, 3, 4].includes(n) ? String(n) : '' }} yAxis={{ lines: false, labels: (n) => [-1, 1, 2, 3].includes(n) ? String(n) : '' }} />
+                          <Plot.OfX y={(x: number) => x > 0 ? NativeMath.log(x) : NaN} color="#3b82f6" weight={3} />
+                          <Plot.OfX y={(x: number) => x > 0 ? 1 / x : NaN} color="#ef4444" weight={3} />
+                        </DebugMafs>
+                      </div>
+                      <p className="text-center text-gray-700 mt-1">🔵 <Math tex="f(x)=\ln x" /> 和 🔴 <Math tex="f'(x)=\dfrac{1}{x}" /></p>
+                      <p className="text-center font-bold text-gray-900 mt-0.5">都过 <Math tex="x=1" />：<Math tex="\ln 1=0" />、<Math tex="\tfrac{1}{1}=1" /></p>
+                      <p className="text-center text-gray-700 text-[0.85em]">一个<span className="text-blue-700 font-bold">缓慢上升</span>，一个<span className="text-red-700 font-bold">急速下降</span></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 详解：sin x → cos x ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解 <Math tex="f(x)=\sin x" />：导数是 <Math tex="\cos x" />（波形向左平移 <Math tex="\tfrac{\pi}{2}" />）</div>
+                  <div className="grid grid-cols-[64fr_36fr]">
+                    <div className="px-2 py-2 space-y-1 border-r border-gray-300">
+                      <p><strong>公式</strong>：<Math tex="(\sin x)'=\cos x" />　<strong>💡 口诀</strong>：<Math tex="\sin" /> 变 <Math tex="\cos" />，<strong>不变号</strong>。</p>
+                      <p><strong>🎯 几何</strong>：<Math tex="\sin x" /> 在某点的切线斜率 = <Math tex="\cos x" /> 在该点的值。</p>
+                      <hr className="border-gray-300" />
+                      <p className="text-gray-700 text-[0.85em]"><strong>计算思路</strong>：先求导得 <Math tex="f'(x)=\cos x" />，再把具体数字代入 <Math tex="x" />。</p>
+                      <p><strong>例 1</strong>：<Math tex="f'(0)=\cos x\big|_{x=0}=\cos 0=1" />（上升最快）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 2</strong>：<Math tex="f'\!\left(\tfrac{\pi}{2}\right)=\cos x\big|_{x=\frac{\pi}{2}}=\cos\tfrac{\pi}{2}=0" />（最高点，切线水平）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 3</strong>：<Math tex="f'(\pi)=\cos x\big|_{x=\pi}=\cos\pi=-1" />（下降最快）</p>
+                    </div>
+                    <div className="px-2 py-2 flex flex-col items-center justify-center">
+                      <div style={{ width: 260 }}>
+                        <DebugMafs viewBox={{ x: [-0.5, 7], y: [-1.5, 1.5] }} height={88} preserveAspectRatio={false}>
+                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: (n) => [-1, 1].includes(n) ? String(n) : '' }} />
+                          <Plot.OfX y={(x: number) => NativeMath.sin(x)} color="#3b82f6" weight={3} />
+                          <Plot.OfX y={(x: number) => NativeMath.cos(x)} color="#ef4444" weight={3} />
+                        </DebugMafs>
+                      </div>
+                      <p className="text-center text-gray-700 mt-1">🔵 <Math tex="f(x)=\sin x" /> 和 🔴 <Math tex="f'(x)=\cos x" /></p>
+                      <p className="text-center font-bold text-gray-900 mt-0.5">红线 = 蓝线<span className="text-red-700">向左平移 <Math tex="\tfrac{\pi}{2}" /></span></p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 详解：cos x → -sin x ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解 <Math tex="f(x)=\cos x" />：导数是 <Math tex="-\sin x" />（上下翻折 + 平移）</div>
+                  <div className="grid grid-cols-[64fr_36fr]">
+                    <div className="px-2 py-2 space-y-1 border-r border-gray-300">
+                      <p><strong>公式</strong>：<Math tex="(\cos x)'=-\sin x" />　<strong>💡 口诀</strong>：<Math tex="\cos" /> 变 <Math tex="\sin" />，<strong>加负号</strong>。</p>
+                      <p className="text-red-700"><strong>⚠️ 易错</strong>：<Math tex="\cos" /> 求导有负号，<Math tex="\sin" /> 求导<strong>没有</strong>——别把两条口诀搞反。</p>
+                      <hr className="border-gray-300" />
+                      <p className="text-gray-700 text-[0.85em]"><strong>计算思路</strong>：先求导得 <Math tex="f'(x)=-\sin x" />，再把具体数字代入 <Math tex="x" />。</p>
+                      <p><strong>例 1</strong>：<Math tex="f'(0)=-\sin x\big|_{x=0}=-\sin 0=0" />（最高点，切线水平）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 2</strong>：<Math tex="f'\!\left(\tfrac{\pi}{2}\right)=-\sin x\big|_{x=\frac{\pi}{2}}=-\sin\tfrac{\pi}{2}=-1" />（下降最快）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>例 3</strong>：<Math tex="f'(\pi)=-\sin x\big|_{x=\pi}=-\sin\pi=0" />（最低点，切线水平）</p>
+                    </div>
+                    <div className="px-2 py-2 flex flex-col items-center justify-center">
+                      <div style={{ width: 260 }}>
+                        <DebugMafs viewBox={{ x: [-0.5, 7], y: [-1.5, 1.5] }} height={88} preserveAspectRatio={false}>
+                          <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: (n) => [-1, 1].includes(n) ? String(n) : '' }} />
+                          <Plot.OfX y={(x: number) => NativeMath.cos(x)} color="#ef4444" weight={3} />
+                          <Plot.OfX y={(x: number) => -NativeMath.sin(x)} color="#3b82f6" weight={3} />
+                        </DebugMafs>
+                      </div>
+                      <p className="text-center text-gray-700 mt-1">🔴 <Math tex="f(x)=\cos x" /> 和 🔵 <Math tex="f'(x)=-\sin x" /></p>
+                      <p className="text-center font-bold text-gray-900 mt-0.5">蓝线 = <Math tex="\sin x" /> <span className="text-blue-700">翻折后</span>的样子</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 幂函数深挖 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">幂函数 <Math tex="x^n" /> 深挖：<Math tex="n" /> 可以是 <strong>0、负数、分数</strong>（<span className="text-red-700">记一个公式抵两个</span>）</div>
+                  <div className="p-2 space-y-1">
+                    <p>公式 <Math tex="(x^n)'=nx^{n-1}" /> 里，<Math tex="n" /> <strong>不限定是正整数</strong>，<strong>0、负数、分数</strong>都能用。<span className="text-red-700"><strong>套路</strong>：先改写为 <Math tex="x^n" />，再套"指数下来减一"。</span></p>
+                    <p className="text-gray-700"><strong>💡 关键洞察</strong>：常数 <Math tex="C=C\cdot x^0" />，所以"<strong>常数归零</strong>"就是幂函数公式在 <Math tex="n=0" /> 的特例——学一个就顺带掌握了两个。</p>
+                    <table className="w-full border-collapse text-center">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="border border-gray-300 px-2 py-0.5 w-[22%]">原式 <Math tex="f(x)" /></th>
+                          <th className="border border-gray-300 px-2 py-0.5 w-[22%]">改写为 <Math tex="x^n" /></th>
+                          <th className="border border-gray-300 px-2 py-0.5">导数 <Math tex="f'(x)" /></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="bg-amber-50">
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="5" />（常数）</td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="5\cdot x^{0}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="5\cdot 0\cdot x^{0-1}=0\cdot x^{-1}=0" />　<span className="text-red-700 text-[0.85em]">← 这就是"常数归零"</span></td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\sqrt{x}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="x^{\frac{1}{2}}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\dfrac{1}{2}x^{\frac{1}{2}-1}=\dfrac{1}{2}x^{-\frac{1}{2}}=\dfrac{1}{2}\cdot\dfrac{1}{x^{\frac{1}{2}}}=\dfrac{1}{2}\cdot\dfrac{1}{\sqrt{x}}=\dfrac{1}{2\sqrt{x}}" /></td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\dfrac{2}{x}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="2\cdot x^{-1}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="2\cdot(-1)x^{-1-1}=-2x^{-2}=-\dfrac{2}{x^{2}}" /></td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\dfrac{1}{x^2}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="x^{-2}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="-2\cdot x^{-2-1}=-2x^{-3}=-2\cdot\dfrac{1}{x^{3}}=-\dfrac{2}{x^3}" /></td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\sqrt[3]{x}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="x^{\frac{1}{3}}" /></td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="\dfrac{1}{3}x^{\frac{1}{3}-1}=\dfrac{1}{3}x^{-\frac{2}{3}}=\dfrac{1}{3}\cdot\dfrac{1}{x^{\frac{2}{3}}}=\dfrac{1}{3}\cdot\dfrac{1}{\sqrt[3]{x^2}}=\dfrac{1}{3\sqrt[3]{x^2}}" /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p className="text-gray-700"><strong>验证：</strong>四步法求过 <Math tex="(x^2)'=2x" />；套公式 <Math tex="2\cdot x^{2-1}=2x" />，一致。</p>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivBasicPractice1} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivBasicPractice1} printOptionCols={2} columns={2} />
+                </div>
+
+              </div>
+            </Collapsible>
+          </section>
+
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 2: 求导法则 */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="db-rules" className="mb-0 scroll-mt-4">
+            <Collapsible title="二、求导法则" defaultOpen storageKey="deriv-basic:rules">
+              <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
+
+                {/* ── 5 条求导法则总表 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 5 条求导法则总表（先记住，后面详解）</div>
+                  <table className="w-full border-collapse text-center text-[0.9rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[14%]">法则名</th>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[36%]">公式</th>
+                        <th className="border border-gray-300 px-2 py-0.5">💡 口诀</th>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[10%]">难度</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>和差</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="(f\pm g)'=f'\pm g'" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left">每项分别求导，符号照搬。</td>
+                        <td className="border border-gray-300 px-2 py-0.5">★</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>常数倍</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="(C\cdot f)'=C\cdot f'" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left">系数提到导号外面。</td>
+                        <td className="border border-gray-300 px-2 py-0.5">★</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>乘积</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="(fg)'=f'g+fg'" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left text-red-700"><strong>前导后不导 ＋ 前不导后导</strong>（❌ 不是 <Math tex="f'g'" />）</td>
+                        <td className="border border-gray-300 px-2 py-0.5">★★★</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>商</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="\left(\dfrac{f}{g}\right)'=\dfrac{f'g-fg'}{g^2}" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left text-red-700"><strong>分子：前导后不导 － 前不导后导</strong>（中间是减号）<br /><strong>分母平方</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5">★★★★</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>复合</strong><br /><span className="text-gray-500 text-[0.8em]">（链式）</span></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="\bigl[f(g(x))\bigr]'=f'(g(x))\cdot g'(x)" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>外层导 × 内层导</strong>（剥洋葱）——高考最高频。</td>
+                        <td className="border border-gray-300 px-2 py-0.5">★★★★</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p className="px-2 py-1 text-gray-700 border-t border-gray-300 text-[0.85em]"><strong>📖 学习路径</strong>：2.1 和差 + 常数倍（最简单）→ 2.2 乘积 → 2.3 商 → 2.4 复合。每节配详解 + 易错 + 即时练习。</p>
+                </div>
+
+                {/* ── 小节标题：2.1 和差 + 常数倍 ── */}
+                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500 mb-0.5 mt-1">2.1　和差法则 + 常数倍法则（最简单，多项式求导）</div>
+
+                {/* ── 2 条基本法则速查表 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 两大基础法则（逐项求导、系数提外）</div>
+                  <table className="w-full border-collapse text-center [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[20%]">法则名</th>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[32%]">公式</th>
+                        <th className="border border-gray-300 px-2 py-0.5">💡 口诀 / 说明</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>和差法则</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="\bigl[f(x)\pm g(x)\bigr]'=f'(x)\pm g'(x)" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>每项分别求导，符号照搬</strong>（原来加还是加，减还是减）。</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>常数倍法则</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="\bigl[C\cdot f(x)\bigr]'=C\cdot f'(x)" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>系数可以"提到导号外面"</strong>——常数倍不参与求导。</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* ── 详解：多项式求导三步走 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：多项式求导"三步走"（最常见题型）</div>
+                  <div className="p-2 space-y-1">
+                    <p><strong>🎯 流程</strong>：① 拆分每一项 → ② 每项套基本公式求导 → ③ 符号照搬拼起来。</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold"><strong>例 1</strong>：求 <Math tex="f(x)=3x^4-2x^2+5x-7" /> 的导数。</p>
+                        <p className="pl-2"><strong>① 拆分</strong>：<Math tex="\underbrace{3x^4}_{(1)}\ \underbrace{-2x^2}_{(2)}\ \underbrace{+5x}_{(3)}\ \underbrace{-7}_{(4)}" /></p>
+                        <hr className="border-gray-300" />
+                        <div className="pl-2 grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-0.5 items-center">
+                          <p className="row-span-2"><strong>② 每项求导</strong>：</p>
+                          <p><Math tex="(3x^4)'=12x^3" /></p>
+                          <p><Math tex="(-2x^2)'=-4x" /></p>
+                          <p><Math tex="(5x)'=5" /></p>
+                          <p><Math tex="(-7)'=0" /></p>
+                        </div>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>③ 拼起来</strong>：<Math tex="f'(x)=12x^3-4x+5" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold"><strong>例 2</strong>：求 <Math tex="f(x)=x^2+\sin x+e^x" /> 的导数。</p>
+                        <p className="pl-2 text-gray-700">三项来自公式表的三个不同类别，一项一项对着公式求。</p>
+                        <hr className="border-gray-300" />
+                        <div className="pl-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 items-center">
+                          <p className="row-span-3"><strong>逐项求导</strong>：</p>
+                          <p><Math tex="(x^2)'=2x" /><span className="text-gray-700 ml-2">（幂函数）</span></p>
+                          <p><Math tex="(\sin x)'=\cos x" /><span className="text-gray-700 ml-2">（三角）</span></p>
+                          <p><Math tex="(e^x)'=e^x" /><span className="text-gray-700 ml-2">（指数，不是 <Math tex="x\cdot e^{x-1}" />）</span></p>
+                        </div>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>拼起来</strong>：<Math tex="f'(x)=2x+\cos x+e^x" /></p>
+                      </div>
+                    </div>
+                    <hr className="border-gray-400" />
+                    <div className="text-base print:hidden">
+                      <PracticeCard title="💪 随手算两道" questions={derivRulesWarmup} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                        renderItem={(q, idx) => (
+                          <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                            <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                            {q.questionLatex && <Math tex={q.questionLatex} />}
+                          </p>
+                        )}
+                      />
+                    </div>
+                    <div className="text-base hidden print:block">
+                      <PrintQuestions questions={derivRulesWarmup} printOptionCols={2} columns={2} />
+                    </div>
+                  </div>
+                </div>
+
+                <PageBreak />
+
+                {/* ── 详解：例 3（先求导再代值）── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　设 <Math tex="f(x)=2x^3+3\ln x" />，求 <Math tex="f'(1)" /><span className="text-gray-700 font-normal ml-2">——"先求导，再代值"，看见撇两步都不能省</span></div>
+                  <div className="p-2">
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="pl-2"><strong>第一步、先求导</strong>：</p>
+                        <p className="pl-4"><Math tex="(2x^3)'=6x^2" /><span className="text-gray-700 ml-2">（常数 2 提外，幂函数）</span></p>
+                        <p className="pl-4"><Math tex="(3\ln x)'=\dfrac{3}{x}" /><span className="text-gray-700 ml-2">（常数 3 提外，<Math tex="(\ln x)'=\tfrac{1}{x}" />）</span></p>
+                        <p className="pl-4">所以 <Math tex="f'(x)=6x^2+\dfrac{3}{x}" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="pl-2"><strong>第二步、代入 <Math tex="x=1" /></strong>：</p>
+                        <p className="pl-4"><Math tex="f'(1)=6\cdot 1^2+\dfrac{3}{1}=6+3=9" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2 text-red-700"><strong>⚠️ 对比</strong>：<Math tex="f(1)=2\cdot 1^3+3\ln 1=2+0=2" /></p>
+                        <p className="pl-4 text-gray-700"><Math tex="f(1)=2" /> 是<strong>函数值</strong>，<Math tex="f'(1)=9" /> 是<strong>导数值</strong>——看见撇先求导，再代值。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 总结：一句话看穿这节 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-amber-50">
+                  <div className="px-2 py-1.5">
+                    <p><strong>💡 一句话看穿这节</strong>：<strong>和差法则 + 常数倍法则 = 把每一项拆出来，分别求导就行</strong>——系数跟着走，符号照搬，跟加减法一样。</p>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivRulesPractice1} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivRulesPractice1} printOptionCols={2} columns={2} />
+                </div>
+
+                {/* ═══════════════════════════════════════════════════════ */}
+                {/* 2.2 乘积法则                                               */}
+                {/* ═══════════════════════════════════════════════════════ */}
+                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500 mb-0.5 mt-2">2.2　乘积法则（前导后不导 + 前不导后导）</div>
+
+                {/* ── 乘积法则速查表 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 乘积法则</div>
+                  <table className="w-full border-collapse text-center [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[18%]">法则名</th>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[36%]">公式</th>
+                        <th className="border border-gray-300 px-2 py-0.5">💡 口诀</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>乘积法则</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="(fg)'=f'g+fg'" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>前导后不导 ＋ 前不导后导</strong>——两项<strong>相加</strong>，不是相乘。</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* ── 详解：乘积法则用法（例 1 + 例 2）── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：乘积法则三步走（套公式的标准流程）</div>
+                  <div className="p-2 space-y-1 text-[0.9rem] leading-snug [&_p]:!my-0">
+                    <p><strong>🎯 流程</strong>：① 认清 <Math tex="f(x)" /> 和 <Math tex="g(x)" /> 是哪两部分 → ② 分别求 <Math tex="f'(x)" /> 和 <Math tex="g'(x)" /> → ③ 套公式 <Math tex="f'(x)g(x)+f(x)g'(x)" />（两项相加）。</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold"><strong>例 1</strong>：求 <Math tex="(x^2\sin x)'" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>① 认清</strong>：<Math tex="f(x)=x^2" />，<Math tex="g(x)=\sin x" /></p>
+                        <p className="pl-2"><strong>② 分别求导</strong>：<Math tex="f'(x)=2x" />，<Math tex="g'(x)=\cos x" /></p>
+                        <p className="pl-2"><strong>③ 套公式</strong> <Math tex="f'(x)g(x)+f(x)g'(x)" />：</p>
+                        <p className="pl-4"><Math tex="=\underbrace{2x}_{\text{前导}}\cdot\underbrace{\sin x}_{\text{后不导}}+\underbrace{x^2}_{\text{前不导}}\cdot\underbrace{\cos x}_{\text{后导}}" /></p>
+                        <p className="pl-4">所以 <Math tex="(x^2\sin x)'=2x\sin x+x^2\cos x" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold"><strong>例 2</strong>：求 <Math tex="(xe^x)'" /><span className="text-gray-700 ml-2">（高考高频）</span></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>① 认清</strong>：<Math tex="f(x)=x" />，<Math tex="g(x)=e^x" /></p>
+                        <p className="pl-2"><strong>② 分别求导</strong>：<Math tex="f'(x)=1" />，<Math tex="g'(x)=e^x" /></p>
+                        <p className="pl-2"><strong>③ 套公式</strong> <Math tex="f'(x)g(x)+f(x)g'(x)" />：</p>
+                        <p className="pl-4"><Math tex="=\underbrace{1}_{\text{前导}}\cdot\underbrace{e^x}_{\text{后不导}}+\underbrace{x}_{\text{前不导}}\cdot\underbrace{e^x}_{\text{后导}}=(1+x)e^x" /></p>
+                        <p className="pl-4 text-gray-700">提公因式 <Math tex="e^x" /> 得更简形式。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 💪 随手算两道 ── */}
+                <hr className="border-gray-400" />
+                <div className="text-base print:hidden">
+                  <PracticeCard title="💪 随手算两道" questions={derivRulesWarmup2} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivRulesWarmup2} printOptionCols={2} columns={2} />
+                </div>
+
+                {/* ── 详解：例 3 两种路径对比 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　<Math tex="(2x+1)(x^2-3)" /> 两种路径对比<span className="text-gray-700 font-normal ml-2">——验证乘积法则的正确性</span></div>
+                  <div className="px-2 text-[0.9rem] leading-snug [&_p]:!my-0">
+                    <p className="mb-1">同一道题走两条路，结果应该完全一样。这是<strong>自我检查</strong>乘积法则有没有套错的好方法。</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-2 gap-x-3 mt-1">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold">路径一：先展开，再用和差+常数倍法则</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>展开</strong>：<Math tex="(2x+1)(x^2-3)=2x^3-6x+x^2-3" /></p>
+                        <hr className="border-gray-300" />
+                        <div className="pl-2 grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-0.5 items-center">
+                          <p className="row-span-2"><strong>逐项求导</strong>：</p>
+                          <p><Math tex="(2x^3)'=6x^2" /></p>
+                          <p><Math tex="(x^2)'=2x" /></p>
+                          <p><Math tex="(-6x)'=-6" /></p>
+                          <p><Math tex="(-3)'=0" /></p>
+                        </div>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>拼起来</strong>：<Math tex="f'(x)=6x^2+2x-6" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold">路径二：不展开，直接用乘积法则</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>认清</strong>：<Math tex="f(x)=2x+1" />，<Math tex="g(x)=x^2-3" /></p>
+                        <p className="pl-2"><strong>分别求导</strong>：<Math tex="f'(x)=2" />，<Math tex="g'(x)=2x" /></p>
+                        <p className="pl-2"><strong>套公式</strong> <Math tex="f'(x)g(x)+f(x)g'(x)" />：</p>
+                        <p className="pl-4"><Math tex="=2\cdot(x^2-3)+(2x+1)\cdot 2x" /></p>
+                        <p className="pl-4"><Math tex="=2x^2-6+4x^2+2x=6x^2+2x-6" /></p>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p className="text-center text-green-700 font-bold mt-1">两条路径结果相同 <Math tex="6x^2+2x-6" />，乘积法则验证通过 ✓</p>
+                    <p className="text-gray-700 text-center">实战建议：因式已经展开好 → 路径一；遇到不好展开的（如 <Math tex="x\cdot e^x" />、<Math tex="\sin x\cdot\cos x" />）→ 必须用路径二。</p>
+                  </div>
+                </div>
+
+                {/* ── 详解：例 4 求导+代值 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 4</strong>　设 <Math tex="f(x)=x^2e^x" />，求 <Math tex="f'(1)" /><span className="text-gray-700 font-normal ml-2">——乘积法则 + 代值（高考大题经典结构）</span></div>
+                  <div className="px-2 pb-2 text-[0.9rem] leading-snug [&_p]:!my-0">
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold">第一步、先求导（乘积法则）</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>认清</strong>：<Math tex="f(x)=x^2" />，<Math tex="g(x)=e^x" /></p>
+                        <p className="pl-2"><strong>分别求导</strong>：<Math tex="f'(x)=2x" />，<Math tex="g'(x)=e^x" /></p>
+                        <p className="pl-2"><strong>套公式</strong> <Math tex="f'(x)g(x)+f(x)g'(x)" />：</p>
+                        <p className="pl-4"><Math tex="=2x\cdot e^x+x^2\cdot e^x" /></p>
+                        <p className="pl-4">提公因式 <Math tex="e^x" />：<Math tex="f'(x)=(2x+x^2)e^x" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold">第二步、代入 <Math tex="x=1" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><Math tex="f'(1)=(2\cdot 1+1^2)\cdot e^1" /></p>
+                        <p className="pl-2"><Math tex="=(2+1)\cdot e=3e" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2 text-red-700"><strong>⚠️ 对比</strong>：<Math tex="f(1)=1^2\cdot e^1=e" /></p>
+                        <p className="pl-4 text-gray-700"><Math tex="f(1)=e" /> 是<strong>函数值</strong>，<Math tex="f'(1)=3e" /> 是<strong>导数值</strong>——看见撇先求导，再代值。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 一句话看穿 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-amber-50">
+                  <div className="px-2 py-1.5">
+                    <p><strong>💡 一句话看穿这节</strong>：<strong>看见相乘，就分别求导、交叉相加</strong>——"前导后不导 + 前不导后导"，绝不能各乘各。</p>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivRulesPractice2} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivRulesPractice2} printOptionCols={2} columns={2} />
+                </div>
+
+                {/* ═══════════════════════════════════════════════════════ */}
+                {/* 2.3 商法则                                                 */}
+                {/* ═══════════════════════════════════════════════════════ */}
+                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500 mb-0.5 mt-2">2.3　商法则（上导下不导 减 上不导下导，除以分母平方）</div>
+
+                {/* ── 商法则速查表 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 商法则</div>
+                  <table className="w-full border-collapse text-center [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[18%]">法则名</th>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[36%]">公式</th>
+                        <th className="border border-gray-300 px-2 py-0.5">💡 口诀 & 易错警示</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>商法则</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="\left(\dfrac{f}{g}\right)'=\dfrac{f'g-fg'}{g^2}" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>上导下不导 － 上不导下导，分母平方</strong><br />⚠️ 中间是<strong className="text-red-700">减号</strong>、<strong className="text-red-700">顺序不能反</strong>、整体除以 <strong className="text-red-700"><Math tex="g^2" /></strong>。</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* ── 详解：商法则用法（例 1 + 例 2）── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：商法则三步走（套公式的标准流程）</div>
+                  <div className="p-2 space-y-1 text-[0.9rem] leading-snug [&_p]:!my-0">
+                    <p><strong>🎯 流程</strong>：① 认清 <Math tex="f(x)" />（分子，"上"）和 <Math tex="g(x)" />（分母，"下"） → ② 分别求 <Math tex="f'(x)" /> 和 <Math tex="g'(x)" /> → ③ 套公式。</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold"><strong>例 1</strong>：求 <Math tex="\left(\dfrac{\sin x}{x}\right)'" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>① 认清</strong>：<Math tex="f(x)=\sin x" />（上），<Math tex="g(x)=x" />（下）</p>
+                        <p className="pl-2"><strong>② 分别求导</strong>：<Math tex="f'(x)=\cos x" />，<Math tex="g'(x)=1" /></p>
+                        <p className="pl-2"><strong>③ 套公式</strong> <Math tex="\dfrac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}" />：</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4"><Math tex="=\dfrac{\underbrace{\cos x}_{\text{上导}}\cdot\underbrace{x}_{\text{下不导}}-\underbrace{\sin x}_{\text{上不导}}\cdot\underbrace{1}_{\text{下导}}}{x^2}" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4">所以 <Math tex="\left(\dfrac{\sin x}{x}\right)'=\dfrac{x\cos x-\sin x}{x^2}" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold"><strong>例 2</strong>：求 <Math tex="\left(\dfrac{x^2+1}{x-1}\right)'" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>① 认清</strong>：<Math tex="f(x)=x^2+1" />（上），<Math tex="g(x)=x-1" />（下）</p>
+                        <p className="pl-2"><strong>② 分别求导</strong>：<Math tex="f'(x)=2x" />，<Math tex="g'(x)=1" /></p>
+                        <p className="pl-2"><strong>③ 套公式</strong> <Math tex="\dfrac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}" />：</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4"><Math tex="=\dfrac{\underbrace{2x}_{\text{上导}}\cdot\underbrace{(x-1)}_{\text{下不导}}-\underbrace{(x^2+1)}_{\text{上不导}}\cdot\underbrace{1}_{\text{下导}}}{(x-1)^2}" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4"><Math tex="=\dfrac{2x^2-2x-x^2-1}{(x-1)^2}=\dfrac{x^2-2x-1}{(x-1)^2}" /></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 💪 随手算两道 ── */}
+                <hr className="border-gray-400" />
+                <div className="text-base print:hidden">
+                  <PracticeCard title="💪 随手算两道" questions={derivRulesWarmup3} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivRulesWarmup3} printOptionCols={2} columns={2} />
+                </div>
+
+                {/* ── 详解：例 3 求导+代值 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　设 <Math tex="f(x)=\dfrac{e^x}{x}" />，求 <Math tex="f'(1)" /><span className="text-gray-700 font-normal ml-2">——商法则 + 代值</span></div>
+                  <div className="px-2 pb-2 text-[0.9rem] leading-snug [&_p]:!my-0">
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold">第一步、先求导（商法则）</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>认清</strong>：<Math tex="f(x)=e^x" />（上），<Math tex="g(x)=x" />（下）</p>
+                        <p className="pl-2"><strong>分别求导</strong>：<Math tex="f'(x)=e^x" />，<Math tex="g'(x)=1" /></p>
+                        <p className="pl-2"><strong>套公式</strong> <Math tex="\dfrac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}" />：</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4"><Math tex="=\dfrac{e^x\cdot x-e^x\cdot 1}{x^2}" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4">提公因式 <Math tex="e^x" />：<Math tex="f'(x)=\dfrac{e^x(x-1)}{x^2}" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold">第二步、代入 <Math tex="x=1" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><Math tex="f'(1)=\dfrac{e^1\cdot(1-1)}{1^2}" /></p>
+                        <p className="pl-2"><Math tex="=\dfrac{e\cdot 0}{1}=0" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2 text-red-700"><strong>⚠️ 对比</strong>：<Math tex="f(1)=\dfrac{e^1}{1}=e" /></p>
+                        <p className="pl-4 text-gray-700"><Math tex="f(1)=e" /> 是<strong>函数值</strong>，<Math tex="f'(1)=0" /> 是<strong>导数值</strong>——看见撇先求导，再代值。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 一句话看穿 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-amber-50">
+                  <div className="px-2 py-1.5">
+                    <p><strong>💡 一句话看穿这节</strong>：<strong>看见分式，就"上导下不导 减 上不导下导，再除以分母的平方"</strong>——顺序不能反、别忘了 <Math tex="g^2" />。</p>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivRulesPractice3} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivRulesPractice3} printOptionCols={2} columns={2} />
+                </div>
+
+                {/* ── 小技巧：分母是常数时不用商法则 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-sky-50">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-sky-100">🛠 小技巧：分母是<strong>常数</strong>，别套商法则</div>
+                  <div className="px-2 py-1 text-[0.9rem] leading-snug [&_p]:!my-0 space-y-0.5">
+                    <p>分母如果是<strong>纯常数</strong>（<Math tex="2,\ e,\ \pi,\ -3" /> …），直接把 <Math tex="\dfrac{1}{\text{分母}}" /> 当系数提外，用<strong>常数倍法则</strong>更快——因为 <Math tex="g'=0" />，商法则会自动退化。</p>
+                    <hr className="border-gray-300" />
+                    <p className="pl-2">例 <Math tex="\left(\dfrac{\sin x}{2}\right)'" />　❌ 硬套商法则：<Math tex="\dfrac{\cos x\cdot 2-\sin x\cdot 0}{2^2}=\dfrac{2\cos x}{4}=\dfrac{\cos x}{2}" /></p>
+                    <p className="pl-2"><span className="invisible">例 <Math tex="\left(\dfrac{\sin x}{2}\right)'" /></span>　✅ 常数倍法则：<Math tex="\tfrac{1}{2}\cdot(\sin x)'=\tfrac{1}{2}\cos x" /><span className="text-gray-700 ml-2">（一步到位）</span></p>
+                    <p><strong>结论</strong>：只有分母是<strong>纯常数</strong>时才能用常数倍法则偷懒；<strong>只要分母含自变量</strong>就老实用商法则。</p>
+                  </div>
+                </div>
+
+                <PageBreak />
+
+                {/* ═══════════════════════════════════════════════════════ */}
+                {/* 2.4 复合函数求导（链式法则）                                 */}
+                {/* ═══════════════════════════════════════════════════════ */}
+                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500 mb-0.5">2.4　复合函数求导（链式法则）</div>
+
+                {/* ── 链式法则速查表 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 链式法则</div>
+                  <table className="w-full border-collapse text-center [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[18%]">法则名</th>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[33%]">公式</th>
+                        <th className="border border-gray-300 px-2 py-0.5">💡 口诀 & 易错警示</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0.5"><strong>链式法则</strong></td>
+                        <td className="border border-gray-300 px-2 py-0.5"><Math tex="[f(g(x))]'=f'(g(x))\cdot g'(x)" /></td>
+                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>外层导数 × 内层导数</strong>（"剥洋葱"——从外往里一层层求）<br />⚠️ 最常见错误：<strong className="text-red-700">只求外层，忘了乘内层的导数</strong>。</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* ── 识别外/内小盒 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-sky-50">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-sky-100">📍 第一步：识别外层 / 内层（拆套娃）</div>
+                  <div className="px-2 py-1 text-[0.9rem] leading-snug [&_p]:!my-0 space-y-0.5">
+                    <p>复合函数就像<strong>套娃</strong>——里面套着另一个函数。求导前先拆清楚谁是外、谁是内，用 <Math tex="u" /> 暂时代表内层。</p>
+                    <hr className="border-gray-300" />
+                    <table className="w-full border-collapse text-center text-[0.85rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="border border-gray-300 px-2 py-0.5">原函数</th>
+                          <th className="border border-gray-300 px-2 py-0.5">外层 <Math tex="f(u)" /></th>
+                          <th className="border border-gray-300 px-2 py-0.5">内层 <Math tex="u=g(x)" /></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td className="border border-gray-300 px-2"><Math tex="\sin(2x+1)" /></td><td className="border border-gray-300 px-2"><Math tex="\sin u" /></td><td className="border border-gray-300 px-2"><Math tex="2x+1" /></td></tr>
+                        <tr><td className="border border-gray-300 px-2"><Math tex="(2x+1)^5" /></td><td className="border border-gray-300 px-2"><Math tex="u^5" /></td><td className="border border-gray-300 px-2"><Math tex="2x+1" /></td></tr>
+                        <tr><td className="border border-gray-300 px-2"><Math tex="e^{x^2}" /></td><td className="border border-gray-300 px-2"><Math tex="e^u" /></td><td className="border border-gray-300 px-2"><Math tex="x^2" /></td></tr>
+                        <tr><td className="border border-gray-300 px-2"><Math tex="\ln(x+1)" /></td><td className="border border-gray-300 px-2"><Math tex="\ln u" /></td><td className="border border-gray-300 px-2"><Math tex="x+1" /></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* ── 详解：链式法则三步走（例 1 + 例 2）── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：链式法则三步走（套公式的标准流程）</div>
+                  <div className="p-2 space-y-1 text-[0.9rem] leading-snug [&_p]:!my-0">
+                    <p><strong>🎯 流程</strong>：① 拆出外 <Math tex="f(u)" /> 和内 <Math tex="u=g(x)" /> → ② 分别求 <Math tex="f'(u)" /> 和 <Math tex="g'(x)" /> → ③ 相乘 <Math tex="f'(g(x))\cdot g'(x)" />。</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold"><strong>例 1</strong>：求 <Math tex="[\sin(2x+1)]'" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>① 拆</strong>：外 <Math tex="f(u)=\sin u" />，内 <Math tex="u=2x+1" /></p>
+                        <p className="pl-2"><strong>② 分别求导</strong>：<Math tex="f'(u)=\cos u" />，<Math tex="g'(x)=2" /></p>
+                        <p className="pl-2"><strong>③ 相乘</strong> <Math tex="f'(g(x))\cdot g'(x)" />：</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4"><Math tex="=\underbrace{\cos(2x+1)}_{\text{外层导}}\cdot\underbrace{2}_{\text{内层导}}" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4">所以 <Math tex="[\sin(2x+1)]'=2\cos(2x+1)" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold"><strong>例 2</strong>：求 <Math tex="[(2x+1)^5]'" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>① 拆</strong>：外 <Math tex="f(u)=u^5" />，内 <Math tex="u=2x+1" /></p>
+                        <p className="pl-2"><strong>② 分别求导</strong>：<Math tex="f'(u)=5u^4" />，<Math tex="g'(x)=2" /></p>
+                        <p className="pl-2"><strong>③ 相乘</strong> <Math tex="f'(g(x))\cdot g'(x)" />：</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4"><Math tex="=\underbrace{5(2x+1)^4}_{\text{外层导}}\cdot\underbrace{2}_{\text{内层导}}" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4">所以 <Math tex="[(2x+1)^5]'=10(2x+1)^4" /></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 💪 随手算两道 ── */}
+                <hr className="border-gray-400" />
+                <div className="text-base print:hidden">
+                  <PracticeCard title="💪 随手算两道" questions={derivRulesWarmup4} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivRulesWarmup4} printOptionCols={2} columns={2} />
+                </div>
+
+                {/* ── 详解：例 3 求导+代值 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　设 <Math tex="f(x)=e^{-x^2}" />，求 <Math tex="f'(1)" /><span className="text-gray-700 font-normal ml-2">——链式法则 + 代值</span></div>
+                  <div className="px-2 pb-2 text-[0.9rem] leading-snug [&_p]:!my-0">
+                    <div className="grid grid-cols-2 gap-x-3">
+                      <div className="space-y-1 pr-3 border-r border-gray-300">
+                        <p className="font-bold">第一步、先求导（链式法则）</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><strong>拆</strong>：外 <Math tex="f(u)=e^u" />，内 <Math tex="u=-x^2" /></p>
+                        <p className="pl-2"><strong>分别求导</strong>：<Math tex="f'(u)=e^u" />，<Math tex="g'(x)=-2x" /></p>
+                        <p className="pl-2"><strong>相乘</strong> <Math tex="f'(g(x))\cdot g'(x)" />：</p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4"><Math tex="=e^{-x^2}\cdot(-2x)" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-4">所以 <Math tex="f'(x)=-2xe^{-x^2}" /></p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="font-bold">第二步、代入 <Math tex="x=1" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2"><Math tex="f'(1)=-2\cdot 1\cdot e^{-1^2}=-2\cdot e^{-1}" /></p>
+                        <p className="pl-2"><Math tex="=-2\cdot\dfrac{1}{e}=-\dfrac{2}{e}" /></p>
+                        <hr className="border-gray-300" />
+                        <p className="pl-2 text-red-700"><strong>⚠️ 对比</strong>：<Math tex="f(1)=e^{-1^2}=\dfrac{1}{e}" /></p>
+                        <p className="pl-4 text-gray-700"><Math tex="f(1)=\tfrac{1}{e}" /> 是<strong>函数值</strong>，<Math tex="f'(1)=-\tfrac{2}{e}" /> 是<strong>导数值</strong>。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 一句话看穿 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-amber-50">
+                  <div className="px-2 py-1.5">
+                    <p><strong>💡 一句话看穿这节</strong>：<strong>看见复合，就"从外往里剥，外层导 × 内层导"</strong>——最怕只写外层忘了乘内层的导数。</p>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivRulesPractice4} explanations={derivativeBasicExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivRulesPractice4} printOptionCols={2} columns={2} />
+                </div>
+
+                {/* ── 法则混合过渡盒（为 §3 切线铺垫）── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-sky-50">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-sky-100">🔗 下一步预热：法则混合</div>
+                  <div className="px-2 py-1 text-[0.9rem] leading-snug [&_p]:!my-0 space-y-0.5">
+                    <p>很多题不止用一个法则——先看<strong>最外层</strong>运算选主法则，内层嵌套其他法则。</p>
+                    <hr className="border-gray-300" />
+                    <p className="pl-2"><strong>例 1</strong> <Math tex="[x\cdot e^{2x}]'" />——外层<strong>乘积</strong>，内层 <Math tex="e^{2x}" /> 再用<strong>链式</strong>：</p>
+                    <p className="pl-4"><Math tex="=1\cdot e^{2x}+x\cdot 2e^{2x}=(1+2x)e^{2x}" /></p>
+                    <hr className="border-gray-300" />
+                    <p className="pl-2"><strong>例 2</strong> <Math tex="\left[\dfrac{\sin(2x)}{x}\right]'" />——外层<strong>商</strong>，内层 <Math tex="\sin(2x)" /> 再用<strong>链式</strong>：</p>
+                    <p className="pl-4"><Math tex="=\dfrac{2\cos(2x)\cdot x-\sin(2x)\cdot 1}{x^2}=\dfrac{2x\cos(2x)-\sin(2x)}{x^2}" /></p>
+                  </div>
+                </div>
+
+                {/* ── 高考说明（2 行）── */}
+                <div className="border border-gray-300 rounded -mt-px bg-yellow-50 px-2 py-1 text-base leading-snug" style={{ breakInside: 'avoid' }}>
+                  <strong>📊 高考说明</strong>：链式法则不单考，<strong>价值在应用</strong>——下一节的<strong>切线方程</strong>、单调性、极值、恒成立等大题都要用。<br />常考形式：<Math tex="\sin(ax+b),\ e^{ax+b},\ \ln(ax+b),\ (ax+b)^n" />。
+                </div>
+
+              </div>
+            </Collapsible>
+          </section>
+
         </div>
-      </div>
-
-      <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 1: 基本导数公式 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <section id="db-formulas" className="mb-2 scroll-mt-4">
-        <Collapsible title="一、基本导数公式 — 🎯 7个必背公式" defaultOpen storageKey="deriv-basic:formulas" headerExtra={<SpeakButton text={derivBasicNarrations.formulas} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* 学前提醒 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🎯 为什么要背公式？</p>
-              <div className="leading-7">
-                <p>求导就像加减乘除一样，是一种<strong>运算</strong></p>
-                <p>加减乘除需要背九九乘法表，求导也需要背<strong>基本公式</strong></p>
-                <p className="text-blue-700 mt-1">好消息：高中只需要背 <strong>7 个</strong>公式，比九九乘法表少多了！</p>
-              </div>
-            </div>
-
-            {/* 7个公式 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📐 七大基本导数公式</p>
-              <div className="space-y-0">
-
-                {/* 公式1: 常数 */}
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <div className="grid grid-cols-2 gap-3 items-center">
-                    <div>
-                      <p className="font-bold text-gray-700">① 常数</p>
-                      <div className="bg-white rounded p-2 text-center my-1">
-                        <Math tex="(C)' = 0" />
-                      </div>
-                    </div>
-                    <div className="leading-7">
-                      <p>常数不会变化 → 变化率为 0</p>
-                      <p className="text-gray-500">例：<Math tex="(5)' = 0,\; (\pi)' = 0" /></p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 公式2: 幂函数 */}
-                <div className="bg-amber-50 rounded-lg p-2">
-                  <div className="grid grid-cols-2 gap-3 items-center">
-                    <div>
-                      <p className="font-bold text-amber-700">② 幂函数 ⭐最常用</p>
-                      <div className="bg-white rounded p-2 text-center my-1">
-                        <Math tex="(x^n)' = nx^{n-1}" />
-                      </div>
-                    </div>
-                    <div className="leading-7">
-                      <p>口诀：<strong>指数下来当系数，指数减一</strong></p>
-                      <p className="text-gray-500">例：<Math tex="(x^5)' = 5x^4" /></p>
-                      <p className="text-gray-500"><Math tex="(x^{-1})' = -x^{-2} = -\dfrac{1}{x^2}" /></p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 公式3-4: 指数函数 */}
-                <div className="bg-green-50 rounded-lg p-2">
-                  <div className="grid grid-cols-2 gap-3 items-center">
-                    <div>
-                      <p className="font-bold text-green-700">③④ 指数函数</p>
-                      <div className="bg-white rounded p-2 text-center my-1 space-y-1">
-                        <p><Math tex="(e^x)' = e^x" /></p>
-                        <p><Math tex="(a^x)' = a^x \ln a" /></p>
-                      </div>
-                    </div>
-                    <div className="leading-7">
-                      <p><Math tex="e^x" /> 求导<strong>等于自己</strong>（唯一！）</p>
-                      <p className="text-gray-500"><Math tex="a^x" /> 多乘一个 <Math tex="\ln a" /></p>
-                      <p className="text-gray-500">例：<Math tex="(2^x)' = 2^x \ln 2" /></p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 公式5-6: 对数函数 */}
-                <div className="bg-blue-50 rounded-lg p-2">
-                  <div className="grid grid-cols-2 gap-3 items-center">
-                    <div>
-                      <p className="font-bold text-blue-700">⑤⑥ 对数函数</p>
-                      <div className="bg-white rounded p-2 text-center my-1 space-y-1">
-                        <p><Math tex="(\ln x)' = \dfrac{1}{x}" /></p>
-                        <p><Math tex="(\log_a x)' = \dfrac{1}{x \ln a}" /></p>
-                      </div>
-                    </div>
-                    <div className="leading-7">
-                      <p><Math tex="\ln x" /> 和 <Math tex="e^x" /> 是"逆运算"</p>
-                      <p className="text-gray-500">一个导数是自己，一个导数是倒数</p>
-                      <p className="text-gray-500">例：<Math tex="(\log_2 x)' = \dfrac{1}{x \ln 2}" /></p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 公式7: 三角函数 */}
-                <div className="bg-purple-50 rounded-lg p-2">
-                  <div className="grid grid-cols-2 gap-3 items-center">
-                    <div>
-                      <p className="font-bold text-purple-700">⑦ 三角函数</p>
-                      <div className="bg-white rounded p-2 text-center my-1 space-y-1">
-                        <p><Math tex="(\sin x)' = \cos x" /></p>
-                        <p><Math tex="(\cos x)' = -\sin x" /></p>
-                      </div>
-                    </div>
-                    <div className="leading-7">
-                      <p>口诀：<strong>正弦变余弦，余弦变负正弦</strong></p>
-                      <p className="text-red-600 font-bold">注意：cos 求导带负号！</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-2 leading-7">
-              <p><strong>💡 记忆技巧：</strong>常数 ➜ 0，<Math tex="e^x" /> ➜ 自己，幂函数 ➜ 指数下来减一，<Math tex="\cos x" /> 求导别忘<strong className="text-red-600">负号</strong></p>
-            </div>
-
-            {/* 记忆口诀 */}
-            <PageBreak />
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">💡 补充：根式也是幂函数</p>
-              <div className="leading-7">
-                <p>根号本质上就是分数指数，可以直接用幂函数公式求导：</p>
-                <div className="grid grid-cols-2 gap-3 mt-1">
-                  <div className="bg-white rounded-lg p-2">
-                    <p className="font-bold text-amber-700"><Math tex="\sqrt{x} = x^{\frac{1}{2}}" /></p>
-                    <p><Math tex="(\sqrt{x})' = \dfrac{1}{2}x^{-\frac{1}{2}} = \dfrac{1}{2\sqrt{x}}" /></p>
-                  </div>
-                  <div className="bg-white rounded-lg p-2">
-                    <p className="font-bold text-amber-700"><Math tex="\dfrac{1}{x} = x^{-1}" /></p>
-                    <p><Math tex="\left(\dfrac{1}{x}\right)' = -x^{-2} = -\dfrac{1}{x^2}" /></p>
-                  </div>
-                </div>
-                <p className="text-amber-700 mt-1"><strong>规律</strong>：遇到根号或分式 → 先改写成 <Math tex="x^n" /> 形式 → 再套公式「指数下来减一」</p>
-              </div>
-            </div>
-
-            {/* 练习 */}
-            <PracticeCard
-              title="✏️ 即时练习：基本导数公式（8题）"
-              questions={derivBasicPractice1}
-              printOptionCols={2}
-              explanations={derivativeBasicExplanations}
-            />
-
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 2: 求导法则 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="db-rules" className="mb-2 scroll-mt-4">
-        <Collapsible title="二、求导法则 — 🎯 组合拳" defaultOpen storageKey="deriv-basic:rules" headerExtra={<SpeakButton text={derivBasicNarrations.rules} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* 引入 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🔧 为什么需要法则？</p>
-              <div className="leading-7">
-                <p>实际函数通常是<strong>多个基本函数的组合</strong></p>
-                <p>比如 <Math tex="f(x) = 3x^2 + 2\sin x - e^x" /> 就是加减组合</p>
-                <p className="text-blue-700 mt-1">求导法则 = <strong>怎么对"组合函数"求导</strong></p>
-              </div>
-            </div>
-
-            {/* 法则1: 和差 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📐 法则一：和差法则（最简单）</p>
-              <div className="grid grid-cols-2 gap-3 items-start">
-                <div className="bg-gray-50 rounded-lg p-2 text-center">
-                  <Math tex="[f(x) \pm g(x)]' = f'(x) \pm g'(x)" />
-                  <p className="mt-1 text-gray-500"><Math tex="[cf(x)]' = cf'(x)" /></p>
-                </div>
-                <div className="leading-7">
-                  <p><strong>分别求导，再加减</strong></p>
-                  <p><strong>例</strong>：<Math tex="(3x^2 + 2x - 1)'" /></p>
-                  <p><Math tex="= 6x + 2" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 法则2: 积 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">📐 法则二：积的求导法则</p>
-              <div className="grid grid-cols-2 gap-3 items-start">
-                <div className="bg-white rounded-lg p-2 text-center">
-                  <Math tex="[f(x) \cdot g(x)]'" />
-                  <p><Math tex="= f'g + fg'" /></p>
-                </div>
-                <div className="leading-7">
-                  <p>口诀：<strong>前导后不动 + 前不动后导</strong></p>
-                  <p><strong>例</strong>：<Math tex="(x \cdot e^x)' = (1+x)e^x" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 法则3: 商 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">📐 法则三：商的求导法则</p>
-              <div className="grid grid-cols-2 gap-3 items-start">
-                <div className="bg-white rounded-lg p-2 text-center">
-                  <Math tex="\left(\dfrac{f}{g}\right)' = \dfrac{f'g - fg'}{g^2}" />
-                </div>
-                <div className="leading-7">
-                  <p>口诀：<strong>子导母减子母导，母平方作分母</strong></p>
-                  <p><strong>例</strong>：<Math tex="\left(\dfrac{x}{x+1}\right)' = \dfrac{1}{(x+1)^2}" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 法则4: 复合函数 */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">📐 法则四：复合函数求导（链式法则）⭐高考重点</p>
-              <div className="grid grid-cols-2 gap-3 items-start">
-                <div className="bg-white rounded-lg p-2 text-center">
-                  <Math tex="[f(g(x))]' = f'(g(x)) \cdot g'(x)" />
-                </div>
-                <div className="leading-7">
-                  <p>口诀：<strong>从外到内，逐层求导，结果相乘</strong></p>
-                  <p><strong>例1</strong>：<Math tex="(e^{2x})' = 2e^{2x}" /></p>
-                  <p><strong>例2</strong>：<Math tex="[(2x+1)^3]' = 6(2x+1)^2" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 实战例题 */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-                <p className="font-bold text-green-800 mb-1">🎯 实战例题：综合求导</p>
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = x^2 e^x" /> 的导数</p>
-                  <p className="mt-1"><strong>解题</strong>：用积的法则</p>
-                  <p><Math tex="f'(x) = (x^2)' \cdot e^x + x^2 \cdot (e^x)'" /></p>
-                  <p><Math tex="= 2x \cdot e^x + x^2 \cdot e^x" /></p>
-                  <p><Math tex="= (2x + x^2) e^x = x(x+2)e^x" /></p>
-                  <p className="text-green-700 font-bold mt-1">技巧：结果提公因式整理，方便后续分析单调性</p>
-                </div>
-              </div>
-              <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-                <p className="font-bold text-green-800 mb-1">🎯 实战例题：链式法则</p>
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = \ln(2x + 1)" /> 的导数</p>
-                  <p className="mt-1"><strong>解题</strong>：令 <Math tex="u = 2x + 1" /></p>
-                  <p>外层 <Math tex="\ln u" /> → 导数 <Math tex="\dfrac{1}{u}" /></p>
-                  <p>内层 <Math tex="u = 2x + 1" /> → 导数 2</p>
-                  <p><Math tex="f'(x) = \dfrac{1}{2x+1} \times 2 = \dfrac{2}{2x+1}" /></p>
-                  <p className="text-red-600 mt-1"><strong>注意</strong>：定义域需 <Math tex="2x+1 > 0" />，即 <Math tex="x > -\dfrac{1}{2}" /></p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-                <p className="font-bold text-amber-800 mb-1">🎯 实战例题：商的法则</p>
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = \dfrac{e^x}{x}" /> 的导数</p>
-                  <p className="mt-1"><strong>解题</strong>：用商的法则</p>
-                  <p><Math tex="f'(x) = \dfrac{(e^x)' \cdot x - e^x \cdot (x)'}{x^2}" /></p>
-                  <p><Math tex="= \dfrac{xe^x - e^x}{x^2} = \dfrac{(x-1)e^x}{x^2}" /></p>
-                </div>
-              </div>
-              <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-                <p className="font-bold text-red-800 mb-1">🎯 实战例题：积 + 链式混合</p>
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = x \cdot e^{2x}" /> 的导数</p>
-                  <p className="mt-1"><strong>解题</strong>：先积后链式</p>
-                  <p><Math tex="f'(x) = 1 \cdot e^{2x} + x \cdot (e^{2x})'" /></p>
-                  <p><Math tex="= e^{2x} + x \cdot 2e^{2x} = (1+2x)e^{2x}" /></p>
-                </div>
-              </div>
-            </div>
-
-
-            {/* 练习 */}
-            <PageBreak />
-            <PracticeCard
-              title="✏️ 即时练习：求导法则（6题）"
-              questions={derivBasicPractice2}
-              printOptionCols={2}
-              explanations={derivativeBasicExplanations}
-            />
-
-            <BigQuestionCard
-              questionLatex="\text{已知 }f(x) = x^2 \ln x\\[6pt]\text{（1）求 }f'(x)\\[4pt]\text{（2）求曲线 }y = f(x)\text{ 在 }x = 1\text{ 处的切线方程}"
-              solutionLatex="\textbf{（1）求导}\\[4pt]f'(x) = (x^2)' \cdot \ln x + x^2 \cdot (\ln x)'\\[4pt]= 2x \ln x + x^2 \cdot \dfrac{1}{x} = 2x\ln x + x\\[8pt]\textbf{（2）切线方程}\\[4pt]f(1) = 1^2 \cdot \ln 1 = 0\text{，切点为 }(1, 0)\\[4pt]f'(1) = 2 \times 1 \times \ln 1 + 1 = 1\text{（斜率）}\\[4pt]y - 0 = 1 \times (x - 1)\\[4pt]\boxed{y = x - 1}"
-            />
-
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 3: 导数与单调性 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="db-monotone" className="mb-2 scroll-mt-4">
-        <Collapsible title="三、导数与单调性 — 🎯 大题第一问" defaultOpen storageKey="deriv-basic:monotone" headerExtra={<SpeakButton text={derivBasicNarrations.monotone} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* ═══ P1: 核心概念 + 四步法 + 例1(二次) ═══ */}
-
-            {/* 直觉理解 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🧠 为什么导数能判断单调性？</p>
-              <div className="leading-7">
-                <p>导数 = <strong>变化率</strong>（函数值变化的速度）</p>
-                <p>变化率 &gt; 0 ➜ 函数值在<strong>增大</strong> ➜ 图像在<strong>上升</strong></p>
-                <p>变化率 &lt; 0 ➜ 函数值在<strong>减小</strong> ➜ 图像在<strong>下降</strong></p>
-              </div>
-            </div>
-
-            {/* 核心定理 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">🔑 核心定理（必背）</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div className="bg-white rounded-lg p-2 text-center">
-                  <p className="font-bold text-green-700"><Math tex="f'(x) > 0" /></p>
-                  <p>函数 <strong>单调递增</strong> ↗</p>
-                  <p className="text-gray-500">导数为正 → 上升</p>
-                </div>
-                <div className="bg-white rounded-lg p-2 text-center">
-                  <p className="font-bold text-red-600"><Math tex="f'(x) < 0" /></p>
-                  <p>函数 <strong>单调递减</strong> ↘</p>
-                  <p className="text-gray-500">导数为负 → 下降</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 求单调区间步骤 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📐 求单调区间四步法</p>
-              <div className="grid grid-cols-4 gap-2 text-center leading-7">
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第一步</p>
-                  <p>求 <Math tex="f'(x)" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第二步</p>
-                  <p>令 <Math tex="f'(x) = 0" /></p>
-                  <p>解出零点</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第三步</p>
-                  <p>列表分析符号</p>
-                  <p>正/负/零</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第四步</p>
-                  <p>写出单调区间</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 例1: 二次函数（最简单，1个零点） */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题1：二次函数（最简单）</p>
-              <div className="grid grid-cols-2 gap-3 items-start">
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = x^2 - 4x" /> 的单调区间</p>
-                  <p className="mt-1"><strong>第一步</strong>：<Math tex="f'(x) = 2x - 4" /></p>
-                  <p><strong>第二步</strong>：令 <Math tex="f'(x) = 0" /> ➜ <Math tex="x = 2" /></p>
-                  <p className="mt-1"><strong>第三步</strong>：只有1个零点，分成2段</p>
-                </div>
-                <div className="leading-7">
-                  <table className="w-full text-base border-collapse">
-                    <thead>
-                      <tr className="bg-green-100">
-                        <th className="border border-green-200 px-2 py-0.5 text-green-700"><Math tex="x" /></th>
-                        <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(-\infty, 2)" /></th>
-                        <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="2" /></th>
-                        <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(2, +\infty)" /></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f'(x)" /></td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center text-red-600 font-bold">−</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center">0</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center text-green-600 font-bold">+</td>
-                      </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f(x)" /></td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center">↘ 递减</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center">极小</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center">↗ 递增</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p className="mt-1"><strong>第四步</strong>：递减 <Math tex="(-\infty, 2)" />，递增 <Math tex="(2, +\infty)" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 怎么判断符号 */}
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">💡 怎么判断每段的正负号？</p>
-              <div className="leading-7">
-                <p><strong>方法：在每段区间里取一个简单的数代入 <Math tex="f'(x)" /></strong></p>
-                <p>上面例题：<Math tex="f'(x) = 2x - 4" />，零点 <Math tex="x = 2" /></p>
-                <div className="grid grid-cols-2 gap-3 mt-1">
-                  <div className="bg-white rounded-lg p-2">
-                    <p>取 <Math tex="x = 0" />（在 <Math tex="(-\infty, 2)" /> 里）</p>
-                    <p><Math tex="f'(0) = -4 < 0" /> ➜ <strong className="text-red-600">负号</strong></p>
-                  </div>
-                  <div className="bg-white rounded-lg p-2">
-                    <p>取 <Math tex="x = 3" />（在 <Math tex="(2, +\infty)" /> 里）</p>
-                    <p><Math tex="f'(3) = 2 > 0" /> ➜ <strong className="text-green-600">正号</strong></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 常见疑问 */}
-            <CalloutCard variant="info" title="❓ 常见疑问" compact>
-              <div className="space-y-0.5 leading-7">
-                <p><strong>Q：零点处 <Math tex="f'(x) = 0" />，函数在增还是在减？</strong></p>
-                <p>A：零点处是"转折点"，既不增也不减。只需关注零点<strong>两侧</strong>的区间</p>
-                <p><strong>Q：<Math tex="f'(x)" /> 的零点有几个，就分成几段？</strong></p>
-                <p>A：<strong>n 个零点分成 n+1 段</strong>。1个零点 → 2段，2个零点 → 3段</p>
-                <p><strong>Q：取点代入时，取什么数最方便？</strong></p>
-                <p>A：取 <strong>0、1、-1</strong> 等最简单的整数，只要落在对应区间内就行</p>
-              </div>
-            </CalloutCard>
-
-            <div className="bg-gray-50 rounded-lg p-2 leading-7">
-              <p><strong>💡 本页小结：</strong>导数正 ➜ 递增，导数负 ➜ 递减。四步法：求导 ➜ 令=0 ➜ 列表（取点代入判正负）➜ 写区间</p>
-            </div>
-
-            {/* ═══ P2: 例2(三次) + 例3(xe^x) + 注意事项 ═══ */}
-            <PageBreak />
-
-            {/* 例2: 三次函数（2个零点） */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题2：三次函数（2个零点）</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：求 <Math tex="f(x) = x^3 - 3x" /> 的单调区间</p>
-                <p className="mt-1"><strong>第一步</strong>：<Math tex="f'(x) = 3x^2 - 3 = 3(x+1)(x-1)" /></p>
-                <p><strong>第二步</strong>：令 <Math tex="f'(x) = 0" /> ➜ <Math tex="x = -1" /> 或 <Math tex="x = 1" />（2个零点，分成3段）</p>
-                <p className="mt-1"><strong>第三步</strong>：列表</p>
-                <table className="w-full text-base border-collapse mt-1 mb-1">
-                  <thead>
-                    <tr className="bg-green-100">
-                      <th className="border border-green-200 px-2 py-0.5 text-green-700"><Math tex="x" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(-\infty, -1)" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="-1" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(-1, 1)" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="1" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(1, +\infty)" /></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f'(x)" /></td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center text-green-600 font-bold">+</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">0</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center text-red-600 font-bold">−</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">0</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center text-green-600 font-bold">+</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f(x)" /></td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">↗ 递增</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">极大</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">↘ 递减</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">极小</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">↗ 递增</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p><strong>第四步</strong>：递增区间 <Math tex="(-\infty, -1)" /> 和 <Math tex="(1, +\infty)" />，递减区间 <Math tex="(-1, 1)" /></p>
-              </div>
-            </div>
-
-            {/* 例3: xe^x（高考常考） */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">🎯 例题3：含 <Math tex="e^x" /> 的函数 ⭐高考必考</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：求 <Math tex="f(x) = xe^x" /> 的单调区间</p>
-                <p className="mt-1"><strong>第一步</strong>：<Math tex="f'(x) = e^x + xe^x = (1+x)e^x" />（积的法则）</p>
-                <p><strong>第二步</strong>：令 <Math tex="f'(x) = 0" /></p>
-                <div className="bg-white rounded-lg p-2 my-1">
-                  <p>🔑 <strong>关键技巧</strong>：<Math tex="e^x > 0" /> 恒成立（永远为正！）</p>
-                  <p>所以 <Math tex="(1+x)e^x = 0" /> 只需 <Math tex="1+x = 0" /> ➜ <Math tex="x = -1" /></p>
-                </div>
-                <p><strong>第三步</strong>：因为 <Math tex="e^x > 0" />，符号只看 <Math tex="(1+x)" /></p>
-                <div className="grid grid-cols-2 gap-3 mt-1">
-                  <div className="bg-white rounded-lg p-2 text-center">
-                    <p><Math tex="x < -1" /> ➜ <Math tex="1+x < 0" /></p>
-                    <p><Math tex="f'(x) < 0" />，<strong className="text-red-600">递减</strong> ↘</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-2 text-center">
-                    <p><Math tex="x > -1" /> ➜ <Math tex="1+x > 0" /></p>
-                    <p><Math tex="f'(x) > 0" />，<strong className="text-green-600">递增</strong> ↗</p>
-                  </div>
-                </div>
-                <p className="mt-1"><strong>第四步</strong>：递减 <Math tex="(-\infty, -1)" />，递增 <Math tex="(-1, +\infty)" /></p>
-              </div>
-            </div>
-
-            {/* 高考注意 + 规律总结 */}
-            <div className="grid grid-cols-2 gap-3">
-              <CalloutCard variant="warning" title="⚠️ 高考注意" compact>
-                <div className="space-y-0.5">
-                  <p><strong>单调区间不能用"并集"连接！</strong></p>
-                  <p>✓ 递增区间为 <Math tex="(-\infty, -1)" /> 和 <Math tex="(1, +\infty)" /></p>
-                  <p>✗ <Math tex="(-\infty, -1) \cup (1, +\infty)" />（扣分！）</p>
-                  <p className="text-gray-600">反例：<Math tex="f(x) = \dfrac{1}{x}" /> 在 <Math tex="(-\infty,0)" /> 和 <Math tex="(0,+\infty)" /> 上都递减，但 <Math tex="f(-1) &lt; f(1)" />，合并后不满足递减定义</p>
-                </div>
-              </CalloutCard>
-              <CalloutCard variant="tip" title="💡 e^x 类题技巧" compact>
-                <div className="space-y-0.5">
-                  <p><strong><Math tex="e^x > 0" /> 恒正</strong>，可以直接忽略</p>
-                  <p>只需看另一个因子的正负</p>
-                  <p>如 <Math tex="(x-a)e^x" />，符号只取决于 <Math tex="x-a" /></p>
-                </div>
-              </CalloutCard>
-            </div>
-
-            {/* 三类题型对比 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📋 三类题型对比总结</p>
-              <table className="w-full text-base border-collapse">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border border-gray-200 px-2 py-0.5 text-left">题型</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-left">函数</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-left">零点个数</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-left">分段</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-left">难点</th>
-                  </tr>
-                </thead>
-                <tbody className="leading-7">
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-0.5">二次</td>
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="x^2 - 4x" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5">1个</td>
-                    <td className="border border-gray-200 px-2 py-0.5">2段</td>
-                    <td className="border border-gray-200 px-2 py-0.5">最简单</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-0.5">三次</td>
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="x^3 - 3x" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5">2个</td>
-                    <td className="border border-gray-200 px-2 py-0.5">3段</td>
-                    <td className="border border-gray-200 px-2 py-0.5">列表要3行</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="e^x" /> 类</td>
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="xe^x" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5">1个</td>
-                    <td className="border border-gray-200 px-2 py-0.5">2段</td>
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="e^x" /> 恒正可忽略</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* 实战练习预热 */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-                <p className="font-bold text-amber-800 mb-1">🎯 变式练习：你来试试</p>
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = x^3 - 6x^2 + 9x" /> 的单调区间</p>
-                  <p className="mt-1 text-amber-700"><strong>提示</strong>：<Math tex="f'(x) = 3x^2 - 12x + 9" /></p>
-                  <p className="text-amber-700">先因式分解，再列表</p>
-                  <p className="mt-1 text-gray-500">答案：递增 <Math tex="(-\infty, 1)" /> 和 <Math tex="(3, +\infty)" /></p>
-                  <p className="text-gray-500">递减 <Math tex="(1, 3)" /></p>
-                </div>
-              </div>
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-                <p className="font-bold text-amber-800 mb-1">🎯 变式练习：<Math tex="e^x" /> 类</p>
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = (x-1)e^x" /> 的单调区间</p>
-                  <p className="mt-1 text-amber-700"><strong>提示</strong>：<Math tex="f'(x) = xe^x" /></p>
-                  <p className="text-amber-700"><Math tex="e^x > 0" />，只看 <Math tex="x" /> 的正负</p>
-                  <p className="mt-1 text-gray-500">答案：递减 <Math tex="(-\infty, 0)" /></p>
-                  <p className="text-gray-500">递增 <Math tex="(0, +\infty)" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* ═══ P3: 练习 + 大题 ═══ */}
-            <PageBreak />
-            <PracticeCard
-              title="✏️ 即时练习：导数与单调性（7题）"
-              questions={derivBasicPractice3}
-              printOptionCols={2}
-              explanations={derivativeBasicExplanations}
-            />
-
-            <BigQuestionCard
-              questionLatex="\text{已知 }f(x) = x^3 - 3x^2 - 9x + 5\\[6pt]\text{（1）求 }f(x)\text{ 的单调递增区间}\\[4pt]\text{（2）求 }f(x)\text{ 在 }[-2, 2]\text{ 上的最大值}"
-              solutionLatex="\textbf{（1）求单调递增区间}\\[4pt]f'(x) = 3x^2 - 6x - 9 = 3(x^2 - 2x - 3) = 3(x-3)(x+1)\\[4pt]\text{令 }f'(x) = 0 \implies x = -1 \text{ 或 } x = 3\\[4pt]\text{当 }x < -1\text{ 时，}f'(x) > 0\text{（递增）}\\[4pt]\text{当 }-1 < x < 3\text{ 时，}f'(x) < 0\text{（递减）}\\[4pt]\text{当 }x > 3\text{ 时，}f'(x) > 0\text{（递增）}\\[4pt]\boxed{\text{递增区间为 }(-\infty, -1)\text{ 和 }(3, +\infty)}\\[8pt]\textbf{（2）在 }[-2, 2]\textbf{ 上的最大值}\\[4pt]\text{在 }[-2, 2]\text{ 内，}x = -1\text{ 是极大值点}\\[4pt]f(-2) = -8 - 12 + 18 + 5 = 3\\[4pt]f(-1) = -1 - 3 + 9 + 5 = 10\\[4pt]f(2) = 8 - 12 - 18 + 5 = -17\\[4pt]\text{比较：}f(-1) = 10 > f(-2) = 3 > f(2) = -17\\[4pt]\boxed{\text{最大值为 }10\text{，在 }x = -1\text{ 处取得}}"
-              lines={6}
-            />
-
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 4: 极值与最值 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="db-extrema" className="mb-2 scroll-mt-4">
-        <Collapsible title="四、极值与最值 — 🎯 大题必考" defaultOpen storageKey="deriv-basic:extrema" headerExtra={<SpeakButton text={derivBasicNarrations.extrema} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* ═══ P1: 概念 + 判定 + 三步法 + 例1(二次) ═══ */}
-
-            {/* 直觉理解 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🧠 什么是极值？</p>
-              <div className="leading-7">
-                <p><strong>极大值</strong>：函数在某点"附近"达到的<strong>局部最高点</strong>（像山顶 🏔️）</p>
-                <p><strong>极小值</strong>：函数在某点"附近"达到的<strong>局部最低点</strong>（像谷底 🏞️）</p>
-                <p className="text-blue-700 mt-1"><strong>注意</strong>：极大值<strong>不一定</strong>比极小值大！想象一下：一座小山丘的顶（极大值=5）比旁边一个深谷的底（极小值=2）大，但另一座更高的山上的谷底（极小值=100）却比这个山顶大得多</p>
-              </div>
-            </div>
-
-            {/* 极值判定 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">🔑 极值点判定方法</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div className="bg-white rounded-lg p-2">
-                  <p className="font-bold text-green-700 text-center">极大值点</p>
-                  <p><Math tex="f'(x)" /> 从 <strong className="text-green-600">正</strong> 变 <strong className="text-red-600">负</strong></p>
-                  <p>↗ 到 ↘ = 山顶</p>
-                </div>
-                <div className="bg-white rounded-lg p-2">
-                  <p className="font-bold text-red-600 text-center">极小值点</p>
-                  <p><Math tex="f'(x)" /> 从 <strong className="text-red-600">负</strong> 变 <strong className="text-green-600">正</strong></p>
-                  <p>↘ 到 ↗ = 谷底</p>
-                </div>
-              </div>
-              <p className="text-amber-700 mt-1 text-center font-bold">关键词：<strong>变号</strong>！不变号 ≠ 极值点</p>
-            </div>
-
-            {/* 求极值步骤 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📐 求极值三步法</p>
-              <div className="grid grid-cols-3 gap-2 text-center leading-7">
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第一步</p>
-                  <p>求 <Math tex="f'(x)" /></p>
-                  <p>令 <Math tex="f'(x) = 0" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第二步</p>
-                  <p>列表看两侧符号</p>
-                  <p>是否变号</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第三步</p>
-                  <p>代入求极值</p>
-                  <p><Math tex="f(x_0) = ?" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 例1: 二次函数（最简单） */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题1：二次函数求极值（最简单）</p>
-              <div className="grid grid-cols-2 gap-3 items-start">
-                <div className="leading-7">
-                  <p><strong>题目</strong>：求 <Math tex="f(x) = -x^2 + 4x + 1" /> 的极值</p>
-                  <p className="mt-1"><strong>第一步</strong>：<Math tex="f'(x) = -2x + 4" /></p>
-                  <p>令 <Math tex="f'(x) = 0" /> ➜ <Math tex="x = 2" /></p>
-                  <p className="mt-1"><strong>第二步</strong>：列表看变号</p>
-                </div>
-                <div className="leading-7">
-                  <table className="w-full text-base border-collapse">
-                    <thead>
-                      <tr className="bg-green-100">
-                        <th className="border border-green-200 px-2 py-0.5 text-green-700"><Math tex="x" /></th>
-                        <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(-\infty, 2)" /></th>
-                        <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="2" /></th>
-                        <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(2, +\infty)" /></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f'(x)" /></td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center text-green-600 font-bold">+</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center">0</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center text-red-600 font-bold">−</td>
-                      </tr>
-                      <tr className="bg-gray-50">
-                        <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f(x)" /></td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center">↗ 递增</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center font-bold text-green-700">极大</td>
-                        <td className="border border-gray-200 px-2 py-0.5 text-center">↘ 递减</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p className="mt-1"><strong>第三步</strong>：<Math tex="f'(x)" /> 从正→负 = 极大值</p>
-                  <p className="text-green-700 font-bold"><Math tex="f(2) = -4 + 8 + 1 = 5" />（极大值）</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 概念区分 */}
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">💡 易混概念辨析</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div className="bg-white rounded-lg p-2">
-                  <p className="font-bold text-purple-700">极值点 vs 极值</p>
-                  <p><strong>极值点</strong>是 x 的值（自变量）</p>
-                  <p><strong>极值</strong>是 f(x) 的值（函数值）</p>
-                  <p className="text-gray-500">上例：极大值<strong>点</strong>是 x=2，极大<strong>值</strong>是 5</p>
-                </div>
-                <div className="bg-white rounded-lg p-2">
-                  <p className="font-bold text-purple-700">极大值 vs 最大值</p>
-                  <p><strong>极大值</strong>：局部最高（附近的山顶）</p>
-                  <p><strong>最大值</strong>：全局最高（整座山脉最高峰）</p>
-                  <p className="text-gray-500">函数可能有多个极大值，但最大值只有一个</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 记忆口诀 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">📌 记忆口诀</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div className="bg-white rounded-lg p-2 text-center">
-                  <p className="text-lg font-bold text-green-700">正 → 负 = 极<span className="text-red-600">大</span></p>
-                  <p>先增后减 → <strong>山顶</strong>（最高点）</p>
-                  <p className="text-gray-500">像爬山，上去再下来</p>
-                </div>
-                <div className="bg-white rounded-lg p-2 text-center">
-                  <p className="text-lg font-bold text-red-600">负 → 正 = 极<span className="text-green-700">小</span></p>
-                  <p>先减后增 → <strong>谷底</strong>（最低点）</p>
-                  <p className="text-gray-500">像下坡，下去再上来</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 变式练习 */}
-            <div className="bg-gray-50 rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">🎯 你来试试：求 <Math tex="f(x) = x^2 - 6x + 5" /> 的极值</p>
-              <div className="leading-7">
-                <p className="text-gray-600"><strong>提示</strong>：<Math tex="f'(x) = 2x - 6" />，令 <Math tex="f'(x) = 0" /> ➜ <Math tex="x = 3" /></p>
-                <p className="text-gray-500">答案：<Math tex="x = 3" /> 处取极小值 <Math tex="f(3) = 9 - 18 + 5 = -4" />（f' 从负→正）</p>
-              </div>
-            </div>
-
-            {/* ═══ P2: 例2(三次求极值) + 闭区间最值 + 例3 + 陷阱 ═══ */}
-            <PageBreak />
-
-            {/* 例2: 三次函数求极值 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题2：三次函数求极值（2个极值点）</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：求 <Math tex="f(x) = x^3 - 3x" /> 的极值</p>
-                <p className="mt-1"><strong>第一步</strong>：<Math tex="f'(x) = 3x^2 - 3 = 3(x+1)(x-1)" />，令 <Math tex="f'(x) = 0" /> ➜ <Math tex="x = -1" /> 或 <Math tex="x = 1" /></p>
-                <p><strong>第二步</strong>：列表</p>
-                <table className="w-full text-base border-collapse mt-1 mb-1">
-                  <thead>
-                    <tr className="bg-green-100">
-                      <th className="border border-green-200 px-2 py-0.5 text-green-700"><Math tex="x" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(-\infty, -1)" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="-1" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(-1, 1)" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="1" /></th>
-                      <th className="border border-green-200 px-2 py-0.5 text-center text-green-700"><Math tex="(1, +\infty)" /></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f'(x)" /></td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center text-green-600 font-bold">+</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">0</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center text-red-600 font-bold">−</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">0</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center text-green-600 font-bold">+</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="border border-gray-200 px-2 py-0.5 font-bold text-green-700"><Math tex="f(x)" /></td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">↗</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center font-bold text-green-700">极大</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">↘</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center font-bold text-red-600">极小</td>
-                      <td className="border border-gray-200 px-2 py-0.5 text-center">↗</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p><strong>第三步</strong>：极大值 <Math tex="f(-1) = -1 + 3 = 2" />，极小值 <Math tex="f(1) = 1 - 3 = -2" /></p>
-              </div>
-            </div>
-
-            {/* 闭区间最值 */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">⭐ 闭区间最值（高考高频题型）</p>
-              <div className="leading-7">
-                <p><strong>闭区间 <Math tex="[a, b]" /> 上的最值</strong> = 比较以下所有值，取最大/最小：</p>
-                <div className="grid grid-cols-3 gap-2 mt-1 text-center">
-                  <div className="bg-white rounded-lg p-2">
-                    <p className="font-bold">左端点</p>
-                    <p><Math tex="f(a)" /></p>
-                  </div>
-                  <div className="bg-white rounded-lg p-2">
-                    <p className="font-bold">区间内所有极值</p>
-                    <p><Math tex="f(x_i)" /></p>
-                  </div>
-                  <div className="bg-white rounded-lg p-2">
-                    <p className="font-bold">右端点</p>
-                    <p><Math tex="f(b)" /></p>
-                  </div>
-                </div>
-                <p className="text-red-700 font-bold mt-1">端点值别忘算！最值经常在端点处取得</p>
-              </div>
-            </div>
-
-            {/* 例3: 闭区间最值 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题3：闭区间上的最值</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：求 <Math tex="f(x) = x^3 - 3x" /> 在 <Math tex="[-2, 2]" /> 上的最大值和最小值</p>
-                <p className="mt-1">由例题2已知：极大值 <Math tex="f(-1) = 2" />，极小值 <Math tex="f(1) = -2" /></p>
-                <p>再算端点值：<Math tex="f(-2) = -8+6 = -2" />，<Math tex="f(2) = 8-6 = 2" /></p>
-                <p className="mt-1">比较所有值：</p>
-                <div className="grid grid-cols-4 gap-2 mt-1 text-center">
-                  <div className="bg-white rounded-lg p-1"><p className="font-bold">f(−2)</p><p>−2</p></div>
-                  <div className="bg-white rounded-lg p-1 border-2 border-green-400"><p className="font-bold text-green-700">f(−1)</p><p className="text-green-700 font-bold">2 ✓最大</p></div>
-                  <div className="bg-white rounded-lg p-1 border-2 border-red-400"><p className="font-bold text-red-600">f(1)</p><p className="text-red-600 font-bold">−2 ✓最小</p></div>
-                  <div className="bg-white rounded-lg p-1"><p className="font-bold">f(2)</p><p>2</p></div>
-                </div>
-                <p className="mt-1 text-green-700 font-bold">最大值 = 2（在 x=−1 和 x=2 处取得），最小值 = −2</p>
-              </div>
-            </div>
-
-            {/* 陷阱 + e^x 提示 */}
-            <div className="grid grid-cols-2 gap-3">
-              <CalloutCard variant="warning" title="⚠️ 经典陷阱" compact>
-                <div className="space-y-0.5">
-                  <p><strong><Math tex="f'(x_0) = 0" /> ≠ 极值点！</strong></p>
-                  <p>反例：<Math tex="f(x) = x^3" /></p>
-                  <p><Math tex="f'(0) = 0" />，但 <Math tex="f'" /> 两侧都是正</p>
-                  <p><strong>不变号</strong> → 不是极值点</p>
-                </div>
-              </CalloutCard>
-              <CalloutCard variant="tip" title="💡 e^x 类求极值" compact>
-                <div className="space-y-0.5">
-                  <p><strong><Math tex="e^x > 0" /> 恒正</strong>，不影响变号</p>
-                  <p>如 <Math tex="f(x) = xe^x" /></p>
-                  <p><Math tex="f'(x) = (1+x)e^x" /></p>
-                  <p>极值点只看 <Math tex="1+x = 0" /> ➜ <Math tex="x = -1" /></p>
-                </div>
-              </CalloutCard>
-            </div>
-
-            <CalloutCard variant="info" title="❓ 常见疑问" compact>
-              <div className="space-y-0.5 leading-7">
-                <p><strong>Q：极值一定在 f'(x)=0 的地方吗？</strong></p>
-                <p>A：对于高考常见的多项式和指数函数，是的。但 <Math tex="f(x) = |x|" /> 在 x=0 有极小值，而 f'(0) 不存在</p>
-                <p><strong>Q：闭区间最值和极值什么关系？</strong></p>
-                <p>A：最值一定存在（闭区间上连续函数），可能在极值点取得，也可能在端点取得</p>
-              </div>
-            </CalloutCard>
-
-            {/* 闭区间最值步骤总结 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📋 闭区间最值完整步骤（必背）</p>
-              <div className="grid grid-cols-4 gap-2 text-center leading-7">
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第一步</p>
-                  <p>求 <Math tex="f'(x)" /></p>
-                  <p>令 <Math tex="f'(x) = 0" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第二步</p>
-                  <p>筛选在 <Math tex="[a,b]" /></p>
-                  <p>内的零点</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第三步</p>
-                  <p>算端点值</p>
-                  <p><Math tex="f(a)" /> 和 <Math tex="f(b)" /></p>
-                </div>
-                <div className="bg-red-50 rounded-lg p-2 border border-red-200">
-                  <p className="font-bold text-red-700">第四步</p>
-                  <p className="font-bold">比较所有值</p>
-                  <p>取最大/最小</p>
-                </div>
-              </div>
-            </div>
-
-            {/* ═══ P3: 练习 + 大题 ═══ */}
-            <PageBreak />
-            <PracticeCard
-              title="✏️ 即时练习：极值与最值（7题）"
-              questions={derivBasicPractice4}
-              printOptionCols={2}
-              explanations={derivativeBasicExplanations}
-            />
-
-            <BigQuestionCard
-              questionLatex="\text{已知 }f(x) = x^3 + ax^2 - 9x + b\text{，且 }f(x)\text{ 在 }x = 1\text{ 处取得极值}\\[6pt]\text{（1）求 }a\text{ 的值，并判断 }x = 1\text{ 处是极大值还是极小值}\\[4pt]\text{（2）求 }f(x)\text{ 在 }[-4, 4]\text{ 上的最大值和最小值（取 }b = 0\text{）}"
-              solutionLatex="\textbf{（1）求 a}\\[4pt]f'(x) = 3x^2 + 2ax - 9\\[4pt]\text{在 }x = 1\text{ 处取极值} \implies f'(1) = 0\\[4pt]3 + 2a - 9 = 0 \implies a = 3\\[4pt]f'(x) = 3x^2 + 6x - 9 = 3(x+3)(x-1)\\[4pt]x = 1\text{ 处：}f'\text{ 从负→正，}\boxed{\text{极小值}}\\[8pt]\textbf{（2）闭区间最值}（b = 0）\\[4pt]f(x) = x^3 + 3x^2 - 9x\\[4pt]\text{极值点：}x = -3\text{（极大）}, x = 1\text{（极小）}\\[4pt]f(-4) = -64 + 48 + 36 = 20\\[4pt]f(-3) = -27 + 27 + 27 = 27\\[4pt]f(1) = 1 + 3 - 9 = -5\\[4pt]f(4) = 64 + 48 - 36 = 76\\[4pt]\boxed{\text{最大值 }76\text{（}x = 4\text{），最小值 }-5\text{（}x = 1\text{）}}"
-              lines={6}
-            />
-
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 5: 切线方程 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="db-tangent" className="mb-2 scroll-mt-4">
-        <Collapsible title="五、切线方程 — 🎯 几何意义应用" defaultOpen storageKey="deriv-basic:tangent" headerExtra={<SpeakButton text={derivBasicNarrations.tangent} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* ═══ P1: 几何意义 + 三步法 + 例1(x²) + 例2(eˣ) + 变式 ═══ */}
-
-            {/* 直觉理解 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🧠 导数的几何意义</p>
-              <div className="leading-7">
-                <p>导数 <Math tex="f'(x_0)" /> 的几何意义：<strong>曲线 <Math tex="y = f(x)" /> 在 <Math tex="x = x_0" /> 处切线的斜率</strong></p>
-                <p className="mt-1">换句话说：你想知道曲线在某一点有多"陡"，算导数就行！</p>
-                <div className="grid grid-cols-3 gap-2 mt-1 text-center">
-                  <div className="bg-white rounded-lg p-1">
-                    <p><Math tex="f'(x_0) > 0" /></p>
-                    <p>切线<strong>向右上</strong> ↗</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-1">
-                    <p><Math tex="f'(x_0) = 0" /></p>
-                    <p>切线<strong>水平</strong> →</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-1">
-                    <p><Math tex="f'(x_0) < 0" /></p>
-                    <p>切线<strong>向右下</strong> ↘</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 三步法 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📐 求切线方程三步法</p>
-              <div className="grid grid-cols-3 gap-2 text-center leading-7">
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第一步</p>
-                  <p>求导 <Math tex="f'(x)" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第二步</p>
-                  <p>代入求斜率</p>
-                  <p><Math tex="k = f'(x_0)" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第三步</p>
-                  <p>点斜式写方程</p>
-                  <p><Math tex="y - y_0 = k(x - x_0)" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 例1: y=x² */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题1：<Math tex="y = x^2" /> 在 <Math tex="(1, 1)" /> 处的切线（最基础）</p>
-              <div className="grid grid-cols-2 gap-3 items-start">
-                <div className="leading-7">
-                  <p><strong>第一步</strong>：<Math tex="y' = 2x" /></p>
-                  <p><strong>第二步</strong>：<Math tex="k = y'(1) = 2 \times 1 = 2" /></p>
-                  <p><strong>第三步</strong>：点斜式</p>
-                  <p><Math tex="y - 1 = 2(x - 1)" /></p>
-                  <p className="text-green-700 font-bold"><Math tex="y = 2x - 1" /></p>
-                </div>
-                <div className="bg-white rounded-lg p-2 leading-7">
-                  <p className="font-bold text-gray-700 mb-1">💡 关键理解</p>
-                  <p>切点 = <Math tex="(1, 1)" /></p>
-                  <p>斜率 = <Math tex="f'(1) = 2" /></p>
-                  <p>切线经过切点，斜率等于导数值</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 例2: y=eˣ */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题2：<Math tex="y = e^x" /> 在 <Math tex="x = 0" /> 处的切线 ⭐高考常考</p>
-              <div className="leading-7">
-                <p><strong>第一步</strong>：<Math tex="y' = e^x" /></p>
-                <p><strong>第二步</strong>：<Math tex="k = e^0 = 1" />，切点 <Math tex="(0, e^0) = (0, 1)" /></p>
-                <p><strong>第三步</strong>：<Math tex="y - 1 = 1 \times (x - 0)" /> ➜ <Math tex="y = x + 1" /></p>
-                <p className="text-green-700 font-bold mt-1">记住这个结论：<Math tex="y = e^x" /> 在原点附近的切线是 <Math tex="y = x + 1" /></p>
-              </div>
-            </div>
-
-            {/* 变式练习 */}
-            <div className="bg-gray-50 rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">🎯 你来试试：求 <Math tex="y = x^3" /> 在 <Math tex="(1, 1)" /> 处的切线方程</p>
-              <div className="leading-7">
-                <p className="text-gray-600"><strong>提示</strong>：<Math tex="y' = 3x^2" />，<Math tex="k = y'(1) = 3" /></p>
-                <p className="text-gray-500">答案：<Math tex="y - 1 = 3(x - 1)" /> ➜ <Math tex="y = 3x - 2" /></p>
-              </div>
-            </div>
-
-            {/* 记忆口诀 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">📌 切线方程记忆口诀</p>
-              <div className="grid grid-cols-3 gap-3 leading-7 text-center">
-                <div className="bg-white rounded-lg p-2">
-                  <p className="text-lg font-bold text-blue-700">求导</p>
-                  <p>先对 <Math tex="f(x)" /> 求导</p>
-                  <p className="text-gray-500">得到斜率公式</p>
-                </div>
-                <div className="bg-white rounded-lg p-2">
-                  <p className="text-lg font-bold text-green-700">代入</p>
-                  <p>把 <Math tex="x_0" /> 代入 <Math tex="f'" /></p>
-                  <p className="text-gray-500">得到斜率数值</p>
-                </div>
-                <div className="bg-white rounded-lg p-2">
-                  <p className="text-lg font-bold text-purple-700">写方程</p>
-                  <p>点斜式一步到位</p>
-                  <p className="text-gray-500"><Math tex="y - y_0 = k(x - x_0)" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 常见函数切线速查 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <table className="w-full text-base border-collapse">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border border-gray-200 px-2 py-0.5 text-gray-700">函数</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-gray-700">切点</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-gray-700">斜率</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-gray-700">切线方程</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="y = x^2" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="(1, 1)" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="2" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="y = 2x - 1" /></td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="y = x^3" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="(1, 1)" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="3" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="y = 3x - 2" /></td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="y = e^x" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="(0, 1)" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="1" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center font-bold text-green-700"><Math tex="y = x + 1" /></td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-0.5"><Math tex="y = \ln x" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="(1, 0)" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center"><Math tex="1" /></td>
-                    <td className="border border-gray-200 px-2 py-0.5 text-center font-bold text-green-700"><Math tex="y = x - 1" /></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* ═══ P2: "在"vs"过" + 例3(过某点) + 易错 + 总结 ═══ */}
-            <PageBreak />
-
-            {/* 核心陷阱 */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">🚨 高考第一大陷阱："在" vs "过"</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div className="bg-white rounded-lg p-2 border-2 border-green-300">
-                  <p className="font-bold text-green-700 text-center">"在点 A 处的切线"</p>
-                  <p className="mt-1"><strong>A 就是切点</strong>（直接用）</p>
-                  <p>斜率 <Math tex="k = f'(x_A)" /></p>
-                  <p className="text-gray-500">简单，三步法直接做</p>
-                  <p className="text-green-700 font-bold mt-1">切线只有 1 条</p>
-                </div>
-                <div className="bg-white rounded-lg p-2 border-2 border-red-300">
-                  <p className="font-bold text-red-600 text-center">"过点 A 的切线"</p>
-                  <p className="mt-1"><strong>A 不一定是切点</strong>（要验证）</p>
-                  <p>设切点 <Math tex="(t, f(t))" /></p>
-                  <p>用 A 在切线上列方程求 t</p>
-                  <p className="text-red-600 font-bold mt-1">可能有 0/1/2 条！</p>
-                </div>
-              </div>
-              <p className="text-red-700 mt-1 text-center font-bold">看到"过"字一定要警觉！先检查点是否在曲线上</p>
-            </div>
-
-            {/* 例3: 过某点 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 例题3："过某点的切线"（完整步骤）</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：求过点 <Math tex="(0, -1)" /> 且与曲线 <Math tex="y = x^2" /> 相切的直线方程</p>
-                <p className="mt-1"><strong>第一步：检验</strong>　<Math tex="(0, -1)" /> 在曲线上吗？代入 <Math tex="0^2 = 0 \neq -1" />，<strong className="text-red-600">不在！</strong></p>
-                <p><strong>第二步：设切点</strong>　设切点为 <Math tex="(t, t^2)" />，斜率 <Math tex="k = 2t" /></p>
-                <p><strong>第三步：写切线</strong>　<Math tex="y - t^2 = 2t(x - t)" />，即 <Math tex="y = 2tx - t^2" /></p>
-                <p><strong>第四步：代入已知点</strong>　过 <Math tex="(0, -1)" />：<Math tex="-1 = 2t(0) - t^2 = -t^2" /></p>
-                <p><strong>第五步：解方程</strong>　<Math tex="t^2 = 1" /> ➜ <Math tex="t = 1" /> 或 <Math tex="t = -1" /></p>
-                <p className="text-green-700 font-bold mt-1">两条切线：<Math tex="y = 2x - 1" /> 和 <Math tex="y = -2x - 1" /></p>
-              </div>
-            </div>
-
-            {/* 易错 + 总结 */}
-            <div className="grid grid-cols-2 gap-3">
-              <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
-                <div className="space-y-0.5">
-                  <p><strong>"过某点"第一步必须检验</strong></p>
-                  <p>如果点<strong>在</strong>曲线上 → 直接用三步法</p>
-                  <p>如果点<strong>不在</strong>曲线上 → 设切点求解</p>
-                  <p>切线与曲线可以有多个交点</p>
-                </div>
-              </CalloutCard>
-              <CalloutCard variant="info" title="📝 高考题型总结" compact>
-                <div className="space-y-0.5">
-                  <p><strong>选择/填空</strong>：求斜率或方程</p>
-                  <p>"在"vs"过"辨析</p>
-                  <p><strong>解答题</strong>：切线方程常作大题第一问</p>
-                  <p>难度不高但容易粗心</p>
-                </div>
-              </CalloutCard>
-            </div>
-
-            {/* "过某点"步骤总结 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📋 "过某点"切线方程步骤（必背）</p>
-              <div className="grid grid-cols-4 gap-2 text-center leading-7">
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第一步</p>
-                  <p>检验点是否</p>
-                  <p>在曲线上</p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第二步</p>
-                  <p>设切点</p>
-                  <p><Math tex="(t, f(t))" /></p>
-                </div>
-                <div className="bg-gray-50 rounded-lg p-2">
-                  <p className="font-bold text-gray-700">第三步</p>
-                  <p>写切线方程</p>
-                  <p>代入已知点</p>
-                </div>
-                <div className="bg-red-50 rounded-lg p-2 border border-red-200">
-                  <p className="font-bold text-red-700">第四步</p>
-                  <p className="font-bold">解方程求 t</p>
-                  <p>可能多解！</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 变式练习: 过某点 */}
-            <div className="bg-gray-50 rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">🎯 你来试试：过原点与 <Math tex="y = e^x" /> 相切的直线</p>
-              <div className="leading-7">
-                <p className="text-gray-600"><strong>提示</strong>：(0,0) 不在 <Math tex="y=e^x" /> 上（<Math tex="e^0 = 1 \neq 0" />），设切点 <Math tex="(t, e^t)" />，斜率 <Math tex="k = e^t" /></p>
-                <p className="text-gray-500">切线：<Math tex="y - e^t = e^t(x - t)" />，过原点：<Math tex="0 - e^t = e^t(0 - t)" /> ➜ <Math tex="-1 = -t" /> ➜ <Math tex="t = 1" /></p>
-                <p className="text-gray-500">答案：<Math tex="k = e" />，切线方程 <Math tex="y = ex" /></p>
-              </div>
-            </div>
-
-            {/* 两类切线对比总结 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📋 两类切线问题完整对比</p>
-              <table className="w-full text-base border-collapse">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border border-gray-200 px-2 py-0.5 text-gray-700"></th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-green-700">"在某点处"的切线</th>
-                    <th className="border border-gray-200 px-2 py-0.5 text-red-600">"过某点"的切线</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-0.5 font-bold">切点</td>
-                    <td className="border border-gray-200 px-2 py-0.5">已知（就是该点）</td>
-                    <td className="border border-gray-200 px-2 py-0.5">未知（需要设 t 求解）</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-0.5 font-bold">难度</td>
-                    <td className="border border-gray-200 px-2 py-0.5">简单（三步法）</td>
-                    <td className="border border-gray-200 px-2 py-0.5">较难（需列方程）</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-0.5 font-bold">切线条数</td>
-                    <td className="border border-gray-200 px-2 py-0.5">恰好 1 条</td>
-                    <td className="border border-gray-200 px-2 py-0.5">可能 0/1/2 条</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-0.5 font-bold">关键词</td>
-                    <td className="border border-gray-200 px-2 py-0.5">"在…处""在点…的"</td>
-                    <td className="border border-gray-200 px-2 py-0.5">"过…""经过…"</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* ═══ P3: 练习 + 大题 ═══ */}
-            <PageBreak />
-            <PracticeCard
-              title="✏️ 即时练习：切线方程（7题）"
-              questions={derivBasicPractice5}
-              printOptionCols={2}
-              explanations={derivativeBasicExplanations}
-            />
-
-            <BigQuestionCard
-              questionLatex="\text{已知 }f(x) = x^3 - 3x\\[6pt]\text{（1）求曲线 }y = f(x)\text{ 在 }x = 2\text{ 处的切线方程}\\[4pt]\text{（2）求过点 }(2, 2)\text{ 的所有切线方程}"
-              solutionLatex={"\\textbf{（1）在 x=2 处的切线}\\\\[4pt]f'(x) = 3x^2 - 3\\\\[4pt]f(2) = 8 - 6 = 2\\text{，切点 }(2, 2)\\\\[4pt]k = f'(2) = 12 - 3 = 9\\\\[4pt]y - 2 = 9(x - 2)\\\\[4pt]\\boxed{y = 9x - 16}\\\\[8pt]\\textbf{（2）过点 (2,2) 的切线}\\\\[4pt]\\text{(2,2) 在曲线上}（f(2) = 2\\text{，验证通过}）\\\\[4pt]\\text{所以第(1)问的切线是其中一条：}y = 9x - 16\\\\[4pt]\\text{但「过」某点可能还有其他切线，设切点 }(t, t^3-3t)\\\\[4pt]k = 3t^2 - 3\\text{，切线：}y - (t^3-3t) = (3t^2-3)(x-t)\\\\[4pt]\\text{过 }(2,2)\\text{：}2-(t^3-3t) = (3t^2-3)(2-t)\\\\[4pt]2-t^3+3t = 6t^2-3t^3-6+3t\\\\[4pt]2t^3-6t^2+8 = 0 \\implies t^3-3t^2+4 = 0\\\\[4pt](t-2)(t^2-t-2) = 0 \\implies (t-2)^2(t+1) = 0\\\\[4pt]t = 2\\text{（已知）或 }t = -1\\\\[4pt]t=-1\\text{：}k = 3-3 = 0\\text{，切点 }(-1, 2)\\\\[4pt]\\boxed{y = 9x - 16\\text{ 和 }y = 2}"}
-              lines={6}
-            />
-
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 6: 综合自测 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="db-quiz" className="mb-2 scroll-mt-4">
-        <Collapsible title="六、高考真题实战（7题选择 + 1题大题）" defaultOpen storageKey="deriv-basic:quiz">
-          <div className="-mx-4 -mt-3 -mb-4">
-            <QuizPanel questions={derivBasicQuizQuestions} module="deriv-basic-quiz" explanations={derivativeBasicExplanations} />
-          </div>
-          <BigQuestionCard
-            questionLatex={"\\text{（2021 全国甲 改编）已知 }f(x) = x^3 - 3x\\\\[6pt]\\text{（1）求 }f(x)\\text{ 的单调递增区间和单调递减区间}\\\\[4pt]\\text{（2）求 }f(x)\\text{ 在 }[-3, 2]\\text{ 上的最大值和最小值}"}
-            solutionLatex={"\\textbf{（1）单调区间}\\\\[4pt]f'(x) = 3x^2 - 3 = 3(x+1)(x-1)\\\\[4pt]\\text{令 }f'(x) = 0 \\implies x = -1\\text{ 或 }x = 1\\\\[4pt]\\text{令 }f'(x) > 0 \\implies x < -1\\text{ 或 }x > 1\\\\[4pt]\\boxed{\\text{递增区间：}(-\\infty, -1)\\text{ 和 }(1, +\\infty)}\\\\[4pt]\\boxed{\\text{递减区间：}(-1, 1)}\\\\[8pt]\\textbf{（2）闭区间最值}\\\\[4pt]\\text{极值点 }x = -1, 1\\text{ 都在 }[-3, 2]\\text{ 内}\\\\[4pt]f(-3) = -27 + 9 = -18\\\\[4pt]f(-1) = -1 + 3 = 2\\\\[4pt]f(1) = 1 - 3 = -2\\\\[4pt]f(2) = 8 - 6 = 2\\\\[4pt]\\text{比较：}\\{-18, 2, -2, 2\\}\\\\[4pt]\\boxed{\\text{最大值} = 2\\text{（在 }x=-1\\text{ 和 }x=2\\text{ 处取得）}}\\\\[4pt]\\boxed{\\text{最小值} = -18\\text{（在 }x=-3\\text{ 处取得）}}"}
-            lines={6}
-          />
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* 打印模式答案区 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && <DerivativeBasicAnswers />}
-
       </LessonLayout>
+      <UnifiedDebugToggle />
     </div>
   );
 }

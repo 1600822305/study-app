@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, GeoDebugToggle } from '@/components/shared';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, UnifiedDebugToggle } from '@/components/shared';
 import { perpLinesDiagram, intersectingLinesDiagram, axiom4Diagram, cuboidParallelDiagram, cuboidIntersectDiagram, cuboidSkewDiagram, cuboidPerpDiagram, lineInPlaneDiagram, lineParallelPlaneDiagram, lineIntersectPlaneDiagram, linePerpPlaneDiagram, cuboidPlainDiagram, cuboidLineInPlaneDiagram, cuboidLpParallelDiagram, cuboidLpParallelDetExDiagram, cuboidLpParallelPropDiagram, cuboidLpIntersectDiagram, cuboidLpPerpDetDiagram, cuboidPpDetExDiagram, cuboidPpPropExDiagram, cuboidPpPerpDetExDiagram, cuboidPpPerpPropExDiagram, lpParallelDetDiagram, lpParallelPropDiagram, ppParallelDetDiagram, ppParallelPropDiagram, lpPerpDetDiagram, lpPerpPropDiagram, lpPerpProp1Diagram, lpPerpProp2Diagram, lpPerpProp3Diagram, ppPerpDetDiagram, ppPerpPropDiagram } from './data/7.1/7.1-relation-diagrams';
 import { geo3dRelationProgressItems } from './data/7.1/7.1-relation-progress';
 import { useProgress } from '@/hooks';
@@ -837,7 +837,7 @@ export function Geo3dRelationPage() {
       </section>
 
       </LessonLayout>
-      <GeoDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

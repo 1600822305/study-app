@@ -59,6 +59,8 @@ export interface QuizQuestionData {
   cols?: 1 | 2 | 4;
   /** 多选题（选择题专用），correctAnswer 存逗号分隔的选项 label，如 "A,C" */
   multiSelect?: boolean;
+  /** 打印模式下此题占满整行（columns=2 时生效） */
+  fullRow?: boolean;
 }
 
 /** 学习进度条目 */

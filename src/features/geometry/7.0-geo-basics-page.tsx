@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, DebugGeo2dSvg, DebugGeo3dSvg, GeoDebugToggle } from '@/components/shared';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, DebugGeo2dSvg, DebugGeo3dSvg, UnifiedDebugToggle } from '@/components/shared';
 import { geoBasicsProgressItems } from './data/7.0/7.0-geo-basics-progress';
 import {
   basicTriangleDiagram, triangleHeightDiagram, rightTriangleAreaDiagram, pythagorasDiagram,
@@ -748,7 +748,7 @@ export function GeoBasicsPage() {
       </section>
 
       </LessonLayout>
-      <GeoDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

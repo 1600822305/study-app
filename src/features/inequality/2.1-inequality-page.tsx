@@ -50,56 +50,65 @@ export function InequalityPage() {
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">① 对称性</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b" />，则 <Math tex="b < a" /></td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="5 > 3" />，则 <Math tex="3 < 5" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="5 > 3" />，则 <Math tex="3 < 5" /></td>
                   </tr>
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">② 传递性</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b" /> 且 <Math tex="b > c" />，则 <Math tex="a > c" /></td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="7 > 5" /> 且 <Math tex="5 > 2" />，则 <Math tex="7 > 2" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="7 > 5" /> 且 <Math tex="5 > 2" />，则 <Math tex="7 > 2" /></td>
                   </tr>
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">③ 加法单调性</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b" />，则 <Math tex="a + c > b + c" />（加减同一个数，方向不变）</td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="5 > 3" />，两边加 <Math tex="-10" />，得 <Math tex="-5 > -7" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="5 > 3" />，两边加 <Math tex="-10" />，得 <Math tex="-5 > -7" /></td>
                   </tr>
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">④ 乘正数</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b" /> 且 <Math tex="c > 0" />，则 <Math tex="ac > bc" />（方向不变）</td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="5 > 3" />，两边乘 2，得 <Math tex="10 > 6" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="5 > 3" />，两边乘 2，得 <Math tex="10 > 6" /></td>
                   </tr>
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">⑤ 乘负数</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b" /> 且 <Math tex="c < 0" />，则 <Math tex="ac < bc" />（<strong>方向翻转</strong>）</td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="5 > 3" />，两边乘 <Math tex="-1" />，得 <Math tex="-5 < -3" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="5 > 3" />，两边乘 <Math tex="-1" />，得 <Math tex="-5 < -3" /></td>
                   </tr>
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">⑥ 同向可乘</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b > 0" /> 且 <Math tex="c > d > 0" />，则 <Math tex="ac > bd" /></td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="5 > 3" /> 且 <Math tex="4 > 2" />，则 <Math tex="20 > 6" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="5 > 3" /> 且 <Math tex="4 > 2" />，则 <Math tex="20 > 6" /></td>
                   </tr>
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">⑦ 可乘方</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b > 0" />，则 <Math tex="a^n > b^n" />（n 为正整数）</td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="3 > 2 > 0" />，则 <Math tex="9 > 4" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="3 > 2 > 0" />，则 <Math tex="9 > 4" /></td>
                   </tr>
                   <tr>
                     <td className="border-b border-r border-gray-300 px-2 py-1 font-bold text-green-700">⑧ 可开方</td>
                     <td className="border-b border-r border-gray-300 px-2 py-1">若 <Math tex="a > b > 0" />，则 <Math tex="\sqrt[n]{a} > \sqrt[n]{b}" />（n 为正整数）</td>
-                    <td className="border-b border-gray-300 px-2 py-1"><Math tex="9 > 4 > 0" />，则 <Math tex="3 > 2" /></td>
+                    <td className="border-b border-gray-300 px-2 py-1">若 <Math tex="9 > 4 > 0" />，则 <Math tex="3 > 2" /></td>
                   </tr>
                   <tr>
                     <td className="border-r border-gray-300 px-2 py-1 font-bold text-green-700">⑨ 倒数法则</td>
-                    <td className="border-r border-gray-300 px-2 py-1">若 <Math tex="0 < a < b" />，则 <Math tex="\frac{1}{a} > \frac{1}{b}" />（同正取倒数翻转）<br />若 <Math tex="a < b < 0" />，则 <Math tex="\frac{1}{a} > \frac{1}{b}" />（同负取倒数也翻转）</td>
-                    <td className="px-2 py-1"><Math tex="0 < 2 < 5" />，则 <Math tex="\frac{1}{2} > \frac{1}{5}" /></td>
+                    <td className="border-r border-gray-300 px-2 py-1">若 <Math tex="a, b" /> 同号 且 <Math tex="a < b" />，则 <Math tex="\frac{1}{a} > \frac{1}{b} " />（同号取倒数翻转）</td>
+                    <td className="px-2 py-1">若 <Math tex="0 < 2 < 5" />，则 <Math tex="\frac{1}{2} > \frac{1}{5}" /></td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
+            {/* 同向可加性（补充） */}
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">补充：同向不等式可以相加，但不能相减</div>
+              <div className="px-3 py-1 space-y-0">
+                <p><strong>可加：</strong>若 <Math tex="a > b" /> 且 <Math tex="c > d" />，则 <Math tex="a + c > b + d" />（同向相加，方向不变）</p>
+                <p><strong>不可减（反例）：</strong><Math tex="5 > 3" /> 且 <Math tex="4 > 1" />，但 <Math tex="5 - 4 < 3 - 1" />，所以同向不等式<strong className="text-red-600">不能相减</strong></p>
+              </div>
+            </div>
+
             {/* 重点详解：乘负数翻转 */}
             <div className="border border-gray-400 rounded overflow-hidden">
               <div className="px-2 py-1 font-bold text-red-700 border-b border-gray-400 bg-gray-100">重点详解：性质⑤ 乘负数方向翻转（高考最常考）</div>
-              <div className="px-3 py-2 space-y-1">
+              <div className="px-3 py-1 space-y-0">
                 <p><strong>核心规则：</strong>不等式两边同时乘以（或除以）一个<strong>负数</strong>，不等号方向必须<strong>翻转</strong></p>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
@@ -118,7 +127,7 @@ export function InequalityPage() {
             {/* 重点详解：倒数法则 */}
             <div className="border border-gray-400 rounded overflow-hidden">
               <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">重点详解：性质⑨ 倒数法则</div>
-              <div className="px-3 py-2 space-y-1">
+              <div className="px-3 py-1 space-y-0">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <p className="font-bold text-green-700">同号取倒数：翻转</p>
@@ -135,25 +144,30 @@ export function InequalityPage() {
               </div>
             </div>
 
-            {/* 同向可加性（补充） */}
+            {/* 要不要全背 */}
             <div className="border border-gray-400 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">补充：同向不等式可以相加，但不能相减</div>
-              <div className="px-3 py-2 space-y-1">
-                <p><strong>可加：</strong>若 <Math tex="a > b" /> 且 <Math tex="c > d" />，则 <Math tex="a + c > b + d" />（同向相加，方向不变）</p>
-                <p><strong>不可减（反例）：</strong><Math tex="5 > 3" /> 且 <Math tex="4 > 1" />，但 <Math tex="5 - 4 = 1 < 3 - 1 = 2" />，所以同向不等式<strong className="text-red-600">不能相减</strong></p>
-              </div>
-            </div>
-
-
-            {/* 综合例题 */}
-            <div className="border border-gray-400 rounded overflow-hidden">
-              <div className="px-2 py-1 font-bold text-purple-700 border-b border-gray-400 bg-gray-100">综合例题：已知 <Math tex="a > b > 0" />，<Math tex="c < d < 0" />，判断各式是否成立</div>
-              <div className="px-3 py-2 space-y-1">
-                <p>① <Math tex="a + c > b + d" />，<strong>不一定成立</strong>。<Math tex="a > b" /> 但 <Math tex="c < d" />，异向不能直接加</p>
-                <p className="border-t border-gray-200 pt-1">② <Math tex="ac < bd" />，<strong>成立</strong>。<Math tex="a > b > 0" /> 且 <Math tex="c < d < 0" />，乘负数翻转得 <Math tex="ac < bc" />，同理 <Math tex="bc < bd" />，传递得 <Math tex="ac < bd" /></p>
-                <p className="border-t border-gray-200 pt-1">③ <Math tex="\frac{1}{a} + \frac{1}{d} < \frac{1}{b} + \frac{1}{c}" />，<strong>成立</strong>。同正取倒数翻转 <Math tex="\frac{1}{a} < \frac{1}{b}" />，同负取倒数翻转 <Math tex="\frac{1}{d} < \frac{1}{c}" />，同向相加</p>
-                <p className="border-t border-gray-200 pt-1">④ <Math tex="a^2 > b^2" /> 且 <Math tex="c^2 > d^2" />，<strong>成立</strong>。<Math tex="a > b > 0" /> 可乘方得 <Math tex="a^2 > b^2" />；<Math tex="|c| > |d| > 0" /> 同理得 <Math tex="c^2 > d^2" /></p>
-                <p className="border-t border-gray-200 pt-1">⑤ <Math tex="a + c > 0" />，<strong>不一定成立</strong>。<Math tex="a > 0" /> 但 <Math tex="c < 0" />，若 <Math tex="|c| > a" /> 则和为负，例如 <Math tex="a=2, c=-5" /> 得 <Math tex="-3 < 0" /></p>
+              <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">九条性质要不要全背？——全部理解，重点熟练 4 条</div>
+              <div className="px-3 py-1 space-y-0">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <p className="font-bold text-red-700">必须熟练到"条件反射"（高考高频）</p>
+                    <p><strong>⑤ 乘负数翻转</strong>：看到乘或除负数必须立刻想到翻转</p>
+                    <p><strong>⑨ 倒数法则</strong>：分式不等式、抽象函数题常用</p>
+                    <p><strong>③ 加法单调性</strong>：解不等式的基本功，移项就是它</p>
+                    <p><strong>④ 乘正数</strong>：解不等式的基本功</p>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="font-bold text-green-700">理解即可，知道何时能用</p>
+                    <p><strong>①对称性、②传递性</strong>：非常直觉，看一眼就会</p>
+                    <p><strong>⑥ 同向可乘</strong>：需要"都是正数"，用时注意条件</p>
+                    <p><strong>⑦可乘方、⑧可开方</strong>：需要"都是正数"，比较大小时偶尔用</p>
+                  </div>
+                </div>
+                <div className="border-t border-gray-300 pt-1">
+                  <p className="font-bold">记住两条核心原则就能推出大部分：</p>
+                  <p>1. <strong>乘或除正数不变号，乘或除负数变号</strong>（④⑤的本质）</p>
+                  <p>2. <strong>涉及乘方、开方、倒数时，必须先判断正负</strong>（⑥⑦⑧⑨都依赖这个）</p>
+                </div>
               </div>
             </div>
 
@@ -161,6 +175,7 @@ export function InequalityPage() {
         </Collapsible>
       </section>
 
+      <PageBreak />
       {/* Section 2: 基本不等式 */}
       <section id="ineq-amgm" className="mb-0 scroll-mt-4">
         <Collapsible title="二、基本不等式" defaultOpen storageKey="ineq:amgm" headerExtra={<SpeakButton text={inequalityNarrations.basicInequality} />}>

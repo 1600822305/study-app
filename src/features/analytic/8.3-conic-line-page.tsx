@@ -1,4 +1,4 @@
-import { Math as MathTex, PageHeader, LessonLayout, Collapsible, DebugGeo2dSvg, GeoDebugToggle, ExportButton } from '@/components/shared';
+import { Math as MathTex, PageHeader, LessonLayout, Collapsible, DebugGeo2dSvg, UnifiedDebugToggle, ExportButton } from '@/components/shared';
 import { useProgress } from '@/hooks';
 import { hyperbolaXDiagram, hyperbolaYDiagram, hyperbolaPythagorDiagram, hyperbolaEx1Diagram, hyperbolaEx2Diagram } from './data/8.3/8.3-conic-diagrams';
 
@@ -299,7 +299,7 @@ export function ConicLinePage() {
       </section>
 
       </LessonLayout>
-      <GeoDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, GeoDebugToggle, PracticeCard } from '@/components/shared';
+import { Math as MathTex, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, DebugGeo3dSvg, UnifiedDebugToggle, PracticeCard } from '@/components/shared';
 import { cuboidCoordSystemDiagram, tetraCoordSystemDiagram, sidePerpPyramidCoordDiagram, sideFacePerpendicularDiagram, regularTetrahedronCubeDiagram, regularPyramidCoordDiagram, isoscelesTrapezoidPyramidDiagram, rightTrapezoidPyramidDiagram, obliquePrismDiagram, rhombusPrismDiagram, regularTriPrismDiagram, frustumDiagram, frustumPyramidDiagram, rightHandSystemDiagram, normalVectorDiagram, normalVectorMethodDiagram, normalVectorExampleDiagram, parallelCubeOriginal, parallelCubeDiagram, parallelLineLineDiagram, parallelLinePlaneDiagram, parallelPlanesDiagram, pureCubeDiagram, perpLinePlaneDiagram, perpPlanesDiagram, angleLineLineDiagram, angleLinePlaneDiagram, angleDihedralDiagram, distancePointToBaseDiagram, distancePointToPlaneBDC1Diagram } from './data/7.2/7.2-vector-diagrams';
 import { geo3dVectorProgressItems } from './data/7.2/7.2-vector-progress';
 import { geo3dVectorEssayQuestions } from './data/7.2/7.2-vector-questions';
@@ -1266,7 +1266,7 @@ export function Geo3dVectorPage() {
       {isPrinting && printOptions.showAnswers && <Geo3dVectorAnswers />}
 
       </LessonLayout>
-      <GeoDebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

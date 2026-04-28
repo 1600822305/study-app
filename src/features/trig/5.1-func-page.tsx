@@ -1,4 +1,4 @@
-import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard } from '@/components/shared';
+import { Math as MathTex, Collapsible, SpeakButton, PageHeader, LessonLayout, ExportButton, PageBreak, PracticeCard, UnifiedDebugToggle } from '@/components/shared';
 import { trigFuncNarrations } from './data/5.1/5.1-func-narrations';
 import { trigFuncProgressItems } from './data/5.1/5.1-func-progress';
 import { trigFuncExam, trigGraphPractice } from './data/5.1/5.1-func-questions';
@@ -7,7 +7,6 @@ import { useProgress } from '@/hooks';
 import { usePrintMode } from '@/hooks/usePrintMode';
 import { scrollToId } from '@/lib/scroll';
 import { SinGraphDiagram, CosGraphDiagram, TanGraphDiagram, SymNegative, SymPiMinus, SymPiPlus, SymHalfPiMinus, SymHalfPiPlus } from './data/5.1/trig-diagrams';
-import { DebugToggle } from './MafsDebug.tsx';
 
 export function TrigFuncPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('trig-func', trigFuncProgressItems);
@@ -1561,7 +1560,7 @@ export function TrigFuncPage() {
       {isPrinting && printOptions.showAnswers && <TrigFuncAnswers />}
 
       </LessonLayout>
-      <DebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

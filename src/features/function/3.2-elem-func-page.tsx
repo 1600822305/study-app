@@ -1,12 +1,11 @@
 import { Mafs, Coordinates, Plot, Point } from 'mafs';
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak, DebugGeo2dSvg, UnifiedDebugToggle } from '@/components/shared';
 import { elemFuncNarrations } from './data/3.2/3.2-elem-func-narrations';
 import { elemFuncProgressItems } from './data/3.2/3.2-elem-func-progress';
-import { elemFuncPractice1, elemFuncPractice2, elemFuncPractice3, elemFuncPractice4 } from './data/3.2/3.2-elem-func-practice';
-import { elemFuncQuizQuestions } from './data/3.2/3.2-elem-func-quiz';
+import { elemFuncPractice2, elemFuncPractice3, elemFuncPractice4 } from './data/3.2/3.2-elem-func-practice';
 import { useProgress, usePrintMode } from '@/hooks';
-import { scrollToId } from '@/lib/scroll';
 import { ElementaryFuncAnswers, elementaryFuncExplanations } from './3.2-elem-func-answers';
+import { expIncDiagram, expDecDiagram, logIncDiagram, logDecDiagram } from './data/3.2/3.2-elem-func-diagrams';
 
 export function ElementaryFuncPage() {
   const { items: progressItems, toggle: toggleProgress } = useProgress('elem-func', elemFuncProgressItems);
@@ -18,7 +17,6 @@ export function ElementaryFuncPage() {
         stage="第三阶段 · 函数思维"
         title="3.2 基本初等函数"
         narration={elemFuncNarrations.intro}
-        subtitle="指数函数·对数函数·幂函数 — 高考必考三大函数"
         tags={[
           { label: '难度 ★★★☆☆', color: 'amber' },
           { label: '必考', color: 'blue' },
@@ -26,464 +24,634 @@ export function ElementaryFuncPage() {
         ]}
       />
 
-      <div className="flex justify-end mb-2 print:hidden">
+      <div className="flex justify-end gap-2 print:hidden">
+        <UnifiedDebugToggle />
         <ExportButton title="3.2 基本初等函数" />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 p-2 mb-1">
-        <p className="font-bold text-gray-800 mb-1">📋 知识地图</p>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-gray-600">
-          <button onClick={() => scrollToId('ef-log-rules')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、对数运算法则（补完对数运算）</button>
-          <button onClick={() => scrollToId('ef-exp-func')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、指数函数（图像与性质）</button>
-          <button onClick={() => scrollToId('ef-log-func')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、对数函数（图像与性质）</button>
-          <button onClick={() => scrollToId('ef-power-func')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、幂函数（图像与性质）</button>
-          <button onClick={() => scrollToId('ef-quiz')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">五、综合自测（8题）</button>
-        </div>
-      </div>
-
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
+        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-0.5 [&_.rounded-xl>div:last-child]:px-0 [&_.rounded-xl>div:last-child]:pt-0 [&_.rounded-xl>div:last-child]:pb-0">
 
       {/* ════════════════════════════════════════════════════════════ */}
       {/* Section 1: 对数运算法则 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      <section id="ef-log-rules" className="mb-2 scroll-mt-4">
-        <Collapsible title="一、对数运算法则 — 🎯 学会对数的加减运算和换底公式" defaultOpen storageKey="elem-func:log-rules" headerExtra={<SpeakButton text={elemFuncNarrations.logRules} />}>
-          <div className="space-y-2 text-gray-700">
+      <section id="ef-log-rules" className="mb-0 scroll-mt-4">
+        <Collapsible title="分组一、对数运算法则" defaultOpen storageKey="elem-func:log-rules" headerExtra={<SpeakButton text={elemFuncNarrations.logRules} />}>
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* ── 第1页：回顾 + 术语解释 ── */}
-            <div className="grid grid-cols-2 gap-2">
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-                <p className="font-bold text-amber-800 mb-1">📖 先回顾一下：对数是什么？</p>
-                <div className="leading-8">
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">先回顾：对数是什么？</div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-0.5">
                   <p><Math tex="\log_2 8 = 3" /> 的意思是：</p>
-                  <p><strong>2 的几次方等于 8？答：3次方</strong></p>
-                  <p>这个式子里有三个角色，我们给它们起个名字 →</p>
+                  <p><strong>以 2 为底 8 的对数等于 3</strong>（即 2 的 3 次方等于 8）</p>
                 </div>
-              </div>
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-                <p className="leading-7"><strong className="text-amber-800">🤔 为什么要学运算法则？</strong></p>
-                <div className="leading-8">
-                  <p>考试经常给你一堆对数让你算，比如 <Math tex="\lg 2 + \lg 5" /></p>
-                  <p>一个一个查值再加？太慢了！</p>
-                  <p>运算法则就是<strong>快捷方式</strong>，不用查值就能直接算出结果。</p>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p><strong>为什么要学运算法则？</strong></p>
+                  <p>运算法则就是<strong>快捷方式</strong>，不用查值就能直接算出结果</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-3">
-              <p className="font-bold text-gray-800 mb-2">📌 先认识三个名字（后面会反复用到）</p>
-              <div className="flex items-center justify-center">
-                <div className="text-center text-lg leading-10">
-                  <p><Math tex="\log_{\underbrace{2}_{\text{底数}}} \underbrace{8}_{\text{真数}} = \underbrace{3}_{\text{对数值}}" /></p>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-2 mt-2">
-                <div className="bg-blue-50 rounded-lg p-2 text-center">
-                  <p className="font-bold text-blue-700">底数</p>
-                  <p>写在 log 右下角的数</p>
-                  <p>这里是 <strong>2</strong></p>
-                </div>
-                <div className="bg-green-50 rounded-lg p-2 text-center">
-                  <p className="font-bold text-green-700">真数</p>
-                  <p>log 后面跟着的数</p>
-                  <p>这里是 <strong>8</strong></p>
-                </div>
-                <div className="bg-purple-50 rounded-lg p-2 text-center">
-                  <p className="font-bold text-purple-700">对数值</p>
-                  <p>等号后面算出来的结果</p>
-                  <p>这里是 <strong>3</strong></p>
-                </div>
-              </div>
-              <p className="text-gray-600 mt-2 leading-7">再看一个：<Math tex="\lg 100 = 2" />　→　底数是 10（lg 就是 <Math tex="\log_{10}" />），<strong>真数</strong>是 100，对数值是 2。</p>
-            </div>
-
-            {/* 常见对数值 */}
-            <div>
-              <p className="font-bold text-gray-800 mb-2">📝 先记住这几个常用的对数值（后面做题要用）</p>
-              <table className="w-full text-center border-collapse">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-gray-50">
-                    <th className="border border-gray-200 p-1.5">式子</th>
-                    <th className="border border-gray-200 p-1.5">意思</th>
-                    <th className="border border-gray-200 p-1.5">结果</th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">对数式 <Math tex="\log_3 9 = 2" /></th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">⟷</th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">指数式 <Math tex="3^2 = 9" /></th>
                   </tr>
                 </thead>
-                <tbody className="leading-8">
-                  <tr><td className="border border-gray-200 p-1.5"><Math tex="\lg 10" /></td><td className="border border-gray-200 p-1.5">10 的几次方等于 10？</td><td className="border border-gray-200 p-1.5 font-bold">1</td></tr>
-                  <tr><td className="border border-gray-200 p-1.5"><Math tex="\lg 100" /></td><td className="border border-gray-200 p-1.5">10 的几次方等于 100？</td><td className="border border-gray-200 p-1.5 font-bold">2</td></tr>
-                  <tr><td className="border border-gray-200 p-1.5"><Math tex="\lg 1000" /></td><td className="border border-gray-200 p-1.5">10 的几次方等于 1000？</td><td className="border border-gray-200 p-1.5 font-bold">3</td></tr>
-                  <tr><td className="border border-gray-200 p-1.5"><Math tex="\lg 1" /></td><td className="border border-gray-200 p-1.5">10 的几次方等于 1？</td><td className="border border-gray-200 p-1.5 font-bold">0</td></tr>
-                  <tr><td className="border border-gray-200 p-1.5"><Math tex="\log_2 8" /></td><td className="border border-gray-200 p-1.5">2 的几次方等于 8？</td><td className="border border-gray-200 p-1.5 font-bold">3</td></tr>
-                  <tr><td className="border border-gray-200 p-1.5"><Math tex="\log_2 4" /></td><td className="border border-gray-200 p-1.5">2 的几次方等于 4？</td><td className="border border-gray-200 p-1.5 font-bold">2</td></tr>
-                  <tr><td className="border border-gray-200 p-1.5"><Math tex="\log_3 9" /></td><td className="border border-gray-200 p-1.5">3 的几次方等于 9？</td><td className="border border-gray-200 p-1.5 font-bold">2</td></tr>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">3 — 底数</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">=</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">3 — 底数</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">9 — 真数</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">=</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">9 — 幂（结果）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">2 — 对数值</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">=</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">2 — 指数（次方）</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
 
-            {/* ── 第2页：三条法则 ── */}
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">先记住这几个常用的对数值（后面做题要用）</div>
+              <div className="grid grid-cols-2">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="border border-gray-300 px-2 py-1 text-center">式子</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center">意思</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center">结果</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\lg 10" /></td><td className="border border-gray-300 px-2 py-1 text-center">10 的几次方等于 10？</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">1</td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\lg 100" /></td><td className="border border-gray-300 px-2 py-1 text-center">10 的几次方等于 100？</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">2</td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\lg 1000" /></td><td className="border border-gray-300 px-2 py-1 text-center">10 的几次方等于 1000？</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">3</td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\log_a 1" /></td><td className="border border-gray-300 px-2 py-1 text-center">任何数的 0 次方都等于 1</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">0</td></tr>
+                  </tbody>
+                </table>
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="border border-gray-300 px-2 py-1 text-center">式子</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center">意思</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center">结果</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\log_2 8" /></td><td className="border border-gray-300 px-2 py-1 text-center">2 的几次方等于 8？</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">3</td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\log_2 4" /></td><td className="border border-gray-300 px-2 py-1 text-center">2 的几次方等于 4？</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">2</td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\log_3 9" /></td><td className="border border-gray-300 px-2 py-1 text-center">3 的几次方等于 9？</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">2</td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\log_a a" /></td><td className="border border-gray-300 px-2 py-1 text-center">任何数的 1 次方就是它本身</td><td className="border border-gray-300 px-2 py-1 text-center font-bold">1</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">对数法则不是凭空冒出来的 — 对数是指数的逆运算，所以<strong>指数律"反过来读"就变成了对数法则</strong></div>
+              <div className="px-3 py-0.5">
+                <p><strong>准备工作</strong>：设 <Math tex="\log_a M = m" />，<Math tex="\log_a N = n" />（前提：底数 <Math tex="a" /> 相同），翻译成指数式就是 <Math tex="a^m = M" />，<Math tex="a^n = N" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">法则① — 积的对数等于对数之和</div>
+              <div className="px-3 py-0.5 border-b border-gray-300 bg-blue-50 flex items-center justify-center gap-6">
+                <Math tex="\log_a M + \log_a N = \log_a(MN)" />
+                <span>例：<Math tex="\log_2 3 + \log_2 5 = \log_2(3 \times 5) = \log_2 15" /></span>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_2fr]">
+                <div className="px-3 py-0.5">
+                  <p><strong>你学过的指数律</strong>：<Math tex="a^m \times a^n = a^{m+n}" /></p>
+                  <p>（同底数幂相乘，指数相加）</p>
+                  <p className="mt-0.5">例：<Math tex="2^2 \times 2^3 = 2^{2+3} = 2^5" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p><strong>反过来问</strong>：<Math tex="a^{m+n}" /> 的对数是多少？根据定义，<Math tex="\log_a(a^{m+n}) = m+n" /></p>
+                  <p>而 <Math tex="a^{m+n} = a^m \times a^n" />，即 <Math tex="a^{m+n} = M \times N" />（因为 <Math tex="a^m = M" />，<Math tex="a^n = N" />）</p>
+                  <p>所以 <Math tex="\log_a(MN) = m+n = \log_a M + \log_a N" /></p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">法则② — 商的对数等于对数之差</div>
+              <div className="px-3 py-0.5 border-b border-gray-300 bg-blue-50 flex items-center justify-center gap-6">
+                <Math tex="\log_a M - \log_a N = \log_a\frac{M}{N}" />
+                <span>例：<Math tex="\log_2 8 - \log_2 4 = \log_2 2 = 1" /></span>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_2fr]">
+                <div className="px-3 py-0.5">
+                  <p><strong>你学过的指数律</strong>：<Math tex="a^m \div a^n = a^{m-n}" /></p>
+                  <p>（同底数幂相除，指数相减）</p>
+                  <p className="mt-0.5">例：<Math tex="2^3 \div 2^2 = 2^{3-2} = 2^1" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p><strong>反过来问</strong>：<Math tex="a^{m-n}" /> 的对数是多少？根据定义，<Math tex="\log_a(a^{m-n}) = m-n" /></p>
+                  <p>而 <Math tex="a^{m-n} = a^m \div a^n" />，即 <Math tex="a^{m-n} = M \div N" />（因为 <Math tex="a^m = M" />，<Math tex="a^n = N" />）</p>
+                  <p>所以 <Math tex="\log_a\frac{M}{N} = m-n = \log_a M - \log_a N" /></p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">法则③ — 幂的对数等于指数乘以对数</div>
+              <div className="px-3 py-0.5 border-b border-gray-300 bg-blue-50 flex items-center justify-center gap-6">
+                <Math tex="n\log_a M = \log_a M^n" />
+                <span>例：<Math tex="3\lg 10 = \lg 10^3 = 3" /></span>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_2fr]">
+                <div className="px-3 py-0.5">
+                  <p><strong>你学过的指数律</strong>：<Math tex="(a^m)^n = a^{mn}" /></p>
+                  <p>（幂的幂，指数相乘）</p>
+                  <p className="mt-0.5">例：<Math tex="(2^3)^2 = 2^{3 \times 2} = 2^6" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p><strong>反过来问</strong>：<Math tex="a^{mn}" /> 的对数是多少？根据定义，<Math tex="\log_a(a^{mn}) = mn" /></p>
+                  <p>而 <Math tex="a^{mn} = (a^m)^n" />，即 <Math tex="a^{mn} = M^n" />（因为 <Math tex="a^m = M" />）</p>
+                  <p>所以 <Math tex="\log_a M^n = mn = n \cdot m = n \cdot \log_a M" /></p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-3 py-0.5">
+                <p>三条法则的本质：<strong>对数把高级运算变成低级运算</strong></p>
+                <table className="w-full border-collapse mt-0.5">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="border border-gray-300 px-2 py-0.5">原来的运算</th>
+                      <th className="border border-gray-300 px-2 py-0.5">取对数后变成</th>
+                      <th className="border border-gray-300 px-2 py-0.5">公式</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td className="border border-gray-300 px-2 py-0.5 text-center">乘法 <Math tex="MN" /></td><td className="border border-gray-300 px-2 py-0.5 text-center">加法</td><td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\log_a M + \log_a N = \log_a(MN)" /></td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-0.5 text-center">除法 <Math tex="\dfrac{M}{N}" /></td><td className="border border-gray-300 px-2 py-0.5 text-center">减法</td><td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\log_a M - \log_a N = \log_a\dfrac{M}{N}" /></td></tr>
+                    <tr><td className="border border-gray-300 px-2 py-0.5 text-center">乘方 <Math tex="M^n" /></td><td className="border border-gray-300 px-2 py-0.5 text-center">乘法</td><td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="n\log_a M = \log_a M^n" /></td></tr>
+                  </tbody>
+                </table>
+                <p className="mt-0.5">（注意：加减法要求<strong>底数相同</strong>才能用！底数不同的情况后面讲换底公式）</p>
+              </div>
+            </div>
+
             <PageBreak />
-            <div className="space-y-0">
-              <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-                <p className="font-bold text-blue-800 text-lg mb-1">🔑 法则① — 两个对数相加 → 真数相乘</p>
-                <div className="leading-8">
-                  <p>我们知道 <Math tex="\lg 2 = 0.301" />，<Math tex="\lg 5 = 0.699" /></p>
-                  <p>把它们加起来：<Math tex="0.301 + 0.699 = 1" /></p>
-                  <p>另外，<Math tex="2 \times 5 = 10" />，而 <Math tex="\lg 10 = 1" /></p>
-                  <p className="mt-1"><strong>发现了吗？</strong> <Math tex="\lg 2 + \lg 5" /> 和 <Math tex="\lg(2 \times 5)" /> 的结果一样！</p>
-                  <p className="mt-1">这就是规律：<strong>两个 lg 相加，等于把它们后面的数乘起来再取 lg</strong></p>
-                  <p className="bg-white rounded-lg p-2 text-center text-lg mt-1 border border-blue-200"><Math tex="\lg 2 + \lg 5 = \lg(2 \times 5) = \lg 10 = 1" /></p>
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">恒等式① — 先对后指（底数相同）：<Math tex="a^{\log_a N} = N \quad (N > 0)" /></div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-0.5">
+                  <p><Math tex="\log_a N" /> 问的是：<strong><Math tex="a" /> 的几次方等于 <Math tex="N" />？</strong></p>
+                  <p>设答案为 <Math tex="x" />，即 <Math tex="\log_a N = x" />，根据定义就是 <Math tex="a^x = N" /></p>
+                  <p>所以 <Math tex="a^{\log_a N} = a^x = N" />（把 <Math tex="\log_a N" /> 换成它等于的那个数 <Math tex="x" />）</p>
                 </div>
-              </div>
-              <div className="bg-green-50 border border-green-200 rounded-xl p-3">
-                <p className="font-bold text-green-800 text-lg mb-1">🔑 法则② — 两个对数相减 → 真数相除</p>
-                <div className="leading-8">
-                  <p>我们知道 <Math tex="\log_2 8 = 3" />（因为 <Math tex="2^3 = 8" />），<Math tex="\log_2 4 = 2" />（因为 <Math tex="2^2 = 4" />）</p>
-                  <p>减一下：<Math tex="3 - 2 = 1" /></p>
-                  <p>另外，<Math tex="8 \div 4 = 2" />，而 <Math tex="\log_2 2 = 1" /></p>
-                  <p className="mt-1"><strong>又对上了！</strong> <Math tex="\log_2 8 - \log_2 4" /> 和 <Math tex="\log_2(8 \div 4)" /> 结果一样！</p>
-                  <p className="mt-1">规律：<strong>两个对数相减，等于把真数相除再取对数</strong></p>
-                  <p className="bg-white rounded-lg p-2 text-center text-lg mt-1 border border-green-200"><Math tex="\log_2 8 - \log_2 4 = \log_2(8 \div 4) = \log_2 2 = 1" /></p>
-                </div>
-              </div>
-              <div className="bg-purple-50 border border-purple-200 rounded-xl p-3">
-                <p className="font-bold text-purple-800 text-lg mb-1">🔑 法则③ — 真数有指数 → 指数搬到前面当系数</p>
-                <div className="leading-8">
-                  <p><Math tex="\lg 1000" /> 是多少？ 因为 <Math tex="1000 = 10^3" />，所以 <Math tex="\lg 1000 = 3" /></p>
-                  <p>换一种写法：<Math tex="\lg 10^3 = 3" /></p>
-                  <p>另外，<Math tex="3 \times \lg 10 = 3 \times 1 = 3" /></p>
-                  <p className="mt-1"><strong>看！</strong> <Math tex="\lg 10^3" /> 等于 <Math tex="3 \times \lg 10" />。真数上面的指数 3，可以搬到前面当系数！</p>
-                  <p className="bg-white rounded-lg p-2 text-center text-lg mt-1 border border-purple-200"><Math tex="\lg 10^3 = 3 \times \lg 10 = 3" /></p>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p><strong>例</strong>：求 <Math tex="2^{\log_2 8}" />，直接代入公式得答案为真数，也就是 8</p>
+                  <p><strong>验证</strong>：<Math tex="\log_2 8" /> 问的是：2 的几次方等于 8？</p>
+                  <p>设答案为 <Math tex="x" />，即 <Math tex="2^x = 8" />，所以 <Math tex="x = 3" />，所以 <Math tex="2^{\log_2 8} = 2^3 = 8" /></p>
                 </div>
               </div>
             </div>
 
-            {/* 小结 */}
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">📌 三条法则总结（用大白话说）</p>
-              <div className="leading-8">
-                <p><strong>① 加法</strong>：看到两个对数<strong>相加</strong>，就把它们后面的数（真数）<strong>乘起来</strong></p>
-                <p><strong>② 减法</strong>：看到两个对数<strong>相减</strong>，就把它们后面的数（真数）<strong>相除</strong></p>
-                <p><strong>③ 指数</strong>：真数上面有个指数，就把那个指数<strong>搬到前面当系数</strong></p>
-                <p className="text-gray-500 mt-1">（注意：加减法要求底数相同才能用！底数不同的情况后面讲换底公式）</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📖 小试一下：<Math tex="\lg 4 + \lg 25" /> 等于多少？</p>
-              <div className="leading-8">
-                <p className="ml-4">第①步：看到两个对数<strong>相加</strong> → 用法则①（加法 → 真数相乘）</p>
-                <p className="ml-4">第②步：<Math tex="\lg 4 + \lg 25 = \lg(4 \times 25) = \lg 100" /></p>
-                <p className="ml-4">第③步：<Math tex="\lg 100 = 2" />（因为 <Math tex="10^2 = 100" />）</p>
-                <p className="text-green-700 font-bold mt-1">✅ 答案：2</p>
-              </div>
-            </div>
-
-            {/* ── 第3页：换底公式 + 练习 ── */}
-            <PageBreak />
-
-            {/* 换底公式 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
-              <p className="font-bold text-amber-800 text-lg mb-1">🔑 换底公式 — 底数不同怎么办？</p>
-              <div className="leading-8">
-                <p>前面三条法则有个前提：<strong>底数必须相同</strong>。</p>
-                <p>但如果遇到 <Math tex="\log_4 8" /> 这种题（底数是 4，不是常见的 2 或 10），怎么算？</p>
-                <p className="mt-1"><strong>方法：把它转化成 lg（底数为 10 的对数）</strong></p>
-                <p className="mt-1">具体操作：</p>
-                <p className="ml-4">第①步：分子写 <Math tex="\lg 8" />（lg 后面跟<strong>原来的真数</strong>）</p>
-                <p className="ml-4">第②步：分母写 <Math tex="\lg 4" />（lg 后面跟<strong>原来的底数</strong>）</p>
-                <p className="ml-4">第③步：变成分数 <Math tex="\dfrac{\lg 8}{\lg 4}" />，然后就能算了！</p>
-                <p className="bg-amber-50 rounded-lg p-2 mt-2">
-                  <strong>完整演算</strong>：<Math tex="\log_4 8 = \dfrac{\lg 8}{\lg 4}" />。因为 <Math tex="8 = 2^3" /> 所以 <Math tex="\lg 8 = 3\lg 2" />；<Math tex="4 = 2^2" /> 所以 <Math tex="\lg 4 = 2\lg 2" />。代入得 <Math tex="\dfrac{3\lg 2}{2\lg 2} = \dfrac{3}{2}" />
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">📌 换底公式（记住这个分数的样子）</p>
-              <div className="grid grid-cols-2 gap-4 leading-8">
-                <div className="text-center">
-                  <p className="text-lg"><Math tex="\log_a b = \dfrac{\lg b}{\lg a}" /></p>
-                  <p className="text-gray-600 mt-1">分子：lg <strong>真数</strong>（要求的那个数）</p>
-                  <p className="text-gray-600">分母：lg <strong>底数</strong></p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">恒等式② — 先指后对（底数相同）：<Math tex="\log_a a^n = n" /></div>
+              <div className="grid grid-cols-[48fr_auto_52fr]">
+                <div className="px-3 py-0.5">
+                  <p><Math tex="\log_a a^n" /> 问的是：<strong><Math tex="a" /> 的几次方等于 <Math tex="a^n" />？</strong></p>
+                  <p>答案显然是 <Math tex="n" />（<Math tex="a" /> 的 <Math tex="n" /> 次方就是 <Math tex="a^n" />），所以 <Math tex="\log_a a^n = n" /></p>
                 </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p><strong>例</strong>：求 <Math tex="\log_2 2^5" />，直接代入公式得答案为指数，也就是 5</p>
+                  <p><strong>验证</strong>：<Math tex="\log_2 2^5" /> 问的是：2 的几次方等于 <Math tex="2^5" />？所以 <Math tex="\log_2 2^5 = 5" /></p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-3 py-0.5 text-center">
+                <strong>口诀：底数一样，指数和对数连用，互相抵消</strong>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="grid grid-cols-[1fr_auto_1fr]">
                 <div>
-                  <p className="font-bold text-gray-700 mb-1">记忆口诀：</p>
-                  <p><strong>"真数在上，底数在下"</strong></p>
-                  <p className="text-gray-600">想要谁（真数）→ 放上面</p>
-                  <p className="text-gray-600">用谁当底（底数）→ 放下面</p>
+                  <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-300 bg-gray-100">例. <Math tex="\lg 4 + \lg 25" /> 等于多少？</div>
+                  <div className="px-3 py-0.5">
+                    <p>第①步：看到两个对数<strong>相加</strong>，用法则①（加法，真数相乘）</p>
+                    <p>第②步：<Math tex="\lg 4 + \lg 25 = \lg(4 \times 25) = \lg 100 = \log_{10} 100" /></p>
+                    <p>第③步：<Math tex="\log_{10} 100 = 2" />（因为 <Math tex="10^2 = 100" />）</p>
+                  </div>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div>
+                  <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-300 bg-gray-100">例. <Math tex="\lg 8000 - 3\lg 2" /> 等于多少？</div>
+                  <div className="px-3 py-0.5">
+                    <p>第①步（法则③）：<Math tex="3\lg 2 = \lg 2^3 = \lg 8" /></p>
+                    <p>第②步（法则②）：<Math tex="\lg 8000 - \lg 8 = \lg \frac{8000}{8} = \lg 1000" /></p>
+                    <p>第③步：<Math tex="\lg 1000 = \log_{10} 1000 = 3" /></p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* 即时练习 */}
-            <PracticeCard
-              title="✏️ 即时练习：对数运算法则（4题）"
-              questions={elemFuncPractice1}
-              printOptionCols={2}
-              explanations={elementaryFuncExplanations}
-            />
-
-            <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
-              <div className="space-y-0.5">
-                <p><strong><Math tex="\lg 2 + \lg 3" /> 不是 <Math tex="\lg 5" />！</strong> 是 <Math tex="\lg(2 \times 3) = \lg 6" />（加法 → 真数相<strong>乘</strong>，不是相加）</p>
-                <p><strong>底数不同不能直接加减！</strong> <Math tex="\log_2 8 + \log_3 9" /> 不能合并，得先算出各自的值（3 + 2 = 5）</p>
-                <p><strong>真数必须大于 0！</strong> <Math tex="\lg(-5)" /> 不存在，因为 10 的任何次方都不可能是负数</p>
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">换底公式 — 底数不同怎么办？</div>
+              <div className="px-3 py-0.5 border-b border-gray-300">
+                <p>前面三条法则都要求<strong>底数相同</strong>才能用，但如果遇到 <Math tex="\log_2 3 \times \log_3 5" /> 这种底数不同的式子，就需要换底公式把它们统一成相同底数</p>
               </div>
-            </CalloutCard>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-0.5">
+                  <p><strong>★ 换底公式</strong>：<Math tex="\log_a b = \dfrac{\log_c b}{\log_c a}" /></p>
+                  <p>记忆口诀：真上底下，新底统一</p>
+                  <p>例：<Math tex="\log_2 5 = \dfrac{\log_{10} 5}{\log_{10} 2}" /></p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p><strong>证明</strong>：设 <Math tex="\log_a b = x" />，即 <Math tex="a^x = b" /></p>
+                  <p>两边取以 <Math tex="c" /> 为底的对数，得 <Math tex="\log_c a^x = \log_c b" /></p>
+                  <p>由法则③（<Math tex="\log_a M^n = n\log_a M" />），得</p>
+                  <p><Math tex="x \cdot \log_c a = \log_c b" />，即 <Math tex="x = \dfrac{\log_c b}{\log_c a}" /></p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">换底公式的三个重要推论（高考常用）</div>
+              <div className="grid grid-cols-[1fr_1px_1fr] items-stretch">
+                {/* 第一行：推论公式 */}
+                <div className="px-3 py-0.5"><p><strong>推论 ①</strong>（底真互换的乘积为1）：<Math tex="\log_a b \cdot \log_b a = 1" /></p></div>
+                <div className="bg-gray-300"></div>
+                <div className="px-3 py-0.5"><p><strong>推论 ②</strong>　指数提到前面：<Math tex="\log_{a^m} b^n = \dfrac{n}{m} \log_a b" /></p></div>
+
+                {/* 横分割线 */}
+                <div className="col-span-3 border-t border-gray-300"></div>
+
+                {/* 第二行：推导 */}
+                <div className="px-3 py-0.5"><p>推导：<Math tex="\log_a b = \dfrac{\log_b b}{\log_b a} = \dfrac{1}{\log_b a}" />，两边同乘分母，得推论①</p></div>
+                <div className="bg-gray-300"></div>
+                <div className="px-3 py-0.5"><p>推导：全换底到 a，得 <Math tex="\dfrac{\log_a b^n}{\log_a a^m} = \dfrac{n\log_a b}{m \cdot 1} = \dfrac{n}{m}\log_a b" /></p></div>
+
+                {/* 横分割线 */}
+                <div className="col-span-3 border-t border-gray-300"></div>
+
+                {/* 第三行：例 */}
+                <div className="px-3 py-0.5"><p>例：<Math tex="\log_2 3 \times \log_3 2 = 1" /></p></div>
+                <div className="bg-gray-300"></div>
+                <div className="px-3 py-0.5"><p>例：<Math tex="\log_4 8 = \log_{2^2} 2^3 = \dfrac{3}{2}" /></p></div>
+
+                {/* 横分割线（进入推论③） */}
+                <div className="col-span-3 border-t border-gray-300"></div>
+
+                {/* 第四行：推论 ③ + 练一练 */}
+                <div className="col-span-3 grid grid-cols-[7fr_1px_3fr]">
+                  <div className="px-3 py-0.5">
+                    <p><strong>推论 ③</strong>　链式恒等式（中间消）：<Math tex="\log_a b \cdot \log_b c = \log_a c" /></p>
+                    <p>推导：<Math tex="\dfrac{\lg b}{\lg a} \cdot \dfrac{\lg c}{\lg b} = \dfrac{\lg c}{\lg a} = \log_a c" />　　例：<Math tex="\log_2 3 \cdot \log_3 8 = \log_2 8 = 3" /></p>
+                  </div>
+                  <div className="bg-gray-300"></div>
+                  <div className="px-3 py-0.5 bg-amber-50">
+                    <p className="font-bold">练一练</p>
+                    <p>① <Math tex="\log_3 7 \cdot \log_7 9 = \underline{\qquad\qquad}" /></p>
+                    <p>② <Math tex="\log_2 9 \cdot \log_3 4 = \underline{\qquad\qquad}" /></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">综合例. <Math tex="\log_2 9 \times \log_3 5 \times \log_{\sqrt{5}} 8 - \lg 4 - 2\lg 5" /> 等于多少？</div>
+              <div className="px-3 py-0.5">
+                <p><strong>第①步</strong>（法则③ + 链式）：<Math tex="\log_2 9 \times \log_3 5 = 2\log_2 3 \times \log_3 5 = 2\log_2 5" /></p>
+                <p><strong>第②步</strong>（推论②）：<Math tex="\log_{\sqrt{5}} 8 = \log_{5^{\frac{1}{2}}} 2^3 = \dfrac{3}{\,\frac{1}{2}\,}\log_5 2 = 6\log_5 2" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第③步</strong>（链式）：<Math tex="2\log_2 5 \times 6\log_5 2 = 12 \times \log_2 5 \cdot \log_5 2 = 12 \times \log_2 2 = 12 \times 1 = 12" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第④步</strong>：后半部分提负号：<Math tex="-\lg 4 - 2\lg 5 = -(\lg 4 + 2\lg 5)" />，其中（法则③）：<Math tex="2\lg 5 = \lg 5^2 = \lg 25" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第⑤步</strong>（法则①，加变乘）：<Math tex="\lg 4 + \lg 25 = \lg(4 \times 25) = \lg 100 = 2" />，所以原式 <Math tex="= 12 - 2 = 10" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-3 py-0.5 bg-amber-50 grid grid-cols-[auto_1fr_1fr] gap-x-4">
+                <p className="font-bold">练一练</p>
+                <p>① <Math tex="\lg^2 5 + \lg 2 \cdot \lg 50 = \underline{\qquad\qquad}" /></p>
+                <p>② <Math tex="3^{\log_3 2} - \log_2 \frac{1}{4} = \underline{\qquad\qquad}" /></p>
+                <span></span>
+                <p>③ <Math tex="\log_3 4 \times \log_8 27 = \underline{\qquad\qquad}" /></p>
+                <p>④ <Math tex="\lg 25 + \lg 2 \cdot \lg 50 = \underline{\qquad\qquad}" /></p>
+                <span></span>
+                <p>⑤ <Math tex="\log_{\sqrt{2}} 8 = \underline{\qquad\qquad}" /></p>
+                <p>⑥ <Math tex="\log_2 5 \cdot \log_{25} 8 + 5^{\log_5 3} = \underline{\qquad\qquad}" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">本页公式汇总</div>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">名称</th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">公式</th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">名称</th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">公式</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">恒等式①（先对后指）</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="a^{\log_a N} = N" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">恒等式②（先指后对）</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\log_a a^n = n" /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">换底公式</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\log_a b = \dfrac{\log_c b}{\log_c a}" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">推论①（底真互换）</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\log_a b \cdot \log_b a = 1" /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">推论②（指数提前）</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\log_{a^m} b^n = \dfrac{n}{m} \log_a b" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">推论③（链式恒等式）</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\log_a b \cdot \log_b c = \log_a c" /></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
           </div>
         </Collapsible>
       </section>
 
       {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 2: 指数函数 */}
+      {/* Section 2: 指数对数综合运算 */}
       {/* ════════════════════════════════════════════════════════════ */}
+      <section id="ef-combined" className="mb-0 scroll-mt-4">
+        <Collapsible title="分组二、指数对数综合运算" defaultOpen storageKey="elem-func:combined">
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
+
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">核心思路：指数和对数可以互相转化，遇到混合运算时统一成同一种形式</div>
+              <div className="px-3 py-0.5">
+                <p>① 指数式 → 对数式（或反过来），让已知条件变成可用的对数形式</p>
+                <p>② 换底公式统一底数，把不同底的对数都换成同一个底</p>
+                <p>③ 用法则拆分合并，凑已知条件求结果</p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">例1. 已知 <Math tex="2^a = 5^b = 100" />，求 <Math tex="\dfrac{1}{a} + \dfrac{1}{b}" /> 的值　<span className="font-normal">思路：指数式转对数式，再利用对数法则合并</span></div>
+              <div className="px-3 py-0.5">
+                <p><strong>第①步</strong>（指数式 → 对数式，再用推论①底真互换：<Math tex="\dfrac{1}{\log_a b} = \log_b a" />）：</p>
+                <p><Math tex="2^a = 100" />，得 <Math tex="a = \log_2 100" />，即 <Math tex="\dfrac{1}{a} = \dfrac{1}{\log_2 100} = \log_{100} 2" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><Math tex="5^b = 100" />，得 <Math tex="b = \log_5 100" />，即 <Math tex="\dfrac{1}{b} = \dfrac{1}{\log_5 100} = \log_{100} 5" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第②步</strong>（法则①，加法变乘法）：</p>
+                <p><Math tex="\dfrac{1}{a} + \dfrac{1}{b} = \log_{100} 2 + \log_{100} 5 = \log_{100}(2 \times 5) = \log_{10^2} 10 = \dfrac{1}{2}\log_{10} 10 = \dfrac{1}{2} \times 1 = \dfrac{1}{2}" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">例2. 已知 <Math tex="\log_{18} 9 = a" />，<Math tex="18^b = 5" />，求 <Math tex="\log_{36} 45" />　<span className="font-normal">思路：统一换成以 18 为底，用 a、b 表示</span></div>
+              <div className="px-3 py-0.5">
+                <p><strong>第①步</strong>（整理已知）：<Math tex="\log_{18} 9 = a" />，<Math tex="18^b = 5" /> 转成对数式得 <Math tex="\log_{18} 5 = b" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第②步</strong>（换底公式，统一成以 18 为底）：</p>
+                <table className="my-0.5"><tbody>
+                  <tr><td rowSpan={2} className="pr-1 align-middle"><Math tex="\log_{36} 45 =" /></td><td className="pr-1 border-b border-gray-400"><Math tex="\log_{18} 45" /></td><td className="pl-2 border-b border-gray-300">← <strong>第③步</strong>（法则①）：<Math tex="= \log_{18}(9 \times 5) = \log_{18} 9 + \log_{18} 5 = a + b" /></td></tr>
+                  <tr><td className="pr-1"><Math tex="\log_{18} 36" /></td><td className="pl-2">← <strong>第④步</strong>（法则①）：<Math tex="= \log_{18}(18 \times 2) = \log_{18} 18 + \log_{18} 2 = 1 + \log_{18} 2" /></td></tr>
+                </tbody></table>
+                <p>其中 <Math tex="\log_{18} 2" /> 无法直接算出，但我们可以利用法则②，结合已知条件：<Math tex="2 = \dfrac{18}{9}" /></p>
+                <p>得 <Math tex="\log_{18} 2 = \log_{18} \dfrac{18}{9} = \log_{18} 18 - \log_{18} 9 = 1 - a" />，所以分母 <Math tex="= 1 + (1 - a) = 2 - a" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>结论</strong>：<Math tex="\log_{36} 45 = \dfrac{a + b}{2 - a}" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">例3. 已知 <Math tex="2^a = 3" />，<Math tex="3^b = 5" />，求 <Math tex="\log_{30} 45" />　<span className="font-normal">思路：指数转对数，换底统一，拆分凑条件</span></div>
+              <div className="px-3 py-0.5">
+                <p><strong>第①步</strong>（指数式 → 对数式）：<Math tex="2^a = 3" /> 得 <Math tex="a = \log_2 3" />，<Math tex="3^b = 5" /> 得 <Math tex="b = \log_3 5" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第②步</strong>（换底公式，统一成以 2 为底）：</p>
+                <p>先把 b 也换成以 2 为底：<Math tex="b = \log_3 5 = \dfrac{\log_2 5}{\log_2 3} = \dfrac{\log_2 5}{a}" />，得 <Math tex="\log_2 5 = ab" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第③步</strong>（拆目标，换底成以 2 为底）：</p>
+                <table className="my-0.5"><tbody>
+                  <tr><td rowSpan={2} className="pr-1 align-middle"><Math tex="\log_{30} 45 =" /></td><td className="pr-1 border-b border-gray-400"><Math tex="\log_2 45" /></td><td className="pl-2 border-b border-gray-300">← <strong>第④步</strong>（法则①③）：<Math tex="= \log_2(9 \times 5) = \log_2 3^2 + \log_2 5 = 2a + ab" /></td></tr>
+                  <tr><td className="pr-1"><Math tex="\log_2 30" /></td><td className="pl-2">← <strong>第⑤步</strong>（法则①）：<Math tex="= \log_2(2 \times 3 \times 5) = 1 + a + ab" /></td></tr>
+                </tbody></table>
+                <p className="border-t border-gray-200 pt-0.5"><strong>结论</strong>：<Math tex="\log_{30} 45 = \dfrac{2a + ab}{1 + a + ab}" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">例4. 已知 <Math tex="125^x = 12.5^y = 1000" />，求 <Math tex="\dfrac{y - x}{xy}" />　<span className="font-normal">思路：拆目标式，推论①互换，法则②合并</span></div>
+              <div className="px-3 py-0.5">
+                <div className="grid grid-cols-2">
+                  <div><p><strong>第①步</strong>（指数式 → 对数式）：</p>
+                  <p><Math tex="125^x = 1000" />，得 <Math tex="x = \log_{125} 1000" /></p>
+                  <p><Math tex="12.5^y = 1000" />，得 <Math tex="y = \log_{12.5} 1000" /></p></div>
+                  <p><strong>第②步</strong>（拆目标）：<Math tex="\dfrac{y - x}{xy} = \dfrac{1}{x} - \dfrac{1}{y}" /></p>
+                </div>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第③步</strong>（用推论①底真互换）：</p>
+                <p><Math tex="\dfrac{1}{x} = \dfrac{1}{\log_{125} 1000} = \log_{1000} 125" />，<Math tex="\dfrac{1}{y} = \dfrac{1}{\log_{12.5} 1000} = \log_{1000} 12.5" /></p>
+                <p className="border-t border-gray-200 pt-0.5"><strong>第④步</strong>（法则②，减法变除法）：<Math tex="\dfrac{1}{x} - \dfrac{1}{y} = \log_{1000} 125 - \log_{1000} 12.5 = \log_{1000} \dfrac{125}{12.5} = \log_{1000} 10 = \dfrac{1}{3}" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">动手算一算</div>
+              <div className="px-3 py-0.5 grid grid-cols-2 gap-x-4 gap-y-0.5 text-base">
+                <p>1. 已知 <Math tex="3^a = 2" />，求 <Math tex="\log_9 8" /></p>
+                <p>2. 已知 <Math tex="\lg 2 = a" />，求 <Math tex="\lg 50" /></p>
+                <p>3. <Math tex="\log_2 3 \cdot \log_3 7 \cdot \log_7 8 =" /></p>
+                <p>4. <Math tex="2^{1+\log_2 3} =" /></p>
+                <p>5. 已知 <Math tex="2^a = 5^b = 10" />，求 <Math tex="\dfrac{1}{a} + \dfrac{1}{b}" /></p>
+              </div>
+            </div>
+
+          </div>
+        </Collapsible>
+      </section>
+
       <PageBreak />
-      <section id="ef-exp-func" className="mb-2 scroll-mt-4">
-        <Collapsible title="二、指数函数 — 🎯 画出图像，判断增减，比较大小" defaultOpen storageKey="elem-func:exp-func" headerExtra={<SpeakButton text={elemFuncNarrations.exponentialFunc} />}>
-          <div className="space-y-0 text-gray-700">
+      {/* ════════════════════════════════════════════════════════════ */}
+      {/* Section 3: 指数函数 */}
+      {/* ════════════════════════════════════════════════════════════ */}
+      <section id="ef-exp-func" className="mb-0 scroll-mt-4">
+        <Collapsible title="三、指数函数" defaultOpen storageKey="elem-func:exp-func" headerExtra={<SpeakButton text={elemFuncNarrations.exponentialFunc} />}>
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* ── 第1页：什么是指数函数 + 列值表 ── */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">� 什么是指数函数？先看一个生活例子</p>
-              <div className="leading-8">
-                <p>把一张纸<strong>对折</strong>：折 1 次 → 2 层，折 2 次 → 4 层，折 3 次 → 8 层...</p>
-                <p>折 <Math tex="x" /> 次 → <Math tex="2^x" /> 层。这个 <Math tex="y = 2^x" /> 就是一个<strong>指数函数</strong>！</p>
-                <p>特点：<strong>指数（x）在变，底数（2）不变</strong> → 变化的是"次方数"</p>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-3">
-              <p className="font-bold text-blue-800 text-lg mb-1">🔑 指数函数长这样</p>
-              <div className="leading-8">
-                <p className="text-center text-lg"><Math tex="y = a^x \quad (a > 0 \text{ 且 } a \neq 1)" /></p>
-                <p className="ml-4"><Math tex="a > 0" />：底数必须是<strong>正数</strong>，否则像 <Math tex="(-2)^{0.5}" /> 这种就没意义了</p>
-                <p className="ml-4"><Math tex="a \neq 1" />：如果 <Math tex="a = 1" />，<Math tex="1^x" /> 永远等于 1，是条水平线，没研究价值</p>
-                <div className="grid grid-cols-2 gap-2 mt-1">
-                  <p>✅ 是：<Math tex="y = 2^x" />、<Math tex="y = 3^x" />、<Math tex="y = 0.5^x" /></p>
-                  <p>❌ 不是：<Math tex="y = 1^x" />、<Math tex="y = (-2)^x" /></p>
-                </div>
-              </div>
-            </div>
-
-            {/* 列值表 */}
-            <div>
-              <p className="font-bold text-gray-800 mb-2">📝 算几个值，看看规律</p>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="font-bold text-blue-700 mb-1"><Math tex="y = 2^x" />（底数 2，比 1 大）</p>
-                  <table className="w-full text-base border-collapse">
-                    <thead><tr className="bg-blue-50">
-                      <th className="border border-blue-200 px-2 py-1"><Math tex="x" /></th>
-                      <th className="border border-blue-200 px-2 py-1">-2</th>
-                      <th className="border border-blue-200 px-2 py-1">-1</th>
-                      <th className="border border-blue-200 px-2 py-1">0</th>
-                      <th className="border border-blue-200 px-2 py-1">1</th>
-                      <th className="border border-blue-200 px-2 py-1">2</th>
-                      <th className="border border-blue-200 px-2 py-1">3</th>
-                    </tr></thead>
-                    <tbody><tr>
-                      <td className="border border-gray-200 px-2 py-1 font-bold"><Math tex="y" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\frac{1}{4}" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\frac{1}{2}" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center font-bold text-blue-700">1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">2</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">4</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">8</td>
-                    </tr></tbody>
-                  </table>
-                  <p className="text-blue-600 mt-1"><strong>x 越大 → y 越大</strong>（越来越猛！）</p>
-                  <p className="text-gray-500">图像：从左往右缓慢上升，过 (0,1) 后越来越陡</p>
-                </div>
-                <div>
-                  <p className="font-bold text-green-700 mb-1"><Math tex="y = \left(\frac{1}{2}\right)^x" />（底数 0.5，比 1 小）</p>
-                  <table className="w-full text-base border-collapse">
-                    <thead><tr className="bg-green-50">
-                      <th className="border border-green-200 px-2 py-1"><Math tex="x" /></th>
-                      <th className="border border-green-200 px-2 py-1">-2</th>
-                      <th className="border border-green-200 px-2 py-1">-1</th>
-                      <th className="border border-green-200 px-2 py-1">0</th>
-                      <th className="border border-green-200 px-2 py-1">1</th>
-                      <th className="border border-green-200 px-2 py-1">2</th>
-                      <th className="border border-green-200 px-2 py-1">3</th>
-                    </tr></thead>
-                    <tbody><tr>
-                      <td className="border border-gray-200 px-2 py-1 font-bold"><Math tex="y" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">4</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">2</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center font-bold text-green-700">1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\frac{1}{2}" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\frac{1}{4}" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\frac{1}{8}" /></td>
-                    </tr></tbody>
-                  </table>
-                  <p className="text-green-600 mt-1"><strong>x 越大 → y 越小</strong>（越来越趋近 0！）</p>
-                  <p className="text-gray-500">图像：从左往右快速下降，过 (0,1) 后越来越贴近 x 轴</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">📌 从表格中发现了什么？</p>
-              <div className="leading-8">
-                <p><strong>发现1</strong>：两个表格里，<Math tex="x = 0" /> 时 <Math tex="y" /> 都等于 <strong>1</strong>（因为任何数的 0 次方都是 1）</p>
-                <p><strong>发现2</strong>：<Math tex="y" /> 永远是<strong>正数</strong>，不管 x 取什么值，y 都不会变成 0 或负数</p>
-                <p><strong>发现3</strong>：底数 &gt; 1 时越来越大（<strong>增</strong>），底数 &lt; 1 时越来越小（<strong>减</strong>）</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl border border-gray-200 p-3">
-              <p className="font-bold text-gray-800 mb-2">📌 先学几个术语（考试会用到）</p>
-              <div className="leading-8">
-                <p><strong>定义域</strong> = x 可以取哪些值。指数函数的 x 可以是任何实数（正数、负数、0 都行）</p>
-                <p><strong>值域</strong> = y 的范围。指数函数的 y 永远大于 0（写成 <Math tex="(0, +\infty)" />，小括号表示不包含 0）</p>
-                <p><strong>增函数</strong> = x 变大，y 也变大（图像从左往右<strong>上升</strong>）</p>
-                <p><strong>减函数</strong> = x 变大，y 反而变小（图像从左往右<strong>下降</strong>）</p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">✏️ 怎么画指数函数的草图？（3步搞定）</p>
-              <div className="grid gap-3" style={{ gridTemplateColumns: '2fr 1fr' }}>
-                <div className="leading-8">
-                  <p><strong>第①步</strong>：先描点 <Math tex="(0, 1)" />（所有指数函数都过这个点）</p>
-                  <p><strong>第②步</strong>：再描 <Math tex="(1, a)" />（把 x=1 代入，y 就等于底数本身）</p>
-                  <p><strong>第③步</strong>：底数 &gt; 1 → 从左下往右上画；底数 &lt; 1 → 从左上往右下画</p>
-                  <p className="text-gray-500">记住：曲线永远在 x 轴<strong>上方</strong>（不碰 x 轴，不穿过 x 轴）</p>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className="rounded-lg overflow-hidden border border-blue-200">
-                    <Mafs viewBox={{ x: [-2.5, 3], y: [-0.5, 5] }} height={70}>
-                      <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
-                      <Plot.OfX y={(x: number) => 2 ** x} color="#3b82f6" weight={2.5} />
-                      <Point x={0} y={1} color="#ef4444" />
-                      <Point x={1} y={2} color="#f59e0b" />
-                    </Mafs>
-                    <p className="text-center text-xs text-blue-600 py-0.5">a&gt;1 增</p>
-                  </div>
-                  <div className="rounded-lg overflow-hidden border border-green-200">
-                    <Mafs viewBox={{ x: [-2.5, 3], y: [-0.5, 5] }} height={70}>
-                      <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
-                      <Plot.OfX y={(x: number) => 0.5 ** x} color="#22c55e" weight={2.5} />
-                      <Point x={0} y={1} color="#ef4444" />
-                      <Point x={1} y={0.5} color="#f59e0b" />
-                    </Mafs>
-                    <p className="text-center text-xs text-green-600 py-0.5">a&lt;1 减</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <PageBreak />
-            <div>
-              <p className="font-bold text-gray-800 mb-2">📖 指数函数性质总结</p>
-              <table className="w-full text-base border-collapse">
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">指数函数性质总结</div>
+              <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-purple-50">
-                    <th className="border border-purple-200 px-2 py-1 text-left text-purple-700">看什么</th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">底数 &gt; 1（如 2, 3, 10）</th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">底数 &lt; 1（如 0.5, 0.3）</th>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1 text-left">性质</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">底数 <Math tex="a" /> &gt; 1</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">0 &lt; 底数 <Math tex="a" /> &lt; 1</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">x 能取什么值？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center" colSpan={2}>任何实数（正的、负的、0 都行）</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">y 的范围？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center" colSpan={2}>永远大于 0（不会等于 0，更不会是负数）</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold align-middle">图像</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><DebugGeo2dSvg data={expIncDiagram} width={140} height={108} /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><DebugGeo2dSvg data={expDecDiagram} width={140} height={108} /></td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">过定点？⭐</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center" colSpan={2}><strong>所有指数函数都过点 (0, 1)</strong>（因为 <Math tex="a^0 = 1" />，高考高频考点！）</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">增还是减？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-blue-700"><strong>增函数</strong>（x 大 → y 大）</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-green-700"><strong>减函数</strong>（x 大 → y 小）</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">定义域</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}><Math tex="\mathbb{R}" />（任何实数）</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">图像什么样？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">右侧越来越陡，左侧贴近 x 轴</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">左侧越来越陡，右侧贴近 x 轴</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">值域</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}><Math tex="(0, +\infty)" />（永远大于 0）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">过定点</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}><strong>所有指数函数都过点 <Math tex="(0, 1)" /></strong>（因为 <Math tex="a^0 = 1" />，高考高频考点！）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">单调性</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><strong>增函数</strong>（<Math tex="x" /> 越大，<Math tex="y" /> 也越大）</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><strong>减函数</strong>（<Math tex="x" /> 越大，<Math tex="y" /> 反而越小）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">图像特征</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">向右急速上升，向左贴着 <Math tex="x" /> 轴走</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center">向左急速上升，向右贴着 <Math tex="x" /> 轴走</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">奇偶性</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}>非奇非偶（图像不关于原点或 <Math tex="y" /> 轴对称）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">对称</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}>底数互为倒数时（如 <Math tex="2" /> 和 <Math tex="\frac{1}{2}" />），图像关于 <Math tex="y" /> 轴对称</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">💡 一句话记住增减</p>
-              <p className="leading-7 text-lg text-center"><strong>底数比 1 大 → 增函数（越来越大），底数比 1 小 → 减函数（越来越小）</strong></p>
-            </div>
-
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-3">
-              <p className="font-bold text-purple-800 text-lg mb-1">� 怎么比较两个指数值的大小？</p>
-              <div className="leading-8">
-                <p className="font-bold">情况1：底数相同，比指数</p>
-                <p className="ml-4">例：<Math tex="2^3" /> 和 <Math tex="2^5" /> 谁大？</p>
-                <p className="ml-4">底数 2 &gt; 1 → 增函数 → 指数大的值大 → <Math tex="2^5 > 2^3" /></p>
-
-                <p className="font-bold mt-2">情况2：指数相同，比底数</p>
-                <p className="ml-4">例：<Math tex="2^3" /> 和 <Math tex="3^3" /> 谁大？</p>
-                <p className="ml-4">指数都是 3（正数），底数大的值大 → <Math tex="3^3 > 2^3" /></p>
-
-                <p className="font-bold mt-2">情况3：底数和指数都不同 → 借助 1 来中转</p>
-                <p className="ml-4">例：<Math tex="2^{0.3}" /> 和 <Math tex="0.3^2" /> 谁大？</p>
-                <p className="ml-4"><Math tex="2^{0.3}" />：底数 2 &gt; 1，指数 0.3 &gt; 0 → 结果 <strong>&gt; 1</strong></p>
-                <p className="ml-4"><Math tex="0.3^2" />：底数 0.3 &lt; 1，指数 2 &gt; 0 → 结果 <strong>&lt; 1</strong></p>
-                <p className="ml-4">所以 <Math tex="2^{0.3} > 1 > 0.3^2" /></p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">先认识三个名字（后面会反复用到）</div>
+              <div className="py-1 text-center text-lg">
+                <Math tex="y = {\underbrace{a}_{\mathclap{\text{底数（常数）}}}}{\vphantom{a}}^{\,\overbrace{x}^{\text{指数（变量）}}}" />
+              </div>
+              <div className="grid grid-cols-3 border-t border-gray-300">
+                <div className="px-1 py-0.5 text-center border-r border-gray-300">
+                  <p><strong>底数 <Math tex="a" /></strong>：固定不变的常数</p>
+                </div>
+                <div className="px-1 py-0.5 text-center border-r border-gray-300">
+                  <p><strong>指数 <Math tex="x" /></strong>：变量，写在右上角</p>
+                </div>
+                <div className="px-1 py-0.5 text-center">
+                  <p><strong><Math tex="y" /></strong>：函数值（结果）</p>
+                </div>
               </div>
             </div>
 
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">📌 比大小口诀</p>
-              <div className="leading-8">
-                <p><strong>同底比指数</strong>：底 &gt; 1 时，指数大的大；底 &lt; 1 时，指数大的反而小</p>
-                <p><strong>不同底</strong>：先各自和 1 比，能分出大小就行</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 text-gray-800 border-b border-gray-400 bg-gray-100 flex items-center justify-center gap-6">
+                <span>指数函数的标准形式</span>
+                <Math tex="\boldsymbol{y = a^x \quad (a > 0 \text{ 且 } a \neq 1)}" />
+              </div>
+              <div className="px-3 py-0.5">
+                <p><Math tex="a > 0" />：底数必须是<strong>正数</strong>。如果 <Math tex="a < 0" />，比如 <Math tex="(-2)^{0.5} = \sqrt{-2}" />，在实数范围内无意义</p>
+                <p className="pl-[3.9em]">如果 <Math tex="a = 0" />，比如 <Math tex="0^{-1} = \frac{1}{0}" />，同样无意义。只有 <Math tex="a > 0" /> 才能保证对任意实数 <Math tex="x" /> 都能算出结果</p>
+                <p><Math tex="a \neq 1" />：如果 <Math tex="a = 1" />，<Math tex="1^x" /> 永远等于 1，是条水平线，没研究价值</p>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📖 综合例题</p>
-              <div className="leading-8">
-                <p><strong>例1：</strong>比较 <Math tex="0.6^{-2}" />、<Math tex="0.6^3" />、<Math tex="2^{0.6}" /> 的大小</p>
-                <p className="ml-4"><Math tex="0.6^{-2}" />：底数 0.6 &lt; 1，指数 -2 &lt; 0 → 结果 <strong>&gt; 1</strong></p>
-                <p className="ml-4"><Math tex="0.6^3" />：底数 0.6 &lt; 1，指数 3 &gt; 0 → 结果 <strong>&lt; 1</strong></p>
-                <p className="ml-4"><Math tex="2^{0.6}" />：底数 2 &gt; 1，指数 0.6 &gt; 0 → 结果 <strong>&gt; 1</strong></p>
-                <p className="ml-4">再比两个 &gt; 1 的：<Math tex="0.6^{-2} = \frac{1}{0.36} \approx 2.78" />，<Math tex="2^{0.6} \approx 1.52" /></p>
-                <p className="text-green-700 font-bold">✅ <Math tex="0.6^{-2} > 2^{0.6} > 1 > 0.6^3" /></p>
-                <p className="mt-1"><strong>例2：</strong>比较 <Math tex="3^{0.5}" /> 和 <Math tex="3^{0.3}" /> 的大小</p>
-                <p className="ml-4">同底（3 &gt; 1）→ 增函数 → 指数大的值大 → <Math tex="3^{0.5} > 3^{0.3}" /> ✅</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">算几个值，看看规律</div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-0.5">
+                  <p className="font-bold mb-0.5"><Math tex="y = 2^x" />（<Math tex="\text{底数 } 2 > 1" />）</p>
+                  <table className="w-full border-collapse">
+                    <thead><tr className="bg-blue-50">
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="x" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">-2</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">-1</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">0</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">1</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">2</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">3</th>
+                    </tr></thead>
+                    <tbody><tr>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold"><Math tex="y" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\frac{1}{4}" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\frac{1}{2}" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold text-blue-700">1</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">2</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">4</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">8</td>
+                    </tr></tbody>
+                  </table>
+                  <p className="mt-0.5"><Math tex="x" /> 越大，<Math tex="y" /> 越大（<strong>增函数</strong>）</p>
+                </div>
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p className="font-bold mb-0.5"><Math tex="y = \left(\frac{1}{2}\right)^x" />（<Math tex="0 < \text{底数 } 0.5 < 1" />）</p>
+                  <table className="w-full border-collapse">
+                    <thead><tr className="bg-green-50">
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="x" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">-2</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">-1</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">0</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">1</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">2</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">3</th>
+                    </tr></thead>
+                    <tbody><tr>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold"><Math tex="y" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">4</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">2</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold text-green-700">1</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\frac{1}{2}" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\frac{1}{4}" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\frac{1}{8}" /></td>
+                    </tr></tbody>
+                  </table>
+                  <p className="mt-0.5"><Math tex="x" /> 越大，<Math tex="y" /> 越小（<strong>减函数</strong>）</p>
+                </div>
               </div>
             </div>
 
-            {/* ── 第4页：练习 ── */}
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-3 py-0.5">
+                <p><strong>特性</strong>：不管底数是多少，<Math tex="x = 0" /> 时 <Math tex="y" /> 都等于 1，因为任何正数的 0 次方都是 1，即 <Math tex="a^0 = 1" /></p>
+              </div>
+            </div>
+
             <PageBreak />
+            <div className="text-base">
+              <PracticeCard
+                title="即时练习：指数函数（7题）"
+                questions={elemFuncPractice2}
+                optionCols={4}
+                printOptionCols={4}
+                explanations={elementaryFuncExplanations}
+              />
+            </div>
 
-            {/* 即时练习 */}
-            <PracticeCard
-              title="✏️ 即时练习：指数函数（7题，含指数对数混合）"
-              questions={elemFuncPractice2}
-              printOptionCols={2}
-              explanations={elementaryFuncExplanations}
-            />
-
-            <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
-              <div className="space-y-0.5">
-                <p><strong>y 永远大于 0！</strong> <Math tex="2^{-100}" /> 虽然很小但仍然是正数，不会等于 0</p>
-                <p><strong>x = 0 时 y = 1！</strong> 不管底数是多少，<Math tex="a^0 = 1" />（这是"过定点 (0,1)"的意思）</p>
-                <p><strong>底数 &gt; 1 增，0 &lt; a &lt; 1 减！</strong> 这是最核心的一句话，记反了全错</p>
-              </div>
-            </CalloutCard>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🔗 知识串联：指数与对数的关系</p>
-              <div className="leading-8">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">知识串联：指数与对数的关系</div>
+              <div className="px-3 py-0.5">
                 <p>指数和对数是<strong>互逆运算</strong>，就像加法和减法、乘法和除法一样：</p>
-                <p className="text-center text-lg my-1"><Math tex="a^b = N \;\Longleftrightarrow\; \log_a N = b" /></p>
+                <p className="text-center my-0.5"><Math tex="a^b = N \;\Longleftrightarrow\; \log_a N = b" /></p>
                 <p>例：<Math tex="2^3 = 8 \;\Longleftrightarrow\; \log_2 8 = 3" />（"2 的 3 次方等于 8" ↔ "8 以 2 为底的对数是 3"）</p>
-                <p className="text-blue-700 font-bold">📌 记住这个关系，指数对数混合题就不难了！</p>
+                <p className="font-bold">记住这个关系，指数对数混合题就不难了！</p>
               </div>
             </div>
 
@@ -494,283 +662,233 @@ export function ElementaryFuncPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* Section 3: 对数函数 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="ef-log-func" className="mb-2 scroll-mt-4">
-        <Collapsible title="三、对数函数 — 🎯 画出图像，判断单调性，比较对数值的大小" defaultOpen storageKey="elem-func:log-func" headerExtra={<SpeakButton text={elemFuncNarrations.logarithmicFunc} />}>
-          <div className="space-y-0 text-gray-700">
+      <section id="ef-log-func" className="mb-0 scroll-mt-4">
+        <Collapsible title="四、对数函数" defaultOpen storageKey="elem-func:log-func" headerExtra={<SpeakButton text={elemFuncNarrations.logarithmicFunc} />}>
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* ── 第1页：什么是对数函数 + 列值表 + 草图 ── */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">🔑 什么是对数函数？先回忆指数函数</p>
-              <div className="leading-8">
-                <p>指数函数是"<strong>已知指数 x，求结果 y</strong>"：<Math tex="y = 2^x" />（折纸问题：折 x 次 → y 层）</p>
-                <p>对数函数反过来："<strong>已知结果 x，求指数 y</strong>"：<Math tex="y = \log_2 x" />（有 x 层 → 折了 y 次）</p>
-                <p>例：8 层纸折了几次？→ <Math tex="\log_2 8 = 3" />（因为 <Math tex="2^3 = 8" />）</p>
-                <p className="text-amber-700 font-bold">一句话：指数函数和对数函数<strong>互为逆运算</strong>，就像乘法和除法是一对！</p>
-              </div>
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">对数函数性质总结</div>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1 text-left">性质</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">底数 <Math tex="a" /> &gt; 1</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">0 &lt; 底数 <Math tex="a" /> &lt; 1</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold align-middle">图像</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><DebugGeo2dSvg data={logIncDiagram} width={140} height={108} /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><DebugGeo2dSvg data={logDecDiagram} width={140} height={108} /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">定义域</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}><Math tex="(0, +\infty)" />（<Math tex="x" /> 必须大于 0，负数和 0 没有对数）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">值域</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}><Math tex="\mathbb{R}" />（<Math tex="y" /> 可以是任何实数，正负都可以）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">过定点</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}><strong>所有对数函数都过点 <Math tex="(1, 0)" /></strong>（因为 <Math tex="\log_a 1 = 0" />，高考高频考点！）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">单调性</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><strong>增函数</strong>（<Math tex="x" /> 越大，<Math tex="y" /> 也越大）</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><strong>减函数</strong>（<Math tex="x" /> 越大，<Math tex="y" /> 反而越小）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold"><Math tex="y" /> 的正负</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="x > 1" /> 时 <Math tex="y > 0" />；<Math tex="0 < x < 1" /> 时 <Math tex="y < 0" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="x > 1" /> 时 <Math tex="y < 0" />；<Math tex="0 < x < 1" /> 时 <Math tex="y > 0" /></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">� 对数函数的标准形式</p>
-              <p className="text-center text-lg leading-8"><Math tex="y = \log_a x \quad (a > 0 \text{ 且 } a \neq 1)" /></p>
-              <div className="leading-7 mt-1">
-                <p className="ml-4"><Math tex="a" /> 叫<strong>底数</strong>，<Math tex="x" /> 叫<strong>真数</strong>（就是"真正要算的数"）</p>
-                <p className="ml-4"><Math tex="a > 0" /> 且 <Math tex="a \neq 1" />：和指数函数一样的限制</p>
-                <p className="ml-4"><strong>注意</strong>：真数 <Math tex="x > 0" />！负数和 0 没有对数（这是对数函数最大的特点）</p>
-                <div className="grid grid-cols-2 gap-2 mt-1">
-                  <p>✅ 是：<Math tex="y = \log_2 x" />、<Math tex="y = \lg x" />、<Math tex="y = \ln x" /></p>
-                  <p>❌ 不是：<Math tex="y = \log_1 x" />、<Math tex="y = \log_{-2} x" /></p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">先认识三个名字（后面会反复用到）</div>
+              <div className="py-1 text-center text-lg">
+                <Math tex="y = \log_{\underbrace{a}_{\mathclap{\text{底数（常数）}}}} \overbrace{x}^{\text{真数（变量）}}" />
+              </div>
+              <div className="grid grid-cols-3 border-t border-gray-300">
+                <div className="px-1 py-0.5 text-center border-r border-gray-300">
+                  <p><strong>底数 <Math tex="a" /></strong>：写在 log 右下角的常数</p>
+                </div>
+                <div className="px-1 py-0.5 text-center border-r border-gray-300">
+                  <p><strong>真数 <Math tex="x" /></strong>：log 后面跟着的数，是变量</p>
+                </div>
+                <div className="px-1 py-0.5 text-center">
+                  <p><strong><Math tex="y" /></strong>：对数值（结果）</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">� 算几个值，找规律</p>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="font-bold text-blue-700 mb-1"><Math tex="y = \log_2 x" />（底数 2 &gt; 1）</p>
-                  <table className="w-full text-base border-collapse">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 text-gray-800 border-b border-gray-400 bg-gray-100 flex items-center justify-center gap-6">
+                <span>对数函数的标准形式</span>
+                <Math tex="\boldsymbol{y = \log_a x \quad (a > 0 \text{ 且 } a \neq 1,\ x > 0)}" />
+              </div>
+              <div className="px-3 py-0.5">
+                <p><Math tex="a > 0" /> 且 <Math tex="a \neq 1" />：和指数函数一样的限制（因为对数是指数的逆运算）</p>
+                <p><Math tex="x > 0" />：<strong>真数必须是正数</strong>。原因是 <Math tex="\log_2 x" /> 问"2 的几次方等于 <Math tex="x" />"，而底数永远大于 0 且不等于 1，所以 <Math tex="x" /> 不可能为 0 或负数</p>
+                <p>常用简写：<Math tex="\lg x = \log_{10} x" />（以 10 为底），<Math tex="\ln x = \log_e x" />（以 <Math tex="e \approx 2.718" /> 为底）</p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">算几个值，看看规律</div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="px-3 py-0.5">
+                  <p className="font-bold mb-0.5"><Math tex="y = \log_2 x" />（底数 2，比 1 大）</p>
+                  <table className="w-full border-collapse">
                     <thead><tr className="bg-blue-50">
-                      <th className="border border-blue-200 px-2 py-1"><Math tex="x" /></th>
-                      <th className="border border-blue-200 px-2 py-1"><Math tex="\frac{1}{4}" /></th>
-                      <th className="border border-blue-200 px-2 py-1"><Math tex="\frac{1}{2}" /></th>
-                      <th className="border border-blue-200 px-2 py-1">1</th>
-                      <th className="border border-blue-200 px-2 py-1">2</th>
-                      <th className="border border-blue-200 px-2 py-1">4</th>
-                      <th className="border border-blue-200 px-2 py-1">8</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="x" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\tfrac{1}{4}" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\tfrac{1}{2}" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">1</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">2</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">4</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">8</th>
                     </tr></thead>
                     <tbody><tr>
-                      <td className="border border-gray-200 px-2 py-1 font-bold"><Math tex="y" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">-2</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">-1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center font-bold text-blue-700">0</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">2</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">3</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold"><Math tex="y" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">-2</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">-1</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold text-blue-700">0</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">1</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">2</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">3</td>
                     </tr></tbody>
                   </table>
-                  <p className="text-gray-500">→ x 越大 y 也越大，<strong>递增</strong>！x=1 时 y=0</p>
+                  <p className="mt-0.5"><Math tex="x" /> 越大，<Math tex="y" /> 越大（<strong>增函数</strong>）</p>
                 </div>
-                <div>
-                  <p className="font-bold text-green-700 mb-1"><Math tex="y = \log_{0.5} x" />（底数 0.5 &lt; 1）</p>
-                  <table className="w-full text-base border-collapse">
+                <div className="w-px bg-gray-300"></div>
+                <div className="px-3 py-0.5">
+                  <p className="font-bold mb-0.5"><Math tex="y = \log_{0.5} x" />（底数 0.5，比 1 小）</p>
+                  <table className="w-full border-collapse">
                     <thead><tr className="bg-green-50">
-                      <th className="border border-green-200 px-2 py-1"><Math tex="x" /></th>
-                      <th className="border border-green-200 px-2 py-1"><Math tex="\frac{1}{4}" /></th>
-                      <th className="border border-green-200 px-2 py-1"><Math tex="\frac{1}{2}" /></th>
-                      <th className="border border-green-200 px-2 py-1">1</th>
-                      <th className="border border-green-200 px-2 py-1">2</th>
-                      <th className="border border-green-200 px-2 py-1">4</th>
-                      <th className="border border-green-200 px-2 py-1">8</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="x" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\tfrac{1}{4}" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center"><Math tex="\tfrac{1}{2}" /></th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">1</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">2</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">4</th>
+                      <th className="border border-gray-300 px-1.5 py-0.5 text-center">8</th>
                     </tr></thead>
                     <tbody><tr>
-                      <td className="border border-gray-200 px-2 py-1 font-bold"><Math tex="y" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">2</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center font-bold text-green-700">0</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">-1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">-2</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">-3</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold"><Math tex="y" /></td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">2</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">1</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center font-bold text-green-700">0</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">-1</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">-2</td>
+                      <td className="border border-gray-300 px-1.5 py-0.5 text-center">-3</td>
                     </tr></tbody>
                   </table>
-                  <p className="text-gray-500">→ x 越大 y 反而越小，<strong>递减</strong>！x=1 时 y=0</p>
+                  <p className="mt-0.5"><Math tex="x" /> 越大，<Math tex="y" /> 越小（<strong>减函数</strong>）</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-2">
-              <p className="font-bold text-gray-800 mb-1">📚 先学几个术语（和指数函数对比记）</p>
-              <div className="leading-8">
-                <p><strong>真数</strong> = 对数里面的那个数（<Math tex="\log_2 \textcolor{red}{8}" /> 中的 8）。真数必须 &gt; 0！</p>
-                <p><strong>定义域</strong> = x 可以取哪些值。对数函数的 x 只能是正数（写成 <Math tex="(0, +\infty)" />）</p>
-                <p><strong>值域</strong> = y 的范围。对数函数的 y 可以是任何实数（<Math tex="\mathbb{R}" />）</p>
-                <p><strong>常用简写</strong>：<Math tex="\lg x = \log_{10} x" />（以 10 为底），<Math tex="\ln x = \log_e x" />（以 e≈2.718 为底）</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-3 py-0.5">
+                <p><strong>特性</strong>：不管底数是多少，<Math tex="x = 1" /> 时 <Math tex="y" /> 都等于 0，因为任何正数的对数在真数为 1 时都是 0，即 <Math tex="\log_a 1 = 0" /></p>
               </div>
             </div>
 
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">❓ 为什么 x 必须大于 0？</p>
-              <div className="leading-8">
-                <p><Math tex="\log_2 x" /> 问的是"2 的几次方等于 x"。2 的任何次方都是<strong>正数</strong>，所以 x 不可能是 0 或负数</p>
-                <p>例：<Math tex="\log_2(-4)" /> = ?（2 的几次方等于 -4？不存在！）→ <strong>无意义</strong></p>
-              </div>
-            </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">✏️ 怎么画对数函数的草图？（3步搞定）</p>
-              <div className="grid gap-3" style={{ gridTemplateColumns: '2fr 1fr' }}>
-                <div className="leading-8">
-                  <p><strong>第①步</strong>：先描点 <Math tex="(1, 0)" />（所有对数函数都过这个点，因为 <Math tex="\log_a 1 = 0" />）</p>
-                  <p><strong>第②步</strong>：再描 <Math tex="(a, 1)" />（把 x=a 代入，y=1，因为 <Math tex="\log_a a = 1" />）</p>
-                  <p><strong>第③步</strong>：底数 &gt; 1 → 曲线从左下往右上；底数 &lt; 1 → 曲线从左上往右下</p>
-                  <p className="text-gray-500">记住：曲线只在 y 轴<strong>右边</strong>（x &gt; 0），且会穿过 x 轴</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">怎么比较两个对数值的大小？— 估值定位法（万能）</div>
+              <div className="px-3 py-0.5">
+                <p><strong>核心思路</strong>：找到底数的哪两个连续幂把真数夹住，对应的指数就是值的范围</p>
+                <p className="pl-4">例如 <Math tex="\log_2 5" />：找到 <Math tex="2^2\!=\!4 < 5 < 8\!=\!2^3" />，取对数得 <Math tex="2 < \log_2 5 < 3" /></p>
+              </div>
+              <div className="grid grid-cols-[1fr_auto_1fr]">
+                <div className="pl-3 py-0.5">
+                  <p><strong>例1：</strong>比较 <Math tex="\log_2 3" /> 和 <Math tex="\log_3 2" /></p>
+                  <p className="pl-4"><Math tex="\log_2 3" />：<Math tex="2^1\!=\!2 < 3 < 4\!=\!2^2" />，值在 1 到 2 之间（<strong>大于 1</strong>）</p>
+                  <p className="pl-4"><Math tex="\log_3 2" />：<Math tex="1 < 2 < 3\!=\!3^1" />，值在 0 到 1 之间（<strong>小于 1</strong>）</p>
+                  <p className="pl-4">一个大于 1 一个小于 1，得 <Math tex="\log_2 3 > \log_3 2" /></p>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="rounded-lg overflow-hidden border border-blue-200">
-                    <Mafs viewBox={{ x: [-0.5, 5], y: [-3, 3] }} height={70}>
-                      <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
-                      <Plot.OfX y={(x: number) => x > 0.01 ? globalThis.Math.log2(x) : -10} color="#3b82f6" weight={2.5} />
-                      <Point x={1} y={0} color="#ef4444" />
-                      <Point x={2} y={1} color="#f59e0b" />
-                    </Mafs>
-                    <p className="text-center text-xs text-blue-600 py-0.5">a&gt;1 增</p>
-                  </div>
-                  <div className="rounded-lg overflow-hidden border border-green-200">
-                    <Mafs viewBox={{ x: [-0.5, 5], y: [-3, 3] }} height={70}>
-                      <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
-                      <Plot.OfX y={(x: number) => x > 0.01 ? -globalThis.Math.log2(x) : 10} color="#22c55e" weight={2.5} />
-                      <Point x={1} y={0} color="#ef4444" />
-                      <Point x={0.5} y={1} color="#f59e0b" />
-                    </Mafs>
-                    <p className="text-center text-xs text-green-600 py-0.5">a&lt;1 减</p>
-                  </div>
+                <div className="w-px bg-gray-300 self-stretch"></div>
+                <div className="pr-3 py-0.5">
+                  <p><strong>例2：</strong>比较 <Math tex="\log_2 5" /> 和 <Math tex="\log_2 3" /></p>
+                  <p className="pl-4"><Math tex="\log_2 5" />：<Math tex="2^2\!=\!4 < 5 < 8\!=\!2^3" />，值在 2 到 3 之间</p>
+                  <p className="pl-4"><Math tex="\log_2 3" />：<Math tex="2^1\!=\!2 < 3 < 4\!=\!2^2" />，值在 1 到 2 之间</p>
+                  <p className="pl-4">一个大于 2 一个小于 2，得 <Math tex="\log_2 5 > \log_2 3" /></p>
                 </div>
               </div>
             </div>
 
-            {/* ── 第2页：性质 + 比大小 + 对比 + 综合例题 ── */}
-            <PageBreak />
-            <div>
-              <p className="font-bold text-gray-800 mb-2">📖 对数函数性质总结</p>
-              <table className="w-full text-base border-collapse">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">定位后区间相同怎么办？— 记住 lg2 和 lg3，换底硬算</div>
+              <div className="px-3 py-0.5">
+                <p>只需记住两个数：<Math tex="\lg 2 \approx 0.30" />，<Math tex="\lg 3 \approx 0.48" />，然后利用对数法则，其他都能推出来：</p>
+                <div className="grid grid-cols-2 pl-4">
+                  <p><Math tex="\lg 4 = \lg 2 + \lg 2 = 0.60" /></p>
+                  <p><Math tex="\lg 5 = \lg \tfrac{10}{2} = \lg 10 - \lg 2 = 1 - \lg 2 = 0.70" /></p>
+                  <p><Math tex="\lg 6 = \lg 2 + \lg 3 = 0.78" /></p>
+                  <p><Math tex="\lg 8 = 3\lg 2 = 0.90" /></p>
+                  <p><Math tex="\lg 9 = 2\lg 3 = 0.96" /></p>
+                </div>
+                <p className="border-t border-gray-300 pt-0.5 mt-0.5">例：比较 <Math tex="\log_5 8" /> 和 <Math tex="\log_7 11" />。先定位：都在 1 到 2 之间，分不出来</p>
+                <p className="pl-4">换底硬算：<Math tex="\log_5 8 = \dfrac{\lg 8}{\lg 5} = \dfrac{0.90}{0.70} \approx 1.29" />，<Math tex="\log_7 11 = \dfrac{\lg 11}{\lg 7} \approx \dfrac{1.04}{0.85} \approx 1.22" /></p>
+                <p className="pl-4">得 <Math tex="\log_5 8 > \log_7 11" /></p>
+                <p className="border-t border-gray-300 pt-0.5 mt-0.5"><strong>试一试</strong>：</p>
+                <p className="pl-4">①  比较 <Math tex="\log_2 3" /> 和 <Math tex="\log_3 5" /> 的大小</p>
+                <p className="pl-4">②  比较 <Math tex="\log_4 6" /> 和 <Math tex="\log_3 4" /> 的大小</p>
+              </div>
+            </div>
+
+            <p className="font-bold text-center my-2">记忆口诀：先定位（跟 0、1、2 比），分不出就换底硬算（记住 lg2 和 lg3）</p>
+
+
+            <div className="text-base">
+              <PracticeCard
+                title="即时练习：对数函数（7题）"
+                questions={elemFuncPractice3}
+                optionCols={4}
+                printOptionCols={4}
+                explanations={elementaryFuncExplanations}
+              />
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">指数函数 vs 对数函数——对比记忆</div>
+              <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-purple-50">
-                    <th className="border border-purple-200 px-2 py-1 text-left text-purple-700">看什么</th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">底数 &gt; 1（如 2, 3, 10）</th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">底数 &lt; 1（如 0.5, 0.3）</th>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1 text-left"></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">指数函数 <Math tex="y = a^x" /></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">对数函数 <Math tex="y = \log_a x" /></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">x 能取什么值？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center" colSpan={2}><Math tex="(0, +\infty)" />（x 必须 &gt; 0，负数和 0 没有对数！）</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">y 的范围？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center" colSpan={2}><Math tex="\mathbb{R}" />（y 可以是任何实数，正负都行）</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">定义域</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="(0, +\infty)" /></td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">过定点？ ⭐</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center" colSpan={2}>所有对数函数都过点 <strong>(1, 0)</strong>（因为 <Math tex="\log_a 1 = 0" />，高频考点！）</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">增还是减？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-blue-700"><strong>增函数</strong>（x 大 → y 大）</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-green-700"><strong>减函数</strong>（x 大 → y 小）</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">值域</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="(0, +\infty)" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">y 的正负？</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="x > 1" /> 时 y &gt; 0，<Math tex="x < 1" /> 时 y &lt; 0</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="x > 1" /> 时 y &lt; 0，<Math tex="x < 1" /> 时 y &gt; 0</td>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">过定点</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="(0, 1)" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="(1, 0)" /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 font-bold">单调性</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center" colSpan={2}><Math tex="a > 1" /> 增，<Math tex="0 < a < 1" /> 减（<strong>规则完全一样</strong>）</td>
                   </tr>
                 </tbody>
               </table>
-            </div>
-
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">💡 一句话记住增减</p>
-              <p className="text-center text-lg leading-8">底数比 1 大 → <strong>增函数</strong>（和指数函数一样的规则！）</p>
-              <p className="text-center text-lg leading-8">底数比 1 小 → <strong>减函数</strong>（和指数函数一样的规则！）</p>
-            </div>
-
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">💎 怎么比较两个对数值的大小？</p>
-              <div className="leading-8">
-                <p><strong>情况1：同底数，比真数</strong></p>
-                <p className="ml-4">例：<Math tex="\log_2 5" /> 和 <Math tex="\log_2 3" /> 谁大？</p>
-                <p className="ml-4">底数 2 &gt; 1 → 增函数 → 真数大的值大 → <Math tex="\log_2 5 > \log_2 3" /></p>
-                <p><strong>情况2：不同底数 → 借助特殊值（0 或 1）</strong></p>
-                <p className="ml-4">例：<Math tex="\log_2 3" /> 和 <Math tex="\log_3 2" /> 谁大？</p>
-                <p className="ml-4"><Math tex="\log_2 3 > \log_2 2 = 1" />，而 <Math tex="\log_3 2 < \log_3 3 = 1" /></p>
-                <p className="ml-4">所以 <Math tex="\log_2 3 > 1 > \log_3 2" /></p>
-              </div>
-            </div>
-
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">� 指数函数 vs 对数函数——对比记忆</p>
-              <table className="w-full text-base border-collapse">
-                <thead>
-                  <tr className="bg-purple-100">
-                    <th className="border border-purple-200 px-2 py-1 text-purple-700"></th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">指数函数 <Math tex="y = a^x" /></th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">对数函数 <Math tex="y = \log_a x" /></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">定义域</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(0, +\infty)" /></td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">值域</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(0, +\infty)" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">过定点</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(0, 1)" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(1, 0)" /></td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">单调性</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center" colSpan={2}><Math tex="a > 1" /> 增，<Math tex="0 < a < 1" /> 减（<strong>规则完全一样！</strong>）</td>
-                  </tr>
-                </tbody>
-              </table>
-              <p className="text-purple-700 font-bold mt-1 text-center">定义域和值域<strong>互换</strong>！过的定点 x 和 y <strong>互换</strong>！</p>
-            </div>
-
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📖 综合例题</p>
-              <div className="leading-8">
-                <p><strong>例1：</strong>比较 <Math tex="\log_3 5" />、<Math tex="\log_3 0.5" />、<Math tex="\log_{0.5} 3" /> 的大小</p>
-                <p className="ml-4"><Math tex="\log_3 5" />：底数 3 &gt; 1，真数 5 &gt; 1 → 结果 <strong>&gt; 0</strong></p>
-                <p className="ml-4"><Math tex="\log_3 0.5" />：底数 3 &gt; 1，真数 0.5 &lt; 1 → 结果 <strong>&lt; 0</strong></p>
-                <p className="ml-4"><Math tex="\log_{0.5} 3" />：底数 0.5 &lt; 1，真数 3 &gt; 1 → 结果 <strong>&lt; 0</strong></p>
-                <p className="ml-4">再比两个 &lt; 0 的：<Math tex="\log_3 0.5 \approx -0.63" />，<Math tex="\log_{0.5} 3 \approx -1.58" /></p>
-                <p className="text-green-700 font-bold">✅ <Math tex="\log_3 5 > 0 > \log_3 0.5 > \log_{0.5} 3" /></p>
-                <p className="mt-1"><strong>例2：</strong>求 <Math tex="y = \log_2(x - 1)" /> 的定义域</p>
-                <p className="ml-4">对数里面（真数）必须 &gt; 0 → <Math tex="x - 1 > 0" /> → <Math tex="x > 1" /> → 定义域 <Math tex="(1, +\infty)" /> ✅</p>
-              </div>
-            </div>
-
-            {/* ── 第3页：练习 ── */}
-            <PageBreak />
-
-            <PracticeCard
-              title="✏️ 即时练习：对数函数（7题，含指数对数混合）"
-              questions={elemFuncPractice3}
-              printOptionCols={2}
-              explanations={elementaryFuncExplanations}
-            />
-
-            <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
-              <div className="space-y-0.5">
-                <p><strong>定义域不是 R！</strong> 对数函数定义域是 <Math tex="(0, +\infty)" />，x 必须大于 0，这是最容易丢分的地方</p>
-                <p><strong>判断正负看 1！</strong> x=1 是分界线：底数 &gt; 1 时，真数 &gt; 1 对数为正，真数 &lt; 1 对数为负</p>
-                <p><strong>减函数比较要反！</strong> 底数在 (0,1) 时是减函数：真数大 → 对数值反而小</p>
-                <p><strong>过定点记清楚！</strong> 指数函数过 (0,1)，对数函数过 (1,0)，别搞混！</p>
-              </div>
-            </CalloutCard>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <table className="w-full text-base border-collapse">
-                <thead>
-                  <tr className="bg-blue-100">
-                    <th className="border border-blue-200 px-2 py-1 text-blue-700">常用对数值</th>
-                    <th className="border border-blue-200 px-2 py-1 text-blue-700">结果</th>
-                    <th className="border border-blue-200 px-2 py-1 text-blue-700">理由</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td className="border border-gray-200 px-2 py-1"><Math tex="\log_a 1" /></td><td className="border border-gray-200 px-2 py-1 text-center font-bold">0</td><td className="border border-gray-200 px-2 py-1"><Math tex="a^0 = 1" /></td></tr>
-                  <tr className="bg-gray-50"><td className="border border-gray-200 px-2 py-1"><Math tex="\log_a a" /></td><td className="border border-gray-200 px-2 py-1 text-center font-bold">1</td><td className="border border-gray-200 px-2 py-1"><Math tex="a^1 = a" /></td></tr>
-                  <tr><td className="border border-gray-200 px-2 py-1"><Math tex="\lg 10" /></td><td className="border border-gray-200 px-2 py-1 text-center font-bold">1</td><td className="border border-gray-200 px-2 py-1"><Math tex="10^1 = 10" /></td></tr>
-                  <tr className="bg-gray-50"><td className="border border-gray-200 px-2 py-1"><Math tex="\ln e" /></td><td className="border border-gray-200 px-2 py-1 text-center font-bold">1</td><td className="border border-gray-200 px-2 py-1"><Math tex="e^1 = e" /></td></tr>
-                  <tr className="bg-gray-50"><td className="border border-gray-200 px-2 py-1"><Math tex="\log_2 8" /></td><td className="border border-gray-200 px-2 py-1 text-center font-bold">3</td><td className="border border-gray-200 px-2 py-1"><Math tex="2^3 = 8" /></td></tr>
-                </tbody>
-              </table>
+              <div className="px-3 py-0.5 border-t border-gray-300 text-center"><strong>定义域和值域互换；过的定点 <Math tex="x" /> 和 <Math tex="y" /> 互换</strong></div>
             </div>
 
           </div>
@@ -780,120 +898,105 @@ export function ElementaryFuncPage() {
       {/* ════════════════════════════════════════════════════════════ */}
       {/* Section 4: 幂函数 */}
       {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="ef-power-func" className="mb-2 scroll-mt-4">
-        <Collapsible title="四、幂函数 — 🎯 区分幂函数和指数函数，掌握 5 种常考幂函数" defaultOpen storageKey="elem-func:power-func" headerExtra={<SpeakButton text={elemFuncNarrations.powerFunc} />}>
-          <div className="space-y-0 text-gray-700">
+      <section id="ef-power-func" className="mb-0 scroll-mt-4">
+        <Collapsible title="五、幂函数" defaultOpen storageKey="elem-func:power-func" headerExtra={<SpeakButton text={elemFuncNarrations.powerFunc} />}>
+          <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-            {/* ── 第1页：什么是幂函数 + 区分 + 5种表 ── */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">🔑 你其实早就认识幂函数了！</p>
-              <div className="leading-8">
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">你其实早就认识幂函数了！</div>
+              <div className="px-3 py-0.5">
                 <p><Math tex="y = x" />（正比例函数）、<Math tex="y = x^2" />（抛物线）、<Math tex="y = \frac{1}{x}" />（反比例）—— 这些都是<strong>幂函数</strong>！</p>
-                <p>它们的共同特点：<strong>底数是 x（变量）</strong>，指数是一个<strong>固定的常数</strong></p>
+                <p>它们的共同特点：<strong>底数是 <Math tex="x" />（变量）</strong>，指数是一个<strong>固定的常数</strong></p>
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">� 幂函数的标准形式</p>
-              <p className="text-center text-lg leading-8"><Math tex="y = x^{\alpha} \quad (\alpha \text{ 是常数})" /></p>
-              <div className="leading-7 mt-1">
-                <p className="ml-4"><Math tex="x" /> 是底数（<strong>变量</strong>），<Math tex="\alpha" /> 是指数（<strong>常数</strong>）</p>
-                <p className="ml-4">和指数函数 <Math tex="y = a^x" /> 正好<strong>反过来</strong>：指数函数底数是常数、指数是变量</p>
-                <div className="grid grid-cols-2 gap-2 mt-1">
-                  <p>✅ 是：<Math tex="y = x^3" />、<Math tex="y = \sqrt{x}" />、<Math tex="y = \frac{1}{x}" /></p>
-                  <p>❌ 不是：<Math tex="y = 2x^2" />（系数<Math tex="\neq 1" />）、<Math tex="y = x^2 + 1" />（多了<Math tex="+1" />）</p>
-                </div>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">幂函数的标准形式</div>
+              <div className="px-3 py-0.5 border-b border-gray-300 bg-blue-50 text-center">
+                <Math tex="y = x^{\alpha} \quad (\alpha \text{ 是常数})" />
+              </div>
+              <div className="px-3 py-0.5">
+                <p><Math tex="x" /> 是底数（<strong>变量</strong>），<Math tex="\alpha" /> 是指数（<strong>常数</strong>）</p>
+                <p><strong>系数必须是 <Math tex="1" /></strong>：形如 <Math tex="y = 2x^2" />、<Math tex="y = -x^2" /> 的都不是幂函数，也不能有 <Math tex="+1" />、<Math tex="-3" /> 等加减项</p>
+                <p>和指数函数 <Math tex="y = a^x" /> 正好<strong>反过来</strong>：指数函数底数是常数、指数是变量</p>
               </div>
             </div>
 
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">🤔 三种函数长得很像，怎么区分？</p>
-              <div className="leading-8">
-                <p><strong>指数函数</strong> <Math tex="y = 2^x" />：底数是常数（2），指数是变量（x）→ <strong>常数在下</strong></p>
-                <p><strong>幂函数</strong> <Math tex="y = x^2" />：底数是变量（x），指数是常数（2）→ <strong>常数在上</strong></p>
-                <p><strong>对数函数</strong> <Math tex="y = \log_2 x" />：用对数连接</p>
-                <p className="text-red-700 font-bold">口诀：常数在上 = 幂函数，常数在下 = 指数函数</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">幂函数 vs 指数函数长得很像，怎么区分？</div>
+              <div className="px-3 py-0.5">
+                <p><strong>指数函数</strong> <Math tex="y = 2^x" />：底数是常数（<Math tex="2" />），指数是变量（<Math tex="x" />），即 <strong>常数在下</strong></p>
+                <p><strong>幂函数</strong> <Math tex="y = x^2" />：底数是变量（<Math tex="x" />），指数是常数（<Math tex="2" />），即 <strong>常数在上</strong></p>
+                <p className="font-bold">口诀：常数在上 = 幂函数，常数在下 = 指数函数</p>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📖 高中常考的 5 种幂函数（都是老朋友）</p>
-              <table className="w-full text-base border-collapse">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">高中常考的 5 种幂函数（都是老朋友）</div>
+              <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-purple-50">
-                    <th className="border border-purple-200 px-2 py-1 text-purple-700"><Math tex="\alpha" /></th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">函数</th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">你认识它吗？</th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">定义域</th>
-                    <th className="border border-purple-200 px-2 py-1 text-center text-purple-700">在 <Math tex="(0,+\infty)" /></th>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1"><Math tex="\alpha" /></th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">函数</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">你认识它吗？</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">定义域</th>
+                    <th className="border border-gray-300 px-2 py-1 text-center">在 <Math tex="(0,+\infty)" /></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 text-center">1</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = x" /></td>
-                    <td className="border border-gray-200 px-2 py-1">正比例函数（直线）</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-blue-700">增</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 text-center">2</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = x^2" /></td>
-                    <td className="border border-gray-200 px-2 py-1">抛物线（二次函数）</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-blue-700">增</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="1" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = x" /></td>
+                    <td className="border border-gray-300 px-2 py-1">正比例函数（直线）</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center text-blue-700">增</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 text-center">3</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = x^3" /></td>
-                    <td className="border border-gray-200 px-2 py-1">三次曲线</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-blue-700">增</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\frac{1}{2}" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = \sqrt{x}" /></td>
-                    <td className="border border-gray-200 px-2 py-1">开根号</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="[0, +\infty)" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-blue-700">增</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="2" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = x^2" /></td>
+                    <td className="border border-gray-300 px-2 py-1">抛物线（二次函数）</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center text-blue-700">增</td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-200 px-2 py-1 text-center">-1</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = \dfrac{1}{x}" /></td>
-                    <td className="border border-gray-200 px-2 py-1">反比例函数</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="x \neq 0" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center text-red-600">减</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="3" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = x^3" /></td>
+                    <td className="border border-gray-300 px-2 py-1">三次曲线</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\mathbb{R}" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center text-blue-700">增</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="\frac{1}{2}" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = \sqrt{x}" /></td>
+                    <td className="border border-gray-300 px-2 py-1">开根号</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="[0, +\infty)" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center text-blue-700">增</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="-1" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = \dfrac{1}{x}" /></td>
+                    <td className="border border-gray-300 px-2 py-1">反比例函数</td>
+                    <td className="border border-gray-300 px-2 py-1 text-center"><Math tex="x \neq 0" /></td>
+                    <td className="border border-gray-300 px-2 py-1 text-center text-red-600">减</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">❓ 为什么定义域不统一？</p>
-              <div className="leading-8">
-                <p><Math tex="y = x^2" />：任何数都能平方 → 定义域 <Math tex="\mathbb{R}" /></p>
-                <p><Math tex="y = \sqrt{x}" />：负数不能开根号 → 定义域 <Math tex="[0, +\infty)" /></p>
-                <p><Math tex="y = \frac{1}{x}" />：分母不能为 0 → 定义域 <Math tex="x \neq 0" /></p>
-                <p className="text-green-700 font-bold">结论：幂函数的定义域取决于 <Math tex="\alpha" /> 的值，没有统一答案！但都在 <Math tex="(0,+\infty)" /> 上有定义</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">为什么定义域不统一？</div>
+              <div className="px-3 py-0.5">
+                <p><Math tex="y = x^2" />：任何数都能平方 <Math tex="\Longrightarrow" /> 定义域 <Math tex="\mathbb{R}" /></p>
+                <p><Math tex="y = \sqrt{x}" />：负数不能开根号 <Math tex="\Longrightarrow" /> 定义域 <Math tex="[0, +\infty)" /></p>
+                <p><Math tex="y = \frac{1}{x}" />：分母不能为 <Math tex="0" /> <Math tex="\Longrightarrow" /> 定义域 <Math tex="x \neq 0" /></p>
+                <p className="font-bold">结论：幂函数的定义域取决于 <Math tex="\alpha" /> 的值，没有统一答案！但都在 <Math tex="(0,+\infty)" /> 上有定义</p>
               </div>
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-2">
-              <p className="font-bold text-gray-800 mb-1">⚠️ 幂函数的形式要求很严格</p>
-              <div className="leading-8">
-                <p>幂函数必须是 <Math tex="y = x^{\alpha}" /> 的<strong>纯粹形式</strong>：系数只能是 1，不能有额外的加减</p>
-                <p><Math tex="y = 2x^3" /> ❌（系数是 2）　<Math tex="y = -x^2" /> ❌（系数是 -1）　<Math tex="y = x^2 + 3" /> ❌（多了 +3）</p>
-              </div>
-            </div>
-
-            {/* ── 第2页：图像 + 性质 + 综合例题 ── */}
-            <PageBreak />
-
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📊 5种幂函数的图像长什么样？</p>
-              <div className="grid grid-cols-5 gap-1">
-                <div className="rounded-lg overflow-hidden border border-gray-200 text-center">
+            <div className="border border-gray-400 rounded overflow-hidden">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">5种幂函数的图像长什么样？</div>
+              <div className="grid grid-cols-5 gap-1 p-1">
+                <div className="rounded overflow-hidden border border-gray-200 text-center">
                   <Mafs viewBox={{ x: [-2, 3], y: [-2, 3] }} height={100}>
                     <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
                     <Plot.OfX y={(x: number) => x} color="#6b7280" weight={2.5} />
@@ -901,7 +1004,7 @@ export function ElementaryFuncPage() {
                   </Mafs>
                   <p className="text-xs py-0.5"><Math tex="y = x" /></p>
                 </div>
-                <div className="rounded-lg overflow-hidden border border-blue-200 text-center">
+                <div className="rounded overflow-hidden border border-blue-200 text-center">
                   <Mafs viewBox={{ x: [-2, 2], y: [-0.5, 4] }} height={100}>
                     <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
                     <Plot.OfX y={(x: number) => x ** 2} color="#3b82f6" weight={2.5} />
@@ -909,7 +1012,7 @@ export function ElementaryFuncPage() {
                   </Mafs>
                   <p className="text-xs py-0.5"><Math tex="y = x^2" /></p>
                 </div>
-                <div className="rounded-lg overflow-hidden border border-purple-200 text-center">
+                <div className="rounded overflow-hidden border border-purple-200 text-center">
                   <Mafs viewBox={{ x: [-1.5, 1.5], y: [-3, 3] }} height={100}>
                     <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
                     <Plot.OfX y={(x: number) => x ** 3} color="#8b5cf6" weight={2.5} />
@@ -917,7 +1020,7 @@ export function ElementaryFuncPage() {
                   </Mafs>
                   <p className="text-xs py-0.5"><Math tex="y = x^3" /></p>
                 </div>
-                <div className="rounded-lg overflow-hidden border border-green-200 text-center">
+                <div className="rounded overflow-hidden border border-green-200 text-center">
                   <Mafs viewBox={{ x: [-0.5, 4], y: [-0.5, 3] }} height={100}>
                     <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
                     <Plot.OfX y={(x: number) => x > 0 ? x ** 0.5 : NaN} color="#22c55e" weight={2.5} />
@@ -925,7 +1028,7 @@ export function ElementaryFuncPage() {
                   </Mafs>
                   <p className="text-xs py-0.5"><Math tex="y = \sqrt{x}" /></p>
                 </div>
-                <div className="rounded-lg overflow-hidden border border-red-200 text-center">
+                <div className="rounded overflow-hidden border border-red-200 text-center">
                   <Mafs viewBox={{ x: [-0.5, 4], y: [-1, 5] }} height={100}>
                     <Coordinates.Cartesian xAxis={{ lines: false, labels: () => '' }} yAxis={{ lines: false, labels: () => '' }} />
                     <Plot.OfX y={(x: number) => x > 0.08 ? 1 / x : NaN} color="#ef4444" weight={2.5} />
@@ -934,12 +1037,12 @@ export function ElementaryFuncPage() {
                   <p className="text-xs py-0.5"><Math tex="y = \frac{1}{x}" /></p>
                 </div>
               </div>
-              <p className="text-gray-500 text-center text-xs mt-0.5">红色点 = 公共定点 <Math tex="(1, 1)" />，前4个 <Math tex="\alpha > 0" /> 递增，最后1个 <Math tex="\alpha < 0" /> 递减</p>
+              <div className="px-3 py-0.5 border-t border-gray-300 text-center">红色点 = 公共定点 <Math tex="(1, 1)" />，前4个 <Math tex="\alpha > 0" /> 递增，最后1个 <Math tex="\alpha < 0" /> 递减</div>
             </div>
 
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🔑 幂函数核心性质（4条铁律）</p>
-              <div className="leading-8">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">幂函数核心性质（4条铁律）</div>
+              <div className="px-3 py-0.5">
                 <p><strong>①</strong> 所有幂函数在 <Math tex="(0, +\infty)" /> 上都有定义（不管 <Math tex="\alpha" /> 是多少）</p>
                 <p><strong>②</strong> 所有幂函数都过点 <Math tex="(1, 1)" />（因为 <Math tex="1^{\alpha} = 1" />，1 的任何次方都是 1）</p>
                 <p><strong>③</strong> <Math tex="\alpha > 0" /> → 在 <Math tex="(0, +\infty)" /> 上<strong>递增</strong>（<Math tex="\alpha = 1, 2, 3, \frac{1}{2}" /> 都是增函数）</p>
@@ -947,127 +1050,167 @@ export function ElementaryFuncPage() {
               </div>
             </div>
 
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">💡 一句话记住增减</p>
-              <p className="text-center text-lg leading-8"><Math tex="\alpha" /> 为正 → 增函数，<Math tex="\alpha" /> 为负 → 减函数（在第一象限）</p>
-              <p className="text-center text-lg leading-8">和前面的规则完全不同：幂函数<strong>看 <Math tex="\alpha" /> 的正负</strong>，不看底数！</p>
-            </div>
-
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">📌 三种函数的"定点"对比（必记！）</p>
-              <div className="grid grid-cols-3 divide-x divide-indigo-200 text-lg leading-10 text-gray-700">
-                <p className="text-center">指数函数过 <Math tex="(0, 1)" /></p>
-                <p className="text-center">对数函数过 <Math tex="(1, 0)" /></p>
-                <p className="text-center">幂函数过 <Math tex="(1, 1)" /></p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-3 py-0.5 bg-blue-50 text-center">
+                <p><strong>一句话记住增减：<Math tex="\alpha" /> 为正 → 增函数，<Math tex="\alpha" /> 为负 → 减函数（在第一象限）</strong></p>
+                <p>和前面的规则完全不同：幂函数<strong>看 <Math tex="\alpha" /> 的正负</strong>，不看底数！</p>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📖 综合例题</p>
-              <div className="leading-8">
-                <p><strong>例1：</strong>比较 <Math tex="3^{0.5}" /> 和 <Math tex="0.5^3" /> 的大小</p>
-                <p className="ml-4"><Math tex="3^{0.5} = \sqrt{3} \approx 1.73" />（底数 &gt; 1 且指数 &gt; 0 → 结果 &gt; 1）</p>
-                <p className="ml-4"><Math tex="0.5^3 = 0.125" />（底数在 (0,1) 且指数 &gt; 0 → 结果 &lt; 1）</p>
-                <p className="text-green-700 font-bold">✅ <Math tex="3^{0.5} > 1 > 0.5^3" />（技巧：和 1 比较！）</p>
-                <p className="mt-1"><strong>例2：</strong>判断 <Math tex="y = x^{-2}" /> 在 <Math tex="(0, +\infty)" /> 上的单调性</p>
-                <p className="ml-4"><Math tex="\alpha = -2 < 0" /> → 在 <Math tex="(0, +\infty)" /> 上是<strong>减函数</strong></p>
-                <p className="ml-4">验证：<Math tex="x=1 \to y=1" />，<Math tex="x=2 \to y=0.25" />，<Math tex="x=3 \to y \approx 0.11" />，越来越小 ✅</p>
-                <p className="mt-1"><strong>例3：</strong>判断 <Math tex="y = 3x^2" /> 是不是幂函数</p>
-                <p className="ml-4">不是！幂函数要求 <Math tex="y = x^{\alpha}" /> 形式，系数只能是 1。这里系数是 3 ❌</p>
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">三种函数的"定点"对比（必记！）</div>
+              <div className="grid grid-cols-3 border-t border-gray-300">
+                <div className="px-3 py-0.5 text-center border-r border-gray-300">指数函数过 <Math tex="(0, 1)" /></div>
+                <div className="px-3 py-0.5 text-center border-r border-gray-300">对数函数过 <Math tex="(1, 0)" /></div>
+                <div className="px-3 py-0.5 text-center">幂函数过 <Math tex="(1, 1)" /></div>
               </div>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">🔗 四种基本初等函数大总结</p>
-              <table className="w-full text-base border-collapse">
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">综合例题</div>
+              <div className="px-3 py-0.5">
+                <p><strong>例1.</strong> 比较 <Math tex="3^{0.5}" /> 和 <Math tex="0.5^3" /> 的大小</p>
+                <p className="pl-4"><Math tex="3^{0.5} = \sqrt{3} \approx 1.73" />（底数 <Math tex="> 1" /> 且指数 <Math tex="> 0" />，所以结果 <Math tex="> 1" />）</p>
+                <p className="pl-4"><Math tex="0.5^3 = 0.125" />（底数在 <Math tex="(0, 1)" /> 且指数 <Math tex="> 0" />，所以结果 <Math tex="< 1" />）</p>
+                <p className="pl-4 font-bold">结论：<Math tex="3^{0.5} > 1 > 0.5^3" />（技巧：和 1 比较！）</p>
+              </div>
+              <div className="px-3 py-0.5 border-t border-gray-300">
+                <p><strong>例2.</strong> 判断 <Math tex="y = x^{-2}" /> 在 <Math tex="(0, +\infty)" /> 上的单调性</p>
+                <p className="pl-4"><Math tex="\alpha = -2 < 0" /> → 在 <Math tex="(0, +\infty)" /> 上是<strong>减函数</strong></p>
+                <p className="pl-4">验证：<Math tex="x=1 \to y=1" />，<Math tex="x=2 \to y=0.25" />，<Math tex="x=3 \to y \approx 0.11" />，越来越小</p>
+              </div>
+              <div className="px-3 py-0.5 border-t border-gray-300">
+                <p><strong>例3.</strong> 判断 <Math tex="y = 3x^2" /> 是不是幂函数</p>
+                <p className="pl-4">不是！幂函数要求 <Math tex="y = x^{\alpha}" /> 形式，系数只能是 <Math tex="1" />。这里系数是 <Math tex="3" /></p>
+              </div>
+            </div>
+
+            <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+              <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">四种基本初等函数大总结</div>
+              <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-amber-100">
-                    <th className="border border-amber-200 px-2 py-1 text-amber-700">函数</th>
-                    <th className="border border-amber-200 px-2 py-1 text-amber-700">形式</th>
-                    <th className="border border-amber-200 px-2 py-1 text-amber-700">谁是变量？</th>
-                    <th className="border border-amber-200 px-2 py-1 text-amber-700">过定点</th>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-1">函数</th>
+                    <th className="border border-gray-300 px-2 py-1">形式</th>
+                    <th className="border border-gray-300 px-2 py-1">谁是变量？</th>
+                    <th className="border border-gray-300 px-2 py-1">过定点</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td className="border border-gray-200 px-2 py-1">指数函数</td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = a^x" /></td><td className="border border-gray-200 px-2 py-1">x 在指数位置</td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(0, 1)" /></td></tr>
-                  <tr className="bg-gray-50"><td className="border border-gray-200 px-2 py-1">对数函数</td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = \log_a x" /></td><td className="border border-gray-200 px-2 py-1">x 在真数位置</td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(1, 0)" /></td></tr>
-                  <tr><td className="border border-gray-200 px-2 py-1">幂函数</td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="y = x^{\alpha}" /></td><td className="border border-gray-200 px-2 py-1">x 在底数位置</td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="(1, 1)" /></td></tr>
+                  <tr><td className="border border-gray-300 px-2 py-1">指数函数</td><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = a^x" /></td><td className="border border-gray-300 px-2 py-1"><Math tex="x" /> 在指数位置</td><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="(0, 1)" /></td></tr>
+                  <tr><td className="border border-gray-300 px-2 py-1">对数函数</td><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = \log_a x" /></td><td className="border border-gray-300 px-2 py-1"><Math tex="x" /> 在真数位置</td><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="(1, 0)" /></td></tr>
+                  <tr><td className="border border-gray-300 px-2 py-1">幂函数</td><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="y = x^{\alpha}" /></td><td className="border border-gray-300 px-2 py-1"><Math tex="x" /> 在底数位置</td><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="(1, 1)" /></td></tr>
                 </tbody>
               </table>
             </div>
 
-            {/* ── 第3页：练习 ── */}
-            <PageBreak />
+            <div className="text-base">
+              <PracticeCard
+                title="即时练习：综合（10题，覆盖对数运算 / 指数 / 对数 / 幂函数）"
+                questions={elemFuncPractice4}
+                optionCols={4}
+                printOptionCols={4}
+                explanations={elementaryFuncExplanations}
+              />
+            </div>
 
-            <PracticeCard
-              title="✏️ 即时练习：幂函数（7题，含四种函数综合）"
-              questions={elemFuncPractice4}
-              printOptionCols={2}
-              explanations={elementaryFuncExplanations}
-            />
+            {/* ════════════════════════════════════════════════════════════ */}
+            {/* 大总结卡片 */}
+            {/* ════════════════════════════════════════════════════════════ */}
+            <div className="border-2 border-gray-500 rounded overflow-hidden mt-2">
+              <div className="px-3 py-1 font-bold text-gray-900 border-b-2 border-gray-500 bg-amber-50 text-center">3.2 基本初等函数 · 一表全掌握</div>
 
-            <CalloutCard variant="warning" title="⚠️ 易错提醒" compact>
-              <div className="space-y-0.5">
-                <p><strong>别和指数函数搞混！</strong> <Math tex="y = x^2" /> 是幂函数（常数在上），<Math tex="y = 2^x" /> 是指数函数（常数在下）</p>
-                <p><strong>定义域不统一！</strong> <Math tex="y = x^2" /> 定义域是 <Math tex="\mathbb{R}" />，<Math tex="y = \sqrt{x}" /> 定义域是 <Math tex="[0,+\infty)" />，<Math tex="y = \frac{1}{x}" /> 要求 <Math tex="x \neq 0" /></p>
-                <p><strong>单调性看 <Math tex="\alpha" /> 正负！</strong> <Math tex="\alpha > 0" /> 增，<Math tex="\alpha < 0" /> 减（在第一象限）</p>
-                <p><strong>过定点别搞混！</strong> 指数过 <Math tex="(0,1)" />，对数过 <Math tex="(1,0)" />，幂函数过 <Math tex="(1,1)" /></p>
+              {/* 对数公式速记 */}
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-b border-gray-300 bg-gray-100">对数公式速记（底数 <Math tex="a > 0,\ a \neq 1" />，真数 <Math tex="M, N > 0" />）</div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 px-3 py-1">
+                <p><strong>积</strong>：<Math tex="\log_a(MN) = \log_a M + \log_a N" /></p>
+                <p><strong>商</strong>：<Math tex="\log_a\dfrac{M}{N} = \log_a M - \log_a N" /></p>
+                <p><strong>幂</strong>：<Math tex="\log_a M^n = n\log_a M" /></p>
+                <p><strong>换底</strong>：<Math tex="\log_a N = \dfrac{\log_c N}{\log_c a}" /></p>
+                <p><strong>恒等式</strong>：<Math tex="a^{\log_a N} = N" /></p>
+                <p><strong>恒等式</strong>：<Math tex="\log_a a^n = n" /></p>
               </div>
-            </CalloutCard>
 
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">📋 四种函数单调性速查</p>
-              <table className="w-full text-base border-collapse">
+              {/* 三大函数对比表 */}
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-y border-gray-300 bg-gray-100">三大函数对比</div>
+              <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-indigo-100">
-                    <th className="border border-indigo-200 px-2 py-1 text-indigo-700">函数</th>
-                    <th className="border border-indigo-200 px-2 py-1 text-indigo-700">增函数条件</th>
-                    <th className="border border-indigo-200 px-2 py-1 text-indigo-700">减函数条件</th>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-2 py-0.5 text-left w-28">项目</th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">指数函数 <Math tex="y = a^x" /></th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">对数函数 <Math tex="y = \log_a x" /></th>
+                    <th className="border border-gray-300 px-2 py-0.5 text-center">幂函数 <Math tex="y = x^{\alpha}" /></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td className="border border-gray-200 px-2 py-1">指数 <Math tex="y=a^x" /></td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="a > 1" /></td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="0 < a < 1" /></td></tr>
-                  <tr className="bg-gray-50"><td className="border border-gray-200 px-2 py-1">对数 <Math tex="y=\log_a x" /></td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="a > 1" /></td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="0 < a < 1" /></td></tr>
-                  <tr><td className="border border-gray-200 px-2 py-1">幂 <Math tex="y=x^{\alpha}" /></td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\alpha > 0" /></td><td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\alpha < 0" /></td></tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">定义域</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\mathbb{R}" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="(0, +\infty)" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">由 <Math tex="\alpha" /> 决定（恒含 <Math tex="(0,+\infty)" />）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">值域</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="(0, +\infty)" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\mathbb{R}" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">由 <Math tex="\alpha" /> 决定</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">过定点</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center font-bold text-blue-700"><Math tex="(0, 1)" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center font-bold text-blue-700"><Math tex="(1, 0)" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center font-bold text-blue-700"><Math tex="(1, 1)" /></td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">参数限制</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="a > 0,\ a \neq 1" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="a > 0,\ a \neq 1" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\alpha" /> 为常数（系数必须为 1）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">增函数条件</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="a > 1" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="a > 1" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\alpha > 0" />（在 <Math tex="(0, +\infty)" />）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">减函数条件</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="0 < a < 1" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="0 < a < 1" /></td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="\alpha < 0" />（在 <Math tex="(0, +\infty)" />）</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">图像特征</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">永远在 <Math tex="x" /> 轴上方，不穿过</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">只在 <Math tex="y" /> 轴右侧，会穿过 <Math tex="x" /> 轴</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center">都经过 <Math tex="(1, 1)" /> 且在第一象限有定义</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-2 py-0.5 font-bold">变量位置</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="x" /> 在指数位置（常数在下）</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="x" /> 在真数位置</td>
+                    <td className="border border-gray-300 px-2 py-0.5 text-center"><Math tex="x" /> 在底数位置（常数在上）</td>
+                  </tr>
                 </tbody>
               </table>
-              <p className="text-indigo-600 mt-1 text-center">指数和对数看<strong>底数 a</strong>，幂函数看<strong>指数 α</strong></p>
+
+              {/* 易错/关键口诀 */}
+              <div className="px-2 py-0.5 font-bold text-gray-800 border-y border-gray-300 bg-gray-100">三条高频考点口诀</div>
+              <div className="px-3 py-1">
+                <p><strong>①</strong> 指数和对数看<strong>底数 <Math tex="a" /></strong> 判单调，幂函数看<strong>指数 <Math tex="\alpha" /></strong> 判单调</p>
+                <p><strong>②</strong> 三类定点别搞混：指数过 <Math tex="(0,1)" />、对数过 <Math tex="(1,0)" />、幂函数过 <Math tex="(1,1)" /></p>
+                <p><strong>③</strong> 指数与对数<strong>互为逆运算</strong>：<Math tex="a^b = N \;\Longleftrightarrow\; \log_a N = b" />；恒等式 <Math tex="a^{\log_a N} = N" /> 和 <Math tex="\log_a a^n = n" /> 是高考"送分题"</p>
+              </div>
             </div>
 
           </div>
         </Collapsible>
       </section>
 
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 5: 综合自测 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="ef-quiz" className="mb-2 scroll-mt-4">
-        <Collapsible title="五、高考真题精选（8题）— 改编自近年高考，检验学习成果" defaultOpen storageKey="elem-func:quiz">
-          <QuizPanel questions={elemFuncQuizQuestions} module="elem-func-quiz" explanations={elementaryFuncExplanations} />
-        </Collapsible>
-      </section>
-
-      {/* 速查表 */}
-      <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2 mt-1">
-        <p className="font-bold text-indigo-800 mb-1">📌 总速查表（打印贴墙上）</p>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-1 leading-7 text-gray-700">
-          <p><strong>积的对数</strong>：<Math tex="\log_a(MN) = \log_a M + \log_a N" /></p>
-          <p><strong>商的对数</strong>：<Math tex="\log_a\frac{M}{N} = \log_a M - \log_a N" /></p>
-          <p><strong>幂的对数</strong>：<Math tex="\log_a M^n = n\log_a M" /></p>
-          <p><strong>换底公式</strong>：<Math tex="\log_a b = \dfrac{\lg b}{\lg a}" /></p>
-          <p><strong>指数函数</strong>：过 <Math tex="(0,1)" />，<Math tex="a>1" /> 增 / <Math tex="0<a<1" /> 减</p>
-          <p><strong>对数函数</strong>：过 <Math tex="(1,0)" />，<Math tex="a>1" /> 增 / <Math tex="0<a<1" /> 减</p>
-          <p><strong>幂函数</strong>：过 <Math tex="(1,1)" />，<Math tex="\alpha>0" /> 增 / <Math tex="\alpha<0" /> 减</p>
-          <p><strong>指数值域</strong>：<Math tex="(0,+\infty)" />　<strong>对数定义域</strong>：<Math tex="(0,+\infty)" /></p>
-        </div>
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════ */}
       {/* 打印模式答案区 */}
-      {/* ════════════════════════════════════════════════════════════ */}
       {isPrinting && printOptions.showAnswers && <ElementaryFuncAnswers />}
 
+</div>
       </LessonLayout>
     </div>
   );

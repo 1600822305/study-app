@@ -1,11 +1,9 @@
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, CalloutCard, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
-import { Mafs, Coordinates, Plot, Point, Line, Text as MafsText } from 'mafs';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, ExportButton, PracticeCard, PrintQuestions, PageBreak } from '@/components/shared';
 import { derivPrereqNarrations } from './data/3.3.5/3.3.5-deriv-prereq-narrations';
 import { derivPrereqProgressItems } from './data/3.3.5/3.3.5-deriv-prereq-progress';
-import { derivPrereqPractice1, derivPrereqPractice2, derivPrereqPractice3 } from './data/3.3.5/3.3.5-deriv-prereq-practice';
+import { derivPrereqPractice1, derivPrereqPractice2, derivPrereqPractice3, derivPrereqPractice4a } from './data/3.3.5/3.3.5-deriv-prereq-practice';
 import { derivPrereqQuizQuestions } from './data/3.3.5/3.3.5-deriv-prereq-quiz';
 import { useProgress, usePrintMode } from '@/hooks';
-import { scrollToId } from '@/lib/scroll';
 import { DerivativePrereqAnswers, derivativePrereqExplanations } from './3.3.5-deriv-prereq-answers';
 
 export function DerivativePrereqPage() {
@@ -19,601 +17,663 @@ export function DerivativePrereqPage() {
         variant="prereq"
         title="3.3.5 导数前置知识"
         narration={derivPrereqNarrations.intro}
-        subtitle="极限直觉·变化率·切线概念 — 学导数之前必须搞定"
-        tags={[
-          { label: '约30-40分钟', color: 'amber' },
-          { label: '初中基础', color: 'green' },
-        ]}
+        tags={[]}
       />
 
-      <div className="flex justify-end mb-2 print:hidden">
-        <ExportButton title="3.3.5 导数前置知识" />
-      </div>
+      <LessonLayout
+        progressItems={progressItems}
+        onToggle={toggleProgress}
+        sidebarTop={<ExportButton title="3.3.5 导数前置知识" />}
+      >
+        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:px-0 [&_.rounded-xl>div:last-child]:pt-0 [&_.rounded-xl>div:last-child]:pb-0">
 
-      <div className="bg-white rounded-xl border border-gray-200 p-2 mb-1">
-        <p className="font-bold text-gray-800 mb-1">📋 知识地图</p>
-        <div className="text-gray-600 space-y-0.5">
-          <button onClick={() => scrollToId('dp-limit')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">一、极限思想入门（"无限趋近"的直觉）</button>
-          <button onClick={() => scrollToId('dp-avg-rate')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">二、平均变化率（速度的数学语言）</button>
-          <button onClick={() => scrollToId('dp-instant-rate')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">三、从平均到瞬时（导数的直觉）</button>
-          <button onClick={() => scrollToId('dp-quiz')} className="block text-left hover:text-blue-600 hover:underline cursor-pointer transition-colors">四、综合自测（8题）</button>
-        </div>
-      </div>
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 1: 函数值的代入与化简 */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="dp-substitute" className="mb-0 scroll-mt-4">
+            <Collapsible title="一、函数值的代入与化简" defaultOpen storageKey="deriv-prereq:substitute" headerExtra={<SpeakButton text={derivPrereqNarrations.substitute} />}>
+              <div className="space-y-0 text-[0.9rem] text-gray-800">
 
-      <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 1: 极限思想入门 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <section id="dp-limit" className="mb-2 scroll-mt-4">
-        <Collapsible title={'一、极限思想入门 — 🎯 理解"无限趋近"'} defaultOpen storageKey="deriv-prereq:limit" headerExtra={<SpeakButton text={derivPrereqNarrations.limit} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* 生活引入 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🚗 生活中的"趋近"</p>
-              <div className="leading-7">
-                <p>你打车去一个地方，导航上显示：</p>
-                <p>距离目的地 <strong>5 km → 2 km → 500 m → 100 m → 20 m → 5 m → ...</strong></p>
-                <p>距离越来越小，<strong>无限接近 0</strong>。</p>
-                <p className="mt-1">再比如：你往杯子里倒水，还差 <strong>半杯 → 四分之一 → 八分之一 → ...</strong></p>
-                <p>离"满杯"越来越近，差距可以<strong>小到忽略不计</strong>。</p>
-                <p className="text-blue-700 mt-1">这种"越来越接近某个值"的过程，数学上叫<strong>极限</strong>。</p>
-              </div>
-            </div>
-
-            {/* 数学表达 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📐 用数字感受一下</p>
-              <div className="leading-7">
-                <p><Math tex="1,\; \dfrac{1}{2},\; \dfrac{1}{4},\; \dfrac{1}{8},\; \dfrac{1}{16},\; \cdots" /> → 越来越小，接近 <strong>0</strong></p>
-                <p>我们说：这一列数的<strong>极限是 0</strong></p>
-                <p className="mt-1"><Math tex="\dfrac{1}{2},\; \dfrac{2}{3},\; \dfrac{3}{4},\; \dfrac{4}{5},\; \dfrac{99}{100},\; \cdots" /> → 越来越大，接近 <strong>1</strong></p>
-                <p>分子比分母只少 1，数越大差距越小 → 极限是 <strong>1</strong></p>
-                <p className="mt-1 text-gray-500">（后面学数列时会学到正式的极限记号，现在只需要理解"趋近"的含义）</p>
-              </div>
-            </div>
-
-            {/* 关键概念 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">💡 极限的三个要点</p>
-              <div className="grid grid-cols-3 gap-3 leading-7">
-                <div className="text-center">
-                  <p className="font-bold">① 无限接近</p>
-                  <p>可以靠得任意近</p>
-                  <p>近到差值小于任何正数</p>
+                {/* ── 引入：这节到底在练什么 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">一眼看清目标：化简 <Math tex="\dfrac{f(x+\Delta x)-f(x)}{\Delta x}" /></div>
+                  <div className="grid grid-cols-[1fr_auto_1fr]">
+                    <div className="px-3 py-1.5 space-y-1">
+                      <p>导数的定义长这样（先认个脸，下节再讲）：</p>
+                      <div className="text-lg [&_.katex-display]:!my-1"><Math tex="f'(x)=\lim_{\Delta x\to 0}\dfrac{f(x+\Delta x)-f(x)}{\Delta x}" display /></div>
+                      <p>如果直接把 <Math tex="\Delta x=0" /> 代进分母，就是 <Math tex="\dfrac{0}{0}" />，算不出来。</p>
+                      <p>所以必须先把分子<strong>化简</strong>成 <Math tex="\Delta x\cdot(\cdots)" /> 的形式，把分子的 <Math tex="\Delta x" /> 和分母的 <Math tex="\Delta x" /> 约掉。</p>
+                    </div>
+                    <div className="w-px bg-gray-300"></div>
+                    <div className="px-3 py-1.5 space-y-1">
+                      <p><strong>这一节只做一件事</strong>：不讲极限，不讲导数，只练</p>
+                      <div className="rounded p-1.5 border border-gray-300 bg-gray-50 text-center">
+                        把 <Math tex="f(x+\Delta x)-f(x)" /> 化成 <Math tex="\Delta x\cdot(\text{某表达式})" />
+                      </div>
+                      <p>高中最常遇到的三种类型：</p>
+                      <p><strong>① 多项式</strong>：展开消同类项，提 <Math tex="\Delta x" /></p>
+                      <p><strong>② 分式</strong>：通分，让分子自然出现 <Math tex="\Delta x" /></p>
+                      <p><strong>③ 根式</strong>：分子有理化，让分子变成 <Math tex="\Delta x" /></p>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <p className="font-bold">② 不一定等于</p>
-                  <p><Math tex="\dfrac{1}{2},\; \dfrac{2}{3},\; \dfrac{3}{4},\; \cdots" /></p>
-                  <p>永远不等于 1，但极限是 1</p>
+
+                {/* ── 基础：正确代入（左右两张独立小卡） ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="grid grid-cols-[1fr_1fr] font-bold text-gray-800 border-b border-gray-400 bg-gray-100">
+                    <div className="px-2 py-1 border-r border-gray-400">基础：把 <Math tex="x+\Delta x" /> 当整体代入</div>
+                    <div className="px-2 py-1">以 <Math tex="f(x)=x^2" /> 为例，下面哪种写法对？</div>
+                  </div>
+                  <div className="grid grid-cols-[1fr_1fr]">
+                    <div className="px-3 py-1.5 space-y-1 border-r border-gray-300">
+                      <p>看到 <Math tex="f(x+\Delta x)" />，把整个 <Math tex="x+\Delta x" /> 当成一团东西，</p>
+                      <p>塞到 <Math tex="f" /> 的每一个 <Math tex="x" /> 所在的位置。</p>
+                      <p className="border-t border-gray-200 pt-1">例如 <Math tex="f(x)=x^2+3x" />：</p>
+                      <p><Math tex="f(x+\Delta x)=(x+\Delta x)^2+3(x+\Delta x)" /></p>
+                      <p>每一处 <Math tex="x" /> 都要替换，<strong>一个都不能漏</strong>。</p>
+                    </div>
+                    <div className="px-3 py-1.5 space-y-1">
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr className="bg-gray-50">
+                            <th className="border border-gray-300 px-2 py-1 text-center">写法</th>
+                            <th className="border border-gray-300 px-2 py-1 text-center">对错</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="f(x+\Delta x)=x^2+\Delta x" /></td><td className="border border-gray-300 px-2 py-1 text-center text-red-600 font-bold">错</td></tr>
+                          <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="f(x+\Delta x)=f(x)+\Delta x" /></td><td className="border border-gray-300 px-2 py-1 text-center text-red-600 font-bold">错</td></tr>
+                          <tr><td className="border border-gray-300 px-2 py-1 text-center"><Math tex="f(x+\Delta x)=(x+\Delta x)^2" /></td><td className="border border-gray-300 px-2 py-1 text-center text-green-700 font-bold">对</td></tr>
+                        </tbody>
+                      </table>
+                      <p>口诀：<strong>看到括号，整体代入。</strong></p>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-center">
-                  <p className="font-bold">③ 也可以等于</p>
-                  <p>常数列 3, 3, 3, …</p>
-                  <p>极限就是 3</p>
+
+                {/* ── 多项式型：主例 + 再做一个（双标题栏）+ 规律 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">类型一 · 多项式：展开 <Math tex="\rightarrow" /> 消同类项 <Math tex="\rightarrow" /> 提 <Math tex="\Delta x" /></div>
+                  <div className="grid grid-cols-[1fr_1fr] font-bold text-gray-800 border-b border-gray-400 bg-gray-100">
+                    <div className="px-2 py-1 border-r border-gray-400">设 <Math tex="f(x)=x^2" />，把 <Math tex="f(x+\Delta x)-f(x)" /> 化成 <Math tex="\Delta x\cdot(\quad\ )" /></div>
+                    <div className="px-2 py-1">设 <Math tex="f(x)=x^3" />，把 <Math tex="f(x+\Delta x)-f(x)" /> 化成 <Math tex="\Delta x\cdot(\quad\ )" /></div>
+                  </div>
+                  <div className="grid grid-cols-[1fr_1fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p>第一步，代入：<Math tex="f(x+\Delta x)=(x+\Delta x)^2" /></p>
+                      <p>第二步，展开：<Math tex="(x+\Delta x)^2=x^2+2x\Delta x+(\Delta x)^2" /></p>
+                      <p>第三步，作差：<Math tex="f(x+\Delta x)-f(x)=2x\Delta x+(\Delta x)^2" /></p>
+                      <p className="text-red-700"><strong>注意：</strong>这里的 <Math tex="x^2" /> 是被<strong>减去的 <Math tex="f(x)=x^2" /></strong>抵消掉的。</p>
+                      <p>第四步，提公因式：</p>
+                      <p><Math tex="f(x+\Delta x)-f(x)=\Delta x\,(2x+\Delta x)" /></p>
+                      <p>目标达成：分子化成了 <Math tex="\Delta x\cdot(\cdots)" />。</p>
+                    </div>
+                    <div className="p-2 space-y-1">
+                      <p><Math tex="f(x+\Delta x)=(x+\Delta x)^3" /></p>
+                      <p>用公式 <Math tex="(a+b)^3=a^3+3a^2b+3ab^2+b^3" />：</p>
+                      <p><Math tex="=x^3+3x^2\Delta x+3x(\Delta x)^2+(\Delta x)^3" /></p>
+                      <p>作差，<Math tex="x^3" /> 消掉：</p>
+                      <p><Math tex="f(x+\Delta x)-f(x)=3x^2\Delta x+3x(\Delta x)^2+(\Delta x)^3" /></p>
+                      <p>提 <Math tex="\Delta x" />：</p>
+                      <p><Math tex="=\Delta x\bigl(3x^2+3x\Delta x+(\Delta x)^2\bigr)" /></p>
+                    </div>
+                  </div>
+                  <div className="px-3 py-1 border-t border-gray-400 bg-gray-50">
+                    <p><strong>规律：</strong>多项式作差后，<strong>不含 <Math tex="\Delta x" /> 的项一定互相消掉</strong>，剩下的每一项都带 <Math tex="\Delta x" />。</p>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            {/* 经典问题 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🤔 经典问题：0.999... = 1 吗？</p>
-              <div className="leading-7">
-                <p><Math tex="0.9,\; 0.99,\; 0.999,\; 0.9999,\; \cdots" /></p>
-                <p>和 1 的差距：<Math tex="0.1 \rightarrow 0.01 \rightarrow 0.001 \rightarrow \cdots" /> 趋近 0</p>
-                <p>数学上 <Math tex="0.\overline{9} = 1" />（不是"接近"，是<strong>等于</strong>！）</p>
-                <p className="text-green-700 mt-1">这里"等于"的含义：<strong>两者之间的差可以小于任何正数</strong>，所以它们是同一个数。</p>
-              </div>
-            </div>
-
-            <CalloutCard variant="info" title="📝 高中要求" compact>
-              <p>高中<strong>不考极限的严格定义</strong>，只需要你理解"无限趋近"的直觉。后面学导数时，"<Math tex="\Delta x \rightarrow 0" />"就是极限思想的应用。</p>
-            </CalloutCard>
-
-            {/* 练习 */}
-            <PracticeCard
-              title="✏️ 即时练习：极限直觉（5题）"
-              questions={derivPrereqPractice1}
-              printOptionCols={2}
-              explanations={derivativePrereqExplanations}
-            />
-
-            {/* 实战例题 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 实战例题 1：判断趋近方向</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：<Math tex="3,\; 2.5,\; 2.25,\; 2.125,\; 2.0625,\; \cdots" /> 趋近于哪个数？</p>
-                <p className="mt-1"><strong>思路</strong>：观察规律</p>
-                <p>每个数和 2 的距离：<Math tex="1,\; 0.5,\; 0.25,\; 0.125,\; \cdots" /> 越来越小</p>
-                <p>离 2 <strong>越来越近</strong>，近到可以忽略不计</p>
-                <p className="text-green-700 font-bold mt-1">答案：极限是 2（从大的方向逐渐靠近 2）</p>
-              </div>
-            </div>
-
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 实战例题 2：趋近 ≠ 单调</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：<Math tex="1.1,\; 0.9,\; 1.01,\; 0.99,\; 1.001,\; 0.999,\; \cdots" /> 趋近于？</p>
-                <p className="mt-1"><strong>思路</strong>：这列数一大一小地跳动</p>
-                <p>但不管是"大"还是"小"，离 1 的距离越来越近：</p>
-                <p><Math tex="0.1 \rightarrow 0.1 \rightarrow 0.01 \rightarrow 0.01 \rightarrow 0.001 \rightarrow 0.001 \rightarrow \cdots" /></p>
-                <p className="text-green-700 font-bold mt-1">答案：趋近于 1（从两侧交替逼近，这叫"震荡趋近"）</p>
-                <p className="text-green-600">启示：<strong>趋近不要求一直变大或一直变小</strong>，只要距离越来越近就行</p>
-              </div>
-            </div>
-
-            {/* 小结速查 */}
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-2">
-              <p className="font-bold text-gray-800 mb-1">📋 极限判断三步法</p>
-              <div className="grid grid-cols-3 gap-3 text-center leading-7">
-                <div>
-                  <p className="font-bold text-gray-700">第一步</p>
-                  <p>算出和目标的<strong>差距</strong></p>
+                {/* ── 分式型 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">类型二 · 分式：通分，让分子自然出现 <Math tex="\Delta x" /></div>
+                  <div className="grid grid-cols-[9fr_16fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p><strong>方法：</strong>当 <Math tex="f(x)" /> 为分式，且 <Math tex="x" /> 在分母</p>
+                      <p>例如 <Math tex="f(x)=\dfrac{1}{x}" />，<Math tex="f(x)=\dfrac{2}{x+1}" /></p>
+                      <hr className="border-gray-300" />
+                      <p>作差后直接通分。</p>
+                      <p>异分母：<Math tex="\dfrac{1}{A}-\dfrac{1}{B}=\dfrac{B-A}{AB}" /></p>
+                      <p>分子是 <Math tex="B-A" />，而 <Math tex="A" /> 和 <Math tex="B" /> 只差一个 <Math tex="\Delta x" />，</p>
+                      <p>所以 <strong>分子必然带 <Math tex="\Delta x" /></strong>。</p>
+                    </div>
+                    <div className="p-2 space-y-1">
+                      <p className="font-bold">📝 设 <Math tex="f(x)=\dfrac{1}{x}" />，把 <Math tex="f(x+\Delta x)-f(x)" /> 化简</p>
+                      <hr className="border-gray-300" />
+                      <p>代入：<Math tex="f(x+\Delta x)=\dfrac{1}{x+\Delta x}" /></p>
+                      <p>作差并通分（公分母 <Math tex="x(x+\Delta x)" />）：</p>
+                      <p><Math tex="f(x+\Delta x)-f(x)=\dfrac{1}{x+\Delta x}-\dfrac{1}{x}=\dfrac{x-(x+\Delta x)}{x(x+\Delta x)}=\dfrac{-\Delta x}{x(x+\Delta x)}" /></p>
+                      <p>分子出现 <Math tex="-\Delta x" />，目标达成。</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-bold text-gray-700">第二步</p>
-                  <p>看差距是否<strong>越来越小</strong></p>
-                </div>
-                <div>
-                  <p className="font-bold text-gray-700">第三步</p>
-                  <p>差距趋近 0 → <strong>极限就是那个目标</strong></p>
-                </div>
-              </div>
-            </div>
 
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 2: 平均变化率 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="dp-avg-rate" className="mb-2 scroll-mt-4">
-        <Collapsible title="二、平均变化率 — 🎯 速度就是变化率" defaultOpen storageKey="deriv-prereq:avg-rate" headerExtra={<SpeakButton text={derivPrereqNarrations.avgRate} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* 生活引入 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🚗 你其实已经会了！</p>
-              <div className="leading-7">
-                <p>开车从A到B，<strong>30分钟走了15公里</strong></p>
-                <p>平均速度 = <Math tex="\dfrac{\text{路程}}{\text{时间}} = \dfrac{15}{0.5} = 30" /> km/h</p>
-                <p className="mt-1 font-bold text-blue-700">速度就是"路程关于时间的平均变化率"！</p>
-              </div>
-            </div>
-
-            {/* 数学定义 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">📐 数学定义</p>
-              <div className="leading-7">
-                <p>函数 <Math tex="y = f(x)" /> 从 <Math tex="x_1" /> 到 <Math tex="x_2" /> 的<strong>平均变化率</strong>：</p>
-                <div className="bg-gray-50 rounded-lg p-2 my-1 text-center">
-                  <Math tex="\dfrac{\Delta y}{\Delta x} = \dfrac{f(x_2) - f(x_1)}{x_2 - x_1}" />
-                </div>
-                <p>其中 <Math tex="\Delta y = f(x_2) - f(x_1)" /> 是<strong>函数值的增量</strong></p>
-                <p><Math tex="\Delta x = x_2 - x_1" /> 是<strong>自变量的增量</strong></p>
-              </div>
-            </div>
-
-            {/* 例题 + 图 */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-                <p className="font-bold text-green-800 mb-1">🔍 例题：<Math tex="f(x) = x^2" /></p>
-                <div className="leading-7">
-                  <p>从 <Math tex="x = 1" /> 到 <Math tex="x = 3" /> 的平均变化率：</p>
-                  <p><Math tex="\dfrac{f(3) - f(1)}{3 - 1} = \dfrac{9 - 1}{2} = \dfrac{8}{2} = 4" /></p>
-                  <p className="mt-1">从 <Math tex="x = 1" /> 到 <Math tex="x = 2" />：</p>
-                  <p><Math tex="\dfrac{f(2) - f(1)}{2 - 1} = \dfrac{4 - 1}{1} = 3" /></p>
-                  <p className="text-green-700 mt-1"><strong>注意</strong>：同一个函数，不同区间的平均变化率<strong>不同</strong>！</p>
-                </div>
-              </div>
-              <div>
-                <p className="font-bold text-gray-800 mb-1 text-center">割线 = 连接两点的直线</p>
-                <Mafs viewBox={{ x: [0, 4], y: [-1, 10] }} height={200} pan={false} zoom={false}>
-                  <Coordinates.Cartesian
-                    xAxis={{ labels: (n) => (n === 1 || n === 3 ? String(n) : ''), lines: false }}
-                    yAxis={{ labels: (n) => (n === 1 || n === 9 ? String(n) : ''), lines: false }}
+                {/* ── 即时练习（多项式/分式，页底）── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivPrereqPractice1.slice(0, 3)} explanations={derivativePrereqExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
                   />
-                  <Plot.OfX y={(x) => x * x} color="#10b981" />
-                  <Point x={1} y={1} color="#059669" />
-                  <Point x={3} y={9} color="#059669" />
-                  <Line.Segment point1={[1, 1]} point2={[3, 9]} color="#ef4444" style="dashed" />
-                  <MafsText x={0.5} y={1.5} size={20}>A(1,1)</MafsText>
-                  <MafsText x={2.2} y={9.5} size={20}>B(3,9)</MafsText>
-                  <MafsText x={0.5} y={5} size={20} color="#ef4444">割线</MafsText>
-                </Mafs>
-              </div>
-            </div>
-
-            {/* 一次函数的特殊性 */}
-            <div className="bg-purple-50 border border-purple-200 rounded-xl p-2">
-              <p className="font-bold text-purple-800 mb-1">⭐ 一次函数的平均变化率 = 斜率（常数！）</p>
-              <div className="leading-7">
-                <p><Math tex="f(x) = kx + b" /> 的平均变化率 = <Math tex="\dfrac{(kx_2+b) - (kx_1+b)}{x_2 - x_1} = \dfrac{k(x_2 - x_1)}{x_2 - x_1} = k" /></p>
-                <p><strong>不管选哪个区间，平均变化率都等于斜率 <Math tex="k" /></strong></p>
-                <p className="text-purple-700">这是因为一次函数是直线 → 割线就是它自己 → 斜率不变</p>
-              </div>
-            </div>
-
-            <CalloutCard variant="warning" title="⚠️ 常见错误" compact>
-              <div className="space-y-0.5">
-                <p><strong>分子分母不要搞反！</strong> 是 <Math tex="\dfrac{\Delta y}{\Delta x}" />（y 在上，x 在下）</p>
-                <p><strong>顺序要一致！</strong> 如果分子是 <Math tex="f(x_2) - f(x_1)" />，分母必须是 <Math tex="x_2 - x_1" /></p>
-              </div>
-            </CalloutCard>
-
-            {/* 实战例题 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 实战例题：温度的平均变化率</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：某天 8:00 气温 12°C，14:00 气温 24°C，求这段时间内气温的平均变化率。</p>
-                <p className="mt-1"><strong>解题</strong>：</p>
-                <p>时间增量 <Math tex="\Delta x = 14 - 8 = 6" />（小时）</p>
-                <p>温度增量 <Math tex="\Delta y = 24 - 12 = 12" />（°C）</p>
-                <p>平均变化率 = <Math tex="\dfrac{\Delta y}{\Delta x} = \dfrac{12}{6} = 2" /> °C/小时</p>
-                <p className="text-green-700 font-bold mt-1">含义：平均每小时升温 2°C</p>
-              </div>
-            </div>
-
-            <PageBreak />
-            {/* 练习 */}
-            <PracticeCard
-              title="✏️ 即时练习：平均变化率（5题）"
-              questions={derivPrereqPractice2}
-              printOptionCols={2}
-              explanations={derivativePrereqExplanations}
-            />
-
-            {/* 高考考什么 */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">🎯 高考怎么考平均变化率？</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div>
-                  <p className="font-bold text-red-700">① 直接计算（必考）</p>
-                  <p>给函数 + 区间，求 <Math tex="\dfrac{\Delta y}{\Delta x}" /></p>
-                  <p className="text-gray-500">难度低，送分题</p>
                 </div>
-                <div>
-                  <p className="font-bold text-red-700">② 物理情境</p>
-                  <p>位移函数求"平均速度"</p>
-                  <p className="text-gray-500">本质还是 <Math tex="\dfrac{\Delta y}{\Delta x}" /></p>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivPrereqPractice1.slice(0, 3)} printOptionCols={2} />
                 </div>
-                <div>
-                  <p className="font-bold text-red-700">③ 过渡到导数</p>
-                  <p>区间越缩越小 → 导数</p>
-                  <p className="text-gray-500">理解题，考概念</p>
-                </div>
-                <div>
-                  <p className="font-bold text-red-700">④ 图像割线</p>
-                  <p>看图判断斜率正负 / 大小</p>
-                  <p className="text-gray-500">数形结合</p>
-                </div>
-              </div>
-            </div>
 
-            {/* 过渡到导数的实战题 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🎯 实战例题：从平均变化率"逼近"导数</p>
-              <div className="leading-7">
-                <p><strong>题目</strong>：<Math tex="f(x) = x^2" />，计算从 <Math tex="x = 1" /> 到 <Math tex="x = 1 + \Delta x" /> 的平均变化率，并观察 <Math tex="\Delta x" /> 缩小时的变化。</p>
-                <p className="mt-1"><strong>解题</strong>：</p>
-                <p><Math tex="\dfrac{f(1+\Delta x) - f(1)}{\Delta x} = \dfrac{(1+\Delta x)^2 - 1}{\Delta x} = \dfrac{2\Delta x + (\Delta x)^2}{\Delta x} = 2 + \Delta x" /></p>
-                <table className="w-full text-base border-collapse mt-1 mb-1">
-                  <thead>
-                    <tr className="bg-green-100">
-                      <th className="border border-green-200 px-2 py-1 text-green-700"><Math tex="\Delta x" /></th>
-                      <th className="border border-green-200 px-2 py-1 text-center text-green-700">1</th>
-                      <th className="border border-green-200 px-2 py-1 text-center text-green-700">0.1</th>
-                      <th className="border border-green-200 px-2 py-1 text-center text-green-700">0.01</th>
-                      <th className="border border-green-200 px-2 py-1 text-center text-green-700">0.001</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-2 py-1 font-bold text-green-700"><Math tex="2 + \Delta x" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">3</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">2.1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">2.01</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">2.001</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p className="text-green-700 font-bold"><Math tex="\Delta x" /> 越小，平均变化率越接近 <strong>2</strong> → 这就是下一节要学的"导数"！</p>
-              </div>
-            </div>
-
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 3: 从平均到瞬时 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <PageBreak />
-      <section id="dp-instant-rate" className="mb-2 scroll-mt-4">
-        <Collapsible title="三、从平均到瞬时 — 🎯 导数的直觉" defaultOpen storageKey="deriv-prereq:instant-rate" headerExtra={<SpeakButton text={derivPrereqNarrations.instantRate} />}>
-          <div className="space-y-0 text-gray-700">
-
-            {/* 生活引入 */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-2">
-              <p className="font-bold text-blue-800 mb-1">🏎️ 平均速度 vs 瞬时速度</p>
-              <div className="leading-7">
-                <p><strong>平均速度</strong>：30分钟走了15公里 → 30 km/h</p>
-                <p>但这30分钟里，你可能等过红灯（0 km/h），也上过高速（120 km/h）</p>
-                <p className="mt-1"><strong>瞬时速度</strong>：汽车仪表盘上显示的速度</p>
-                <p>它描述的是<strong>"此时此刻"</strong>你有多快</p>
-                <p className="text-blue-700 mt-1 font-bold">问题来了：怎么从"一段时间的平均"变成"某一瞬间"的？</p>
-              </div>
-            </div>
-
-            {/* 核心思想 */}
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-2">
-              <p className="font-bold text-amber-800 mb-1">🔑 核心思想：把时间间隔缩到无限小！</p>
-              <div className="leading-7">
-                <p>想测量 <Math tex="t = 2" /> 秒时的瞬时速度：</p>
-                <table className="w-full text-base border-collapse mt-1 mb-1">
-                  <thead>
-                    <tr className="bg-amber-100">
-                      <th className="border border-amber-200 px-2 py-1 text-amber-700">时间区间</th>
-                      <th className="border border-amber-200 px-2 py-1 text-center text-amber-700"><Math tex="\Delta t" /></th>
-                      <th className="border border-amber-200 px-2 py-1 text-center text-amber-700">平均速度</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-2 py-1 text-center">[2, 3]</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">1 秒</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">很粗略</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="border border-gray-200 px-2 py-1 text-center">[2, 2.1]</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">0.1 秒</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">比较准</td>
-                    </tr>
-                    <tr>
-                      <td className="border border-gray-200 px-2 py-1 text-center">[2, 2.01]</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">0.01 秒</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">很准</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="border border-gray-200 px-2 py-1 text-center">[2, 2.001]</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">0.001 秒</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">极准</td>
-                    </tr>
-                    <tr className="bg-amber-100 font-bold">
-                      <td className="border border-amber-200 px-2 py-1 text-center"><Math tex="\Delta t \rightarrow 0" /></td>
-                      <td className="border border-amber-200 px-2 py-1 text-center">→ 0</td>
-                      <td className="border border-amber-200 px-2 py-1 text-center text-amber-700">→ 瞬时速度！</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p className="text-amber-700 font-bold">当 <Math tex="\Delta t \rightarrow 0" />，平均速度的<strong>极限</strong>就是瞬时速度！</p>
-              </div>
-            </div>
-
-            {/* 具体计算 */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-2">
-              <p className="font-bold text-green-800 mb-1">🔍 例题：<Math tex="f(x) = x^2" /> 在 <Math tex="x = 2" /> 处的"瞬时变化率"</p>
-              <div className="leading-7">
-                <p>平均变化率 = <Math tex="\dfrac{f(2 + \Delta x) - f(2)}{\Delta x} = \dfrac{(2+\Delta x)^2 - 4}{\Delta x}" /></p>
-                <p>= <Math tex="\dfrac{4 + 4\Delta x + (\Delta x)^2 - 4}{\Delta x} = \dfrac{4\Delta x + (\Delta x)^2}{\Delta x}" /></p>
-                <p>= <Math tex="4 + \Delta x" /></p>
-                <table className="w-full text-base border-collapse mt-1 mb-1">
-                  <thead>
-                    <tr className="bg-green-100">
-                      <th className="border border-green-200 px-2 py-1 text-green-700"><Math tex="\Delta x" /></th>
-                      <th className="border border-green-200 px-2 py-1 text-center text-green-700">平均变化率 <Math tex="= 4 + \Delta x" /></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="border border-gray-200 px-2 py-1 text-center">1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">5</td>
-                    </tr>
-                    <tr className="bg-gray-50">
-                      <td className="border border-gray-200 px-2 py-1 text-center">0.1</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">4.1</td>
-                    </tr>
-                    <tr>
-                      <td className="border border-gray-200 px-2 py-1 text-center">0.01</td>
-                      <td className="border border-gray-200 px-2 py-1 text-center">4.01</td>
-                    </tr>
-                    <tr className="bg-green-100 font-bold">
-                      <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\rightarrow 0" /></td>
-                      <td className="border border-gray-200 px-2 py-1 text-center text-green-700"><Math tex="\rightarrow 4" /></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p className="font-bold text-green-700"><Math tex="f(x) = x^2" /> 在 <Math tex="x = 2" /> 处的瞬时变化率（导数）= <Math tex="4" /></p>
-              </div>
-            </div>
-
-            {/* 割线→切线 图 */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white rounded-xl border border-gray-200 p-2">
-                <p className="font-bold text-gray-800 mb-1">📐 割线 → 切线</p>
-                <div className="leading-7">
-                  <p><strong>割线</strong>：连接曲线上<strong>两个点</strong>的直线</p>
-                  <p>斜率 = 平均变化率</p>
-                  <p className="mt-1"><strong>切线</strong>：只"碰"曲线于<strong>一个点</strong></p>
-                  <p>斜率 = 瞬时变化率 = <strong>导数</strong></p>
-                  <p className="mt-1 text-red-600 font-bold">第二个点无限靠近第一个点时</p>
-                  <p className="text-red-600 font-bold">割线 → 切线</p>
-                </div>
-              </div>
-              <div>
-                <p className="font-bold text-gray-800 mb-1 text-center"><Math tex="\Delta x" /> 缩小，割线→切线</p>
-                <div className="grid grid-cols-3 gap-1">
-                  <div className="text-center">
-                    <p className="text-gray-500 mb-0.5">远割线（斜率=6）</p>
-                    <Mafs viewBox={{ x: [0, 5], y: [-1, 10] }} height={140} pan={false} zoom={false}>
-                      <Coordinates.Cartesian xAxis={{ labels: false, lines: false }} yAxis={{ labels: false, lines: false }} />
-                      <Plot.OfX y={(x) => x * x} color="#10b981" />
-                      <Point x={2} y={4} color="#059669" />
-                      <Point x={4} y={16} color="#94a3b8" />
-                      <Line.Segment point1={[2, 4]} point2={[4, 16]} color="#94a3b8" />
-                    </Mafs>
+                <PageBreak />
+                {/* ── 根式型 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">类型三 · 根式：分子有理化，让分子变成 <Math tex="\Delta x" /></div>
+                  <div className="p-2 space-y-1 border-b border-gray-300">
+                    <p><strong>方法：</strong>遇到两个根式之差 <Math tex="\sqrt{A}-\sqrt{B}" />，乘<strong>共轭</strong> <Math tex="\sqrt{A}+\sqrt{B}" />（上下都乘，保持相等）：</p>
+                    <div className="text-sm [&_.katex-display]:!my-1"><Math tex="\sqrt{A}-\sqrt{B}=\dfrac{(\sqrt{A}-\sqrt{B})(\sqrt{A}+\sqrt{B})}{\sqrt{A}+\sqrt{B}}=\dfrac{A-B}{\sqrt{A}+\sqrt{B}}" display /></div>
+                    <p>根号没了，分子变成 <Math tex="A-B" />，一般就会出现 <Math tex="\Delta x" />。</p>
                   </div>
-                  <div className="text-center">
-                    <p className="text-gray-500 mb-0.5">近割线（斜率=5）</p>
-                    <Mafs viewBox={{ x: [0, 5], y: [-1, 10] }} height={140} pan={false} zoom={false}>
-                      <Coordinates.Cartesian xAxis={{ labels: false, lines: false }} yAxis={{ labels: false, lines: false }} />
-                      <Plot.OfX y={(x) => x * x} color="#10b981" />
-                      <Point x={2} y={4} color="#059669" />
-                      <Point x={3} y={9} color="#f97316" />
-                      <Line.Segment point1={[2, 4]} point2={[3, 9]} color="#f97316" />
-                    </Mafs>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-red-600 font-bold mb-0.5">切线（斜率=4）</p>
-                    <Mafs viewBox={{ x: [0, 5], y: [-1, 10] }} height={140} pan={false} zoom={false}>
-                      <Coordinates.Cartesian xAxis={{ labels: false, lines: false }} yAxis={{ labels: false, lines: false }} />
-                      <Plot.OfX y={(x) => x * x} color="#10b981" />
-                      <Point x={2} y={4} color="#059669" />
-                      <Plot.OfX y={(x) => 4 * x - 4} color="#ef4444" />
-                    </Mafs>
+                  <div className="p-2 space-y-1">
+                    <p className="font-bold">📝 设 <Math tex="f(x)=\sqrt{x}" />，把 <Math tex="f(x+\Delta x)-f(x)" /> 化简</p>
+                    <hr className="border-gray-300" />
+                    <p>代入并作差：<Math tex="f(x+\Delta x)-f(x)=\sqrt{x+\Delta x}-\sqrt{x}" /></p>
+                    <hr className="border-gray-300" />
+                    <p>乘共轭 <Math tex="\sqrt{x+\Delta x}+\sqrt{x}" />，得 <Math tex="\dfrac{(\sqrt{x+\Delta x}-\sqrt{x})(\sqrt{x+\Delta x}+\sqrt{x})}{\sqrt{x+\Delta x}+\sqrt{x}}=\dfrac{(x+\Delta x)-x}{\sqrt{x+\Delta x}+\sqrt{x}}=\dfrac{\Delta x}{\sqrt{x+\Delta x}+\sqrt{x}}" />，分子为 <Math tex="\Delta x" />。</p>
                   </div>
                 </div>
+
+                {/* ── 三型对照速查表 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">三型对照速查表</div>
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50">
+                        <th className="border border-gray-300 px-2 py-0 text-center">函数类型</th>
+                        <th className="border border-gray-300 px-2 py-0 text-center">关键技巧</th>
+                        <th className="border border-gray-300 px-2 py-0 text-center">化简后分子形式</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0 text-center font-bold">多项式 <Math tex="x^n" /></td>
+                        <td className="border border-gray-300 px-2 py-0 text-center">展开消同类项 <Math tex="\rightarrow" /> 提 <Math tex="\Delta x" /></td>
+                        <td className="border border-gray-300 px-2 py-0 text-center"><Math tex="\Delta x\cdot(\cdots)" /></td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0 text-center font-bold">分式 <Math tex="\dfrac{1}{g(x)}" /></td>
+                        <td className="border border-gray-300 px-2 py-0 text-center">通分作差</td>
+                        <td className="border border-gray-300 px-2 py-0 text-center"><Math tex="\dfrac{\pm\Delta x}{(\cdots)}" /></td>
+                      </tr>
+                      <tr>
+                        <td className="border border-gray-300 px-2 py-0 text-center font-bold">根式 <Math tex="\sqrt{g(x)}" /></td>
+                        <td className="border border-gray-300 px-2 py-0 text-center">分子有理化（乘共轭）</td>
+                        <td className="border border-gray-300 px-2 py-0 text-center"><Math tex="\dfrac{\Delta x}{(\cdots)}" /></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+
+                {/* ── 即时练习（分式/根式/综合）── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivPrereqPractice1.slice(3)} explanations={derivativePrereqExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 4}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivPrereqPractice1.slice(3)} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200">
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 4}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+
               </div>
-            </div>
+            </Collapsible>
+          </section>
 
-            {/* 三等价 */}
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-2">
-              <p className="font-bold text-indigo-800 mb-1">⭐ 三件事其实是同一件事</p>
-              <div className="grid grid-cols-3 gap-3 text-center leading-7">
-                <div>
-                  <p className="font-bold text-indigo-700">瞬时变化率</p>
-                  <p>物理：瞬时速度</p>
-                  <p><Math tex="\Delta x \rightarrow 0" /> 时的变化率</p>
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 2: 直线斜率与点斜式 */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="dp-slope" className="mb-0 scroll-mt-4">
+            <Collapsible title="二、直线斜率与点斜式" defaultOpen storageKey="deriv-prereq:slope" headerExtra={<SpeakButton text={derivPrereqNarrations.slope} />}>
+              <div className="space-y-0 text-[0.9rem] text-gray-800">
+
+                {/* ── 引入：为什么导数前要讲这个 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">为什么导数前要讲这个：导数的两个核心用途，都离不开直线</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p className="pl-4">① 导数 <Math tex="f'(x_0)" /> = <strong>切线的斜率</strong> —— 先得会算斜率。</p>
+                    <p className="pl-4">② 写<strong>切线方程</strong> —— 要用点斜式。</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-bold text-indigo-700">切线斜率</p>
-                  <p>几何：切线的倾斜程度</p>
-                  <p>割线 <Math tex="\rightarrow" /> 切线</p>
+
+                {/* ── 斜率公式 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">① 斜率公式：用两点算陡峭程度</div>
+                  <div className="grid grid-cols-[3fr_2fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p>已知直线上两点 <Math tex="(x_1, y_1)" /> 和 <Math tex="(x_2, y_2)" />：</p>
+                      <div className="text-base [&_.katex-display]:!my-1"><Math tex="k=\dfrac{\Delta y}{\Delta x}=\dfrac{y_2-y_1}{x_2-x_1}" display /></div>
+                      <hr className="border-gray-300" />
+                      <p><strong>几何意义：</strong><Math tex="x" /> 每增加 1，<Math tex="y" /> 变化 <Math tex="k" />。</p>
+                      <p><Math tex="k>0" />：上升；<Math tex="k<0" />：下降；<Math tex="k=0" />：水平。</p>
+                    </div>
+                    <div className="p-2 space-y-1">
+                      <p className="font-bold">📝 过 <Math tex="(1,2)" />、<Math tex="(4,11)" /> 两点，求斜率</p>
+                      <hr className="border-gray-300" />
+                      <p>套公式：</p>
+                      <p><Math tex="k=\dfrac{11-2}{4-1}=\dfrac{9}{3}=3" /></p>
+                      <p>即 <Math tex="x" /> 每加 1，<Math tex="y" /> 加 3。</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-bold text-indigo-700">导数</p>
-                  <p>数学：<Math tex="f'(x_0)" /></p>
-                  <p>三者<strong>完全等价</strong></p>
+
+                {/* ── 点斜式 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">② 点斜式：已知一点和斜率，写直线方程</div>
+                  <div className="grid grid-cols-[3fr_2fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p>已知直线过点 <Math tex="(x_1, y_1)" />，斜率为 <Math tex="k" />：</p>
+                      <div className="text-base [&_.katex-display]:!my-1"><Math tex="y-y_1=k(x-x_1)" display /></div>
+                      <hr className="border-gray-300" />
+                      <p><strong>适用：</strong>只知道<strong>一个点 + 一个斜率</strong>，就能写出方程。</p>
+                      <p>导数里求切线方程正是这种情况：切点已知，斜率 = 导数值。</p>
+                    </div>
+                    <div className="p-2 space-y-1">
+                      <p className="font-bold">📝 过 <Math tex="(2,5)" />，斜率 <Math tex="k=3" />，写方程</p>
+                      <hr className="border-gray-300" />
+                      <p>直接套公式：<Math tex="y-5=3(x-2)" /></p>
+                      <p>整理得 <Math tex="y=3x-1" />。</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 导数里怎么用 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">③ 导数里怎么用：切线方程的模板</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p>要写曲线 <Math tex="y=f(x)" /> 在点 <Math tex="x_1" /> 处的切线方程，固定三步：</p>
+                    <p className="pl-4">第一步，算切点：<Math tex="(x_1,\ f(x_1))" /></p>
+                    <p className="pl-4">第二步，算斜率：<Math tex="k=f'(x_1)" />（下一节学）</p>
+                    <p className="pl-4">第三步，套点斜式：</p>
+                    <div className="text-base [&_.katex-display]:!my-1 pl-4"><Math tex="y-f(x_1)=f'(x_1)\,(x-x_1)" display /></div>
+                    <p className="text-gray-700">后面凡是"求切线方程"，都是这个模板，只差把 <Math tex="f'(x_1)" /> 算出来。</p>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="" questions={derivPrereqPractice2} explanations={derivativePrereqExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivPrereqPractice2} printOptionCols={2} />
+                </div>
+
+              </div>
+            </Collapsible>
+          </section>
+
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 3: 平均变化率（割线斜率） */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="dp-avg-rate" className="mb-0 scroll-mt-4">
+            <Collapsible title="三、平均变化率（割线斜率）" defaultOpen storageKey="deriv-prereq:avg-rate" headerExtra={<SpeakButton text={derivPrereqNarrations.avgRate} />}>
+              <div className="space-y-0 text-[0.9rem] text-gray-800">
+
+                {/* ── 引入 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">为什么学这个：导数是"瞬时变化率"，先得会算"平均变化率"</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p className="pl-4">① 几何上：平均变化率 = <strong>割线斜率</strong>（用第二节的 <Math tex="k" /> 公式）</p>
+                    <p className="pl-4">② 让 <Math tex="\Delta x" /> 变得无限小（接近 0），割线变切线，就得到<strong>导数</strong>（第四节讲）</p>
+                    <p>而且，平均变化率的表达式<strong>正是第一节练的那个化简式子</strong>。三节内容在这里汇合。</p>
+                  </div>
+                </div>
+
+                {/* ── 增量 Δx 和 Δy ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.92rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">① 增量 <Math tex="\Delta x" /> 和 <Math tex="\Delta y" />：先把两个记号认清</div>
+                  <div className="grid grid-cols-[3fr_2fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p><Math tex="\Delta" />（delta）就是"<strong>变化量</strong>"的意思。</p>
+                      <p><Math tex="\Delta x = x_2 - x_1" />（自变量的变化，横坐标变化）</p>
+                      <p><Math tex="\Delta y = f(x_2) - f(x_1)" />（函数值的变化，纵坐标变化）</p>
+                      <hr className="border-gray-300" />
+                      <p><strong>注意：</strong><Math tex="\Delta x" /> 是一个<strong>整体记号</strong>，不是 <Math tex="\Delta" /> 乘 <Math tex="x" />。它可以是正、负或很小的数。</p>
+                    </div>
+                    <div className="p-2 space-y-1">
+                      <p className="font-bold">📝 <Math tex="f(x)=x^2" />，从 <Math tex="x=1" /> 到 <Math tex="x=3" /></p>
+                      <hr className="border-gray-300" />
+                      <p><Math tex="\Delta x=3-1=2" /></p>
+                      <p><Math tex="\Delta y=f(3)-f(1)=9-1=8" /></p>
+                      <p className="text-gray-700">横坐标变化 2，纵坐标变化 8。</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 平均变化率公式 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">② 平均变化率公式：就是割线斜率</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p>函数 <Math tex="y=f(x)" /> 从 <Math tex="x_1" /> 到 <Math tex="x_2" /> 的<strong>平均变化率</strong>：<span className="block text-center mt-1"><Math tex="\bar{v}=\dfrac{\Delta y}{\Delta x}=\dfrac{f(x_2)-f(x_1)}{x_2-x_1}" /></span></p>
+                    <hr className="border-gray-300" />
+                    <p><strong>几何意义：</strong>过曲线上 <Math tex="(x_1, f(x_1))" /> 和 <Math tex="(x_2, f(x_2))" /> 两点的<strong>割线斜率</strong>。</p>
+                    <p className="text-gray-700">和第二节的斜率公式 <Math tex="k=\dfrac{y_2-y_1}{x_2-x_1}" /> 完全一样，只是这里两点都在曲线上。</p>
+                  </div>
+                </div>
+
+                {/* ── 换个写法（承接第一节）── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">③ 换个写法：把 <Math tex="x_2" /> 换成 <Math tex="x_1+\Delta x" /></div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p>如果只给起点 <Math tex="x_1" /> 和增量 <Math tex="\Delta x" />，那么终点就是 <Math tex="x_2 = x_1+\Delta x" />。代进上面公式：</p>
+                    <div className="text-base [&_.katex-display]:!my-1"><Math tex="\bar{v}=\dfrac{f(x_1+\Delta x)-f(x_1)}{(x_1+\Delta x)-x_1}=\dfrac{f(x_1+\Delta x)-f(x_1)}{\Delta x}" display /></div>
+                    <hr className="border-gray-300" />
+                    <p><strong>为什么要换？</strong>后面学导数时要让"区间塌缩到一个点"，也就是让 <Math tex="\Delta x" /> 变得无限小（接近 0）。</p>
+                    <p>用这种写法时，<Math tex="\Delta x" /> 是一个独立的变量，可以直接说"让它变小"，操作起来自然。</p>
+                    <hr className="border-gray-300" />
+                    <p className="text-red-700"><strong>⚡ 顿悟点：</strong>这里的<strong>分子</strong>就是<strong>第一节</strong>反复练的那一串！</p>
+                  </div>
+                </div>
+
+                {/* ── 物理理解 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.95rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">④ 物理理解：就是平均速度</div>
+                  <div className="grid grid-cols-[3fr_2fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p>物体做直线运动，路程 <Math tex="s" /> 是时间 <Math tex="t" /> 的函数 <Math tex="s=s(t)" />。</p>
+                      <p><strong>平均速度</strong> <Math tex="\bar{v}=\dfrac{\Delta s}{\Delta t}=\dfrac{s(t_2)-s(t_1)}{t_2-t_1}" /></p>
+                      <hr className="border-gray-300" />
+                      <p>平均变化率不只适用于路程对时间，适用于任何变量对任何变量。</p>
+                    </div>
+                    <div className="p-2 space-y-1">
+                      <p className="font-bold">📝 <Math tex="s(t)=t^2" />，<Math tex="t=1" /> 到 <Math tex="t=3" /></p>
+                      <hr className="border-gray-300" />
+                      <p><Math tex="\bar{v}=\dfrac{s(3)-s(1)}{3-1}=\dfrac{9-1}{2}=4" /></p>
+                      <p>即这段时间内平均每秒前进 4 单位。</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 即时练习 ── */}
+                <div className="text-[1rem] print:hidden">
+                  <PracticeCard title="" questions={derivPrereqPractice3} explanations={derivativePrereqExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-[1rem] hidden print:block">
+                  <PrintQuestions questions={derivPrereqPractice3} printOptionCols={2} />
+                </div>
+
+              </div>
+            </Collapsible>
+          </section>
+
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 4: 极限直觉与瞬时变化率 */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="dp-limit" className="mb-0 scroll-mt-4">
+            <Collapsible title="四、极限直觉与瞬时变化率" defaultOpen storageKey="deriv-prereq:limit" headerExtra={<SpeakButton text={derivPrereqNarrations.limit} />}>
+              <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
+
+                {/* ── 引入：回答上一节的悬念 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">为什么学这个：上一节说"让 <Math tex="\Delta x" /> 变得无限小"——到底啥意思？</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p className="pl-4">• 直接让 <Math tex="\Delta x = 0" />？<strong>只有在分母不含 <Math tex="\Delta x" /> 时才行</strong>——否则代进平均变化率就会得到 <Math tex="\tfrac{0}{0}" />，分母为 0 无意义。</p>
+                    <p className="pl-4">• 那让 <Math tex="\Delta x = 0.001" /> 行吗？不行——这只是一段很短区间的平均值，换成 0.0001 又变一个数，始终是"平均"而不是"瞬时"。</p>
+                    <p>这节用<strong>极限</strong>解决这个悖论，然后正式给出<strong>导数定义</strong>。</p>
+                  </div>
+                </div>
+
+                {/* ── 无限接近的直觉 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="grid grid-cols-[3fr_2fr] font-bold text-gray-800 border-b border-gray-400 bg-gray-100">
+                    <div className="px-2 py-1 border-r border-gray-400">① "无限接近但不等于"的直觉</div>
+                    <div className="px-2 py-1">📝 观察 <Math tex="2+\Delta x" /></div>
+                  </div>
+                  <div className="grid grid-cols-[3fr_2fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p>让 <Math tex="\Delta x" /> 依次取 <Math tex="0.1,\ 0.01,\ 0.001,\ 0.0001,\ \ldots" /></p>
+                      <p>它<strong>越来越接近 0，但永远不等于 0</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p>观察某个关于 <Math tex="\Delta x" /> 的表达式（比如 <Math tex="2+\Delta x" />），如果 <Math tex="\Delta x" /> 越来越小，这个表达式会<strong>稳定趋向</strong>一个数（比如趋向 2）。</p>
+                      <p>这个"稳定趋向的数"就叫<strong>极限</strong>。</p>
+                    </div>
+                    <div className="px-2 pt-0 pb-2 space-y-1">
+                      <table className="w-full text-center border border-gray-300 leading-tight">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="border border-gray-300 px-1 py-0"><Math tex="\Delta x" /></th>
+                            <th className="border border-gray-300 px-1 py-0"><Math tex="2+\Delta x" /></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td className="border border-gray-300 px-1 py-0">0.1</td><td className="border border-gray-300 px-1 py-0">2.1</td></tr>
+                          <tr><td className="border border-gray-300 px-1 py-0">0.01</td><td className="border border-gray-300 px-1 py-0">2.01</td></tr>
+                          <tr><td className="border border-gray-300 px-1 py-0">0.001</td><td className="border border-gray-300 px-1 py-0">2.001</td></tr>
+                          <tr><td className="border border-gray-300 px-1 py-0">0.0001</td><td className="border border-gray-300 px-1 py-0">2.0001</td></tr>
+                        </tbody>
+                      </table>
+                      <p className="text-gray-700">结果越来越接近 <strong>2</strong>。</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 极限记号 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">② 极限的记号 <Math tex="\lim" />（<em>limit</em> 的缩写，下标写变量怎么变）</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p>用数学符号写"让 <Math tex="\Delta x" /> 无限接近 0 时，<Math tex="2+\Delta x" /> 趋向 2"：</p>
+                    <div className="text-base [&_.katex-display]:!my-1"><Math tex="\lim_{\Delta x\to 0}(2+\Delta x)=2" display /></div>
+                    <hr className="border-gray-300" />
+                    <p><strong>读作：</strong>"当 <Math tex="\Delta x" /> 趋近于 0 时，<Math tex="2+\Delta x" /> 的极限等于 2"。<span className="font-bold text-gray-900 ml-2">⚠️ 核心规则：什么时候能"直接代 0"？</span></p>
+                    <p className="pl-4">✅ <strong>可以直接代</strong>：如果表达式里<strong>没有分母</strong>（或分母不含 <Math tex="\Delta x" />），直接把 <Math tex="\Delta x" /> 换成 0 就是极限。</p>
+                    <p className="pl-6 text-gray-700">例：<Math tex="\lim\limits_{\Delta x\to 0}(2+\Delta x)=2+0=2" />，<Math tex="\lim\limits_{\Delta x\to 0}(2x+\Delta x)=2x+0=2x" />。</p>
+                    <p className="pl-4">❌ <strong>不能直接代</strong>：如果代 0 会得到 <Math tex="\tfrac{0}{0}" />（分母也为 0），必须<strong>先化简</strong>（约掉分母的 <Math tex="\Delta x" />）再代。</p>
+                    <p className="pl-6 text-gray-700">例：<Math tex="\lim\limits_{\Delta x\to 0}\dfrac{\Delta x(2x+\Delta x)}{\Delta x}" /> 如果直接代 0 是 <Math tex="\dfrac{0}{0}" />；先约掉 <Math tex="\Delta x" /> 得 <Math tex="2x+\Delta x" />，再代 0 得 <Math tex="2x" />。</p>
+                    <hr className="border-gray-300" />
+                    <p className="font-bold text-gray-900">所以<strong>第一节反复练"把分子拆成 <Math tex="\Delta x\cdot(\cdots)" />"</strong>就是为这一步铺路——只有化简后分母的 <Math tex="\Delta x" /> 才能被约掉，才能代 0 算极限。</p>
+                  </div>
+                </div>
+
+                {/* ── 瞬时变化率 = 导数 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.95rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">③ 瞬时变化率 = 导数（正式定义 🎯）</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p><strong>瞬时变化率</strong> = 让平均变化率里的 <Math tex="\Delta x" /> 趋于 0 得到的极限：</p>
+                    <div className="text-base [&_.katex-display]:!my-1"><Math tex="f'(x_1)=\lim_{\Delta x\to 0}\dfrac{f(x_1+\Delta x)-f(x_1)}{\Delta x}" display /></div>
+                    <hr className="border-gray-300" />
+                    <p>这个极限值就叫做函数 <Math tex="f(x)" /> 在 <Math tex="x_1" /> 处的<strong>导数</strong>，记作 <Math tex="f'(x_1)" />（读作"f 撇 x<sub>1</sub>"）。</p>
+                    <p className="text-gray-700">若题目写作 <Math tex="y=f(x)" />，也可简写成 <Math tex="y'" />（即 <Math tex="f'(x)" />）。新高考主要用 <Math tex="f'(x)" /> 和 <Math tex="y'" />。</p>
+                  </div>
+                </div>
+
+                {/* ── 几何意义 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">④ 几何意义：割线变切线，斜率变导数</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p><strong>先认清两个点：</strong>曲线 <Math tex="y=f(x)" /> 上的点都是 <Math tex="(x,\,y)" />，而 <Math tex="y=f(x)" />，所以两个点是 <Math tex="(x_1,\,f(x_1))" /> 和 <Math tex="(x_1+\Delta x,\,f(x_1+\Delta x))" />。</p>
+                    <p className="pl-4">• <strong>第三节</strong>：平均变化率 = 过 <Math tex="(x_1, f(x_1))" /> 和 <Math tex="(x_1+\Delta x, f(x_1+\Delta x))" /> 的<strong>割线斜率</strong></p>
+                    <p className="pl-4">• <strong>让 <Math tex="\Delta x" /> 无限小</strong>：两个点无限靠近，割线逐渐"贴合"曲线</p>
+                    <p className="pl-4">• <strong>极限位置</strong>：割线变成<strong>切线</strong>，斜率变成<strong>导数</strong> <Math tex="f'(x_1)" /></p>
+                    <hr className="border-gray-300" />
+                    <p className="text-red-700"><strong>一句话：</strong>导数 <Math tex="f'(x_1)" /> 就是曲线在 <Math tex="x_1" /> 处的<strong>切线斜率</strong>。</p>
+                    <p>所以第二节的点斜式终于派上用场了——有了切点 <Math tex="(x_1, f(x_1))" /> 和斜率 <Math tex="f'(x_1)" />，就能写切线方程。</p>
+                  </div>
+                </div>
+
+                {/* ── 求导四步法 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.95rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🧭 求导四步法：记住这个模板，任何题都能做</div>
+                  <div className="px-3 py-1 space-y-0.5">
+                    <p>① <strong>写定义</strong>：套 <Math tex="f'(x)=\lim\limits_{\Delta x\to 0}\dfrac{f(x+\Delta x)-f(x)}{\Delta x}" /></p>
+                    <p>② <strong>化简分子</strong>：把 <Math tex="f(x+\Delta x)-f(x)" /> 拆成 <Math tex="\Delta x\cdot(\cdots)" /></p>
+                    <p>③ <strong>约掉 <Math tex="\Delta x" /></strong>：分子分母的 <Math tex="\Delta x" /> 相消，式子不再有分母</p>
+                    <p>④ <strong>取极限</strong>：把剩下的 <Math tex="\Delta x" /> 当 0 代入，得到 <Math tex="f'(x)" />（如需点值，再代 <Math tex="x=x_0" />）</p>
+                  </div>
+                </div>
+
+                {/* ── 自测（⑤ 示例前，先自己试）── */}
+                <div className="text-[1rem] print:hidden">
+                  <PracticeCard title="先自己试（翻页看详解）" questions={derivPrereqPractice4a} explanations={derivativePrereqExplanations} hideBlankLine optionCols={2} printOptionCols={2}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-[1rem] hidden print:block">
+                  <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                    <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">✍️ 先自己试（翻页看详解）</div>
+                    <div className="px-3 py-1 grid grid-cols-2 gap-x-4">
+                      {derivPrereqPractice4a.map((q, idx) => (
+                        <p key={q.id} className={`text-gray-800 py-1 border-b border-gray-200 ${idx === 2 ? 'col-span-2' : ''}`} style={{ breakInside: 'avoid' }}>
+                          <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                          {q.questionLatex && <Math tex={q.questionLatex} />}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 完整示例：四节汇合 ── */}
+                <PageBreak />
+                <div className="border border-gray-400 rounded overflow-hidden text-[0.95rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">⑤ 完整示例：求 <Math tex="f(x)=x^2" /> 在 <Math tex="x=2" /> 处的导数</div>
+                  <div className="px-3 py-1.5 space-y-1">
+                    <p><strong>目标：</strong>套导数定义 <Math tex="f'(x)=\lim\limits_{\Delta x\to 0}\dfrac{f(x+\Delta x)-f(x)}{\Delta x}" /> 算出来（四步法 ①）。</p>
+                    <hr className="border-gray-300" />
+                    <p><strong>② 化简分子 <Math tex="f(x+\Delta x)-f(x)" />（第一节学过）：</strong></p>
+                    <p className="pl-4"><Math tex="f(x+\Delta x)-f(x)=(x+\Delta x)^2-x^2=2x\Delta x+(\Delta x)^2=\Delta x(2x+\Delta x)" /></p>
+                    <hr className="border-gray-300" />
+                    <p className="font-bold">③ 约掉分母 <Math tex="\Delta x" />（第三节学过）：</p>
+                    <p className="pl-4"><Math tex="\dfrac{f(x+\Delta x)-f(x)}{\Delta x}=\dfrac{\Delta x(2x+\Delta x)}{\Delta x}=2x+\Delta x" /></p>
+                    <hr className="border-gray-300" />
+                    <p><strong>④ 让 <Math tex="\Delta x\to 0" /> 取极限（第四节学过）：</strong>分母已去除，可以直接把剩下的 <Math tex="\Delta x" /> 当 0。<Math tex="2x" /> 部分不变，<Math tex="\Delta x" /> 部分消失：</p>
+                    <p className="pl-4"><Math tex="f'(x)=\lim\limits_{\Delta x\to 0}(2x+\Delta x)=2x+0=2x" /></p>
+                    <hr className="border-gray-300" />
+                    <p><strong>最后代入 <Math tex="x=2" />：</strong><Math tex="f'(2)=2\times 2=4" />。<span className="text-red-700 ml-2"><strong>🎯 四步法闭环</strong>：化简 → 约掉 → 取极限 → 代点。</span></p>
+                  </div>
+                </div>
+
+                {/* ── 注意：f(a) vs f'(a) ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.95rem]">
+                  <div className="grid grid-cols-[3fr_2fr] font-bold text-gray-800 border-b border-gray-400 bg-gray-100">
+                    <div className="px-2 py-1 border-r border-gray-400">⚠️ 注意：别混淆 <Math tex="f(a)" /> 和 <Math tex="f'(a)" /></div>
+                    <div className="px-2 py-1">📊 对照速记</div>
+                  </div>
+                  <div className="grid grid-cols-[3fr_2fr]">
+                    <div className="p-2 space-y-1 border-r border-gray-300">
+                      <p>一撇之差，算法和结果完全不同。以 <Math tex="f(x)=x^2" /> 为例：</p>
+                      <p className="pl-4">• <Math tex="f(3)" />（<strong>函数值</strong>）：直接代 <Math tex="x=3" /> 到 <Math tex="f(x)" />，得 <Math tex="3^2=9" /></p>
+                      <p className="pl-4">• <Math tex="f'(3)" />（<strong>导数值</strong>）：先求导得 <Math tex="f'(x)=2x" />，再代 <Math tex="x=3" /> 得 <Math tex="2\times 3=6" /></p>
+                      <p className="text-red-700"><strong>一句话：看到 <Math tex="'" />（撇），先求导再代值；没有 <Math tex="'" />，直接代值。</strong></p>
+                    </div>
+                    <div className="p-2 flex">
+                      <table className="w-full h-full text-center border border-gray-300 leading-tight">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="border border-gray-300 px-1 py-0"></th>
+                            <th className="border border-gray-300 px-1 py-0"><Math tex="f(a)" /></th>
+                            <th className="border border-gray-300 px-1 py-0"><Math tex="f'(a)" /></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td className="border border-gray-300 px-1 py-0 font-bold">叫法</td><td className="border border-gray-300 px-1 py-0">函数值</td><td className="border border-gray-300 px-1 py-0">导数值</td></tr>
+                          <tr><td className="border border-gray-300 px-1 py-0 font-bold">几何</td><td className="border border-gray-300 px-1 py-0">点的高度</td><td className="border border-gray-300 px-1 py-0">切线斜率</td></tr>
+                          <tr><td className="border border-gray-300 px-1 py-0 font-bold">步骤</td><td className="border border-gray-300 px-1 py-0">直接代</td><td className="border border-gray-300 px-1 py-0">先求导再代</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </Collapsible>
+          </section>
+
+          {/* ═══════════════════════════════════════════════════════ */}
+          {/* Section 5: 综合自测 */}
+          {/* ═══════════════════════════════════════════════════════ */}
+          <section id="dp-quiz" className="mb-0 scroll-mt-4">
+            <Collapsible title="五、综合自测" defaultOpen storageKey="deriv-prereq:quiz">
+              <div className="print:hidden">
+                <QuizPanel questions={derivPrereqQuizQuestions} module="deriv-prereq-quiz" explanations={derivativePrereqExplanations} title="" />
+              </div>
+              <div className="hidden print:block text-[0.95rem]">
+                <div className="grid grid-cols-2 gap-x-4">
+                  {derivPrereqQuizQuestions.map((q, idx) => (
+                    <div key={q.id} className={`py-1 border-b border-gray-200 ${q.type !== 'blank' || idx === 2 || idx === 3 || idx === 10 ? 'col-span-2' : ''}`} style={{ breakInside: 'avoid' }}>
+                      <p className="text-gray-800">
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                      {q.type !== 'blank' && q.options && (
+                        <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 ml-5 mt-0.5">
+                          {q.options.map((opt) => (
+                            <div key={opt.value} className="flex items-center gap-1 text-gray-700">
+                              <span className="w-4 h-4 rounded-full border border-gray-300 flex items-center justify-center text-xs font-bold text-gray-600 shrink-0">{opt.label}</span>
+                              <span>{opt.isLatex ? <Math tex={opt.value} /> : opt.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </div>
 
-            {/* 导数符号 */}
-            <div className="bg-white rounded-xl border border-gray-200 p-2">
-              <p className="font-bold text-gray-800 mb-1">✍️ 导数的记号（预习）</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div>
-                  <p><Math tex="f'(x)" /> 读作 "f 撇 x"</p>
-                  <p><Math tex="f'(x_0)" /> = 函数在 <Math tex="x_0" /> 处的导数</p>
+              {/* ── 本章要点速查表 ── */}
+              <div className="text-base">
+                <div className="grid grid-cols-[3rem_13rem_1fr] bg-gray-100 border border-gray-400 font-bold text-gray-800">
+                  <div className="px-2 py-0.5 text-center border-r border-gray-400">节</div>
+                  <div className="px-2 py-0.5 text-center border-r border-gray-400">核心内容</div>
+                  <div className="px-2 py-0.5 text-center">关键公式/动作</div>
                 </div>
-                <div>
-                  <p><Math tex="\dfrac{dy}{dx}" /> 读作 "dy dx"（莱布尼茨记号）</p>
-                  <p>表示 <Math tex="y" /> 对 <Math tex="x" /> 的变化率</p>
-                </div>
+                {[
+                  { t: '①', c: <>化简 <Math tex="f(x+\Delta x)-f(x)" /></>, f: <>拆成 <Math tex="\Delta x\cdot(\cdots)" />（多项式提项 / 分式通分 / 根式乘共轭）</> },
+                  { t: '②', c: <>斜率 / 切线方程</>, f: <><Math tex="k=\dfrac{y_2-y_1}{x_2-x_1}" />；点斜式 <Math tex="y-y_1=k(x-x_1)" /></> },
+                  { t: '③', c: <>平均变化率 = 割线斜率</>, f: <><Math tex="\bar{v}=\dfrac{f(x_1+\Delta x)-f(x_1)}{\Delta x}" /></> },
+                  { t: '④', c: <>导数 = 瞬时变化率 = 切线斜率</>, f: <><Math tex="f'(x)=\lim\limits_{\Delta x\to 0}\dfrac{f(x+\Delta x)-f(x)}{\Delta x}" /></> },
+                  { t: '🧭', c: <>求导四步法</>, f: <>① 写定义 → ② 化简分子 → ③ 约掉 <Math tex="\Delta x" /> → ④ 取极限</> },
+                  { t: '⚠️', c: <>易错区分</>, f: <><Math tex="f(a)" /> = 函数值；<Math tex="f'(a)" /> = 导数值（看见 <Math tex="'" /> 先求导再代）</> },
+                ].map((row, i) => (
+                  <div key={i} className="grid grid-cols-[3rem_13rem_1fr] border-l border-r border-b border-gray-400">
+                    <div className="px-2 py-0.5 text-center font-bold border-r border-gray-300">{row.t}</div>
+                    <div className="px-2 py-0.5 border-r border-gray-300">{row.c}</div>
+                    <div className="px-2 py-0.5">{row.f}</div>
+                  </div>
+                ))}
               </div>
-            </div>
+            </Collapsible>
+          </section>
 
-            <CalloutCard variant="tip" title="🎉 恭喜！你已经理解了导数的本质" compact>
-              <div className="space-y-0.5">
-                <p><strong>导数 = 瞬时变化率 = 切线斜率</strong></p>
-                <p>接下来学导数，就是学怎么<strong>快速计算</strong>这个值（不用每次都算极限）</p>
-              </div>
-            </CalloutCard>
+          {/* 打印模式答案区 */}
+          {isPrinting && printOptions.showAnswers && <DerivativePrereqAnswers />}
 
-            {/* 练习 */}
-            <PracticeCard
-              title="✏️ 即时练习：从平均到瞬时（5题）"
-              questions={derivPrereqPractice3}
-              printOptionCols={2}
-              explanations={derivativePrereqExplanations}
-            />
-
-            {/* 高考考什么 */}
-            <div className="bg-red-50 border border-red-200 rounded-xl p-2">
-              <p className="font-bold text-red-800 mb-1">🎯 高考怎么考"导数的几何意义"？</p>
-              <div className="grid grid-cols-2 gap-3 leading-7">
-                <div>
-                  <p className="font-bold text-red-700">① 求切线方程（大题必考）</p>
-                  <p>已知 <Math tex="f(x)" />，求在某点处的切线</p>
-                  <p className="text-gray-500">切线斜率 = 导数值</p>
-                </div>
-                <div>
-                  <p className="font-bold text-red-700">② 看图判断导数正负</p>
-                  <p>切线向上倾 → 导数 &gt; 0</p>
-                  <p>切线向下倾 → 导数 &lt; 0</p>
-                </div>
-                <div>
-                  <p className="font-bold text-red-700">③ 切线 vs 过某点的直线</p>
-                  <p>"在点A处的切线" ≠ "过点A的切线"</p>
-                  <p className="text-gray-500">经典陷阱，每年都有人踩</p>
-                </div>
-                <div>
-                  <p className="font-bold text-red-700">④ 导数 = 0 的点</p>
-                  <p>切线水平 → 极值候选点</p>
-                  <p className="text-gray-500">这是后面学单调性的基础</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 对比速查 */}
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-2">
-              <p className="font-bold text-gray-800 mb-1">📋 全章对比速查表</p>
-              <table className="w-full text-base border-collapse">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border border-gray-200 px-2 py-1"></th>
-                    <th className="border border-gray-200 px-2 py-1 text-center">平均变化率</th>
-                    <th className="border border-gray-200 px-2 py-1 text-center">瞬时变化率（导数）</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">公式</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\dfrac{f(x_2) - f(x_1)}{x_2 - x_1}" /></td>
-                    <td className="border border-gray-200 px-2 py-1 text-center"><Math tex="\Delta x \rightarrow 0" /> 时的极限</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">图像</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">割线斜率</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">切线斜率</td>
-                  </tr>
-                  <tr>
-                    <td className="border border-gray-200 px-2 py-1 font-bold">物理</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">平均速度</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">瞬时速度</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-200 px-2 py-1 font-bold">需要几个点</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">两个点</td>
-                    <td className="border border-gray-200 px-2 py-1 text-center">一个点（极限过程）</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* Section 4: 综合自测 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      <section id="dp-quiz" className="mb-2 scroll-mt-4">
-        <Collapsible title="四、综合自测（8题）— 全对可进入下一章，错2题以上回看对应节" defaultOpen storageKey="deriv-prereq:quiz">
-          <div className="-mx-4 -mt-3 -mb-4">
-            <QuizPanel questions={derivPrereqQuizQuestions} module="deriv-prereq-quiz" explanations={derivativePrereqExplanations} />
-          </div>
-        </Collapsible>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════ */}
-      {/* 打印模式答案区 */}
-      {/* ════════════════════════════════════════════════════════════ */}
-      {isPrinting && printOptions.showAnswers && <DerivativePrereqAnswers />}
-
+        </div>
       </LessonLayout>
     </div>
   );

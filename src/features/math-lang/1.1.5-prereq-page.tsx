@@ -1,7 +1,7 @@
 import { Mafs, Coordinates, Point, Line, Plot } from 'mafs';
-import { DebugMafs, DText, DebugToggle } from '@/features/trig/MafsDebug';
+import { DebugMafs, DText } from '@/features/trig/MafsDebug';
 
-import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak } from '@/components/shared';
+import { Math, Collapsible, SpeakButton, QuizPanel, PageHeader, LessonLayout, PracticeCard, ExportButton, PageBreak, UnifiedDebugToggle } from '@/components/shared';
 import { setsPrereqNarrations } from './data/1.1.5/1.1.5-prereq-narrations';
 import { setsPrereqPractice1, setsPrereqPractice1a, setsPrereqPractice2 } from './data/1.2/1.2-practice';
 import { setsPrereqProgressItems } from './data/1.1.5/1.1.5-prereq-progress';
@@ -511,7 +511,7 @@ export function SetsPrereqPage() {
       {isPrinting && printOptions.showAnswers && <SetsPrereqAnswers />}
 
       </LessonLayout>
-      <DebugToggle />
+      <UnifiedDebugToggle />
     </div>
   );
 }

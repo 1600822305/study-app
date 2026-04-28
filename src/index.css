@@ -37,6 +37,14 @@ html, body, #root {
   display: inline-block !important;
 }
 
+/* 渲染性能：可视区外的大卡片跳过 layout/paint（仅非打印模式） */
+@media screen {
+  .rounded-xl {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+  }
+}
+
 /* 安全区域适配（刘海屏、底部手势条、edge-to-edge） */
 :root {
   --sat: env(safe-area-inset-top, 0px);
@@ -100,6 +108,11 @@ math-field::part(virtual-keyboard-toggle) {
   table, figure, img {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
+  }
+  /* 大表格允许跨页 */
+  table.print-break-allow {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
   }
 
   /* 白底小卡片不截断（rounded-xl 是 Collapsible 大容器，允许跨页） */

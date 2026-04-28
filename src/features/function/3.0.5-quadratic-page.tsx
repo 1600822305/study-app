@@ -1,6 +1,6 @@
 import { Coordinates, Plot, Line, Point } from 'mafs';
-import { DebugMafs, DebugToggle } from '@/features/trig/MafsDebug';
-import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak } from '@/components/shared';
+import { DebugMafs } from '@/features/trig/MafsDebug';
+import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PageBreak, UnifiedDebugToggle } from '@/components/shared';
 import { quadraticProgressItems } from './data/3.0.5/3.0.5-progress';
 import { useProgress, usePrintMode } from '@/hooks';
 
@@ -21,12 +21,12 @@ export function QuadraticPage() {
       />
 
       <div className="flex justify-end mb-2 print:hidden gap-2">
-        <DebugToggle />
+        <UnifiedDebugToggle />
         <ExportButton title="3.0.5 二次函数" />
       </div>
 
       <LessonLayout progressItems={progressItems} onToggle={toggleProgress}>
-        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:pt-1 [&_.rounded-xl>div:last-child]:pb-1">
+        <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-1 [&_.rounded-xl>div:last-child]:px-0 [&_.rounded-xl>div:last-child]:pt-0 [&_.rounded-xl>div:last-child]:pb-0">
 
       {/* ═══════════════════════════════════════════════════════ */}
       {/* Section 1: 定义与基本条件 */}
@@ -556,7 +556,7 @@ export function QuadraticPage() {
       {/* 总结速查表 */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section id="qd-summary" className="mb-0 scroll-mt-4">
-        <div className="border border-gray-400 rounded overflow-hidden">
+        <div className="border border-gray-400 rounded overflow-hidden bg-white">
           <div className="px-2 py-1 font-bold text-blue-700 border-b border-gray-400 bg-gray-100">二次函数速查表</div>
           <table className="w-full border-collapse text-[0.85rem]">
             <thead>

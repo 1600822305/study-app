@@ -1,9 +1,12 @@
 export { FunctionReviewPage } from './3.0-review-page';
+export { QuadraticPage } from './3.0.5-quadratic-page';
 export { FunctionConceptPage } from './3.1-concept-page';
 export { PiecewisePage } from './3.1.3-piecewise-page';
 export { ElementaryFuncPrereqPage } from './3.1.8-elem-prereq-page';
 export { ElementaryFuncPage } from './3.2-elem-func-page';
-export { FunctionGraphPrereqPage } from './3.2.5-graph-prereq-page';
+export { LogComparePage } from './3.2.5-log-compare-page';
 export { FunctionGraphPage } from './3.3-graph-page';
 export { DerivativePrereqPage } from './3.3.5-deriv-prereq-page';
 export { DerivativeBasicPage } from './3.4-deriv-basic-page';
+export { DerivativeApplicationPage } from './3.5-deriv-application-page';
+export { DerivativeApplication2Page } from './3.6-deriv-application-2-page';

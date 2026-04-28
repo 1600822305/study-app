@@ -95,12 +95,25 @@ export function PrintProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!isPrinting || isPreview) return;
 
+    // 将章节标题写入 document.title，让浏览器导出 PDF 时默认文件名为章节名
+    const originalTitle = document.title;
+    if (printOptions.title) {
+      document.title = printOptions.answersOnly
+        ? `${printOptions.title}（答案册）`
+        : printOptions.showAnswers
+          ? `${printOptions.title}（含答案）`
+          : printOptions.title;
+    }
+
     const timer = setTimeout(() => {
       window.print();
     }, 400);
 
-    return () => clearTimeout(timer);
-  }, [isPrinting, isPreview]);
+    return () => {
+      clearTimeout(timer);
+      document.title = originalTitle;
+    };
+  }, [isPrinting, isPreview, printOptions]);
 
   // 监听浏览器 afterprint 事件，自动退出打印模式
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, startTransition } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 import { useUIState } from '@/hooks/useUIState';
@@ -17,6 +17,8 @@ interface CollapsibleProps {
   headerExtra?: React.ReactNode;
   /** Extra class for the title <span> */
   titleClassName?: string;
+  /** Hide the header (title bar) when printing */
+  hideTitleOnPrint?: boolean;
 }
 
 export function Collapsible({
@@ -27,6 +29,7 @@ export function Collapsible({
   storageKey,
   headerExtra,
   titleClassName,
+  hideTitleOnPrint = false,
 }: CollapsibleProps) {
   const [localOpen, setLocalOpen] = useState(defaultOpen);
   const [persistedOpen, setPersistedOpen] = useUIState(
@@ -56,9 +59,9 @@ export function Collapsible({
 
   return (
     <div className={`rounded-xl border ${styles[variant]} mb-1.5 overflow-hidden`}>
-      <div className="flex items-center px-4 py-2">
+      <div className={`flex items-center px-4 py-2${hideTitleOnPrint ? ' print:hidden' : ''}`}>
         <button
-          onClick={() => setOpen(!open)}
+          onClick={() => startTransition(() => setOpen(!open))}
           className="flex-1 flex items-center gap-2 text-left font-medium cursor-pointer hover:opacity-80 transition-opacity"
         >
           {open ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
