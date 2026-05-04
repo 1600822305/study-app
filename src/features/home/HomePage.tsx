@@ -75,6 +75,7 @@ const phases: Phase[] = [
       { path: '/math/derivative-basic', label: '3.4 导数基础', time: '4-5小时', desc: '求导公式 + 单调性判断' },
       { path: '/math/derivative-application', label: '3.5 导数应用（上）', time: '2-3小时', desc: '切线方程：在某点 / 过某点 / 已知切线求参 / 公切线' },
       { path: '/math/derivative-application-2', label: '3.6 导数应用（下）', time: '2-3小时', desc: '单调性、极值与最值（含参讨论）' },
+      { path: '/math/closed-max', label: '3.6.3 闭区间最值', time: '1-2小时', desc: '驻点+端点=候选；含参讨论最值' },
       { path: '/math/always-exists', label: '3.6.4 恒成立与存在性', time: '1-2小时', desc: '四句话总表：任意↔最值，存在↔最值' },
       { path: '/math/reverse-param', label: '3.6.5 反求参数', time: '1-2小时', desc: '已知性质倒推 a：极值/最值/单调/零点' },
     ],

@@ -31,6 +31,7 @@ const DerivativePrereqPage = lazy(() => import('@/features/function').then(m => 
 const DerivativeBasicPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeBasicPage })));
 const DerivativeApplicationPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeApplicationPage })));
 const DerivativeApplication2Page = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeApplication2Page })));
+const ClosedMaxPage = lazy(() => import('@/features/function').then(m => ({ default: m.ClosedMaxPage })));
 const AlwaysExistsPage = lazy(() => import('@/features/function').then(m => ({ default: m.AlwaysExistsPage })));
 const ReverseParamPage = lazy(() => import('@/features/function').then(m => ({ default: m.ReverseParamPage })));
 const VectorPrereqPage = lazy(() => import('@/features/vector').then(m => ({ default: m.VectorPrereqPage })));
@@ -118,6 +119,7 @@ function App() {
           <Route path="/math/derivative-basic" element={<DerivativeBasicPage />} />
           <Route path="/math/derivative-application" element={<DerivativeApplicationPage />} />
           <Route path="/math/derivative-application-2" element={<DerivativeApplication2Page />} />
+          <Route path="/math/closed-max" element={<ClosedMaxPage />} />
           <Route path="/math/always-exists" element={<AlwaysExistsPage />} />
           <Route path="/math/reverse-param" element={<ReverseParamPage />} />
           <Route path="/math/stage3-exam" element={<Stage3ExamPage />} />
