@@ -77,6 +77,8 @@ const navItems: NavItem[] = [
           { path: '/math/derivative-basic', label: '3.4 导数基础' },
           { path: '/math/derivative-application', label: '3.5 导数应用（上）' },
           { path: '/math/derivative-application-2', label: '3.6 导数应用（下）' },
+          { path: '/math/always-exists', label: '3.6.4 恒成立与存在性' },
+          { path: '/math/reverse-param', label: '3.6.5 反求参数' },
           { path: '/math/stage3-exam', label: '📝 阶段考试' },
         ],
       },

@@ -65,7 +65,7 @@ export function PrintQuestions({ questions, printOptionCols = 4, hideBlankLine =
           <div key={idx} className={`py-1 border-b border-gray-200${q.fullRow && columns === 2 ? ' col-span-2' : ''}`} style={{ breakInside: 'avoid' }}>
             <p className="text-gray-800">
               <span className="text-gray-800 mr-2 font-medium">{idx + 1 + startIndex}.</span>
-              {q.questionLatex ? <MathTex tex={q.questionLatex} /> : renderQ(q)}
+              {renderQ(q)}
             </p>
             {q.type !== 'blank' && q.options && (
               <div className={`${

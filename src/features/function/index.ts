@@ -10,3 +10,5 @@ export { DerivativePrereqPage } from './3.3.5-deriv-prereq-page';
 export { DerivativeBasicPage } from './3.4-deriv-basic-page';
 export { DerivativeApplicationPage } from './3.5-deriv-application-page';
 export { DerivativeApplication2Page } from './3.6-deriv-application-2-page';
+export { AlwaysExistsPage } from './3.6.4-always-exists-page';
+export { ReverseParamPage } from './3.6.5-reverse-param-page';

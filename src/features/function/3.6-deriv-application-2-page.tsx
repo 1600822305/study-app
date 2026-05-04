@@ -1,6 +1,8 @@
 import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PracticeCard, PrintQuestions, UnifiedDebugToggle, PageBreak } from '@/components/shared';
+import { Coordinates, Plot, Point } from 'mafs';
+import { DebugMafs } from '@/features/trig/MafsDebug';
 import { derivApplication2ProgressItems } from './data/3.6/3.6-deriv-application-2-progress';
-import { derivMono1Warmup, derivMono1Practice, derivMono2Warmup, derivMono2Practice, derivMono3Practice, derivMonoDiscussPractice } from './data/3.6/3.6-deriv-application-2-practice';
+import { derivMono1Warmup, derivMono1Practice, derivMono2Warmup, derivMono2Practice, derivMono3Practice, derivMonoDiscussPractice, derivExtremaExample1Practice, derivExtremaExample2Practice, derivExtremaExample3Practice, derivExtremaExample4Practice, closedIntervalMaxStepsPractice, closedMaxExample1Practice, closedMaxExample2Practice, closedMaxExample3Practice, closedMaxExample4Practice, closedMaxExample5Practice } from './data/3.6/3.6-deriv-application-2-practice';
 import { useProgress } from '@/hooks';
 import { derivativeApplication2Explanations } from './3.6-deriv-application-2-answers';
 
@@ -887,7 +889,7 @@ export function DerivativeApplication2Page() {
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="border border-gray-300 px-2 py-0.5 w-[10%]">类型</th>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[26%]"><Math tex="f'(x)" /> 形态</th>
+                        <th className="border border-gray-300 px-2 py-0.5 w-[30%]"><Math tex="f'(x)" /> 形态</th>
                         <th className="border border-gray-300 px-2 py-0.5">分类标准</th>
                         <th className="border border-gray-300 px-2 py-0.5 w-[10%]">对应例题</th>
                       </tr>
@@ -926,30 +928,23 @@ export function DerivativeApplication2Page() {
                   <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 1</strong>　<Math tex="f(x)=a(x-1)-\ln x+1" />（定义域 <Math tex="x>0" />），讨论单调区间<span className="text-gray-700 font-normal ml-2">——2024 全国甲卷第 20 题，一次型母题</span></div>
                   <div className="px-2 py-0.5 space-y-1">
                     <p className="pl-2"><strong>① 求导</strong>：<Math tex="f'(x)=a-\dfrac{1}{x}=\dfrac{ax-1}{x}" />。</p>
-                    <p className="pl-2"><strong>② 定号</strong>：分母 <Math tex="x>0" /> 恒正可约，看分子 <Math tex="ax-1" />。</p>
+                    <p className="pl-2"><strong>② 定号</strong>：分母 <Math tex="x>0" /> 恒正可约，看分子 <Math tex="ax-1" />。<strong>先求分子零点</strong>：令 <Math tex="ax-1=0" />，<Math tex="a=0" /> 时方程无解；<Math tex="a\ne 0" /> 时解得 <Math tex="x=\dfrac{1}{a}" />。</p>
                     <hr className="border-gray-300" />
-                    <div className="grid grid-cols-[auto_1fr]">
-                      <div className="flex items-center justify-center px-2 py-1 font-bold text-gray-800 border-r border-gray-300 whitespace-nowrap">③ 按 <Math tex="a" /> 分类</div>
-                      <div>
-                        <div className="space-y-1 px-2 py-1">
-                          <p><span className="font-bold text-blue-800 mr-2">情况一：<Math tex="a\le 0" /></span>分子 <Math tex="ax-1" /> 在定义域 <Math tex="x>0" /> 上<strong>恒为负</strong>（不变号），不用分段，直接判号即可。</p>
-                          <p>因为 <Math tex="x>0" /> 且 <Math tex="a\le 0" />，所以 <Math tex="ax\le 0" />，两边减 1 得 <Math tex="ax-1\le -1" />。</p>
-                          <p>分母 <Math tex="x>0" />，所以 <Math tex="f'(x)=\dfrac{ax-1}{x}<0" />。<strong>结论</strong>：<Math tex="f(x)" /> 在 <Math tex="(0,+\infty)" /> 上<strong>单调递减</strong>。</p>
-                        </div>
-                        <div className="space-y-1 px-2 py-1 border-t border-gray-300">
-                          <p><span className="font-bold text-blue-800 mr-2">情况二：<Math tex="a>0" /></span>分子 <Math tex="ax-1" /> 是关于 <Math tex="x" /> 的<strong>递增一次函数</strong>，分子值<strong>有正有负</strong>，中间会<strong>变号</strong>。找零点把定义域分段</p>
-                          <p>令 <Math tex="ax-1=0" />，解得零点 <Math tex="x=\dfrac{1}{a}" />，把 <Math tex="(0,+\infty)" /> 切成 <Math tex="\left(0,\dfrac{1}{a}\right)" /> 和 <Math tex="\left(\dfrac{1}{a},+\infty\right)" /> 两段。</p>
-                          <p className="pl-2">• 当 <Math tex="0<x<\dfrac{1}{a}" /> 时，<Math tex="ax<1" />，所以 <Math tex="ax-1<0" />，得 <Math tex="f'(x)<0" />，<strong>单调递减</strong>。</p>
-                          <p className="pl-2">• 当 <Math tex="x>\dfrac{1}{a}" /> 时，<Math tex="ax>1" />，所以 <Math tex="ax-1>0" />，得 <Math tex="f'(x)>0" />，<strong>单调递增</strong>。</p>
-                        </div>
-                      </div>
+                    <p className="font-bold text-gray-800">③ 按 <Math tex="a" /> 分类</p>
+                    <div className="space-y-1">
+                      <p><span className="font-bold text-blue-800 mr-2">情况一：当 <Math tex="a\le 0" /> 时</span>因为 <Math tex="a\le 0" />，所以 <Math tex="\dfrac{1}{a}" /> 不在定义域 <Math tex="(0,+\infty)" /> 内，无需分段讨论。又因为 <Math tex="x>0" /> 且 <Math tex="a\le 0" />，所以 <Math tex="ax\le 0" />，</p>
+                      <p>即 <Math tex="ax-1\le -1" />，得 <Math tex="f'(x)<0" />，故 <Math tex="f(x)" /> 在 <Math tex="(0,+\infty)" /> 上<strong>单调递减</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况二：当 <Math tex="a>0" /> 时</span>零点 <Math tex="\dfrac{1}{a}>0" /> <strong>落在定义域 <Math tex="(0,+\infty)" /> 内</strong>，把定义域切成 <Math tex="\left(0,\dfrac{1}{a}\right)" /> 和 <Math tex="\left(\dfrac{1}{a},+\infty\right)" /> 两段。</p>
+                      <p className="pl-2">• 区间 <Math tex="\left(0,\dfrac{1}{a}\right)" />，即 <Math tex="0<x<\dfrac{1}{a}" /> 时，同乘 <Math tex="a" /> 得 <Math tex="ax<1" />，得 <Math tex="ax-1<0" />。分子为负，分母为正，得 <Math tex="f'(x)<0" /> → <strong>单调递减</strong></p>
+                      <p className="pl-2">• 区间 <Math tex="\left(\dfrac{1}{a},+\infty\right)" />，即 <Math tex="x>\dfrac{1}{a}" /> 时，同乘 <Math tex="a" /> 得 <Math tex="ax>1" />，得 <Math tex="ax-1>0" />。分子为正，分母为正，得 <Math tex="f'(x)>0" /> → <strong>单调递增</strong>。</p>
                     </div>
                     <hr className="border-gray-300" />
                     <div className="pl-2 grid grid-cols-[auto_1fr] gap-x-2">
                       <div className="font-bold whitespace-nowrap"><strong>④ 综上所述</strong>：</div>
                       <div className="space-y-0.5">
                         <p>• <Math tex="a\le 0" /> 时，<Math tex="f(x)" /> 的减区间为 <Math tex="(0,+\infty)" />，无增区间。</p>
-                        <p>• <Math tex="a>0" /> 时，<Math tex="f(x)" /> 的减区间为 <Math tex="\left(0,\dfrac{1}{a}\right)" />，增区间为 <Math tex="\left(\dfrac{1}{a},+\infty\right)" />。</p>
+                        <p>• <Math tex="a>0" /> 时，<Math tex="f(x)" /> 的减区间为 <Math tex="\left(0,\tfrac{1}{a}\right)" />，增区间为 <Math tex="\left(\tfrac{1}{a},+\infty\right)" />。</p>
                       </div>
                     </div>
                   </div>
@@ -960,28 +955,22 @@ export function DerivativeApplication2Page() {
                   <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 2</strong>　<Math tex="f(x)=2x^3-3(a+1)x^2+6ax" />，讨论单调性<span className="text-gray-700 font-normal ml-2">——二次可分解最高频母题</span></div>
                   <div className="px-2 py-0.5 space-y-1">
                     <p className="pl-2"><strong>① 求导 + 因式分解 + 找零点</strong>：<Math tex="f'(x)=6x^2-6(a+1)x+6a=6(x-1)(x-a)" />，零点为 <Math tex="x=1" /> 和 <Math tex="x=a" />。</p>
-                    <p className="pl-2"><strong>② 定号</strong>：两根的<strong>大小关系由 <Math tex="a" /> 与 <Math tex="1" /> 决定</strong>，所以按 <Math tex="a" /> 与 <Math tex="1" /> 的关系分 3 类。</p>
+                    <p className="pl-2"><strong>② 定号</strong>：判 <Math tex="f'(x)" /> 的正负就是判两因子 <Math tex="(x-1)(x-a)" /> 相乘的符号，用两根 <Math tex="1" /> 和 <Math tex="a" /> 分段判号。分类讨论两根之间大小。</p>
                     <hr className="border-gray-300" />
-                    <div className="grid grid-cols-[auto_1fr]">
-                      <div className="flex items-center justify-center px-2 py-1 font-bold text-gray-800 border-r border-gray-300 whitespace-nowrap">③ 按 <Math tex="a" /> 分类</div>
-                      <div>
-                        <div className="space-y-1 px-2 py-1">
-                          <p><span className="font-bold text-blue-800 mr-2">情况一：<Math tex="a>1" /></span>两根次序为 <Math tex="1<a" />，把 <Math tex="\mathbb{R}" /> 切成 <Math tex="(-\infty,1)" />、<Math tex="(1,a)" />、<Math tex="(a,+\infty)" /> 三段。</p>
-                          <p className="pl-2">• 当 <Math tex="x<1" /> 时，<Math tex="x-1<0" /> 且 <Math tex="x-a<0" />（两负），相乘为正，<Math tex="f'(x)>0" />，<strong>单调递增</strong>。</p>
-                          <p className="pl-2">• 当 <Math tex="1<x<a" /> 时，<Math tex="x-1>0" /> 且 <Math tex="x-a<0" />（异号），相乘为负，<Math tex="f'(x)<0" />，<strong>单调递减</strong>。</p>
-                          <p className="pl-2">• 当 <Math tex="x>a" /> 时，<Math tex="x-1>0" /> 且 <Math tex="x-a>0" />（两正），相乘为正，<Math tex="f'(x)>0" />，<strong>单调递增</strong>。</p>
-                        </div>
-                        <div className="space-y-1 px-2 py-1 border-t border-gray-300">
-                          <p><span className="font-bold text-blue-800 mr-2">情况二：<Math tex="a=1" />（重根）</span>此时 <Math tex="f'(x)=6(x-1)^2\ge 0" />，<Math tex="x=1" /> 处虽然 <Math tex="f'=0" /> 但<strong>不变号</strong>（孤立零点），不分段。</p>
-                          <p><strong>结论</strong>：<Math tex="f(x)" /> 在 <Math tex="\mathbb{R}" /> 上<strong>单调递增</strong>。<span className="text-red-700 ml-2"><strong>⚠️ 易错</strong>：重根处 <Math tex="f'=0" /> 但函数仍单调，<strong>不要</strong>把它当成分段点。</span></p>
-                        </div>
-                        <div className="space-y-1 px-2 py-1 border-t border-gray-300">
-                          <p><span className="font-bold text-blue-800 mr-2">情况三：<Math tex="a<1" /></span>两根次序为 <Math tex="a<1" />，把 <Math tex="\mathbb{R}" /> 切成 <Math tex="(-\infty,a)" />、<Math tex="(a,1)" />、<Math tex="(1,+\infty)" /> 三段。</p>
-                          <p className="pl-2">• 当 <Math tex="x<a" /> 时，<Math tex="x-1<0" /> 且 <Math tex="x-a<0" />（两负），相乘为正，<Math tex="f'(x)>0" />，<strong>单调递增</strong>。</p>
-                          <p className="pl-2">• 当 <Math tex="a<x<1" /> 时，<Math tex="x-1<0" /> 且 <Math tex="x-a>0" />（异号），相乘为负，<Math tex="f'(x)<0" />，<strong>单调递减</strong>。</p>
-                          <p className="pl-2">• 当 <Math tex="x>1" /> 时，<Math tex="x-1>0" /> 且 <Math tex="x-a>0" />（两正），相乘为正，<Math tex="f'(x)>0" />，<strong>单调递增</strong>。</p>
-                        </div>
-                      </div>
+                    <p className="font-bold text-gray-800">③ 按 <Math tex="a" /> 分类</p>
+                    <div className="space-y-1">
+                      <p><span className="font-bold text-blue-800 mr-2">情况一：当 <Math tex="a>1" /> 时</span>此时 <Math tex="1<a" />，在定义域 <Math tex="x\in\mathbb{R}" /> 上分区为 <Math tex="(-\infty,1)" />、<Math tex="(1,a)" />、<Math tex="(a,+\infty)" /></p>
+                      <p className="pl-2">• 区间 <Math tex="(-\infty,1)" />，即 <Math tex="x<1" /> 时，移项得 <Math tex="x-1<0" /> 且 <Math tex="x-a<0" />（两负），相乘为正，<Math tex="f'(x)>0" />，<Math tex="f(x)" /> <strong>单调递增</strong>。</p>
+                      <p className="pl-2">• 区间 <Math tex="(1,a)" />，即 <Math tex="1<x<a" /> 时，移项得 <Math tex="x-1>0" /> 且 <Math tex="x-a<0" />（异号），相乘为负，<Math tex="f'(x)<0" />，<Math tex="f(x)" /> <strong>单调递减</strong>。</p>
+                      <p className="pl-2">• 区间 <Math tex="(a,+\infty)" />，即 <Math tex="x>a" /> 时，移项得 <Math tex="x-1>0" /> 且 <Math tex="x-a>0" />（两正），相乘为正，<Math tex="f'(x)>0" />，<Math tex="f(x)" /> <strong>单调递增</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况二：<Math tex="a=1" />（重根）</span>当 <Math tex="a=1" /> 时 <Math tex="f'(x)=6(x-1)(x-1)" />，即 <Math tex="f'(x)=6(x-1)^2" />。因为 <Math tex="6>0" /> 且 <Math tex="(x-1)^2\ge 0" />，</p>
+                      <p className="pl-2">所以 <Math tex="f'(x)\ge 0" />（仅在 <Math tex="x=1" /> 时 <Math tex="f'=0" />），即 <Math tex="f(x)" /> 在 <Math tex="\mathbb{R}" /> 上<strong>单调递增</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况三：<Math tex="a<1" /></span>两根次序为 <Math tex="a<1" />，把 <Math tex="\mathbb{R}" /> 切成 <Math tex="(-\infty,a)" />、<Math tex="(a,1)" />、<Math tex="(1,+\infty)" /> 三段。</p>
+                      <p className="pl-2">• 区间 <Math tex="(-\infty,a)" />，即 <Math tex="x<a" /> 时，移项得 <Math tex="x-1<0" /> 且 <Math tex="x-a<0" />（两负），相乘为正，<Math tex="f'(x)>0" />，<Math tex="f(x)" /> <strong>单调递增</strong>。</p>
+                      <p className="pl-2">• 区间 <Math tex="(a,1)" />，即 <Math tex="a<x<1" /> 时，移项得 <Math tex="x-1<0" /> 且 <Math tex="x-a>0" />（异号），相乘为负，<Math tex="f'(x)<0" />，<Math tex="f(x)" /> <strong>单调递减</strong>。</p>
+                      <p className="pl-2">• 区间 <Math tex="(1,+\infty)" />，即 <Math tex="x>1" /> 时，移项得 <Math tex="x-1>0" /> 且 <Math tex="x-a>0" />（两正），相乘为正，<Math tex="f'(x)>0" />，<Math tex="f(x)" /> <strong>单调递增</strong>。</p>
                     </div>
                     <hr className="border-gray-300" />
                     <div className="pl-2 grid grid-cols-[auto_1fr] gap-x-2">
@@ -1000,91 +989,154 @@ export function DerivativeApplication2Page() {
                   <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　<Math tex="f(x)=2x^3-3(a+1)x^2+6ax" /> 在 <Math tex="[0,1]" /> 上的单调性<span className="text-gray-700 font-normal ml-2">——同例 2 函数，多了限定区间，按根与端点位置分</span></div>
                   <div className="px-2 py-0.5 space-y-1">
                     <p className="pl-2"><strong>① 求导（同例 2）</strong>：<Math tex="f'(x)=6(x-1)(x-a)" />，零点为 <Math tex="x=1" /> 和 <Math tex="x=a" />。</p>
-                    <p className="pl-2"><strong>② 定号</strong>：固定零点 <Math tex="x=1" /> 正好是区间右端点。所以只需关心<strong>含参零点 <Math tex="x=a" /> 与区间 <Math tex="[0,1]" /> 的位置关系</strong>，按 <Math tex="a" /> 与端点 <Math tex="0,1" /> 比较分 3 类。</p>
+                    <p className="pl-2"><strong>② 定号</strong>：零点 <Math tex="x=1" /> 在区间端点上，不用管。看<strong>含参零点 <Math tex="x=a" /> 与区间 <Math tex="[0,1]" /> 的位置关系</strong>。</p>
                     <hr className="border-gray-300" />
-                    <div className="grid grid-cols-[auto_1fr]">
-                      <div className="flex items-center justify-center px-2 py-1 font-bold text-gray-800 border-r border-gray-300 whitespace-nowrap">③ 按 <Math tex="a" /> 分类</div>
-                      <div>
-                        <div className="space-y-1 px-2 py-1">
-                          <p><span className="font-bold text-blue-800 mr-2">情况一：<Math tex="a\le 0" /></span>含参零点 <Math tex="a" /> 在区间<strong>左外</strong>，区间内不分段。</p>
-                          <p className="pl-2">在 <Math tex="(0,1)" /> 上，<Math tex="x-1<0" /> 且 <Math tex="x-a>0" />（异号），相乘为负，<Math tex="f'(x)<0" />。</p>
-                          <p className="pl-2"><strong>结论</strong>：<Math tex="f(x)" /> 在 <Math tex="[0,1]" /> 上<strong>单调递减</strong>。</p>
-                        </div>
-                        <div className="space-y-1 px-2 py-1 border-t border-gray-300">
-                          <p><span className="font-bold text-blue-800 mr-2">情况二：<Math tex="0<a<1" /></span>含参零点 <Math tex="a" /> 在区间<strong>内部</strong>，把 <Math tex="[0,1]" /> 切成 <Math tex="[0,a)" />、<Math tex="(a,1]" /> 两段。</p>
-                          <p className="pl-2">• 当 <Math tex="0<x<a" /> 时，<Math tex="x-1<0" /> 且 <Math tex="x-a<0" />（两负），相乘为正，<Math tex="f'(x)>0" />，<strong>单调递增</strong>。</p>
-                          <p className="pl-2">• 当 <Math tex="a<x<1" /> 时，<Math tex="x-1<0" /> 且 <Math tex="x-a>0" />（异号），相乘为负，<Math tex="f'(x)<0" />，<strong>单调递减</strong>。</p>
-                        </div>
-                        <div className="space-y-1 px-2 py-1 border-t border-gray-300">
-                          <p><span className="font-bold text-blue-800 mr-2">情况三：<Math tex="a\ge 1" /></span>含参零点 <Math tex="a" /> 在区间<strong>右外</strong>（<Math tex="a=1" /> 时与右端点重合，重根不分段），区间内不分段。</p>
-                          <p className="pl-2">在 <Math tex="(0,1)" /> 上，<Math tex="x-1<0" /> 且 <Math tex="x-a<0" />（两负），相乘为正，<Math tex="f'(x)>0" />。</p>
-                          <p className="pl-2"><strong>结论</strong>：<Math tex="f(x)" /> 在 <Math tex="[0,1]" /> 上<strong>单调递增</strong>。</p>
-                        </div>
-                      </div>
+                    <p className="font-bold text-gray-800">③ 按 <Math tex="a" /> 与端点 <Math tex="0,1" /> 比较分类</p>
+                    <div className="space-y-1">
+                      <p><span className="font-bold text-blue-800 mr-2">情况一：当 <Math tex="a" /> 在区间左边时</span>即 <Math tex="a\le 0" />，结合 <Math tex="x\ge 0" />（因 <Math tex="x\in[0,1]" />），得 <Math tex="a\le 0\le x\le 1" />。由 <Math tex="x\le 1" /> 移项得 <Math tex="x-1\le 0" />；</p>
+                      <p>由 <Math tex="a\le x" /> 移项得 <Math tex="x-a\ge 0" />。两个因子一正一负，故 <Math tex="f'(x)\le 0" />，所以 <Math tex="f(x)" /> 在 <Math tex="[0,1]" /> 上<strong>单调递减</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况二：当 <Math tex="a" /> 在区间内部时</span>即 <Math tex="0<a<1" />，含参零点在区间内单调性未知，把区间 <Math tex="(0,1)" /> 分割成 <Math tex="(0,a)" /> 和 <Math tex="(a,1)" /> 两个区间。</p>
+                      <p className="pl-2">• 区间 <Math tex="(0,a)" />，即 <Math tex="0<x<a" /> 时，移项得 <Math tex="x-1<0" /> 且 <Math tex="x-a<0" />（两负），相乘为正，<Math tex="f'(x)>0" />，<Math tex="f(x)" /> <strong>单调递增</strong>。</p>
+                      <p className="pl-2">• 区间 <Math tex="(a,1)" />，即 <Math tex="a<x<1" /> 时，移项得 <Math tex="x-1<0" /> 且 <Math tex="x-a>0" />（异号），相乘为负，<Math tex="f'(x)<0" />，<Math tex="f(x)" /> <strong>单调递减</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况三：当 <Math tex="a" /> 在区间右边时</span>即 <Math tex="a\ge 1" />，结合 <Math tex="x\le 1" />（因 <Math tex="x\in[0,1]" />），得 <Math tex="0\le x\le 1\le a" />。由 <Math tex="x\le 1" /> 移项得 <Math tex="x-1\le 0" />；</p>
+                      <p>由 <Math tex="x\le a" /> 移项得 <Math tex="x-a\le 0" />。两个因子均非正，相乘 <Math tex="\ge 0" />，故 <Math tex="f'(x)\ge 0" />，所以 <Math tex="f(x)" /> 在 <Math tex="[0,1]" /> 上<strong>单调递增</strong>。</p>
                     </div>
                     <hr className="border-gray-300" />
                     <div className="pl-2 grid grid-cols-[auto_1fr] gap-x-2">
                       <div className="font-bold whitespace-nowrap"><strong>④ 综上所述</strong>：</div>
                       <div className="space-y-0.5">
                         <p>• <Math tex="a\le 0" /> 时，<Math tex="f(x)" /> 在 <Math tex="[0,1]" /> 上单调递减。</p>
-                        <p>• <Math tex="0<a<1" /> 时，<Math tex="f(x)" /> 在 <Math tex="[0,a]" /> 上单调递增，在 <Math tex="[a,1]" /> 上单调递减。</p>
+                        <p>• <Math tex="0<a<1" /> 时，<Math tex="f(x)" /> 在 <Math tex="(0,a)" /> 上单调递增，在 <Math tex="(a,1)" /> 上单调递减。</p>
                         <p>• <Math tex="a\ge 1" /> 时，<Math tex="f(x)" /> 在 <Math tex="[0,1]" /> 上单调递增。</p>
                       </div>
                     </div>
-                    <p className="pl-2 text-[0.85rem] text-gray-700"><strong>💡 临界值的来源</strong>：把含参零点 <Math tex="a" /> 与区间端点 <Math tex="0,1" /> 比较，<Math tex="a=0" /> 与 <Math tex="a=1" /> 就是分类的分界点。</p>
                   </div>
                 </div>
 
                 {/* ── 例 4：含 ln 通分（Δ 法） ── */}
                 <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 4</strong>　<Math tex="f(x)=\dfrac{1}{2}x^2-ax+\ln x" />（定义域 <Math tex="x>0" />），讨论单调性<span className="text-gray-700 font-normal ml-2">——含 <Math tex="\ln" /> 通分综合（Δ + 韦达定理）</span></div>
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 4</strong>　<Math tex="f(x)=\dfrac{1}{2}x^2-ax+\ln x" />，讨论单调性<span className="text-gray-700 font-normal ml-2">——含 <Math tex="\ln" /> 通分综合（Δ + 韦达定理）</span></div>
                   <div className="px-2 py-0.5 space-y-1">
-                    <p className="pl-2"><strong>① 求导通分</strong>：<Math tex="f'(x)=x-a+\dfrac{1}{x}=\dfrac{x^2-ax+1}{x}" />。分母 <Math tex="x>0" /> 可约，看分子 <Math tex="g(x)=x^2-ax+1" />（开口向上的二次）。</p>
+                    <p className="pl-2"><strong>① 分析定义域 + 求导</strong>：因为含 <Math tex="\ln x" />，所以<strong>定义域为 <Math tex="x>0" /></strong>。求导通分得 <Math tex="f'(x)=x-a+\dfrac{1}{x}=\dfrac{x^2-ax+1}{x}" />。</p>
+                    <p className="pl-2"><strong>② 分析</strong>：分母 <Math tex="x" />，由定义域得 <Math tex="x>0" />，所以分母恒正，<Math tex="f'(x)" /> 的符号由分子决定。看分子 <Math tex="g(x)=x^2-ax+1" />，是含参二次方程，求出零点过于复杂，<strong>改用判别式法</strong>：<Math tex="g(x)" /> <strong>开口向上</strong>，判别式 <Math tex="\Delta=a^2-4" />，按 <Math tex="\Delta" /> 分类讨论。</p>
                     <hr className="border-gray-300" />
-                    <p className="pl-2"><strong>② 按 <Math tex="\Delta=a^2-4" /> 分类</strong>：</p>
-                    <div className="grid grid-cols-3 gap-x-2 pl-2">
-                      <div className="space-y-1 pr-2 border-r border-gray-300">
-                        <p className="font-bold text-blue-800">情况一：<Math tex="\Delta\le 0" /></p>
-                        <p className="pl-2">即 <Math tex="-2\le a\le 2" />。</p>
-                        <p className="pl-2"><Math tex="g(x)\ge 0" /> 恒成立 → <Math tex="f'\ge 0" />。</p>
-                        <p className="pl-2"><strong>结论</strong>：在 <Math tex="(0,+\infty)" /> <strong>单调递增</strong>。</p>
-                      </div>
-                      <div className="space-y-1 pr-2 border-r border-gray-300">
-                        <p className="font-bold text-blue-800">情况二：<Math tex="\Delta>0,\,a<-2" /></p>
-                        <p className="pl-2">两根 <Math tex="x_1+x_2=a<0" />、<Math tex="x_1 x_2=1>0" />（韦达定理）→ 两根都 <Math tex="<0" />。</p>
-                        <p className="pl-2">两根<strong>不在定义域 <Math tex="x>0" /> 内</strong>。</p>
-                        <p className="pl-2">在 <Math tex="(0,+\infty)" /> 上 <Math tex="g(x)>0" /> → <strong>单增</strong>。</p>
-                      </div>
-                      <div className="space-y-1">
-                        <p className="font-bold text-blue-800">情况三：<Math tex="\Delta>0,\,a>2" /></p>
-                        <p className="pl-2">两根 <Math tex="x_1+x_2=a>0" />、<Math tex="x_1 x_2=1>0" /> → 两根都 <Math tex=">0" />。</p>
-                        <p className="pl-2">设 <Math tex="x_{1,2}=\dfrac{a\mp\sqrt{a^2-4}}{2}" />。</p>
-                        <p className="pl-2"><Math tex="(0,x_1)" />：<Math tex="g>0" /> → 增；<Math tex="(x_1,x_2)" />：减；<Math tex="(x_2,+\infty)" />：增。</p>
-                      </div>
+                    <p className="font-bold text-gray-800">③ 按 <Math tex="\Delta" /> 分类</p>
+                    <div className="space-y-1">
+                      <p><span className="font-bold text-blue-800 mr-2">情况一：<Math tex="\Delta\le 0" /></span>即 <Math tex="a^2-4\le 0" />，解得 <Math tex="-2\le a\le 2" />。<span className="border-b border-dashed border-gray-400">抛物线与 <Math tex="x" /> 轴相切或无交点，又开口向上，所以图像全部在 <Math tex="x" /> 轴上方或相切，即</span> <Math tex="g(x)\ge 0" /> 恒成立。<span className="border-b border-dashed border-gray-400">分子 <Math tex="g(x)\ge 0" />，分母 <Math tex="x>0" />，所以</span> <Math tex="f'(x)\ge 0" />，因此 <Math tex="f(x)" /> 在 <Math tex="(0,+\infty)" /> 上<strong>单调递增</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p><Math tex="\Delta>0" /> 时，即 <Math tex="a^2-4>0" />，解得 <Math tex="a<-2" /> 或 <Math tex="a>2" />，再分两种情况讨论。</p>
+                      <p><span className="font-bold text-blue-800 mr-2">情况二：<Math tex="\Delta>0" /> 且 <Math tex="a<-2" /></span>由韦达定理：两根之和 <Math tex="=x_1+x_2=-\dfrac{b}{a}=a" />，两根之积 <Math tex="=x_1 x_2=\dfrac{c}{a}=1" />。所以当 <Math tex="a<-2" /> 时，积为正得两根同号，和 <Math tex="=a<-2" /> 排除都为正，所以两根<strong>都为负</strong>，都在定义域左边。因式分解 <Math tex="g(x)=(x-x_1)(x-x_2)" />。</p>
+                      <p className="pl-2">因为两根为负且不在定义域内，则 <Math tex="x_1<x_2<0" />，结合 <Math tex="x>0" />，得 <Math tex="x>0>x_2>x_1" />。</p>
+                      <p className="pl-2">所以 <Math tex="x>x_1" /> 且 <Math tex="x>x_2" />，移项得 <Math tex="x-x_1>0" />，<Math tex="x-x_2>0" />，两式相乘为正，得 <Math tex="g(x)>0" />，<Math tex="f'(x)>0" />。</p>
+                      <p className="pl-2"><strong>结论</strong>：所以当 <Math tex="\Delta>0" /> 且 <Math tex="a<-2" />，<Math tex="f(x)" /> 在 <Math tex="(0,+\infty)" /> 上<strong>单调递增</strong>。</p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况三：<Math tex="\Delta>0" /> 且 <Math tex="a>2" /></span>由韦达定理：两根之和 <Math tex="=x_1+x_2=-\dfrac{b}{a}=a" />，两根之积 <Math tex="=x_1 x_2=\dfrac{c}{a}=1" />。所以当 <Math tex="a>2" /> 时，两根之积为正，则两根<strong>都为正</strong>，都在定义域 <Math tex="(0,+\infty)" /> 内，两根为 <Math tex="x_1" />、<Math tex="x_2" />，设 <Math tex="x_1<x_2" />。</p>
+                      <p className="pl-2">因式分解 <Math tex="g(x)=(x-x_1)(x-x_2)" />，把 <Math tex="(0,+\infty)" /> 切成 <Math tex="(0,x_1)" />、<Math tex="(x_1,x_2)" />、<Math tex="(x_2,+\infty)" />。</p>
+                      <p className="pl-2">• 区间 <Math tex="(0,x_1)" />，即 <Math tex="0<x<x_1" /> 时，移项得 <Math tex="x-x_1<0" /> 且 <Math tex="x-x_2<0" />，相乘为正，得 <Math tex="g(x)>0" />，<Math tex="f'(x)>0" />，<Math tex="f(x)" /> <strong>单调递增</strong></p>
+                      <p className="pl-2">• 区间 <Math tex="(x_1,x_2)" />，即 <Math tex="x_1<x<x_2" /> 时，移项得 <Math tex="x-x_1>0" /> 且 <Math tex="x-x_2<0" />，相乘为负，得 <Math tex="g(x)<0" />，<Math tex="f'(x)<0" />，<strong>单调递减</strong></p>
+                      <p className="pl-2">• 区间 <Math tex="(x_2,+\infty)" />，即 <Math tex="x>x_2" /> 时，移项得 <Math tex="x-x_1>0" /> 且 <Math tex="x-x_2>0" />，相乘为正，得 <Math tex="g(x)>0" />，<Math tex="f'(x)>0" />，<Math tex="f(x)" /> <strong>单调递增</strong></p>
                     </div>
                     <hr className="border-gray-300" />
-                    <p className="pl-2"><strong>③ 综上所述</strong>：</p>
-                    <p className="pl-4">• <Math tex="a\le 2" />（含 <Math tex="a<-2" />）：在 <Math tex="(0,+\infty)" /> 上<strong>单调递增</strong>。</p>
-                    <p className="pl-4">• <Math tex="a>2" />：增区间 <Math tex="(0,x_1),(x_2,+\infty)" />，减区间 <Math tex="(x_1,x_2)" />，<Math tex="x_{1,2}=\dfrac{a\mp\sqrt{a^2-4}}{2}" />。</p>
+                    <div className="pl-2 grid grid-cols-[auto_1fr] gap-x-2">
+                      <div className="font-bold whitespace-nowrap"><strong>④ 综上所述</strong>：</div>
+                      <div className="space-y-0.5">
+                        <p>• 当 <Math tex="a\le 2" /> <span className="border-b border-dashed border-gray-400">（即 <Math tex="a<-2" /> 或 <Math tex="-2\le a\le 2" />）</span>时，<Math tex="f(x)" /> 在 <Math tex="(0,+\infty)" /> 上<strong>单调递增</strong>。</p>
+                        <p>• <Math tex="a>2" /> 时，增区间 <Math tex="(0,x_1)" /> 和 <Math tex="(x_2,+\infty)" />，减区间 <Math tex="(x_1,x_2)" />，其中 <Math tex="x_1=\dfrac{a-\sqrt{a^2-4}}{2}" />，<Math tex="x_2=\dfrac{a+\sqrt{a^2-4}}{2}" />。</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* ── 答题规范 + 5 个高考扣分点 ── */}
+                {/* ── 答题规范 + 10 个高考扣分点 ── */}
                 <div className="border border-red-400 rounded overflow-hidden -mt-px bg-red-50">
-                  <div className="px-2 py-1 font-bold text-red-900 border-b border-red-300 bg-red-100">⚠️ 答题规范 · 5 个高考扣分点</div>
-                  <div className="px-2 py-1 grid grid-cols-2 gap-x-3 gap-y-1 text-[0.88rem]">
-                    <p><strong>① 没写定义域</strong>：含 <Math tex="\ln" /> 必写 <Math tex="x>0" />；含分母必排除分母为 0 的点。</p>
-                    <p><strong>② 漏掉边界 <Math tex="a=0" /></strong>：分类时必须把 <Math tex="a>0,\,a=0,\,a<0" /> <strong>三种情况都列</strong>，<Math tex="a=0" /> 经常漏。</p>
-                    <p><strong>③ 重根当变号根</strong>：<Math tex="\Delta=0" /> 时分子是完全平方，<strong>不变号</strong>，不分段。</p>
-                    <p><strong>④ 没显式声明分类标准</strong>：要写"<strong>按 <Math tex="a" /> 分类</strong>"或"<strong>按 <Math tex="\Delta" /> 分类</strong>"，让阅卷一眼看出思路。</p>
-                    <p className="col-span-2"><strong>⑤ 缺综合结论</strong>：每种 <Math tex="a" /> 情况的结果列完后，最后必须用"<strong>综上所述</strong>"汇总，否则扣 1-2 分。</p>
+                  <div className="px-2 py-1 font-bold text-red-900 border-b border-red-300 bg-red-100">⚠️ 答题规范 · 10 个高考扣分点</div>
+                  <div className="px-2 py-1 space-y-1 text-[0.88rem]">
+                    <p><strong>① 没写定义域</strong>：含 <Math tex="\ln" /> 必写 <Math tex="x>0" />；含分母必排除零点；含 <Math tex="\sqrt{\,}" /> 必排除根号内为负。<span className="text-red-700">扣 1-2 分</span></p>
+                    <p><strong>② 求导 / 化简错</strong>：基本功失误最高频，特别是 <Math tex="(uv)'" />、<Math tex="(u/v)'" />、复合函数链式法则；导错后续全错（连环扣）。<span className="text-red-700">扣 2-3 分</span></p>
+                    <p><strong>③ 没显式声明 <Math tex="f'(x)" /> 的符号由谁决定</strong>：分式必先说"分母恒正/恒负，符号由分子定"，否则阅卷看不出判号思路。<span className="text-red-700">扣 1 分</span></p>
+                    <p><strong>④ 没声明分类标准</strong>：开头要明写"按 <Math tex="a" /> 分类"或"按 <Math tex="\Delta" /> 分类"。<span className="text-red-700">扣 1 分</span></p>
+                    <p><strong>⑤ 漏掉边界 / 临界值</strong>：<Math tex="a=0" /> 与临界值（如 <Math tex="a=\pm 2" />）必须单独列出，不能并入两侧情况。<span className="text-red-700">扣 1-2 分</span></p>
+                    <p><strong>⑥ 分类不互斥或不完备</strong>：参数 <Math tex="a" /> 的所有取值必须<strong>不重不漏</strong>覆盖，区间端点归属要明确。<span className="text-red-700">扣 1-2 分</span></p>
+                    <p><strong>⑦ 重根当变号根</strong>：<Math tex="\Delta=0" /> 时分子为完全平方，<strong>不变号</strong>，不能分段。<span className="text-red-700">扣 2-3 分</span></p>
+                    <p><strong>⑧ 单调区间用 <Math tex="\cup" /> 连接</strong>：多段单调区间要<strong>分写</strong>，不能并集（单调性是局部性质）。<span className="text-red-700">扣 2 分</span></p>
+                    <p><strong>⑨ "增/减函数" 与 "增/减区间" 混淆</strong>：前者指整个定义域，后者指子区间，题问什么写什么。<span className="text-red-700">扣 1 分</span></p>
+                    <p><strong>⑩ 缺综上 / 结论不规范</strong>：必须"综上所述"汇总，含<strong>函数名+区间+单调方向</strong>，用 <Math tex="a" /> 表述。<span className="text-red-700">扣 1-2 分</span></p>
                   </div>
                 </div>
 
-                {/* ── 一句话看穿 ── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-amber-50">
-                  <div className="px-2 py-1.5">
-                    <p><strong>💡 一句话看穿这节</strong>：含参讨论 = <strong>找参数让"零点位置 / 符号"发生变化的临界值</strong>，把临界值拆成几段分别讨论。流程不变，只是多了"对 <Math tex="a" /> 分类"这一步。</p>
+                {/* ── 例 5：一次型（指数版）2024 全国甲卷 19 题 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 5</strong>　<Math tex="f(x)=a(e^x+a)-x" />，讨论单调性<span className="text-gray-700 font-normal ml-2">——2024 全国甲卷第 19 题，例 1 的指数姐妹题</span></div>
+                  <div className="px-2 py-0.5 space-y-1">
+                    <p className="pl-2"><strong>① 化简 + 求导</strong>：<Math tex="f(x)=ae^x+a^2-x" />，所以 <Math tex="f'(x)=ae^x-1" />（<Math tex="a^2" /> 是常数，导数为 0）。</p>
+                    <p className="pl-2"><strong>② 定号</strong>：<Math tex="f'(x)" /> 的正负由 <Math tex="ae^x" /> 与 <Math tex="1" /> 的大小决定。<strong>因 <Math tex="e^x>0" />，<Math tex="ae^x" /> 的符号随 <Math tex="a" /> 而变</strong> → 按 <Math tex="a" /> 分 2 类。</p>
+                    <hr className="border-gray-300" />
+                    <p className="font-bold text-gray-800">③ 按 <Math tex="a" /> 分类</p>
+                    <div className="space-y-1">
+                      <p><span className="font-bold text-blue-800 mr-2">情况一：当 <Math tex="a\le 0" /> 时</span>因为 <Math tex="e^x>0" />，<Math tex="a\le 0" />，所以 <Math tex="ae^x\le 0" />，得 <Math tex="ae^x-1\le -1" /></p>
+                      <p className="pl-2">所以 <Math tex="f'(x)<0" />，即 <Math tex="f(x)" /> 在 <Math tex="\mathbb{R}" /> 上<strong>单调递减</strong></p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况二：当 <Math tex="a>0" /> 时</span><Math tex="ae^x>0" />，但无法直接分析出 <Math tex="ae^x" /> 与 <Math tex="1" /> 谁大</p>
+                      <p className="pl-2">令 <Math tex="f'(x)=0" />，即 <Math tex="ae^x-1=0" />，得 <Math tex="e^x=\dfrac{1}{a}" />，换算成对数得 <Math tex="x=\ln\dfrac{1}{a}=\ln 1-\ln a=0-\ln a=-\ln a" /></p>
+                      <p className="pl-2">零点为 <Math tex="x=-\ln a" />，以零点将定义域分割为 <Math tex="(-\infty,-\ln a)" /> 和 <Math tex="(-\ln a,+\infty)" />。将零点代入 <Math tex="e^x" /> 中得 <Math tex="e^{-\ln a}=\dfrac{1}{a}" /></p>
+                      <p className="pl-2">• 当 <Math tex="x<-\ln a" /> 时，化为同底比大小，则 <Math tex="e^x<e^{-\ln a}" />，得 <Math tex="e^x<\dfrac{1}{a}" />。同乘 <Math tex="a" /> 得 <Math tex="ae^x<1" />，移项得 <Math tex="ae^x-1<0" /></p>
+                      <p className="pl-2">因为 <Math tex="f'(x)<0" />，得 <Math tex="f(x)" /> 在区间 <Math tex="(-\infty,-\ln a)" /> 上<strong>单调递减</strong></p>
+                      <p className="pl-2">• 当 <Math tex="x>-\ln a" /> 时，比大小，则 <Math tex="e^x>e^{-\ln a}" />，得 <Math tex="e^x>\dfrac{1}{a}" />。同乘 <Math tex="a" /> 得 <Math tex="ae^x>1" />，移项得 <Math tex="ae^x-1>0" /></p>
+                      <p className="pl-2">因为 <Math tex="f'(x)>0" />，所以 <Math tex="f(x)" /> 在区间 <Math tex="(-\ln a,+\infty)" /> 上<strong>单调递增</strong></p>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <div className="pl-2 grid grid-cols-[auto_1fr] gap-x-2">
+                      <div className="font-bold whitespace-nowrap"><strong>④ 综上所述</strong>：</div>
+                      <div className="space-y-0.5">
+                        <p>• <Math tex="a\le 0" /> 时，<Math tex="f(x)" /> 在 <Math tex="\mathbb{R}" /> 上单调递减；</p>
+                        <p>• <Math tex="a>0" /> 时，<Math tex="f(x)" /> 在 <Math tex="(-\infty,-\ln a)" /> 上递减，在 <Math tex="(-\ln a,+\infty)" /> 上递增。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 技巧版：直接解 f'>0 / f'<0 ── */}
+                <div className="border border-amber-400 rounded overflow-hidden -mt-px bg-amber-50">
+                  <div className="px-2 py-1 font-bold text-amber-900 border-b border-amber-300 bg-amber-100">⚡ 技巧版：跳过判号，直接解 <Math tex="f'(x)>0" /> 和 <Math tex="f'(x)<0" /><span className="font-normal ml-2">——以例 5 情况二为示范</span></div>
+                  <div className="px-2 py-1 space-y-0.5">
+                    <p>• 解 <Math tex="f'(x)>0" />：<Math tex="ae^x-1>0\Rightarrow ae^x>1\Rightarrow e^x>\dfrac{1}{a}\Rightarrow x>-\ln a" /> → <strong>增区间</strong> <Math tex="(-\ln a,+\infty)" /></p>
+                    <hr className="border-amber-400" />
+                    <p>• 解 <Math tex="f'(x)<0" />：<Math tex="ae^x-1<0\Rightarrow ae^x<1\Rightarrow e^x<\dfrac{1}{a}\Rightarrow x<-\ln a" /> → <strong>减区间</strong> <Math tex="(-\infty,-\ln a)" /></p>
+                    <p><strong>💡 原理</strong>：解 <Math tex="f'>0" /> 得到的 <Math tex="x" /> 范围 = 增区间，解 <Math tex="f'<0" /> 得到的 <Math tex="x" /> 范围 = 减区间，零点自动作为边界出现。<strong>省掉判号步骤</strong></p>
+                    <p><strong>📌 适用范围</strong>：<Math tex="f'(x)" /> 能解出 <Math tex="x" /> 的显式范围时都能用</p>
+                    <table className="w-full border-collapse border border-gray-400 text-[0.9rem] bg-white">
+                      <thead>
+                        <tr className="bg-gray-100">
+                          <th className="border border-gray-400 px-1.5 py-0.5 font-bold text-left whitespace-nowrap">类型</th>
+                          <th className="border border-gray-400 px-1.5 py-0.5 font-bold text-left">例子</th>
+                          <th className="border border-gray-400 px-1.5 py-0.5 font-bold text-center whitespace-nowrap">适用</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-gray-400 px-1.5 py-0.5 whitespace-nowrap">一次型</td>
+                          <td className="border border-gray-400 px-1.5 py-0.5"><Math tex="ax-1" />、<Math tex="ae^x-1" /></td>
+                          <td className="border border-gray-400 px-1.5 py-0.5 text-center text-green-700 font-bold">✓</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-400 px-1.5 py-0.5 whitespace-nowrap">分式型</td>
+                          <td className="border border-gray-400 px-1.5 py-0.5"><Math tex="\dfrac{ax-1}{x}" /></td>
+                          <td className="border border-gray-400 px-1.5 py-0.5 text-center text-green-700 font-bold">✓</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-400 px-1.5 py-0.5 whitespace-nowrap">二次型已分解</td>
+                          <td className="border border-gray-400 px-1.5 py-0.5"><Math tex="(x-1)(x-a)" />（看开口方向取"两根之外/之间"）</td>
+                          <td className="border border-gray-400 px-1.5 py-0.5 text-center text-green-700 font-bold">✓</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-400 px-1.5 py-0.5 whitespace-nowrap">解不出零点</td>
+                          <td className="border border-gray-400 px-1.5 py-0.5"><Math tex="f'=e^x-2x" />、<Math tex="f'=\ln x+x" /></td>
+                          <td className="border border-gray-400 px-1.5 py-0.5 text-center text-red-600 font-bold">✗</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
@@ -1113,17 +1165,1138 @@ export function DerivativeApplication2Page() {
           <section id="da2-extrema" className="mb-0 scroll-mt-4">
             <Collapsible title="四、极值与最值" defaultOpen storageKey="deriv-application-2:extrema">
               <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
-                {/* TODO: 极值定义、求极值步骤、最值（闭区间端点比较）、含参等 */}
-                <p className="text-gray-500 italic px-2 py-4">本节内容待编写。</p>
+
+                {/* ═══════════════════════════════════════════════════════ */}
+                {/* 4.0 高考定位                                              */}
+                {/* ═══════════════════════════════════════════════════════ */}
+                <div className="border border-gray-400 rounded overflow-hidden">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 高考定位 · 极值与最值</div>
+                  <div className="grid grid-cols-[49%_51%]">
+                    <div className="px-2 py-1 border-r border-gray-300 space-y-0.5">
+                      <p><strong>考查频率</strong>：导数解答题<strong>第（1）小问高频考点</strong>，2024-2025 全国卷每年至少考 1 题。</p>
+                      <p><strong>难度跨度</strong>：从基础（直接求极值/最值）到压轴（含参讨论 + 综合不等式）<strong>全覆盖</strong>。</p>
+                      <p><strong>得分策略</strong>：</p>
+                      <p className="pl-2">• <strong>必拿分</strong>：求不含参函数的极值、闭区间最值（基础送分）</p>
+                      <p className="pl-2">• <strong>力争分</strong>：含参讨论极值（基于 1.4 分类思路）、反求参数</p>
+                    </div>
+                    <div className="px-2 py-1">
+                      <p className="font-bold mb-0.5">📋 4 大考点 + 6 大常考题型</p>
+                      <table className="w-full border-collapse text-[0.85rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="border border-gray-300 px-1 py-0.5">考点</th>
+                            <th className="border border-gray-300 px-1 py-0.5">代表题型</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">① 极值定义/判定</td>
+                            <td className="border border-gray-300 px-1 py-0.5">求极值；由 <Math tex="f'" /> 图判极值</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">② 闭区间最值</td>
+                            <td className="border border-gray-300 px-1 py-0.5">极值 + 端点比较</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">③ 含参极值</td>
+                            <td className="border border-gray-300 px-1 py-0.5">按 <Math tex="a" /> 分类（同 1.4）</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">④ 反求参数</td>
+                            <td className="border border-gray-300 px-1 py-0.5">已知极值 → 列方程组求 <Math tex="a,b" /></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ═══════════════════════════════════════════════════════ */}
+                {/* 4.1 极值定义与判定                                        */}
+                {/* ═══════════════════════════════════════════════════════ */}
+                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500 mt-1">4.1　极值定义与判定（★ 基础送分）</div>
+
+                {/* ── 概念卡片 1：零点 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-blue-800 border-b border-gray-400 bg-blue-50">📘 概念 1：零点（看原函数 <Math tex="f" />）</div>
+                  <div className="px-2 py-1 space-y-0.5">
+                    <p><strong>定义</strong>：使得函数值为零的<strong>自变量的值</strong>，称为函数 <Math tex="f(x)" /> 的零点（即令 <Math tex="f(x)=0" /> 解出来的 <Math tex="x" />）。</p>
+                    <p><strong>几何意义</strong>：函数图像与 <Math tex="x" /> 轴的<strong>交点的横坐标</strong>。</p>
+                    <p><strong>例</strong>：<Math tex="f(x)=x^2-1" />，令 <Math tex="x^2-1=0" />，解得 <Math tex="x=\pm 1" />，所以 <Math tex="-1" /> 和 <Math tex="1" /> 是 <Math tex="f" /> 的两个零点。</p>
+                  </div>
+                </div>
+
+                {/* ── 概念卡片 2：驻点 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-green-800 border-b border-gray-400 bg-green-50">📗 概念 2：驻点（看导函数 <Math tex="f'" />，即 <Math tex="f'" /> 的零点）</div>
+                  <div className="px-2 py-1 space-y-0.5">
+                    <p><strong>定义</strong>：函数的驻点就是求导之后<strong>一阶导函数的零点</strong>。</p>
+                    <div className="flex items-center gap-2">
+                      <strong className="whitespace-nowrap">等价关系：</strong>
+                      <table className="flex-1 border-collapse text-[0.9rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                        <tbody>
+                          <tr>
+                            <td className="border border-gray-300 px-2 py-0.5 text-center">函数 <Math tex="f" /> 的驻点 <Math tex="\Leftrightarrow" /> 导函数 <Math tex="f'" /> 的零点</td>
+                            <td className="border border-gray-300 px-2 py-0.5 text-center">导函数 <Math tex="f'" /> 的驻点 <Math tex="\Leftrightarrow" /> 二阶导函数 <Math tex="f''" /> 的零点（高中不考）</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <p><strong>例</strong>：<Math tex="f(x)=x^3-3x" />，求导 <Math tex="f'(x)=3x^2-3" />，令 <Math tex="f'(x)=0" />，解得 <Math tex="x=\pm 1" />，所以 <Math tex="x=\pm 1" /> 是原函数的驻点，即导函数的零点</p>
+                  </div>
+                </div>
+
+                {/* ── 概念卡片 3：极值点 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-orange-800 border-b border-gray-400 bg-orange-50">📙 概念 3：极值点 / 极值（看函数<strong>单调性变化</strong>的位置）</div>
+                  <div className="px-2 py-1 space-y-0.5">
+                    <div className="grid grid-cols-[1fr_auto] gap-3">
+                      <div className="space-y-0.5">
+                        <p><strong>极值点（<Math tex="x" /> 坐标）</strong>：函数<strong>单调性发生变化</strong>的那个 <Math tex="x" /> 值。</p>
+                        <p className="pl-2">• <strong>极大值点</strong>：函数从增变减的位置（图像上的<strong>山顶</strong>）</p>
+                        <p className="pl-2">• <strong>极小值点</strong>：函数从减变增的位置（图像上的<strong>山谷</strong>）</p>
+                        <p><strong>极值（<Math tex="y" /> 值）</strong>：函数在极值点处的<strong>函数值</strong> <Math tex="f(x_0)" />，分别叫<strong>极大值</strong>和<strong>极小值</strong>。</p>
+                      </div>
+                      <div className="flex flex-row gap-2 shrink-0">
+                        <div className="flex flex-col items-center">
+                          <p className="text-[0.85rem] font-bold text-red-700">极大值（山顶）</p>
+                          <DebugMafs viewBox={{ x: [-2.5, 2.5], y: [-1, 2.2] }} height={58} width={88}>
+                            <Coordinates.Cartesian xAxis={{ lines: false, labels: false }} yAxis={{ lines: false, labels: false }} />
+                            <Plot.OfX y={(x) => -x * x + 2} color="#ef4444" />
+                            <Point x={0} y={2} color="#ef4444" />
+                          </DebugMafs>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <p className="text-[0.85rem] font-bold text-blue-700">极小值（山谷）</p>
+                          <DebugMafs viewBox={{ x: [-2.5, 2.5], y: [-2.2, 1] }} height={58} width={88}>
+                            <Coordinates.Cartesian xAxis={{ lines: false, labels: false }} yAxis={{ lines: false, labels: false }} />
+                            <Plot.OfX y={(x) => x * x - 2} color="#3b82f6" />
+                            <Point x={0} y={-2} color="#3b82f6" />
+                          </DebugMafs>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300 my-1" />
+                    <p><strong>💡 经典例子（二次函数）</strong>：<Math tex="f(x)=ax^2+bx+c" /> 的<strong>对称轴</strong> <Math tex="x=-\dfrac{b}{2a}" /> 就是极值点；</p>
+                    <hr className="border-gray-300 my-1" />
+                    <p>将对称轴 <Math tex="x" /> <strong>代入 <Math tex="f(x)" /> 算出的函数值</strong>就是极值。开口向上时为极小值，开口向下时为极大值。</p>
+                    <hr className="border-gray-300 my-1" />
+                    <p><strong>例</strong>：<Math tex="f(x)=x^2-4x+3" />，对称轴 <Math tex="x=2" />，所以<strong>极小值点是 <Math tex="x=2" /></strong>；代入 <Math tex="f(2)=4-8+3=-1" />，所以<strong>极小值是 <Math tex="-1" /></strong></p>
+                  </div>
+                </div>
+
+                {/* ── 极值判定定理 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📖 极值判定定理（核心方法）</div>
+                  <div className="px-2 py-1 space-y-0.5">
+                    <p>设 <Math tex="a" /> 是 <Math tex="f(x)" /> 的<strong>驻点</strong>，则 <Math tex="f'(x)" /> 的零点为 <Math tex="a" />，即 <Math tex="f'(a)=0" />。看 <Math tex="f'" /> 在 <Math tex="a" /> 两侧的<strong>正负</strong>：</p>
+                    <table className="w-full border-collapse text-[0.9rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th className="border border-gray-300 px-2 py-0.5"><Math tex="f'" /> 左侧</th>
+                          <th className="border border-gray-300 px-2 py-0.5"><Math tex="f'" /> 右侧</th>
+                          <th className="border border-gray-300 px-2 py-0.5">结论</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5 text-center"><strong>正</strong>（+）</td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-center"><strong>负</strong>（−）</td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="f" /> 先增后减 → <strong className="text-red-700">极大值点</strong>（山顶 ⌒）</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5 text-center"><strong>负</strong>（−）</td>
+                          <td className="border border-gray-300 px-2 py-0.5 text-center"><strong>正</strong>（+）</td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="f" /> 先减后增 → <strong className="text-blue-700">极小值点</strong>（山谷 ⌣）</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-gray-300 px-2 py-0.5 text-center" colSpan={2}><strong>同号</strong>（不变号）</td>
+                          <td className="border border-gray-300 px-2 py-0.5"><Math tex="f" /> 一直增或一直减 → <strong>不是极值点</strong>（只是驻点）</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p><strong>💡 一句话</strong>：<strong>驻点变号 = 极值点；驻点不变号 = 不是极值点</strong>。</p>
+                    <p><strong>反例提醒</strong>：<Math tex="f(x)=x^3" /> 的驻点 <Math tex="x=0" />，但 <Math tex="f'=3x^2" /> 两侧都为非负，<strong>不变号</strong>，所以 <Math tex="x=0" /> 不是极值点。</p>
+                  </div>
+                </div>
+
+                {/* ── 求极值 4 步流程 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🔧 求极值标准 4 步流程（套路化）</div>
+                  <div className="px-2 py-1 space-y-0.5">
+                    <p>① <strong>求定义域</strong>（含 <Math tex="\ln x" />、分式、根号时不能漏）</p>
+                    <p>② <strong>求导找驻点</strong>（解 <Math tex="f'(x)=0" />，得 <Math tex="x=a_1, a_2, \ldots" />）</p>
+                    <p>③ <strong>列表判号</strong>（用驻点把定义域分段，判 <Math tex="f'" /> 在每段的正负）</p>
+                    <p>④ <strong>判极大极小并计算极值</strong>（左正右负 → 极大；左负右正 → 极小；不变号 → 不是极值点；代入 <Math tex="f" /> 算出极值）</p>
+                  </div>
+                </div>
+
+                {/* ── 例 1 详解 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 1</strong>　求 <Math tex="f(x)=x^3-3x^2+1" /> 的极值</div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\mathbb{R}" />（多项式无限制）</p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=3x^2-6x=3x(x-2)" /></p>
+                    <p className="pl-4">令 <Math tex="f'(x)=0" />，即 <Math tex="3x(x-2)=0" />，解得 <Math tex="x=0" /> 或 <Math tex="x=2" /></p>
+                    <p className="pl-4">所以驻点为 <Math tex="x=0" /> 和 <Math tex="x=2" /></p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列表判号</strong>（用驻点把 <Math tex="\mathbb{R}" /> 分成三段）：</p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="(-\infty,0)" /></th>
+                              <th><Math tex="0" /></th>
+                              <th><Math tex="(0,2)" /></th>
+                              <th><Math tex="2" /></th>
+                              <th><Math tex="(2,+\infty)" /></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="3x" /></td>
+                              <td>−</td>
+                              <td>0</td>
+                              <td>+</td>
+                              <td>+</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="x-2" /></td>
+                              <td>−</td>
+                              <td>−</td>
+                              <td>−</td>
+                              <td>0</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f'(x)" /></td>
+                              <td><strong>+</strong></td>
+                              <td>0</td>
+                              <td><strong>−</strong></td>
+                              <td>0</td>
+                              <td><strong>+</strong></td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f(x)" /></td>
+                              <td>↗ 递增</td>
+                              <td className="text-red-700 font-bold">极大</td>
+                              <td>↘ 递减</td>
+                              <td className="text-blue-700 font-bold">极小</td>
+                              <td>↗ 递增</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>判极大极小并求极值</strong>（两种角度任选其一，等价）：</p>
+                        <div className="grid grid-cols-[auto_1fr] gap-3 items-start">
+                          <div className="border border-gray-300 rounded overflow-hidden">
+                            <div className="px-2 py-0.5 bg-orange-50 leading-tight">
+                              <p className="font-bold text-gray-800">角度 A：从导数 <Math tex="f'" /> 正负看</p>
+                              <p className="pl-2">• <Math tex="x=0" /> 处 <Math tex="f'" /> <strong>左正右负</strong> → <strong>极大值点</strong></p>
+                              <p className="pl-2">• <Math tex="x=2" /> 处 <Math tex="f'" /> <strong>左负右正</strong> → <strong>极小值点</strong></p>
+                            </div>
+                            <div className="px-2 py-0.5 bg-blue-50 border-t border-gray-300 leading-tight">
+                              <p className="font-bold text-gray-800">角度 B：从函数 <Math tex="f" /> 单调性看</p>
+                              <p className="pl-2">• <Math tex="x=0" /> 处 <Math tex="f" /> <strong>先增后减</strong> → <strong>极大值点</strong></p>
+                              <p className="pl-2">• <Math tex="x=2" /> 处 <Math tex="f" /> <strong>先减后增</strong> → <strong>极小值点</strong></p>
+                            </div>
+                          </div>
+                          <div className="space-y-0.5">
+                            <p><strong>计算极值</strong>：</p>
+                            <p className="pl-2">• 极大值 <Math tex="f(0)" /></p>
+                            <p className="pl-4"><Math tex="=0-0+1=1" /></p>
+                            <p className="pl-2">• 极小值 <Math tex="f(2)" /></p>
+                            <p className="pl-4"><Math tex="=8-12+1=-3" /></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p><strong>结论</strong>：<Math tex="f(x)" /> 的<strong>极大值为 1</strong>（在 <Math tex="x=0" /> 处取得），<strong>极小值为 -3</strong>（在 <Math tex="x=2" /> 处取得）</p>
+                  </div>
+                </div>
+
+                {/* ── 例 1 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 1 同款练习（求多项式极值）" questions={derivExtremaExample1Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivExtremaExample1Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 例 2 详解：含 ln，有定义域限制 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 2</strong>　求 <Math tex="f(x)=x-\ln x" /> 的极值<span className="font-normal ml-2">——含 <Math tex="\ln" /> 有定义域限制</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\ln x" /> 要求真数 <Math tex="x>0" />，所以定义域为 <Math tex="(0,+\infty)" />。<span className="text-red-700"><strong>⚠️ 含 <Math tex="\ln" /> 必先写定义域</strong>，所有判号都要在定义域内。</span></p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=1-\dfrac{1}{x}=\dfrac{x-1}{x}" />（通分）</p>
+                    <p className="pl-4">令 <Math tex="f'(x)=0" />，分式 <Math tex="=0" /> 只看分子，<Math tex="x-1=0" />，解得 <Math tex="x=1" />（在定义域内 ✓）</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列表判号</strong>（驻点 <Math tex="x=1" /> 把定义域 <Math tex="(0,+\infty)" /> 切成两段）：</p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="(0,1)" /></th>
+                              <th><Math tex="1" /></th>
+                              <th><Math tex="(1,+\infty)" /></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="x-1" /></td>
+                              <td>−</td>
+                              <td>0</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="x" /></td>
+                              <td>+</td>
+                              <td>+</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f'(x)" /></td>
+                              <td><strong>−</strong></td>
+                              <td>0</td>
+                              <td><strong>+</strong></td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f(x)" /></td>
+                              <td>↘ 递减</td>
+                              <td className="text-blue-700 font-bold">极小</td>
+                              <td>↗ 递增</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>判极大极小并求极值</strong>：</p>
+                        <p className="pl-2">• <Math tex="x=1" /> 处 <Math tex="f'" /> <strong>左负右正</strong> → <strong>极小值点</strong></p>
+                        <p className="pl-2">• 没有左正右负的位置 → <strong>无极大值</strong></p>
+                        <hr className="border-gray-300" />
+                        <p><strong>计算极值</strong>：</p>
+                        <p className="pl-2">• 极小值 <Math tex="f(1)" /></p>
+                        <p className="pl-4"><Math tex="=1-\ln 1=1-0=1" /></p>
+                        <hr className="border-gray-300" />
+                        <p><strong>结论</strong>：<Math tex="f(x)" /> 的<strong>极小值为 1</strong>（在 <Math tex="x=1" /> 处取得），<strong>无极大值</strong>。</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 例 2 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 2 同款练习（含 ln 求极值）" questions={derivExtremaExample2Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivExtremaExample2Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 例 3 详解：含 e^x ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　求 <Math tex="f(x)=xe^x" /> 的极值<span className="font-normal ml-2">——含 <Math tex="e^x" />，约掉恒正因子</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\mathbb{R}" />（指数函数对所有实数都有定义）</p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>（乘积法则 <Math tex="(uv)'=u'v+uv'" />）：</p>
+                    <p className="pl-4"><Math tex="f'(x)=x'\cdot e^x+x\cdot(e^x)'=1\cdot e^x+x\cdot e^x=(1+x)e^x" /></p>
+                    <p className="pl-4">令 <Math tex="f'(x)=0" />，因 <Math tex="e^x>0" /> <strong>恒正可约</strong>（指数函数永远为正），只看 <Math tex="1+x=0" />，解得 <Math tex="x=-1" /></p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列表判号</strong>（驻点 <Math tex="x=-1" /> 把 <Math tex="\mathbb{R}" /> 切成两段）：</p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="(-\infty,-1)" /></th>
+                              <th><Math tex="-1" /></th>
+                              <th><Math tex="(-1,+\infty)" /></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="1+x" /></td>
+                              <td>−</td>
+                              <td>0</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="e^x" /></td>
+                              <td>+</td>
+                              <td>+</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f'(x)" /></td>
+                              <td><strong>−</strong></td>
+                              <td>0</td>
+                              <td><strong>+</strong></td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f(x)" /></td>
+                              <td>↘ 递减</td>
+                              <td className="text-blue-700 font-bold">极小</td>
+                              <td>↗ 递增</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>判极大极小并求极值</strong>：</p>
+                        <p className="pl-2">• <Math tex="x=-1" /> 处 <Math tex="f'" /> <strong>左负右正</strong> → <strong>极小值点</strong></p>
+                        <p className="pl-2">• 没有左正右负的位置 → <strong>无极大值</strong></p>
+                        <hr className="border-gray-300" />
+                        <p><strong>计算极值</strong>：</p>
+                        <p className="pl-2">• 极小值 <Math tex="f(-1)=(-1)\cdot e^{-1}=-\dfrac{1}{e}" /></p>
+                        <hr className="border-gray-300" />
+                        <p><strong>结论</strong>：<Math tex="f(x)" /> 的<strong>极小值为 <Math tex="-\dfrac{1}{e}" /></strong>（在 <Math tex="x=-1" /> 处取得），<strong>无极大值</strong>。</p>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p><strong>💡 含 <Math tex="e^x" /> 题的关键</strong>：<Math tex="e^x" /> 永远 <Math tex=">0" />，求导后<strong>把它当成恒正因子直接约掉</strong>，只看剩下的多项式因子的零点和正负。</p>
+                  </div>
+                </div>
+
+                {/* ── 例 3 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 3 同款练习（含 e^x 求极值）" questions={derivExtremaExample3Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivExtremaExample3Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 例 4 详解：分式 / 反比例型 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 4</strong>　求 <Math tex="f(x)=x+\dfrac{1}{x}" /> 的极值<span className="font-normal ml-2">——分式 / 反比例型经典母题，含间断点</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：分母 <Math tex="x\ne 0" />，定义域为 <Math tex="(-\infty,0)\cup(0,+\infty)" />。<span className="text-red-700"><strong>⚠️ 含分母必排除分母为 0 的点</strong>，<Math tex="x=0" /> 时函数无意义、不存在。</span></p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=1-\dfrac{1}{x^2}=\dfrac{x^2-1}{x^2}=\dfrac{(x-1)(x+1)}{x^2}" />（通分 + 因式分解）</p>
+                    <p className="pl-4">分母 <Math tex="x^2>0" /> <strong>恒正可约</strong>，看分子 <Math tex="(x-1)(x+1)" />。令 <Math tex="(x-1)(x+1)=0" />，解得 <Math tex="x=\pm 1" />（均在定义域内 ✓）</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列表判号</strong>（驻点 <Math tex="\pm 1" /> + 间断点 <Math tex="0" /> 把定义域切成 4 段）：</p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.85rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-1.5 [&_td]:py-0.5 [&_th]:px-1.5 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="(-\infty,-1)" /></th>
+                              <th><Math tex="-1" /></th>
+                              <th><Math tex="(-1,0)" /></th>
+                              <th><Math tex="0" /></th>
+                              <th><Math tex="(0,1)" /></th>
+                              <th><Math tex="1" /></th>
+                              <th><Math tex="(1,+\infty)" /></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="x+1" /></td>
+                              <td>−</td>
+                              <td>0</td>
+                              <td>+</td>
+                              <td>+</td>
+                              <td>+</td>
+                              <td>+</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="x-1" /></td>
+                              <td>−</td>
+                              <td>−</td>
+                              <td>−</td>
+                              <td>−</td>
+                              <td>−</td>
+                              <td>0</td>
+                              <td>+</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f'(x)" /></td>
+                              <td><strong>+</strong></td>
+                              <td>0</td>
+                              <td><strong>−</strong></td>
+                              <td className="bg-gray-200 text-gray-500">无定义</td>
+                              <td><strong>−</strong></td>
+                              <td>0</td>
+                              <td><strong>+</strong></td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="f(x)" /></td>
+                              <td>↗ 递增</td>
+                              <td className="text-red-700 font-bold">极大</td>
+                              <td>↘ 递减</td>
+                              <td className="bg-gray-200 text-gray-500">间断</td>
+                              <td>↘ 递减</td>
+                              <td className="text-blue-700 font-bold">极小</td>
+                              <td>↗ 递增</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>判极大极小并求极值</strong>：</p>
+                        <p className="pl-2">• <Math tex="x=-1" /> 处 <Math tex="f'" /> <strong>左正右负</strong> → <strong>极大值点</strong></p>
+                        <p className="pl-2">• <Math tex="x=1" /> 处 <Math tex="f'" /> <strong>左负右正</strong> → <strong>极小值点</strong></p>
+                        <hr className="border-gray-300" />
+                        <p><strong>计算极值</strong>：</p>
+                        <p className="pl-2">• 极大值 <Math tex="f(-1)=-1+\dfrac{1}{-1}=-2" /></p>
+                        <p className="pl-2">• 极小值 <Math tex="f(1)=1+\dfrac{1}{1}=2" /></p>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p><strong>结论</strong>：<Math tex="f(x)" /> 的<strong>极大值为 -2</strong>（在 <Math tex="x=-1" /> 处取得），<strong>极小值为 2</strong>（在 <Math tex="x=1" /> 处取得）</p>
+                    <div className="border border-red-400 rounded bg-red-50 px-2 py-1 text-[0.88rem]">
+                      <p className="font-bold text-red-800">⚠️ 关键认知：极大值居然小于极小值！</p>
+                      <p>本题 <strong>极大值 -2 &lt; 极小值 2</strong>，看起来反直觉，但完全合法。原因是间断点 <Math tex="x=0" /> 把定义域切成两段，<Math tex="-1" /> 在左段、<Math tex="1" /> 在右段。</p>
+                      <p className="text-gray-700"><strong>📌 一句话</strong>：极值是<strong>局部</strong>概念（"邻域内"的最值），不是全局；极大值不一定大于极小值，二者也不一定共存。</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 例 4 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 4 同款练习（分式 / 反比例型求极值）" questions={derivExtremaExample4Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={derivExtremaExample4Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 答题提示：高考标准表格格式 ── */}
+                <div className="border border-amber-400 rounded overflow-hidden -mt-px bg-amber-50">
+                  <div className="px-2 py-1 font-bold text-amber-900 border-b border-amber-300 bg-amber-100">📝 高考答题提示：列表判号表只写 3 行</div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>前面例 1–4 详解里画的 4–5 行表格（带 <Math tex="x+1" />、<Math tex="x-1" /> 等中间因子行）是<strong>教学版</strong>，方便看清符号怎么来。<strong>高考正式答题只需要 3 行</strong>：</p>
+                    <table className="w-full border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                      <thead className="bg-white">
+                        <tr>
+                          <th><Math tex="x" /></th>
+                          <th><Math tex="(-\infty,-1)" /></th>
+                          <th><Math tex="-1" /></th>
+                          <th><Math tex="(-1,0)" /></th>
+                          <th><Math tex="0" /></th>
+                          <th><Math tex="(0,1)" /></th>
+                          <th><Math tex="1" /></th>
+                          <th><Math tex="(1,+\infty)" /></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="bg-white">
+                          <td className="font-bold"><Math tex="f'(x)" /></td>
+                          <td><strong>+</strong></td>
+                          <td>0</td>
+                          <td><strong>−</strong></td>
+                          <td className="bg-gray-200 text-gray-500">无定义</td>
+                          <td><strong>−</strong></td>
+                          <td>0</td>
+                          <td><strong>+</strong></td>
+                        </tr>
+                        <tr className="bg-white">
+                          <td className="font-bold"><Math tex="f(x)" /></td>
+                          <td>↗ 递增</td>
+                          <td className="text-red-700 font-bold">极大</td>
+                          <td>↘ 递减</td>
+                          <td className="bg-gray-200 text-gray-500">间断</td>
+                          <td>↘ 递减</td>
+                          <td className="text-blue-700 font-bold">极小</td>
+                          <td>↗ 递增</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p><strong>给分点</strong>：<Math tex="f'(x)" /> 行符号正确（判号分）+ <Math tex="f(x)" /> 行的 ↗↘ 和"极大/极小"标注（极值判定分），共 <strong>2–3 分</strong>。中间因子行（<Math tex="x+1" />、<Math tex="x-1" />）<strong>不给分</strong>，属于草稿，写在草稿纸或脑子里就行。</p>
+                    <p className="text-gray-700"><strong>💡 一句话</strong>：教学时画详细表帮理解；答题时只画"<Math tex="x" /> + <Math tex="f'(x)" /> + <Math tex="f(x)" />"三行 + 表格下方文字写极值结论。</p>
+                  </div>
+                </div>
+
               </div>
             </Collapsible>
           </section>
 
           {/* ═════════════════════════════════════════════════════ */}
-          {/* Section 5: 综合自测 */}
+          {/* Section 5: 闭区间最值 */}
+          {/* ═════════════════════════════════════════════════════ */}
+          <section id="da2-closed-max" className="mb-0 scroll-mt-4">
+            <Collapsible title="五、闭区间最值" defaultOpen storageKey="deriv-application-2:closed-max" hideTitleOnPrint>
+              <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
+
+                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500 mt-1">4.2　闭区间最值（★ 基础送分）</div>
+
+                {/* ── 4.2.0 高考定位 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 高考定位 · 闭区间最值</div>
+                  <div className="grid grid-cols-[52fr_48fr]">
+                    <div className="px-2 py-0.5 space-y-1 border-r border-gray-300">
+                      <p><strong>考查频率</strong>：导数大题<strong>第（1）（2）问高频</strong>，2024-2025 全国卷至少考 1 次；选择填空也常考。</p>
+                      <p><strong>难度跨度</strong>：从基础（直接求闭区间最值）到中档（结合不等式 / 反求参数）。</p>
+                      <p><strong>得分策略</strong>：</p>
+                      <p className="pl-2">• <strong>必拿分</strong>：不含参函数闭区间最值（基础送分）</p>
+                      <p className="pl-2">• <strong>力争分</strong>：识别单调函数走简化路径（节省时间）</p>
+                      <p className="pl-2">• <strong>易错点</strong>：漏端点 / 极值≠最值 / 驻点出区间（详见下方警示）</p>
+                    </div>
+                    <div className="px-2 py-0.5 space-y-1">
+                      <p className="font-bold mb-0.5">📋 4 大常考题型</p>
+                      <table className="w-full border-collapse text-[0.85rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="border border-gray-300 px-1 py-0.5">题型</th>
+                            <th className="border border-gray-300 px-1 py-0.5">特征</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">① 多项式闭区间</td>
+                            <td className="border border-gray-300 px-1 py-0.5">驻点都在区间内，比较 4 个值</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">② 含 <Math tex="\ln" /> / <Math tex="e^x" /></td>
+                            <td className="border border-gray-300 px-1 py-0.5">先验证定义域，再求驻点</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">③ 单调函数</td>
+                            <td className="border border-gray-300 px-1 py-0.5">直接两端点，无需列表</td>
+                          </tr>
+                          <tr>
+                            <td className="border border-gray-300 px-1 py-0.5">④ 反求参数</td>
+                            <td className="border border-gray-300 px-1 py-0.5">已知最值列方程求 <Math tex="a" />（4.4 详讲）</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 概念区分卡：极值 vs 最值（核心认知） ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-purple-800 border-b border-gray-400 bg-purple-50">📘 核心区分：极值 vs 最值（高考必考辨析）</div>
+                  <div className="px-2 py-0.5 space-y-0.5">
+                    <table className="w-full border-collapse text-[0.9rem] -mt-0.5 -mx-2 [width:calc(100%+1rem)] [&_th]:border [&_th]:border-gray-300 [&_th]:px-2 [&_th]:py-0.5 [&_td]:border [&_td]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th>对比项</th>
+                          <th>极值（local）</th>
+                          <th>最值（global）</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="font-bold">概念</td>
+                          <td><strong>局部</strong>最值（邻域内最大/最小）</td>
+                          <td><strong>全局</strong>最值（整个区间最大/最小）</td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold">候选位置</td>
+                          <td>只能在<strong>驻点</strong>处</td>
+                          <td><strong>驻点</strong> ∪ <strong>端点</strong></td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold">存在性</td>
+                          <td>不一定存在（如单调函数无极值）</td>
+                          <td><strong>闭区间连续函数一定存在</strong>（最值定理）</td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold">判定方法</td>
+                          <td><Math tex="f'" /> 在驻点两侧<strong>变号</strong></td>
+                          <td>所有候选点函数值<strong>比较大小</strong></td>
+                        </tr>
+                        <tr>
+                          <td className="font-bold">数量关系</td>
+                          <td>可能多个极大/极小值</td>
+                          <td><strong>最大值 / 最小值各一个</strong>（数值唯一，但取得位置可能多个）</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <hr className="border-gray-300" />
+                    <p><strong>🔑 核心关系</strong>：<Math tex="\text{最大值}=\max\{\,\text{极大值},\ \text{端点值}\,\}" /></p>
+                    <p className="pl-[6.5em]"><Math tex="\text{最小值}=\min\{\,\text{极小值},\ \text{端点值}\,\}" /></p>
+                    <p><strong>常见误区</strong>：</p>
+                    <p className="pl-2">• ❌ "极大值就是最大值" —— <strong>不一定</strong>，端点值可能更大</p>
+                    <p className="pl-2">• ❌ "极大值一定大于极小值" —— <strong>不一定</strong>。极值是<strong>局部</strong>概念（在某个邻域内的极值），不是全局；不同区段的极值只是各自段内的局部极值，互相之间没有大小关系（见 4.1 例 4 <Math tex="x+1/x" />，极大值 -2 反而小于极小值 2）</p>
+                    <p className="pl-2">• ✅ "闭区间上一定有最值，但不一定有极值" —— 因为极值存在的条件是<strong>单调性发生变化的点</strong>，而指定区间内如果单调性没变化（即整段单调），则<strong>不存在极值</strong>，这时<strong>端点就是最值</strong>。比如 <Math tex="f(x)=x" /> 在 <Math tex="[0,1]" /> 上单调递增，<Math tex="f(0)=0,\ f(1)=1" /> 即为最值</p>
+                  </div>
+                </div>
+
+                {/* ── 求最值 4 步流程 ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🔧 求闭区间最值标准 4 步流程</div>
+                  <div className="px-2 py-1 space-y-0.5">
+                    <p>① <strong>验证定义域</strong>：检查闭区间 <Math tex="[a,b]" /> 是否完全包含在函数定义域内（含 <Math tex="\ln" />、分式、根号时尤其重要）</p>
+                    <p>② <strong>求导找驻点</strong>：解 <Math tex="f'(x)=0" />，<strong className="text-red-700">只保留落在 <Math tex="(a,b)" /> 内的驻点</strong>（区间外的驻点不参与比较）</p>
+                    <div className="grid grid-cols-[1fr_1fr] gap-2">
+                      <div>
+                        <p>③ <strong>列出候选清单 + 算函数值</strong>：</p>
+                        <p className="pl-4">• <strong>区间内驻点</strong> <Math tex="x_1, x_2, \ldots" />（来自 ②）</p>
+                        <p className="pl-4">• <strong>左端点</strong> <Math tex="x=a" /></p>
+                        <p className="pl-4">• <strong>右端点</strong> <Math tex="x=b" /></p>
+                        <p className="pl-4">分别代入<strong className="text-red-700">原函数 <Math tex="f(x)" /></strong>（不是 <Math tex="f'" />！）算函数值</p>
+                      </div>
+                      <div className="border-l border-gray-300 pl-2 text-[0.85rem] text-gray-700">
+                        <p className="font-bold text-gray-800">📌 举例：<Math tex="f(x)=x^2-4x" /> 在 <Math tex="[0,3]" /> 上</p>
+                        <p className="pl-2">驻点：解 <Math tex="f'(x)=2x-4=0" /> 得 <Math tex="x=2" />（在区间内 ✓）</p>
+                        <p className="pl-2">候选 = <Math tex="\{0,\,2,\,3\}" />（驻点 + 两端点）</p>
+                        <p className="pl-2">代入 <Math tex="f" />：<Math tex="f(0)=0,\ f(2)=-4,\ f(3)=-3" /></p>
+                        <p className="pl-2">⇒ <strong>最大值 0</strong>（在 <Math tex="x=0" />），<strong>最小值 -4</strong>（在 <Math tex="x=2" />）</p>
+                      </div>
+                    </div>
+                    <p>④ <strong>比较大小</strong>：所有候选值中<strong>最大者 = 最大值</strong>，<strong>最小者 = 最小值</strong>。可同时在多个点取得（数值唯一即可）</p>
+                    <hr className="border-gray-300 my-1" />
+                    <p className="text-gray-700"><strong>💡 一句话口诀</strong>：<strong>驻点 + 端点 = 候选；比较大小定最值</strong>。⚠️ <strong>找驻点用 <Math tex="f'" />，算最值用 <Math tex="f" /></strong>，别混淆。</p>
+                  </div>
+                </div>
+
+                {/* ── 4 步流程后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 4 步流程练习（多项式闭区间最值）" questions={closedIntervalMaxStepsPractice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={closedIntervalMaxStepsPractice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 例 1 详解：多项式（驻点都在内 + 极值与端点平手） ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 1</strong>　求 <Math tex="f(x)=x^3-6x^2+9x+1" /> 在 <Math tex="[0,4]" /> 上的最值<span className="font-normal ml-2">——多项式经典母题</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\mathbb{R}" />（多项式无限制），区间 <Math tex="[0,4]" /> 完全包含在定义域内 ✓</p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=3x^2-12x+9=3(x-1)(x-3)" />（因式分解）</p>
+                    <p className="pl-4">令 <Math tex="f'(x)=0" />，即 <Math tex="3(x-1)(x-3)=0" />，解得 <Math tex="x=1" /> 或 <Math tex="x=3" /></p>
+                    <p className="pl-4">两个驻点 <strong>都在 <Math tex="(0,4)" /> 内</strong> ✓，全部保留</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列候选清单 + 算函数值</strong>：</p>
+                        <p className="pl-2">候选点 = 驻点 <Math tex="\{1,3\}" /> ∪ 端点 <Math tex="\{0,4\}" /></p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="f(x)" /></th>
+                              <th>身份</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="0" /></td>
+                              <td><Math tex="f(0)=1" /></td>
+                              <td>左端点</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="1" /></td>
+                              <td><Math tex="f(1)=1-6+9+1=5" /></td>
+                              <td className="text-red-700 font-bold">驻点（极大值点）</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="3" /></td>
+                              <td><Math tex="f(3)=27-54+27+1=1" /></td>
+                              <td className="text-blue-700 font-bold">驻点（极小值点）</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="4" /></td>
+                              <td><Math tex="f(4)=64-96+36+1=5" /></td>
+                              <td>右端点</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>比较大小定最值</strong>：</p>
+                        <p className="pl-2">候选值集合：<Math tex="\{1,\,5,\,1,\,5\}" /></p>
+                        <p className="pl-2">• <Math tex="\max=5" />，在 <Math tex="x=1" />（极大值点）和 <Math tex="x=4" />（右端点）<strong>同时取得</strong></p>
+                        <p className="pl-2">• <Math tex="\min=1" />，在 <Math tex="x=0" />（左端点）和 <Math tex="x=3" />（极小值点）<strong>同时取得</strong></p>
+                        <hr className="border-gray-300" />
+                        <p><strong>结论</strong>：</p>
+                        <p className="pl-2">• <strong>最大值为 5</strong>（<Math tex="x=1" /> 和 <Math tex="x=4" /> 处取得）</p>
+                        <p className="pl-2">• <strong>最小值为 1</strong>（<Math tex="x=0" /> 和 <Math tex="x=3" /> 处取得）</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 例 1 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 1 同款练习（多项式闭区间最值）" questions={closedMaxExample1Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={closedMaxExample1Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 例 2 详解：含 ln（极小值就是最小值） ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 2</strong>　求 <Math tex="f(x)=x-2\ln x" /> 在 <Math tex="[1,e]" /> 上的最值<span className="font-normal ml-2">——含 <Math tex="\ln" />，先验定义域</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\ln x" /> 要求真数 <Math tex="x>0" />，所以定义域为 <Math tex="(0,+\infty)" />，区间 <Math tex="[1,e]" /> 完全包含在定义域内 ✓<span className="text-red-700 ml-2"><strong>⚠️ 含 <Math tex="\ln" /> 必先写定义域</strong></span></p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=1-\dfrac{2}{x}=\dfrac{x-2}{x}" />（通分）</p>
+                    <p className="pl-4">分母 <Math tex="x>0" /> 恒正可约，看分子 <Math tex="x-2" />。令 <Math tex="x-2=0" /> 得驻点 <Math tex="x=2" /></p>
+                    <p className="pl-4">驻点 <Math tex="x=2" /> <strong>在 <Math tex="(1,e)" /> 内</strong>（因 <Math tex="e\approx 2.718>2" />）✓，保留</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列候选清单 + 算函数值</strong>：</p>
+                        <p className="pl-2">候选点 = 驻点 <Math tex="\{2\}" /> ∪ 端点 <Math tex="\{1,e\}" /></p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="f(x)" /></th>
+                              <th>身份</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="1" /></td>
+                              <td><Math tex="f(1)=1-2\ln 1=1" /></td>
+                              <td>左端点</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="2" /></td>
+                              <td><Math tex="f(2)=2-2\ln 2" /></td>
+                              <td className="text-blue-700 font-bold">驻点（极小值点）</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="e" /></td>
+                              <td><Math tex="f(e)=e-2\ln e=e-2" /></td>
+                              <td>右端点</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>用单调性定最值</strong>：</p>
+                        <p className="pl-2"><strong>判断单调性</strong>（看分子 <Math tex="x-2" />）：</p>
+                        <p className="pl-4">• 在 <Math tex="(1,2)" />：<Math tex="x-2<0" />，<Math tex="f'(x)<0" /> → <Math tex="f(x)" /> <strong>递减</strong></p>
+                        <p className="pl-4">• 在 <Math tex="(2,e)" />：<Math tex="x-2>0" />，<Math tex="f'(x)>0" /> → <Math tex="f(x)" /> <strong>递增</strong></p>
+                        <p className="pl-2">先减后增 → <Math tex="f(2)" /> 是谷底 → <Math tex="\min=f(2)=2-2\ln 2" /></p>
+                        <p className="pl-2"><strong>最大值在两端点中</strong>：比 <Math tex="f(1)=1" /> 与 <Math tex="f(e)=e-2\approx 0.718" />，故 <Math tex="\max=f(1)=1" /></p>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p><strong>结论</strong>：<strong>最大值为 1</strong>（在 <Math tex="x=1" /> 处取得），<strong>最小值为 <Math tex="2-2\ln 2" /></strong>（在 <Math tex="x=2" /> 处取得）</p>
+                    <hr className="border-gray-300" />
+                    <p><strong>💡 含 <Math tex="\ln" /> 题的关键</strong>：第一步必写定义域 <Math tex="x>0" />；通分后分母 <Math tex="x" /> 恒正可约，只看分子判号。</p>
+                  </div>
+                </div>
+
+                {/* ── 例 2 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 2 同款练习（含 ln 闭区间最值）" questions={closedMaxExample2Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={closedMaxExample2Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 例 3 详解：含 eˣ ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　求 <Math tex="f(x)=e^x-2x" /> 在 <Math tex="[-1,1]" /> 上的最值<span className="font-normal ml-2">——含 <Math tex="e^x" />，驻点带 <Math tex="\ln" /></span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\mathbb{R}" />（<Math tex="e^x" /> 处处定义），区间 <Math tex="[-1,1]" /> 完全包含 ✓</p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=e^x-2" /></p>
+                    <p className="pl-4">令 <Math tex="f'(x)=0" />，即 <Math tex="e^x=2" />，化为对数形式 <Math tex="x=\log_e 2=\ln 2" />，得驻点 <Math tex="x=\ln 2" /></p>
+                    <p className="pl-4">驻点 <Math tex="x=\ln 2" /> <strong>在 <Math tex="(-1,1)" /> 内</strong>（因 <Math tex="\ln 1<\ln 2<\ln e" />，得 <Math tex="0<\ln 2<1" />）✓，保留</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列候选清单 + 算函数值</strong>：</p>
+                        <p className="pl-2">候选点 = 驻点 <Math tex="\{\ln 2\}" /> ∪ 端点 <Math tex="\{-1,1\}" /></p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="f(x)" /></th>
+                              <th>身份</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="-1" /></td>
+                              <td><Math tex="f(-1)=e^{-1}+2=\dfrac{1}{e}+2" /></td>
+                              <td>左端点</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="\ln 2" /></td>
+                              <td><Math tex="f(\ln 2)=e^{\ln 2}-2\ln 2=2-2\ln 2" /></td>
+                              <td className="text-blue-700 font-bold">驻点（极小值点）</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="1" /></td>
+                              <td><Math tex="f(1)=e-2" /></td>
+                              <td>右端点</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>用单调性定最值</strong>：</p>
+                        <p className="pl-2"><strong>判断单调性</strong>（看 <Math tex="e^x-2" />，<Math tex="e^x" /> 单调递增）：</p>
+                        <p className="pl-4">• 在 <Math tex="(-1,\ln 2)" />：<Math tex="e^x<2" />，<Math tex="f'(x)<0" /> → <Math tex="f(x)" /> <strong>递减</strong></p>
+                        <p className="pl-4">• 在 <Math tex="(\ln 2,1)" />：<Math tex="e^x>2" />，<Math tex="f'(x)>0" /> → <Math tex="f(x)" /> <strong>递增</strong></p>
+                        <p className="pl-2">先减后增 → <Math tex="f(\ln 2)" /> 是谷底 → <Math tex="\min=2-2\ln 2" /></p>
+                        <p className="pl-2"><strong>最大值在两端点中</strong>：比 <Math tex="f(-1)=\dfrac{1}{e}+2\approx 2.368" /> 与 <Math tex="f(1)=e-2\approx 0.718" />，故 <Math tex="\max=f(-1)=\dfrac{1}{e}+2" /></p>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p><strong>结论</strong>：<strong>最大值为 <Math tex="\dfrac{1}{e}+2" /></strong>（在 <Math tex="x=-1" /> 处取得），<strong>最小值为 <Math tex="2-2\ln 2" /></strong>（在 <Math tex="x=\ln 2" /> 处取得）</p>
+                    <hr className="border-gray-300" />
+                    <p><strong>💡 含 <Math tex="e^x" /> 题的关键</strong>：<Math tex="e^x" /> 处处定义且恒正；驻点常带 <Math tex="\ln" />（解 <Math tex="e^x=k" /> 得 <Math tex="x=\ln k" />）；判号时利用 <Math tex="e^x" /> 的单调性即可。</p>
+                  </div>
+                </div>
+
+                {/* ── 例 3 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 3 同款练习（含 eˣ 闭区间最值）" questions={closedMaxExample3Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={closedMaxExample3Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 简化判定（单调函数） ── */}
+                <div className="border border-amber-400 rounded overflow-hidden -mt-px bg-white">
+                  <div className="px-2 py-1 font-bold text-amber-900 border-b border-amber-300 bg-amber-100">⚡ 简化判定：单调函数直接走两端点</div>
+                  <div className="px-2 py-0.5 space-y-0.5 bg-white">
+                    <p>如果能<strong>提前判断出 <Math tex="f(x)" /> 在 <Math tex="[a,b]" /> 上单调</strong>（即 <Math tex="f'(x)" /> 在区间内不变号），就<strong>跳过求驻点和列表</strong>，直接用两端点：</p>
+                    <table className="w-full border-collapse border border-gray-400 text-[0.9rem] text-center bg-white [&_th]:border [&_th]:border-gray-400 [&_th]:px-2 [&_th]:py-0.5 [&_td]:border [&_td]:border-gray-400 [&_td]:px-2 [&_td]:py-0.5">
+                      <thead className="bg-white">
+                        <tr>
+                          <th>情况</th>
+                          <th>判断条件</th>
+                          <th className="text-red-700">最大值</th>
+                          <th className="text-blue-700">最小值</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="bg-white">
+                          <td className="font-bold">单调递增</td>
+                          <td>在 <Math tex="[a,b]" /> 上，<Math tex="f'(x)\ge 0" /> 恒成立</td>
+                          <td className="text-red-700 font-bold"><Math tex="f(b)" /></td>
+                          <td className="text-blue-700 font-bold"><Math tex="f(a)" /></td>
+                        </tr>
+                        <tr className="bg-white">
+                          <td className="font-bold">单调递减</td>
+                          <td>在 <Math tex="[a,b]" /> 上，<Math tex="f'(x)\le 0" /> 恒成立</td>
+                          <td className="text-red-700 font-bold"><Math tex="f(a)" /></td>
+                          <td className="text-blue-700 font-bold"><Math tex="f(b)" /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p><strong>📌 怎么判断单调</strong>：</p>
+                    <p className="pl-2">• <strong>整体 <Math tex="\ge 0" /> 或 <Math tex="\le 0" /> 显而易见</strong>：如 <Math tex="f'=e^x+1>0" />（恒正）、<Math tex="f'=-x^2-1<0" />（恒负）</p>
+                    <p className="pl-2">• <strong>因式分析在区间内不变号</strong>：如 <Math tex="f'=(x-3)" /> 在 <Math tex="[5,10]" /> 上恒正</p>
+                    <p className="pl-2">• <strong>区间内无驻点</strong>：解 <Math tex="f'=0" /> 得到的驻点都不在 <Math tex="(a,b)" /> 内 → 区间内不变号</p>
+                    <p className="text-gray-700"><strong>💡 适用场景</strong>：考试时优先尝试这条路，能秒杀就<strong>省 2-3 分钟</strong>。判断不出再走标准 4 步流程。</p>
+                  </div>
+                </div>
+
+                {/* ── 例 4 详解：含参讨论闭区间最值（高考压轴母题） ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 4</strong>　求 <Math tex="f(x)=x^3-3ax^2+2" /> 在 <Math tex="[0,2]" /> 上的<strong>最小值</strong><span className="font-normal ml-2">——含参讨论闭区间最值（高考压轴母题）</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\mathbb{R}" />，区间 <Math tex="[0,2]" /> 完全包含 ✓</p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=3x^2-6ax=3x(x-2a)" />，零点为 <Math tex="x=0" /> 和 <Math tex="x=2a" /></p>
+                    <p className="pl-4"><Math tex="x=0" /> 正好是区间左端点，所以只需关心<strong>含参驻点 <Math tex="x=2a" /> 与区间 <Math tex="[0,2]" /> 的位置关系</strong></p>
+                    <p className="pl-4">在 <Math tex="[0,2]" /> 上 <Math tex="3x\ge 0" /> 非负（仅 <Math tex="x=0" /> 端点处为 0），只需<strong>看因子 <Math tex="x-2a" /> 的正负</strong>就能定 <Math tex="f'(x)" /> 的正负</p>
+                    <hr className="border-gray-300" />
+                    <p className="font-bold text-gray-800">③ 按 <Math tex="2a" /> 与 <Math tex="0,2" /> 的位置分类</p>
+                    <div className="space-y-1">
+                      <p><span className="font-bold text-blue-800 mr-2">情况一：当 <Math tex="2a" /> 在区间左边时，即 <Math tex="2a\le 0" /> 时</span>结合 <Math tex="x\ge 0" />（因 <Math tex="x\in[0,2]" />），得 <Math tex="2a\le 0\le x" />，移项得 <Math tex="x-2a\ge 0" />。又因为 <Math tex="3x\ge 0" />。</p>
+                      <p>两式相乘 <Math tex="\ge 0" />，在区间 <Math tex="[0,2]" /> 上 <Math tex="f'(x)\ge 0" />，即 <Math tex="f(x)" /> <strong>单调递增</strong>，此时最小值为区间左端点，代入得 <Math tex="\min=f(0)=2" /></p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况二：当 <Math tex="2a" /> 在区间内部时，即 <Math tex="0<2a<2" /></span>含参驻点把区间分为 <Math tex="(0,2a)" /> 和 <Math tex="(2a,2)" />（只有 <Math tex="f'(x)=0" /> 或不存在的点才能分区）：</p>
+                      <p className="pl-2">• 当 <Math tex="0<x<2a" /> 时，<Math tex="x-2a<0" />，<Math tex="3x>0" />，相乘为负，在区间 <Math tex="(0,2a)" /> 上 <Math tex="f'(x)<0" />，即 <Math tex="f(x)" /> <strong>单调递减</strong></p>
+                      <p className="pl-2">• 当 <Math tex="2a<x<2" /> 时，<Math tex="x-2a>0" />，<Math tex="3x>0" />，相乘为正，在区间 <Math tex="(2a,2)" /> 上 <Math tex="f'(x)>0" />，即 <Math tex="f(x)" /> <strong>单调递增</strong></p>
+                      <p>先减后增，<Math tex="x=2a" /> 处为<strong>谷底</strong>，得 <Math tex="\min=f(2a)=(2a)^3-3a(2a)^2+2=8a^3-12a^3+2=-4a^3+2" /></p>
+                      <hr className="border-gray-300" />
+                      <p><span className="font-bold text-blue-800 mr-2">情况三：当 <Math tex="2a" /> 在区间右边时，即 <Math tex="2a\ge 2" /> 时</span>结合 <Math tex="x\le 2" />（因 <Math tex="x\in[0,2]" />），得 <Math tex="x\le 2\le 2a" />，移项得 <Math tex="x-2a\le 0" />。又因为 <Math tex="3x\ge 0" />。</p>
+                      <p>两式相乘 <Math tex="\le 0" />，在区间 <Math tex="[0,2]" /> 上 <Math tex="f'(x)\le 0" />，即 <Math tex="f(x)" /> <strong>单调递减</strong>，此时最小值为区间右端点，代入得 <Math tex="\min=f(2)=10-12a" /></p>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <div className="pl-2 grid grid-cols-[auto_1fr] gap-x-2">
+                      <div className="font-bold whitespace-nowrap"><strong>④ 综上所述</strong>：</div>
+                      <div className="space-y-0.5">
+                        <p>• <Math tex="2a\le 0" /> 时，<Math tex="\min=2" />（在 <Math tex="x=0" /> 处取得）</p>
+                        <p>• <Math tex="0<2a<2" /> 时，<Math tex="\min=-4a^3+2" />（在 <Math tex="x=2a" /> 处取得）</p>
+                        <p>• <Math tex="2a\ge 2" /> 时，<Math tex="\min=10-12a" />（在 <Math tex="x=2" /> 处取得）</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 例 4 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 4 同款练习（含参讨论闭区间最值）" questions={closedMaxExample4Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={closedMaxExample4Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                {/* ── 例 5 详解：分式型（反比例） ── */}
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 5</strong>　求 <Math tex="f(x)=x+\dfrac{4}{x}" /> 在 <Math tex="[1,4]" /> 上的最值<span className="font-normal ml-2">——分式型（反比例）经典母题</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：分母 <Math tex="x\ne 0" />，定义域为 <Math tex="(-\infty,0)\cup(0,+\infty)" />，区间 <Math tex="[1,4]" /> 完全包含在定义域内 ✓</p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=1-\dfrac{4}{x^2}=\dfrac{x^2-4}{x^2}=\dfrac{(x-2)(x+2)}{x^2}" />（通分 + 因式分解）</p>
+                    <p className="pl-4">分母 <Math tex="x^2>0" /> <strong>恒正可约</strong>，看分子 <Math tex="(x-2)(x+2)" />。在 <Math tex="[1,4]" /> 上，<Math tex="x+2>0" /> 恒正</p>
+                    <p className="pl-4">所以只需看因子 <Math tex="x-2" /> 的正负。令 <Math tex="x-2=0" /> 得驻点 <Math tex="x=2" />（在区间内 ✓）</p>
+                    <hr className="border-gray-300" />
+                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                      <div>
+                        <p>③ <strong>列候选清单 + 算函数值</strong>：</p>
+                        <p className="pl-2">候选点 = 驻点 <Math tex="\{2\}" /> ∪ 端点 <Math tex="\{1,4\}" /></p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="f(x)" /></th>
+                              <th>身份</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="1" /></td>
+                              <td><Math tex="f(1)=1+4=5" /></td>
+                              <td>左端点</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="2" /></td>
+                              <td><Math tex="f(2)=2+2=4" /></td>
+                              <td className="text-blue-700 font-bold">驻点（极小值点）</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="4" /></td>
+                              <td><Math tex="f(4)=4+1=5" /></td>
+                              <td>右端点</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="space-y-1">
+                        <p>④ <strong>比较大小定最值</strong>：</p>
+                        <p className="pl-2">候选值集合：<Math tex="\{5,\,4,\,5\}" /></p>
+                        <p className="pl-2">• <Math tex="\max=5" />，在 <Math tex="x=1" />（左端点）和 <Math tex="x=4" />（右端点）<strong>同时取得</strong></p>
+                        <p className="pl-2">• <Math tex="\min=4" />，在 <Math tex="x=2" />（驻点/极小值点）取得</p>
+                        <hr className="border-gray-300" />
+                        <p><strong>结论</strong>：</p>
+                        <p className="pl-2">• <strong>最大值为 5</strong>（<Math tex="x=1" /> 和 <Math tex="x=4" /> 处取得）</p>
+                        <p className="pl-2">• <strong>最小值为 4</strong>（<Math tex="x=2" /> 处取得）</p>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p><strong>💡 分式型题的关键</strong>：① 先验定义域（<Math tex="x\ne 0" />）；② 通分后分母恒正可约；③ 区间内判断哪些因子恒正可约，只看剩余因子。</p>
+                  </div>
+                </div>
+
+                {/* ── 例 5 后即时练习 ── */}
+                <div className="text-base print:hidden">
+                  <PracticeCard title="✏️ 例 5 同款练习（分式型闭区间最值）" questions={closedMaxExample5Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={1} printOptionCols={1}
+                    renderItem={(q, idx) => (
+                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
+                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
+                        {q.questionLatex && <Math tex={q.questionLatex} />}
+                      </p>
+                    )}
+                  />
+                </div>
+                <div className="text-base hidden print:block">
+                  <PrintQuestions questions={closedMaxExample5Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📌 4.2 收尾：什么能作为区间分割点</div>
+                  <div className="px-2 py-0.5 space-y-0.5">
+                    <p><strong>能分割区间的点</strong>：使 <Math tex="f'(x)=0" /> 的点，或使 <Math tex="f'(x)" /> 不存在的点；左右端点只参与比较，不把区间继续切开。</p>
+                    <p><strong>不能分割区间的点</strong>：普通代入点、随便取的验号点、与 <Math tex="f'(x)" /> 变号无关的点。</p>
+                    <p><strong>闭区间最值候选点</strong>：区间内部的分割点 + 左右端点，最后全部代回原函数 <Math tex="f(x)" /> 比较大小。</p>
+                    <p><strong>例</strong>：在 <Math tex="[1,4]" /> 上，若 <Math tex="f'(x)=0" /> 得 <Math tex="x=2" />，则 <Math tex="2" /> 能分割区间；<Math tex="1,4" /> 是端点，只参与最后比较。</p>
+                  </div>
+                </div>
+
+                {/* TODO: 3 大易错警示 + 5 题即时练习 */}
+
+              </div>
+            </Collapsible>
+          </section>
+
+
+
+          {/* ═════════════════════════════════════════════════════ */}
+          {/* Section 6: 综合自测 */}
           {/* ═════════════════════════════════════════════════════ */}
           <section id="da2-quiz" className="mb-0 scroll-mt-4">
-            <Collapsible title="五、综合自测" defaultOpen storageKey="deriv-application-2:quiz">
+            <Collapsible title="六、综合自测" defaultOpen storageKey="deriv-application-2:quiz">
               <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
                 {/* TODO: QuizPanel + 本章要点速查表 */}
                 <p className="text-gray-500 italic px-2 py-4">本节内容待编写。</p>
