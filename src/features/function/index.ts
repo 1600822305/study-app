@@ -9,6 +9,7 @@ export { FunctionGraphPage } from './3.3-graph-page';
 export { DerivativePrereqPage } from './3.3.5-deriv-prereq-page';
 export { DerivativeBasicPage } from './3.4-deriv-basic-page';
 export { DerivativeApplicationPage } from './3.5-deriv-application-page';
+export { DerivMethodPage } from './3.6.0-deriv-method-page';
 export { DerivativeApplication2Page } from './3.6-deriv-application-2-page';
 export { ExtremaPage } from './3.6.2-extrema-page';
 export { ClosedMaxPage } from './3.6.3-closed-max-page';

@@ -1,6 +1,6 @@
 import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PracticeCard, PrintQuestions, UnifiedDebugToggle, PageBreak } from '@/components/shared';
 import { derivApplication2ProgressItems } from './data/3.6/3.6-deriv-application-2-progress';
-import { derivMono1Warmup, derivMono1Practice, derivMono2Warmup, derivMono2Practice, derivMono3Practice, derivMonoDiscussPractice } from './data/3.6/3.6-deriv-application-2-practice';
+import { derivMono2Warmup, derivMono2Practice, derivMono3Practice, derivMonoDiscussPractice } from './data/3.6/3.6-deriv-application-2-practice';
 import { useProgress } from '@/hooks';
 import { derivativeApplication2Explanations } from './3.6-deriv-application-2-answers';
 
@@ -12,7 +12,7 @@ export function DerivativeApplication2Page() {
       <div className="[&_h1]:!mb-0 [&_.flex.flex-wrap]:!mt-1">
         <PageHeader
           stage="第三阶段 · 函数思维"
-          title="3.6 导数应用（下）"
+          title="3.6.1 含参单调性专题"
           tags={[]}
         />
       </div>
@@ -20,296 +20,19 @@ export function DerivativeApplication2Page() {
       <LessonLayout
         progressItems={progressItems}
         onToggle={toggleProgress}
-        sidebarTop={<ExportButton title="3.6 导数应用（下）" />}
+        sidebarTop={<ExportButton title="3.6.1 含参单调性专题" />}
       >
         <div className="[&_.rounded-xl]:mb-0 [&_.rounded-xl>.flex.items-center]:py-0.5 [&_.rounded-xl>div:last-child]:px-0 [&_.rounded-xl>div:last-child]:pt-0 [&_.rounded-xl>div:last-child]:pb-0 [&_.rounded-xl_button>span]:font-bold [&_.rounded-xl_button>span]:text-gray-900">
 
-          {/* ═══════════════════════════════════════════════════════ */}
-          {/* Section 1: 单调性 */}
-          {/* ═══════════════════════════════════════════════════════ */}
-          <section id="da2-monotone" className="mb-0 scroll-mt-4">
-            <Collapsible title="一、单调性" defaultOpen storageKey="deriv-application-2:monotone">
+          {/* ══════════════════════════════════════════════════════ */}
+          {/* Section 1: 已知单调性求参（恒成立型） */}
+          {/* ══════════════════════════════════════════════════════ */}
+          <section id="da2-monotone-param-eq" className="mb-0 scroll-mt-4">
+            <Collapsible title="一、已知单调性求参（恒成立型）" defaultOpen storageKey="deriv-application-2:monotone-param-eq">
               <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
 
-                {/* ═══════════════════════════════════════════════════════ */}
-                {/* 1.0 铺垫：导数符号与单调性的关系 + 流程总览                  */}
-                {/* ═══════════════════════════════════════════════════════ */}
-                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500 mb-0.5">1.0　铺垫：导数符号与单调性的关系（核心定理 + 流程）</div>
+                {/* 1.0 铺垫 + 1.1 求不含参单调区间 已迁至 3.6.0 单调性入门 */}
 
-                {/* ── 为什么要单讲这一节 ── */}
-                <div className="border border-gray-400 rounded overflow-hidden">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📊 为什么单讲：导数大题 (1) 问的<strong>送分主力</strong></div>
-                  <div className="grid grid-cols-[54fr_46fr]">
-                    <div className="px-2 py-0.5 space-y-1 border-r border-gray-300">
-                      <p><strong>高考定位</strong>：导数大题三连——</p>
-                      <p className="pl-4">(1) <strong>判单调性</strong>　(2) 求极值 / 最值　(3) 不等式证明</p>
-                      <hr className="border-gray-300" />
-                      <p>(1) 是<strong>整道大题的根</strong>，做不出 (1) 后面全废；做出 (1) 至少拿 5–7 分。</p>
-                      <p className="text-red-700"><strong>⚠️ 2025 起新高考</strong>：导数题位置前移（第 18 题），<strong>难度降低但更高频</strong>，单调性这一步必须练熟。</p>
-                    </div>
-                    <div className="px-2 py-0.5 space-y-1">
-                      <p><strong>核心定理</strong>（本节引入）：在区间 <Math tex="I" /> 上，</p>
-                      <p className="pl-4">• <Math tex="f'(x)>0" /> ⇒ <Math tex="f(x)" /> 在 <Math tex="I" /> 上<strong>递增</strong></p>
-                      <p className="pl-4">• <Math tex="f'(x)<0" /> ⇒ <Math tex="f(x)" /> 在 <Math tex="I" /> 上<strong>递减</strong></p>
-                      <hr className="border-gray-300" />
-                      <p>所以求单调性 = <strong>解不等式 <Math tex="f'(x)>0" /> / <Math tex="f'(x)<0" /></strong>。</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ── 回顾对比：定义法 vs 导数法 ── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📖 回顾对比：3.1 学过的<strong>定义法</strong>，本节学的<strong>导数法</strong></div>
-                  <table className="w-full border-collapse text-center [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[14%]">方法</th>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[36%]">怎么判</th>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[28%]">优点</th>
-                        <th className="border border-gray-300 px-2 py-0.5">缺点</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-gray-300 px-2 py-0.5 font-bold">定义法<br /><span className="font-normal text-[0.85em]">(3.1)</span></td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">任取 <Math tex="x_1<x_2" />，比较 <Math tex="f(x_1)" /> 与 <Math tex="f(x_2)" /> 大小（作差或作商）。</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">原理直接，不依赖求导。</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">作差极繁琐，含 <Math tex="e^x,\ln x" /> 几乎做不动。</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-2 py-0.5 font-bold">图像法<br /><span className="font-normal text-[0.85em]">(初中 / 3.0.5)</span></td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">画出函数图像，从图上读增减区间。</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">直观，二次/反比例函数一眼出。</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">复杂函数（如 <Math tex="x^3-3x" />、<Math tex="xe^x" />）画不准。</td>
-                      </tr>
-                      <tr className="bg-amber-50">
-                        <td className="border border-gray-300 px-2 py-0.5 font-bold text-red-700">导数法<br /><span className="font-normal text-[0.85em]">(本节)</span></td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">求 <Math tex="f'(x)" />，看符号——正则增、负则减。</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>通用、机械、稳定</strong>——任何能求导的函数都能做。</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">需要熟练 3.4 的求导公式与法则。</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p className="px-2 py-1 border-t border-gray-300"><strong>💡 一句话总结</strong>：导数法 = <strong>把"比大小"问题转化为"判正负"问题</strong>——后者只用解不等式 <Math tex="f'(x)>0" /> 或 <Math tex="<0" />，比作差好做百倍。</p>
-                </div>
-
-                {/* ── 题型总览 ── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🗺 四大题型总览：先认清属于哪一类，再套流程</div>
-                  <table className="w-full border-collapse text-center text-[0.9rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[8%]">类型</th>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[28%]">题目特征</th>
-                        <th className="border border-gray-300 px-2 py-0.5">处理方法</th>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[10%]">难度</th>
-                        <th className="border border-gray-300 px-2 py-0.5 w-[10%]">本节位置</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td className="border border-gray-300 px-2 py-0.5 font-bold">①</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>求单调区间</strong>（不含参）</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">通用流程：求导 → 找零点 → 分段判号 → 写区间。</td>
-                        <td className="border border-gray-300 px-2 py-0.5">★</td>
-                        <td className="border border-gray-300 px-2 py-0.5">1.1</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-2 py-0.5 font-bold">②</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>已知单调性</strong>求参范围<br /><span className="text-[0.85em]">"在 <Math tex="[a,b]" /> 上递增"</span></td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">转化为 <Math tex="f'(x)\ge 0" /> 在区间上<strong>恒成立</strong>，分参或求最值。</td>
-                        <td className="border border-gray-300 px-2 py-0.5">★★★</td>
-                        <td className="border border-gray-300 px-2 py-0.5">1.2</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-2 py-0.5 font-bold">③</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>不单调 / 存在</strong>单调区间<br /><span className="text-[0.85em]">"在 <Math tex="(a,b)" /> 不单调"</span></td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">转化为 <Math tex="f'(x)=0" /> 在区间上<strong>有解</strong>。<strong>"恒成立 ↔ 有解"反向思维。</strong></td>
-                        <td className="border border-gray-300 px-2 py-0.5">★★★</td>
-                        <td className="border border-gray-300 px-2 py-0.5">1.3</td>
-                      </tr>
-                      <tr>
-                        <td className="border border-gray-300 px-2 py-0.5 font-bold">④</td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left"><strong>含参讨论</strong>单调性<br /><span className="text-[0.85em]">"讨论 <Math tex="f(x)" /> 单调性"</span></td>
-                        <td className="border border-gray-300 px-2 py-0.5 text-left">导函数含参，按<strong>系数正负 / 根的位置</strong>分类讨论。<br /><strong>导数大题 (1) 问的主力。</strong></td>
-                        <td className="border border-gray-300 px-2 py-0.5">★★★★</td>
-                        <td className="border border-gray-300 px-2 py-0.5">1.4</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p className="px-2 py-1 border-t border-gray-300 text-[0.85em]"><strong>📖 学习路径</strong>：1.1 通用流程练熟 → 1.2 反向求参（恒成立）→ 1.3 反向求参（有解）→ 1.4 含参讨论挑战压轴。</p>
-                </div>
-
-                {/* ── 🌳 全节根心法 ── */}
-                <div className="border-2 border-emerald-600 rounded overflow-hidden -mt-px bg-emerald-50">
-                  <div className="px-2 py-1 font-bold text-emerald-900 border-b border-emerald-300 bg-emerald-100">🌳 全节根心法：判 <Math tex="f" /> 单调性 <strong>=</strong> 判 <Math tex="f'" /> 正负</div>
-                  <div className="px-2 py-1 space-y-1">
-                    <p>上面四种题型，<strong>底层逻辑只有这一句</strong>。区别只是问法不同，分成<strong>两类</strong>：</p>
-                    <div className="grid grid-cols-2 gap-2 mt-1">
-                      <div className="border border-emerald-300 rounded bg-white px-2 py-1">
-                        <p className="font-bold text-emerald-800">▶ 正向问题：给 <Math tex="f" />，求性质</p>
-                        <p className="pl-2 text-[0.9rem]">直接<strong>判 <Math tex="f'" /> 正负</strong>，写出单调性。</p>
-                        <p className="pl-2 text-[0.85rem] text-gray-700">• <strong>1.1 不含参</strong>：套下方通用流程。</p>
-                        <p className="pl-2 text-[0.85rem] text-gray-700">• <strong>1.4 含参讨论</strong>：通用流程 + 对参数 <Math tex="a" /> 分类。</p>
-                      </div>
-                      <div className="border border-emerald-300 rounded bg-white px-2 py-1">
-                        <p className="font-bold text-emerald-800">◀ 反向问题：给性质，求 <Math tex="a" /></p>
-                        <p className="pl-2 text-[0.9rem]">把"<Math tex="f'\ge 0" /> 或 <Math tex="<0" />"<strong>翻译成 <Math tex="a" /> 取最值</strong>。</p>
-                        <p className="pl-2 text-[0.85rem] text-gray-700">• <strong>1.2 恒成立</strong>：<Math tex="a" /> 盖住极端 → 取 <Math tex="\min" /> / <Math tex="\max" />。</p>
-                        <p className="pl-2 text-[0.85rem] text-gray-700">• <strong>1.3 有解</strong>：<Math tex="a" /> 够到极端 → 取另一头 <Math tex="\min" /> / <Math tex="\max" />。</p>
-                      </div>
-                    </div>
-                    <p className="text-[0.85rem] text-gray-700 mt-1"><strong>💡 学习建议</strong>：先吃透 1.1 的"判 <Math tex="f'" /> 正负"。后面所有题型都是这件事的不同变体。</p>
-                  </div>
-                </div>
-
-                {/* ── 通用流程模板（针对正向问题）── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 通用流程（正向问题用）：求导 → 找零点 → 分段判号 → 写区间</div>
-                  <div className="px-2 py-0.5 space-y-1">
-                    <table className="w-full border-collapse text-center [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
-                      <thead className="bg-gray-50">
-                        <tr>
-                          <th className="border border-gray-300 px-2 py-0.5 w-[8%]">步骤</th>
-                          <th className="border border-gray-300 px-2 py-0.5 w-[24%]">做什么</th>
-                          <th className="border border-gray-300 px-2 py-0.5">注意</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="border border-gray-300 px-2 py-0.5 font-bold">①</td>
-                          <td className="border border-gray-300 px-2 py-0.5"><strong>确定定义域</strong></td>
-                          <td className="border border-gray-300 px-2 py-0.5 text-left">含 <Math tex="\ln" /> 解真数 <Math tex=">0" />；含分母解 <Math tex="\ne 0" />。<strong>所有判号都在定义域内</strong>。</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-gray-300 px-2 py-0.5 font-bold">②</td>
-                          <td className="border border-gray-300 px-2 py-0.5"><strong>求导并整理</strong></td>
-                          <td className="border border-gray-300 px-2 py-0.5 text-left">多项式 → 因式分解；分式 → 通分成 <Math tex="\dfrac{\text{分子}}{\text{分母}}" />；<strong>恒正因子直接约掉</strong>。</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-gray-300 px-2 py-0.5 font-bold">③</td>
-                          <td className="border border-gray-300 px-2 py-0.5"><strong>找 <Math tex="f'(x)=0" /> 的零点</strong></td>
-                          <td className="border border-gray-300 px-2 py-0.5 text-left">分式 <Math tex="=0" /> <strong>只看分子</strong>。零点解不出来？<strong>再求 <Math tex="f''(x)" /></strong> 判 <Math tex="f'" /> 单调性，反推零点位置。</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-gray-300 px-2 py-0.5 font-bold">④</td>
-                          <td className="border border-gray-300 px-2 py-0.5"><strong>分段判 <Math tex="f'" /> 正负</strong></td>
-                          <td className="border border-gray-300 px-2 py-0.5 text-left">零点把定义域切成若干段。<strong>每段任取一个值代入</strong>（或穿根法 / 看分子分母同号异号）。</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-gray-300 px-2 py-0.5 font-bold">⑤</td>
-                          <td className="border border-gray-300 px-2 py-0.5"><strong>写单调区间</strong></td>
-                          <td className="border border-gray-300 px-2 py-0.5 text-left"><Math tex="f'>0" /> 段 → <strong>增</strong>；<Math tex="f'<0" /> 段 → <strong>减</strong>。<strong>定义域有断点必须分开写，不合并</strong>。</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <p className="px-2 py-0.5 text-gray-700 text-[0.85rem]"><strong>💡 核心心法</strong>：判 <Math tex="f" /> 单调性 = 判 <Math tex="f'" /> 正负。形式不同，套路相同——多项式、对数、指数、含参数<strong>全用这一套</strong>。</p>
-                  </div>
-                </div>
-
-                {/* ═══════════════════════════════════════════════════════ */}
-                {/* 1.1 求不含参函数的单调区间                                  */}
-                {/* ═══════════════════════════════════════════════════════ */}
-                <div className="px-2 py-1 font-bold text-gray-900 bg-blue-50 border-l-4 border-blue-500">1.1　求不含参函数的单调区间（★ 最基础）</div>
-
-                {/* ── 详解：例 1 + 例 2（标准多项式 + 含 ln）── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：通用流程示范（例 1 多项式 + 例 2 含 <Math tex="\ln" />）</div>
-                  <div className="grid grid-cols-[1fr_auto_1fr]">
-                    <div className="px-2 py-0.5 space-y-1">
-                      <p className="font-bold"><strong>例 1</strong>：求 <Math tex="f(x)=x^3-3x+2" /> 的单调区间。</p>
-                      <hr className="border-gray-300" />
-                      <p className="pl-2"><strong>① 定义域</strong>：<Math tex="\mathbb{R}" />（多项式无限制）。</p>
-                      <p className="pl-2"><strong>② 求导</strong>：<Math tex="f'(x)=3x^2-3" />。</p>
-                      <p className="pl-2"><strong>③ 找零点</strong>：令 <Math tex="f'(x)=0" />，<Math tex="3x^2-3=0" /> 解得 <Math tex="x=-1,\,1" />。</p>
-                      <p className="pl-2"><strong>④ 分段代值</strong>：零点把 <Math tex="\mathbb{R}" /> 切成 3 段，并代入对应区间的值。</p>
-                      <p className="pl-4">• <Math tex="(-\infty,-1)" />：代 <Math tex="x=-2" />，<Math tex="f'(-2)=9>0" /> → <strong>增</strong></p>
-                      <p className="pl-4">• <Math tex="(-1,1)" />：代 <Math tex="x=0" />，<Math tex="f'(0)=-3<0" /> → <strong>减</strong></p>
-                      <p className="pl-4">• <Math tex="(1,+\infty)" />：代 <Math tex="x=2" />，<Math tex="f'(2)=9>0" /> → <strong>增</strong></p>
-                      <p className="pl-2"><strong>结论</strong>：增区间 <Math tex="(-\infty,-1)" /> 和 <Math tex="(1,+\infty)" />，减区间 <Math tex="(-1,1)" />。</p>
-                    </div>
-                    <div className="w-px bg-gray-300"></div>
-                    <div className="px-2 py-0.5 space-y-1">
-                      <p className="font-bold"><strong>例 2</strong>：求 <Math tex="f(x)=x-\ln x" /> 的单调区间。</p>
-                      <hr className="border-gray-300" />
-                      <p className="pl-2"><strong>① 定义域</strong>：<Math tex="x>0" />（<Math tex="\ln x" /> 要求）。</p>
-                      <p className="pl-2"><strong>② 求导通分</strong>：<Math tex="f'(x)=1-\dfrac{1}{x}=\dfrac{x}{x}-\dfrac{1}{x}=\dfrac{x-1}{x}" />。</p>
-                      <p className="pl-2"><strong>③ 定号</strong>：分母 <Math tex="x>0" /> 已固定为正，分子 <Math tex="x-1" /> 有两种情况：</p>
-                      <p className="pl-4">• 当 <Math tex="x-1>0" /> 即 <Math tex="x>1" />：分式正，<Math tex="f'>0" /> → <strong>增</strong></p>
-                      <p className="pl-4">• 当 <Math tex="x-1<0" /> 即 <Math tex="0<x<1" />：分式负，<Math tex="f'<0" /> → <strong>减</strong></p>
-                      <p className="pl-2"><strong>结论</strong>：增区间 <Math tex="(1,+\infty)" />，减区间 <Math tex="(0,1)" />。</p>
-                      <p className="pl-2 text-gray-700 text-[0.85rem]">💡 也可以用分段代值法：定义域端点 <Math tex="0" /> + 零点 <Math tex="1" /> 把 <Math tex="(0,+\infty)" /> 切成两段，代 <Math tex="x=0.5,\,2" /> 验证即可。</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ── 解题提示 ── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-amber-50">
-                  <div className="px-2 py-1 text-[0.85rem]">
-                    <p><strong>💡 解题口诀</strong>：令 <Math tex="f'(x)>0" />，解得的 <Math tex="x" /> 范围就是 <strong>增区间</strong>；令 <Math tex="f'(x)<0" />，解得的 <Math tex="x" /> 范围就是 <strong>减区间</strong>。</p>
-                  </div>
-                </div>
-
-                {/* ── 💪 随手算两道 ── */}
-                <div className="text-base print:hidden">
-                  <PracticeCard title="💪 随手算两道" questions={derivMono1Warmup} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={2} printOptionCols={2}
-                    renderItem={(q, idx) => (
-                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
-                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
-                        {q.questionLatex && <Math tex={q.questionLatex} />}
-                      </p>
-                    )}
-                  />
-                </div>
-                <div className="text-base hidden print:block">
-                  <PrintQuestions questions={derivMono1Warmup} printOptionCols={2} columns={2} />
-                </div>
-
-                {/* ── 详解：例 3（带 e^x，需要乘积法则 + 约掉恒正因子）── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 3</strong>　求 <Math tex="f(x)=(x-1)e^x" /> 的单调区间<span className="font-normal ml-2">——约掉恒正因子的技巧</span></div>
-                  <div className="px-2 py-0.5 space-y-1">
-                    <p className="pl-2"><strong>① 定义域</strong>：<Math tex="\mathbb{R}" />。</p>
-                    <p className="pl-2"><strong>② 求导</strong>（乘积法则 <Math tex="(uv)'=u'v+uv'" />，口诀：<strong>前导后不导，加前不导后导</strong>）：</p>
-                    <p className="pl-4"><Math tex="f'(x)=(x-1)'\cdot e^x+(x-1)\cdot(e^x)'=1\cdot e^x+(x-1)\cdot e^x=e^x+(x-1)e^x=xe^x" /></p>
-                    <p className="pl-2"><strong>③ 定号</strong>：因为底数 <Math tex="e>0" />，所以 <Math tex="e^x>0" /> <strong>恒成立</strong>，乘上正数不改变符号，故 <Math tex="f'(x)=xe^x" /> 的正负<strong>完全跟随 <Math tex="x" /></strong>，<strong>分类讨论</strong>：</p>
-                    <p className="pl-4">• 当 <Math tex="x>0" /> 时，<Math tex="xe^x>0" />，得 <Math tex="f'(x)>0" /> → <strong>增</strong>（验：<Math tex="x=1\Rightarrow 1\cdot e>0" /> ✓）</p>
-                    <p className="pl-4">• 当 <Math tex="x<0" /> 时，<Math tex="xe^x<0" />，得 <Math tex="f'(x)<0" /> → <strong>减</strong>（验：<Math tex="x=-1\Rightarrow -1\cdot e^{-1}<0" /> ✓）</p>
-                    <p className="pl-2"><strong>结论</strong>：增区间 <Math tex="(0,+\infty)" />，减区间 <Math tex="(-\infty,0)" />。</p>
-                    <hr className="border-gray-300" />
-                    <div className="space-y-1">
-                      <p><strong>💡 约掉恒正因子的技巧 · 原理</strong>：如 <Math tex="5x" /> 中 <Math tex="5" /> 是正数，<Math tex="x" /> 可正可负，<strong>正负完全由 <Math tex="x" /> 控制</strong>。</p>
-                      <p className="pl-2"><strong>常见恒正因子</strong>：<Math tex="e^x" />、<Math tex="e^{ax+b}" /> ——指数函数（底数 <Math tex="e>0" />，<strong>正数的任何次方都是正数</strong>）</p>
-                      <p className="pl-[7.5em]"><Math tex="x^2+1" />、<Math tex="x^2+a" />（<Math tex="a>0" />）——平方加正常数（任何数的平方都 <Math tex="\ge 0" />，加正常数后必 <Math tex=">0" />）</p>
-                      <p className="pl-[7.5em]"><Math tex="\ln(\square)" /> 题中的<strong>真数 <Math tex="\square" /></strong>（定义域要求真数 <Math tex=">0" />，自动恒正）</p>
-                      <p className="pl-[7.5em]"><Math tex="\sqrt{x}" />（定义域 <Math tex="x\ge 0" /> 上 <Math tex="\sqrt{x}\ge 0" />；当题目要求 <Math tex="x>0" /> 时严格 <Math tex=">0" />）</p>
-                      <p className="pl-2"><strong>用法</strong>：把恒正因子"擦掉"，只看剩下的因子判正负——大幅省力。</p>
-                      <p className="pl-2"><strong>反例</strong>：<Math tex="x" />（可正可负）、<Math tex="\sin x" />（可正可负）、<Math tex="x-1" />（看 <Math tex="x" /> 与 1 的大小）——这些<strong>不能</strong>直接约。</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ── 一句话看穿 ── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px bg-amber-50">
-                  <div className="px-2 py-1.5">
-                    <p><strong>💡 一句话看穿这节</strong>：求单调区间 = <strong>定义域 → 求导 → 找零点 → 分段判 <Math tex="f'" /> 正负 → 写区间</strong>。形式不同，套路相同。</p>
-                  </div>
-                </div>
-
-                {/* ── 即时练习 ── */}
-                <div className="text-base print:hidden">
-                  <PracticeCard title="" questions={derivMono1Practice} explanations={derivativeApplication2Explanations} hideBlankLine optionCols={2} printOptionCols={2}
-                    renderItem={(q, idx) => (
-                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
-                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
-                        {q.questionLatex && <Math tex={q.questionLatex} />}
-                      </p>
-                    )}
-                  />
-                </div>
-                <div className="text-base hidden print:block">
-                  <PrintQuestions questions={derivMono1Practice} printOptionCols={2} columns={2} />
-                </div>
 
                 {/* ═══════════════════════════════════════════════════════ */}
                 {/* 1.2 已知单调性求参数范围（恒成立型）                        */}
@@ -1160,18 +883,6 @@ export function DerivativeApplication2Page() {
 
 
 
-
-          {/* ═════════════════════════════════════════════════════ */}
-          {/* Section 4: 综合自测 */}
-          {/* ═════════════════════════════════════════════════════ */}
-          <section id="da2-quiz" className="mb-0 scroll-mt-4">
-            <Collapsible title="四、综合自测" defaultOpen storageKey="deriv-application-2:quiz">
-              <div className="space-y-0 text-[0.9rem] text-gray-800 leading-snug [&_p]:!my-0 [&_.space-y-1>*+*]:!mt-0.5 [&_hr]:!my-0.5">
-                {/* TODO: QuizPanel + 本章要点速查表 */}
-                <p className="text-gray-500 italic px-2 py-4">本节内容待编写。</p>
-              </div>
-            </Collapsible>
-          </section>
 
         </div>
       </LessonLayout>

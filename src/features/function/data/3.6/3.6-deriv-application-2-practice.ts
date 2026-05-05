@@ -1,64 +1,8 @@
 import type { QuizQuestionData } from '@/types';
 
 // ══════════════════════════════════════════════════════════════
-// §1 单调性
+// §1 含参单调性专题（1.1 已迁至 3.6.0）
 // ══════════════════════════════════════════════════════════════
-
-// ── 1.1 求不含参函数的单调区间 · 随手算 ──
-export const derivMono1Warmup: QuizQuestionData[] = [
-  {
-    id: 'dm1w-1',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=3x^2-x^3\\text{ 的单调区间}',
-    correctAnswer: '增:(0,2); 减:(-\\infty,0),(2,+\\infty)',
-    acceptableAnswers: ['增:(0,2); 减:(-\\infty,0),(2,+\\infty)', '增(0,2);减(-∞,0),(2,+∞)'],
-  },
-  {
-    id: 'dm1w-2',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=\\ln(2x-1)\\text{ 的单调区间}',
-    correctAnswer: '增:(\\dfrac{1}{2},+\\infty)',
-    acceptableAnswers: ['增:(\\dfrac{1}{2},+\\infty)', '增(1/2,+∞)', '在(1/2,+∞)单调递增', '(1/2,+∞)'],
-  },
-];
-
-// ── 1.1 求不含参函数的单调区间 · 即时练习 ──
-export const derivMono1Practice: QuizQuestionData[] = [
-  {
-    id: 'dm1p-1',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=x^3-6x^2+9x\\text{ 的单调区间}',
-    correctAnswer: '增:(-\\infty,1),(3,+\\infty); 减:(1,3)',
-    acceptableAnswers: ['增:(-\\infty,1),(3,+\\infty); 减:(1,3)', '增(-∞,1),(3,+∞);减(1,3)'],
-  },
-  {
-    id: 'dm1p-2',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=e^x-2x\\text{ 的单调区间}',
-    correctAnswer: '增:(\\ln 2,+\\infty); 减:(-\\infty,\\ln 2)',
-    acceptableAnswers: ['增:(\\ln 2,+\\infty); 减:(-\\infty,\\ln 2)', '增(ln2,+∞);减(-∞,ln2)'],
-  },
-  {
-    id: 'dm1p-3',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=\\dfrac{\\ln x}{x}\\text{ 的单调区间}',
-    correctAnswer: '增:(0,e); 减:(e,+\\infty)',
-    acceptableAnswers: ['增:(0,e); 减:(e,+\\infty)', '增(0,e);减(e,+∞)'],
-  },
-  {
-    id: 'dm1p-4',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=x+\\dfrac{1}{x}\\text{ 的单调区间}',
-    correctAnswer: '增:(-\\infty,-1),(1,+\\infty); 减:(-1,0),(0,1)',
-    acceptableAnswers: ['增:(-\\infty,-1),(1,+\\infty); 减:(-1,0),(0,1)', '增(-∞,-1),(1,+∞);减(-1,0),(0,1)'],
-  },
-];
 
 // ── 1.2 已知单调性求参数范围 · 随手算（3 题，分参法基础，多项式/ln/e^x 全覆盖） ──
 export const derivMono2Warmup: QuizQuestionData[] = [

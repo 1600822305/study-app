@@ -1,7 +1,7 @@
 import type { ProgressItem } from '@/types';
 
 export const derivApplication2ProgressItems: ProgressItem[] = [
-  { id: 'da2-monotone', label: '单调性', checked: false },
-  { id: 'da2-extrema', label: '极值与最值', checked: false },
-  { id: 'da2-quiz', label: '综合自测', checked: false },
+  { id: 'da2-monotone-param-eq', label: '已知单调性求参（恒成立）', checked: false },
+  { id: 'da2-monotone-param', label: '存在子区间求参', checked: false },
+  { id: 'da2-mono-discuss', label: '含参讨论单调性', checked: false },
 ];

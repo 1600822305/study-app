@@ -2,11 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import solid from 'vite-plugin-solid'
 import tailwindcss from '@tailwindcss/vite'
+import katexPrerender from './plugins/vite-plugin-katex-prerender'
 import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    katexPrerender(),
     // SolidJS 编译器：只处理 .solid.tsx/.solid.ts 文件
     solid({
       include: ['**/*.solid.tsx', '**/*.solid.ts'],

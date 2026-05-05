@@ -30,6 +30,7 @@ const FunctionGraphPage = lazy(() => import('@/features/function').then(m => ({ 
 const DerivativePrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativePrereqPage })));
 const DerivativeBasicPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeBasicPage })));
 const DerivativeApplicationPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeApplicationPage })));
+const DerivMethodPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivMethodPage })));
 const DerivativeApplication2Page = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeApplication2Page })));
 const ExtremaPage = lazy(() => import('@/features/function').then(m => ({ default: m.ExtremaPage })));
 const ClosedMaxPage = lazy(() => import('@/features/function').then(m => ({ default: m.ClosedMaxPage })));
@@ -119,6 +120,7 @@ function App() {
           <Route path="/math/derivative-prereq" element={<DerivativePrereqPage />} />
           <Route path="/math/derivative-basic" element={<DerivativeBasicPage />} />
           <Route path="/math/derivative-application" element={<DerivativeApplicationPage />} />
+          <Route path="/math/deriv-method" element={<DerivMethodPage />} />
           <Route path="/math/derivative-application-2" element={<DerivativeApplication2Page />} />
           <Route path="/math/extrema" element={<ExtremaPage />} />
           <Route path="/math/closed-max" element={<ClosedMaxPage />} />
