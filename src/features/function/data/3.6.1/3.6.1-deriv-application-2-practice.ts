@@ -402,69 +402,8 @@ export const derivAnchor3Practice: QuizQuestionData[] = [
   },
 ];
 
-// ── 1.4 含参讨论单调性 · 即时练习（5 题，对应 4 大题型 + 1 综合压轴） ──
-export const derivMonoDiscussPractice: QuizQuestionData[] = [
-  {
-    id: 'dm4-1',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{讨论 }f(x)=ax+\\ln x\\text{ 的单调性（按 }a\\text{ 分类）}\\quad\\text{【题型①一次型】}',
-    correctAnswer: 'a\\ge 0:(0,+\\infty)\\text{ 增};a<0:(0,-1/a)\\text{ 增},(-1/a,+\\infty)\\text{ 减}',
-    acceptableAnswers: [
-      'a\\ge 0:(0,+\\infty)\\text{ 增};a<0:(0,-1/a)\\text{ 增},(-1/a,+\\infty)\\text{ 减}',
-    ],
-  },
-  {
-    id: 'dm4-2',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{讨论 }f(x)=\\dfrac{1}{3}x^3-ax^2+1\\text{ 的单调性（按 }a\\text{ 分类）}\\quad\\text{【题型②二次可分解】}',
-    correctAnswer: 'a>0:(-\\infty,0),(2a,+\\infty)\\text{ 增},(0,2a)\\text{ 减};a=0:\\mathbb{R}\\text{ 增};a<0:(-\\infty,2a),(0,+\\infty)\\text{ 增},(2a,0)\\text{ 减}',
-    acceptableAnswers: [
-      'a>0:(-\\infty,0),(2a,+\\infty)\\text{ 增},(0,2a)\\text{ 减};a=0:\\mathbb{R}\\text{ 增};a<0:(-\\infty,2a),(0,+\\infty)\\text{ 增},(2a,0)\\text{ 减}',
-    ],
-  },
-  {
-    id: 'dm4-3',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{讨论 }f(x)=x^3-3ax^2\\text{ 在 }[1,2]\\text{ 上的单调性（按 }a\\text{ 分类）}\\quad\\text{【题型③二次+区间】}',
-    correctAnswer: 'a\\le 1/2:[1,2]\\text{ 增};1/2<a<1:(1,2a)\\text{ 减},(2a,2)\\text{ 增};a\\ge 1:[1,2]\\text{ 减}',
-    acceptableAnswers: [
-      'a\\le 1/2:[1,2]\\text{ 增};1/2<a<1:(1,2a)\\text{ 减},(2a,2)\\text{ 增};a\\ge 1:[1,2]\\text{ 减}',
-    ],
-  },
-  {
-    id: 'dm4-4',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{讨论 }f(x)=\\dfrac{1}{2}x^2-ax+4\\ln x\\text{ 的单调性（按 }\\Delta\\text{ 分类）}\\quad\\text{【题型④含 ln + Δ 法】}',
-    correctAnswer: 'a\\le 4:(0,+\\infty)\\text{ 增};a>4:(0,x_1),(x_2,+\\infty)\\text{ 增},(x_1,x_2)\\text{ 减},x_{1,2}=(a\\mp\\sqrt{a^2-16})/2',
-    acceptableAnswers: [
-      'a\\le 4:(0,+\\infty)\\text{ 增};a>4:(0,x_1),(x_2,+\\infty)\\text{ 增},(x_1,x_2)\\text{ 减}',
-    ],
-  },
-  {
-    id: 'dm4-exp',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{讨论 }f(x)=x-ae^x\\text{ 的单调性（按 }a\\text{ 分类）}\\quad\\text{【例 5 变式·指数型】}',
-    correctAnswer: 'a\\le 0:\\mathbb{R}\\text{ 增};a>0:(-\\infty,-\\ln a)\\text{ 增},(-\\ln a,+\\infty)\\text{ 减}',
-    acceptableAnswers: [
-      'a\\le 0:\\mathbb{R}\\text{ 增};a>0:(-\\infty,-\\ln a)\\text{ 增},(-\\ln a,+\\infty)\\text{ 减}',
-    ],
-  },
-  {
-    id: 'dm4-5',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{讨论 }f(x)=\\dfrac{1}{2}x^2-(a+1)x+a\\ln x\\text{ 的单调性（按 }a\\text{ 分类）}\\quad\\text{【综合压轴】}',
-    correctAnswer: 'a\\le 0:(0,1)\\text{ 减},(1,+\\infty)\\text{ 增};0<a<1:(0,a),(1,+\\infty)\\text{ 增},(a,1)\\text{ 减};a=1:(0,+\\infty)\\text{ 增};a>1:(0,1),(a,+\\infty)\\text{ 增},(1,a)\\text{ 减}',
-    acceptableAnswers: [
-      'a\\le 0:(0,1)\\text{ 减},(1,+\\infty)\\text{ 增};0<a<1:(0,a),(1,+\\infty)\\text{ 增},(a,1)\\text{ 减};a=1:(0,+\\infty)\\text{ 增};a>1:(0,1),(a,+\\infty)\\text{ 增},(1,a)\\text{ 减}',
-    ],
-  },
-];
+// ── 1.4 含参讨论单调性 · 即时练习（占位） ──
+export const derivMonoDiscussPractice: QuizQuestionData[] = [];
 
 // ── 2.2 极值与最值 · 即时练习（占位） ──
 export const derivExtremaPractice: QuizQuestionData[] = [];

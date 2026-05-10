@@ -28,75 +28,60 @@ export const derivExtremaExample1Practice: QuizQuestionData[] = [
   },
 ];
 
-// ── 2.1 例 2 后即时练习（含 ln 求极值） ──
-export const derivExtremaExample2Practice: QuizQuestionData[] = [
-  {
-    id: 'dex2-1',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=\\ln x-x\\text{ 的极值（注意定义域）}',
-    correctAnswer: '\\text{极大值 }f(1)=-1,\\text{ 无极小值}',
-    acceptableAnswers: [
-      '\\text{极大值 }f(1)=-1,\\text{ 无极小值}',
-      '极大值-1;无极小值',
-      '极大-1,无极小',
-    ],
-  },
-];
 
-// ── 2.1 例 3 后即时练习（含 e^x 求极值） ──
+
+// ── 例 3 后即时练习（含参讨论极值点） ──
 export const derivExtremaExample3Practice: QuizQuestionData[] = [
   {
     id: 'dex3-1',
     type: 'blank',
     question: '',
-    questionLatex: '\\text{求 }f(x)=\\dfrac{x}{e^x}\\text{ 的极值}',
-    correctAnswer: '\\text{极大值 }f(1)=\\dfrac{1}{e},\\text{ 无极小值}',
+    questionLatex: '\\text{若 }f(x)=x^3+ax\\text{ 有极值点，求 }a\\text{ 的取值范围}',
+    correctAnswer: 'a<0',
     acceptableAnswers: [
-      '\\text{极大值 }f(1)=\\dfrac{1}{e},\\text{ 无极小值}',
-      '极大值1/e;无极小值',
-      '极大1/e,无极小',
+      'a<0',
+      'a < 0',
+      '(-\\infty,0)',
     ],
   },
   {
     id: 'dex3-2',
     type: 'blank',
     question: '',
-    questionLatex: '\\text{求 }f(x)=(x-2)e^x\\text{ 的极值}',
-    correctAnswer: '\\text{极小值 }f(1)=-e,\\text{ 无极大值}',
+    questionLatex: '\\text{若 }f(x)=x^3-ax^2\\text{ 有两个极值点，求 }a\\text{ 的取值范围}',
+    correctAnswer: 'a\\ne 0',
     acceptableAnswers: [
-      '\\text{极小值 }f(1)=-e,\\text{ 无极大值}',
-      '极小值-e;无极大值',
-      '极小-e,无极大',
+      'a\\ne 0',
+      'a≠0',
+      'a不等于0',
     ],
   },
 ];
 
-// ── 2.1 例 4 后即时练习（分式 / 反比例型求极值） ──
+// ── 例 4 后即时练习（已知极值点反求参数） ──
 export const derivExtremaExample4Practice: QuizQuestionData[] = [
   {
     id: 'dex4-1',
     type: 'blank',
     question: '',
-    questionLatex: '\\text{求 }f(x)=\\dfrac{\\ln x}{x}\\text{ 的极值}',
-    correctAnswer: '\\text{极大值 }f(e)=\\dfrac{1}{e},\\text{ 无极小值}',
+    questionLatex: '\\text{已知 }f(x)=x^3-ax^2+3x\\text{ 在 }x=1\\text{ 处取得极值，求 }a',
+    correctAnswer: 'a=3',
     acceptableAnswers: [
-      '\\text{极大值 }f(e)=\\dfrac{1}{e},\\text{ 无极小值}',
-      '极大值1/e;无极小值',
-      '极大1/e,无极小',
+      'a=3',
+      'a = 3',
+      '3',
     ],
   },
   {
     id: 'dex4-2',
     type: 'blank',
     question: '',
-    questionLatex: '\\text{求 }f(x)=\\dfrac{x^2}{x-1}\\text{ 的极值}',
-    correctAnswer: '\\text{极大值 }f(0)=0,\\text{ 极小值 }f(2)=4',
+    questionLatex: '\\text{已知 }f(x)=x^3+ax^2+b\\text{ 在 }x=1\\text{ 处取得极小值 }0\\text{，求 }a,b',
+    correctAnswer: 'a=-\\dfrac{3}{2},\\,b=\\dfrac{1}{2}',
     acceptableAnswers: [
-      '\\text{极大值 }f(0)=0,\\text{ 极小值 }f(2)=4',
-      '极大值0;极小值4',
-      '极大0,极小4',
+      'a=-\\dfrac{3}{2},\\,b=\\dfrac{1}{2}',
+      'a=-3/2,b=1/2',
+      'a=-1.5,b=0.5',
     ],
   },
 ];
-

@@ -24,6 +24,10 @@ html, body, #root {
 .katex {
   font-size: 1.15em !important;
 }
+/* 绝对值竖线加深 */
+.katex .abs-bar {
+  -webkit-text-stroke: 0.4px currentColor;
+}
 @media (min-width: 768px) {
   .katex { font-size: 1.25em !important; }
 }

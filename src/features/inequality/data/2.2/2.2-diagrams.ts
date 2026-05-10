@@ -4,7 +4,7 @@ import type { Diagram2DData } from '@/components/shared/geo2d/types';
 export const absoluteValueNumberLine: Diagram2DData = {
   name: 'abs-number-line',
   coordinateSystem: {
-    origin: [180, 65],   // 原点偏下，上方留空给花括号
+    origin: [180, 56],   // 原点偏下，上方留空给花括号
     scale: [40, -40],    // 每个单位 40px
   },
   axes: {
@@ -71,14 +71,15 @@ export const boundaryPointsNumberLine: Diagram2DData = {
 export const absGraphTransform: Diagram2DData = {
   name: 'abs-graph-transform',
   coordinateSystem: {
-    origin: [105, 105],
-    scale: [18, -18],
+    origin: [105, 94.5],
+    scale: [18, -16.2],
   },
   axes: {
     xRange: [-3.5, 3.5],
     yRange: [-4.5, 5.5],
     step: 1,
     showNumbers: true,
+    xTicks: [-2, 0, 2],
     yTicks: [],
     showOriginLabel: true,
     color: '#64748b',
@@ -95,5 +96,37 @@ export const absGraphTransform: Diagram2DData = {
   functions: [
     { fn: (x: number) => x * x - 4, color: '#94a3b8', strokeWidth: 1.5, dashed: true },
     { fn: (x: number) => Math.abs(x * x - 4), color: '#2563eb', strokeWidth: 2 },
+  ],
+};
+
+// y = f(|x|) 图像变换：f(x) = x²-2x（虚线）→ f(|x|) = x²-2|x|（实线）
+export const absGraphInputTransform: Diagram2DData = {
+  name: 'abs-graph-input-transform',
+  coordinateSystem: {
+    origin: [105, 89],
+    scale: [22, -22],
+  },
+  axes: {
+    xRange: [-3.2, 3.2],
+    yRange: [-1.5, 3.5],
+    step: 1,
+    showNumbers: true,
+    xTicks: [-2, 0, 2],
+    yTicks: [],
+    showOriginLabel: true,
+    color: '#64748b',
+    tickColor: '#64748b',
+    xTickSide: 'both',
+  },
+  vertices: [],
+  edges: [],
+  polygons: [],
+  freeLabels: [
+    { pos: [3.2, 4.5], tex: 'y=f(|x|)', color: '#2563eb', fontSize: 12, offset: [5, 16] },
+    { pos: [3.2, 3], tex: 'y=f(x)', color: '#94a3b8', fontSize: 12, offset: [-10, 114] },
+  ],
+  functions: [
+    { fn: (x: number) => x * x - 2 * x, color: '#94a3b8', strokeWidth: 1.5, dashed: true },
+    { fn: (x: number) => x * x - 2 * Math.abs(x), color: '#2563eb', strokeWidth: 2 },
   ],
 };

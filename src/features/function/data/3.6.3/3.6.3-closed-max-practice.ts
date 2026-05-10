@@ -1,45 +1,16 @@
 import type { QuizQuestionData } from '@/types';
 
-// ── 4.2 求最值 4 步流程 · 即时练习 ──
-export const closedIntervalMaxStepsPractice: QuizQuestionData[] = [
-  {
-    id: 'dmax-1',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=x^3-3x^2\\text{ 在 }[-1,4]\\text{ 上的最值}',
-    correctAnswer: '\\text{最大值 }16,\\text{ 最小值 }-4',
-    acceptableAnswers: [
-      '\\text{最大值 }16,\\text{ 最小值 }-4',
-      '最大值16;最小值-4',
-      '最大16,最小-4',
-    ],
-  },
-  {
-    id: 'dmax-2',
-    type: 'blank',
-    question: '',
-    questionLatex: '\\text{求 }f(x)=x^3-3x+1\\text{ 在 }[0,2]\\text{ 上的最值}',
-    correctAnswer: '\\text{最大值 }3,\\text{ 最小值 }-1',
-    acceptableAnswers: [
-      '\\text{最大值 }3,\\text{ 最小值 }-1',
-      '最大值3;最小值-1',
-      '最大3,最小-1',
-    ],
-  },
-];
-
-// ── 4.2 例 1 同款练习（多项式闭区间最值） ──
 export const closedMaxExample1Practice: QuizQuestionData[] = [
   {
     id: 'cmax1-1',
     type: 'blank',
     question: '',
-    questionLatex: '\\text{求 }f(x)=2x^3-3x^2-12x+5\\text{ 在 }[-2,3]\\text{ 上的最值}',
-    correctAnswer: '\\text{最大值 }12,\\text{ 最小值 }-15',
+    questionLatex: '\\text{求 }f(x)=x^3-3x^2-9x+1\\text{ 在 }[-2,4]\\text{ 上的最值}',
+    correctAnswer: '\\text{最大值 }6,\\text{ 最小值 }-26',
     acceptableAnswers: [
-      '\\text{最大值 }12,\\text{ 最小值 }-15',
-      '最大值12;最小值-15',
-      '最大12,最小-15',
+      '\\text{最大值 }6,\\text{ 最小值 }-26',
+      '最大值6;最小值-26',
+      '最大6,最小-26',
     ],
   },
 ];

@@ -1,6 +1,6 @@
 import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, PracticeCard, PrintQuestions, UnifiedDebugToggle } from '@/components/shared';
 import { closedMaxProgressItems } from './data/3.6.3/3.6.3-closed-max-progress';
-import { closedIntervalMaxStepsPractice, closedMaxExample1Practice, closedMaxExample2Practice, closedMaxExample3Practice, closedMaxExample4Practice, closedMaxExample5Practice } from './data/3.6.3/3.6.3-closed-max-practice';
+import { closedMaxExample1Practice, closedMaxExample2Practice, closedMaxExample3Practice, closedMaxExample4Practice, closedMaxExample5Practice } from './data/3.6.3/3.6.3-closed-max-practice';
 import { useProgress } from '@/hooks';
 import { closedMaxExplanations } from './3.6.3-closed-max-answers';
 
@@ -30,50 +30,6 @@ export function ClosedMaxPage() {
 
 
 
-                {/* ── 4.2.0 高考定位 ── */}
-                <div className="border border-gray-400 rounded overflow-hidden -mt-px">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🎯 高考定位 · 闭区间最值</div>
-                  <div className="grid grid-cols-[52fr_48fr]">
-                    <div className="px-2 py-0.5 space-y-1 border-r border-gray-300">
-                      <p><strong>考查频率</strong>：导数大题<strong>第（1）（2）问高频</strong>，2024-2025 全国卷至少考 1 次；选择填空也常考。</p>
-                      <p><strong>难度跨度</strong>：从基础（直接求闭区间最值）到中档（结合不等式 / 反求参数）。</p>
-                      <p><strong>得分策略</strong>：</p>
-                      <p className="pl-2">• <strong>必拿分</strong>：不含参函数闭区间最值（基础送分）</p>
-                      <p className="pl-2">• <strong>力争分</strong>：识别单调函数走简化路径（节省时间）</p>
-                      <p className="pl-2">• <strong>易错点</strong>：漏端点 / 极值≠最值 / 驻点出区间（详见下方警示）</p>
-                    </div>
-                    <div className="px-2 py-0.5 space-y-1">
-                      <p className="font-bold mb-0.5">📋 4 大常考题型</p>
-                      <table className="w-full border-collapse text-[0.85rem] [&_tr>*:first-child]:border-l-0 [&_tr>*:last-child]:border-r-0">
-                        <thead className="bg-gray-50">
-                          <tr>
-                            <th className="border border-gray-300 px-1 py-0.5">题型</th>
-                            <th className="border border-gray-300 px-1 py-0.5">特征</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td className="border border-gray-300 px-1 py-0.5">① 多项式闭区间</td>
-                            <td className="border border-gray-300 px-1 py-0.5">驻点都在区间内，比较 4 个值</td>
-                          </tr>
-                          <tr>
-                            <td className="border border-gray-300 px-1 py-0.5">② 含 <Math tex="\ln" /> / <Math tex="e^x" /></td>
-                            <td className="border border-gray-300 px-1 py-0.5">先验证定义域，再求驻点</td>
-                          </tr>
-                          <tr>
-                            <td className="border border-gray-300 px-1 py-0.5">③ 单调函数</td>
-                            <td className="border border-gray-300 px-1 py-0.5">直接两端点，无需列表</td>
-                          </tr>
-                          <tr>
-                            <td className="border border-gray-300 px-1 py-0.5">④ 反求参数</td>
-                            <td className="border border-gray-300 px-1 py-0.5">已知最值列方程求 <Math tex="a" />（4.4 详讲）</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
                 {/* ── 概念区分卡：极值 vs 最值（核心认知） ── */}
                 <div className="border border-gray-400 rounded overflow-hidden -mt-px">
                   <div className="px-2 py-1 font-bold text-purple-800 border-b border-gray-400 bg-purple-50">📘 核心区分：极值 vs 最值（高考必考辨析）</div>
@@ -94,8 +50,8 @@ export function ClosedMaxPage() {
                         </tr>
                         <tr>
                           <td className="font-bold">候选位置</td>
-                          <td>只能在<strong>驻点</strong>处</td>
-                          <td><strong>驻点</strong> ∪ <strong>端点</strong></td>
+                          <td><strong>驻点</strong>或<strong>不可导点</strong>（单调性变化处）</td>
+                          <td><strong>驻点</strong> ∪ <strong>不可导点</strong> ∪ <strong>端点</strong></td>
                         </tr>
                         <tr>
                           <td className="font-bold">存在性</td>
@@ -119,8 +75,8 @@ export function ClosedMaxPage() {
                     <p className="pl-[6.5em]"><Math tex="\text{最小值}=\min\{\,\text{极小值},\ \text{端点值}\,\}" /></p>
                     <p><strong>常见误区</strong>：</p>
                     <p className="pl-2">• ❌ "极大值就是最大值" —— <strong>不一定</strong>，端点值可能更大</p>
-                    <p className="pl-2">• ❌ "极大值一定大于极小值" —— <strong>不一定</strong>。极值是<strong>局部</strong>概念（在某个邻域内的极值），不是全局；不同区段的极值只是各自段内的局部极值，互相之间没有大小关系（见 4.1 例 4 <Math tex="x+1/x" />，极大值 -2 反而小于极小值 2）</p>
-                    <p className="pl-2">• ✅ "闭区间上一定有最值，但不一定有极值" —— 因为极值存在的条件是<strong>单调性发生变化的点</strong>，而指定区间内如果单调性没变化（即整段单调），则<strong>不存在极值</strong>，这时<strong>端点就是最值</strong>。比如 <Math tex="f(x)=x" /> 在 <Math tex="[0,1]" /> 上单调递增，<Math tex="f(0)=0,\ f(1)=1" /> 即为最值</p>
+                    <p className="pl-2">• ❌ "极大值一定大于极小值" —— <strong>不一定</strong>，极值是<strong>局部</strong>概念，不同区段的极值之间没有大小关系</p>
+                    <p className="pl-2">• ✅ "闭区间上一定有最值，但不一定有极值" —— 整段单调时无极值，端点就是最值</p>
                   </div>
                 </div>
 
@@ -128,59 +84,31 @@ export function ClosedMaxPage() {
                 <div className="border border-gray-400 rounded overflow-hidden -mt-px">
                   <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">🔧 求闭区间最值标准 4 步流程</div>
                   <div className="px-2 py-1 space-y-0.5">
-                    <p>① <strong>验证定义域</strong>：检查闭区间 <Math tex="[a,b]" /> 是否完全包含在函数定义域内（含 <Math tex="\ln" />、分式、根号时尤其重要）</p>
-                    <p>② <strong>求导找驻点</strong>：解 <Math tex="f'(x)=0" />，<strong className="text-red-700">只保留落在 <Math tex="(a,b)" /> 内的驻点</strong>（区间外的驻点不参与比较）</p>
-                    <div className="grid grid-cols-[1fr_1fr] gap-2">
-                      <div>
-                        <p>③ <strong>列出候选清单 + 算函数值</strong>：</p>
-                        <p className="pl-4">• <strong>区间内驻点</strong> <Math tex="x_1, x_2, \ldots" />（来自 ②）</p>
-                        <p className="pl-4">• <strong>左端点</strong> <Math tex="x=a" /></p>
-                        <p className="pl-4">• <strong>右端点</strong> <Math tex="x=b" /></p>
-                        <p className="pl-4">分别代入<strong className="text-red-700">原函数 <Math tex="f(x)" /></strong>（不是 <Math tex="f'" />！）算函数值</p>
-                      </div>
-                      <div className="border-l border-gray-300 pl-2 text-[0.85rem] text-gray-700">
-                        <p className="font-bold text-gray-800">📌 举例：<Math tex="f(x)=x^2-4x" /> 在 <Math tex="[0,3]" /> 上</p>
-                        <p className="pl-2">驻点：解 <Math tex="f'(x)=2x-4=0" /> 得 <Math tex="x=2" />（在区间内 ✓）</p>
-                        <p className="pl-2">候选 = <Math tex="\{0,\,2,\,3\}" />（驻点 + 两端点）</p>
-                        <p className="pl-2">代入 <Math tex="f" />：<Math tex="f(0)=0,\ f(2)=-4,\ f(3)=-3" /></p>
-                        <p className="pl-2">⇒ <strong>最大值 0</strong>（在 <Math tex="x=0" />），<strong>最小值 -4</strong>（在 <Math tex="x=2" />）</p>
-                      </div>
-                    </div>
+                    <p>① <strong>验证定义域</strong>：检查闭区间 <Math tex="[a,b]" /> 是否完全包含在函数定义域内</p>
+                    <p>② <strong>求导找驻点</strong>：解 <Math tex="f'(x)=0" />，<strong>只保留落在 <Math tex="(a,b)" /> 内的驻点</strong>（区间外的驻点不参与比较）</p>
+                    <p>③ <strong>列出候选清单 + 算函数值</strong>：</p>
+                    <p className="pl-4">候选点 = 区间内驻点 + 左端点 <Math tex="a" /> + 右端点 <Math tex="b" /></p>
+                    <p className="pl-4">分别代入<strong className="text-red-700">原函数 <Math tex="f(x)" /></strong>（不是 <Math tex="f'" />！）算函数值</p>
                     <p>④ <strong>比较大小</strong>：所有候选值中<strong>最大者 = 最大值</strong>，<strong>最小者 = 最小值</strong>。可同时在多个点取得（数值唯一即可）</p>
                     <hr className="border-gray-300 my-1" />
                     <p className="text-gray-700"><strong>💡 一句话口诀</strong>：<strong>驻点 + 端点 = 候选；比较大小定最值</strong>。⚠️ <strong>找驻点用 <Math tex="f'" />，算最值用 <Math tex="f" /></strong>，别混淆。</p>
                   </div>
                 </div>
 
-                {/* ── 4 步流程后即时练习 ── */}
-                <div className="text-base print:hidden">
-                  <PracticeCard title="✏️ 4 步流程练习（多项式闭区间最值）" questions={closedIntervalMaxStepsPractice} explanations={closedMaxExplanations} hideBlankLine optionCols={1} printOptionCols={1}
-                    renderItem={(q, idx) => (
-                      <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
-                        <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
-                        {q.questionLatex && <Math tex={q.questionLatex} />}
-                      </p>
-                    )}
-                  />
-                </div>
-                <div className="text-base hidden print:block">
-                  <PrintQuestions questions={closedIntervalMaxStepsPractice} printOptionCols={1} columns={1} />
-                </div>
 
-                {/* ── 例 1 详解：多项式（驻点都在内 + 极值与端点平手） ── */}
+                {/* ── 例 1 详解：多项式（一个驻点在区间外需舍去） ── */}
                 <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
-                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 1</strong>　求 <Math tex="f(x)=x^3-6x^2+9x+1" /> 在 <Math tex="[0,4]" /> 上的最值<span className="font-normal ml-2">——多项式经典母题</span></div>
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 1</strong>　求 <Math tex="f(x)=x^3-3x^2-9x+5" /> 在 <Math tex="[0,4]" /> 上的最值<span className="font-normal ml-2">——驻点在区间外需舍去</span></div>
                   <div className="px-2 py-1 space-y-1">
                     <p>① <strong>定义域</strong>：<Math tex="\mathbb{R}" />（多项式无限制），区间 <Math tex="[0,4]" /> 完全包含在定义域内 ✓</p>
                     <hr className="border-gray-300" />
-                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=3x^2-12x+9=3(x-1)(x-3)" />（因式分解）</p>
-                    <p className="pl-4">令 <Math tex="f'(x)=0" />，即 <Math tex="3(x-1)(x-3)=0" />，解得 <Math tex="x=1" /> 或 <Math tex="x=3" /></p>
-                    <p className="pl-4">两个驻点 <strong>都在 <Math tex="(0,4)" /> 内</strong> ✓，全部保留</p>
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=3x^2-6x-9=3(x^2-2x-3)=3(x-3)(x+1)" />（因式分解）</p>
+                    <p className="pl-4">令 <Math tex="f'(x)=0" />，即 <Math tex="3(x-3)(x+1)=0" />，解得 <Math tex="x=3" /> 或 <Math tex="x=-1" /></p>
+                    <p className="pl-4"><Math tex="x=3" /> 在 <Math tex="(0,4)" /> 内 ✓，保留；<Math tex="x=-1" /> <strong>不在区间内</strong> ✗，<strong>舍去</strong></p>
                     <hr className="border-gray-300" />
-                    <div className="grid grid-cols-[auto_1fr] gap-4">
+                    <div className="flex">
                       <div>
-                        <p>③ <strong>列候选清单 + 算函数值</strong>：</p>
-                        <p className="pl-2">候选点 = 驻点 <Math tex="\{1,3\}" /> ∪ 端点 <Math tex="\{0,4\}" /></p>
+                        <p>③ <strong>列候选清单 + 算函数值</strong>：候选点 = 驻点 <Math tex="\{3\}" /> ∪ 端点 <Math tex="\{0,4\}" /></p>
                         <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
                           <thead className="bg-gray-50">
                             <tr>
@@ -192,44 +120,44 @@ export function ClosedMaxPage() {
                           <tbody>
                             <tr>
                               <td className="font-bold"><Math tex="0" /></td>
-                              <td><Math tex="f(0)=1" /></td>
+                              <td><Math tex="f(0)=5" /></td>
                               <td>左端点</td>
                             </tr>
                             <tr>
-                              <td className="font-bold"><Math tex="1" /></td>
-                              <td><Math tex="f(1)=1-6+9+1=5" /></td>
-                              <td className="text-red-700 font-bold">驻点（极大值点）</td>
-                            </tr>
-                            <tr>
                               <td className="font-bold"><Math tex="3" /></td>
-                              <td><Math tex="f(3)=27-54+27+1=1" /></td>
+                              <td><Math tex="f(3)=-22" /></td>
                               <td className="text-blue-700 font-bold">驻点（极小值点）</td>
                             </tr>
                             <tr>
                               <td className="font-bold"><Math tex="4" /></td>
-                              <td><Math tex="f(4)=64-96+36+1=5" /></td>
+                              <td><Math tex="f(4)=-15" /></td>
                               <td>右端点</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
+                      <div className="w-px bg-gray-300 mx-2"></div>
                       <div className="space-y-1">
                         <p>④ <strong>比较大小定最值</strong>：</p>
-                        <p className="pl-2">候选值集合：<Math tex="\{1,\,5,\,1,\,5\}" /></p>
-                        <p className="pl-2">• <Math tex="\max=5" />，在 <Math tex="x=1" />（极大值点）和 <Math tex="x=4" />（右端点）<strong>同时取得</strong></p>
-                        <p className="pl-2">• <Math tex="\min=1" />，在 <Math tex="x=0" />（左端点）和 <Math tex="x=3" />（极小值点）<strong>同时取得</strong></p>
+                        <p className="pl-2">候选值集合：<Math tex="\{5,\,-22,\,-15\}" /></p>
+                        <p className="pl-2">• <Math tex="\max=5" />，在 <Math tex="x=0" />（左端点）取得</p>
+                        <p className="pl-2">• <Math tex="\min=-22" />，在 <Math tex="x=3" />（驻点/极小值点）取得</p>
                         <hr className="border-gray-300" />
-                        <p><strong>结论</strong>：</p>
-                        <p className="pl-2">• <strong>最大值为 5</strong>（<Math tex="x=1" /> 和 <Math tex="x=4" /> 处取得）</p>
-                        <p className="pl-2">• <strong>最小值为 1</strong>（<Math tex="x=0" /> 和 <Math tex="x=3" /> 处取得）</p>
+                        <div className="grid grid-cols-[auto_1fr]">
+                          <p><strong>结论</strong>：</p>
+                          <div>
+                            <p><strong>最大值为 5</strong>（在 <Math tex="x=0" /> 处取得）</p>
+                            <p><strong>最小值为 -22</strong>（在 <Math tex="x=3" /> 处取得）</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* ── 例 1 后即时练习 ── */}
+
                 <div className="text-base print:hidden">
-                  <PracticeCard title="✏️ 例 1 同款练习（多项式闭区间最值）" questions={closedMaxExample1Practice} explanations={closedMaxExplanations} hideBlankLine optionCols={1} printOptionCols={1}
+                  <PracticeCard title="✏️ 例 1 同款练习（两个驻点都在区间内）" questions={closedMaxExample1Practice} explanations={closedMaxExplanations} hideBlankLine optionCols={1} printOptionCols={1}
                     renderItem={(q, idx) => (
                       <p className="text-gray-800 py-1 border-b border-gray-200" style={{ breakInside: 'avoid' }}>
                         <span className="text-gray-800 mr-2 font-medium">{idx + 1}.</span>
@@ -246,16 +174,14 @@ export function ClosedMaxPage() {
                 <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
                   <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 2</strong>　求 <Math tex="f(x)=x-2\ln x" /> 在 <Math tex="[1,e]" /> 上的最值<span className="font-normal ml-2">——含 <Math tex="\ln" />，先验定义域</span></div>
                   <div className="px-2 py-1 space-y-1">
-                    <p>① <strong>定义域</strong>：<Math tex="\ln x" /> 要求真数 <Math tex="x>0" />，所以定义域为 <Math tex="(0,+\infty)" />，区间 <Math tex="[1,e]" /> 完全包含在定义域内 ✓<span className="text-red-700 ml-2"><strong>⚠️ 含 <Math tex="\ln" /> 必先写定义域</strong></span></p>
+                    <p>① <strong>定义域</strong>：<Math tex="\ln x" /> 要求真数 <Math tex="x>0" />，所以定义域为 <Math tex="(0,+\infty)" />，区间 <Math tex="[1,e]" /> 完全包含在定义域内 ✓</p>
                     <hr className="border-gray-300" />
-                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=1-\dfrac{2}{x}=\dfrac{x-2}{x}" />（通分）</p>
-                    <p className="pl-4">分母 <Math tex="x>0" /> 恒正可约，看分子 <Math tex="x-2" />。令 <Math tex="x-2=0" /> 得驻点 <Math tex="x=2" /></p>
+                    <p>② <strong>求导找驻点</strong>：<Math tex="f'(x)=1-\dfrac{2}{x}=\dfrac{x-2}{x}" />（通分），分母 <Math tex="x>0" /> 恒正可约，看分子 <Math tex="x-2" />。令 <Math tex="x-2=0" /> 得驻点 <Math tex="x=2" /></p>
                     <p className="pl-4">驻点 <Math tex="x=2" /> <strong>在 <Math tex="(1,e)" /> 内</strong>（因 <Math tex="e\approx 2.718>2" />）✓，保留</p>
                     <hr className="border-gray-300" />
                     <div className="grid grid-cols-[auto_1fr] gap-4">
                       <div>
-                        <p>③ <strong>列候选清单 + 算函数值</strong>：</p>
-                        <p className="pl-2">候选点 = 驻点 <Math tex="\{2\}" /> ∪ 端点 <Math tex="\{1,e\}" /></p>
+                        <p>③ <strong>列候选清单 + 算函数值</strong>：候选点 = 驻点 <Math tex="\{2\}" /> ∪ 端点 <Math tex="\{1,e\}" /></p>
                         <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
                           <thead className="bg-gray-50">
                             <tr>
@@ -284,12 +210,12 @@ export function ClosedMaxPage() {
                         </table>
                       </div>
                       <div className="space-y-1">
-                        <p>④ <strong>用单调性定最值</strong>：</p>
-                        <p className="pl-2"><strong>判断单调性</strong>（看分子 <Math tex="x-2" />）：</p>
+                        <p>④ <strong>用单调性定最值</strong>：<strong>判断单调性</strong>（看分子 <Math tex="x-2" />）：</p>
                         <p className="pl-4">• 在 <Math tex="(1,2)" />：<Math tex="x-2<0" />，<Math tex="f'(x)<0" /> → <Math tex="f(x)" /> <strong>递减</strong></p>
                         <p className="pl-4">• 在 <Math tex="(2,e)" />：<Math tex="x-2>0" />，<Math tex="f'(x)>0" /> → <Math tex="f(x)" /> <strong>递增</strong></p>
                         <p className="pl-2">先减后增 → <Math tex="f(2)" /> 是谷底 → <Math tex="\min=f(2)=2-2\ln 2" /></p>
-                        <p className="pl-2"><strong>最大值在两端点中</strong>：比 <Math tex="f(1)=1" /> 与 <Math tex="f(e)=e-2\approx 0.718" />，故 <Math tex="\max=f(1)=1" /></p>
+                        <p className="pl-2"><strong>最大值在两端点中</strong>：对比 <Math tex="f(1)=1" /> 与 <Math tex="f(e)=e-2\approx 0.718" /></p>
+                        <p className="pl-2">故 <Math tex="\max=f(1)=1" /></p>
                       </div>
                     </div>
                     <hr className="border-gray-300" />
@@ -543,6 +469,67 @@ export function ClosedMaxPage() {
                 </div>
                 <div className="text-base hidden print:block">
                   <PrintQuestions questions={closedMaxExample5Practice} printOptionCols={1} columns={1} />
+                </div>
+
+                <div className="border border-gray-400 rounded overflow-hidden -mt-px text-[0.85rem]">
+                  <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">📍 详解：<strong>例 6</strong>　求 <Math tex="f(x)=\lvert x-1\rvert+2x" /> 在 <Math tex="[0,3]" /> 上的最值<span className="font-normal ml-2">——单调函数 + 不可导点</span></div>
+                  <div className="px-2 py-1 space-y-1">
+                    <p>① <strong>定义域</strong>：<Math tex="\mathbb{R}" />，区间 <Math tex="[0,3]" /> 完全包含在定义域内</p>
+                    <hr className="border-gray-300" />
+                    <p>② <strong>找绝对值分界点并分段</strong>：先令绝对值里面为 <Math tex="0" />，即 <Math tex="x-1=0" />，得 <Math tex="x=1" /></p>
+                    <p className="pl-4">当 <Math tex="0\le x<1" /> 时，<Math tex="x-1<0" />，所以 <Math tex="\lvert x-1\rvert=-(x-1)=1-x" />，<Math tex="f(x)=1-x+2x=x+1" />，<Math tex="k=1>0" />，函数递增</p>
+                    <p className="pl-4">当 <Math tex="1<x\le 3" /> 时，<Math tex="x-1>0" />，所以 <Math tex="\lvert x-1\rvert=x-1" />，<Math tex="f(x)=x-1+2x=3x-1" />，<Math tex="k=3>0" />，函数递增</p>
+                    <p className="pl-4">两段都递增，最值主要看端点；但 <Math tex="x=1" /> 是分界点，也要放入候选点</p>
+                    <hr className="border-gray-300" />
+                    <div className="flex">
+                      <div>
+                        <p>③ <strong>列候选清单 + 算函数值</strong>：候选点 = 不可导点 <Math tex="\{1\}" /> ∪ 端点 <Math tex="\{0,3\}" /></p>
+                        <table className="ml-4 mt-1 border-collapse text-center text-[0.9rem] [&_td]:border [&_td]:border-gray-300 [&_th]:border [&_th]:border-gray-300 [&_td]:px-2 [&_td]:py-0.5 [&_th]:px-2 [&_th]:py-0.5">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th><Math tex="x" /></th>
+                              <th><Math tex="f(x)" /></th>
+                              <th>身份</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td className="font-bold"><Math tex="0" /></td>
+                              <td><Math tex="f(0)=1" /></td>
+                              <td>左端点</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="1" /></td>
+                              <td><Math tex="f(1)=2" /></td>
+                              <td className="font-bold">不可导点</td>
+                            </tr>
+                            <tr>
+                              <td className="font-bold"><Math tex="3" /></td>
+                              <td><Math tex="f(3)=8" /></td>
+                              <td>右端点</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="w-px bg-gray-300 mx-2"></div>
+                      <div className="space-y-1">
+                        <p>④ <strong>比较大小定最值</strong>：</p>
+                        <p className="pl-2">候选值集合：<Math tex="\{1,\,2,\,8\}" /></p>
+                        <p className="pl-2">• <Math tex="\max=8" />，在 <Math tex="x=3" />（右端点）取得</p>
+                        <p className="pl-2">• <Math tex="\min=1" />，在 <Math tex="x=0" />（左端点）取得</p>
+                        <hr className="border-gray-300" />
+                        <div className="grid grid-cols-[auto_1fr]">
+                          <p><strong>结论</strong>：</p>
+                          <div>
+                            <p><strong>最大值为 8</strong>（在 <Math tex="x=3" /> 处取得）</p>
+                            <p><strong>最小值为 1</strong>（在 <Math tex="x=0" /> 处取得）</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="border-gray-300" />
+                    <p><strong>💡 关键</strong>：整段单调时，最值在端点；但遇到不可导点时，仍要识别出来，防止漏候选。</p>
+                  </div>
                 </div>
 
                 <div className="border border-gray-400 rounded overflow-hidden -mt-px">

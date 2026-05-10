@@ -43,7 +43,7 @@ interface PracticeCardProps {
   /** 打印模式下隐藏填空题的答题线，默认 false */
   hideBlankLine?: boolean;
   /** 打印模式下题目列数，默认 1 */
-  columns?: 1 | 2;
+  columns?: 1 | 2 | 3;
   /** 自定义打印模式下每道题的渲染，传了就用自定义 UI，不传就用原版 */
   renderItem?: (q: QuizQuestionData, idx: number) => ReactNode;
 }
@@ -165,7 +165,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
     return (
       <div className="print-practice bg-green-50 border border-green-200 rounded-xl px-2 py-0 mt-0" style={{ breakInside: 'auto' }}>
         {title && <p className="font-bold text-green-800 mb-1">{title}</p>}
-        <div className={columns === 2 ? 'grid grid-cols-2 gap-2' : 'space-y-0'}>
+        <div className={columns === 3 ? 'grid grid-cols-3 gap-2' : columns === 2 ? 'grid grid-cols-2 gap-2' : 'space-y-0'}>
           {questions.map((q, idx) => (
             renderItem ? (
             <div key={idx} style={{ breakInside: 'avoid' }}>

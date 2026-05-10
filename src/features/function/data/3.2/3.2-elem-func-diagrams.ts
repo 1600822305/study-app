@@ -5,54 +5,54 @@ import type { Diagram2DData } from '@/components/shared/Geo2dSvg';
 // ═══════════════════════════════════════════════════════
 
 /*
- * 坐标计算（两图均为 140×108）：
- *   origin [25, 90]   → math (0,0) 在像素 (25, 90)
- *   scale  [18, -14.4] → 1 单位 x = 18px 向右，1 单位 y = 14.4px 向上
+ * 新版指数函数图（200×140，紧凑布局）：
+ *   origin [103, 118]  → math (0,0) 在像素 (103, 118)
+ *   scale  [29, -19]   → 1 单位 x = 29px 向右，1 单位 y = 19px 向上
  *
- *   x 轴范围 [-1.4, 5.5]  → px [0, 124]   ✓ 在 140 内
- *   y 轴范围 [-0.5, 5.5]  → py [97, 11]   ✓ 在 108 内
+ *   x 轴范围 [-2.8, 3]   → px [22, 190]   ✓ 在 200 内
+ *   y 轴范围 [-0.3, 5.8]  → py [124, 8]   ✓ 在 140 内
  *
- *   2^x  画到 x=2.4  → y≈5.3 → py≈14      ✓ 不溢出
- *   0.5^x 画到 x=−2.4 → y≈5.3 → py≈14     ✓ 不溢出
+ *   2^x  画到 x=2.5  → y≈5.66 → py≈11     ✓ 不溢出
+ *   0.5^x 画到 x=-2.5 → y≈5.66 → py≈11    ✓ 不溢出
  */
 
-/** 图: 指数函数 y=2^x（a>1，增函数） */
-export const expIncDiagram: Diagram2DData = {
-  name: 'exp-inc',
-  coordinateSystem: { origin: [25, 90], scale: [18, -14.4] },
-  axes: { xRange: [-1.4, 5.5], yRange: [-0.5, 5.5], showNumbers: false, xTicks: [], yTicks: [], showOriginLabel: true },
+/** 图: y=2^x（新版紧凑） */
+export const expIncDiagramNew: Diagram2DData = {
+  name: 'exp-inc-new',
+  coordinateSystem: { origin: [103, 118], scale: [29, -19] },
+  axes: { xRange: [-2.8, 3], yRange: [-0.3, 5.8], showNumbers: false, xTicks: [1, 2], yTicks: [1, 2, 4], showOriginLabel: true },
   vertices: [],
   edges: [],
   polygons: [],
   freeLabels: [
     { pos: [0, 1], dot: '#334155' },
     { pos: [1, 2], dot: '#334155' },
-    { pos: [-0.4, 1.7], offset: [-5, 0], tex: '(0,1)', fontSize: 10 },
-    { pos: [1.7, 2.8], offset: [4, 14], tex: '(1,2)', fontSize: 10 },
-    { pos: [3.5, 1.5], offset: [14, 0], tex: 'a>1', fontSize: 12 },
+    { pos: [0, 1], offset: [-32, 2], tex: '(0,1)', fontSize: 10 },
+    { pos: [1, 2], offset: [16, 8], tex: '(1,2)', fontSize: 10 },
+    { pos: [1.8, 4.5], offset: [-12, -2], tex: 'y=2^x', fontSize: 11 },
   ],
   functions: [
-    { fn: (x: number) => 2 ** x, xRange: [-1.4, 2.4], color: '#3b82f6', strokeWidth: 2.5 },
+    { fn: (x: number) => 2 ** x, xRange: [-2.8, 2.5], color: '#3b82f6', strokeWidth: 2.5 },
   ],
 };
 
-/** 图: 指数函数 y=(1/2)^x（0<a<1，减函数） */
-export const expDecDiagram: Diagram2DData = {
-  name: 'exp-dec',
-  coordinateSystem: { origin: [25, 90], scale: [18, -14.4] },
-  axes: { xRange: [-1.4, 5.5], yRange: [-0.5, 5.5], showNumbers: false, xTicks: [], yTicks: [], showOriginLabel: true },
+/** 图: y=(1/2)^x（新版紧凑） */
+export const expDecDiagramNew: Diagram2DData = {
+  name: 'exp-dec-new',
+  coordinateSystem: { origin: [103, 118], scale: [29, -19] },
+  axes: { xRange: [-3, 2.8], yRange: [-0.3, 5.8], showNumbers: false, xTicks: [-2, -1, 1], yTicks: [1, 2, 4], showOriginLabel: true },
   vertices: [],
   edges: [],
   polygons: [],
   freeLabels: [
     { pos: [0, 1], dot: '#334155' },
     { pos: [1, 0.5], dot: '#334155' },
-    { pos: [0.4, 1.8], offset: [6, -1], tex: '(0,1)', fontSize: 10 },
-    { pos: [2.2, 0.85], offset: [-5, -2], tex: '(1,\\tfrac{1}{2})', fontSize: 10 },
-    { pos: [3, 3], tex: '0<a<1', fontSize: 12 },
+    { pos: [0, 1], offset: [-17, 8], tex: '(0,1)', fontSize: 10 },
+    { pos: [1, 0.5], offset: [6, -11], tex: '(1,\\tfrac{1}{2})', fontSize: 10 },
+    { pos: [-1.8, 4.5], offset: [19, -10], tex: 'y=(\\tfrac{1}{2})^x', fontSize: 11 },
   ],
   functions: [
-    { fn: (x: number) => 0.5 ** x, xRange: [-2.4, 5], color: '#22c55e', strokeWidth: 2.5 },
+    { fn: (x: number) => 0.5 ** x, xRange: [-2.5, 2.8], color: '#22c55e', strokeWidth: 2.5 },
   ],
 };
 

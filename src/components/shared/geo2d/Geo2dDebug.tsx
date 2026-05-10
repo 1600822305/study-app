@@ -9,6 +9,7 @@
  *   5. 拖拽标签调整 offset，拖拽顶点调整坐标，复制数据
  */
 import { useState, useRef, useCallback, useSyncExternalStore, memo } from 'react';
+import { createPortal } from 'react-dom';
 import { Geo2dSvg } from './Geo2dSvg';
 import type { Diagram2DData, Point2D, FreePath2D } from './types';
 import { Math as MathTex } from '../Math';
@@ -906,7 +907,10 @@ export const DebugGeo2dSvg = memo(function DebugGeo2dSvg({ data, width = 160, he
   const [debug, setDebug] = useState(false);
 
   if (debug) {
-    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initW={width} initH={height} />;
+    return createPortal(
+      <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initW={width} initH={height} />,
+      document.body,
+    );
   }
 
   return (

@@ -71,22 +71,33 @@ const navItems: NavItem[] = [
           { path: '/math/piecewise', label: '3.1.3 分段函数' },
           { path: '/math/elementary-func-prereq', label: '3.1.8 初等函数前置知识' },
           { path: '/math/elementary-func', label: '3.2 基本初等函数' },
+          { path: '/math/log-func', label: '3.2.2 对数函数' },
+          { path: '/math/power-func', label: '3.2.3 幂函数' },
           { path: '/math/log-compare', label: '3.2.5 对数比大小' },
+          { path: '/math/exp', label: '3.2 指数函数（新）' },
+          { path: '/math/log-calc', label: '3.2.1 对数与运算（新）' },
+          { path: '/math/log', label: '3.2.2 对数函数（新）' },
+          { path: '/math/power', label: '3.2.3 幂函数与总结（新）' },
           { path: '/math/function-graph', label: '3.3 函数图像与零点' },
+          { path: '/math/stage3-exam', label: '📝 阶段考试' },
+        ],
+      },
+      {
+        groupLabel: '第四阶段：导数',
+        items: [
           { path: '/math/derivative-prereq', label: '3.3.5 导数前置知识' },
           { path: '/math/derivative-basic', label: '3.4 导数基础' },
           { path: '/math/derivative-application', label: '3.5 导数应用（上）' },
           { path: '/math/deriv-method', label: '3.6.0 单调性入门' },
           { path: '/math/derivative-application-2', label: '3.6.1 含参单调性专题' },
-          { path: '/math/extrema', label: '3.6.2 极值与最值' },
+          { path: '/math/extrema', label: '3.6.2 极值' },
           { path: '/math/closed-max', label: '3.6.3 闭区间最值' },
           { path: '/math/always-exists', label: '3.6.4 恒成立与存在性' },
           { path: '/math/reverse-param', label: '3.6.5 反求参数' },
-          { path: '/math/stage3-exam', label: '📝 阶段考试' },
         ],
       },
       {
-        groupLabel: '第四阶段：平面向量',
+        groupLabel: '第五阶段：平面向量',
         items: [
           { path: '/math/vector-prereq', label: '4.0 向量前置知识' },
           { path: '/math/vector', label: '4.1 平面向量' },
@@ -96,7 +107,7 @@ const navItems: NavItem[] = [
         ],
       },
       {
-        groupLabel: '第五阶段：三角世界',
+        groupLabel: '第六阶段：三角世界',
         items: [
           { path: '/math/trig-prereq', label: '5.0 三角前置知识' },
           { path: '/math/trig-func', label: '5.1 三角函数' },
@@ -106,7 +117,7 @@ const navItems: NavItem[] = [
         ],
       },
       {
-        groupLabel: '第六阶段：数列套路',
+        groupLabel: '第七阶段：数列套路',
         items: [
           { path: '/math/sequence-prereq', label: '6.0 数列前置知识' },
           { path: '/math/sequence-basic', label: '6.1 等差与等比数列' },
@@ -117,7 +128,7 @@ const navItems: NavItem[] = [
         ],
       },
       {
-        groupLabel: '第七阶段：立体几何',
+        groupLabel: '第八阶段：立体几何',
         items: [
           { path: '/math/geo-basics', label: '7.0 初中几何基础' },
 
@@ -129,7 +140,7 @@ const navItems: NavItem[] = [
         ],
       },
       {
-        groupLabel: '第八阶段：解析几何',
+        groupLabel: '第九阶段：解析几何',
         items: [
           { path: '/math/line', label: '8.0 直线' },
           { path: '/math/circle', label: '8.1 圆' },
@@ -139,20 +150,12 @@ const navItems: NavItem[] = [
         ],
       },
       {
-        groupLabel: '第九阶段：概率统计',
+        groupLabel: '第十阶段：概率统计',
         items: [
           { path: '/math/counting', label: '9.0 计数原理' },
           { path: '/math/probability', label: '9.1 概率基础' },
           { path: '/math/statistics', label: '9.2 统计与随机变量' },
           { path: '/math/stage9-exam', label: '📝 阶段考试' },
-        ],
-      },
-      {
-        groupLabel: '第十阶段：导数进阶',
-        items: [
-          { path: '/math/derivative-comp', label: '10.0 导数综合' },
-          { path: '/math/derivative-hard', label: '10.1 导数压轴' },
-          { path: '/math/stage10-exam', label: '📝 阶段考试' },
         ],
       },
     ],

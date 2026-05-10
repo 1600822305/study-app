@@ -9,7 +9,7 @@ interface PrintQuestionsProps {
   /** 打印模式下隐藏填空题的答题线，默认 true */
   hideBlankLine?: boolean;
   /** 题目列数，默认 1 */
-  columns?: 1 | 2;
+  columns?: 1 | 2 | 3;
   /** 题号起始偏移，默认 0（从 1 开始编号） */
   startIndex?: number;
   /** 自定义每道题的渲染 */
@@ -32,10 +32,10 @@ function renderQ(q: QuizQuestionData) {
 export function PrintQuestions({ questions, printOptionCols = 4, hideBlankLine = true, columns = 1, startIndex = 0, renderItem }: PrintQuestionsProps) {
   return (
     <div className="bg-white border border-gray-800 px-2 py-0">
-      <div className={columns === 2 ? 'grid grid-cols-2 gap-x-4' : 'space-y-0'}>
+      <div className={columns === 3 ? 'grid grid-cols-3 gap-x-4' : columns === 2 ? 'grid grid-cols-2 gap-x-4' : 'space-y-0'}>
       {questions.map((q, idx) => (
         renderItem ? (
-          <div key={idx} className={q.fullRow && columns === 2 ? 'col-span-2' : ''} style={{ breakInside: 'avoid' }}>
+          <div key={idx} className={q.fullRow ? (columns === 3 ? 'col-span-3' : columns === 2 ? 'col-span-2' : '') : ''} style={{ breakInside: 'avoid' }}>
             {renderItem(q, idx)}
             {q.type !== 'blank' && q.options && (
               <div className={`${
@@ -62,7 +62,7 @@ export function PrintQuestions({ questions, printOptionCols = 4, hideBlankLine =
             )}
           </div>
         ) : (
-          <div key={idx} className={`py-1 border-b border-gray-200${q.fullRow && columns === 2 ? ' col-span-2' : ''}`} style={{ breakInside: 'avoid' }}>
+          <div key={idx} className={`py-1 border-b border-gray-200${q.fullRow ? (columns === 3 ? ' col-span-3' : columns === 2 ? ' col-span-2' : '') : ''}`} style={{ breakInside: 'avoid' }}>
             <p className="text-gray-800">
               <span className="text-gray-800 mr-2 font-medium">{idx + 1 + startIndex}.</span>
               {renderQ(q)}

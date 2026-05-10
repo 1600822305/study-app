@@ -1780,19 +1780,18 @@ export function DerivativeApplication2Page() {
                 </div>
 
                 {/* ── 答题规范 + 10 个高考扣分点 ── */}
-                <div className="border border-red-400 rounded overflow-hidden -mt-px bg-red-50">
-                  <div className="px-2 py-1 font-bold text-red-900 border-b border-red-300 bg-red-100">⚠️ 答题规范 · 10 个高考扣分点</div>
+                <div className="border border-red-400 border-b-0 rounded overflow-hidden -mt-px">
+                  <div className="px-2 py-1 font-bold text-red-900 border-b border-red-300 bg-red-100">⚠️ 答题规范 · 9 个高考扣分点</div>
                   <div className="px-2 py-1 space-y-1 text-[0.88rem]">
                     <p><strong>① 没写定义域</strong>：含 <Math tex="\ln" /> 必写 <Math tex="x>0" />；含分母必排除零点；含 <Math tex="\sqrt{\,}" /> 必排除根号内为负。<span className="text-red-700">扣 1-2 分</span></p>
                     <p><strong>② 求导 / 化简错</strong>：基本功失误最高频，特别是 <Math tex="(uv)'" />、<Math tex="(u/v)'" />、复合函数链式法则；导错后续全错（连环扣）。<span className="text-red-700">扣 2-3 分</span></p>
                     <p><strong>③ 没显式声明 <Math tex="f'(x)" /> 的符号由谁决定</strong>：分式必先说"分母恒正/恒负，符号由分子定"，否则阅卷看不出判号思路。<span className="text-red-700">扣 1 分</span></p>
                     <p><strong>④ 没声明分类标准</strong>：开头要明写"按 <Math tex="a" /> 分类"或"按 <Math tex="\Delta" /> 分类"。<span className="text-red-700">扣 1 分</span></p>
-                    <p><strong>⑤ 漏掉边界 / 临界值</strong>：<Math tex="a=0" /> 与临界值（如 <Math tex="a=\pm 2" />）必须单独列出，不能并入两侧情况。<span className="text-red-700">扣 1-2 分</span></p>
-                    <p><strong>⑥ 分类不互斥或不完备</strong>：参数 <Math tex="a" /> 的所有取值必须<strong>不重不漏</strong>覆盖，区间端点归属要明确。<span className="text-red-700">扣 1-2 分</span></p>
-                    <p><strong>⑦ 重根当变号根</strong>：<Math tex="\Delta=0" /> 时分子为完全平方，<strong>不变号</strong>，不能分段。<span className="text-red-700">扣 2-3 分</span></p>
-                    <p><strong>⑧ 单调区间用 <Math tex="\cup" /> 连接</strong>：多段单调区间要<strong>分写</strong>，不能并集（单调性是局部性质）。<span className="text-red-700">扣 2 分</span></p>
-                    <p><strong>⑨ "增/减函数" 与 "增/减区间" 混淆</strong>：前者指整个定义域，后者指子区间，题问什么写什么。<span className="text-red-700">扣 1 分</span></p>
-                    <p><strong>⑩ 缺综上 / 结论不规范</strong>：必须"综上所述"汇总，含<strong>函数名+区间+单调方向</strong>，用 <Math tex="a" /> 表述。<span className="text-red-700">扣 1-2 分</span></p>
+                    <p><strong>⑤ 分类不互斥或不完备</strong>：<Math tex="a" /> 的取值要<strong>不重不漏</strong>；边界值（如 <Math tex="a=0" />、<Math tex="a=\pm 2" />）须单独列出。<span className="text-red-700">扣 1-2 分</span></p>
+                    <p><strong>⑥ 重根当变号根</strong>：<Math tex="\Delta=0" /> 时分子为完全平方，<strong>不变号</strong>，不能分段。<span className="text-red-700">扣 2-3 分</span></p>
+                    <p><strong>⑦ 单调区间用 <Math tex="\cup" /> 连接</strong>：多段单调区间要<strong>分写</strong>，不能并集（单调性是局部性质）。<span className="text-red-700">扣 2 分</span></p>
+                    <p><strong>⑧ "增/减函数" 与 "增/减区间" 混淆</strong>：前者指整个定义域，后者指子区间，题问什么写什么。<span className="text-red-700">扣 1 分</span></p>
+                    <p><strong>⑨ 缺综上 / 结论不规范</strong>：必须"综上所述"汇总，含<strong>函数名+区间+单调方向</strong>，用 <Math tex="a" /> 表述。<span className="text-red-700">扣 1-2 分</span></p>
                   </div>
                 </div>
 

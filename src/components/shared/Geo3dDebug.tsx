@@ -9,6 +9,7 @@
  *   5. 拖拽标签调整 offset，复制坐标数据
  */
 import { useState, useRef, useCallback, useSyncExternalStore } from 'react';
+import { createPortal } from 'react-dom';
 import { Geo3dSvg, type DiagramData, type Point3D } from './Geo3dSvg';
 import { Math as MathTex } from './Math';
 
@@ -516,7 +517,10 @@ export function DebugGeo3dSvg({ data, width = 160, height = 140, strokeColor = '
   const [debug, setDebug] = useState(false);
 
   if (debug) {
-    return <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initialRotation={rotation} initW={width} initH={height} />;
+    return createPortal(
+      <DebugPanel data={data} strokeColor={strokeColor} onClose={() => setDebug(false)} initialRotation={rotation} initW={width} initH={height} />,
+      document.body,
+    );
   }
 
   return (

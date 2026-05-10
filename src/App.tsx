@@ -25,7 +25,13 @@ const FunctionConceptPage = lazy(() => import('@/features/function').then(m => (
 const PiecewisePage = lazy(() => import('@/features/function').then(m => ({ default: m.PiecewisePage })));
 const ElementaryFuncPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPrereqPage })));
 const ElementaryFuncPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPage })));
+const LogFuncPage = lazy(() => import('@/features/function').then(m => ({ default: m.LogFuncPage })));
+const PowerFuncPage = lazy(() => import('@/features/function').then(m => ({ default: m.PowerFuncPage })));
 const LogComparePage = lazy(() => import('@/features/function').then(m => ({ default: m.LogComparePage })));
+const ExpPage = lazy(() => import('@/features/function').then(m => ({ default: m.ExpPage })));
+const LogCalcPage = lazy(() => import('@/features/function').then(m => ({ default: m.LogCalcPage })));
+const LogPage = lazy(() => import('@/features/function').then(m => ({ default: m.LogPage })));
+const PowerPage = lazy(() => import('@/features/function').then(m => ({ default: m.PowerPage })));
 const FunctionGraphPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionGraphPage })));
 const DerivativePrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativePrereqPage })));
 const DerivativeBasicPage = lazy(() => import('@/features/function').then(m => ({ default: m.DerivativeBasicPage })));
@@ -63,8 +69,6 @@ const ConicLinePage = lazy(() => import('@/features/analytic').then(m => ({ defa
 const CountingPage = lazy(() => import('@/features/probability').then(m => ({ default: m.CountingPage })));
 const ProbabilityPage = lazy(() => import('@/features/probability').then(m => ({ default: m.ProbabilityPage })));
 const StatisticsPage = lazy(() => import('@/features/probability').then(m => ({ default: m.StatisticsPage })));
-const DerivativeCompPage = lazy(() => import('@/features/derivative').then(m => ({ default: m.DerivativeCompPage })));
-const DerivativeHardPage = lazy(() => import('@/features/derivative').then(m => ({ default: m.DerivativeHardPage })));
 const SettingsPage = lazy(() => import('@/features/settings/SettingsPage').then(m => ({ default: m.SettingsPage })));
 const TTSSettingsPage = lazy(() => import('@/features/settings/TTSSettingsPage').then(m => ({ default: m.TTSSettingsPage })));
 const AISettingsPage = lazy(() => import('@/features/settings/AISettingsPage').then(m => ({ default: m.AISettingsPage })));
@@ -115,7 +119,13 @@ function App() {
           <Route path="/math/quadratic" element={<QuadraticPage />} />
           <Route path="/math/elementary-func-prereq" element={<ElementaryFuncPrereqPage />} />
           <Route path="/math/elementary-func" element={<ElementaryFuncPage />} />
+          <Route path="/math/log-func" element={<LogFuncPage />} />
+          <Route path="/math/power-func" element={<PowerFuncPage />} />
           <Route path="/math/log-compare" element={<LogComparePage />} />
+          <Route path="/math/exp" element={<ExpPage />} />
+          <Route path="/math/log-calc" element={<LogCalcPage />} />
+          <Route path="/math/log" element={<LogPage />} />
+          <Route path="/math/power" element={<PowerPage />} />
           <Route path="/math/function-graph" element={<FunctionGraphPage />} />
           <Route path="/math/derivative-prereq" element={<DerivativePrereqPage />} />
           <Route path="/math/derivative-basic" element={<DerivativeBasicPage />} />
@@ -156,8 +166,6 @@ function App() {
           <Route path="/math/counting" element={<CountingPage />} />
           <Route path="/math/probability" element={<ProbabilityPage />} />
           <Route path="/math/statistics" element={<StatisticsPage />} />
-          <Route path="/math/derivative-comp" element={<DerivativeCompPage />} />
-          <Route path="/math/derivative-hard" element={<DerivativeHardPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/settings/tts" element={<TTSSettingsPage />} />
           <Route path="/settings/ai" element={<AISettingsPage />} />

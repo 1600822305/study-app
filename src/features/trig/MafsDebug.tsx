@@ -10,6 +10,7 @@
  *   6. 复制坐标数据发给我即可
  */
 import { createContext, useContext, useState, useRef, useCallback, useEffect, useId, useSyncExternalStore, type ReactNode, type ComponentProps } from 'react';
+import { createPortal } from 'react-dom';
 import { Mafs, useMovablePoint, Text as MafsText, LaTeX as MafsLaTeX } from 'mafs';
 
 /* ── 全局调试开关 ── */
@@ -286,12 +287,13 @@ export function DebugMafs({ children, ...mafsProps }: DebugMafsProps) {
   const [origWidth, setOrigWidth] = useState(0);
 
   if (debug) {
-    return (
+    return createPortal(
       <MafsDebugCtx.Provider value={true}>
         <DebugPanel mafsProps={mafsProps} onClose={() => setDebug(false)} origWidth={origWidth}>
           {children}
         </DebugPanel>
-      </MafsDebugCtx.Provider>
+      </MafsDebugCtx.Provider>,
+      document.body,
     );
   }
 

@@ -13,6 +13,7 @@ function renderKatex(tex: string, display: boolean): string {
       throwOnError: false,
       trust: true,
     });
+    html = html.replace(/∣/g, '<span class="abs-bar">∣</span>');
     cache.set(key, html);
   }
   return html;
