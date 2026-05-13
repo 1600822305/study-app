@@ -2,7 +2,7 @@ import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, UnifiedDebug
 import { DebugGeo2dSvg } from '@/components/shared/geo2d';
 import { useProgress, usePrintMode } from '@/hooks';
 import { expDefinitionPractice, expPropertyPractice, expComparePractice, expIneqPractice, expCompositePractice, expRangePractice, expDerivPractice } from './data/3.2/3.2-exp-practice';
-import { expIncDiagramNew, expDecDiagramNew } from './data/3.2/3.2-elem-func-diagrams';
+import { expIncDiagram, expDecDiagram } from './data/3.2/3.2-exp-diagrams';
 import { ExpAnswers, expExplanations } from './3.2-exp-answers';
 
 const expProgressItems = [
@@ -262,11 +262,11 @@ export function ExpPage() {
               <div className="px-2 py-1 font-bold text-gray-800 border-b border-gray-400 bg-gray-100">描点连线，画出图像</div>
               <div className="flex justify-center gap-8 py-2">
                 <div className="text-center">
-                  <DebugGeo2dSvg data={expIncDiagramNew} width={200} height={140} />
+                  <DebugGeo2dSvg data={expIncDiagram} width={200} height={140} />
                   <p className="mt-1"><Math tex="y = 2^x" />（底数 <Math tex="> 1" />，向右急升）</p>
                 </div>
                 <div className="text-center">
-                  <DebugGeo2dSvg data={expDecDiagramNew} width={200} height={140} />
+                  <DebugGeo2dSvg data={expDecDiagram} width={200} height={140} />
                   <p className="mt-1"><Math tex="y = \left(\tfrac{1}{2}\right)^x" />（底数 <Math tex="< 1" />，向右下降）</p>
                 </div>
               </div>

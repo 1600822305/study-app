@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { elemFuncPractice4 } from './data/3.2/3.2-elem-func-practice';
+import { elemFuncPractice4 } from './data/3.2.3/3.2.3-power-func-practice';
 import type { QuizQuestionData } from '@/types';
 
 export const powerFuncExplanations: Record<string, ReactNode> = {

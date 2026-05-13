@@ -1,6 +1,6 @@
 import { Math, Collapsible, PageHeader, LessonLayout, ExportButton, UnifiedDebugToggle, PracticeCard, PrintQuestions } from '@/components/shared';
 import { useProgress, usePrintMode } from '@/hooks';
-import { logDefinitionPractice, logParamPractice, logIdentityPractice, logRulePractice, logChangeBasePractice, logSubstitutionPractice, logDerivPractice } from './data/3.2/3.2.1-log-calc-practice';
+import { logDefinitionPractice, logParamPractice, logIdentityPractice, logRulePractice, logChangeBasePractice, logSubstitutionPractice, logDerivPractice } from './data/3.2.1/3.2.1-log-calc-practice';
 import { LogCalcAnswers, logCalcExplanations } from './3.2.1-log-calc-answers';
 
 const logCalcProgressItems = [

@@ -168,7 +168,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
         <div className={columns === 3 ? 'grid grid-cols-3 gap-2' : columns === 2 ? 'grid grid-cols-2 gap-2' : 'space-y-0'}>
           {questions.map((q, idx) => (
             renderItem ? (
-            <div key={idx} style={{ breakInside: 'avoid' }}>
+            <div key={idx} className={q.fullRow ? (columns === 3 ? 'col-span-3' : columns === 2 ? 'col-span-2' : '') : ''} style={{ breakInside: 'avoid' }}>
               {renderItem(q, idx)}
               {/* 选择题选项 */}
               {q.type !== 'blank' && q.options && (
@@ -197,7 +197,7 @@ export function PracticeCard({ title = '✏️ 即时练习', questions, module:
               )}
             </div>
             ) : (
-            <div key={idx} className="bg-white rounded-lg border border-green-100 p-2" style={{ breakInside: 'avoid' }}>
+            <div key={idx} className={`bg-white rounded-lg border border-green-100 p-2${q.fullRow ? (columns === 3 ? ' col-span-3' : columns === 2 ? ' col-span-2' : '') : ''}`} style={{ breakInside: 'avoid' }}>
               <p className="text-gray-800 font-medium mb-1">
                 <span className="text-green-600 mr-2">{idx + 1}.</span>
                 {renderQ(q)}

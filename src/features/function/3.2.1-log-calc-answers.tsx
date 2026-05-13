@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Math as MathTex, PageBreak } from '@/components/shared';
-import { logDefinitionPractice, logParamPractice, logIdentityPractice, logRulePractice, logChangeBasePractice, logSubstitutionPractice, logDerivPractice } from './data/3.2/3.2.1-log-calc-practice';
+import { logDefinitionPractice, logParamPractice, logIdentityPractice, logRulePractice, logChangeBasePractice, logSubstitutionPractice, logDerivPractice } from './data/3.2.1/3.2.1-log-calc-practice';
 import type { QuizQuestionData } from '@/types';
 
 // ══════════════════════════════════════════════

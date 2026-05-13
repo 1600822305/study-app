@@ -1,6 +1,6 @@
 import { Mafs, Coordinates, Plot, Point } from 'mafs';
 import { Math, PageHeader, PracticeCard, ExportButton, UnifiedDebugToggle } from '@/components/shared';
-import { elemFuncPractice4 } from './data/3.2/3.2-elem-func-practice';
+import { elemFuncPractice4 } from './data/3.2.3/3.2.3-power-func-practice';
 import { usePrintMode } from '@/hooks';
 import { PowerFuncAnswers, powerFuncExplanations } from './3.2.3-power-func-answers';
 
