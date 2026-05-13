@@ -3,7 +3,6 @@ export { QuadraticPage } from './3.0.5-quadratic-page';
 export { FunctionConceptPage } from './3.1-concept-page';
 export { PiecewisePage } from './3.1.3-piecewise-page';
 export { ElementaryFuncPrereqPage } from './3.1.8-elem-prereq-page';
-export { PowerFuncPage } from './3.2.3-power-func-page';
 export { LogComparePage } from './3.2.5-log-compare-page';
 export { ExpPage } from './3.2-exp-page';
 export { LogCalcPage } from './3.2.1-log-calc-page';

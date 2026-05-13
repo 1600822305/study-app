@@ -68,7 +68,7 @@ const phases: Phase[] = [
       { path: '/math/function-concept', label: '3.1 函数的概念与性质', time: '3-4小时', desc: '定义域、值域、单调性、奇偶性' },
       { path: '/math/piecewise', label: '3.1.3 分段函数', time: '1-2小时', desc: '求值、定义域、单调性与求参' },
       { path: '/math/elementary-func-prereq', label: '3.1.8 初等函数前置知识', time: '20分钟', desc: '指数、对数运算基础', prereq: true },
-      { path: '/math/power-func', label: '3.2.3 幂函数', time: '2小时', desc: '幂函数性质 + 三大函数总结' },
+      { path: '/math/power', label: '3.2.3 幂函数与总结', time: '2小时', desc: '幂函数性质 + 三大函数总结' },
       { path: '/math/log-compare', label: '3.2.5 对数比大小', time: '2小时', desc: '估值定位 + 换底硬算，系统掌握所有方法' },
       { path: '/math/function-graph', label: '3.3 函数图像与零点', time: '3-4小时', desc: '图像变换 + 零点存在性定理' },
       { path: '/math/derivative-prereq', label: '3.3.5 导数前置知识', time: '20分钟', desc: '极限思想、瞬时变化率', prereq: true },

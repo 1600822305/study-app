@@ -24,7 +24,6 @@ const FunctionReviewPage = lazy(() => import('@/features/function').then(m => ({
 const FunctionConceptPage = lazy(() => import('@/features/function').then(m => ({ default: m.FunctionConceptPage })));
 const PiecewisePage = lazy(() => import('@/features/function').then(m => ({ default: m.PiecewisePage })));
 const ElementaryFuncPrereqPage = lazy(() => import('@/features/function').then(m => ({ default: m.ElementaryFuncPrereqPage })));
-const PowerFuncPage = lazy(() => import('@/features/function').then(m => ({ default: m.PowerFuncPage })));
 const LogComparePage = lazy(() => import('@/features/function').then(m => ({ default: m.LogComparePage })));
 const ExpPage = lazy(() => import('@/features/function').then(m => ({ default: m.ExpPage })));
 const LogCalcPage = lazy(() => import('@/features/function').then(m => ({ default: m.LogCalcPage })));
@@ -116,7 +115,6 @@ function App() {
           <Route path="/math/piecewise" element={<PiecewisePage />} />
           <Route path="/math/quadratic" element={<QuadraticPage />} />
           <Route path="/math/elementary-func-prereq" element={<ElementaryFuncPrereqPage />} />
-          <Route path="/math/power-func" element={<PowerFuncPage />} />
           <Route path="/math/log-compare" element={<LogComparePage />} />
           <Route path="/math/exp" element={<ExpPage />} />
           <Route path="/math/log-calc" element={<LogCalcPage />} />
